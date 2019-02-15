@@ -24,4 +24,10 @@ go unit tests:
   image: golang:1.11.2
   stage: test
   script:
-    - go test ./...
+    - go test $(go list ./...) -v -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o coverage.html
+  coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - coverage.html
