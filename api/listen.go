@@ -15,7 +15,7 @@ import (
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
 func (api *ApiServer) ListenAndServe(address string) error {
 	r := chi.NewRouter()
-	r.Get("/list", listAPIsHandler(api.logger, getAvailableAPIs))
+	r.Get("/api/list", listAPIsHandler(api.logger, getAvailableAPIs))
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {
