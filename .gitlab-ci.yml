@@ -1,0 +1,21 @@
+stages:
+  - test
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ui/node_modules/
+
+ui unit tests:
+  image: node:10.15.1
+  stage: test
+  before_script:
+    - cd ui/
+    - npm install
+  script:
+    - npm test -- --coverage
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - coverage
