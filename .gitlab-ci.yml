@@ -23,7 +23,7 @@ ui unit tests:
     paths:
       - coverage
 
-go unit tests:
+api unit tests:
   image: golang:1.11.2
   stage: test
   only:
