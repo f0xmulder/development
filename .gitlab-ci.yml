@@ -19,3 +19,9 @@ ui unit tests:
     expire_in: 1 month
     paths:
       - coverage
+
+go unit tests:
+  image: golang:1.11.2
+  stage: test
+  script:
+    - go test ./...
