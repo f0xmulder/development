@@ -6,7 +6,7 @@ package main
 import (
 	"log"
 
-	flags "github.com/jessevdk/go-flags"
+	"github.com/jessevdk/go-flags"
 	"gitlab.com/commonground/developer.overheid.nl/api"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
