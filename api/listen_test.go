@@ -6,6 +6,7 @@ package api
 import (
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/routes"
 	"go.uber.org/zap"
 	"io/ioutil"
 	"net/http/httptest"
@@ -32,7 +33,7 @@ func TestListAPIsHandler(t *testing.T) {
 	req := httptest.NewRequest("GET", "/list", nil)
 	w := httptest.NewRecorder()
 
-	listAPIsHandler(logger, mockGetAvailableAPIs)(w, req)
+	routes.ListAPIsHandler(logger, mockGetAvailableAPIs)(w, req)
 
 	resp := w.Result()
 
