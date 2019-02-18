@@ -24,7 +24,7 @@ ui unit tests:
       - ui/coverage
 
 api unit tests:
-  image: golang:1.11.5-alpine
+  image: golang:1.11.5
   stage: test
   only:
     changes:
