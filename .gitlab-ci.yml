@@ -7,7 +7,7 @@ cache:
     - ui/node_modules/
 
 ui unit tests:
-  image: node:10.15.1
+  image: node:10.15.1-alpine
   stage: test
   only:
     changes:
