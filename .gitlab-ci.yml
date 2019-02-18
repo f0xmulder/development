@@ -9,9 +9,6 @@ cache:
 ui unit tests:
   image: node:10.15.1-alpine
   stage: test
-  only:
-    changes:
-      - ui/**/*
   before_script:
     - cd ui/
     - npm install
@@ -26,9 +23,6 @@ ui unit tests:
 api unit tests:
   image: golang:1.11.5
   stage: test
-  only:
-    changes:
-      - api/**/*
   script:
     - go test $(go list ./...) -v -coverprofile coverage.out
     - go tool cover -html=coverage.out -o api/coverage.html
