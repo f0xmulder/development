@@ -5,6 +5,7 @@ package api
 
 import (
 	"github.com/stretchr/testify/assert"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
 	"io/ioutil"
 	"net/http/httptest"
@@ -12,7 +13,7 @@ import (
 )
 
 func TestGetAvailableAPIs(t *testing.T) {
-	expectedList := []api{
+	expectedList := []models.API{
 		{OrganizationName: "Test"},
 	}
 
@@ -21,8 +22,8 @@ func TestGetAvailableAPIs(t *testing.T) {
 	assert.Equal(t, expectedList, actualList)
 }
 
-func mockGetAvailableAPIs() []api {
-	return []api{}
+func mockGetAvailableAPIs() []models.API {
+	return []models.API{}
 }
 
 func TestListAPIsHandler(t *testing.T) {

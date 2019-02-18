@@ -5,6 +5,7 @@ package api
 
 import (
 	"encoding/json"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"net/http"
 
 	"github.com/go-chi/chi"
@@ -24,24 +25,15 @@ func (api *ApiServer) ListenAndServe(address string) error {
 	return nil
 }
 
-type api struct {
-	OrganizationName     string `json:"organization_name"`
-	ServiceName          string `json:"service_name"`
-	APIURL               string `json:"api_url"`
-	APISpecificationType string `json:"api_specification_type"`
-	SpecificationURL     string `json:"specification_url"`
-	DocumentationURL     string `json:"documentation_url"`
-}
-
-func getAvailableAPIs() []api {
-	outputList := []api{
+func getAvailableAPIs() []models.API {
+	outputList := []models.API{
 		{OrganizationName: "Test"},
 	}
 
 	return outputList
 }
 
-func listAPIsHandler(logger *zap.Logger, apiGetter func() []api) http.HandlerFunc {
+func listAPIsHandler(logger *zap.Logger, apiGetter func() []models.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
