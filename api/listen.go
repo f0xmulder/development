@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
-// ListenAndServe is a blocking function that listens on provided tcp address to handle requests.
+// ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
 func (api *ApiServer) ListenAndServe(address string) error {
 	r := chi.NewRouter()
 	r.Get("/list", listAPIsHandler(api.logger, getAvailableAPIs))
@@ -32,8 +32,6 @@ type api struct {
 	SpecificationURL     string `json:"specification_url"`
 	DocumentationURL     string `json:"documentation_url"`
 }
-
-type apiGetter func() []api
 
 func getAvailableAPIs() []api {
 	outputList := []api{
