@@ -42,13 +42,7 @@ func mockGetAvailableAPIs() []api {
 }
 
 func TestListAPIsHandler(t *testing.T) {
-	config := zap.NewDevelopmentConfig()
-	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
-	logger, err := config.Build()
-
-	if err != nil {
-		t.Error(err)
-	}
+	logger := zap.NewNop()
 
 	req := httptest.NewRequest("GET", "/list", nil)
 	w := httptest.NewRecorder()
