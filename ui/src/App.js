@@ -30,11 +30,11 @@ class App extends Component {
       <div className="App">
         <h1>API overview</h1>
         {
-          apis ?
+          apis && apis.length > 0 ?
             <ul>
               { apis.map((api, i) => <li key={i}>{ api['organization_name'] }</li>) }
             </ul> :
-            <p>No APIs available (yet)</p>
+            <p data-test="no-apis-available-message">No APIs available (yet)</p>
         }
       </div>
     );

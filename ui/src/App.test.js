@@ -47,3 +47,13 @@ describe('listing the available apis', () => {
     expect(listItems.first().text()).toBe('Test')
   })
 })
+
+describe('when no apis are available', () => {
+  it('should show a message saying no APIs are available yet', () => {
+    const wrapper = shallow(<App/>)
+    wrapper.setState({ apis: [] })
+    const noApisMessageElement = wrapper.find('[data-test="no-apis-available-message"]')
+    expect(noApisMessageElement.exists()).toBe(true)
+    expect(noApisMessageElement.text()).toBe('No APIs available (yet)')
+  })
+})
