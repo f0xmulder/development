@@ -4,26 +4,52 @@
 package api
 
 import (
+	"encoding/json"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/routes"
+	"io/ioutil"
+	"log"
 	"net/http"
+	"strings"
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 )
 
-func getAvailableAPIs() []models.API {
-	outputList := []models.API{
-		{OrganizationName: "Test"},
+func readAPIDataFromDirectory(directory string) []models.API {
+	files, err := ioutil.ReadDir(directory)
+
+	output := []models.API{}
+
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	return outputList
+	for _, file := range files {
+		filePath := strings.Join([]string{directory, file.Name()}, "/")
+		content, err := ioutil.ReadFile(filePath)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		newAPI := models.API{}
+		err = json.Unmarshal(content, &newAPI)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		output = append(output, newAPI)
+	}
+
+	return output
 }
 
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
 func (api *ApiServer) ListenAndServe(address string) error {
 	r := chi.NewRouter()
-	r.Get("/api/list", routes.ListAPIsHandler(api.logger, getAvailableAPIs))
+	r.Get("/api/list", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {

@@ -7,11 +7,11 @@ import (
 	"net/http"
 )
 
-func ListAPIsHandler(logger *zap.Logger, apiGetter func() []models.API) http.HandlerFunc {
+func ListAPIsHandler(logger *zap.Logger, apiFileReader func(directory string) []models.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		outputList := apiGetter()
+		outputList := apiFileReader("./data")
 		err := json.NewEncoder(w).Encode(outputList)
 
 		if err != nil {

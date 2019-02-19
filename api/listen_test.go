@@ -9,11 +9,18 @@ import (
 	"testing"
 )
 
-func TestGetAvailableAPIs(t *testing.T) {
+func TestReadAPIDataFromDirectory(t *testing.T) {
 	expectedList := []models.API{
-		{OrganizationName: "Test"},
+		{
+			OrganizationName:     "Test Organization Name",
+			ServiceName:          "Test Service Name",
+			APIURL:               "Test API URL",
+			APISpecificationType: "Test Specification Type",
+			SpecificationURL:     "Test Specification URL",
+			DocumentationURL:     "Test Documentation URL",
+		},
 	}
 
-	actualList := getAvailableAPIs()
+	actualList := readAPIDataFromDirectory("./test-data")
 	assert.Equal(t, expectedList, actualList)
 }
