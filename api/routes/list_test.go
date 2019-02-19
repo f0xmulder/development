@@ -25,7 +25,7 @@ func TestListAPIsHandler(t *testing.T) {
 
 	body, _ := ioutil.ReadAll(resp.Body)
 
-	assert.Equal(t, 200, resp.StatusCode)
-	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"))
-	assert.Equal(t, "[]\n", string(body))
+	assert.Equal(t, 200, resp.StatusCode, "status code should be 200")
+	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"), "response type should be JSON")
+	assert.Equal(t, "[]\n", string(body), "response body should be an empty array")
 }
