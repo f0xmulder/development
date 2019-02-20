@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react": "16.8.2",
+    "react-app-polyfill": "0.2.1",
+    "react-dom": "16.8.2",
     "react-scripts": "2.1.5"
+  },
+  "devDependencies": {
+    "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "1.9.1",
+    "enzyme-to-json": "3.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +27,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "http://localhost:8080"
 }

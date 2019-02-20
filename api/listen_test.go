@@ -5,39 +5,22 @@ package api
 
 import (
 	"github.com/stretchr/testify/assert"
-	"go.uber.org/zap"
-	"io/ioutil"
-	"net/http/httptest"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"testing"
 )
 
-func TestGetAvailableAPIs(t *testing.T) {
-	expectedList := []api{
-		{OrganizationName: "Test"},
+func TestReadAPIDataFromDirectory(t *testing.T) {
+	expectedList := []models.API{
+		{
+			OrganizationName:     "Test Organization Name",
+			ServiceName:          "Test Service Name",
+			APIURL:               "Test API URL",
+			APISpecificationType: "Test Specification Type",
+			SpecificationURL:     "Test Specification URL",
+			DocumentationURL:     "Test Documentation URL",
+		},
 	}
 
-	actualList := getAvailableAPIs()
-
+	actualList := readAPIDataFromDirectory("./test-data")
 	assert.Equal(t, expectedList, actualList)
-}
-
-func mockGetAvailableAPIs() []api {
-	return []api{}
-}
-
-func TestListAPIsHandler(t *testing.T) {
-	logger := zap.NewNop()
-
-	req := httptest.NewRequest("GET", "/list", nil)
-	w := httptest.NewRecorder()
-
-	listAPIsHandler(logger, mockGetAvailableAPIs)(w, req)
-
-	resp := w.Result()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-
-	assert.Equal(t, 200, resp.StatusCode)
-	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"))
-	assert.Equal(t, "[]\n", string(body))
 }

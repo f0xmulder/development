@@ -7,11 +7,8 @@ cache:
     - ui/node_modules/
 
 ui unit tests:
-  image: node:10.15.1
+  image: node:10.15.1-alpine
   stage: test
-  only:
-    changes:
-      - ui/**/*
   before_script:
     - cd ui/
     - npm install
@@ -21,19 +18,16 @@ ui unit tests:
   artifacts:
     expire_in: 1 month
     paths:
-      - coverage
+      - ui/coverage
 
 api unit tests:
-  image: golang:1.11.2
+  image: golang:1.11.5
   stage: test
-  only:
-    changes:
-      - api/**/*
   script:
     - go test $(go list ./...) -v -coverprofile coverage.out
-    - go tool cover -html=coverage.out -o coverage.html
+    - go tool cover -html=coverage.out -o api/coverage.html
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
   artifacts:
     expire_in: 1 month
     paths:
-      - coverage.html
+      - api/coverage.html

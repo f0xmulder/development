@@ -6,14 +6,14 @@ package main
 import (
 	"log"
 
-	flags "github.com/jessevdk/go-flags"
+	"github.com/jessevdk/go-flags"
 	"gitlab.com/commonground/developer.overheid.nl/api"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
 
 var options struct {
-	ListenAddressPlain string `long:"listen-address-plain" env:"LISTEN_ADDRESS_PLAIN" default:"0.0.0.0:80" description:"Address for the API to listen on. Read https://golang.org/pkg/net/#Dial for possible tcp address specs."`
+	ListenAddressPlain string `long:"listen-address-plain" env:"LISTEN_ADDRESS_PLAIN" default:"0.0.0.0:8080" description:"Address for the API to listen on. Read https://golang.org/pkg/net/#Dial for possible tcp address specs."`
 }
 
 func main() {
@@ -46,6 +46,7 @@ func main() {
 	}()
 
 	apiServer := api.NewApiServer(logger)
+	logger.Info("API running on", zap.String("address", options.ListenAddressPlain))
 
 	// Listen on the address provided in the options
 	err = apiServer.ListenAndServe(options.ListenAddressPlain)
