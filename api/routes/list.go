@@ -11,7 +11,7 @@ func ListAPIsHandler(logger *zap.Logger, apiFileReader func(directory string) []
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		outputList := apiFileReader("./data")
+		outputList := apiFileReader("../data")
 		err := json.NewEncoder(w).Encode(outputList)
 
 		if err != nil {
