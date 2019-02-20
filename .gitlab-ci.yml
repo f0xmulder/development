@@ -8,7 +8,7 @@ npm audit:
   before_script:
     - cd ui
   script:
-    - npm audit
+    - npm audit --dry-run
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
