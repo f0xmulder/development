@@ -1,6 +1,14 @@
 stages:
   - test
 
+npm audit:
+  only:
+    - schedules
+  before_script:
+    - cd ui
+  script:
+    - npm audit
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
