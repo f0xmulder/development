@@ -29,5 +29,4 @@ COPY ui/docker/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /go/src/commonground/developer.overheid.nl/ui/build /usr/share/nginx/html
 
-USER nobody
-EXPOSE 8000
+EXPOSE 80
