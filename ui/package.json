@@ -5,13 +5,13 @@
   "dependencies": {
     "react": "16.8.2",
     "react-app-polyfill": "0.2.1",
-    "react-dom": "16.8.2",
-    "react-scripts": "2.1.5"
+    "react-dom": "16.8.2"
   },
   "devDependencies": {
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.9.1",
-    "enzyme-to-json": "3.3.5"
+    "enzyme-to-json": "3.3.5",
+    "react-scripts": "2.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
