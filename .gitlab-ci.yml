@@ -2,6 +2,7 @@ stages:
   - test
 
 npm audit:
+  image: node:10.15.1-alpine
   only:
     - schedules
   before_script:
