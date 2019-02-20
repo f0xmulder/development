@@ -32,7 +32,7 @@ profiles:
     tagPolicy:
       gitCommit: {}
     local:
-      push: true
+      push: false
 - name: deploy-prod
   deploy:
     helm:
@@ -42,6 +42,6 @@ profiles:
         valuesFiles:
         - helm/don/values-prod.yaml
         values:
-          apiImage: nlxio/don-api
-          uiImage: nlxio/don-ui
+          apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api
+          uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui
         namespace: don-prod
