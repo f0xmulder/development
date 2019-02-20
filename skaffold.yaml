@@ -2,11 +2,11 @@ apiVersion: skaffold/v1beta2
 kind: Config
 build:
   artifacts:
-  - image: nlxio/don-api
+  - image: registry.gitlab.com/commonground/developer.overheid.nl/api
     context: .
     docker:
       dockerfile: api/Dockerfile
-  - image: nlxio/don-ui
+  - image: registry.gitlab.com/commonground/developer.overheid.nl/ui
     context: .
     docker:
       dockerfile: ui/Dockerfile
@@ -32,7 +32,7 @@ profiles:
     tagPolicy:
       gitCommit: {}
     local:
-      push: false
+      push: true
 - name: deploy-prod
   deploy:
     helm:

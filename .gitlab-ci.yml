@@ -58,6 +58,8 @@ validate API definitions:
   stage: deploy
   tags:
     - nlx-privileged
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - skaffold run --profile release --profile deploy-${CI_ENVIRONMENT_NAME}
 
@@ -73,6 +75,8 @@ docker tag latest:
   stage: deploy
   tags:
     - nlx-privileged
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - skaffold build --profile release | ./docker-tag-latest.awk
   when: manual
