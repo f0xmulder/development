@@ -1,6 +1,7 @@
 stages:
   - test
   - validate
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -52,3 +53,28 @@ validate API definitions:
     - cd validate
   script:
     - go run ./cmd/don-validate/main.go
+
+.deploy:
+  stage: deploy
+  tags:
+    - nlx-privileged
+  script:
+    - skaffold run --profile release --profile deploy-${CI_ENVIRONMENT_NAME}
+
+deploy prod:
+  extends: .deploy
+  environment:
+    name: prod
+  when: manual
+  only:
+    - tags
+
+docker tag latest:
+  stage: deploy
+  tags:
+    - nlx-privileged
+  script:
+    - skaffold build --profile release | ./docker-tag-latest.awk
+  when: manual
+  only:
+    - tags

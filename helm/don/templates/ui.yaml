@@ -1,0 +1,50 @@
+{{ with set . "component" "ui" }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: {{ include "don.common.metadata-labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{ include "don.common.metadata-labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: ui
+          image: {{.Values.uiImage}}
+          imagePullPolicy: {{.Values.imagePullPolicy}}
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+spec:
+  selector: {{ include "don.common.metadata-labels" . | nindent 4 }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+    - host: {{.Values.domain}}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ui
+              servicePort: http
+          - path: /api
+            backend:
+              serviceName: api
+              servicePort: http
+{{ end }}

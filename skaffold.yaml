@@ -1,0 +1,47 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: nlxio/don-api
+    context: .
+    docker:
+      dockerfile: api/Dockerfile
+  - image: nlxio/don-ui
+    context: .
+    docker:
+      dockerfile: ui/Dockerfile
+  tagPolicy:
+    sha256: {}
+  local:
+    push: false
+profiles:
+- name: minikube
+  deploy:
+    helm:
+      releases:
+      - name: don
+        chartPath: helm/don
+        valuesFiles:
+        - helm/don/values-dev.yaml
+        values:
+          apiImage: nlxio/don-api
+          uiImage: nlxio/don-ui
+        namespace: don-dev
+- name: release
+  build:
+    tagPolicy:
+      gitCommit: {}
+    local:
+      push: true
+- name: deploy-prod
+  deploy:
+    helm:
+      releases:
+      - name: don-prod
+        chartPath: helm/don
+        valuesFiles:
+        - helm/don/values-prod.yaml
+        values:
+          apiImage: nlxio/don-api
+          uiImage: nlxio/don-ui
+        namespace: don-prod

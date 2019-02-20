@@ -1,0 +1,2 @@
+domain: don.minikube
+imagePullPolicy: IfNotPresent
