@@ -17,7 +17,7 @@ func TestFile(t *testing.T) {
 		{"invalid-json.json", false, "invalid JSON"},
 		{"missing-service-name.json", false, "the field service_name is missing"},
 		{"missing-specification-url.json", true, ""},
-		{"Valid.json", true, ""},
+		{"valid.json", true, ""},
 	}
 
 	rootFilePath := "./test-data/files"
