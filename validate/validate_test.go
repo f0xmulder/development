@@ -44,8 +44,8 @@ func TestDirectory(t *testing.T) {
 		wantReason    string
 	}{
 		{"with-invalid-file", false, "invalid-json.json - invalid JSON"},
-		{"with-Valid-and-invalid-file", false, "invalid-json.json - invalid JSON"},
-		{"with-Valid-file", true, ""},
+		{"with-valid-and-invalid-file", false, "invalid-json.json - invalid JSON"},
+		{"with-valid-file", true, ""},
 	}
 
 	rootDirectory := "./test-data/directories"
@@ -56,11 +56,11 @@ func TestDirectory(t *testing.T) {
 			got := Directory(fullPath)
 
 			if got.Valid != tc.wantValid {
-				t.Errorf("got Valid %s, want %s", strconv.FormatBool(got.Valid), strconv.FormatBool(tc.wantValid))
+				t.Errorf("got valid %s, want %s", strconv.FormatBool(got.Valid), strconv.FormatBool(tc.wantValid))
 			}
 
 			if got.Reason != tc.wantReason {
-				t.Errorf("got Reason '%s', want '%s'", got.Reason, tc.wantReason)
+				t.Errorf("got reason '%s', want '%s'", got.Reason, tc.wantReason)
 			}
 		})
 	}
