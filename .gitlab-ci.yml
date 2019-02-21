@@ -48,5 +48,7 @@ validate unit tests:
 validate API definitions:
   image: golang:1.11.5
   stage: validate
+  before_script:
+    - cd validate
   script:
     - go run ./cmd/don-validate/main.go
