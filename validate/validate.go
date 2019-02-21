@@ -2,6 +2,7 @@ package validate
 
 import (
 	"encoding/json"
+	"fmt"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
 	"log"
@@ -9,48 +10,86 @@ import (
 	"strings"
 )
 
-func requiredFieldsAreFilled(api models.API) bool {
-	return len(api.ServiceName) > 0 &&
-		len(api.OrganizationName) > 0 &&
-		len(api.DocumentationURL) > 0 &&
-		len(api.APISpecificationType) > 0 &&
-		len(api.APIURL) > 0
+type ValidationFeedback struct {
+	Valid  bool
+	Reason string
 }
 
-func File(filePath string) bool {
+func File(filePath string) ValidationFeedback {
 	extension := filepath.Ext(filePath)
 
 	if extension != ".json" {
-		log.Printf("invalid extension %s", extension)
-		return false
+		return ValidationFeedback{
+			false,
+			fmt.Sprintf("invalid extension %s", extension),
+		}
 	}
 
 	content, err := ioutil.ReadFile(filePath)
 
 	if err != nil {
-		log.Print("unable to read file")
-		return false
+		return ValidationFeedback{
+			false,
+			"unable to read file",
+		}
 	}
 
 	newAPI := models.API{}
 	err = json.Unmarshal(content, &newAPI)
 
 	if err != nil {
-		log.Print("invalid JSON")
-		return false
+		return ValidationFeedback{
+			false,
+			"invalid JSON",
+		}
 	}
 
-	if !requiredFieldsAreFilled(newAPI) {
-		return false
+	if len(newAPI.ServiceName) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field service_name is missing",
+		}
 	}
 
-	return true
+	if len(newAPI.OrganizationName) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field organization_name is missing",
+		}
+	}
+
+	if len(newAPI.APIURL) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field api_url is missing",
+		}
+	}
+
+	if len(newAPI.APISpecificationType) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field api_specification_type is missing",
+		}
+	}
+
+	if len(newAPI.DocumentationURL) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field documentation_url is missing",
+		}
+	}
+
+	return ValidationFeedback{
+		Valid: true,
+	}
 }
 
-func Directory(path string) bool {
+func Directory(path string) ValidationFeedback {
 	files, err := ioutil.ReadDir(path)
 
-	result := true
+	result := ValidationFeedback{
+		Valid: true,
+	}
 
 	if err != nil {
 		log.Fatal(err)
@@ -60,7 +99,8 @@ func Directory(path string) bool {
 		filePath := strings.Join([]string{path, file.Name()}, "/")
 		result = File(filePath)
 
-		if result == false {
+		if result.Valid == false {
+			result.Reason = fmt.Sprintf("%s - %s", file.Name(), result.Reason)
 			break
 		}
 	}

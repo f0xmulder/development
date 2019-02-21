@@ -9,22 +9,29 @@ import (
 
 func TestFile(t *testing.T) {
 	testCases := []struct {
-		filePath string
-		want     bool
+		filePath   string
+		wantValid  bool
+		wantReason string
 	}{
-		{"file-extension.txt", false},
-		{"invalid-json.json", false},
-		{"missing-service-name.json", false},
-		{"missing-specification-url.json", true},
-		{"valid.json", true},
+		{"file-extension.txt", false, "invalid extension .txt"},
+		{"invalid-json.json", false, "invalid JSON"},
+		{"missing-service-name.json", false, "the field service_name is missing"},
+		{"missing-specification-url.json", true, ""},
+		{"Valid.json", true, ""},
 	}
 
 	rootFilePath := "./test-data/files"
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("%s", tc.filePath), func(t *testing.T) {
-			if got := File(strings.Join([]string{rootFilePath, tc.filePath}, "/")); got != tc.want {
-				t.Errorf("got %s, want %s", strconv.FormatBool(got), strconv.FormatBool(tc.want))
+			got := File(strings.Join([]string{rootFilePath, tc.filePath}, "/"))
+
+			if got.Valid != tc.wantValid {
+				t.Errorf("got Valid %s, want %s", strconv.FormatBool(got.Valid), strconv.FormatBool(tc.wantValid))
+			}
+
+			if got.Reason != tc.wantReason {
+				t.Errorf("got Reason '%s', want '%s'", got.Reason, tc.wantReason)
 			}
 		})
 	}
@@ -33,19 +40,27 @@ func TestFile(t *testing.T) {
 func TestDirectory(t *testing.T) {
 	testCases := []struct {
 		directoryPath string
-		want          bool
+		wantValid     bool
+		wantReason    string
 	}{
-		{"with-invalid-file", false},
-		{"with-valid-and-invalid-file", false},
-		{"with-valid-file", true},
+		{"with-invalid-file", false, "invalid-json.json - invalid JSON"},
+		{"with-Valid-and-invalid-file", false, "invalid-json.json - invalid JSON"},
+		{"with-Valid-file", true, ""},
 	}
 
 	rootDirectory := "./test-data/directories"
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("%s", tc.directoryPath), func(t *testing.T) {
-			if got := Directory(strings.Join([]string{rootDirectory, tc.directoryPath}, "/")); got != tc.want {
-				t.Errorf("got %s, want %s", strconv.FormatBool(got), strconv.FormatBool(tc.want))
+			fullPath := strings.Join([]string{rootDirectory, tc.directoryPath}, "/")
+			got := Directory(fullPath)
+
+			if got.Valid != tc.wantValid {
+				t.Errorf("got Valid %s, want %s", strconv.FormatBool(got.Valid), strconv.FormatBool(tc.wantValid))
+			}
+
+			if got.Reason != tc.wantReason {
+				t.Errorf("got Reason '%s', want '%s'", got.Reason, tc.wantReason)
 			}
 		})
 	}

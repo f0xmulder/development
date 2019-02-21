@@ -29,9 +29,9 @@ func main() {
 		log.Fatalf("unexpected arguments: %v", args)
 	}
 
-	directoryIsValid := validate.Directory(options.DirectoryToValidate)
+	directoryValidation := validate.Directory(options.DirectoryToValidate)
 
-	if !directoryIsValid {
-		log.Fatal("directory contains one or more invalid API definition files")
+	if !directoryValidation.Valid {
+		log.Fatalf("directory '%s' contains one or more invalid API definition files. %s", options.DirectoryToValidate, directoryValidation.Reason)
 	}
 }
