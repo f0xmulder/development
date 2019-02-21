@@ -24,7 +24,7 @@ api unit tests:
   image: golang:1.11.5
   stage: test
   script:
-    - go test $(go list ./...) -v -coverprofile coverage.out
+    - go test $(go list ./api/...) -v -coverprofile coverage.out
     - go tool cover -html=coverage.out -o api/coverage.html
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
   artifacts:
