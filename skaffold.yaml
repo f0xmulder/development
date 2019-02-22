@@ -24,8 +24,8 @@ profiles:
         valuesFiles:
         - helm/don/values-dev.yaml
         values:
-          apiImage: nlxio/don-api
-          uiImage: nlxio/don-ui
+          apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api
+          uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui
         namespace: don-dev
 - name: release
   build:
