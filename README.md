@@ -24,4 +24,4 @@ If you would like to learn more about the deployment en release process of devel
 ## Licence
 Copyright © VNG Realisatie 2019
 
-[Licenced under the EUPLv1.2](LICENCE.md)
+[Licensed under the EUPLv1.2](LICENCE.md)
