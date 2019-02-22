@@ -1,21 +1,27 @@
 # developer.overheid.nl
+This is the repository of the software backing the [developer.overheid.nl](https://developer.overheid.nl) portal. This portal provides an overview of all API's within the Dutch government.
 
-This README outlines the details of collaborating on this repository.
+## Adding an API to developer.overheid.nl
+If you would like to add an API to developer.overheid.nl please submit a pull request to this repository with a new JSON file: `data/{organization}-{api}.json`. Here is an example JSON:
 
-This software is developed to run on [developers.overheid.nl](https://developers.overheid.nl). 
-A portal that provides an overview of all API's within the Dutch government
-
-# Documentation
-
-* [The technical stack](./docs/00-stack.md)
-* [Setup your development environment](./docs/01-development-setup.md)
-* [From development to production](./docs/02-from-development-to-production.md)
-This repository contains all the source for developer.overheid.nl, a portal that provides an overview of all API's within the Dutch government.
-
-## Production releases
-We use Docker to for our production releases. Use the following commands to build the Docker containers locally:
-
-```bash
-    $ docker build -f ui/Dockerfile -t commonground/don-ui .
-    $ docker build -f api/Dockerfile -t commonground/don-api .
+```json
+{
+    "organization_name": "Example Organization",
+    "service_name": "Example Service",
+    "api_url": "https://api.example.com/service/",
+    "api_specification_type": "OpenAPI2",
+    "specification_url": "https://api.example.com/service/swagger/?format=openapi",
+    "documentation_url": "https://api.example.com/service/"
+}
 ```
+
+## Developer documentation
+If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/developer.md).
+
+## Deployment and releases
+If you would like to learn more about the deployment en release process of developer.overheid.nl, consult the [depoyment and releases documentation](./docs/deployment-releases.md).
+
+## License
+Copyright © VNG Realisatie 2019
+
+[Licenced under the EUPLv1.2](LICENCE.md)
