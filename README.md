@@ -19,9 +19,9 @@ If you would like to add an API to developer.overheid.nl please submit a pull re
 If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/developer.md).
 
 ## Deployment and releases
-If you would like to learn more about the deployment en release process of developer.overheid.nl, consult the [depoyment and releases documentation](./docs/deployment-releases.md).
+If you would like to learn more about the deployment en release process of developer.overheid.nl, consult the [deployment and releases documentation](./docs/deployment-releases.md).
 
-## License
+## Licence
 Copyright © VNG Realisatie 2019
 
 [Licenced under the EUPLv1.2](LICENCE.md)
