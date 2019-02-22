@@ -1,5 +1,5 @@
 # Deployment and releases
-The [CI system of GitLab](https://gitlab.com/commonground/developer.overheid.nl/pipelines) automatically builds every push to the master branch, creates Docker images and pushes them to the Gitlab registry. When a release is succesful it also automatically deploys the application to the production environment.
+The [CI system of GitLab](https://gitlab.com/commonground/developer.overheid.nl/pipelines) automatically builds every push to the master branch, creates Docker images and pushes them to the Gitlab registry. When a release is succesful it deploys with a manual trigger from within Gitlab to the production environment.
 
 ## Build tools
 We use [Skaffold](https://github.com/GoogleContainerTools/skaffold) to automate the development and deployment process of developer.overheid.nl.
