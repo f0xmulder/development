@@ -20,7 +20,7 @@ Now we point `don.minikube` to the minikube cluster by running:
 Then run the following command from the root of the repository to deploy the application to the local cluster:
 
 ```bash
-    $ minikube dev --profile minikube
+    $ skaffold dev --profile minikube
 ```
 
 You will find the application running in the `don-dev` namespace. Point your browser to https://don.minikube:30443/ to view the deployment.
