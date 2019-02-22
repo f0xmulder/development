@@ -17,8 +17,8 @@ RUN npm ci --no-progress --color=false --quiet
 COPY ui /go/src/commonground/developer.overheid.nl/ui
 COPY .git /go/src/commonground/developer.overheid.nl/.git
 
-RUN REACT_APP_GIT_COMMIT_HASH=$(git rev-parse HEAD) \
-    REACT_APP_GIT_TAG_NAME=$(git describe --tags) \
+RUN GIT_COMMIT_HASH=$(git rev-parse HEAD) \
+    GIT_TAG_NAME=$(git describe --tags 2> /dev/null || echo no-tag) \
     npm run build
 
 # Copy static docs to alpine-based nginx container.
