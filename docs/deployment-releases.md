@@ -31,4 +31,4 @@ Then run the following command from the root of the repository to deploy the app
 skaffold dev --profile minikube
 ```
 
-You will find the application running in the `don-dev` namespace. Point your browser to https://don.minikube:30443/ to view the deployment.
+You will find the application running in the `don-dev` namespace. Point your browser to [https://don.minikube:30443](https://don.minikube:30443/) to view the deployment.
