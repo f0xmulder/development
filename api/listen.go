@@ -47,7 +47,7 @@ func readAPIDataFromDirectory(directory string) []models.API {
 }
 
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
-func (api *ApiServer) ListenAndServe(address string) error {
+func (api *Server) ListenAndServe(address string) error {
 	r := chi.NewRouter()
 	r.Get("/api/list", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
 

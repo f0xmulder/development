@@ -7,13 +7,14 @@ import (
 	"go.uber.org/zap"
 )
 
-type ApiServer struct {
+// Server is the server itself
+type Server struct {
 	logger *zap.Logger
 }
 
-// ApiServer creates a new ApiServer and sets it up to handle requests.
-func NewApiServer(l *zap.Logger) *ApiServer {
-	i := &ApiServer{
+// NewServer creates a new Server and sets it up to handle requests.
+func NewServer(l *zap.Logger) *Server {
+	i := &Server{
 		logger: l,
 	}
 	return i

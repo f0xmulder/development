@@ -45,7 +45,7 @@ func main() {
 		}
 	}()
 
-	apiServer := api.NewApiServer(logger)
+	apiServer := api.NewServer(logger)
 	logger.Info("API running on", zap.String("address", options.ListenAddressPlain))
 
 	// Listen on the address provided in the options

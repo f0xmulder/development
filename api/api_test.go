@@ -18,7 +18,7 @@ func TestAPIServer(t *testing.T) {
 		t.Error(err)
 	}
 
-	apiServer := NewApiServer(logger)
+	apiServer := NewServer(logger)
 	if apiServer == nil {
 		t.Error()
 	}
