@@ -1,10 +1,9 @@
-# Use go 1.x based on the latest alpine image.
 FROM golang:1.11-alpine AS build
 
 # Install build tools.
 RUN apk add --update git gcc musl-dev
 
-# Cache dependencies
+# Install dependencies
 COPY go.mod /go/src/commonground/developer.overheid.nl/go.mod
 COPY go.sum /go/src/commonground/developer.overheid.nl/go.sum
 ENV GO111MODULE on
