@@ -54,7 +54,7 @@ validate API definitions:
   script:
     - go run ./cmd/don-validate/main.go
 
-.deploy:
+deploy:
   stage: deploy
   tags:
     - nlx-privileged
@@ -62,11 +62,7 @@ validate API definitions:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
     - skaffold run --profile release --profile deploy-${CI_ENVIRONMENT_NAME}
-
-deploy prod:
-  extends: .deploy
   environment:
     name: prod
-  when: manual
   only:
-    - tags
+    - master
