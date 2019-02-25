@@ -8,7 +8,7 @@ cache:
   paths:
     - ui/node_modules/
 
-ui unit tests:
+UI unit tests:
   image: node:10.15.1-alpine
   stage: test
   before_script:
@@ -22,7 +22,7 @@ ui unit tests:
     paths:
       - ui/coverage
 
-api unit tests:
+API unit tests:
   image: golang:1.11.5
   stage: test
   script:
