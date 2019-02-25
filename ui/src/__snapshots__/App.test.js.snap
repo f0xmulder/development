@@ -11,6 +11,10 @@ exports[`contains the page title 1`] = `
         exact={true}
         path="/"
       />
+      <Route
+        component={[Function]}
+        path="/submit-api"
+      />
       <hr />
       <ul>
         <li>
@@ -19,6 +23,14 @@ exports[`contains the page title 1`] = `
             to="/"
           >
             Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            replace={false}
+            to="/submit-api"
+          >
+            Submit your API
           </Link>
         </li>
       </ul>
