@@ -2,18 +2,7 @@
 This is the repository of the software backing the [developer.overheid.nl](https://developer.overheid.nl) portal. This portal provides an overview of all API's within the Dutch government.
 
 ## Adding an API to developer.overheid.nl
-If you would like to add an API to developer.overheid.nl please submit a pull request to this repository with a new JSON file: `data/{organization}-{api}.json`. Here is an example JSON:
-
-```json
-{
-    "organization_name": "Example Organization",
-    "service_name": "Example Service",
-    "api_url": "https://api.example.com/service/",
-    "api_specification_type": "OpenAPI2",
-    "specification_url": "https://api.example.com/service/swagger/?format=openapi",
-    "documentation_url": "https://api.example.com/service/"
-}
-```
+See [Submit your API](https://don.commonground.nl/submit-api).
 
 ## Developer documentation
 If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/developer.md).
