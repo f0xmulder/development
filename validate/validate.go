@@ -10,11 +10,13 @@ import (
 	"strings"
 )
 
+// ValidationFeedback contains feedback info
 type ValidationFeedback struct {
 	Valid  bool
 	Reason string
 }
 
+// File validation
 func File(filePath string) ValidationFeedback {
 	extension := filepath.Ext(filePath)
 
@@ -84,6 +86,7 @@ func File(filePath string) ValidationFeedback {
 	}
 }
 
+// Directory validation
 func Directory(path string) ValidationFeedback {
 	files, err := ioutil.ReadDir(path)
 

@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// ListAPIsHandler lists the available APIs
 func ListAPIsHandler(logger *zap.Logger, apiFileReader func(directory string) []models.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

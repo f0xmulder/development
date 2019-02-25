@@ -1,5 +1,6 @@
 package models
 
+// API model
 type API struct {
 	OrganizationName     string `json:"organization_name"`
 	ServiceName          string `json:"service_name"`
