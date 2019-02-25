@@ -5,7 +5,15 @@ The [CI system of GitLab](https://gitlab.com/commonground/developer.overheid.nl/
 We use [Skaffold](https://github.com/GoogleContainerTools/skaffold) to automate the development and deployment process of [developer.overheid.nl](developer.overheid.nl).
 
 ## Setup a local Kubernetes environment with minikube
-Please make sure you setup [minikube](https://github.com/kubernetes/minikube) and [Helm](https://helm.sh/) on the cluster. Then make sure you have a Traefik ingress controller up and running:
+Please make sure you setup [minikube](https://github.com/kubernetes/minikube) and [Helm](https://helm.sh/) on the cluster.
+
+Let's start minikube first:
+
+```bash
+minikube start
+```
+
+Then make sure you have a Traefik ingress controller up and running:
 
 ```bash
 helm install stable/traefik --name traefik --namespace traefik --values helm/traefik-values-minikube.yaml
