@@ -12,20 +12,20 @@ First make sure the following tools are available on your computer:
 Then clone this repository:
 
 ```bash
-    $ git clone git@gitlab.com:commonground/developer.overheid.nl.git
-    $ cd developer.overheid.nl/
+git clone git@gitlab.com:commonground/developer.overheid.nl.git
+cd developer.overheid.nl/
 ```
 
 To start the API server:
 
 ```bash
-    $ cd api/ && modd
+cd api/ && modd
 ```
 
 To start the frontend application:
 
 ```bash
-    $ cd ui/ && npm install && npm start
+cd ui/ && npm install && npm start
 ```
 
-The last command should automatically open a browser on `http://localhost:3000/`.
+The last command should automatically open a browser on [http://localhost:3000](http://localhost:3000/).
