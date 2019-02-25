@@ -4,6 +4,25 @@ exports[`contains the page title 1`] = `
 <div
   className="App"
 >
-  <Home />
+  <BrowserRouter>
+    <div>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <hr />
+      <ul>
+        <li>
+          <Link
+            replace={false}
+            to="/"
+          >
+            Home
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </BrowserRouter>
 </div>
 `;
