@@ -1,5 +1,6 @@
 stages:
   - test
+  - validate
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -24,10 +25,30 @@ api unit tests:
   image: golang:1.11.5
   stage: test
   script:
-    - go test $(go list ./...) -v -coverprofile coverage.out
+    - go test $(go list ./api/...) -v -coverprofile coverage.out
     - go tool cover -html=coverage.out -o api/coverage.html
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
   artifacts:
     expire_in: 1 month
     paths:
       - api/coverage.html
+
+validate unit tests:
+  image: golang:1.11.5
+  stage: test
+  script:
+    - go test $(go list ./validate/...) -v -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o validate/coverage.html
+  coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - validate/coverage.html
+
+validate API definitions:
+  image: golang:1.11.5
+  stage: validate
+  before_script:
+    - cd validate
+  script:
+    - go run ./cmd/don-validate/main.go
