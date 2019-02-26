@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { object } from 'prop-types'
 
 class APIDetail extends Component {
@@ -41,17 +41,28 @@ class APIDetail extends Component {
 
         return (
             <div className="APIDetail">
-                <h1>API details</h1>
                 {
                     !loaded ?
                         null :
                         error ?
                             <p data-test="error-message">Failed loading the API details</p> :
                             details ?
-                                <dl>
-                                    <dt>Organization</dt>
-                                    <dd data-test="organization-name">{ details.organization_name }</dd>
-                                </dl> : null
+                                <Fragment>
+                                    <h1>{ details.service_name } - { details.organization_name }</h1>
+                                    <dl>
+                                        <dt>API URL</dt>
+                                        <dd data-test="api-url">{ details.api_url }</dd>
+
+                                        <dt>API Specification Type</dt>
+                                        <dd data-test="api-specification-type">{ details.api_specification_type }</dd>
+
+                                        <dt>API Specification URL</dt>
+                                        <dd data-test="api-specification-url">{ details.specification_url }</dd>
+
+                                        <dt>API Documentation URL</dt>
+                                        <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
+                                    </dl>
+                                </Fragment> : null
                 }
             </div>
         );
