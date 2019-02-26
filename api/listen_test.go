@@ -9,17 +9,20 @@ import (
 	"testing"
 )
 
+var validTestApiModel = models.API{
+	Id:                   "test-api-name.json",
+	Description:          "Test Description",
+	OrganizationName:     "Test Organization Name",
+	ServiceName:          "Test Service Name",
+	APIURL:               "Test API URL",
+	APISpecificationType: "Test Specification Type",
+	SpecificationURL:     "Test Specification URL",
+	DocumentationURL:     "Test Documentation URL",
+}
+
 func TestReadAPIDataFromDirectory(t *testing.T) {
 	expectedList := []models.API{
-		{
-			Id:                   "test-api-name.json",
-			OrganizationName:     "Test Organization Name",
-			ServiceName:          "Test Service Name",
-			APIURL:               "Test API URL",
-			APISpecificationType: "Test Specification Type",
-			SpecificationURL:     "Test Specification URL",
-			DocumentationURL:     "Test Documentation URL",
-		},
+		validTestApiModel,
 	}
 
 	actualList := readAPIDataFromDirectory("./test-data")
@@ -27,15 +30,7 @@ func TestReadAPIDataFromDirectory(t *testing.T) {
 }
 
 func TestReadAPIDataFromFile(t *testing.T) {
-	expected := models.API{
-		Id:                   "test-api-name.json",
-		OrganizationName:     "Test Organization Name",
-		ServiceName:          "Test Service Name",
-		APIURL:               "Test API URL",
-		APISpecificationType: "Test Specification Type",
-		SpecificationURL:     "Test Specification URL",
-		DocumentationURL:     "Test Documentation URL",
-	}
+	expected := validTestApiModel
 
 	actualList := readAPIDataFromFile("./test-data", "test-api-name.json")
 	assert.Equal(t, expected, actualList)

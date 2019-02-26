@@ -26,6 +26,7 @@ describe('loading the API details', () => {
 
 describe('the API details', () => {
   let pageTitle
+  let description
   let apiURL
   let apiSpecType
   let apiSpecUrl
@@ -35,6 +36,7 @@ describe('the API details', () => {
     const wrapper = shallow(<APIDetail/>)
 
     const details = {
+      "description": "Description",
       "organization_name": "Organization Name",
       "service_name": "Service Name",
       "api_url": "API URL",
@@ -45,6 +47,7 @@ describe('the API details', () => {
     wrapper.setState({ details, loaded: true })
 
     pageTitle = wrapper.find('h1')
+    description = wrapper.find('p')
     apiURL = wrapper.find('[data-test="api-url"]')
     apiSpecType = wrapper.find('[data-test="api-specification-type"]')
     apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
@@ -53,6 +56,10 @@ describe('the API details', () => {
 
   it('should show the service & organization name as page title', () => {
     expect(pageTitle.text()).toBe('Service Name - Organization Name')
+  })
+
+  it('should show the description', () => {
+    expect(description.text()).toBe('Description')
   })
 
   it('should show the API URL', () => {

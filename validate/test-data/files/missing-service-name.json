@@ -1,4 +1,5 @@
 {
+    "description": "Test Description",
     "organization_name": "Test Organization Name",
     "api_url": "Test API URL",
     "api_specification_type": "Test Specification Type",

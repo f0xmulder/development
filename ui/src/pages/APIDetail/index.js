@@ -49,6 +49,7 @@ class APIDetail extends Component {
                             details ?
                                 <Fragment>
                                     <h1>{ details.service_name } - { details.organization_name }</h1>
+                                    <p>{ details.description }</p>
                                     <dl>
                                         <dt>API URL</dt>
                                         <dd data-test="api-url">{ details.api_url }</dd>

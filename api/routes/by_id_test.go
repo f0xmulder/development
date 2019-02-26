@@ -34,5 +34,5 @@ func TestAPIByIdHandler(t *testing.T) {
 
 	assert.Equal(t, 200, resp.StatusCode, "status code should be 200")
 	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"), "response type should be JSON")
-	assert.Equal(t, "{\"id\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n", string(body), "response body should contain an API")
+	assert.Equal(t, "{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n", string(body), "response body should contain an API")
 }

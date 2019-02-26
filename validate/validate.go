@@ -46,6 +46,13 @@ func File(filePath string) ValidationFeedback {
 		}
 	}
 
+	if len(newAPI.Description) < 1 {
+		return ValidationFeedback{
+			false,
+			"the field description is missing",
+		}
+	}
+
 	if len(newAPI.ServiceName) < 1 {
 		return ValidationFeedback{
 			false,

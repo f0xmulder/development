@@ -18,6 +18,7 @@ const SubmitAPI = () =>
         <pre>
             {`
 {
+    "description": "Example Description",
     "organization_name": "Example Organization",
     "service_name": "Example Service",
     "api_url": "https://api.example.com/service/",

@@ -1,4 +1,5 @@
 {
+    "description": "Test Description",
     "service_name": "Test Service Name",
     "api_url": "Test API URL",
     "api_specification_type": "Test Specification Type",
