@@ -24,7 +24,7 @@ func TestFile(t *testing.T) {
 		{"valid.json", true, ""},
 	}
 
-	rootFilePath := "./test-data-valid/files"
+	rootFilePath := "./test-data/files"
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("%s", tc.filePath), func(t *testing.T) {
@@ -52,7 +52,7 @@ func TestDirectory(t *testing.T) {
 		{"with-valid-file", true, ""},
 	}
 
-	rootDirectory := "./test-data-valid/directories"
+	rootDirectory := "./test-data/directories"
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("%s", tc.directoryPath), func(t *testing.T) {
