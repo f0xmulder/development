@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
     constructor(props) {
@@ -46,7 +47,16 @@ class Home extends Component {
                             <p data-test="error-message">Failed loading the available APIs</p> :
                             apis && apis.length > 0 ?
                                 <ul>
-                                    { apis.map((api, i) => <li key={i}>{ api['organization_name'] }</li>) }
+                                    {
+                                        apis
+                                            .map((api, i) =>
+                                                <li key={i}>
+                                                    <Link to={`/detail/${api['id']}`} data-test="link">
+                                                        { api['organization_name'] }
+                                                    </Link>
+                                                </li>
+                                            )
+                                    }
                                 </ul> :
                                 <p data-test="no-apis-available-message">No APIs available (yet)</p>
                 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { shallow } from 'enzyme'
 import Home from './index'
 
@@ -35,7 +36,7 @@ describe('listing the available apis', () => {
   beforeEach(() => {
     const wrapper = shallow(<Home/>)
 
-    const apis = [{ organization_name: 'Test' }]
+    const apis = [{ id: 'test-api.json', organization_name: 'Organization Name' }]
     wrapper.setState({ apis, loaded: true })
 
     listItems = wrapper.find('ul li')
@@ -45,8 +46,21 @@ describe('listing the available apis', () => {
     expect(listItems.length).toBe(1)
   })
 
-  it('should show the organization name as label', () => {
-    expect(listItems.first().text()).toBe('Test')
+  describe('the API links', () => {
+    let itemLink
+
+    beforeAll(() => {
+      const listItem = listItems.first()
+      itemLink = listItem.find('[data-test="link"]')
+    })
+
+    it('should navigate to the API Detail page for the API', () => {
+      expect(itemLink.props().to).toBe('/detail/test-api.json')
+    })
+
+    it('should show the organization name as label', () => {
+      expect(itemLink.props().children).toBe('Organization Name')
+    })
   })
 })
 

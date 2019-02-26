@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import Home from './pages/Home'
 import SubmitAPI from './pages/SubmitAPI'
+import APIDetail from './pages/APIDetail'
 import About from './pages/About'
 
 import './App.css'
@@ -12,6 +13,7 @@ const App = () =>
         <Router>
             <div>
                 <Route exact path="/" component={Home} />
+                <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/submit-api" component={SubmitAPI} />
                 <Route path="/about" component={About} />
 

@@ -13,6 +13,10 @@ exports[`contains the page title 1`] = `
       />
       <Route
         component={[Function]}
+        path="/detail/:id"
+      />
+      <Route
+        component={[Function]}
         path="/submit-api"
       />
       <Route
