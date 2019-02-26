@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func mockAPIFileReader(directory string) []models.API {
+func mockAPIDirectoryReader(path string) []models.API {
 	return []models.API{}
 }
 
@@ -19,7 +19,7 @@ func TestListAPIsHandler(t *testing.T) {
 	req := httptest.NewRequest("GET", "/list", nil)
 	w := httptest.NewRecorder()
 
-	ListAPIsHandler(logger, mockAPIFileReader)(w, req)
+	ListAPIsHandler(logger, mockAPIDirectoryReader)(w, req)
 
 	resp := w.Result()
 

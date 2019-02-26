@@ -16,6 +16,23 @@ import (
 	"github.com/pkg/errors"
 )
 
+func readAPIDataFromFile(path string) models.API {
+	content, err := ioutil.ReadFile(path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	newAPI := models.API{}
+	err = json.Unmarshal(content, &newAPI)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return newAPI
+}
+
 func readAPIDataFromDirectory(directory string) []models.API {
 	files, err := ioutil.ReadDir(directory)
 
@@ -50,6 +67,7 @@ func readAPIDataFromDirectory(directory string) []models.API {
 func (api *Server) ListenAndServe(address string) error {
 	r := chi.NewRouter()
 	r.Get("/api/list", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
+	r.Get("/api/list/{id}", routes.APIByIdHandler(api.logger, readAPIDataFromFile))
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {
