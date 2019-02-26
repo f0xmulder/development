@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { object } from 'prop-types'
+import { RedocStandalone } from 'redoc';
 
 class APIDetail extends Component {
     constructor(props) {
@@ -63,6 +64,7 @@ class APIDetail extends Component {
                                         <dt>API Documentation URL</dt>
                                         <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
                                     </dl>
+                                    <RedocStandalone specUrl={details.specification_url} />
                                 </Fragment> : null
                 }
             </div>
