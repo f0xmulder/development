@@ -25,13 +25,13 @@ func TestReadAPIDataFromDirectory(t *testing.T) {
 		validTestAPIModel,
 	}
 
-	actualList := readAPIDataFromDirectory("./test-data")
+	actualList, _ := readAPIDataFromDirectory("./test-data-valid")
 	assert.Equal(t, expectedList, actualList)
 }
 
 func TestReadAPIDataFromFile(t *testing.T) {
 	expected := validTestAPIModel
 
-	actualList := readAPIDataFromFile("./test-data", "test-api-name.json")
+	actualList, _ := readAPIDataFromFile("./test-data-valid", "test-api-name.json")
 	assert.Equal(t, expected, actualList)
 }

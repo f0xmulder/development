@@ -5,19 +5,18 @@ package api
 
 import (
 	"encoding/json"
+	"github.com/go-chi/chi"
+	"github.com/pkg/errors"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/routes"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
-
-	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
+	"path/filepath"
 )
 
-func readAPIDataFromFile(directory string, filename string) models.API {
-	path := strings.Join([]string{directory, filename}, "/")
+func readAPIDataFromFile(directory string, filename string) (models.API, error) {
+	path := filepath.Join(directory, filename)
 	content, err := ioutil.ReadFile(path)
 
 	if err != nil {
@@ -28,29 +27,29 @@ func readAPIDataFromFile(directory string, filename string) models.API {
 	err = json.Unmarshal(content, &newAPI)
 	newAPI.Id = filename
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return newAPI
+	return newAPI, err
 }
 
-func readAPIDataFromDirectory(directory string) []models.API {
+func readAPIDataFromDirectory(directory string) ([]models.API, error) {
 	files, err := ioutil.ReadDir(directory)
 
 	output := []models.API{}
 
 	if err != nil {
-		log.Fatal(err)
+		return output, err
 	}
 
 	for _, file := range files {
-		newAPI := readAPIDataFromFile(directory, file.Name())
+		newAPI, err := readAPIDataFromFile(directory, file.Name())
 
-		output = append(output, newAPI)
+		if err != nil {
+			return output, err
+		} else {
+			output = append(output, newAPI)
+		}
 	}
 
-	return output
+	return output, nil
 }
 
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
@@ -60,7 +59,7 @@ func (api *Server) ListenAndServe(address string) error {
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/apis", func(r chi.Router) {
 			r.Get("/", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
-			r.Get("/{id}", routes.APIByIDHandler(api.logger, readAPIDataFromFile))
+			r.Get("/{id}", routes.APIByIDHandler(api.logger, "../data", readAPIDataFromFile))
 		})
 	})
 

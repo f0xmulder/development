@@ -9,8 +9,8 @@ import (
 	"testing"
 )
 
-func mockAPIDirectoryReader(path string) []models.API {
-	return []models.API{}
+func mockAPIDirectoryReader(path string) ([]models.API, error) {
+	return []models.API{}, nil
 }
 
 func TestListAPIsHandler(t *testing.T) {
