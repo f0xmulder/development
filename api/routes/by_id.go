@@ -2,7 +2,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
