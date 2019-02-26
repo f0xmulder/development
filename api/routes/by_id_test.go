@@ -26,7 +26,7 @@ func TestAPIByIdHandler(t *testing.T) {
 
 	req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, ctx))
 
-	APIByIdHandler(logger, mockAPIFileReader)(w, req)
+	APIByIDHandler(logger, mockAPIFileReader)(w, req)
 
 	resp := w.Result()
 

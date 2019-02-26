@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-var validTestApiModel = models.API{
+var validTestAPIModel = models.API{
 	Id:                   "test-api-name.json",
 	Description:          "Test Description",
 	OrganizationName:     "Test Organization Name",
@@ -22,7 +22,7 @@ var validTestApiModel = models.API{
 
 func TestReadAPIDataFromDirectory(t *testing.T) {
 	expectedList := []models.API{
-		validTestApiModel,
+		validTestAPIModel,
 	}
 
 	actualList := readAPIDataFromDirectory("./test-data")
@@ -30,7 +30,7 @@ func TestReadAPIDataFromDirectory(t *testing.T) {
 }
 
 func TestReadAPIDataFromFile(t *testing.T) {
-	expected := validTestApiModel
+	expected := validTestAPIModel
 
 	actualList := readAPIDataFromFile("./test-data", "test-api-name.json")
 	assert.Equal(t, expected, actualList)

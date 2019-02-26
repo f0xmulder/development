@@ -8,14 +8,14 @@ import (
 	"net/http"
 )
 
-// APIByIdHandler show API details by id
-func APIByIdHandler(logger *zap.Logger, apiFileReader func(directory string, filename string) models.API) http.HandlerFunc {
+// APIByIDHandler show API details by id
+func APIByIDHandler(logger *zap.Logger, apiFileReader func(directory string, filename string) models.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		apiId := chi.URLParam(r, "id")
+		apiID := chi.URLParam(r, "id")
 
-		output := apiFileReader("../data", apiId)
+		output := apiFileReader("../data", apiID)
 		err := json.NewEncoder(w).Encode(output)
 
 		if err != nil {

@@ -60,7 +60,7 @@ func (api *Server) ListenAndServe(address string) error {
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/apis", func(r chi.Router) {
 			r.Get("/", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
-			r.Get("/{id}", routes.APIByIdHandler(api.logger, readAPIDataFromFile))
+			r.Get("/{id}", routes.APIByIDHandler(api.logger, readAPIDataFromFile))
 		})
 	})
 
