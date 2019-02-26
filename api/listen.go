@@ -43,19 +43,8 @@ func readAPIDataFromDirectory(directory string) []models.API {
 	}
 
 	for _, file := range files {
-		filePath := strings.Join([]string{directory, file.Name()}, "/")
-		content, err := ioutil.ReadFile(filePath)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		newAPI := models.API{}
-		err = json.Unmarshal(content, &newAPI)
-
-		if err != nil {
-			log.Fatal(err)
-		}
+		path := strings.Join([]string{directory, file.Name()}, "/")
+		newAPI := readAPIDataFromFile(path)
 
 		output = append(output, newAPI)
 	}
