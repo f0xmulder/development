@@ -4,6 +4,6 @@
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_url": "https://api.data.amsterdam.nl/bag/",
     "api_specification_type": "OpenAPI2",
-    "specification_url": "https://api.data.amsterdam.nl/bag/swagger/?format=openapi",
+    "specification_url": "https://api.data.amsterdam.nl/bag/docs/api-docs/search/?format=openapi",
     "documentation_url": "https://api.data.amsterdam.nl/bag/"
 }
