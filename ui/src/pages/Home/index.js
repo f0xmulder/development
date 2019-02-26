@@ -12,7 +12,7 @@ class Home extends Component {
     }
 
     fetchApiList() {
-        return fetch('/api/list')
+        return fetch('/api/apis')
             .then(response => {
                 if (response.ok) {
                     return response.json()
