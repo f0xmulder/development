@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { RedocStandalone } from 'redoc';
 
 class Home extends Component {
     constructor(props) {
@@ -46,8 +47,9 @@ class Home extends Component {
                         error ?
                             <p data-test="error-message">Failed loading the available APIs</p> :
                             apis && apis.length > 0 ?
-                                <ul>
-                                    {
+                                <div>
+                                    <ul>
+                                        {
                                         apis
                                             .map((api, i) =>
                                                 <li key={i}>
@@ -57,7 +59,10 @@ class Home extends Component {
                                                 </li>
                                             )
                                     }
-                                </ul> :
+                                    </ul>
+                                    <RedocStandalone specUrl={apis[1]['specification_url']} />
+                                </div>
+                    :
                                 <p data-test="no-apis-available-message">No APIs available (yet)</p>
                 }
             </div>
