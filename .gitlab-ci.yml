@@ -53,6 +53,9 @@ validate API definitions:
     - cd validate
   script:
     - go run ./cmd/don-validate/main.go
+  only:
+    changes:
+      - data/**/*
 
 deploy:
   stage: deploy
