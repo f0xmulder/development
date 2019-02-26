@@ -36,7 +36,11 @@ describe('listing the available apis', () => {
   beforeEach(() => {
     const wrapper = shallow(<Home/>)
 
-    const apis = [{ id: 'test-api.json', organization_name: 'Organization Name' }]
+    const apis = [{
+      id: 'test-api.json',
+      organization_name: 'Organization Name',
+      service_name: 'Service Name'
+    }]
     wrapper.setState({ apis, loaded: true })
 
     listItems = wrapper.find('ul li')
@@ -59,7 +63,7 @@ describe('listing the available apis', () => {
     })
 
     it('should show the organization name as label', () => {
-      expect(itemLink.props().children).toBe('Organization Name')
+      expect(itemLink.props().children).toEqual(['Service Name', ' - ', 'Organization Name'])
     })
   })
 })

@@ -52,7 +52,7 @@ class Home extends Component {
                                             .map((api, i) =>
                                                 <li key={i}>
                                                     <Link to={`/detail/${api['id']}`} data-test="link">
-                                                        { api['organization_name'] }
+                                                        { api['service_name'] } - { api['organization_name'] }
                                                     </Link>
                                                 </li>
                                             )
