@@ -49,7 +49,7 @@ func TestAPIByIdHandler(t *testing.T) {
 			"../test-data-valid",
 			404,
 			"text/plain; charset=utf-8",
-			"can not find API\n",
+			"404 page not found\n",
 			mockAPIFileReader,
 		}, {
 			"invalid-json",

@@ -10,7 +10,7 @@ import (
 )
 
 var validTestAPIModel = models.API{
-	Id:                   "test-api-name.json",
+	Id:                   "test-api-name",
 	Description:          "Test Description",
 	OrganizationName:     "Test Organization Name",
 	ServiceName:          "Test Service Name",
@@ -18,6 +18,12 @@ var validTestAPIModel = models.API{
 	APISpecificationType: "Test Specification Type",
 	SpecificationURL:     "Test Specification URL",
 	DocumentationURL:     "Test Documentation URL",
+}
+
+func TestFilenameToAPIID(t *testing.T) {
+	expected := "test-filename"
+	actual := filenameToAPIID("test-filename.json")
+	assert.Equal(t, expected, actual)
 }
 
 func TestReadAPIDataFromDirectory(t *testing.T) {

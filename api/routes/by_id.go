@@ -2,6 +2,7 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
@@ -26,11 +27,11 @@ func APIByIDHandler(logger *zap.Logger, rootDirectoryAPIDefinitions string, apiF
 
 		if _, err := os.Stat(path); os.IsNotExist(err) {
 			logger.Error("failed to find API by id", zap.Error(err))
-			http.Error(w, "can not find API", http.StatusNotFound)
+			http.Error(w, "404 page not found", http.StatusNotFound)
 			return
 		}
 
-		output, errReadFile := apiFileReader(rootDirectoryAPIDefinitions, apiID)
+		output, errReadFile := apiFileReader(rootDirectoryAPIDefinitions, filename)
 
 		if errReadFile != nil {
 			logger.Error("failed to read API file", zap.Error(errReadFile))

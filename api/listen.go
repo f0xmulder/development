@@ -13,7 +13,12 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"strings"
 )
+
+func filenameToAPIID(filename string) string {
+	return strings.TrimSuffix(filename, filepath.Ext(filename))
+}
 
 func readAPIDataFromFile(directory string, filename string) (models.API, error) {
 	path := filepath.Join(directory, filename)
@@ -25,7 +30,7 @@ func readAPIDataFromFile(directory string, filename string) (models.API, error) 
 
 	newAPI := models.API{}
 	err = json.Unmarshal(content, &newAPI)
-	newAPI.Id = filename
+	newAPI.Id = filenameToAPIID(filename)
 
 	return newAPI, err
 }
@@ -59,7 +64,7 @@ func (api *Server) ListenAndServe(address string) error {
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/apis", func(r chi.Router) {
 			r.Get("/", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
-			r.Get("/{id}", routes.APIByIDHandler(api.logger, "../data", readAPIDataFromFile))
+			r.Get("/{id:[a-zA-z0-9-]+}", routes.APIByIDHandler(api.logger, "../data", readAPIDataFromFile))
 		})
 	})
 
