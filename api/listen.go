@@ -16,7 +16,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func readAPIDataFromFile(path string) models.API {
+func readAPIDataFromFile(directory string, filename string) models.API {
+	path := strings.Join([]string{directory, filename}, "/")
 	content, err := ioutil.ReadFile(path)
 
 	if err != nil {
@@ -25,6 +26,7 @@ func readAPIDataFromFile(path string) models.API {
 
 	newAPI := models.API{}
 	err = json.Unmarshal(content, &newAPI)
+	newAPI.Id = filename
 
 	if err != nil {
 		log.Fatal(err)
@@ -43,8 +45,7 @@ func readAPIDataFromDirectory(directory string) []models.API {
 	}
 
 	for _, file := range files {
-		path := strings.Join([]string{directory, file.Name()}, "/")
-		newAPI := readAPIDataFromFile(path)
+		newAPI := readAPIDataFromFile(directory, file.Name())
 
 		output = append(output, newAPI)
 	}

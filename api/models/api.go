@@ -2,6 +2,7 @@ package models
 
 // API model
 type API struct {
+	Id                   string `json:"id"`
 	OrganizationName     string `json:"organization_name"`
 	ServiceName          string `json:"service_name"`
 	APIURL               string `json:"api_url"`

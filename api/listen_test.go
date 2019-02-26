@@ -12,6 +12,7 @@ import (
 func TestReadAPIDataFromDirectory(t *testing.T) {
 	expectedList := []models.API{
 		{
+			Id:                   "test-api-name.json",
 			OrganizationName:     "Test Organization Name",
 			ServiceName:          "Test Service Name",
 			APIURL:               "Test API URL",
@@ -27,6 +28,7 @@ func TestReadAPIDataFromDirectory(t *testing.T) {
 
 func TestReadAPIDataFromFile(t *testing.T) {
 	expected := models.API{
+		Id:                   "test-api-name.json",
 		OrganizationName:     "Test Organization Name",
 		ServiceName:          "Test Service Name",
 		APIURL:               "Test API URL",
@@ -35,6 +37,6 @@ func TestReadAPIDataFromFile(t *testing.T) {
 		DocumentationURL:     "Test Documentation URL",
 	}
 
-	actualList := readAPIDataFromFile("./test-data/test-api-name.json")
+	actualList := readAPIDataFromFile("./test-data", "test-api-name.json")
 	assert.Equal(t, expected, actualList)
 }
