@@ -13,6 +13,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
@@ -21,6 +22,15 @@ func filenameToAPIID(filename string) string {
 }
 
 func readAPIDataFromFile(directory string, filename string) (models.API, error) {
+	newAPI := models.API{}
+
+	regex, err := regexp.Compile(`[a-zA-Z0-9-]+\.json`)
+	isFilenameValid := regex.MatchString(filename)
+
+	if !isFilenameValid {
+		return newAPI, errors.New("Invalid filename")
+	}
+
 	path := filepath.Join(directory, filename)
 	content, err := ioutil.ReadFile(path)
 
@@ -28,7 +38,6 @@ func readAPIDataFromFile(directory string, filename string) (models.API, error) 
 		log.Fatal(err)
 	}
 
-	newAPI := models.API{}
 	err = json.Unmarshal(content, &newAPI)
 	newAPI.Id = filenameToAPIID(filename)
 
