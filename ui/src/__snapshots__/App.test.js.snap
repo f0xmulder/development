@@ -19,6 +19,10 @@ exports[`contains the page title 1`] = `
         component={[Function]}
         path="/submit-api"
       />
+      <Route
+        component={[Function]}
+        path="/about"
+      />
       <div
         class="container"
       >
@@ -38,6 +42,14 @@ exports[`contains the page title 1`] = `
               to="/submit-api"
             >
               Submit your API
+            </Link>
+          </li>
+          <li>
+            <Link
+              replace={false}
+              to="/about"
+            >
+              About
             </Link>
           </li>
         </ul>

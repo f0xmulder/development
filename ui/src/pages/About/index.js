@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const About = () =>
-    <div className="About">
+    <div className="About container">
         <h1>About</h1>
         <p>
           Developer.overheid.nl provides an overview of all API's that are available within the Dutch government.
