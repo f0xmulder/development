@@ -1,6 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import APIDetail from './index'
+import { RedocStandalone } from 'redoc'
 
 describe('on initialization', () => {
   it('should fetch the API details', () => {
@@ -31,6 +32,7 @@ describe('the API details', () => {
   let apiSpecType
   let apiSpecUrl
   let documentationUrl
+  let documentation
 
   beforeEach(() => {
     const wrapper = shallow(<APIDetail/>)
@@ -52,6 +54,7 @@ describe('the API details', () => {
     apiSpecType = wrapper.find('[data-test="api-specification-type"]')
     apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
     documentationUrl = wrapper.find('[data-test="api-documentation-url"]')
+    documentation = wrapper.find(RedocStandalone)
   })
 
   it('should show the service & organization name as page title', () => {
@@ -76,6 +79,10 @@ describe('the API details', () => {
 
   it('should show the documentation url', () => {
     expect(documentationUrl.text()).toBe('Documentation URL')
+  })
+
+  it('should show the documentation', () => {
+    expect(documentation.exists()).toBe(true)
   })
 })
 

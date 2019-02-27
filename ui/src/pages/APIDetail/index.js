@@ -66,7 +66,9 @@ class APIDetail extends Component {
                                             <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
                                         </dl>
                                     </div>
-                                    <RedocStandalone specUrl={details.specification_url} />
+                                    { details.specification_url ?
+                                        <RedocStandalone specUrl={details.specification_url} />
+                                    : null }
                                 </Fragment> : null
                 }
             </div>
