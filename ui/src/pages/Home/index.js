@@ -38,7 +38,7 @@ class Home extends Component {
         const { apis, error, loaded } = this.state
 
         return (
-            <div className="Home">
+            <div className="Home container">
                 <h1>API overview</h1>
                 {
                     !loaded ?

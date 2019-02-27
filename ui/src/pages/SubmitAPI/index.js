@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SubmitAPI = () =>
-    <div className="SubmitAPI">
+    <div className="SubmitAPI container">
         <h1>Submit your API</h1>
         <p>
           If you would like to add an API to <a href="https://developer.overheid.nl" target="_blank" rel="noopener noreferrer">developer.overheid.nl</a>,

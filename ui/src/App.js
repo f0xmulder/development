@@ -18,13 +18,16 @@ const App = () =>
                 <Route path="/submit-api" component={SubmitAPI} />
                 <Route path="/about" component={About} />
 
-                <hr />
 
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/submit-api">Submit your API</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                </ul>
+                <div class="container">
+                    <hr />
+
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/submit-api">Submit your API</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                    </ul>
+                </div>
             </div>
         </Router>
     </div>

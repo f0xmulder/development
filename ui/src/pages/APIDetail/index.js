@@ -49,21 +49,23 @@ class APIDetail extends Component {
                             <p data-test="error-message">Failed loading the API details</p> :
                             details ?
                                 <Fragment>
-                                    <h1>{ details.service_name } - { details.organization_name }</h1>
-                                    <p>{ details.description }</p>
-                                    <dl>
-                                        <dt>API URL</dt>
-                                        <dd data-test="api-url">{ details.api_url }</dd>
+                                    <div class="container">
+                                        <h1>{ details.service_name } - { details.organization_name }</h1>
+                                        <p>{ details.description }</p>
+                                        <dl>
+                                            <dt>API URL</dt>
+                                            <dd data-test="api-url">{ details.api_url }</dd>
 
-                                        <dt>API Specification Type</dt>
-                                        <dd data-test="api-specification-type">{ details.api_specification_type }</dd>
+                                            <dt>API Specification Type</dt>
+                                            <dd data-test="api-specification-type">{ details.api_specification_type }</dd>
 
-                                        <dt>API Specification URL</dt>
-                                        <dd data-test="api-specification-url">{ details.specification_url }</dd>
+                                            <dt>API Specification URL</dt>
+                                            <dd data-test="api-specification-url">{ details.specification_url }</dd>
 
-                                        <dt>API Documentation URL</dt>
-                                        <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
-                                    </dl>
+                                            <dt>API Documentation URL</dt>
+                                            <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
+                                        </dl>
+                                    </div>
                                     <RedocStandalone specUrl={details.specification_url} />
                                 </Fragment> : null
                 }
