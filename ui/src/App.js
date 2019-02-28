@@ -6,8 +6,6 @@ import SubmitAPI from './pages/SubmitAPI'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
 
-import './App.css'
-
 const App = () =>
     <div className="App">
         <Router>
