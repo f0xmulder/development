@@ -110,3 +110,23 @@ describe('when the component is in the error state', () => {
     expect(noApisMessageElement.text()).toBe('Failed loading the API details')
   })
 })
+
+describe('the specification docs', () => {
+  describe('when the specification URL can not be loaded', () => {
+    it('should set the error state for the loading specification property', () => {
+      const wrapper = shallow(<APIDetail />)
+      expect(wrapper.state('errorLoadingSpecification')).toBe(false)
+
+      wrapper.instance().onErrorLoadingSpecification()
+      expect(wrapper.state('errorLoadingSpecification')).toBe(true)
+    })
+
+    it('an error message should be visible', () => {
+      const wrapper = shallow(<APIDetail />)
+      wrapper.setState({ errorLoadingSpecification: true, loaded: true })
+      const noApisMessageElement = wrapper.find('[data-test="error-message-loading-specification"]')
+      expect(noApisMessageElement.exists()).toBe(true)
+      expect(noApisMessageElement.text()).toBe('Failed loading the API specification.')
+    })
+  })
+})

@@ -9,7 +9,8 @@ class APIDetail extends Component {
         this.state = {
             details: {},
             error: false,
-            loaded: false
+            loaded: false,
+            errorLoadingSpecification: false
         }
     }
 
@@ -37,8 +38,12 @@ class APIDetail extends Component {
             })
     }
 
+    onErrorLoadingSpecification() {
+        this.setState({ errorLoadingSpecification: true })
+    }
+
     render() {
-        const { details, error, loaded } = this.state
+        const { details, error, loaded, errorLoadingSpecification } = this.state
 
         return (
             <div className="APIDetail">
@@ -65,10 +70,19 @@ class APIDetail extends Component {
                                             <dt>API Documentation URL</dt>
                                             <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
                                         </dl>
+
+                                        {
+                                            errorLoadingSpecification ?
+                                                <p data-test="error-message-loading-specification">Failed loading the API specification.</p> :
+                                                null
+                                        }
                                     </div>
-                                    { details.specification_url ?
-                                        <RedocStandalone specUrl={details.specification_url} />
-                                    : null }
+                                    {
+                                        !errorLoadingSpecification && details.specification_url ?
+                                            <RedocStandalone specUrl={details.specification_url}
+                                                             onLoaded={error => error ? this.onErrorLoadingSpecification(error) : null } />
+                                            : null
+                                    }
                                 </Fragment> : null
                 }
             </div>
