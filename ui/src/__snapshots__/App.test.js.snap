@@ -24,7 +24,7 @@ exports[`contains the page title 1`] = `
         path="/about"
       />
       <div
-        class="container"
+        className="container"
       >
         <hr />
         <ul>
