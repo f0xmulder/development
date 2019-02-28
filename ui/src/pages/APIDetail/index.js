@@ -49,7 +49,7 @@ class APIDetail extends Component {
                             <p data-test="error-message">Failed loading the API details</p> :
                             details ?
                                 <Fragment>
-                                    <div class="container">
+                                    <div className="container">
                                         <h1>{ details.service_name } - { details.organization_name }</h1>
                                         <p>{ details.description }</p>
                                         <dl>

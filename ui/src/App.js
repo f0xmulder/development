@@ -19,7 +19,7 @@ const App = () =>
                 <Route path="/about" component={About} />
 
 
-                <div class="container">
+                <div className="container">
                     <hr />
 
                     <ul>
