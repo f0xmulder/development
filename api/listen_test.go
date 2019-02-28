@@ -27,7 +27,8 @@ func TestIsFilenameValid(t *testing.T) {
 		valid    bool
 	}{
 		{"foobar.json", true},
-		{"baz/jo**sdf.json", false},
+		{"foo-bar.json", true},
+		{"foo/bar.json", false},
 	}
 
 	for _, tc := range testCases {

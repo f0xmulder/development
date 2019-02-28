@@ -22,7 +22,7 @@ func filenameToAPIID(filename string) string {
 }
 
 func isFilenameValid(filename string) bool {
-	regex, _ := regexp.Compile(`^[a-zA-Z0-9]+\.json$`)
+	regex, _ := regexp.Compile(`^[a-zA-Z0-9-]+\.json$`)
 	return regex.MatchString(filename)
 }
 
