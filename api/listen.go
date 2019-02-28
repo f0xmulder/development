@@ -21,13 +21,15 @@ func filenameToAPIID(filename string) string {
 	return strings.TrimSuffix(filename, filepath.Ext(filename))
 }
 
+func isFilenameValid(filename string) bool {
+	regex, _ := regexp.Compile(`^[a-zA-Z0-9]+\.json$`)
+	return regex.MatchString(filename)
+}
+
 func readAPIDataFromFile(directory string, filename string) (models.API, error) {
 	newAPI := models.API{}
 
-	regex, err := regexp.Compile(`[a-zA-Z0-9-]+\.json`)
-	isFilenameValid := regex.MatchString(filename)
-
-	if !isFilenameValid {
+	if !isFilenameValid(filename) {
 		return newAPI, errors.New("Invalid filename")
 	}
 

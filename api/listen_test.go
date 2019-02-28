@@ -4,6 +4,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"testing"
@@ -18,6 +19,22 @@ var validTestAPIModel = models.API{
 	APISpecificationType: "Test Specification Type",
 	SpecificationURL:     "Test Specification URL",
 	DocumentationURL:     "Test Documentation URL",
+}
+
+func TestIsFilenameValid(t *testing.T) {
+	testCases := []struct {
+		filename string
+		valid    bool
+	}{
+		{"foobar.json", true},
+		{"baz/jo**sdf.json", false},
+	}
+
+	for _, tc := range testCases {
+		t.Run(fmt.Sprintf("%s", tc.filename), func(t *testing.T) {
+			assert.Equal(t, tc.valid, isFilenameValid(tc.filename))
+		})
+	}
 }
 
 func TestFilenameToAPIID(t *testing.T) {
