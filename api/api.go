@@ -4,7 +4,9 @@
 package api
 
 import (
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
+	"net/http"
 )
 
 // Server is the server itself
@@ -18,4 +20,15 @@ func NewServer(l *zap.Logger) *Server {
 		logger: l,
 	}
 	return i
+}
+
+// ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
+func (api *Server) ListenAndServe(address string) error {
+	router := router(api.logger)
+
+	err := http.ListenAndServe(address, router)
+	if err != nil {
+		return errors.Wrap(err, "failed to run http server")
+	}
+	return nil
 }

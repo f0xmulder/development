@@ -1,17 +1,14 @@
-// Copyright © VNG Realisatie 2019
-// Licensed under the EUPL
-
 package api
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/routes"
+	"go.uber.org/zap"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -68,20 +65,15 @@ func readAPIDataFromDirectory(directory string) ([]models.API, error) {
 	return output, nil
 }
 
-// ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
-func (api *Server) ListenAndServe(address string) error {
+func router(logger *zap.Logger) chi.Router {
 	r := chi.NewRouter()
 
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/apis", func(r chi.Router) {
-			r.Get("/", routes.ListAPIsHandler(api.logger, readAPIDataFromDirectory))
-			r.Get("/{id:[a-zA-Z0-9-]+}", routes.APIByIDHandler(api.logger, "../data", readAPIDataFromFile))
+			r.Get("/", routes.ListAPIsHandler(logger, readAPIDataFromDirectory))
+			r.Get("/{id:[a-zA-Z0-9-]+}", routes.APIByIDHandler(logger, "../data", readAPIDataFromFile))
 		})
 	})
 
-	err := http.ListenAndServe(address, r)
-	if err != nil {
-		return errors.Wrap(err, "failed to run http server")
-	}
-	return nil
+	return r
 }
