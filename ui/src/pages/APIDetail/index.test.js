@@ -3,6 +3,17 @@ import {shallow} from 'enzyme'
 import APIDetail from './index'
 import { RedocStandalone } from 'redoc'
 
+const details = {
+  "description": "Description",
+  "organization_name": "Organization Name",
+  "service_name": "Service Name",
+  "api_url": "API URL",
+  "api_specification_type": "Specification Type",
+  "specification_url": "Specification URL",
+  "documentation_url": "Documentation URL",
+  "badges": ["Golden API", "Well-written docs"]
+}
+
 describe('on initialization', () => {
   it('should fetch the API details', () => {
     jest.spyOn(APIDetail.prototype, 'fetchApiDetails')
@@ -14,29 +25,21 @@ describe('on initialization', () => {
 
 describe('loading the API details', () => {
   it('should store the API info as state', () => {
-    const apiPromise = Promise.resolve([{test: 'test'}])
+    const apiPromise = Promise.resolve(details)
     APIDetail.prototype.fetchApiDetails = jest.fn(() => apiPromise)
 
     const wrapper = shallow(<APIDetail/>)
     return apiPromise
         .then(() => {
-          expect(wrapper.state('details')).toEqual([{ test: 'test'}])
+          expect(wrapper.state('details')).toEqual(details)
         })
   })
 })
 
-describe('the API details', () => {
-  let pageTitle
-  let description
-  let apiURL
-  let apiSpecType
-  let apiSpecUrl
-  let documentationUrl
-  let documentation
+describe('the APIDetails', () => {
+  let wrapper
 
   beforeEach(() => {
-    const wrapper = shallow(<APIDetail/>)
-
     const details = {
       "description": "Description",
       "organization_name": "Organization Name",
@@ -46,43 +49,35 @@ describe('the API details', () => {
       "specification_url": "Specification URL",
       "documentation_url": "Documentation URL"
     }
+
+    wrapper = shallow(<APIDetail/>)
     wrapper.setState({ details, loaded: true })
-
-    pageTitle = wrapper.find('h1')
-    description = wrapper.find('p')
-    apiURL = wrapper.find('[data-test="api-url"]')
-    apiSpecType = wrapper.find('[data-test="api-specification-type"]')
-    apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
-    documentationUrl = wrapper.find('[data-test="api-documentation-url"]')
-    documentation = wrapper.find(RedocStandalone)
   })
 
-  it('should show the service & organization name as page title', () => {
-    expect(pageTitle.text()).toBe('Service Name - Organization Name')
-  })
+  describe('the documentation', () => {
+    it('should be included', () => {
+      const documentation = wrapper.find(RedocStandalone)
+      expect(documentation.exists()).toBe(true)
+    })
 
-  it('should show the description', () => {
-    expect(description.text()).toBe('Description')
-  })
+    describe('when the specification URL can not be loaded', () => {
+      it('should set the error state for the loading specification property', () => {
+        const wrapper = shallow(<APIDetail />)
+        expect(wrapper.state('errorLoadingSpecification')).toBe(false)
 
-  it('should show the API URL', () => {
-    expect(apiURL.text()).toBe('API URL')
-  })
+        wrapper.instance().onErrorLoadingSpecification()
+        expect(wrapper.state('errorLoadingSpecification')).toBe(true)
+      })
 
-  it('should show the specification type', () => {
-    expect(apiSpecType.text()).toBe('Specification Type')
-  })
+      it('an error message should be visible', () => {
+        const wrapper = shallow(<APIDetail />)
+        wrapper.setState({ errorLoadingSpecification: true, loaded: true, details })
 
-  it('should show the specification URL', () => {
-    expect(apiSpecUrl.text()).toBe('Specification URL')
-  })
-
-  it('should show the documentation url', () => {
-    expect(documentationUrl.text()).toBe('Documentation URL')
-  })
-
-  it('should show the documentation', () => {
-    expect(documentation.exists()).toBe(true)
+        const noApisMessageElement = wrapper.find('[data-test="error-message-loading-specification"]')
+        expect(noApisMessageElement.exists()).toBe(true)
+        expect(noApisMessageElement.text()).toBe('Failed loading the API specification.')
+      })
+    })
   })
 })
 
@@ -108,25 +103,5 @@ describe('when the component is in the error state', () => {
     const noApisMessageElement = wrapper.find('[data-test="error-message"]')
     expect(noApisMessageElement.exists()).toBe(true)
     expect(noApisMessageElement.text()).toBe('Failed loading the API details')
-  })
-})
-
-describe('the specification docs', () => {
-  describe('when the specification URL can not be loaded', () => {
-    it('should set the error state for the loading specification property', () => {
-      const wrapper = shallow(<APIDetail />)
-      expect(wrapper.state('errorLoadingSpecification')).toBe(false)
-
-      wrapper.instance().onErrorLoadingSpecification()
-      expect(wrapper.state('errorLoadingSpecification')).toBe(true)
-    })
-
-    it('an error message should be visible', () => {
-      const wrapper = shallow(<APIDetail />)
-      wrapper.setState({ errorLoadingSpecification: true, loaded: true })
-      const noApisMessageElement = wrapper.find('[data-test="error-message-loading-specification"]')
-      expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('Failed loading the API specification.')
-    })
   })
 })

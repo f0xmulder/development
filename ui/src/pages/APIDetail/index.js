@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { object } from 'prop-types'
-import { RedocStandalone } from 'redoc';
+import { RedocStandalone } from 'redoc'
+
+import APIDetails from './APIDetails'
 
 class APIDetail extends Component {
     constructor(props) {
@@ -55,21 +57,7 @@ class APIDetail extends Component {
                             details ?
                                 <Fragment>
                                     <div className="container">
-                                        <h1>{ details.service_name } - { details.organization_name }</h1>
-                                        <p>{ details.description }</p>
-                                        <dl>
-                                            <dt>API URL</dt>
-                                            <dd data-test="api-url">{ details.api_url }</dd>
-
-                                            <dt>API Specification Type</dt>
-                                            <dd data-test="api-specification-type">{ details.api_specification_type }</dd>
-
-                                            <dt>API Specification URL</dt>
-                                            <dd data-test="api-specification-url">{ details.specification_url }</dd>
-
-                                            <dt>API Documentation URL</dt>
-                                            <dd data-test="api-documentation-url">{ details.documentation_url }</dd>
-                                        </dl>
+                                        <APIDetails details={details} />
 
                                         {
                                             errorLoadingSpecification ?
@@ -78,7 +66,7 @@ class APIDetail extends Component {
                                         }
                                     </div>
                                     {
-                                        !errorLoadingSpecification && details.specification_url ?
+                                        !errorLoadingSpecification ?
                                             <RedocStandalone specUrl={details.specification_url}
                                                              onLoaded={error => error ? this.onErrorLoadingSpecification(error) : null } />
                                             : null
