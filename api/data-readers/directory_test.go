@@ -1,6 +1,7 @@
 package data_readers
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"testing"
@@ -20,6 +21,11 @@ func TestDirectory(t *testing.T) {
 		},
 	}
 
-	actual, _ := Directory("./test-data-valid")
+	actual, err := Directory("./test-data-valid")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	assert.Equal(t, expected, actual)
 }

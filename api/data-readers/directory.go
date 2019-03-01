@@ -3,6 +3,7 @@ package data_readers
 import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
+	"path/filepath"
 )
 
 // Directory maps every file from a directory into an API model
@@ -16,7 +17,8 @@ func Directory(directory string) ([]models.API, error) {
 	}
 
 	for _, file := range files {
-		newAPI, err := File(directory, file.Name())
+		path := filepath.Join(directory, file.Name())
+		newAPI, err := File(path)
 
 		if err != nil {
 			return output, err

@@ -18,6 +18,6 @@ func TestFile(t *testing.T) {
 		DocumentationURL:     "Test Documentation URL",
 	}
 
-	actual, _ := File("./test-data-valid", "test-api-name.json")
+	actual, _ := File("./test-data-valid/test-api-name.json")
 	assert.Equal(t, expected, actual)
 }

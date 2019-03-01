@@ -18,11 +18,11 @@ func mockAPIDirectoryReader(directory string) ([]models.API, error) {
 	return []models.API{}, nil
 }
 
-func mockAPIFileReader(directory string, filename string) (models.API, error) {
+func mockAPIFileReader(path string) (models.API, error) {
 	return models.API{}, nil
 }
 
-func mockAPIFileReaderWithError(directory string, filename string) (models.API, error) {
+func mockAPIFileReaderWithError(path string) (models.API, error) {
 	return models.API{}, errors.New("Unable to read file")
 }
 
@@ -55,7 +55,7 @@ func TestGet(t *testing.T) {
 		wantStatusCode              int
 		wantContentType             string
 		wantResponseBody            string
-		mockAPIFileReader           func(directory string, filename string) (models.API, error)
+		mockAPIFileReader           func(path string) (models.API, error)
 	}{
 		{
 			"test-api-name",

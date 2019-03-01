@@ -10,14 +10,14 @@ import (
 )
 
 // File maps a file into an API model
-func File(directory string, filename string) (models.API, error) {
+func File(path string) (models.API, error) {
 	newAPI := models.API{}
+	filename := filepath.Base(path)
 
 	if !isValid(filename) {
-		return newAPI, errors.New("Invalid filename")
+		return newAPI, errors.New("Invalid path")
 	}
 
-	path := filepath.Join(directory, filename)
 	content, err := ioutil.ReadFile(path)
 
 	if err != nil {

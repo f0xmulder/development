@@ -8,7 +8,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(directory string, filename string) (models.API, error),
+func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
 	readDirectory func(directory string) ([]models.API, error)) *resources.APIResource {
 	i := &resources.APIResource{
 		Logger:                      logger,

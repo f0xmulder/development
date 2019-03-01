@@ -14,7 +14,7 @@ import (
 type APIResource struct {
 	Logger                      *zap.Logger
 	RootDirectoryAPIDefinitions string
-	ReadFile                    func(directory string, filename string) (models.API, error)
+	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
 }
 
@@ -59,7 +59,7 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, errReadFile := rs.ReadFile(rs.RootDirectoryAPIDefinitions, filename)
+	output, errReadFile := rs.ReadFile(path)
 
 	if errReadFile != nil {
 		rs.Logger.Error("failed to read API file", zap.Error(errReadFile))
