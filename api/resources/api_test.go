@@ -1,10 +1,10 @@
-package routes
+package resources
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
@@ -14,10 +14,8 @@ import (
 	"testing"
 )
 
-func TestApiIdToFilename(t *testing.T) {
-	expected := "abc-def.json"
-	actual := apiIDToFilename("abc-def")
-	assert.Equal(t, expected, actual)
+func mockAPIDirectoryReader(directory string) ([]models.API, error) {
+	return []models.API{}, nil
 }
 
 func mockAPIFileReader(directory string, filename string) (models.API, error) {
@@ -28,7 +26,29 @@ func mockAPIFileReaderWithError(directory string, filename string) (models.API, 
 	return models.API{}, errors.New("Unable to read file")
 }
 
-func TestAPIByIdHandler(t *testing.T) {
+func TestList(t *testing.T) {
+	apiResource := APIResource{
+		zap.NewNop(),
+		"",
+		nil,
+		mockAPIDirectoryReader,
+	}
+
+	req := httptest.NewRequest("GET", "/list", nil)
+	w := httptest.NewRecorder()
+
+	apiResource.List(w, req)
+
+	resp := w.Result()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	assert.Equal(t, 200, resp.StatusCode, "status code should be 200")
+	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"), "response type should be JSON")
+	assert.Equal(t, "[]\n", string(body), "response body should be an empty array")
+}
+
+func TestGet(t *testing.T) {
 	testCases := []struct {
 		apiID                       string
 		rootDirectoryAPIDefinitions string
@@ -39,21 +59,21 @@ func TestAPIByIdHandler(t *testing.T) {
 	}{
 		{
 			"test-api-name",
-			"../test-data-valid",
+			"./test-data-valid",
 			200,
 			"application/json",
 			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",
-			"../test-data-valid",
+			"./test-data-valid",
 			404,
 			"text/plain; charset=utf-8",
 			"404 page not found\n",
 			mockAPIFileReader,
 		}, {
 			"invalid-json",
-			"../test-data-invalid",
+			"./test-data-invalid",
 			500,
 			"text/plain; charset=utf-8",
 			"oops, something went wrong while getting the API info\n",
@@ -63,10 +83,14 @@ func TestAPIByIdHandler(t *testing.T) {
 
 	for _, tc := range testCases {
 		url := strings.Join([]string{"/api/apis", tc.apiID}, "/")
+		apiResource := APIResource{
+			zap.NewNop(),
+			tc.rootDirectoryAPIDefinitions,
+			tc.mockAPIFileReader,
+			nil,
+		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
-			logger := zap.NewNop()
-
 			fmt.Println(url)
 			req := httptest.NewRequest("GET", url, nil)
 			w := httptest.NewRecorder()
@@ -76,7 +100,7 @@ func TestAPIByIdHandler(t *testing.T) {
 
 			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, ctx))
 
-			APIByIDHandler(logger, tc.rootDirectoryAPIDefinitions, tc.mockAPIFileReader)(w, req)
+			apiResource.Get(w, req)
 			resp := w.Result()
 			body, _ := ioutil.ReadAll(resp.Body)
 

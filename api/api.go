@@ -24,9 +24,9 @@ func NewServer(l *zap.Logger) *Server {
 
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
 func (api *Server) ListenAndServe(address string) error {
-	router := router(api.logger)
+	r := router(api.logger)
 
-	err := http.ListenAndServe(address, router)
+	err := http.ListenAndServe(address, r)
 	if err != nil {
 		return errors.Wrap(err, "failed to run http server")
 	}
