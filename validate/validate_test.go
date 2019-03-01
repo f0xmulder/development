@@ -21,6 +21,8 @@ func TestFile(t *testing.T) {
 		{"missing-api-url.json", false, "the field api_url is missing"},
 		{"missing-documentation-url.json", false, "the field documentation_url is missing"},
 		{"missing-specification-url.json", true, ""},
+		{"missing-tags.json", true, ""},
+		{"invalid-tags.json", false, "invalid JSON"},
 		{"valid.json", true, ""},
 	}
 

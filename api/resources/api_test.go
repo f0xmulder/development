@@ -62,7 +62,7 @@ func TestGet(t *testing.T) {
 			"./test-data-valid",
 			200,
 			"application/json",
-			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
+			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",

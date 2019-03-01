@@ -88,6 +88,8 @@ func File(filePath string) ValidationFeedback {
 		}
 	}
 
+	fmt.Println(newAPI)
+
 	return ValidationFeedback{
 		Valid: true,
 	}
