@@ -16,6 +16,7 @@ func TestFile(t *testing.T) {
 		APISpecificationType: "Test Specification Type",
 		SpecificationURL:     "Test Specification URL",
 		DocumentationURL:     "Test Documentation URL",
+		Tags:                 []string{"test tag"},
 	}
 
 	actual, _ := File("./test-data-valid/test-api-name.json")

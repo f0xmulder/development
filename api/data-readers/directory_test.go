@@ -18,6 +18,7 @@ func TestDirectory(t *testing.T) {
 			"Test Specification Type",
 			"Test Specification URL",
 			"Test Documentation URL",
+			[]string{"test tag"},
 		},
 	}
 
