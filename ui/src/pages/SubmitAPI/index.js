@@ -25,7 +25,8 @@ const SubmitAPI = () =>
     "api_specification_type": "OpenAPI2",
     "specification_url": "https://api.example.com/service/swagger/?format=openapi",
     "documentation_url": "https://api.example.com/service/",
-    "tags": ["Example tag", "Another tag"]
+    "tags": ["Example tag", "Another tag"],
+    "badges": ["Gouden API"]
 }
             `}
         </pre>

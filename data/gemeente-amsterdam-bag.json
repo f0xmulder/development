@@ -6,5 +6,6 @@
     "api_specification_type": "OpenAPI2",
     "specification_url": "https://api.data.amsterdam.nl/bag/docs/api-docs/search/?format=openapi",
     "documentation_url": "https://api.data.amsterdam.nl/bag/",
-    "tags": ["bag", "amsterdam"]
+    "tags": ["bag", "amsterdam"],
+    "badges": []
 }

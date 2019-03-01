@@ -11,4 +11,5 @@ type API struct {
 	SpecificationURL     string   `json:"specification_url"`
 	DocumentationURL     string   `json:"documentation_url"`
 	Tags                 []string `json:"tags"`
+	Badges               []string `json:"badges"`
 }

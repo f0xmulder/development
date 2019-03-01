@@ -5,7 +5,5 @@
     "api_url": "Test API URL",
     "api_specification_type": "Test Specification Type",
     "specification_url": "Test Specification URL",
-    "documentation_url": "Test Documentation URL",
-    "tags": ["test-tag"],
-    "badges": ["Test badge"]
+    "documentation_url": "Test Documentation URL"
 }
