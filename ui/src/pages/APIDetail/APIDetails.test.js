@@ -13,14 +13,11 @@ const details = {
     "badges": ["Golden API", "Well-written docs"]
 }
 
-const detailsWithoutBadges = () =>
-    Object.assign({}, details, { badges: null })
-
 describe('APIDetails', () => {
     let wrapper
 
     beforeEach(() => {
-        wrapper = shallow(<APIDetails details={details}/>)
+        wrapper = shallow(<APIDetails {...details}/>)
     })
 
     it('should show the service & organization name as page title', () => {
@@ -73,7 +70,7 @@ describe('APIDetails', () => {
 
         describe('when the API has no badges', () => {
             beforeEach(() => {
-                wrapper.setProps({ details: detailsWithoutBadges() })
+                wrapper.setProps({ badges: null })
 
                 badgesTitle = wrapper.find('[data-test="badges-title"]')
                 badges = wrapper.find('[data-test="badges"]')

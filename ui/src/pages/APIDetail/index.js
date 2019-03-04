@@ -57,7 +57,7 @@ class APIDetail extends Component {
                             details ?
                                 <Fragment>
                                     <div className="container">
-                                        <APIDetails details={details} />
+                                        <APIDetails {...details} />
 
                                         {
                                             errorLoadingSpecification ?

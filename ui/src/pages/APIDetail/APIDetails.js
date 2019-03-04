@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { shape, string, array } from 'prop-types'
+import { string, array } from 'prop-types'
 
-const APIDetails = ({ details: { service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges } }) =>
+const APIDetails = ({ service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges }) =>
         <div className="APIDetails">
         <h1>{ service_name } - { organization_name }</h1>
         <p>{ description }</p>
@@ -36,16 +36,14 @@ const APIDetails = ({ details: { service_name, organization_name, description, a
     </div>
 
 APIDetails.propTypes = {
-    details: shape({
-        service_name: string.isRequired,
-        organization_name: string.isRequired,
-        description: string.isRequired,
-        api_url: string.isRequired,
-        api_specification_type: string.isRequired,
-        specification_url: string.isRequired,
-        documentation_url: string.isRequired,
-        badges: array,
-    }).isRequired
+    service_name: string.isRequired,
+    organization_name: string.isRequired,
+    description: string.isRequired,
+    api_url: string.isRequired,
+    api_specification_type: string.isRequired,
+    specification_url: string.isRequired,
+    documentation_url: string.isRequired,
+    badges: array
 }
 
 export default APIDetails
