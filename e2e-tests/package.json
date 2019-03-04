@@ -1,0 +1,15 @@
+{
+  "name": "e2e-tests",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Integration tests for DON.",
+  "main": "index.test.js",
+  "scripts": {
+    "test": "jest",
+    "debug": "NODE_ENV=debug npm test"
+  },
+  "devDependencies": {
+    "jest": "24.1.0",
+    "puppeteer": "1.12.2"
+  }
+}

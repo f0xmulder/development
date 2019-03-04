@@ -2,6 +2,7 @@ stages:
   - test
   - validate
   - deploy
+  - e2e-tests
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -69,3 +70,18 @@ deploy:
     name: prod
   only:
     - master
+
+E2E tests:
+  image: buildkite/puppeteer:latest
+  stage: e2e-tests
+  before_script:
+    - cd e2e-tests
+    - npm install
+  script:
+    - npm test
+  only:
+    - master
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - e2e-tests/screenshots
