@@ -21,7 +21,7 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 
 func router(logger *zap.Logger) chi.Router {
 	r := chi.NewRouter()
-	r.Mount("/apis",
+	r.Mount("/api/apis",
 		NewAPIResource(logger,
 			"../data",
 			data_readers.File,
