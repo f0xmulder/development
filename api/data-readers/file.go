@@ -5,7 +5,6 @@ import (
 	"errors"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
-	"log"
 	"path/filepath"
 )
 
@@ -15,17 +14,21 @@ func File(path string) (models.API, error) {
 	filename := filepath.Base(path)
 
 	if !isValid(filename) {
-		return newAPI, errors.New("Invalid path")
+		return newAPI, errors.New("invalid path")
 	}
 
 	content, err := ioutil.ReadFile(path)
 
 	if err != nil {
-		log.Fatal(err)
+		return newAPI, err
 	}
 
 	err = json.Unmarshal(content, &newAPI)
-	newAPI.Id = toAPIID(filename)
 
+	if err != nil {
+		return newAPI, err
+	}
+
+	newAPI.Id = toAPIID(filename)
 	return newAPI, err
 }

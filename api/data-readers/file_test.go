@@ -7,18 +7,41 @@ import (
 )
 
 func TestFile(t *testing.T) {
-	expected := models.API{
-		Id:                   "test-api-name",
-		Description:          "Test Description",
-		OrganizationName:     "Test Organization Name",
-		ServiceName:          "Test Service Name",
-		APIURL:               "Test API URL",
-		APISpecificationType: "Test Specification Type",
-		SpecificationURL:     "Test Specification URL",
-		DocumentationURL:     "Test Documentation URL",
-		Tags:                 []string{"test tag"},
+	testCases := []struct {
+		filePath      string
+		expectedModel models.API
+		expectedError bool
+	}{
+		{
+			"./test-data-valid/test-api-name.json",
+			models.API{
+				Id:                   "test-api-name",
+				Description:          "Test Description",
+				OrganizationName:     "Test Organization Name",
+				ServiceName:          "Test Service Name",
+				APIURL:               "Test API URL",
+				APISpecificationType: "Test Specification Type",
+				SpecificationURL:     "Test Specification URL",
+				DocumentationURL:     "Test Documentation URL",
+				Tags:                 []string{"test tag"},
+			},
+			false,
+		},
+		{
+			"./test-data-valid/invalid-file-path",
+			models.API{},
+			true,
+		},
+		{
+			"./test-data-invalid/invalid-json.json",
+			models.API{},
+			true,
+		},
 	}
 
-	actual, _ := File("./test-data-valid/test-api-name.json")
-	assert.Equal(t, expected, actual)
+	for _, tc := range testCases {
+		actual, actualError := File(tc.filePath)
+		assert.Equal(t, tc.expectedModel, actual)
+		assert.Equal(t, tc.expectedError, actualError != nil)
+	}
 }
