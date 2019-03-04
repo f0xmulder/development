@@ -1,13 +1,14 @@
 package api
 
 import (
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"gitlab.com/commonground/developer.overheid.nl/api/data-readers"
+	data_readers "gitlab.com/commonground/developer.overheid.nl/api/data-readers"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/resources"
 	"go.uber.org/zap"
-	"net/http"
 )
 
 func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
@@ -21,13 +22,19 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	return i
 }
 
-func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string,
-	readDirectory func(directory string) ([]models.API, error)) *resources.TagResource {
+func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readDirectory func(directory string) ([]models.API, error)) *resources.TagResource {
 	i := &resources.TagResource{
 		Logger:                      logger,
 		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
 		ReadDirectory:               readDirectory,
 	}
+}
+
+func NewSubmitAPIResource(logger *zap.Logger) *resources.SubmitAPIResource {
+	i := &resources.SubmitAPIResource{
+		Logger: logger,
+	}
+
 	return i
 }
 
@@ -47,7 +54,11 @@ func router(logger *zap.Logger) chi.Router {
 				data_readers.File,
 				data_readers.Directory).Routes(),
 		)
-
+		r.Mount("/submit-api",
+			NewSubmitAPIResource(
+				logger,
+			).Routes(),
+		)
 		r.Mount("/tags",
 			NewTagResource(logger,
 				"../data",
