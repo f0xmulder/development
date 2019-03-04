@@ -24,6 +24,7 @@ func TestFile(t *testing.T) {
 				SpecificationURL:     "Test Specification URL",
 				DocumentationURL:     "Test Documentation URL",
 				Tags:                 []string{"test tag"},
+				Badges:               []string{"Gouden API"},
 			},
 			false,
 		},
