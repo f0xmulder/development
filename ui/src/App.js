@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import SubmitAPI from './pages/SubmitAPI'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
+import Tag from './pages/Tag'
 
 const App = () =>
     <div className="App">
@@ -14,7 +15,7 @@ const App = () =>
                 <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/submit-api" component={SubmitAPI} />
                 <Route path="/about" component={About} />
-
+                <Route path="/tag/:tag" component={Tag} />
 
                 <div className="container">
                     <hr />
