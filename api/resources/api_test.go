@@ -14,8 +14,27 @@ import (
 	"testing"
 )
 
+var dummyAPI = models.API{
+	"test-api-name",
+	"Test Description",
+	"Test Organization Name",
+	"Test Service Name",
+	"Test API URL",
+	"Test Specification Type",
+	"Test Specification URL",
+	"Test Documentation URL",
+	[]string{"test-tag"},
+	[]string{},
+}
+
 func mockAPIDirectoryReaderNoResults(directory string) ([]models.API, error) {
 	return []models.API{}, nil
+}
+
+func mockAPIDirectoryReaderOneResult(directory string) ([]models.API, error) {
+	return []models.API{
+		dummyAPI,
+	}, nil
 }
 
 func mockAPIFileReader(path string) (models.API, error) {
@@ -26,10 +45,44 @@ func mockAPIFileReaderWithError(path string) (models.API, error) {
 	return models.API{}, errors.New("Unable to read file")
 }
 
+func TestListIncludes(t *testing.T) {
+	testCases := []struct {
+		query    string
+		list     []string
+		expected bool
+	}{
+		{"a", []string{"a"}, true},
+		{"a", []string{}, false},
+	}
+
+	for _, tc := range testCases {
+		t.Run(fmt.Sprintf("%s", tc.query), func(t *testing.T) {
+			assert.Equal(t, tc.expected, listIncludes(tc.query, tc.list))
+		})
+	}
+}
+
+func TestFilterAPIsByTag(t *testing.T) {
+	testCases := []struct {
+		query    string
+		list     []models.API
+		expected []models.API
+	}{
+		{"test-tag", []models.API{dummyAPI}, []models.API{dummyAPI}},
+		{"a", []models.API{dummyAPI}, []models.API{}},
+	}
+
+	for _, tc := range testCases {
+		t.Run(fmt.Sprintf("%s", tc.query), func(t *testing.T) {
+			assert.Equal(t, tc.expected, filterAPIsByTag(tc.query, tc.list))
+		})
+	}
+}
+
 func TestList(t *testing.T) {
 	testCases := []struct {
 		directoryReader  func(directory string) ([]models.API, error)
-		target           string
+		url              string
 		wantStatusCode   int
 		wantContentType  string
 		wantResponseBody string
@@ -41,28 +94,44 @@ func TestList(t *testing.T) {
 			"application/json",
 			"[]\n",
 		},
+		{
+			mockAPIDirectoryReaderOneResult,
+			"/list?tags=test-tag",
+			200,
+			"application/json",
+			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[]}]\n",
+		},
+		{
+			mockAPIDirectoryReaderOneResult,
+			"/list?tags=tag-which-does-not-appear-for-any-result",
+			200,
+			"application/json",
+			"[]\n",
+		},
 	}
 
 	for _, tc := range testCases {
-		apiResource := APIResource{
-			zap.NewNop(),
-			"",
-			nil,
-			tc.directoryReader,
-		}
+		t.Run(fmt.Sprintf("%s", tc.url), func(t *testing.T) {
+			apiResource := APIResource{
+				zap.NewNop(),
+				"",
+				nil,
+				tc.directoryReader,
+			}
 
-		req := httptest.NewRequest("GET", tc.target, nil)
-		w := httptest.NewRecorder()
+			req := httptest.NewRequest("GET", tc.url, nil)
+			w := httptest.NewRecorder()
 
-		apiResource.List(w, req)
+			apiResource.List(w, req)
 
-		resp := w.Result()
+			resp := w.Result()
 
-		body, _ := ioutil.ReadAll(resp.Body)
+			body, _ := ioutil.ReadAll(resp.Body)
 
-		assert.Equal(t, tc.wantStatusCode, resp.StatusCode)
-		assert.Equal(t, tc.wantContentType, resp.Header.Get("Content-Type"))
-		assert.Equal(t, tc.wantResponseBody, string(body))
+			assert.Equal(t, tc.wantStatusCode, resp.StatusCode)
+			assert.Equal(t, tc.wantContentType, resp.Header.Get("Content-Type"))
+			assert.Equal(t, tc.wantResponseBody, string(body))
+		})
 	}
 }
 

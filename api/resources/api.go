@@ -18,6 +18,39 @@ type APIResource struct {
 	ReadDirectory               func(directory string) ([]models.API, error)
 }
 
+// via https://golangcode.com/get-a-url-parameter-from-a-request/
+func getQueryParam(r *http.Request, key string) string {
+	keys, ok := r.URL.Query()[key]
+
+	if !ok || len(keys[0]) < 1 {
+		return ""
+	}
+
+	return keys[0]
+}
+
+func listIncludes(query string, items []string) bool {
+	for _, item := range items {
+		if item == query {
+			return true
+		}
+	}
+
+	return false
+}
+
+func filterAPIsByTag(tag string, items []models.API) []models.API {
+	output := []models.API{}
+
+	for _, item := range items {
+		if listIncludes(tag, item.Tags) {
+			output = append(output, item)
+		}
+	}
+
+	return output
+}
+
 func (rs APIResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
@@ -31,6 +64,12 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	outputList, errReadFile := rs.ReadDirectory("../data")
+	tagsFilterValue := getQueryParam(r, "tags")
+
+	if len(tagsFilterValue) > 0 {
+		outputList = filterAPIsByTag(tagsFilterValue, outputList)
+	}
+
 	err := json.NewEncoder(w).Encode(outputList)
 
 	if err != nil {
