@@ -26,7 +26,13 @@ const SubmitAPI = () =>
     "specification_url": "https://api.example.com/service/swagger/?format=openapi",
     "documentation_url": "https://api.example.com/service/",
     "tags": ["Example tag", "Another tag"],
-    "badges": ["Gouden API"]
+    "badges": ["Gouden API"],
+    "contact": {
+        "email": "name@example.nl",
+        "phone": "0031612345678",
+        "fax": "0031687654321",
+        "chat": "https://nl-x.slack.com"
+    }
 }
             `}
         </pre>
