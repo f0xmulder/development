@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-func mockAPIDirectoryReader(directory string) ([]models.API, error) {
+func mockAPIDirectoryReaderNoResults(directory string) ([]models.API, error) {
 	return []models.API{}, nil
 }
 
@@ -27,25 +27,43 @@ func mockAPIFileReaderWithError(path string) (models.API, error) {
 }
 
 func TestList(t *testing.T) {
-	apiResource := APIResource{
-		zap.NewNop(),
-		"",
-		nil,
-		mockAPIDirectoryReader,
+	testCases := []struct {
+		directoryReader  func(directory string) ([]models.API, error)
+		target           string
+		wantStatusCode   int
+		wantContentType  string
+		wantResponseBody string
+	}{
+		{
+			mockAPIDirectoryReaderNoResults,
+			"/list",
+			200,
+			"application/json",
+			"[]\n",
+		},
 	}
 
-	req := httptest.NewRequest("GET", "/list", nil)
-	w := httptest.NewRecorder()
+	for _, tc := range testCases {
+		apiResource := APIResource{
+			zap.NewNop(),
+			"",
+			nil,
+			tc.directoryReader,
+		}
 
-	apiResource.List(w, req)
+		req := httptest.NewRequest("GET", tc.target, nil)
+		w := httptest.NewRecorder()
 
-	resp := w.Result()
+		apiResource.List(w, req)
 
-	body, _ := ioutil.ReadAll(resp.Body)
+		resp := w.Result()
 
-	assert.Equal(t, 200, resp.StatusCode, "status code should be 200")
-	assert.Equal(t, "application/json", resp.Header.Get("Content-Type"), "response type should be JSON")
-	assert.Equal(t, "[]\n", string(body), "response body should be an empty array")
+		body, _ := ioutil.ReadAll(resp.Body)
+
+		assert.Equal(t, tc.wantStatusCode, resp.StatusCode)
+		assert.Equal(t, tc.wantContentType, resp.Header.Get("Content-Type"))
+		assert.Equal(t, tc.wantResponseBody, string(body))
+	}
 }
 
 func TestGet(t *testing.T) {
