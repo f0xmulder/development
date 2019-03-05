@@ -23,7 +23,9 @@ func TestFile(t *testing.T) {
 		{"missing-specification-url.json", true, ""},
 		{"missing-tags.json", true, ""},
 		{"invalid-tags.json", false, "invalid JSON"},
+		{"invalid-contact.json", false, "invalid JSON"},
 		{"missing-badges.json", true, ""},
+		{"missing-contact.json", true, ""},
 		{"valid.json", true, ""},
 	}
 
