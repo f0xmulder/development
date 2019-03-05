@@ -109,7 +109,6 @@ func TestGet(t *testing.T) {
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
-			fmt.Println(url)
 			req := httptest.NewRequest("GET", url, nil)
 			w := httptest.NewRecorder()
 
