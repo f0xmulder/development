@@ -7,5 +7,11 @@
     "specification_url": "Test Specification URL",
     "documentation_url": "Test Documentation URL",
     "tags": ["test tag"],
-    "badges": ["Gouden API"]
+    "badges": ["Gouden API"],
+    "contact": {
+        "email": "name@example.nl",
+        "phone": "0031612345678",
+        "fax": "0031687654321",
+        "chat": "https://nl-x.slack.com"
+    }
 }

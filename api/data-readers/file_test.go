@@ -25,6 +25,12 @@ func TestFile(t *testing.T) {
 				DocumentationURL:     "Test Documentation URL",
 				Tags:                 []string{"test tag"},
 				Badges:               []string{"Gouden API"},
+				Contact: models.APIContactDetails{
+					Email: "name@example.nl",
+					Phone: "0031612345678",
+					Fax:   "0031687654321",
+					Chat:  "https://nl-x.slack.com",
+				},
 			},
 			false,
 		},

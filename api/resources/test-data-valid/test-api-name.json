@@ -5,5 +5,11 @@
     "api_url": "Test API URL",
     "api_specification_type": "Test Specification Type",
     "specification_url": "Test Specification URL",
-    "documentation_url": "Test Documentation URL"
+    "documentation_url": "Test Documentation URL",
+    "contact": {
+        "email": "name@example.nl",
+        "phone": "0031612345678",
+        "fax": "0031687654321",
+        "chat": "https://nl-x.slack.com"
+    }
 }

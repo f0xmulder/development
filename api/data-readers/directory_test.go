@@ -20,6 +20,12 @@ func TestDirectory(t *testing.T) {
 			"Test Documentation URL",
 			[]string{"test tag"},
 			[]string{"Gouden API"},
+			models.APIContactDetails{
+				Email: "name@example.nl",
+				Phone: "0031612345678",
+				Fax:   "0031687654321",
+				Chat:  "https://nl-x.slack.com",
+			},
 		},
 	}
 
