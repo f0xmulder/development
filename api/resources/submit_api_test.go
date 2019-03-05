@@ -18,7 +18,7 @@ func TestCreate(t *testing.T) {
 		wantResponseBody string
 	}{
 		{
-			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
+			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_specification_type\":\"asdf\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
 			200,
 			"application/json",
 			"",
@@ -36,7 +36,11 @@ func TestCreate(t *testing.T) {
 
 		submitAPIResource := SubmitAPIResource{
 			zap.NewNop(),
-			"",
+			GitlabConfig{
+				Host:        "",
+				AccessToken: "",
+				ProjectID:   "",
+			},
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {

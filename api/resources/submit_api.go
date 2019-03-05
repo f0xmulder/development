@@ -44,10 +44,9 @@ func (rs SubmitAPIResource) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var title bytes.Buffer
-	var description bytes.Buffer
+	var title, description bytes.Buffer
 
-	titleTemplate, err := template.ParseFiles("./templates/gitlab-issue-title.tmpl")
+	titleTemplate, err := template.New("").Parse("Add a new API: {{.OrganizationName}} {{.ServiceName}}")
 	if err != nil {
 		rs.Logger.Error("could not parse issue title", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
@@ -55,7 +54,18 @@ func (rs SubmitAPIResource) Create(w http.ResponseWriter, r *http.Request) {
 
 	titleTemplate.Execute(&title, input)
 
-	descriptionTemplate, err := template.ParseFiles("./templates/gitlab-issue-description.tmpl")
+	descriptionTemplate, err := template.New("").Parse(`
+We would like to add the following API:
+
+` + "```" + `
+{{.JSON}}
+` + "```" + `
+
+Thanks a lot!
+
+The web form
+	`)
+
 	if err != nil {
 		rs.Logger.Error("could not parse issue description", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
@@ -84,6 +94,10 @@ func (rs SubmitAPIResource) Create(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		rs.Logger.Error("could not parse output json", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
+		return
+	}
+
+	if rs.GitlabConfig.Host == "" {
 		return
 	}
 
