@@ -6,6 +6,7 @@ import SubmitAPI from './pages/SubmitAPI'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
 import Tag from './pages/Tag'
+import TagListContainer from "./components/TagListContainer";
 
 const App = () =>
     <div className="App">
@@ -18,6 +19,10 @@ const App = () =>
                 <Route path="/tag/:tag" component={Tag} />
 
                 <div className="container">
+                    <hr />
+
+                    <TagListContainer/>
+
                     <hr />
 
                     <ul>

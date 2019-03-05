@@ -24,7 +24,7 @@ class Tag extends Component {
             })
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         const { match } = this.props
         const tag = match.params.tag
 
