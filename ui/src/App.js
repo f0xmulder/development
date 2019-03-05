@@ -21,6 +21,7 @@ const App = () =>
                 <div className="container">
                     <hr />
 
+                    <h2>API's by tag</h2>
                     <TagListContainer/>
 
                     <hr />
