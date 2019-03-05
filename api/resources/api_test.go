@@ -59,21 +59,21 @@ func TestGet(t *testing.T) {
 	}{
 		{
 			"test-api-name",
-			"./test-data-valid",
+			"./test-data/valid",
 			200,
 			"application/json",
 			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\"}}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",
-			"./test-data-valid",
+			"./test-data/valid",
 			404,
 			"text/plain; charset=utf-8",
 			"404 page not found\n",
 			mockAPIFileReader,
 		}, {
 			"invalid-json",
-			"./test-data-invalid",
+			"./test-data/invalid",
 			500,
 			"text/plain; charset=utf-8",
 			"oops, something went wrong while getting the API info\n",
