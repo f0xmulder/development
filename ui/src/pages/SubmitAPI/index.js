@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SubmitAPI = () =>
     <div className="SubmitAPI container">
@@ -36,6 +37,11 @@ const SubmitAPI = () =>
 }
             `}
         </pre>
+
+        <hr />
+        <p>
+          You can also submit a new API by <Link to="/submit-api/form">filling in the form</Link>.
+        </p>
     </div>
 
 export default SubmitAPI
