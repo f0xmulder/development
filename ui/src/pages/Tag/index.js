@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
+import APIList from '../../components/APIList'
 
 class Tag extends Component {
     constructor(props) {
@@ -52,20 +52,7 @@ class Tag extends Component {
                         error ?
                             <p data-test="error-message">Failed loading the APIs for tag '{ tag }'</p> :
                             apis && apis.length > 0 ?
-                                <div>
-                                    <ul>
-                                        {
-                                        apis
-                                            .map((api, i) =>
-                                                <li key={i}>
-                                                    <Link to={`/detail/${api['id']}`} data-test="link">
-                                                        { api['service_name'] } - { api['organization_name'] }
-                                                    </Link>
-                                                </li>
-                                            )
-                                    }
-                                    </ul>
-                                </div>
+                                <APIList apis={apis} />
                     :
                                 <p data-test="no-apis-found-message">No APIs found for tag '{ tag }'</p>
                 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import APIList from "../../components/APIList";
 
 class Home extends Component {
     constructor(props) {
@@ -46,20 +46,7 @@ class Home extends Component {
                         error ?
                             <p data-test="error-message">Failed loading the available APIs</p> :
                             apis && apis.length > 0 ?
-                                <div>
-                                    <ul>
-                                        {
-                                        apis
-                                            .map((api, i) =>
-                                                <li key={i}>
-                                                    <Link to={`/detail/${api['id']}`} data-test="link">
-                                                        { api['service_name'] } - { api['organization_name'] }
-                                                    </Link>
-                                                </li>
-                                            )
-                                    }
-                                    </ul>
-                                </div>
+                                <APIList apis={apis}/>
                     :
                                 <p data-test="no-apis-available-message">No APIs available (yet)</p>
                 }
