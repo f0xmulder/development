@@ -14,7 +14,7 @@ func TestFile(t *testing.T) {
 		wantReason string
 	}{
 		{"file-extension.txt", false, "invalid extension .txt"},
-		{"invalid-json.json", false, "invalid JSON"},
+		{"company-service.json", false, "invalid JSON"},
 		{"missing-service-name.json", false, "the field service_name is missing"},
 		{"missing-organization-name.json", false, "the field organization_name is missing"},
 		{"missing-api-specification-type.json", false, "the field api_specification_type is missing"},
@@ -50,8 +50,8 @@ func TestDirectory(t *testing.T) {
 		wantValid     bool
 		wantReason    string
 	}{
-		{"with-invalid-file", false, "invalid-json.json - invalid JSON"},
-		{"with-valid-and-invalid-file", false, "invalid-json.json - invalid JSON"},
+		{"with-invalid-file", false, "company-service.json - invalid JSON"},
+		{"with-valid-and-invalid-file", false, "company-service.json - invalid JSON"},
 		{"with-valid-file", true, ""},
 	}
 

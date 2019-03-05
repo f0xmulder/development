@@ -10,7 +10,7 @@ import (
 func TestDirectory(t *testing.T) {
 	expected := []models.API{
 		{
-			"test-api-name",
+			"company-service",
 			"Test Description",
 			"Test Organization Name",
 			"Test Service Name",
@@ -23,7 +23,7 @@ func TestDirectory(t *testing.T) {
 		},
 	}
 
-	actual, err := Directory("./test-data-valid")
+	actual, err := Directory("./test-data/valid")
 
 	if err != nil {
 		fmt.Println(err)

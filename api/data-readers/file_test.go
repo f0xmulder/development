@@ -13,9 +13,9 @@ func TestFile(t *testing.T) {
 		expectedError bool
 	}{
 		{
-			"./test-data-valid/test-api-name.json",
+			"./test-data/valid/company-service.json",
 			models.API{
-				Id:                   "test-api-name",
+				Id:                   "company-service",
 				Description:          "Test Description",
 				OrganizationName:     "Test Organization Name",
 				ServiceName:          "Test Service Name",
@@ -29,12 +29,12 @@ func TestFile(t *testing.T) {
 			false,
 		},
 		{
-			"./test-data-valid/invalid-file-path",
+			"./test-data/invalid-file-path",
 			models.API{},
 			true,
 		},
 		{
-			"./test-data-invalid/invalid-json.json",
+			"./test-data/invalid/company-service.json",
 			models.API{},
 			true,
 		},
