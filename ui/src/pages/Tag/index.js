@@ -14,7 +14,7 @@ class Tag extends Component {
     }
 
     fetchApiList(tag) {
-        return fetch(`/api/apis?tag=${tag}`)
+        return fetch(`/api/apis?tags=${tag}`)
             .then(response => {
                 if (response.ok) {
                     return response.json()
