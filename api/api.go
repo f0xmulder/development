@@ -4,27 +4,31 @@
 package api
 
 import (
-	"github.com/pkg/errors"
-	"go.uber.org/zap"
 	"net/http"
+
+	"github.com/pkg/errors"
+	"gitlab.com/commonground/developer.overheid.nl/api/resources"
+	"go.uber.org/zap"
 )
 
 // Server is the server itself
 type Server struct {
-	logger *zap.Logger
+	Logger       *zap.Logger
+	GitlabConfig resources.GitlabConfig
 }
 
 // NewServer creates a new Server and sets it up to handle requests.
-func NewServer(l *zap.Logger) *Server {
+func NewServer(l *zap.Logger, gitlabConfig resources.GitlabConfig) *Server {
 	i := &Server{
-		logger: l,
+		Logger:       l,
+		GitlabConfig: gitlabConfig,
 	}
 	return i
 }
 
 // ListenAndServe is a blocking function that listens to the provided TCP address to handle requests.
 func (api *Server) ListenAndServe(address string) error {
-	r := router(api.logger)
+	r := router(api.Logger, api.GitlabConfig)
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {

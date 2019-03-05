@@ -6,6 +6,8 @@ package main
 import (
 	"log"
 
+	"gitlab.com/commonground/developer.overheid.nl/api/resources"
+
 	"github.com/jessevdk/go-flags"
 	"gitlab.com/commonground/developer.overheid.nl/api"
 	"go.uber.org/zap"
@@ -14,6 +16,9 @@ import (
 
 var options struct {
 	ListenAddressPlain string `long:"listen-address-plain" env:"LISTEN_ADDRESS_PLAIN" default:"0.0.0.0:8080" description:"Address for the API to listen on. Read https://golang.org/pkg/net/#Dial for possible tcp address specs."`
+	GitlabHost         string `long:"gitlab-host" env:"GITLAB_HOST" default:"gitlab.com" description:"The Gitlab host that is running the issue tracker for submitting new API's."`
+	GitlabAccessToken  string `long:"gitlab-access-token" env:"GITLAB_ACCESS_TOKEN" default:"" description:"The Gitlab access token that is used for creating issues."`
+	GitlabProjectID    string `long:"gitlab-project-id" env:"GITLAB_PROJECT_ID" default:"" description:"The id of the project in Gitlab where issues are created."`
 }
 
 func main() {
@@ -35,6 +40,7 @@ func main() {
 	config := zap.NewDevelopmentConfig()
 	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	logger, err := config.Build()
+
 	if err != nil {
 		log.Fatalf("failed to create new zap logger: %v", err)
 	}
@@ -45,7 +51,13 @@ func main() {
 		}
 	}()
 
-	apiServer := api.NewServer(logger)
+	gitlabConfig := resources.GitlabConfig{
+		Host:        options.GitlabHost,
+		AccessToken: options.GitlabAccessToken,
+		ProjectID:   options.GitlabProjectID,
+	}
+
+	apiServer := api.NewServer(logger, gitlabConfig)
 	logger.Info("API running on", zap.String("address", options.ListenAddressPlain))
 
 	// Listen on the address provided in the options

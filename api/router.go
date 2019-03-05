@@ -11,6 +11,7 @@ import (
 	"go.uber.org/zap"
 )
 
+// NewAPIResource creates a new APIResource
 func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
 	readDirectory func(directory string) ([]models.API, error)) *resources.APIResource {
 	i := &resources.APIResource{
@@ -22,6 +23,7 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	return i
 }
 
+<<<<<<< HEAD
 func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readDirectory func(directory string) ([]models.API, error)) *resources.TagResource {
 	i := &resources.TagResource{
 		Logger:                      logger,
@@ -31,14 +33,19 @@ func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 }
 
 func NewSubmitAPIResource(logger *zap.Logger) *resources.SubmitAPIResource {
+=======
+// NewSubmitAPIResource creates a new SubmitAPIResource
+func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig resources.GitlabConfig) *resources.SubmitAPIResource {
+>>>>>>> Added submit API endpoint
 	i := &resources.SubmitAPIResource{
-		Logger: logger,
+		Logger:       logger,
+		GitlabConfig: gitlabConfig,
 	}
 
 	return i
 }
 
-func router(logger *zap.Logger) chi.Router {
+func router(logger *zap.Logger, gitlabConfig resources.GitlabConfig) chi.Router {
 	r := chi.NewRouter()
 
 	r.Use(middleware.Logger)
