@@ -43,7 +43,13 @@ func filterAPIsByTag(tag string, items []models.API) []models.API {
 	output := []models.API{}
 
 	for _, item := range items {
-		if listIncludes(tag, item.Tags) {
+		tagsAsStrings := []string{}
+
+		for _, tag := range item.Tags {
+			tagsAsStrings = append(tagsAsStrings, string(tag))
+		}
+
+		if listIncludes(tag, tagsAsStrings) {
 			output = append(output, item)
 		}
 	}

@@ -23,7 +23,7 @@ func TestFile(t *testing.T) {
 				APISpecificationType: "Test Specification Type",
 				SpecificationURL:     "Test Specification URL",
 				DocumentationURL:     "Test Documentation URL",
-				Tags:                 []string{"test tag"},
+				Tags:                 []models.Tag{"test tag"},
 				Badges:               []string{"Gouden API"},
 				Contact: models.APIContactDetails{
 					Email: "name@example.nl",

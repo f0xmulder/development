@@ -23,7 +23,7 @@ var dummyAPI = models.API{
 	"Test Specification Type",
 	"Test Specification URL",
 	"Test Documentation URL",
-	[]string{"test-tag"},
+	[]models.Tag{"test-tag"},
 	[]string{},
 }
 
@@ -79,7 +79,7 @@ func TestFilterAPIsByTag(t *testing.T) {
 	}
 }
 
-func TestList(t *testing.T) {
+func TestAPIList(t *testing.T) {
 	testCases := []struct {
 		directoryReader  func(directory string) ([]models.API, error)
 		url              string
@@ -135,7 +135,7 @@ func TestList(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestAPIGet(t *testing.T) {
 	testCases := []struct {
 		apiID                       string
 		rootDirectoryAPIDefinitions string
