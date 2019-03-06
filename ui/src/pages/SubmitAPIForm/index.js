@@ -26,6 +26,11 @@ const validationSchema = Yup.object().shape({
     badges: Yup.string()
 })
 
+const arrayFields = [
+    'tags',
+    'badges'
+]
+
 export default class SubmitAPIForm extends Component {
     constructor(props) {
         super(props)
@@ -33,13 +38,16 @@ export default class SubmitAPIForm extends Component {
         this.state = {
             submitted: false
         }
+
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
-    onSubmit = (values, actions) => {
+    onSubmit(values, actions) {
         const data = validationSchema.cast(values)
 
-        data['tags'] = data['tags'] ? data['tags'].split(',').map((v) => v.trim()) : []
-        data['badges'] = data['badges'] ? data['badges'].split(',').map((v) => v.trim()) : []
+        arrayFields.forEach((fieldName) => {
+            data[fieldName] = data[fieldName] ? data[fieldName].split(',').map((v) => v.trim()) : []
+        })
 
         return fetch('/api/submit-api', {
             method: 'POST',
@@ -118,27 +126,27 @@ export default class SubmitAPIForm extends Component {
                                     <label htmlFor="specification_url">Specification URL</label>
                                     <Field component="input" type="text" id="specification_url" name="specification_url" className="form-control" />
                                     {errors.specification_url && touched.specification_url && <div>{errors.specification_url}</div>}
-                                    <small class="form-text text-muted">The link to the machine-readable documentation.</small>
+                                    <small className="form-text text-muted">The link to the machine-readable documentation.</small>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="documentation_url">Documentation URL</label>
                                     <Field component="input" type="text" id="documentation_url" name="documentation_url" className="form-control" />
                                     {errors.documentation_url && touched.documentation_url && <div>{errors.documentation_url}</div>}
-                                    <small class="form-text text-muted">The link to the human-readable documentation.</small>
+                                    <small className="form-text text-muted">The link to the human-readable documentation.</small>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="tags">Tags</label>
                                     <Field component="input" type="text" id="tags" name="tags" className="form-control" />
-                                    <small class="form-text text-muted">A comma-seperated list of tags.</small>
+                                    <small className="form-text text-muted">A comma-seperated list of tags.</small>
                                     {errors.tags && touched.tags && <div>{errors.tags}</div>}
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="badges">Badges</label>
                                     <Field component="input" type="text" id="badges" name="badges" className="form-control" />
-                                    <small class="form-text text-muted">A comma-seperated list of badges.</small>
+                                    <small className="form-text text-muted">A comma-seperated list of badges.</small>
                                     {errors.badges && touched.badges && <div>{errors.badges}</div>}
                                 </div>
 
