@@ -24,6 +24,11 @@ type SubmitAPIResource struct {
 	GitlabConfig GitlabConfig
 }
 
+type GitlabResponse struct {
+	Id     string `json:"id"`
+	WebURL string `json:"web_url"`
+}
+
 func (rs SubmitAPIResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
@@ -133,4 +138,16 @@ The web form
 		http.Error(w, "server error", http.StatusInternalServerError)
 		return
 	}
+
+	gitlabResponse := GitlabResponse{}
+	json.NewDecoder(resp.Body).Decode(&gitlabResponse)
+
+	json.NewEncoder(w).Encode(gitlabResponse)
+
+	if err != nil {
+		rs.Logger.Error("failed to parse JSON for API", zap.Error(err))
+		http.Error(w, "oops, something went wrong while getting the API info", http.StatusInternalServerError)
+		return
+	}
+
 }
