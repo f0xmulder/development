@@ -24,11 +24,8 @@ class Tag extends Component {
             })
     }
 
-    componentDidUpdate() {
-        const { match } = this.props
-        const tag = match.params.tag
-
-        this
+    loadAPIsForTag(tag) {
+        return this
             .fetchApiList(tag)
             .then(apis => {
                 this.setState({ apis, loaded: true })
@@ -36,6 +33,22 @@ class Tag extends Component {
                 this.setState({ error: true, loaded: true })
                 console.error(error)
             })
+    }
+
+    componentWillUpdate(nextProps) {
+        const { match: { params: { tag }} } = nextProps
+        const { match: { params: { tag: prevTag }} } = this.props
+
+        if (prevTag === tag) {
+            return
+        }
+
+        this.loadAPIsForTag(tag)
+    }
+
+    componentDidMount(previousProps, previousState) {
+        const { match: { params: { tag }} } = this.props
+        this.loadAPIsForTag(tag)
     }
 
     render() {
@@ -70,4 +83,4 @@ Tag.defaultProps = {
     match: { params: {} }
 }
 
-export default Tag;
+export default Tag
