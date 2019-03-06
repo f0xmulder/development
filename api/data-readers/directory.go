@@ -3,6 +3,7 @@ package data_readers
 import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
@@ -16,16 +17,58 @@ func Directory(directory string) ([]models.API, error) {
 		return output, err
 	}
 
-	for _, file := range files {
-		path := filepath.Join(directory, file.Name())
-		newAPI, err := File(path)
+	inputChan := make(chan string)
+	resultChan := make(chan result)
 
-		if err != nil {
-			return output, err
+	filePaths := filesToFullPath(directory, files)
+
+	go worker(inputChan, resultChan)
+	go addWorkToInputChannel(filePaths, inputChan)
+
+	for i := 0; i < len(filePaths); i++ {
+		result := <-resultChan
+
+		if result.err != nil {
+			return output, result.err
 		} else {
-			output = append(output, newAPI)
+			output = append(output, result.apiModel)
 		}
 	}
 
 	return output, nil
+}
+
+type result struct {
+	apiModel models.API
+	err      error
+}
+
+func filesToFullPath(baseDir string, files []os.FileInfo) []string {
+	filePaths := []string{}
+
+	for _, file := range files {
+		path := filepath.Join(baseDir, file.Name())
+		filePaths = append(filePaths, path)
+	}
+
+	return filePaths
+}
+
+func addWorkToInputChannel(paths []string, inputCh chan<- string) {
+	for _, path := range paths {
+		inputCh <- path
+	}
+	close(inputCh)
+}
+
+func worker(inputChan <-chan string, resultChan chan<- result) {
+	for input := range inputChan {
+		newAPI, err := File(input)
+
+		if err != nil {
+			resultChan <- result{newAPI, err}
+		} else {
+			resultChan <- result{newAPI, nil}
+		}
+	}
 }
