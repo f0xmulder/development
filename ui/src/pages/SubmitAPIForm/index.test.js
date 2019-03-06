@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import SubmitAPI from './index'
 import { Formik } from 'formik'
 
@@ -19,8 +19,16 @@ describe('on initialization', () => {
   it('has a non-submitted state when loaded', () => {
     expect(wrapper.state('submitted')).toBe(false)
   })
+})
 
-  it('has a non-submitted state when loaded', () => {
-    expect(wrapper.state('submitted')).toBe(false)
+describe('on form submit', () => {
+  jest.spyOn(SubmitAPI.prototype, 'submitToApi')
+  const wrapper = shallow(<SubmitAPI/>)
+
+  it('should call the submit to api method', () => {
+    const form = wrapper.find(Formik)
+    form.simulate('submit')
+
+    expect(wrapper.instance().submitToApi).toHaveBeenCalled()
   })
 })
