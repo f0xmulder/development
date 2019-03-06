@@ -11,7 +11,13 @@ const initialValues = {
     specification_url: '',
     documentation_url: '',
     tags: '',
-    badges: ''
+    badges: '',
+    contact: {
+        email: '',
+        phone: '',
+        fax: '',
+        chat: ''
+    }
 }
 
 const validationSchema = Yup.object().shape({
@@ -23,7 +29,13 @@ const validationSchema = Yup.object().shape({
     specification_url: Yup.string().url(),
     documentation_url: Yup.string().url(),
     tags: Yup.string(),
-    badges: Yup.string()
+    badges: Yup.string(),
+    contact: Yup.object().shape({
+        email: Yup.string().email(),
+        phone: Yup.string(),
+        fax: Yup.string(),
+        chat: Yup.string().url()
+    })
 })
 
 const arrayFields = [
@@ -148,6 +160,33 @@ export default class SubmitAPIForm extends Component {
                                     <Field component="input" type="text" id="badges" name="badges" className="form-control" />
                                     <small className="form-text text-muted">A comma-seperated list of badges.</small>
                                     {errors.badges && touched.badges && <div>{errors.badges}</div>}
+                                </div>
+
+                                <h3>Contact</h3>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact.email">E-mail</label>
+                                    <Field component="input" type="email" id="contact.email" name="contact.email" className="form-control" />
+                                    {errors.contact && errors.contact.email && touched.contact.email && <div>{errors.contact.email}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact.phone">Phone</label>
+                                    <Field component="input" type="text" id="contact.phone" name="contact.phone" className="form-control" />
+                                    {errors.contact && errors.contact.phone && touched.contact.phone && <div>{errors.contact.phone}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact.fax">Fax</label>
+                                    <Field component="input" type="text" id="contact.fax" name="contact.fax" className="form-control" />
+                                    {errors.contact && errors.contact.fax && touched.contact.fax && <div>{errors.contact.fax}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact.chat">Chat</label>
+                                    <Field component="input" type="text" id="contact.chat" name="contact.chat" className="form-control" />
+                                    {errors.contact && errors.contact.chat && touched.contact.chat && <div>{errors.contact.chat}</div>}
+                                    <small className="form-text text-muted">This can be a link to a chat platform.</small>
                                 </div>
 
                                 {status && status.msg && <div>{status.msg}</div>}
