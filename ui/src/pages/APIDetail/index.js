@@ -27,17 +27,31 @@ class APIDetail extends Component {
             })
     }
 
-    componentDidMount() {
-        const { match } = this.props
-
-        this
-            .fetchApiDetails(match.params.id)
+    loadDetailsForApi(id) {
+        return this
+            .fetchApiDetails(id)
             .then(details => {
                 this.setState({ details, loaded: true })
             }, error => {
                 this.setState({ error: true, loaded: true })
                 console.error(error)
             })
+    }
+
+    componentWillUpdate(nextProps) {
+        const { match: { params: { id }} } = nextProps
+        const { match: { params: { id: prevId }} } = this.props
+
+        if (prevId === id) {
+            return
+        }
+
+        this.loadDetailsForApi(id)
+    }
+
+    componentDidMount() {
+        const { match: { params: { id } } } = this.props
+        this.loadDetailsForApi(id)
     }
 
     onErrorLoadingSpecification() {
