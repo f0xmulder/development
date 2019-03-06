@@ -10,7 +10,7 @@ type API struct {
 	APISpecificationType string            `json:"api_specification_type"`
 	SpecificationURL     string            `json:"specification_url"`
 	DocumentationURL     string            `json:"documentation_url"`
-	Tags                 []string          `json:"tags"`
+	Tags                 []Tag             `json:"tags"`
 	Badges               []string          `json:"badges"`
 	Contact              APIContactDetails `json:"contact"`
 }

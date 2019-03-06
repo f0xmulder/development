@@ -25,6 +25,7 @@ var dummyAPI = models.API{
 	"Test Documentation URL",
 	[]models.Tag{"test-tag"},
 	[]string{},
+	models.APIContactDetails{},
 }
 
 func mockAPIDirectoryReaderNoResults(directory string) ([]models.API, error) {
@@ -99,7 +100,7 @@ func TestAPIList(t *testing.T) {
 			"/list?tags=test-tag",
 			200,
 			"application/json",
-			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[]}]\n",
+			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\"}}]\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
