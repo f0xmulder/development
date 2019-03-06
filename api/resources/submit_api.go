@@ -57,7 +57,7 @@ func (rs SubmitAPIResource) Create(w http.ResponseWriter, r *http.Request) {
 	descriptionTemplate, err := template.New("").Parse(`
 We would like to add the following API:
 
-` + "```" + `
+` + "```json" + `
 {{.JSON}}
 ` + "```" + `
 

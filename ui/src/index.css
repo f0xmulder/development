@@ -82,6 +82,10 @@ select.form-control {
   color: #6c757d;
 }
 
+.text-danger {
+  color: #dc3545;
+}
+
 .form-text {
   display: inline-block;
   margin-top: .25rem;
