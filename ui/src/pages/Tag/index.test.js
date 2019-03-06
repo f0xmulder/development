@@ -1,6 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import Tag from './index'
+import APIDetail from "../APIDetail/index.test";
 
 const dummyAPI = {
     id: 'test-api.json',
@@ -9,6 +10,10 @@ const dummyAPI = {
 }
 
 describe('Tag', () => {
+    afterEach(() => {
+        jest.clearAllMocks()
+    })
+
     it('contains the page title including the tag', () => {
         const wrapper = shallow(<Tag match={({params: {tag: 'dummy-tag'}})}/>)
         expect(wrapper.find('h1').text()).toBe(`APIs for tag 'dummy-tag'`)
@@ -20,6 +25,17 @@ describe('Tag', () => {
 
             const wrapper = shallow(<Tag match={({params: {tag: 'dummy-tag'}})}/>)
             expect(wrapper.instance().fetchApiList).toHaveBeenCalledWith('dummy-tag')
+        })
+    })
+
+    describe('when the provided tag changes', () => {
+        it(`should re-fetch the tag API's`, () => {
+            jest.spyOn(Tag.prototype, 'fetchApiList')
+
+            const wrapper = shallow(<Tag match={({ params: { tag: 'dummy-tag-a' } })}/>)
+            wrapper.setProps({match: {params: { tag: 'dummy-tag-b' }}})
+            expect(wrapper.instance().fetchApiList).toHaveBeenNthCalledWith(1, 'dummy-tag-a')
+            expect(wrapper.instance().fetchApiList).toHaveBeenNthCalledWith(2, 'dummy-tag-b')
         })
     })
 

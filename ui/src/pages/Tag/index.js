@@ -53,8 +53,7 @@ class Tag extends Component {
 
     render() {
         const { apis, error, loaded } = this.state
-        const { match } = this.props
-        const tag = match.params.tag
+        const { match: { params: { tag } } } = this.props
 
         return (
             <div className="Tag container">
