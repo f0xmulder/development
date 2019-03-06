@@ -38,7 +38,6 @@ const SubmitAPI = () =>
             `}
         </pre>
 
-        <hr />
         <p>
           You can also submit a new API by <Link to="/submit-api/form">filling in the form</Link>.
         </p>

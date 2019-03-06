@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Formik } from 'formik'
+import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 
 const initialValues = {
@@ -7,7 +7,7 @@ const initialValues = {
     organization_name: '',
     service_name: '',
     api_url: '',
-    api_specification_type: '',
+    api_specification_type: 'REST/JSON',
     specification_url: '',
     documentation_url: '',
     tags: '',
@@ -22,8 +22,8 @@ const validationSchema = Yup.object().shape({
     api_specification_type: Yup.string().required(),
     specification_url: Yup.string().url(),
     documentation_url: Yup.string().url(),
-    tags: Yup.array().ensure(),
-    badges: Yup.array().ensure()
+    tags: Yup.string(),
+    badges: Yup.string()
 })
 
 export default class SubmitAPIForm extends Component {
@@ -36,9 +36,14 @@ export default class SubmitAPIForm extends Component {
     }
 
     onSubmit = (values, actions) => {
+        const data = validationSchema.cast(values)
+
+        data['tags'] = data['tags'] ? data['tags'].split(',').map((v) => v.trim()) : []
+        data['badges'] = data['badges'] ? data['badges'].split(',').map((v) => v.trim()) : []
+
         return fetch('/api/submit-api', {
             method: 'POST',
-            body: JSON.stringify(validationSchema.cast(values)),
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -63,8 +68,7 @@ export default class SubmitAPIForm extends Component {
                 <h1>Submit your API</h1>
                 <p>
                     If you would like to add an API to <a href="https://developer.overheid.nl" target="_blank" rel="noopener noreferrer">developer.overheid.nl</a>,
-                    please submit a <a href="https://gitlab.com/commonground/developer.overheid.nl/merge_requests" target="_blank" rel="noopener noreferrer">Merge Request</a> to
-                    the <a href="https://gitlab.com/commonground/developer.overheid.nl" target="_blank" rel="noopener noreferrer">Git repository</a>  with a new JSON file defining your API.
+                    please fill the following form:
                 </p>
 
                 { this.state.submitted ? <p>Your API is submitted succesfully. We will review it shortly.</p> :
@@ -75,56 +79,66 @@ export default class SubmitAPIForm extends Component {
                         render={({ values, errors, status, touched, handleBlur, handleChange, handleSubmit, isSubmitting }) => (
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label htmlFor="organization_name">Organisatienaam</label>
-                                    <input type="text" id="organization_name" name="organization_name" onChange={handleChange} onBlur={handleBlur} value={values.organization_name} className="form-control" />
+                                    <label htmlFor="organization_name">Organization name*</label>
+                                    <Field component="input" type="text" id="organization_name" name="organization_name" className="form-control" />
                                     {errors.organization_name && touched.organization_name && <div>{errors.organization_name}</div>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="service_name">Servicenaam</label>
-                                    <input type="text" id="service_name" name="service_name" onChange={handleChange} onBlur={handleBlur} value={values.service_name} className="form-control" />
+                                    <label htmlFor="service_name">Service name*</label>
+                                    <Field component="input" type="text" id="service_name" name="service_name" className="form-control" />
                                     {errors.service_name && touched.service_name && <div>{errors.service_name}</div>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="description">Omschrijving</label>
-                                    <input type="text" id="description" name="description" onChange={handleChange} onBlur={handleBlur} value={values.description} className="form-control" />
+                                    <label htmlFor="description">Description*</label>
+                                    <Field component="textarea" id="description" name="description" className="form-control" />
                                     {errors.description && touched.description && <div>{errors.description}</div>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="api_url">API URL</label>
-                                    <input type="text" id="api_url" name="api_url" onChange={handleChange} onBlur={handleBlur} value={values.api_url} className="form-control" />
+                                    <label htmlFor="api_url">API URL*</label>
+                                    <Field component="input" type="text" id="api_url" name="api_url" className="form-control" />
                                     {errors.api_url && touched.api_url && <div>{errors.api_url}</div>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="api_specification_type">Specificatietype</label>
-                                    <input type="text" id="api_specification_type" name="api_specification_type" onChange={handleChange} onBlur={handleBlur} value={values.api_specification_type} className="form-control" />
+                                    <label htmlFor="api_specification_type">Specification type</label>
+                                    <Field component="select" id="api_specification_type" name="api_specification_type" className="form-control">
+                                        <option value="REST/JSON">REST/JSON</option>
+                                        <option value="SOAP/XML">SOAP/XML</option>
+                                        <option value="gRPC">gRPC</option>
+                                        <option value="GraphQL">GraphQL</option>
+                                        <option value="WSDL">WSDL</option>
+                                    </Field>
                                     {errors.api_specification_type && touched.api_specification_type && <div>{errors.api_specification_type}</div>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="specification_url">Specificatie URL</label>
-                                    <input type="text" id="specification_url" name="specification_url" onChange={handleChange} onBlur={handleBlur} value={values.specification_url} className="form-control" />
+                                    <label htmlFor="specification_url">Specification URL</label>
+                                    <Field component="input" type="text" id="specification_url" name="specification_url" className="form-control" />
                                     {errors.specification_url && touched.specification_url && <div>{errors.specification_url}</div>}
+                                    <small class="form-text text-muted">The link to the machine-readable documentation.</small>
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="documentation_url">Documentatie URL</label>
-                                    <input type="text" id="documentation_url" name="documentation_url" onChange={handleChange} onBlur={handleBlur} value={values.documentation_url} className="form-control" />
+                                    <label htmlFor="documentation_url">Documentation URL</label>
+                                    <Field component="input" type="text" id="documentation_url" name="documentation_url" className="form-control" />
                                     {errors.documentation_url && touched.documentation_url && <div>{errors.documentation_url}</div>}
+                                    <small class="form-text text-muted">The link to the human-readable documentation.</small>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="tags">Tags</label>
-                                    <input type="text" id="tags" name="tags" onChange={handleChange} onBlur={handleBlur} value={values.tags} className="form-control" />
+                                    <Field component="input" type="text" id="tags" name="tags" className="form-control" />
+                                    <small class="form-text text-muted">A comma-seperated list of tags.</small>
                                     {errors.tags && touched.tags && <div>{errors.tags}</div>}
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="badges">Badges</label>
-                                    <input type="text" id="badges" name="badges" onChange={handleChange} onBlur={handleBlur} value={values.badges} className="form-control" />
+                                    <Field component="input" type="text" id="badges" name="badges" className="form-control" />
+                                    <small class="form-text text-muted">A comma-seperated list of badges.</small>
                                     {errors.badges && touched.badges && <div>{errors.badges}</div>}
                                 </div>
 
