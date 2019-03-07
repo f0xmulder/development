@@ -2,10 +2,13 @@ package resources
 
 import (
 	"encoding/json"
+	bleveHttp "github.com/blevesearch/bleve/http"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/data-readers"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"go.uber.org/zap"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -48,8 +51,20 @@ func filterAPIsByTag(tag string, items []models.API) []models.API {
 func (rs APIResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
+	outputList, errReadFile := rs.ReadDirectory("../data")
+
+	if errReadFile != nil {
+		log.Fatal(errReadFile)
+	}
+
+	indexDirectoryPath := ".don-apis-bleve-index"
+	apiIndex := searchindex.Setup(indexDirectoryPath, outputList)
+	bleveHttp.RegisterIndexName(indexDirectoryPath, apiIndex)
+	searchHandler := bleveHttp.NewSearchHandler("don.apis").ServeHTTP
+
 	r.Get("/", rs.List)
 	r.Get("/{id:[a-zA-Z0-9-]+}", rs.Get)
+	r.Post("/search", searchHandler)
 
 	return r
 }
