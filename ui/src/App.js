@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import SubmitAPI from './pages/SubmitAPI'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
+import Search from './pages/Search'
 import Tag from './pages/Tag'
 import TagListContainer from "./components/TagListContainer";
 
@@ -15,6 +16,7 @@ const App = () =>
                 <Route exact path="/" component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/submit-api" component={SubmitAPI} />
+                <Route path="/search" component={Search} />
                 <Route path="/about" component={About} />
                 <Route path="/tag/:tag" component={Tag} />
 
@@ -28,6 +30,7 @@ const App = () =>
 
                     <ul>
                         <li><Link to="/">Home</Link></li>
+                        <li><Link to="/search">Search</Link></li>
                         <li><Link to="/submit-api">Submit your API</Link></li>
                         <li><Link to="/about">About</Link></li>
                     </ul>
