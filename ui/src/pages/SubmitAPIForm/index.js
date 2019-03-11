@@ -65,7 +65,7 @@ export default class SubmitAPIForm extends Component {
             if (response.ok) {
                 return response.json()
             } else {
-                throw new Error('Failed to fetch API list')
+                throw new Error('Failed to submit API')
             }
         })
     }
@@ -85,9 +85,10 @@ export default class SubmitAPIForm extends Component {
                 responseData
             })
         })
-        .catch((e) => {
+        .catch((error) => {
             actions.setSubmitting(false)
             actions.setStatus({ msg: 'An error occured while submitting the API, please try again' })
+            console.error(error)
         })
     }
 
@@ -100,8 +101,8 @@ export default class SubmitAPIForm extends Component {
                     please fill the following form or <Link to="/submit-api">create a merge request</Link>.
                 </p>
 
-                { this.state.submitted ? <p>
-                    Your API is submitted succesfully. We will review it shortly. You can view the progress of the review on <a href={this.state.responseData.web_url}>{this.state.responseData.web_url}</a>.
+                { this.state.submitted ? <p data-test="api-submitted-message">
+                    Your API is submitted succesfully. We will review it shortly. You can view the progress of the review on <a href={this.state.responseData.web_url} target="_blank" rel="noopener noreferrer">{this.state.responseData.web_url}</a>.
                 </p> :
                 <Formik
                     initialValues={initialValues}
@@ -200,7 +201,7 @@ export default class SubmitAPIForm extends Component {
                                 <small className="form-text text-muted">This can be a link to a chat platform.</small>
                             </div>
 
-                            {status && status.msg && <div>{status.msg}</div>}
+                            {status && status.msg && <div data-test="status-message">{status.msg}</div>}
 
                             <button type="submit" disabled={isSubmitting} className="btn btn-primary">Submit</button>
                         </form>

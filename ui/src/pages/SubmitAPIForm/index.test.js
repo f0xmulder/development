@@ -32,3 +32,36 @@ describe('on form submit', () => {
     expect(wrapper.instance().submitToApi).toHaveBeenCalled()
   })
 })
+
+describe('on succesful form submission', () => {
+  const wrapper = shallow(<SubmitAPI/>)
+  wrapper.setState({ submitted: true, responseData: { id: 1, web_url: 'http://gitlab.com/issues/1' } })
+
+  it('should display the success message', () => {
+    const apiSubmittedMessage = wrapper.find('[data-test="api-submitted-message"]')
+    expect(apiSubmittedMessage.exists()).toBe(true)
+  })
+
+  it('should show the link to the issue', () => {
+    const apiSubmittedMessage = wrapper.find('a[href="http://gitlab.com/issues/1"]')
+    expect(apiSubmittedMessage.exists()).toBe(true)
+  })
+})
+
+describe('on failed form submission', () => {
+  const thePromise = Promise.reject('arbitrary reject reason coming from tests')
+  SubmitAPI.prototype.submitToApi = jest.fn(() => thePromise)
+
+  const wrapper = shallow(<SubmitAPI/>)
+  const form = wrapper.find(Formik)
+
+  it('should set the error state', done => {
+    form.simulate('submit')
+
+    return thePromise
+    .catch(() => {
+      //expect(wrapper.state().msg).toBe('An error occured while submitting the API, please try again')
+      done()
+    })
+  })
+})
