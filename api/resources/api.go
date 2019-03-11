@@ -29,32 +29,20 @@ func getQueryParam(r *http.Request, key string) string {
 	return keys[0]
 }
 
-func listIncludes(query string, items []string) bool {
-	for _, item := range items {
-		if item == query {
-			return true
-		}
-	}
-
-	return false
-}
-
 func filterAPIsByTag(tag string, items []models.API) []models.API {
-	output := []models.API{}
+	hash := make(map[string][]models.API)
 
-	for _, item := range items {
-		tagsAsStrings := []string{}
-
-		for _, tag := range item.Tags {
-			tagsAsStrings = append(tagsAsStrings, string(tag))
-		}
-
-		if listIncludes(tag, tagsAsStrings) {
-			output = append(output, item)
+	for _, API := range items {
+		for _, tag := range API.Tags {
+			hash[string(tag)] = append(hash[string(tag)], API)
 		}
 	}
 
-	return output
+	if hash[tag] != nil {
+		return hash[tag]
+	} else {
+		return []models.API{}
+	}
 }
 
 func (rs APIResource) Routes() chi.Router {

@@ -46,23 +46,6 @@ func mockAPIFileReaderWithError(path string) (models.API, error) {
 	return models.API{}, errors.New("Unable to read file")
 }
 
-func TestListIncludes(t *testing.T) {
-	testCases := []struct {
-		query    string
-		list     []string
-		expected bool
-	}{
-		{"a", []string{"a"}, true},
-		{"a", []string{}, false},
-	}
-
-	for _, tc := range testCases {
-		t.Run(fmt.Sprintf("%s", tc.query), func(t *testing.T) {
-			assert.Equal(t, tc.expected, listIncludes(tc.query, tc.list))
-		})
-	}
-}
-
 func TestFilterAPIsByTag(t *testing.T) {
 	testCases := []struct {
 		query    string
