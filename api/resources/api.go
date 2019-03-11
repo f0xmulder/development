@@ -60,7 +60,7 @@ func (rs APIResource) Routes() chi.Router {
 	indexDirectoryPath := ".don-apis-bleve-index"
 	apiIndex := searchindex.Setup(indexDirectoryPath, outputList)
 	bleveHttp.RegisterIndexName(indexDirectoryPath, apiIndex)
-	searchHandler := bleveHttp.NewSearchHandler("don.apis").ServeHTTP
+	searchHandler := bleveHttp.NewSearchHandler(indexDirectoryPath).ServeHTTP
 
 	r.Get("/", rs.List)
 	r.Get("/{id:[a-zA-Z0-9-]+}", rs.Get)
