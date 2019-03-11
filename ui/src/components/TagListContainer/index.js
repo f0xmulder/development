@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
 import TagList from '../TagList';
 
 class TagListContainer extends Component {
