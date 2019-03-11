@@ -16,6 +16,7 @@ UI unit tests:
     - cd ui/
     - npm install
   script:
+    - npm run build
     - npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
