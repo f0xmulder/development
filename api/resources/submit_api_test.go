@@ -7,8 +7,13 @@ import (
 	"strings"
 	"testing"
 
+	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 	"go.uber.org/zap"
 )
+
+func mockCreateIssue(config gitlab.Config, issue gitlab.PostIssue) (gitlab.GetIssue, error) {
+	return gitlab.GetIssue{}, nil
+}
 
 func TestCreate(t *testing.T) {
 	testCases := []struct {
@@ -21,7 +26,7 @@ func TestCreate(t *testing.T) {
 			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_specification_type\":\"asdf\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
 			200,
 			"application/json",
-			"",
+			"{\"id\":0,\"state\":\"\",\"title\":\"\",\"description\":\"\",\"created_at\":\"\",\"weight\":\"\",\"web_url\":\"\",\"labels\":null}\n",
 		},
 		{
 			"asdf{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
@@ -35,12 +40,9 @@ func TestCreate(t *testing.T) {
 		url := "/api/submit-api/"
 
 		submitAPIResource := SubmitAPIResource{
-			zap.NewNop(),
-			GitlabConfig{
-				Host:        "",
-				AccessToken: "",
-				ProjectID:   "",
-			},
+			Logger:       zap.NewNop(),
+			GitlabConfig: gitlab.Config{},
+			CreateIssue:  mockCreateIssue,
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {

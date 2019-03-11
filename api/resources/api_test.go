@@ -4,14 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/stretchr/testify/assert"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
-	"go.uber.org/zap"
 	"io/ioutil"
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/go-chi/chi"
+	"github.com/stretchr/testify/assert"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"go.uber.org/zap"
 )
 
 var dummyAPI = models.API{
@@ -133,7 +134,7 @@ func TestAPIGet(t *testing.T) {
 			"./test-data/valid",
 			200,
 			"application/json",
-			"{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\"}}\n",
+			"{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\"}}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",

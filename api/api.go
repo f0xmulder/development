@@ -7,18 +7,18 @@ import (
 	"net/http"
 
 	"github.com/pkg/errors"
-	"gitlab.com/commonground/developer.overheid.nl/api/resources"
+	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 	"go.uber.org/zap"
 )
 
 // Server is the server itself
 type Server struct {
 	Logger       *zap.Logger
-	GitlabConfig resources.GitlabConfig
+	GitlabConfig gitlab.Config
 }
 
 // NewServer creates a new Server and sets it up to handle requests.
-func NewServer(l *zap.Logger, gitlabConfig resources.GitlabConfig) *Server {
+func NewServer(l *zap.Logger, gitlabConfig gitlab.Config) *Server {
 	i := &Server{
 		Logger:       l,
 		GitlabConfig: gitlabConfig,

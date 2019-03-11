@@ -6,7 +6,7 @@ package api
 import (
 	"testing"
 
-	"gitlab.com/commonground/developer.overheid.nl/api/resources"
+	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -19,13 +19,7 @@ func TestAPIServer(t *testing.T) {
 		t.Error(err)
 	}
 
-	gitlabConfig := resources.GitlabConfig{
-		Host:        "",
-		AccessToken: "",
-		ProjectID:   "",
-	}
-
-	apiServer := NewServer(logger, gitlabConfig)
+	apiServer := NewServer(logger, gitlab.Config{})
 	if apiServer == nil {
 		t.Error()
 	}
