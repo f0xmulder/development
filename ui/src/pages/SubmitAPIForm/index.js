@@ -72,7 +72,7 @@ export default class SubmitAPIForm extends Component {
             })
             .catch((error) => {
                 actions.setSubmitting(false)
-                actions.setStatus({ msg: 'An error occured while submitting the API, please try again' })
+                actions.setStatus({ msg: 'An error occurred while submitting the API, please try again.' })
                 console.error(error)
             })
     }
