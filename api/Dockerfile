@@ -28,7 +28,6 @@ FROM alpine:latest
 COPY --from=build /go/src/commonground/developer.overheid.nl/api/dist/bin/don-api /srv/don-api/bin/don-api
 COPY data /srv/don-api/data
 
-USER nobody
 EXPOSE 8080
 
 WORKDIR /srv/don-api/bin
