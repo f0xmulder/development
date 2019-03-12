@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
 import { object } from 'prop-types'
-import {Link} from 'react-router-dom'
+import APIList from '../../components/APIList';
 
 import './index.css'
+
+export const mapApisForQueryResponseToApis = response => {
+    const hits = response.hits
+    return hits.map(hit => hit.fields)
+}
 
 class Search extends Component {
     constructor(props) {
@@ -36,9 +41,7 @@ class Search extends Component {
                 } else {
                     throw new Error(`Failed to fetch APIs for query '${query}'`)
                 }
-            })
-            .then(response => response.hits)
-            .then(hits => hits.map(hit => hit.fields))
+            }).then(response => mapApisForQueryResponseToApis(response))
     }
 
     loadApisForQuery(query) {
@@ -88,7 +91,7 @@ class Search extends Component {
 
     render() {
         const { apis, error, loaded } = this.state
-        const search = this.props.location.search
+        const { search } = this.props.location
         const urlParams = new URLSearchParams(search)
         const query = urlParams.get('query')
 
@@ -103,21 +106,10 @@ class Search extends Component {
                             <p data-test="error-message">Failed loading APIs</p> :
                             apis && apis.length > 0 ?
                                 <div>
-                                    <ul>
-                                        {
-                                        apis
-                                            .map((api, i) =>
-                                                <li key={i}>
-                                                    <Link to={`/detail/${api['id']}`} data-test="link">
-                                                        { api['service_name'] } - { api['organization_name'] }
-                                                    </Link>
-                                                </li>
-                                            )
-                                    }
-                                    </ul>
+                                    <APIList apis={apis}/>
                                 </div>
                     :
-                                <p data-test="no-apis-available-message">No APIs found</p>
+                                <p data-test="no-apis-found-message">No APIs found</p>
                 }
             </div>
         );
