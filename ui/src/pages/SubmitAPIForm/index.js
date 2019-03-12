@@ -44,7 +44,7 @@ const arrayFields = [
     'badges'
 ]
 
-export default class SubmitAPIForm extends Component {
+class SubmitAPIForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -214,3 +214,5 @@ export default class SubmitAPIForm extends Component {
         )
     }
 }
+
+export default SubmitAPIForm
