@@ -2,16 +2,17 @@ package resources
 
 import (
 	"encoding/json"
-	bleveHttp "github.com/blevesearch/bleve/http"
-	"github.com/go-chi/chi"
-	"gitlab.com/commonground/developer.overheid.nl/api/data-readers"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
-	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
-	"go.uber.org/zap"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	bleveHttp "github.com/blevesearch/bleve/http"
+	"github.com/go-chi/chi"
+	data_readers "gitlab.com/commonground/developer.overheid.nl/api/data-readers"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
+	"go.uber.org/zap"
 )
 
 type APIResource struct {
@@ -57,7 +58,7 @@ func (rs APIResource) Routes() chi.Router {
 		log.Fatal(errReadFile)
 	}
 
-	indexDirectoryPath := ".don-apis-bleve-index"
+	indexDirectoryPath := "/tmp/.don-apis-bleve-index"
 	apiIndex := searchindex.Setup(indexDirectoryPath, outputList)
 	bleveHttp.RegisterIndexName(indexDirectoryPath, apiIndex)
 	searchHandler := bleveHttp.NewSearchHandler(indexDirectoryPath).ServeHTTP
