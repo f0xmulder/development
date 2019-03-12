@@ -51,7 +51,7 @@ func CreateIssue(config Config, issue CreateIssueBody) (Issue, error) {
 		return Issue{}, err
 	}
 
-	req, err := http.NewRequest("POST", parsedURL.String(), bytes.NewBuffer(jsonBody))
+	req, err := http.NewRequest(http.MethodPost, parsedURL.String(), bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return Issue{}, err
 	}
