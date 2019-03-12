@@ -4,10 +4,10 @@ import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
 const initialValues = {
-    description: 'asdf',
-    organization_name: 'asdf',
-    service_name: 'asdf',
-    api_url: 'http://www.google.nl',
+    description: '',
+    organization_name: '',
+    service_name: '',
+    api_url: '',
     api_specification_type: 'REST/JSON',
     specification_url: '',
     documentation_url: '',
