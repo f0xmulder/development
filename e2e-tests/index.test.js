@@ -58,7 +58,7 @@ describe('on page load', () => {
 
     describe('navigating to the About page', () => {
         beforeAll(async () => {
-            await page.click('hr + ul li:nth-child(3) a')
+            await page.click('hr + ul li:nth-child(4) a')
         })
 
         test('about page is visible', async () => {
@@ -68,14 +68,26 @@ describe('on page load', () => {
         })
     })
 
-    describe('navigating to the Submit API page', () => {
+    describe('navigating to the Search page', () => {
         beforeAll(async () => {
             await page.click('hr + ul li:nth-child(2) a')
         })
 
         test('submit API page is visible', async () => {
             const html = await page.$eval('h1', e => e.innerHTML)
-            await page.screenshot({ path: 'screenshots/03-submit-api-page-is-visible.png' });
+            await page.screenshot({ path: 'screenshots/03-search-api-page-is-visible.png' });
+            expect(html).toBe('Search API')
+        })
+    })
+
+    describe('navigating to the Submit API page', () => {
+        beforeAll(async () => {
+            await page.click('hr + ul li:nth-child(3) a')
+        })
+
+        test('submit API page is visible', async () => {
+            const html = await page.$eval('h1', e => e.innerHTML)
+            await page.screenshot({ path: 'screenshots/04-submit-api-page-is-visible.png' });
             expect(html).toBe('Submit your API')
         })
     })
