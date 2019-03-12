@@ -15,9 +15,9 @@ import (
 
 var options struct {
 	ListenAddressPlain string `long:"listen-address-plain" env:"LISTEN_ADDRESS_PLAIN" default:"0.0.0.0:8080" description:"Address for the API to listen on. Read https://golang.org/pkg/net/#Dial for possible tcp address specs."`
-	GitlabURL          string `long:"gitlab-url" env:"GITLAB_URL" default:"https://gitlab.com" description:"The Gitlab host that is running the issue tracker for submitting new API's."`
-	GitlabAccessToken  string `long:"gitlab-access-token" env:"GITLAB_ACCESS_TOKEN" default:"" description:"The Gitlab access token that is used for creating issues."`
-	GitlabProjectID    string `long:"gitlab-project-id" env:"GITLAB_PROJECT_ID" default:"" description:"The id of the project in Gitlab where issues are created."`
+	GitLabURL          string `long:"gitlab-url" env:"GITLAB_URL" default:"https://gitlab.com" description:"The GitLab host that is running the issue tracker for submitting new API's."`
+	GitLabAccessToken  string `long:"gitlab-access-token" env:"GITLAB_ACCESS_TOKEN" default:"" description:"The GitLab access token that is used for creating an issue."`
+	GitLabProjectID    string `long:"gitlab-project-id" env:"GITLAB_PROJECT_ID" default:"" description:"The id of the project in Gitlab where issues are created."`
 }
 
 func main() {
@@ -51,9 +51,9 @@ func main() {
 	}()
 
 	gitlabConfig := gitlab.Config{
-		URL:         options.GitlabURL,
-		AccessToken: options.GitlabAccessToken,
-		ProjectID:   options.GitlabProjectID,
+		URL:         options.GitLabURL,
+		AccessToken: options.GitLabAccessToken,
+		ProjectID:   options.GitLabProjectID,
 	}
 
 	apiServer := api.NewServer(logger, gitlabConfig)
