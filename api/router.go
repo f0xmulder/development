@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
 	"gitlab.com/commonground/developer.overheid.nl/api/data-readers"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/resources"
@@ -31,6 +32,8 @@ func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string,
 
 func router(logger *zap.Logger) chi.Router {
 	r := chi.NewRouter()
+
+	r.Use(middleware.Logger)
 
 	r.Route("/api", func(r chi.Router) {
 		r.Mount("/apis",
