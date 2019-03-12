@@ -36,16 +36,16 @@ func TestCreateIssue(t *testing.T) {
 		ProjectID:   "42",
 	}
 
-	postIssue := CreateIssueBody{
+	createIssueBody := CreateIssueBody{
 		Title:       "test",
 		Description: "test",
 		Labels:      "test",
 	}
 
-	getIssue, err := CreateIssue(config, postIssue)
+	issue, err := CreateIssue(config, createIssueBody)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	assert.Equal(t, getIssue.WebURL, "https://test/issues/42", "did not receive expected web_url")
+	assert.Equal(t, issue.WebURL, "https://test/issues/42", "did not receive expected web_url")
 }
