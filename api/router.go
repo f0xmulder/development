@@ -7,6 +7,7 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/resources"
 	"go.uber.org/zap"
+	"net/http"
 )
 
 func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
@@ -34,6 +35,10 @@ func router(logger *zap.Logger) chi.Router {
 	r := chi.NewRouter()
 
 	r.Use(middleware.Logger)
+
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("ok"))
+	})
 
 	r.Route("/api", func(r chi.Router) {
 		r.Mount("/apis",
