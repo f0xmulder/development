@@ -36,6 +36,22 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          env:
+            - name: GITLAB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab
+                  key: url
+            - name: GITLAB_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab
+                  key: access_token
+            - name: GITLAB_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab
+                  key: project_id
       restartPolicy: Always
 ---
 apiVersion: v1

@@ -31,4 +31,22 @@ Then run the following command from the root of the repository to deploy the app
 skaffold dev --profile minikube
 ```
 
+For creating issues in Gitlab, make sure the Gitlab credentials are provided to the cluster. First create the file `gitlab.yaml`. You can encode the secrets using: `echo -n 'https://gitlab.com' | base64`
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab
+type: Opaque
+data:
+  url: aHR0cHM6Ly9naXRsYWIuY29t
+  access_token: YWJjZGVmZ2hpams=
+  project_id: NDI=
+```
+
+```bash
+kubectl create -f gitlab.yaml
+```
+
 You will find the application running in the `don-dev` namespace. Point your browser to [https://don.minikube:30443](https://don.minikube:30443/) to view the deployment.
