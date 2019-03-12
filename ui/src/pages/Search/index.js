@@ -116,7 +116,6 @@ class Search extends Component {
     }
 }
 
-
 Search.propTypes = {
     location: object
 }
