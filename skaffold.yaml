@@ -33,6 +33,20 @@ profiles:
       gitCommit: {}
     local:
       push: true
+- name: deploy-review-app
+  deploy:
+    helm:
+      releases:
+        - name: don-review-app
+          chartPath: helm/don
+          valuesFiles:
+            - helm/don/values-review-app.yaml
+          values:
+            apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api
+            uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui
+          namespace: don-review-app
+          setValueTemplates:
+            domain: '{{.DOMAIN}}'
 - name: deploy-prod
   deploy:
     helm:
