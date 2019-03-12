@@ -16,7 +16,7 @@ import (
 type SubmitAPIResource struct {
 	Logger       *zap.Logger
 	GitlabConfig gitlab.Config
-	CreateIssue  func(config gitlab.Config, issue gitlab.PostIssue) (gitlab.GetIssue, error)
+	CreateIssue  func(config gitlab.Config, issue gitlab.CreateIssueBody) (gitlab.Issue, error)
 }
 
 // Routes return all routes that are exposed by the SubmitAPIResource
@@ -53,7 +53,7 @@ func (rs SubmitAPIResource) Post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	postIssue := gitlab.PostIssue{
+	postIssue := gitlab.CreateIssueBody{
 		Title:       title,
 		Description: description,
 		Labels:      "New API",

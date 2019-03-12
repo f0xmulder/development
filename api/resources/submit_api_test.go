@@ -11,8 +11,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func mockCreateIssue(config gitlab.Config, issue gitlab.PostIssue) (gitlab.GetIssue, error) {
-	return gitlab.GetIssue{}, nil
+func mockCreateIssue(config gitlab.Config, issue gitlab.CreateIssueBody) (gitlab.Issue, error) {
+	return gitlab.Issue{}, nil
 }
 
 func TestCreate(t *testing.T) {

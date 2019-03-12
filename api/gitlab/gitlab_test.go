@@ -11,7 +11,7 @@ import (
 )
 
 func mockTestServer() *httptest.Server {
-	getIssue := GetIssue{
+	getIssue := Issue{
 		ID:          42,
 		Title:       "Test",
 		Description: "Test",
@@ -36,7 +36,7 @@ func TestCreateIssue(t *testing.T) {
 		ProjectID:   "42",
 	}
 
-	postIssue := PostIssue{
+	postIssue := CreateIssueBody{
 		Title:       "test",
 		Description: "test",
 		Labels:      "test",
