@@ -30,6 +30,8 @@ func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
 		ReadDirectory:               readDirectory,
 	}
+
+	return i
 }
 
 func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig gitlab.Config) *resources.SubmitAPIResource {
