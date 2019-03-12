@@ -15,7 +15,7 @@ import (
 // SubmitAPIResource allows users to submit a new API through a web form
 type SubmitAPIResource struct {
 	Logger       *zap.Logger
-	GitlabConfig gitlab.Config
+	GitLabConfig gitlab.Config
 	CreateIssue  func(config gitlab.Config, issue gitlab.CreateIssueBody) (gitlab.Issue, error)
 }
 
@@ -27,7 +27,7 @@ func (rs SubmitAPIResource) Routes() chi.Router {
 	return r
 }
 
-// Post creates a new issue in Gitlab with the API specification
+// Post creates a new issue in GitLab with the API specification
 func (rs SubmitAPIResource) Post(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -59,18 +59,18 @@ func (rs SubmitAPIResource) Post(w http.ResponseWriter, r *http.Request) {
 		Labels:      "New API",
 	}
 
-	getIssue, err := rs.CreateIssue(rs.GitlabConfig, postIssue)
+	getIssue, err := rs.CreateIssue(rs.GitLabConfig, postIssue)
 	if err != nil {
-		rs.Logger.Error("failed to post issue to Gitlab API", zap.Error(err))
-		http.Error(w, "oops, something went wrong while posting the API", http.StatusInternalServerError)
+		rs.Logger.Error("failed to post issue to GitLab API", zap.Error(err))
+		http.Error(w, "oops, something went wrong while posting to the GitLab API", http.StatusInternalServerError)
 		return
 	}
 
 	err = json.NewEncoder(w).Encode(getIssue)
 
 	if err != nil {
-		rs.Logger.Error("failed to parse JSON for the Gitlab response", zap.Error(err))
-		http.Error(w, "oops, something went wrong while posting the API", http.StatusInternalServerError)
+		rs.Logger.Error("failed to parse JSON for the GitLab response", zap.Error(err))
+		http.Error(w, "oops, something went wrong while posting the GitLab API", http.StatusInternalServerError)
 		return
 	}
 }

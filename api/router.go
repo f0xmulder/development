@@ -37,7 +37,7 @@ func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig gitlab.Config) *resources.SubmitAPIResource {
 	i := &resources.SubmitAPIResource{
 		Logger:       logger,
-		GitlabConfig: gitlabConfig,
+		GitLabConfig: gitlabConfig,
 		CreateIssue:  gitlab.CreateIssue,
 	}
 

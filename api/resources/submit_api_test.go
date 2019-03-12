@@ -41,7 +41,7 @@ func TestCreate(t *testing.T) {
 
 		submitAPIResource := SubmitAPIResource{
 			Logger:       zap.NewNop(),
-			GitlabConfig: gitlab.Config{},
+			GitLabConfig: gitlab.Config{},
 			CreateIssue:  mockCreateIssue,
 		}
 
