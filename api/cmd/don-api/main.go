@@ -50,13 +50,13 @@ func main() {
 		}
 	}()
 
-	gitlabConfig := gitlab.Config{
+	gitLabConfig := gitlab.Config{
 		URL:         options.GitLabURL,
 		AccessToken: options.GitLabAccessToken,
 		ProjectID:   options.GitLabProjectID,
 	}
 
-	apiServer := api.NewServer(logger, gitlabConfig)
+	apiServer := api.NewServer(logger, gitLabConfig)
 	logger.Info("API running on", zap.String("address", options.ListenAddressPlain))
 
 	// Listen on the address provided in the options
