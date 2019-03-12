@@ -50,7 +50,7 @@ func TestCreate(t *testing.T) {
 			req := httptest.NewRequest("POST", url, strings.NewReader(tc.inputContent))
 			w := httptest.NewRecorder()
 
-			submitAPIResource.Create(w, req)
+			submitAPIResource.Post(w, req)
 
 			resp := w.Result()
 			body, _ := ioutil.ReadAll(resp.Body)

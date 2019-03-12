@@ -22,13 +22,13 @@ type SubmitAPIResource struct {
 // Routes return all routes that are exposed by the SubmitAPIResource
 func (rs SubmitAPIResource) Routes() chi.Router {
 	r := chi.NewRouter()
-	r.Post("/", rs.Create)
+	r.Post("/", rs.Post)
 
 	return r
 }
 
-// Create creates a new issue in Gitlab with the API specification
-func (rs SubmitAPIResource) Create(w http.ResponseWriter, r *http.Request) {
+// Post creates a new issue in Gitlab with the API specification
+func (rs SubmitAPIResource) Post(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	input := models.API{}

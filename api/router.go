@@ -36,6 +36,7 @@ func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig gitlab.Config) *resou
 	i := &resources.SubmitAPIResource{
 		Logger:       logger,
 		GitlabConfig: gitlabConfig,
+		CreateIssue:  gitlab.CreateIssue,
 	}
 
 	return i
