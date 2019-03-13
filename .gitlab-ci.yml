@@ -72,7 +72,7 @@ deploy_review:
     - docker info
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script:
-    - helm install ./helm/don --set "apiImage=registry.gitlab.com/commonground/developer.overheid.nl/api:1070f8d-dirty" --set "uiImage=registry.gitlab.com/commonground/developer.overheid.nl/ui:6c239ae-dirty" --set domain=$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN --name $CI_ENVIRONMENT_SLUG --namespace $CI_ENVIRONMENT_SLUG
+    - helm upgrade --install $CI_ENVIRONMENT_SLUG ./helm/don --set "apiImage=registry.gitlab.com/commonground/developer.overheid.nl/api:1070f8d-dirty" --set "uiImage=registry.gitlab.com/commonground/developer.overheid.nl/ui:6c239ae-dirty" --set domain=$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN --namespace $CI_ENVIRONMENT_SLUG
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
