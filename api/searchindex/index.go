@@ -8,18 +8,15 @@ import (
 )
 
 // Setup search index for Bleve with provided data
-func Setup(indexDirectoryPath string, data []models.API) bleve.Index {
+func Setup(data []models.API) bleve.Index {
 	var apiIndex bleve.Index
 	var err error
 
-	apiIndex, err = bleve.Open(indexDirectoryPath)
-	if err == bleve.ErrorIndexPathDoesNotExist {
-		mapping := bleve.NewIndexMapping()
-		apiIndex, err = bleve.New(indexDirectoryPath, mapping)
-		if err != nil {
-			log.Fatal(err)
-			return nil
-		}
+	mapping := bleve.NewIndexMapping()
+	apiIndex, err = bleve.NewMemOnly(mapping)
+	if err != nil {
+		log.Fatal(err)
+		return nil
 	}
 
 	// index the data
