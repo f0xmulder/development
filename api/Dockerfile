@@ -25,6 +25,8 @@ RUN GIT_COMMIT_HASH=$(git rev-parse HEAD) && \
 # Release binary on latest alpine image.
 FROM alpine:latest
 
+RUN apk add --no-cache ca-certificates bash
+
 COPY --from=build /go/src/commonground/developer.overheid.nl/api/dist/bin/don-api /srv/don-api/bin/don-api
 COPY data /srv/don-api/data
 
