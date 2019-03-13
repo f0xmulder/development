@@ -1,0 +1,11 @@
+{
+    "description": "API voor zaakgericht werken",
+    "organization_name": "VNG Realisatie",
+    "service_name": "ZGW",
+    "api_url": "https://ref.tst.vng.cloud/zrc/api/v1/",
+    "api_specification_type": "OpenAPI2",
+    "specification_url": "https://ref.tst.vng.cloud/zrc/api/v1/schema/",
+    "documentation_url": "https://ref.tst.vng.cloud",
+    "tags": ["zgw", "zaakgericht werken"],
+    "badges": []
+}
