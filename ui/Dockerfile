@@ -1,7 +1,5 @@
 FROM node:10.15.1-alpine AS build
 
-RUN apk add git
-
 ENV CI=true
 
 # First copy only package.json and package-lock.json to make the dependency fetching step optional.
@@ -15,14 +13,11 @@ RUN npm ci --no-progress --color=false --quiet
 
 # Now copy the whole workdir for the build step.
 COPY ui /go/src/commonground/developer.overheid.nl/ui
-COPY .git /go/src/commonground/developer.overheid.nl/.git
 
-RUN GIT_COMMIT_HASH=$(git rev-parse HEAD) \
-    GIT_TAG_NAME=$(git describe --tags 2> /dev/null || echo no-tag) \
-    npm run build
+RUN npm run build
 
 # Copy static docs to alpine-based nginx container.
-FROM nginx:alpine
+FROM nginx:alpine as webserver
 
 # Copy nginx configuration
 COPY ui/docker/default.conf /etc/nginx/conf.d/default.conf

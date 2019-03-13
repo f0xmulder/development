@@ -1,8 +1,5 @@
 const puppeteer = require('puppeteer')
 
-const devEnvironment = 'http://localhost:3000'
-const prodEnvironment = 'https://don.commonground.nl'
-
 const isDebugging = () =>
     process.env.NODE_ENV === 'debug'
 
@@ -20,8 +17,7 @@ const getConfig = isDebugging =>
         ]
     };
 
-const getBaseUrl = isDebugging =>
-    isDebugging ? devEnvironment : prodEnvironment;
+const getBaseUrl = () => process.env.URL
 
 describe('on page load', () => {
     let browser
@@ -29,6 +25,8 @@ describe('on page load', () => {
     let baseUrl
 
     beforeAll(async () => {
+        console.info(`Running E2E tests on ${getBaseUrl()}`)
+
         const config = getConfig(isDebugging())
         baseUrl = getBaseUrl(isDebugging())
 

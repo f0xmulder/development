@@ -6,7 +6,7 @@
   "main": "index.test.js",
   "scripts": {
     "test": "jest",
-    "debug": "NODE_ENV=debug npm test"
+    "debug": "URL=http://localhost:3000 npm test"
   },
   "devDependencies": {
     "jest": "24.1.0",

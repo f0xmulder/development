@@ -38,20 +38,11 @@ spec:
             timeoutSeconds: 1
           env:
             - name: GITLAB_URL
-              valueFrom:
-                secretKeyRef:
-                  name: gitlab
-                  key: url
+              value: {{.Values.gitlabUrl | b64enc}}
             - name: GITLAB_ACCESS_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: gitlab
-                  key: access_token
+              value: {{.Values.gitlabAccessToken | b64enc}}
             - name: GITLAB_PROJECT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: gitlab
-                  key: project_id
+              value: {{.Values.gitlabProjectId | b64enc}}
       restartPolicy: Always
 ---
 apiVersion: v1
