@@ -1,0 +1,17 @@
+.App {}
+
+.App__TopBar {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.App__TopBar .title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.App__TopBar .Navigation {
+    flex: 1;
+    text-align: right;
+}

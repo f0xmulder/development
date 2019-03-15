@@ -1,0 +1,13 @@
+.Navigation {
+    margin: 0;
+}
+
+.Navigation li {
+    display: inline-block;
+    margin-right: 15px;
+
+}
+
+.Navigation li:last-child {
+    margin-right: 0;
+}

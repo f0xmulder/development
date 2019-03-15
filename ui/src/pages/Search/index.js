@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { object } from 'prop-types'
 import APIList from '../../components/APIList';
+import TagListContainer from "../../components/TagListContainer";
 
 import './index.css'
 
@@ -111,6 +112,9 @@ class Search extends Component {
                     :
                                 <p data-test="no-apis-found-message">No APIs found</p>
                 }
+
+                <h2>API's by tag</h2>
+                <TagListContainer />
             </div>
         );
     }
