@@ -1,0 +1,50 @@
+.APIDetails {
+}
+
+.APIDetails__sections {
+    display: flex;
+    justify-content: space-between;
+}
+
+.APIDetails__general {
+    flex: 1;
+    padding-right: 50px;
+    flex-grow: 0;
+    flex-basis: 750px;
+}
+
+.APIDetails__technical {
+    flex: 1;
+    max-width: 750px;
+    flex-grow: 0;
+    padding-right: 50px;
+    flex-basis: 500px;
+}
+
+.APIDetails .title {
+    margin-bottom: 0;
+}
+
+.APIDetails .subtitle {
+    margin-top: 0;
+    font-weight: normal;
+    color: #888;
+    font-size: 24px;
+}
+
+.APIDetails dt {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.APIDetails dd {
+    margin-bottom: 16px;
+}
+
+.APIDetails .base-url a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 350px;
+    display: inline-block;
+}

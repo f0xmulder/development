@@ -22,10 +22,10 @@ const App = () =>
                     <Navigation />
                 </div>
 
-                <Route exact path="/" component={Home} />
+                <Route path="/" exact component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/overview" component={Overview} />
-                <Route exact path="/submit-api" component={SubmitAPI} />
+                <Route path="/submit-api" component={SubmitAPI} />
                 <Route path="/submit-api/form" component={SubmitAPIForm} />
                 <Route path="/about" component={About} />
                 <Route path="/tag/:tag" component={Tag} />

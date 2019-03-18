@@ -1,7 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import APIDetail from './index'
-import { RedocStandalone } from 'redoc'
 
 const details = {
   "description": "Description",
@@ -68,32 +67,6 @@ describe('APIDetail', () => {
 
       wrapper = shallow(<APIDetail/>)
       wrapper.setState({ details, loaded: true })
-    })
-
-    describe('the documentation', () => {
-      it('should be included', () => {
-        const documentation = wrapper.find(RedocStandalone)
-        expect(documentation.exists()).toBe(true)
-      })
-
-      describe('when the specification URL can not be loaded', () => {
-        it('should set the error state for the loading specification property', () => {
-          const wrapper = shallow(<APIDetail />)
-          expect(wrapper.state('errorLoadingSpecification')).toBe(false)
-
-          wrapper.instance().onErrorLoadingSpecification()
-          expect(wrapper.state('errorLoadingSpecification')).toBe(true)
-        })
-
-        it('an error message should be visible', () => {
-          const wrapper = shallow(<APIDetail />)
-          wrapper.setState({ errorLoadingSpecification: true, loaded: true, details })
-
-          const noApisMessageElement = wrapper.find('[data-test="error-message-loading-specification"]')
-          expect(noApisMessageElement.exists()).toBe(true)
-          expect(noApisMessageElement.text()).toBe('Failed loading the API specification.')
-        })
-      })
     })
   })
 

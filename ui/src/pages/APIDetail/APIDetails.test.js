@@ -20,9 +20,14 @@ describe('APIDetails', () => {
         wrapper = shallow(<APIDetails {...details}/>)
     })
 
-    it('should show the service & organization name as page title', () => {
-        const pageTitle = wrapper.find('h1')
-        expect(pageTitle.text()).toBe('Service Name - Organization Name')
+    it('should show the service as title', () => {
+        const pageTitle = wrapper.find('.title')
+        expect(pageTitle.text()).toBe('Service Name')
+    })
+
+    it('should show the organization name as subtitle', () => {
+        const pageTitle = wrapper.find('.subtitle')
+        expect(pageTitle.text()).toBe('Organization Name')
     })
 
     it('should show the description', () => {
@@ -35,19 +40,28 @@ describe('APIDetails', () => {
         expect(apiURL.text()).toBe('API URL')
     })
 
-    it('should show the specification type', () => {
-        const apiSpecType = wrapper.find('[data-test="api-specification-type"]')
-        expect(apiSpecType.text()).toBe('Specification Type')
+    describe('specification', () => {
+        it('should show the specification type', () => {
+            const apiSpecType = wrapper.find('[data-test="api-specification-type"]')
+            expect(apiSpecType.text()).toBe('Specification Type')
+        })
+
+        it('should link to Rebilly with the specification URL', () => {
+            const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
+            expect(apiSpecUrl.prop('href')).toBe('https://rebilly.github.io/ReDoc/?url=Specification%20URL')
+        })
     })
 
-    it('should show the specification URL', () => {
-        const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
-        expect(apiSpecUrl.text()).toBe('Specification URL')
-    })
+    describe('documentation', () => {
+        it('should show a link to the documentation url', () => {
+            const documentationUrl = wrapper.find('[data-test="api-documentation-url"]')
+            expect(documentationUrl.text()).toBe('Read more')
+        })
 
-    it('should show the documentation url', () => {
-        const documentationUrl = wrapper.find('[data-test="api-documentation-url"]')
-        expect(documentationUrl.text()).toBe('Documentation URL')
+        it('should link to Rebilly with the specification URL', () => {
+            const apiSpecUrl = wrapper.find('[data-test="api-documentation-url"] a')
+            expect(apiSpecUrl.prop('href')).toBe('Documentation URL')
+        })
     })
 
     describe('badges', () => {

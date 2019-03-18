@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { object } from 'prop-types'
-import { RedocStandalone } from 'redoc'
 
 import APIDetails from './APIDetails'
+
+import './index.css'
 
 class APIDetail extends Component {
     constructor(props) {
@@ -11,8 +12,7 @@ class APIDetail extends Component {
         this.state = {
             details: {},
             error: false,
-            loaded: false,
-            errorLoadingSpecification: false
+            loaded: false
         }
     }
 
@@ -54,12 +54,8 @@ class APIDetail extends Component {
         this.loadDetailsForApi(id)
     }
 
-    onErrorLoadingSpecification() {
-        this.setState({ errorLoadingSpecification: true })
-    }
-
     render() {
-        const { details, error, loaded, errorLoadingSpecification } = this.state
+        const { details, error, loaded } = this.state
 
         return (
             <div className="APIDetail">
@@ -69,23 +65,9 @@ class APIDetail extends Component {
                         error ?
                             <p data-test="error-message">Failed loading the API details</p> :
                             details ?
-                                <Fragment>
-                                    <div className="container">
-                                        <APIDetails {...details} />
-
-                                        {
-                                            errorLoadingSpecification ?
-                                                <p data-test="error-message-loading-specification">Failed loading the API specification.</p> :
-                                                null
-                                        }
-                                    </div>
-                                    {
-                                        !errorLoadingSpecification ?
-                                            <RedocStandalone specUrl={details.specification_url}
-                                                             onLoaded={error => error ? this.onErrorLoadingSpecification(error) : null } />
-                                            : null
-                                    }
-                                </Fragment> : null
+                                <div className="container">
+                                    <APIDetails {...details} />
+                                </div> : null
                 }
             </div>
         );

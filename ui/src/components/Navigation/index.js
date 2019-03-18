@@ -5,7 +5,7 @@ import './index.css'
 
 const Navigation = () =>
     <ul className="Navigation">
-        <li><Link to="/" exact>Home</Link></li>
+        <li><Link to="/">Home</Link></li>
         <li><Link to="/overview">Overview</Link></li>
         <li><Link to="/submit-api">Submit your API</Link></li>
         <li><Link to="/about">About</Link></li>

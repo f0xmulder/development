@@ -122,7 +122,7 @@ class Home extends Component {
                 </div>
 
                 <div className="Home__Tags">
-                    <p>Categoriën</p>
+                    <p>Categorieën</p>
                     <TagListContainer />
                 </div>
             </div>
