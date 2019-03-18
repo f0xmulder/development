@@ -6,16 +6,17 @@ import SubmitAPI from './pages/SubmitAPI'
 import SubmitAPIForm from './pages/SubmitAPIForm'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
-import Search from './pages/Search'
 import Tag from './pages/Tag'
-import Navigation from "./components/Navigation";
+import Overview from './pages/Overview'
+
+import Navigation from './components/Navigation'
 
 import './App.css'
 
 const App = () =>
-    <div className="App">
+    <div className="App full-height">
         <Router>
-            <div>
+            <div className="full-height">
                 <div className="App__TopBar">
                     <Link to="/" className="title">developer.overheid.nl</Link>
                     <Navigation />
@@ -23,7 +24,7 @@ const App = () =>
 
                 <Route exact path="/" component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
-                <Route path="/search" component={Search} />
+                <Route path="/overview" component={Overview} />
                 <Route exact path="/submit-api" component={SubmitAPI} />
                 <Route path="/submit-api/form" component={SubmitAPIForm} />
                 <Route path="/about" component={About} />

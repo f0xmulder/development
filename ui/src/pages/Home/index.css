@@ -1,0 +1,89 @@
+.Home {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100% - 118px);
+}
+
+.Home__Search {
+    flex: 1 0 auto;
+    padding-top: 100px;
+}
+
+.Home__Search ul li {
+    padding-bottom: 16px;
+}
+
+.Home__Search .search-box + p,
+.Home__Search .search-box + div {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Home__Search .APIList ul {
+    list-style-type: decimal;
+    padding: 0;
+}
+
+.Home .Home__Tags {
+    padding: 16px;
+}
+
+.Home h1 {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.Home .search-box {
+    display: flex;
+    border: 1px solid #bdbdbd;
+    width: 450px;
+    margin: 0 auto;
+}
+
+.Home .search-box input {
+    flex: 1;
+    padding: 0 0 0 16px;
+    height: 48px;
+    font-size: 18px;
+    border: 0 none;
+}
+
+.Home .search-box svg {
+    flex-shrink: 0;
+    margin-right: 18px;
+    width: 24px;
+}
+
+.Home .Home__Tags {
+    display: flex;
+}
+
+.Home .Home__Tags .TagListContainer {
+    display: inline-block;
+}
+
+.Home .Home__Tags p {
+    display: inline-block;
+    color: #6c757d;
+    margin: 0;
+    padding-right: 16px;
+    line-height: 1.65rem;
+}
+
+.Home .Home__Tags .TagList ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.65rem;
+}
+
+.Home .Home__Tags .TagList li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.Home .Home__Tags .TagList li:last-child {
+    margin-right: 0;
+}
