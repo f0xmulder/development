@@ -169,7 +169,6 @@ deploy:
   stage: deploy
   image: registry.gitlab.com/commonground/don-deployer:latest
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export IMAGE_API=${IMAGE_PREFIX}/api
     - export IMAGE_UI=${IMAGE_PREFIX}/ui
   script:
