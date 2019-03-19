@@ -163,7 +163,7 @@ E2E tests:
   image: buildkite/puppeteer:latest
   stage: e2e-tests
   before_script:
-    - export URL=$(cat ci_environment_url.txt)
+    - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$INGRESS_BASE_DOMAIN")
     - cd e2e-tests
     - npm install
   script:
