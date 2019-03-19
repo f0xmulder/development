@@ -150,7 +150,6 @@ stop_review_app:
     GIT_STRATEGY: none
   script:
     - helm delete $CI_ENVIRONMENT_SLUG
-  when: manual
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
