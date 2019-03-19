@@ -140,7 +140,7 @@ Remove Review App:
   variables:
     GIT_STRATEGY: none
   script:
-    - helm delete --purge $CI_ENVIRONMENT_SLUG
+    - helm delete --purge don-$CI_ENVIRONMENT_SLUG
   when: manual
   environment:
     name: review/$CI_COMMIT_REF_NAME
