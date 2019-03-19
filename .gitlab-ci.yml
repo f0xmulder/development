@@ -176,10 +176,10 @@ E2E tests:
 Deploy production:
   stage: deploy
   script:
-    - helm upgrade --install don-prod ./helm/don --namespace don-prod --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" --set "ingressClass=traefik" --set domain=don.commonground.nl
+    - helm upgrade --install don-prod ./helm/don --namespace don-prod --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" --set "ingressClass=traefik" --set domain="$INGRESS_BASE_DOMAIN"
   environment:
     name: prod
-    url: https://don.commonground.nl
+    url: https://$INGRESS_BASE_DOMAIN
   tags:
     - nlx-privileged
   only:
