@@ -9,8 +9,8 @@ stages:
   - test
   - release
   - review
-  - e2e-tests
   - deploy
+  - e2e-tests
 
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
