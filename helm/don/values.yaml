@@ -1,4 +1,4 @@
-imagePullPolicy: IfNotPresent
+imagePullPolicy: Always
 ingressClass: nginx
 
 domain: don.minikube
