@@ -53,12 +53,12 @@ describe('on page load', () => {
     test('homepage is visible', async () => {
         const html = await page.$eval('h1', e => e.innerHTML)
         await page.screenshot({ path: 'screenshots/01-homepage-is-visible.png' });
-        expect(html).toBe('API overview')
+        expect(html).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid')
     })
 
     describe('navigating to the About page', () => {
         beforeAll(async () => {
-            await page.click('hr + ul li:nth-child(4) a')
+            await page.click('.Navigation li:nth-child(4) a')
         })
 
         test('about page is visible', async () => {
@@ -68,21 +68,21 @@ describe('on page load', () => {
         })
     })
 
-    describe('navigating to the Search page', () => {
+    describe('navigating to the Overview page', () => {
         beforeAll(async () => {
-            await page.click('hr + ul li:nth-child(2) a')
+            await page.click('.Navigation li:nth-child(2) a')
         })
 
-        test('submit API page is visible', async () => {
+        test('overview page is visible', async () => {
             const html = await page.$eval('h1', e => e.innerHTML)
-            await page.screenshot({ path: 'screenshots/03-search-api-page-is-visible.png' });
-            expect(html).toBe('Search API')
+            await page.screenshot({ path: 'screenshots/03-overview-page-is-visible.png' });
+            expect(html).toBe(`Overview of all available API's`)
         })
     })
 
     describe('navigating to the Submit API page', () => {
         beforeAll(async () => {
-            await page.click('hr + ul li:nth-child(3) a')
+            await page.click('.Navigation li:nth-child(3) a')
         })
 
         test('submit API page is visible', async () => {
@@ -96,7 +96,7 @@ describe('on page load', () => {
         beforeAll(async () => {
             await Promise.all([
                 page.waitForNavigation(),
-                page.click('hr + ul li:nth-child(1) a')
+                page.click('.Navigation li:nth-child(2) a')
             ]);
 
             await page.waitForSelector('[data-test="link"]')
@@ -109,9 +109,9 @@ describe('on page load', () => {
 
         test('detail page is visible', async () => {
             await page.waitForSelector('dl dt')
-            const apiUrlLabel = await page.$eval('dl dt', e => e.innerHTML)
+            const apiDocumentationLabel = await page.$eval('dl dt', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/04-api-detail-page-is-visible.png' })
-            expect(apiUrlLabel).toBe('API URL')
+            expect(apiDocumentationLabel).toBe('Documentation')
         })
     })
 })
