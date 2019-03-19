@@ -125,7 +125,6 @@ Deploy Review App:
     - export IMAGE_API=${IMAGE_PREFIX}/api
     - export IMAGE_UI=${IMAGE_PREFIX}/ui
   script:
-    - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN" > ci_environment_url.txt
     - helm delete --purge $CI_ENVIRONMENT_SLUG || true
     - helm upgrade --install $CI_ENVIRONMENT_SLUG ./helm/don --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_API:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_UI:$CI_COMMIT_REF_SLUG" --set domain=$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN --set name=$CI_ENVIRONMENT_SLUG --namespace developer-overheid-nl
   environment:
@@ -139,9 +138,6 @@ Deploy Review App:
     - branches
   except:
     - master
-  artifacts:
-    paths:
-      - ci_environment_url.txt
 
 stop_review_app:
   stage: review
@@ -159,7 +155,7 @@ E2E tests:
   image: buildkite/puppeteer:latest
   stage: e2e-tests
   before_script:
-    - export URL=$(cat ci_environment_url.txt)
+    - export URL="https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN"
     - cd e2e-tests
     - npm install
   script:
