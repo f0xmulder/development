@@ -1,6 +1,11 @@
+imagePullPolicy: IfNotPresent
 ingressClass: nginx
 
 domain: don.minikube
 
 apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api:master
 uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui:master
+
+gitlabUrl: https://gitlab.com
+gitlabAccessToken: secret
+gitlabProjectId: "0"
