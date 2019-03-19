@@ -146,6 +146,13 @@ Remove Review App:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
     action: stop
+  tags:
+    - cluster
+    - kubernetes
+  only:
+    - branches
+  except:
+    - master
 
 E2E tests:
   image: buildkite/puppeteer:latest
