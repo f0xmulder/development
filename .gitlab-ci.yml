@@ -130,7 +130,7 @@ Deploy Review App:
     - cluster
     - kubernetes
   only:
-    - branches
+    - feature/*
   except:
     - master
 
@@ -150,7 +150,7 @@ Remove Review App:
     - cluster
     - kubernetes
   only:
-    - branches
+    - feature/*
   except:
     - master
 
@@ -178,5 +178,4 @@ Deploy production:
   tags:
     - nlx-privileged
   only:
-    refs:
-      - master
+    - master
