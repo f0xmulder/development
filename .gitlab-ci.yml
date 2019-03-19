@@ -84,6 +84,7 @@ Release UI:
   only:
     changes:
       - api/**/*
+      - data/**/*
   tags:
     - cluster
     - kubernetes
