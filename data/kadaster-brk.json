@@ -1,0 +1,10 @@
+{
+    "description": "Het Kadaster is houder van de Basisregistratie Kadaster (BRK). Onderdeel van de BRK is de Digitale kadastrale kaart. Deze is beschikbaar als open data en nu via dit portaal ook als Linked Open Data (vooralsnog zonder de topografie).",
+    "organization_name": "Kadaster",
+    "service_name": "Basisregistratie Kadaster (BRK)",
+    "api_url": "https://brk.basisregistraties.overheid.nl/api/v1",
+    "api_specification_type": "OpenAPI3",
+    "specification_url": "https://brk.basisregistraties.overheid.nl/api/v1",
+    "documentation_url": "https://brk.basisregistraties.overheid.nl/api/v1",
+    "tags": ["basisregistratie", "kadaster", "brk"]
+}
