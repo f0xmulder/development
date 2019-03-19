@@ -173,8 +173,7 @@ deploy:
     - export IMAGE_API=${IMAGE_PREFIX}/api
     - export IMAGE_UI=${IMAGE_PREFIX}/ui
   script:
-    - helm delete --purge don-prod || true
-    - helm upgrade --install don-prod ./helm/don --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --namespace don-prod
+    - helm upgrade --install --force don-prod ./helm/don --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --namespace don-prod
   environment:
     name: prod
     url: https://don.commonground.nl
