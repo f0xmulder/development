@@ -3,7 +3,7 @@
     "organization_name": "RDW",
     "service_name": "Gekentekende voertuigen",
     "api_url": "https://opendata.rdw.nl",
-    "api_specification_type": "",
+    "api_specification_type": "None",
     "specification_url": "",
     "documentation_url": "https://dev.socrata.com/foundry/opendata.rdw.nl/m9d7-ebf2",
     "tags": ["basisregistratie", "rdw", "brv"]
