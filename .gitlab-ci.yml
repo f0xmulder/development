@@ -122,6 +122,7 @@ Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/don-deployer:latest
   script:
+    - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN" > ci_environment_url.txt
     - helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don --namespace don-$CI_ENVIRONMENT_SLUG --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
   environment:
     name: $CI_COMMIT_REF_NAME
@@ -134,6 +135,9 @@ Deploy Review App:
     - /^feature\/.*$/
   except:
     - master
+  artifacts:
+    paths:
+      - ci_environment_url.txt
 
 Remove Review App:
   stage: review
@@ -159,7 +163,7 @@ E2E tests:
   image: buildkite/puppeteer:latest
   stage: e2e-tests
   before_script:
-    - export URL=https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
+    - export URL=$(cat ci_environment_url.txt)
     - cd e2e-tests
     - npm install
   script:
