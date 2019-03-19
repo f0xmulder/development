@@ -167,7 +167,6 @@ E2E tests:
 
 deploy:
   stage: deploy
-  image: registry.gitlab.com/commonground/don-deployer:latest
   before_script:
     - export IMAGE_API=${IMAGE_PREFIX}/api
     - export IMAGE_UI=${IMAGE_PREFIX}/ui
