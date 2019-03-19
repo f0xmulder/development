@@ -121,15 +121,7 @@ Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/don-deployer:latest
   script:
-    - helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don \
-        --namespace don-$CI_ENVIRONMENT_SLUG \
-        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
-        --set "gitlabUrl=$GITLAB_URL" \
-        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "imagePullPolicy=Always" \
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" \
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" \
-        --set domain=$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN \
+    - helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don --namespace don-$CI_ENVIRONMENT_SLUG --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" --set domain=$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
@@ -172,16 +164,7 @@ E2E tests:
 Deploy production:
   stage: deploy
   script:
-    - helm upgrade --install don-prod ./helm/don \
-      --namespace don-prod \
-      --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
-      --set "gitlabUrl=$GITLAB_URL" \
-      --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-      --set "imagePullPolicy=Always" \
-      --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" \
-      --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" \
-      --set "ingressClass=traefik" \
-      --set domain=don.commonground.nl
+    - helm upgrade --install don-prod ./helm/don --namespace don-prod --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set "imagePullPolicy=Always" --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_REF_SLUG" --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_REF_SLUG" --set "ingressClass=traefik" --set domain=don.commonground.nl
   environment:
     name: prod
     url: https://don.commonground.nl
