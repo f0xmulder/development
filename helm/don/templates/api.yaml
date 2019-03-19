@@ -38,11 +38,20 @@ spec:
             timeoutSeconds: 1
           env:
             - name: GITLAB_URL
-              value: {{.Values.gitlabUrl | b64enc}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .component }}
+                  key: gitlabUrl
             - name: GITLAB_ACCESS_TOKEN
-              value: {{.Values.gitlabAccessToken | b64enc}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .component }}
+                  key: gitlabAccessToken
             - name: GITLAB_PROJECT_ID
-              value: {{.Values.gitlabProjectId | b64enc}}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .component }}
+                  key: gitlabProjectId
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -54,4 +63,13 @@ spec:
     - name: http
       protocol: TCP
       port: 8080
+---
+apiVersion: v1
+kind: Secret
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+type: Opaque
+data:
+  gitlabUrl: {{.Values.gitlabUrl | b64enc}}
+  gitlabAccessToken: {{.Values.gitlabAccessToken | b64enc}}
+  gitlabProjectId: {{.Values.gitlabProjectId | b64enc}}
 {{ end }}
