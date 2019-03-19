@@ -179,9 +179,11 @@ deploy:
   script:
     - helm delete --purge don-prod || true
     - helm upgrade --install don-prod ./helm/don --set "gitlabUrl=$GITLAB_URL" --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" --namespace don-prod
-  when: manual
   environment:
     name: prod
     url: https://don.commonground.nl
   tags:
     - nlx-privileged
+  only:
+    refs:
+      - master
