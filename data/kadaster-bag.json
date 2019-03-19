@@ -6,5 +6,6 @@
     "api_specification_type": "OpenAPI3",
     "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
     "documentation_url": "https://bag.basisregistraties.overheid.nl",
-   "badges": ["Gouden API"]
+    "tags": ["basisregistratie", "kadaster", "bag"],
+    "badges": ["Gouden API"]
 }
