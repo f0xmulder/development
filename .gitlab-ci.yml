@@ -130,7 +130,7 @@ Deploy Review App:
     - cluster
     - kubernetes
   only:
-    - feature/*
+    - /^feature\/.*$/
   except:
     - master
 
@@ -150,7 +150,7 @@ Remove Review App:
     - cluster
     - kubernetes
   only:
-    - feature/*
+    - /^feature\/.*$/
   except:
     - master
 
