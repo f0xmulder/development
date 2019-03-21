@@ -41,7 +41,7 @@ class Home extends Component {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Failed to fetch APIs for query '${query}'`)
+                    throw new Error(`Er ging iets fout tijdens het ophalen van API's voor de zoekterm '${query}'`)
                 }
             }).then(response => mapApisForQueryResponseToApis(response))
     }
@@ -103,7 +103,7 @@ class Home extends Component {
                     <h1>Een incompleet overzicht van alle API’s binnen de Nederlandse overheid</h1>
 
                     <div className="search-box">
-                        <input type="text" placeholder="Search for an API" defaultValue={query} onChange={event => this.onInputChangedHandler(event)}/>
+                        <input type="text" placeholder="Zoeken naar een API" defaultValue={query} onChange={event => this.onInputChangedHandler(event)}/>
                         <Search/>
                     </div>
 
@@ -111,13 +111,13 @@ class Home extends Component {
                         !loaded ?
                             null :
                             error ?
-                                <p data-test="error-message">Failed loading APIs</p> :
+                                <p data-test="error-message">Er ging iets fout tijdens het laden van de API's</p> :
                                 apis && apis.length > 0 ?
                                     <div>
                                         <APIList apis={apis}/>
                                     </div>
                                     :
-                                    <p data-test="no-apis-found-message">No APIs found</p>
+                                    <p data-test="no-apis-found-message">Geen API's gevonden.</p>
                     }
                 </div>
 
