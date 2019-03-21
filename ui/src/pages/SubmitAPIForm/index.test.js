@@ -8,7 +8,7 @@ describe('SubmitAPI', () => {
 
   it('contains the page title', () => {
     const wrapper = shallow(<SubmitAPI/>)
-    expect(wrapper.find('h1').text()).toBe('Submit your API')
+    expect(wrapper.find('h1').exists()).toBe(true)
   })
 
   describe('on initialization', () => {

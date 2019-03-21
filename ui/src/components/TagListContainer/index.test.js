@@ -47,7 +47,6 @@ describe('TagListContainer', () => {
             wrapper.setState({tags: [], loaded: true})
             const noTagsMessageElement = wrapper.find('[data-test="no-tags-available-message"]')
             expect(noTagsMessageElement.exists()).toBe(true)
-            expect(noTagsMessageElement.text()).toBe('No tags available (yet)')
         })
     })
 
@@ -72,7 +71,6 @@ describe('TagListContainer', () => {
             wrapper.setState({error: true, loaded: true})
             const noTagsMessageElement = wrapper.find('[data-test="error-message"]')
             expect(noTagsMessageElement.exists()).toBe(true)
-            expect(noTagsMessageElement.text()).toBe('Failed loading the tags')
         })
     })
 })

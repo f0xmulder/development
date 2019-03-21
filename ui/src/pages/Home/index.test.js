@@ -83,7 +83,6 @@ describe('Search', () => {
       wrapper.setState({ apis: [], loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="no-apis-found-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('No APIs found')
     })
   })
 
@@ -108,7 +107,6 @@ describe('Search', () => {
       wrapper.setState({ error: true, loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="error-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('Failed loading APIs')
     })
   })
 })

@@ -91,7 +91,6 @@ describe('APIDetail', () => {
       wrapper.setState({ error: true, loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="error-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('Failed loading the API details')
     })
   })
 })

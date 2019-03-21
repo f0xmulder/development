@@ -11,7 +11,7 @@ const dummyAPI = {
 describe('Overview', () => {
   it('contains the page title', () => {
     const wrapper = shallow(<Overview/>)
-    expect(wrapper.find('h1').text()).toBe(`Overview of all available API's`)
+    expect(wrapper.find('h1').exists()).toBe(true)
   })
 
   describe('on initialization', () => {
@@ -56,7 +56,6 @@ describe('Overview', () => {
       wrapper.setState({ apis: [], loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="no-apis-available-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('No APIs available (yet)')
     })
   })
 
@@ -81,7 +80,6 @@ describe('Overview', () => {
       wrapper.setState({ error: true, loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="error-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
-      expect(noApisMessageElement.text()).toBe('Failed loading the available APIs')
     })
   })
 })
