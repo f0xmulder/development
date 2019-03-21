@@ -18,7 +18,7 @@ class TagListContainer extends Component {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error('Failed to fetch tag list')
+                    throw new Error('Er ging iets fout tijdens het ophalen van de tags')
                 }
             })
     }
@@ -43,11 +43,11 @@ class TagListContainer extends Component {
                     !loaded ?
                         null :
                         error ?
-                            <p data-test="error-message">Failed loading the tags</p> :
+                            <p data-test="error-message">Er ging iets fout tijdens het ophalen van de tags.</p> :
                             tags && tags.length > 0 ?
                                 <TagList tags={tags} />
                     :
-                                <p data-test="no-tags-available-message">No tags available (yet)</p>
+                                <p data-test="no-tags-available-message">Er zijn (nog) geen tags beschikbaar.</p>
                 }
             </div>
         );
