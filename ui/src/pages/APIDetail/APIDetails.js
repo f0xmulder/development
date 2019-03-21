@@ -33,17 +33,17 @@ const APIDetails = ({ service_name, organization_name, description, api_url, api
 
             <div className="APIDetails__technical">
                 <dl>
-                    <dt>Documentation</dt>
+                    <dt>Documentatie</dt>
                     <dd data-test="api-documentation-url">
                         <a href={documentation_url} target="_blank" rel="noopener noreferrer">Read more</a>
                     </dd>
 
-                    <dt>Base URL</dt>
+                    <dt>Basis URL</dt>
                     <dd data-test="api-url" className="base-url">
                         <a href={api_url} target="_blank" rel="noopener noreferrer">{ api_url }</a>
                     </dd>
 
-                    <dt>API Specification</dt>
+                    <dt>API Specificatie</dt>
                     <dd data-test="api-specification-type">
                         <a href={getOnlineRedocUrl(specification_url)} target="_blank" rel="noopener noreferrer" data-test="api-specification-url">{ api_specification_type }</a>
                     </dd>

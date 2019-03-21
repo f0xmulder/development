@@ -22,7 +22,7 @@ class APIDetail extends Component {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Failed to fetch API details for API with ID '${id}'`)
+                    throw new Error(`Er ging iets fout bij het ophalen voor de API met ID  '${id}'`)
                 }
             })
     }
@@ -63,7 +63,7 @@ class APIDetail extends Component {
                     !loaded ?
                         null :
                         error ?
-                            <p data-test="error-message">Failed loading the API details</p> :
+                            <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API.</p> :
                             details ?
                                 <div className="container">
                                     <APIDetails {...details} />
