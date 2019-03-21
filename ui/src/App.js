@@ -24,10 +24,10 @@ const App = () =>
 
                 <Route path="/" exact component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
-                <Route path="/overview" component={Overview} />
-                <Route path="/submit-api" component={SubmitAPI} />
-                <Route path="/submit-api/form" component={SubmitAPIForm} />
-                <Route path="/about" component={About} />
+                <Route path="/overzicht" component={Overview} />
+                <Route path="/api-toevoegen" component={SubmitAPI} />
+                <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
+                <Route path="/over" component={About} />
                 <Route path="/tag/:tag" component={Tag} />
             </div>
         </Router>
