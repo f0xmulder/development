@@ -62,7 +62,7 @@ describe('on page load', () => {
         test('about page is visible', async () => {
             const html = await page.$eval('h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/02-about-page-is-visible.png' });
-            expect(html).toBe('About')
+            expect(html).toBe('Over')
         })
     })
 
@@ -74,7 +74,7 @@ describe('on page load', () => {
         test('overview page is visible', async () => {
             const html = await page.$eval('h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/03-overview-page-is-visible.png' });
-            expect(html).toBe(`Overview of all available API's`)
+            expect(html).toBe(`Overzicht van alle beschikbare API's`)
         })
     })
 
@@ -86,7 +86,7 @@ describe('on page load', () => {
         test('submit API page is visible', async () => {
             const html = await page.$eval('h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/04-submit-api-page-is-visible.png' });
-            expect(html).toBe('Submit your API')
+            expect(html).toBe('API toevoegen')
         })
     })
 
@@ -109,7 +109,7 @@ describe('on page load', () => {
             await page.waitForSelector('dl dt')
             const apiDocumentationLabel = await page.$eval('dl dt', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/04-api-detail-page-is-visible.png' })
-            expect(apiDocumentationLabel).toBe('Documentation')
+            expect(apiDocumentationLabel).toBe('Documentatie')
         })
     })
 })
