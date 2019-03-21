@@ -6,9 +6,9 @@ import './index.css'
 const Navigation = () =>
     <ul className="Navigation">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/overview">Overview</Link></li>
-        <li><Link to="/submit-api">Submit your API</Link></li>
-        <li><Link to="/about">About</Link></li>
+        <li><Link to="/overzicht">Overzicht</Link></li>
+        <li><Link to="/api-toevoegen">API toevoegen</Link></li>
+        <li><Link to="/over">Over</Link></li>
     </ul>
 
 export default Navigation
