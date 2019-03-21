@@ -20,7 +20,7 @@ class Overview extends Component {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error('Failed to fetch API list')
+                    throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
                 }
             })
     }
@@ -41,16 +41,16 @@ class Overview extends Component {
 
         return (
             <div className="Overview container">
-                <h1>Overview of all available API's</h1>
+                <h1>Overzicht van alle beschikbare API's</h1>
                 {
                     !loaded ?
                         null :
                         error ?
-                            <p data-test="error-message">Failed loading the available APIs</p> :
+                            <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                             apis && apis.length > 0 ?
                                 <APIList apis={apis}/>
                     :
-                                <p data-test="no-apis-available-message">No APIs available (yet)</p>
+                                <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
                 }
             </div>
         );
