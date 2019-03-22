@@ -14,7 +14,7 @@ stages:
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
   DOCKER_DRIVER: overlay2
-  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_HOST: tcp://docker:2375
   INGRESS_BASE_DOMAIN: don.commonground.nl
 
 .validate:
@@ -128,6 +128,8 @@ Deploy Review App:
   tags:
     - cluster
     - kubernetes
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
   only:
     - /^feature\/.*$/
   except:
@@ -151,6 +153,8 @@ Remove Review App:
   tags:
     - cluster
     - kubernetes
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
   only:
     - /^feature\/.*$/
   except:
