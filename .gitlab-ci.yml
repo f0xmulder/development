@@ -42,9 +42,6 @@ validate API definitions:
 
 ## UI ##
 .ui:
-  only:
-    changes:
-      - ui/**/*
   tags:
     - cluster
     - kubernetes
@@ -81,10 +78,6 @@ Release UI:
 
 ## API ##
 .api:
-  only:
-    changes:
-      - api/**/*
-      - data/**/*
   tags:
     - cluster
     - kubernetes
