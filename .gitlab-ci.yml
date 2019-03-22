@@ -25,6 +25,9 @@ variables:
     changes:
       - data/**/*
       - validate/**/*
+  tags:
+    - docker
+    - nlx
 
 validate unit tests:
   extends: .validate
@@ -41,12 +44,12 @@ validate API definitions:
 
 ## UI ##
 .ui:
-  tags:
-    - cluster
-    - kubernetes
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export UI_IMAGE=${IMAGE_PREFIX}/ui
+  tags:
+    - docker
+    - nlx
 
 Test UI:
   extends: .ui
@@ -73,12 +76,12 @@ Release UI:
 
 ## API ##
 .api:
-  tags:
-    - cluster
-    - kubernetes
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export API_IMAGE=${IMAGE_PREFIX}/api
+  tags:
+    - docker
+    - nlx
 
 Test API:
   extends: .api
@@ -166,6 +169,9 @@ E2E tests:
     expire_in: 1 month
     paths:
       - e2e-tests/screenshots
+  tags:
+    - docker
+    - nlx
 
 Deploy production:
   stage: deploy
@@ -186,5 +192,6 @@ Deploy production:
     url: https://$INGRESS_BASE_DOMAIN
   tags:
     - nlx-privileged
+    - shell
   only:
     - master
