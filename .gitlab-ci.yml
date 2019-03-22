@@ -5,7 +5,6 @@ services:
 
 stages:
   - validate
-  - build
   - test
   - release
   - review
@@ -47,34 +46,30 @@ validate API definitions:
     - kubernetes
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export IMAGE_UI=${IMAGE_PREFIX}/ui
-
-Build UI:
-  extends: .ui
-  stage: build
-  script:
-    - docker pull $IMAGE_UI:master || true
-    - docker pull $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build || true
-    - docker build --target build --cache-from $IMAGE_UI:$CI_COMMIT_REF_SLUG --tag $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build -f ui/Dockerfile .
-    - docker push $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
-    - docker push $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build
+    - export UI_IMAGE=${IMAGE_PREFIX}/ui
 
 Test UI:
   extends: .ui
   stage: test
   script:
-    - docker pull $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
-    - docker run $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp npm test -- --coverage
+    - |
+        docker build --target build \
+        --tag $UI_IMAGE:${CI_COMMIT_SHA:0:8}-build \
+        -f ui/Dockerfile . && \
+        docker run $UI_IMAGE:${CI_COMMIT_SHA:0:8}-test npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
   extends: .ui
   stage: release
   script:
-    - docker pull $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
-    - docker build --target webserver --cache-from $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_UI:${CI_COMMIT_SHA:0:8} --tag $IMAGE_UI:$CI_COMMIT_REF_SLUG -f ui/Dockerfile .
-    - docker push $IMAGE_UI:${CI_COMMIT_SHA:0:8}
-    - docker push $IMAGE_UI:$CI_COMMIT_REF_SLUG
+    - |
+        docker build \
+        --tag $UI_IMAGE:${CI_COMMIT_SHA:0:8} \
+        --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
+        -f ui/Dockerfile . && \
+        docker push $UI_IMAGE:${CI_COMMIT_SHA:0:8} && \
+        docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
 
 ## API ##
 .api:
@@ -83,34 +78,30 @@ Release UI:
     - kubernetes
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export IMAGE_API=${IMAGE_PREFIX}/api
-
-Build API:
-  extends: .api
-  stage: build
-  script:
-    - docker pull $IMAGE_API:master || true
-    - docker pull $IMAGE_API:${CI_COMMIT_REF_SLUG}-build || true
-    - docker build --target build --cache-from $IMAGE_API:$CI_COMMIT_REF_SLUG --tag $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_API:${CI_COMMIT_REF_SLUG}-build -f api/Dockerfile .
-    - docker push $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
-    - docker push $IMAGE_API:${CI_COMMIT_REF_SLUG}-build
+    - export API_IMAGE=${IMAGE_PREFIX}/api
 
 Test API:
   extends: .api
   stage: test
   script:
-    - docker pull $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
-    - docker run $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp go test -v -coverprofile coverage.out ./...
+    - |
+        docker build --target build \
+        --tag $API_IMAGE:${CI_COMMIT_SHA:0:8}-build \
+        -f api/Dockerfile . && \
+        docker run $API_IMAGE:${CI_COMMIT_SHA:0:8}-build go test -v -coverprofile coverage.out ./...
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
 
 Release API:
   extends: .api
   stage: release
   script:
-    - docker pull $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
-    - docker build --cache-from $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_API:${CI_COMMIT_SHA:0:8} --tag $IMAGE_API:$CI_COMMIT_REF_SLUG -f api/Dockerfile .
-    - docker push $IMAGE_API:${CI_COMMIT_SHA:0:8}
-    - docker push $IMAGE_API:$CI_COMMIT_REF_SLUG
+    - |
+        docker build \
+        --tag $API_IMAGE:${CI_COMMIT_SHA:0:8} \
+        --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
+        -f api/Dockerfile . && \
+        docker push $API_IMAGE:${CI_COMMIT_SHA:0:8} && \
+        docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
 
 Deploy Review App:
   stage: review
