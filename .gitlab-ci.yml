@@ -125,14 +125,14 @@ Deploy Review App:
   script:
     - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN" > ci_environment_url.txt
     - |
-        helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don
-        --namespace don-$CI_ENVIRONMENT_SLUG
-        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID"
-        --set "gitlabUrl=$GITLAB_URL"
-        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN"
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA"
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA"
-        --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
+        helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don \
+        --namespace don-$CI_ENVIRONMENT_SLUG \
+        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+        --set "gitlabUrl=$GITLAB_URL" \
+        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA" \
+        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA" \
+        --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN \
         --debug
   environment:
     name: $CI_COMMIT_REF_NAME
@@ -187,15 +187,15 @@ Deploy production:
   stage: deploy
   script:
     - |
-        helm upgrade --install don-prod ./helm/don
-        --namespace don-prod
-        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID"
-        --set "gitlabUrl=$GITLAB_URL"
-        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN"
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA"
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA"
-        --set domain="$INGRESS_BASE_DOMAIN"
-        --set "ingressClass=traefik"
+        helm upgrade --install don-prod ./helm/don \
+        --namespace don-prod \
+        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+        --set "gitlabUrl=$GITLAB_URL" \
+        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA" \
+        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA" \
+        --set domain="$INGRESS_BASE_DOMAIN" \
+        --set "ingressClass=traefik" \
         --debug
   environment:
     name: prod
