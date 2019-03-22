@@ -59,7 +59,7 @@ Test UI:
         docker build --target build \
         --tag $UI_IMAGE:${CI_COMMIT_SHA:0:8}-build \
         -f ui/Dockerfile . && \
-        docker run $UI_IMAGE:${CI_COMMIT_SHA:0:8}-test npm test -- --coverage
+        docker run $UI_IMAGE:${CI_COMMIT_SHA:0:8}-build npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
