@@ -58,25 +58,25 @@ Build UI:
   script:
     - docker pull $IMAGE_UI:master || true
     - docker pull $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build || true
-    - docker build --target build --cache-from $IMAGE_UI:$CI_COMMIT_REF_SLUG --tag $IMAGE_UI:${CI_COMMIT_SHA}-tmp --tag $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build -f ui/Dockerfile .
-    - docker push $IMAGE_UI:${CI_COMMIT_SHA}-tmp
+    - docker build --target build --cache-from $IMAGE_UI:$CI_COMMIT_REF_SLUG --tag $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build -f ui/Dockerfile .
+    - docker push $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
     - docker push $IMAGE_UI:${CI_COMMIT_REF_SLUG}-build
 
 Test UI:
   extends: .ui
   stage: test
   script:
-    - docker pull $IMAGE_UI:${CI_COMMIT_SHA}-tmp
-    - docker run $IMAGE_UI:${CI_COMMIT_SHA}-tmp npm test -- --coverage
+    - docker pull $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
+    - docker run $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
   extends: .ui
   stage: release
   script:
-    - docker pull $IMAGE_UI:${CI_COMMIT_SHA}-tmp
-    - docker build --target webserver --cache-from $IMAGE_UI:${CI_COMMIT_SHA}-tmp --tag $IMAGE_UI:$CI_COMMIT_SHA --tag $IMAGE_UI:$CI_COMMIT_REF_SLUG -f ui/Dockerfile .
-    - docker push $IMAGE_UI:$CI_COMMIT_SHA
+    - docker pull $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp
+    - docker build --target webserver --cache-from $IMAGE_UI:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_UI:${CI_COMMIT_SHA:0:8} --tag $IMAGE_UI:$CI_COMMIT_REF_SLUG -f ui/Dockerfile .
+    - docker push $IMAGE_UI:${CI_COMMIT_SHA:0:8}
     - docker push $IMAGE_UI:$CI_COMMIT_REF_SLUG
 
 ## API ##
@@ -98,25 +98,25 @@ Build API:
   script:
     - docker pull $IMAGE_API:master || true
     - docker pull $IMAGE_API:${CI_COMMIT_REF_SLUG}-build || true
-    - docker build --target build --cache-from $IMAGE_API:$CI_COMMIT_REF_SLUG --tag $IMAGE_API:${CI_COMMIT_SHA}-tmp --tag $IMAGE_API:${CI_COMMIT_REF_SLUG}-build -f api/Dockerfile .
-    - docker push $IMAGE_API:${CI_COMMIT_SHA}-tmp
+    - docker build --target build --cache-from $IMAGE_API:$CI_COMMIT_REF_SLUG --tag $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_API:${CI_COMMIT_REF_SLUG}-build -f api/Dockerfile .
+    - docker push $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
     - docker push $IMAGE_API:${CI_COMMIT_REF_SLUG}-build
 
 Test API:
   extends: .api
   stage: test
   script:
-    - docker pull $IMAGE_API:${CI_COMMIT_SHA}-tmp
-    - docker run $IMAGE_API:${CI_COMMIT_SHA}-tmp go test -v -coverprofile coverage.out ./...
+    - docker pull $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
+    - docker run $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp go test -v -coverprofile coverage.out ./...
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
 
 Release API:
   extends: .api
   stage: release
   script:
-    - docker pull $IMAGE_API:${CI_COMMIT_SHA}-tmp
-    - docker build --cache-from $IMAGE_API:${CI_COMMIT_SHA}-tmp --tag $IMAGE_API:$CI_COMMIT_SHA --tag $IMAGE_API:$CI_COMMIT_REF_SLUG -f api/Dockerfile .
-    - docker push $IMAGE_API:$CI_COMMIT_SHA
+    - docker pull $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp
+    - docker build --cache-from $IMAGE_API:${CI_COMMIT_SHA:0:8}-tmp --tag $IMAGE_API:${CI_COMMIT_SHA:0:8} --tag $IMAGE_API:$CI_COMMIT_REF_SLUG -f api/Dockerfile .
+    - docker push $IMAGE_API:${CI_COMMIT_SHA:0:8}
     - docker push $IMAGE_API:$CI_COMMIT_REF_SLUG
 
 Deploy Review App:
@@ -130,8 +130,8 @@ Deploy Review App:
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA" \
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA" \
+        --set "apiImage=$IMAGE_PREFIX/api:${CI_COMMIT_SHA:0:8}" \
+        --set "uiImage=$IMAGE_PREFIX/ui:${CI_COMMIT_SHA:0:8}" \
         --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN \
         --debug
   environment:
@@ -192,8 +192,8 @@ Deploy production:
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHA" \
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHA" \
+        --set "apiImage=$IMAGE_PREFIX/api:${CI_COMMIT_SHA:0:8}" \
+        --set "uiImage=$IMAGE_PREFIX/ui:${CI_COMMIT_SHA:0:8}" \
         --set domain="$INGRESS_BASE_DOMAIN" \
         --set "ingressClass=traefik" \
         --debug
