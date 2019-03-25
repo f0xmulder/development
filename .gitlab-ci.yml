@@ -16,10 +16,6 @@ variables:
   image: golang:1.11.5
   before_script:
     - cd validate
-  only:
-    changes:
-      - data/**/*
-      - validate/**/*
   tags:
     - docker
     - nlx
