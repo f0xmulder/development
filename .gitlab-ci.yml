@@ -52,9 +52,9 @@ Test UI:
   script:
     - |
         docker build --target build \
-        --tag $UI_IMAGE:${CI_COMMIT_SHA:0:8}-build \
+        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
         -f ui/Dockerfile . && \
-        docker run $UI_IMAGE:${CI_COMMIT_SHA:0:8}-build npm test -- --coverage
+        docker run $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
@@ -63,10 +63,10 @@ Release UI:
   script:
     - |
         docker build \
-        --tag $UI_IMAGE:${CI_COMMIT_SHA:0:8} \
+        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
         --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
         -f ui/Dockerfile . && \
-        docker push $UI_IMAGE:${CI_COMMIT_SHA:0:8} && \
+        docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
 
 ## API ##
@@ -84,9 +84,9 @@ Test API:
   script:
     - |
         docker build --target build \
-        --tag $API_IMAGE:${CI_COMMIT_SHA:0:8}-build \
+        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA-build \
         -f api/Dockerfile . && \
-        docker run $API_IMAGE:${CI_COMMIT_SHA:0:8}-build go test -v -coverprofile coverage.out ./...
+        docker run $API_IMAGE:$CI_COMMIT_SHORT_SHA-build go test -v -coverprofile coverage.out ./...
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
 
 Release API:
@@ -95,10 +95,10 @@ Release API:
   script:
     - |
         docker build \
-        --tag $API_IMAGE:${CI_COMMIT_SHA:0:8} \
+        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
         --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
         -f api/Dockerfile . && \
-        docker push $API_IMAGE:${CI_COMMIT_SHA:0:8} && \
+        docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
 
 Deploy Review App:
@@ -112,8 +112,8 @@ Deploy Review App:
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:${CI_COMMIT_SHA:0:8}" \
-        --set "uiImage=$IMAGE_PREFIX/ui:${CI_COMMIT_SHA:0:8}" \
+        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN \
         --debug
   environment:
@@ -187,8 +187,8 @@ Deploy production:
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:${CI_COMMIT_SHA:0:8}" \
-        --set "uiImage=$IMAGE_PREFIX/ui:${CI_COMMIT_SHA:0:8}" \
+        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set domain="$INGRESS_BASE_DOMAIN" \
         --set "ingressClass=traefik" \
         --debug
