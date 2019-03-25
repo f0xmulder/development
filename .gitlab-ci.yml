@@ -24,8 +24,8 @@ validate unit tests:
   extends: .validate
   stage: test
   script:
-    - go test $(go list ./validate/...) -v -coverprofile coverage.out
-    - go tool cover -html=coverage.out -o validate/coverage.html
+    - go test $(go list ./...) -v -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o coverage.html
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
   artifacts:
     expire_in: 1 month
