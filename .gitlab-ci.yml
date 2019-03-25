@@ -115,8 +115,7 @@ Deploy Review App:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN \
-        --debug
+        --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
   environment:
     name: $CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
@@ -191,8 +190,7 @@ Deploy production:
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set domain="$INGRESS_BASE_DOMAIN" \
-        --set "ingressClass=traefik" \
-        --debug
+        --set "ingressClass=traefik"
   environment:
     name: prod
     url: https://$INGRESS_BASE_DOMAIN
