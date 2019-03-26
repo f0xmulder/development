@@ -62,7 +62,7 @@ describe('on page load', () => {
     })
 
     test('homepage is visible', async () => {
-        const html = await page.$eval('h1', e => e.innerHTML)
+        const html = await page.$eval('main h1', e => e.innerHTML)
         await page.screenshot({ path: 'screenshots/01-homepage-is-visible.png' });
         expect(html).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid')
     })
@@ -73,7 +73,7 @@ describe('on page load', () => {
         })
 
         test('about page is visible', async () => {
-            const html = await page.$eval('h1', e => e.innerHTML)
+            const html = await page.$eval('main h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/02-about-page-is-visible.png' });
             expect(html).toBe('Over')
         })
@@ -85,7 +85,7 @@ describe('on page load', () => {
         })
 
         test('overview page is visible', async () => {
-            const html = await page.$eval('h1', e => e.innerHTML)
+            const html = await page.$eval('main h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/03-overview-page-is-visible.png' });
             expect(html).toBe(`Overzicht van alle beschikbare API's`)
         })
@@ -97,7 +97,7 @@ describe('on page load', () => {
         })
 
         test('submit API page is visible', async () => {
-            const html = await page.$eval('h1', e => e.innerHTML)
+            const html = await page.$eval('main h1', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/04-submit-api-page-is-visible.png' });
             expect(html).toBe('API toevoegen')
         })
