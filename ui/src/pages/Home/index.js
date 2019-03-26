@@ -103,7 +103,9 @@ class Home extends Component {
                     <h1>Een incompleet overzicht van alle API’s binnen de Nederlandse overheid</h1>
 
                     <div className="search-box">
-                        <input type="text" placeholder="Zoeken naar een API" defaultValue={query} onChange={event => this.onInputChangedHandler(event)}/>
+                        <label htmlFor="search-query" aria-label="Search query">
+                            <input type="text" id="search-query" placeholder="Zoeken naar een API" defaultValue={query} onChange={event => this.onInputChangedHandler(event)}/>
+                        </label>
                         <Search/>
                     </div>
 
