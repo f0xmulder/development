@@ -11,6 +11,10 @@
   "devDependencies": {
     "axe-core": "3.2.2",
     "jest": "24.1.0",
+    "jest-puppeteer": "4.1.0",
     "puppeteer": "1.12.2"
+  },
+  "jest": {
+    "preset": "jest-puppeteer"
   }
 }
