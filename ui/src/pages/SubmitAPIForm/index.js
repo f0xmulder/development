@@ -107,7 +107,7 @@ class SubmitAPIForm extends Component {
 
     render() {
         return (
-            <div className="SubmitAPI container">
+            <div className="SubmitAPIForm container">
                 <h1>Formulier API toevoegen</h1>
                 <p>
                     Voor het toevoegen van je API aan <a href="https://developer.overheid.nl" target="_blank"
