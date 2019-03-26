@@ -4,6 +4,8 @@ import { Field, Form, Formik } from 'formik'
 import { array, boolean, date, mixed, number, object, string } from './yup-translations'
 import * as Yup from 'yup'
 
+import './index.css'
+
 Yup.setLocale({
     mixed,
     array,
