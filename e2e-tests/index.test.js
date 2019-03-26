@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const { analyzeAccessibility } = require('./accessibility')
 
 const isDebugging = () =>
     process.env.NODE_ENV === 'debug'
@@ -46,6 +47,18 @@ describe('on page load', () => {
 
     afterAll(() => {
         browser.close()
+    })
+
+    describe('the Homepage', () => {
+        it('should not have accessibility issues', async () => {
+            await page.goto(baseUrl, { waitUntil: 'load' });
+            const accessibilityReport = await analyzeAccessibility(
+                page,
+                `home.accessibility.png`,
+            );
+
+            expect(accessibilityReport).toHaveNoAccessibilityIssues();
+        });
     })
 
     test('homepage is visible', async () => {
