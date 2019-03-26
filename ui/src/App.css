@@ -5,6 +5,7 @@
 }
 
 .App__TopBar .title {
+    margin: 0;
     font-size: 32px;
     font-weight: bold;
 }

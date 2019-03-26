@@ -17,18 +17,20 @@ const App = () =>
     <div className="App full-height">
         <Router>
             <div className="full-height">
-                <div className="App__TopBar">
-                    <Link to="/" className="title">developer.overheid.nl</Link>
+                <header className="App__TopBar">
+                    <h1 className="title"><Link to="/">developer.overheid.nl</Link></h1>
                     <Navigation />
-                </div>
+                </header>
 
-                <Route path="/" exact component={Home} />
-                <Route path="/detail/:id" component={APIDetail} />
-                <Route path="/overzicht" component={Overview} />
-                <Route path="/api-toevoegen" component={SubmitAPI} />
-                <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
-                <Route path="/over" component={About} />
-                <Route path="/tag/:tag" component={Tag} />
+                <main role="main">
+                    <Route path="/" exact component={Home} />
+                    <Route path="/detail/:id" component={APIDetail} />
+                    <Route path="/overzicht" component={Overview} />
+                    <Route path="/api-toevoegen" component={SubmitAPI} />
+                    <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
+                    <Route path="/over" component={About} />
+                    <Route path="/tag/:tag" component={Tag} />
+                </main>
             </div>
         </Router>
     </div>
