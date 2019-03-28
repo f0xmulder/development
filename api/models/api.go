@@ -20,4 +20,5 @@ type APIContactDetails struct {
 	Phone string `json:"phone"`
 	Fax   string `json:"fax"`
 	Chat  string `json:"chat"`
+	URL   string `json:"url"`
 }

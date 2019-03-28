@@ -30,7 +30,8 @@ const initialValues = {
         email: '',
         phone: '',
         fax: '',
-        chat: ''
+        chat: '',
+        url: ''
     }
 }
 
@@ -48,7 +49,8 @@ const validationSchema = Yup.object().shape({
         email: Yup.string().email(),
         phone: Yup.string(),
         fax: Yup.string(),
-        chat: Yup.string().url()
+        chat: Yup.string().url(),
+        url: Yup.string().url()
     })
 })
 
@@ -248,6 +250,15 @@ class SubmitAPIForm extends Component {
                                     {errors.contact && errors.contact.chat && touched.contact && touched.contact.chat &&
                                     <p className="text-danger">{errors.contact.chat}</p>}
                                     <small className="form-text text-muted">Link naar een chat-platform.</small>
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact.url">URL</label>
+                                    <Field component="input" type="text" id="contact.url" name="contact.url"
+                                           className="form-control"/>
+                                    {errors.contact && errors.contact.url && touched.contact && touched.contact.url &&
+                                    <p className="text-danger">{errors.contact.url}</p>}
+                                    <small className="form-text text-muted">Link naar een website met contactinformatie.</small>
                                 </div>
 
                                 {status && status.msg && <div data-test="status-message">{status.msg}</div>}

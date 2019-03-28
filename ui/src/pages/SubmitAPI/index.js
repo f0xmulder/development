@@ -32,7 +32,8 @@ const SubmitAPI = () =>
         "email": "helpdesk@voorbeeld.nl",
         "phone": "0031612345678",
         "fax": "0031687654321",
-        "chat": "https://nl-x.slack.com"
+        "chat": "https://nl-x.slack.com",
+        "url": "https://github.com/VNG-Realisatie/nlx"
     }
 }
             `}
