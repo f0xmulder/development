@@ -43,7 +43,8 @@ class Home extends Component {
                 } else {
                     throw new Error(`Er ging iets fout tijdens het ophalen van API's voor de zoekterm '${query}'`)
                 }
-            }).then(response => mapApisForQueryResponseToApis(response))
+            })
+            .then(response => mapApisForQueryResponseToApis(response))
     }
 
     loadApisForQuery(query) {
