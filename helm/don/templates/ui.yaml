@@ -71,7 +71,7 @@ spec:
             backend:
               serviceName: ui
               servicePort: http
-          - path: /api
+          - path: /api/
             backend:
               serviceName: api
               servicePort: http
