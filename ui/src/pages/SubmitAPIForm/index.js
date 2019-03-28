@@ -116,7 +116,7 @@ class SubmitAPIForm extends Component {
                 <p>
                     Voor het toevoegen van je API aan <a href="https://developer.overheid.nl" target="_blank"
                                                          rel="noopener noreferrer">developer.overheid.nl</a>,
-                    gelieve onderstaand formulier in te vullen, of <Link to="/submit-api">een Merge Request aan te
+                    gelieve onderstaand formulier in te vullen, of <Link to="/api-toevoegen">een Merge Request aan te
                     maken</Link>.
                 </p>
 
