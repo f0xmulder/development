@@ -4,7 +4,7 @@ import APIList from '../../components/APIList';
 import TagListContainer from "../../components/TagListContainer";
 
 import './index.css'
-import {Search} from "../../components/Icons/Search";
+import Search from "../../components/Icons/Search";
 
 export const mapApisForQueryResponseToApis = response => {
     const hits = response.hits
