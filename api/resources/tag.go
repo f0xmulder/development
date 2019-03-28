@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// TagResource enables injecting functions to deal with the Tag resource handlers
 type TagResource struct {
 	Logger                      *zap.Logger
 	RootDirectoryAPIDefinitions string
@@ -28,6 +29,7 @@ func unique(tags []models.Tag) []models.Tag {
 	return list
 }
 
+// Routes defines the routes for the Tag resource
 func (rs TagResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
@@ -36,6 +38,7 @@ func (rs TagResource) Routes() chi.Router {
 	return r
 }
 
+// List will write a list of all tags used in the APIs
 func (rs TagResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

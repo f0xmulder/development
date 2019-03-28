@@ -1,4 +1,4 @@
-package data_readers
+package datareaders
 
 import (
 	"encoding/json"
@@ -29,6 +29,6 @@ func File(path string) (models.API, error) {
 		return newAPI, err
 	}
 
-	newAPI.Id = toAPIID(filename)
+	newAPI.ID = toAPIID(filename)
 	return newAPI, err
 }

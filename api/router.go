@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	data_readers "gitlab.com/commonground/developer.overheid.nl/api/data-readers"
+	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/resources"
@@ -24,6 +24,7 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	return i
 }
 
+// NewTagResource creates a new TagResource
 func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readDirectory func(directory string) ([]models.API, error)) *resources.TagResource {
 	i := &resources.TagResource{
 		Logger:                      logger,
@@ -34,6 +35,7 @@ func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	return i
 }
 
+// NewSubmitAPIResource creates a new SubmitAPIResource
 func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig gitlab.Config) *resources.SubmitAPIResource {
 	i := &resources.SubmitAPIResource{
 		Logger:       logger,
@@ -57,8 +59,8 @@ func router(logger *zap.Logger, gitlabConfig gitlab.Config) chi.Router {
 		r.Mount("/apis",
 			NewAPIResource(logger,
 				"../data",
-				data_readers.File,
-				data_readers.Directory).Routes(),
+				datareaders.File,
+				datareaders.Directory).Routes(),
 		)
 		r.Mount("/submit-api",
 			NewSubmitAPIResource(
@@ -69,7 +71,7 @@ func router(logger *zap.Logger, gitlabConfig gitlab.Config) chi.Router {
 		r.Mount("/tags",
 			NewTagResource(logger,
 				"../data",
-				data_readers.Directory).Routes(),
+				datareaders.Directory).Routes(),
 		)
 	})
 

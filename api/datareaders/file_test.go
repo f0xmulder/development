@@ -1,4 +1,4 @@
-package data_readers
+package datareaders
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -15,7 +15,7 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/valid/company-service.json",
 			models.API{
-				Id:                   "company-service",
+				ID:                   "company-service",
 				Description:          "Test Description",
 				OrganizationName:     "Test Organization Name",
 				ServiceName:          "Test Service Name",

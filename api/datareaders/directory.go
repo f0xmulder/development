@@ -1,4 +1,4 @@
-package data_readers
+package datareaders
 
 import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -30,9 +30,9 @@ func Directory(directory string) ([]models.API, error) {
 
 		if result.err != nil {
 			return output, result.err
-		} else {
-			output = append(output, result.apiModel)
 		}
+
+		output = append(output, result.apiModel)
 	}
 
 	return output, nil

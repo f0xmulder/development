@@ -21,7 +21,7 @@ func Setup(data []models.API) bleve.Index {
 
 	// index the data
 	for _, apiModel := range data {
-		addToIndexErr := apiIndex.Index(apiModel.Id, apiModel)
+		addToIndexErr := apiIndex.Index(apiModel.ID, apiModel)
 
 		if addToIndexErr != nil {
 			log.Fatal(addToIndexErr)

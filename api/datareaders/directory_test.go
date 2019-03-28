@@ -1,4 +1,4 @@
-package data_readers
+package datareaders
 
 import (
 	"fmt"

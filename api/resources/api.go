@@ -9,12 +9,13 @@ import (
 
 	bleveHttp "github.com/blevesearch/bleve/http"
 	"github.com/go-chi/chi"
-	data_readers "gitlab.com/commonground/developer.overheid.nl/api/data-readers"
+	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"go.uber.org/zap"
 )
 
+// APIResource enables injecting functions to deal with the API resource handlers
 type APIResource struct {
 	Logger                      *zap.Logger
 	RootDirectoryAPIDefinitions string
@@ -44,11 +45,12 @@ func filterAPIsByTag(tag string, items []models.API) []models.API {
 
 	if hash[tag] != nil {
 		return hash[tag]
-	} else {
-		return []models.API{}
 	}
+
+	return []models.API{}
 }
 
+// Routes defines the routes for the API resource
 func (rs APIResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
@@ -70,6 +72,7 @@ func (rs APIResource) Routes() chi.Router {
 	return r
 }
 
+// List will write a list of all APIs
 func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -95,11 +98,12 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Get returns information of a specific API by id
 func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	apiID := chi.URLParam(r, "id")
-	filename := data_readers.FromID(apiID)
+	filename := datareaders.FromID(apiID)
 	path := filepath.Join(rs.RootDirectoryAPIDefinitions, filename)
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
