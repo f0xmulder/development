@@ -74,9 +74,13 @@ class Home extends Component {
 
     onInputChangedHandler(event) {
         const query = event.currentTarget.value
-        const search = this.props.location.search
-        const urlParams = new URLSearchParams(search)
-        urlParams.set('query', query)
+        this.updateQueryString('query', query)
+    }
+
+    updateQueryString(key, value) {
+        const currentQueryString = this.props.location.search
+        const urlParams = new URLSearchParams(currentQueryString)
+        urlParams.set(key, value)
         this.props.history.push(`?${urlParams.toString()}`);
     }
 

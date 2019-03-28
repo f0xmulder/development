@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import {shallow} from 'enzyme'
 import Search, {mapApisForQueryResponseToApis} from './index'
 
 const dummyAPI = {
@@ -111,14 +111,34 @@ describe('Search', () => {
   })
 
   describe('the input change handler', () => {
-    it('should update the query params of the history object', () => {
-      const pushSpy = jest.fn()
-      const wrapper = shallow(<Search history={({ push: pushSpy })}/>)
+    it('should update the query string with the input value', () => {
+      jest.spyOn(Search.prototype, 'updateQueryString')
+      const wrapper = shallow(<Search location={({})} history={({push: () => {}})}/>)
 
       const event = {currentTarget: {value: 'my-query'}}
       wrapper.instance().onInputChangedHandler(event)
 
-      expect(pushSpy).toHaveBeenCalledWith(`?query=my-query`)
+      expect(wrapper.instance().updateQueryString).toHaveBeenCalledWith('query', 'my-query')
+    })
+  })
+
+  describe('updating the query string', () => {
+    it('should update the query string for the provided key and value', () => {
+      const pushSpy = jest.fn()
+      const wrapper = shallow(<Search history={({ push: pushSpy })}/>)
+      wrapper.instance().updateQueryString('query', 'my-updated-query')
+      expect(pushSpy).toHaveBeenCalledWith(`?query=my-updated-query`)
+    })
+
+    it('should preserve existing key-value pairs', () => {
+      const pushSpy = jest.fn()
+        const wrapper = shallow(<Search history={({push: pushSpy})}
+                                        location={({search: new URLSearchParams('?foo=bar')})}/>)
+
+      const event = {currentTarget: {value: 'my-query'}}
+      wrapper.instance().onInputChangedHandler(event)
+
+      expect(pushSpy).toHaveBeenCalledWith(`?foo=bar&query=my-query`)
     })
   })
 })
