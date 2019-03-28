@@ -170,10 +170,6 @@ E2E tests:
     - npm install
   script:
     - npm test
-  artifacts:
-    expire_in: 1 month
-    paths:
-      - e2e-tests/screenshots
   tags:
     - docker
     - nlx
