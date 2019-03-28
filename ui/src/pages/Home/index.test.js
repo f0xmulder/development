@@ -109,4 +109,16 @@ describe('Search', () => {
       expect(noApisMessageElement.exists()).toBe(true)
     })
   })
+
+  describe('the input change handler', () => {
+    it('should update the query params of the history object', () => {
+      const pushSpy = jest.fn()
+      const wrapper = shallow(<Search history={({ push: pushSpy })}/>)
+
+      const event = {currentTarget: {value: 'my-query'}}
+      wrapper.instance().onInputChangedHandler(event)
+
+      expect(pushSpy).toHaveBeenCalledWith(`?query=my-query`)
+    })
+  })
 })
