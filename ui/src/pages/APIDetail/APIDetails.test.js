@@ -10,7 +10,13 @@ const details = {
     "api_specification_type": "Specification Type",
     "specification_url": "Specification URL",
     "documentation_url": "Documentation URL",
-    "badges": ["Golden API", "Well-written docs"]
+    "badges": ["Golden API", "Well-written docs"],
+    "terms_of_use": {
+        "government_only": true,
+        "cost_compensations": false,
+        "uptime_guarantee": 99.9,
+        "support_response_time": "2 days"
+    }
 }
 
 describe('APIDetails', () => {

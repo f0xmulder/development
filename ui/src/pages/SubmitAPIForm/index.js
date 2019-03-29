@@ -32,6 +32,12 @@ const initialValues = {
         fax: '',
         chat: '',
         url: ''
+    },
+    terms_of_use: {
+        government_only: false,
+        cost_compensations: false,
+        uptime_guarantee: 99.5,
+        support_response_time: ''
     }
 }
 
@@ -51,6 +57,12 @@ const validationSchema = Yup.object().shape({
         fax: Yup.string(),
         chat: Yup.string().url(),
         url: Yup.string().url()
+    }),
+    terms_of_use: Yup.object().shape({
+        government_only: Yup.boolean(),
+        cost_compensations: Yup.boolean(),
+        uptime_guarantee: Yup.number(),
+        support_response_time: Yup.string()
     })
 })
 
@@ -86,6 +98,7 @@ class SubmitAPIForm extends Component {
                 })
             })
             .catch((error) => {
+                debugger
                 actions.setSubmitting(false)
                 actions.setStatus({msg: 'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.'})
                 console.error(error)
@@ -183,9 +196,7 @@ class SubmitAPIForm extends Component {
                                            className="form-control"/>
                                     {errors.specification_url && touched.specification_url &&
                                     <p className="text-danger">{errors.specification_url}</p>}
-                                    <small className="form-text text-muted">The link to the machine-readable
-                                        documentation.
-                                    </small>
+                                    <small className="form-text text-muted">Link naar een machine leesbare documentatie.</small>
                                 </div>
 
                                 <div className="form-group">
@@ -194,8 +205,7 @@ class SubmitAPIForm extends Component {
                                            className="form-control"/>
                                     {errors.documentation_url && touched.documentation_url &&
                                     <p className="text-danger">{errors.documentation_url}</p>}
-                                    <small className="form-text text-muted">The link to the human-readable
-                                        documentation.
+                                    <small className="form-text text-muted">Link naar een menselijk leesbare documentatie.
                                     </small>
                                 </div>
 
@@ -259,6 +269,42 @@ class SubmitAPIForm extends Component {
                                     {errors.contact && errors.contact.url && touched.contact && touched.contact.url &&
                                     <p className="text-danger">{errors.contact.url}</p>}
                                     <small className="form-text text-muted">Link naar een website met contactinformatie.</small>
+                                </div>
+
+                                <h3>Gebruiksvoorwaarden</h3>
+
+                                <div className="form-group">
+                                    <label htmlFor="terms_of_use.government_only">Deze API is alleen beschikbaar voor overheden</label>
+                                    <Field component="input" type="checkbox" id="terms_of_use.government_only" name="terms_of_use.government_only"
+                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.government_only === true)} />
+                                    {errors.terms_of_use && errors.terms_of_use.government_only && touched.terms_of_use && touched.terms_of_use.government_only &&
+                                    <p className="text-danger">{errors.terms_of_use.government_only}</p>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="terms_of_use.cost_compensations">De kosten voor het gebruik van de API worden verrekend met de gebruiker</label>
+                                    <Field component="input" type="checkbox" id="terms_of_use.cost_compensations" name="terms_of_use.cost_compensations"
+                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.cost_compensations === true)} />
+                                    {errors.terms_of_use && errors.terms_of_use.cost_compensations && touched.terms_of_use && touched.terms_of_use.cost_compensations &&
+                                    <p className="text-danger">{errors.terms_of_use.cost_compensations}</p>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="terms_of_use.uptime_guarantee">Beschikbaarheidsgarantie van de API</label>
+                                    <Field component="input" type="number" max="100" min="90" step="0.01" id="terms_of_use.uptime_guarantee" name="terms_of_use.uptime_guarantee"
+                                           className="form-control" />
+                                    <small className="form-text text-muted">Opgegeven als een percentage, bijv. 99,5.</small>
+                                    {errors.terms_of_use && errors.terms_of_use.cost_compensations && touched.terms_of_use && touched.terms_of_use.cost_compensations &&
+                                    <p className="text-danger">{errors.terms_of_use.cost_compensations}</p>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="terms_of_use.support_response_time">Reactietijd van de helpdesk</label>
+                                    <Field component="input" type="text" id="terms_of_use.support_response_time" name="terms_of_use.support_response_time"
+                                           className="form-control" />
+                                    <small className="form-text text-muted">Bijv. 2 werkdagen</small>
+                                    {errors.terms_of_use && errors.terms_of_use.support_response_time && touched.terms_of_use && touched.terms_of_use.support_response_time &&
+                                    <p className="text-danger">{errors.terms_of_use.support_response_time}</p>}
                                 </div>
 
                                 {status && status.msg && <div data-test="status-message">{status.msg}</div>}
