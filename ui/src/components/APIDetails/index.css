@@ -10,7 +10,7 @@
     flex-basis: 750px;
 }
 
-.APIDetails__technical {
+.APIDetails__other {
     flex: 1;
     max-width: 750px;
     flex-grow: 0;

@@ -1,12 +1,23 @@
 import React, { Fragment } from 'react'
 import { string, array, object } from 'prop-types'
+import { string, array, bool, object } from 'prop-types'
+
+import ImplementedByContainer from '../ImplementedByContainer'
 
 import './index.css'
+import LinkToAPIContainer from "../LinkToAPIContainer";
+
+const RELATION_TYPE_REFERENCE_IMPLEMENTATION = 'reference-implementation'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
 
-const APIDetails = ({ service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges, terms_of_use }) =>
+const referenceImplementationsFromRelations = relations =>
+    Object
+        .keys(relations || {})
+        .filter(apiId => relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION))
+
+const APIDetails = ({ id, service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use }) =>
     <div className="APIDetails">
         <h1 className="title">{ service_name }</h1>
         <h2 className="subtitle">{ organization_name }</h2>
@@ -31,7 +42,7 @@ const APIDetails = ({ service_name, organization_name, description, api_url, api
                 }
             </div>
 
-            <div className="APIDetails__technical">
+            <div className="APIDetails__other">
                 <dl>
                     <dt>Documentatie</dt>
                     <dd data-test="api-documentation-url">
@@ -58,6 +69,23 @@ const APIDetails = ({ service_name, organization_name, description, api_url, api
                         </ul>
                     </dd>
                 </dl>
+
+                {
+                    is_reference_implementation ?
+                        <ImplementedByContainer id={id}/> : null
+                }
+
+                {
+                    !is_reference_implementation && referenceImplementationsFromRelations(relations).length > 0 ?
+                        <Fragment>
+                            <h3>Referentie implementatie</h3>
+                            {
+                                referenceImplementationsFromRelations(relations)
+                                    .map((apiId) => <LinkToAPIContainer id={apiId} key={apiId} />)
+                            }
+                        </Fragment>
+                        : null
+                }
             </div>
         </div>
     </div>
@@ -70,7 +98,9 @@ APIDetails.propTypes = {
     api_specification_type: string.isRequired,
     specification_url: string.isRequired,
     documentation_url: string.isRequired,
+    is_reference_implementation: bool,
     badges: array,
+    relations: object,
     terms_of_use: object
 }
 
