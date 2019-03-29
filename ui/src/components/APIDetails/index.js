@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { string, array, object } from 'prop-types'
 import { string, array, bool, object } from 'prop-types'
 
-import ImplementedByContainer from '../ImplementedByContainer'
+import ImplementedByListContainer from '../ImplementedByListContainer'
 
 import './index.css'
 import LinkToAPIContainer from "../LinkToAPIContainer";
@@ -72,7 +72,7 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
 
                 {
                     is_reference_implementation ?
-                        <ImplementedByContainer id={id}/> : null
+                        <ImplementedByListContainer id={id}/> : null
                 }
 
                 {

@@ -1,7 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import Tag from './index'
-import APIDetail from "../APIDetail/index.test";
 
 const dummyAPI = {
     id: 'test-api.json',
