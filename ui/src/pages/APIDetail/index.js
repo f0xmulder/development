@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { object } from 'prop-types'
 
-import APIDetails from './APIDetails'
+import APIDetails from '../../components/APIDetails'
 
 import './index.css'
 

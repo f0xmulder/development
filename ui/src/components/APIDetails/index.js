@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { string, array, object } from 'prop-types'
 
-import './APIDetails.css'
+import './index.css'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`

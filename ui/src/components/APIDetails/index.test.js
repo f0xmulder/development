@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import APIDetails from './APIDetails'
+import APIDetails from './index'
 
 const details = {
     "description": "Description",
