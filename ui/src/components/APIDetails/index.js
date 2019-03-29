@@ -46,7 +46,7 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                 <dl>
                     <dt>Documentatie</dt>
                     <dd data-test="api-documentation-url">
-                        <a href={documentation_url} target="_blank" rel="noopener noreferrer">Read more</a>
+                        <a href={documentation_url} target="_blank" rel="noopener noreferrer">Lees meer</a>
                     </dd>
 
                     <dt>Basis URL</dt>

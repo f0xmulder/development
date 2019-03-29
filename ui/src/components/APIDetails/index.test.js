@@ -61,7 +61,7 @@ describe('APIDetails', () => {
     describe('documentation', () => {
         it('should show a link to the documentation url', () => {
             const documentationUrl = wrapper.find('[data-test="api-documentation-url"]')
-            expect(documentationUrl.text()).toBe('Read more')
+            expect(documentationUrl.text()).toBe('Lees meer')
         })
 
         it('should link to Rebilly with the specification URL', () => {
