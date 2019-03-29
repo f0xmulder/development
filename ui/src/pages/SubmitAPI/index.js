@@ -34,7 +34,13 @@ const SubmitAPI = () =>
         "fax": "0031687654321",
         "chat": "https://nl-x.slack.com",
         "url": "https://github.com/VNG-Realisatie/nlx"
-    }
+    },
+    "terms_of_use": {
+      "government_only": true,
+      "cost_compensations": false,
+      "uptime_guarantee": 99.9,
+      "support_response_time": "2 dagen"
+  }
 }
             `}
         </pre>
