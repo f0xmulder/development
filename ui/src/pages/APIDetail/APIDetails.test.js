@@ -105,4 +105,11 @@ describe('APIDetails', () => {
             })
         })
     })
+
+    describe('terms of use', () => {
+        it('should display the terms of use', () => {
+            const termsOfUse = wrapper.find('[data-test="api-terms-of-use"]')
+            expect(termsOfUse.exists()).toBe(true)
+        })
+    })
 })
