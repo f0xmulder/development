@@ -6,5 +6,8 @@
     "api_specification_type": "Custom",
     "specification_url": "",
     "documentation_url": "https://www.duck.com",
-    "tags": ["zgw", "zrc", "dummy"]
+    "tags": ["zgw", "zrc", "dummy"],
+    "relations": {
+        "vng-zrc": ["reference-implementation"]
+    }
 }
