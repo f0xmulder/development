@@ -13,5 +13,11 @@
         "phone": "0031612345678",
         "fax": "0031687654321",
         "chat": "https://nl-x.slack.com"
+    },
+    "terms_of_use": {
+        "government_only": true,
+        "cost_compensations": false,
+        "uptime_guarantee": 99.9,
+        "support_response_time": "2 days"
     }
 }

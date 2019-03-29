@@ -13,6 +13,7 @@ type API struct {
 	Tags                 []Tag             `json:"tags"`
 	Badges               []string          `json:"badges"`
 	Contact              APIContactDetails `json:"contact"`
+	TermsOfUse           APITermsOfUse     `json:"terms_of_use"`
 }
 
 // APIContactDetails model
@@ -22,4 +23,11 @@ type APIContactDetails struct {
 	Fax   string `json:"fax"`
 	Chat  string `json:"chat"`
 	URL   string `json:"url"`
+}
+
+type APITermsOfUse struct {
+	GovernmentOnly      bool    `json:"government_only"`
+	CostCompensations   bool    `json:"cost_compensations`
+	UptimeGuarantee     float64 `json:"uptime_guarantee"`
+	SupportResponseTime string  `json:"support_response_time"`
 }

@@ -2,9 +2,10 @@ package datareaders
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
-	"testing"
 )
 
 func TestDirectory(t *testing.T) {
@@ -25,6 +26,12 @@ func TestDirectory(t *testing.T) {
 				Phone: "0031612345678",
 				Fax:   "0031687654321",
 				Chat:  "https://nl-x.slack.com",
+			},
+			models.APITermsOfUse{
+				GovernmentOnly:      true,
+				CostCompensations:   false,
+				UptimeGuarantee:     99.9,
+				SupportResponseTime: "2 days",
 			},
 		},
 	}
