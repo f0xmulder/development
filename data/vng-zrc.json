@@ -1,13 +1,15 @@
 {
-    "description": "API voor zaakgericht werken",
+    "description": "Een API om een zaakregistratiecomponent te benaderen.",
     "organization_name": "VNG Realisatie",
-    "service_name": "ZGW",
+    "service_name": "ZRC",
     "api_url": "https://ref.tst.vng.cloud/zrc/api/v1/",
     "api_specification_type": "OpenAPI2",
     "specification_url": "https://ref.tst.vng.cloud/zrc/api/v1/schema/",
-    "documentation_url": "https://ref.tst.vng.cloud",
-    "tags": ["zgw", "zaakgericht werken"],
-    "badges": [],
+    "documentation_url": "https://github.com/vng-Realisatie/gemma-zaakregistratiecomponent",
+    "tags": ["zgw", "zrc"],
+    "contact": {
+        "email": "support@maykinmedia.nl"
+    },
     "terms_of_use": {
         "government_only": false,
         "pay_per_use": false
