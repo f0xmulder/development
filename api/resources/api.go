@@ -50,6 +50,22 @@ func filterAPIsByTag(tag string, items []models.API) []models.API {
 	return []models.API{}
 }
 
+const RELATION_TYPE_REFERENCE_IMPLEMENTATION = "reference-implementation"
+
+func filterAPIsByReferenceImplementation(items []models.API, implementingAPIID string) []models.API {
+	result := []models.API{}
+
+	for _, API := range items {
+		for _, relationType := range API.Relations[implementingAPIID] {
+			if relationType == RELATION_TYPE_REFERENCE_IMPLEMENTATION {
+				result = append(result, API)
+			}
+		}
+	}
+
+	return result
+}
+
 // Routes defines the routes for the API resource
 func (rs APIResource) Routes() chi.Router {
 	r := chi.NewRouter()
@@ -66,7 +82,10 @@ func (rs APIResource) Routes() chi.Router {
 	searchHandler := bleveHttp.NewSearchHandler(indexDirectoryPath).ServeHTTP
 
 	r.Get("/", rs.List)
-	r.Get("/{id:[a-zA-Z0-9-]+}", rs.Get)
+	r.Route("/{id:[a-zA-Z0-9-]+}", func(r chi.Router) {
+		r.Get("/", rs.Get)
+		r.Get("/implemented-by", rs.ListImplementedBy)
+	})
 	r.Post("/search", searchHandler)
 
 	return r
@@ -125,6 +144,29 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		rs.Logger.Error("failed to parse JSON for API", zap.Error(err))
 		http.Error(w, "oops, something went wrong while getting the API info", http.StatusInternalServerError)
+		return
+	}
+}
+
+func (rs APIResource) ListImplementedBy(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	apiID := chi.URLParam(r, "id")
+
+	outputList, errReadFile := rs.ReadDirectory("../data")
+	outputList = filterAPIsByReferenceImplementation(outputList, apiID)
+
+	err := json.NewEncoder(w).Encode(outputList)
+
+	if err != nil {
+		rs.Logger.Error("failed to output APIs", zap.Error(err))
+		http.Error(w, "server error", http.StatusInternalServerError)
+		return
+	}
+
+	if errReadFile != nil {
+		rs.Logger.Error("oops, something went wrong while getting the info of an API", zap.Error(errReadFile))
+		http.Error(w, "server error", http.StatusInternalServerError)
 		return
 	}
 }
