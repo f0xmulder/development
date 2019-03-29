@@ -22,7 +22,7 @@ class APIDetail extends Component {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Er ging iets fout bij het ophalen voor de API met ID  '${id}'`)
+                    throw new Error(`Er ging iets fout bij het ophalen voor de API met ID '${id}'`)
                 }
             })
     }
