@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import { shape, string, array, arrayOf } from 'prop-types'
+import { shape, string, arrayOf } from 'prop-types'
 
 const ImplementedByList = ({ apis }) =>
     <div className="ImplementedByList">
