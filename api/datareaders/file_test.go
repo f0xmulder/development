@@ -32,6 +32,9 @@ func TestFile(t *testing.T) {
 					Fax:   "0031687654321",
 					Chat:  "https://nl-x.slack.com",
 				},
+				Relations: map[string][]string{
+					"api-id": {"reference-implementation"},
+				},
 				TermsOfUse: models.APITermsOfUse{
 					GovernmentOnly:      true,
 					PayPerUse:           false,

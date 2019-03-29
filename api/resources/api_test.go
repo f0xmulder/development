@@ -27,6 +27,8 @@ var dummyAPI = models.API{
 	[]models.Tag{"test-tag"},
 	[]string{},
 	models.APIContactDetails{},
+	false,
+	map[string][]string{},
 	models.APITermsOfUse{},
 }
 
@@ -85,7 +87,7 @@ func TestAPIList(t *testing.T) {
 			"/list?tags=test-tag",
 			200,
 			"application/json",
-			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]\n",
+			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"},\"is_reference_implementation\":false}]\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
@@ -135,7 +137,7 @@ func TestAPIGet(t *testing.T) {
 			"./test-data/valid",
 			200,
 			"application/json",
-			"{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}\n",
+			"{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"},\"is_reference_implementation\":false}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",

@@ -14,7 +14,7 @@ type API struct {
 	Badges                    []string            `json:"badges"`
 	Contact                   APIContactDetails   `json:"contact"`
 	IsReferenceImplementation bool                `json:"is_reference_implementation"`
-	Relations                 map[string][]string `json:"relations"`
+	Relations                 map[string][]string `json:"relations,omitempty"`
 	TermsOfUse           APITermsOfUse     `json:"terms_of_use"`
 }
 

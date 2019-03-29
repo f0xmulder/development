@@ -33,6 +33,10 @@ func TestDirectory(t *testing.T) {
 				UptimeGuarantee:     99.9,
 				SupportResponseTime: "2 days",
 			},
+			false,
+			map[string][]string{
+				"api-id": {"reference-implementation"},
+			},
 		},
 	}
 
