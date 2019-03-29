@@ -1,0 +1,10 @@
+{
+    "description": "Niet-bestaande implementatie van de ZRC API, omdat er nog geen alternatief beschikbaar is om de referentie-implementatie-functionaliteit te kunnen laten zien in DON.",
+    "organization_name": "Dummy organisatie",
+    "service_name": "Dummy ZRC",
+    "api_url": "https://",
+    "api_specification_type": "Custom",
+    "specification_url": "",
+    "documentation_url": "https://www.duck.com",
+    "tags": ["zgw", "zrc", "dummy"]
+}
