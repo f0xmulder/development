@@ -27,15 +27,15 @@ func TestDirectory(t *testing.T) {
 				Fax:   "0031687654321",
 				Chat:  "https://nl-x.slack.com",
 			},
+			false,
+			map[string][]string{
+				"api-id": {"reference-implementation"},
+			},
 			models.APITermsOfUse{
 				GovernmentOnly:      true,
 				PayPerUse:           false,
 				UptimeGuarantee:     99.9,
 				SupportResponseTime: "2 days",
-			},
-			false,
-			map[string][]string{
-				"api-id": {"reference-implementation"},
 			},
 		},
 	}
