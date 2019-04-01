@@ -13,7 +13,7 @@ class LinkToAPIContainer extends Component {
         }
     }
 
-    fetchApiDetails(id) {
+    fetchAPIDetails(id) {
         return fetch(`/api/apis/${id}`)
             .then(response => {
                 if (response.ok) {
@@ -26,7 +26,7 @@ class LinkToAPIContainer extends Component {
 
     loadDetailsForApi(id) {
         return this
-            .fetchApiDetails(id)
+            .fetchAPIDetails(id)
             .then(details => {
                 this.setState({ details, loaded: true })
             }, error => {
@@ -39,7 +39,7 @@ class LinkToAPIContainer extends Component {
         const { id } = nextProps
         const { id: prevId } = this.props
 
-        if (prevId === id) {
+        if (prevId === id && typeof prevId !== 'undefined') {
             return
         }
 
