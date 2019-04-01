@@ -16,7 +16,7 @@ export const referenceImplementationsFromRelations = relations =>
         .keys(relations || {})
         .filter(apiId => relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION))
 
-const APIDetails = ({ id, service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use }) =>
+const APIDetails = ({ id, service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use, scores }) =>
     <div className="APIDetails">
         <h1 className="title">{ service_name }</h1>
         <h2 className="subtitle">{ organization_name }</h2>
@@ -65,6 +65,17 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                             <li>{ terms_of_use.pay_per_use ? "Kosten voor gebruik" : "Gratis gebruik" }</li>
                             <li>{ terms_of_use.uptime_guarantee ? `Uptime garantie is ${terms_of_use.uptime_guarantee}%` : "Geen uptime garantie" }</li>
                             <li>{ terms_of_use.support_response_time ? `Maximale reactietijd bij ondersteuning is ${terms_of_use.support_response_time}` : "Geen minimale reactietijd ondersteuning" }</li>
+                        </ul>
+                    </dd>
+
+                    <dt>Scores</dt>
+                    <dd data-test="api-scores">
+                        <ul>
+                            <li>Heeft documentatie: {scores.has_documentation ? "Ja" : "Nee"}</li>
+                            <li>Heeft een specificatie: {scores.has_specification ? "Ja" : "Nee"}</li>
+                            <li>Heeft contactgegevens: {scores.has_contact_details ? "Ja" : "Nee"}</li>
+                            <li>Heeft een SLA: {scores.provides_sla ? "Ja" : "Nee"}</li>
+                            <li>Is online: {scores.is_online ? "Ja" : "Nee"}</li>
                         </ul>
                     </dd>
                 </dl>
