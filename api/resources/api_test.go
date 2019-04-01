@@ -49,6 +49,7 @@ var dummyImplementationOfReferenceAPI = models.API{
 		"test-reference-api": {RELATION_TYPE_REFERENCE_IMPLEMENTATION},
 	},
 	models.APITermsOfUse{},
+	nil,
 }
 
 func mockAPIDirectoryReaderNoResults(directory string) ([]models.API, error) {
@@ -156,7 +157,7 @@ func TestAPIGet(t *testing.T) {
 			"./test-data/valid",
 			200,
 			"application/json",
-			"{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}\n",
+			"{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"},\"scores\":{\"has_documentation\":false,\"has_specification\":false,\"has_contact_details\":false,\"provides_sla\":false,\"is_online\":false}}\n",
 			mockAPIFileReader,
 		}, {
 			"non-existing-api-id",
