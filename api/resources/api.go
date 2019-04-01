@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"gitlab.com/commonground/developer.overheid.nl/api/scores"
+
 	bleveHttp "github.com/blevesearch/bleve/http"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
@@ -138,6 +140,8 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "oops, something went wrong while getting the API info", http.StatusInternalServerError)
 		return
 	}
+
+	output = scores.CalculateScores(output)
 
 	err := json.NewEncoder(w).Encode(output)
 

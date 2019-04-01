@@ -16,6 +16,7 @@ type API struct {
 	IsReferenceImplementation bool                `json:"is_reference_implementation"`
 	Relations                 map[string][]string `json:"relations,omitempty"`
 	TermsOfUse                APITermsOfUse       `json:"terms_of_use"`
+	Scores                    APIScores           `json:"scores,omitempty"`
 }
 
 // APIContactDetails model
@@ -32,4 +33,12 @@ type APITermsOfUse struct {
 	PayPerUse           bool    `json:"pay_per_use"`
 	UptimeGuarantee     float64 `json:"uptime_guarantee"`
 	SupportResponseTime string  `json:"support_response_time"`
+}
+
+type APIScores struct {
+	HasDocumentation  bool `json:"has_documentation"`
+	HasSpecification  bool `json:"has_specification"`
+	HasContactDetails bool `json:"has_contact_details"`
+	ProvidesSLA       bool `json:"provides_sla"`
+	IsOnline          bool `json:"is_online"`
 }
