@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Field, Form, Formik } from 'formik'
 import { array, boolean, date, mixed, number, object, string } from './yup-translations'
 import * as Yup from 'yup'
+import {RELATION_TYPE_REFERENCE_IMPLEMENTATION} from '../../constants';
 
 import './index.css'
 
@@ -38,7 +39,9 @@ const initialValues = {
         pay_per_use: false,
         uptime_guarantee: 99.5,
         support_response_time: ''
-    }
+    },
+    is_reference_implementation: false,
+    reference_implementation: null
 }
 
 const validationSchema = Yup.object().shape({
@@ -63,7 +66,9 @@ const validationSchema = Yup.object().shape({
         pay_per_use: Yup.boolean(),
         uptime_guarantee: Yup.number(),
         support_response_time: Yup.string()
-    })
+    }),
+    is_reference_implementation: Yup.boolean(),
+    reference_implementation: Yup.string()
 })
 
 const arrayFields = [
@@ -71,23 +76,49 @@ const arrayFields = [
     'badges'
 ]
 
+export const convertLinkToRIToRelation = formData => {
+    if (formData['reference_implementation']) {
+        formData['relations'] = {
+            [formData['reference_implementation']]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION]
+        }
+    }
+
+    delete formData['reference_implementation']
+    
+    return formData
+}
+
+export const convertRIFormDataToAPIDefinition = formData => {
+    formData['reference_implementation'] = !formData['is_reference_implementation'] ?
+        formData['reference_implementation'] :
+        ''
+
+    formData = convertLinkToRIToRelation(formData)
+    return formData
+}
+
 class SubmitAPIForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             submitted: false,
-            responseData: {}
+            responseData: {},
+            apis: [],
+            apisLoaded: false,
+            apisError: false
         }
 
         this.onSubmit = this.onSubmit.bind(this)
     }
 
     onSubmit(values = {}, actions = {}) {
-        const data = validationSchema.cast(values)
+        let data = validationSchema.cast(values)
 
         arrayFields.forEach((fieldName) => {
             data[fieldName] = data[fieldName] ? data[fieldName].split(',').map((v) => v.trim()) : []
         })
+
+        data = convertRIFormDataToAPIDefinition(data)
 
         return this.submitToApi(data)
             .then((responseData) => {
@@ -121,8 +152,32 @@ class SubmitAPIForm extends Component {
             })
     }
 
+    fetchApiList() {
+        return fetch('/api/apis')
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error(`Er ging iets fout tijdens het ophalen van de beschikbare API's`)
+                }
+            })
+    }
+
+    componentDidMount() {
+        this
+            .fetchApiList()
+            .then(apis => {
+                this.setState({ apis, apisLoaded: true })
+            }, error => {
+                this.setState({ apisError: true, apisLoaded: true })
+                console.error(error)
+            })
+    }
+
     render() {
-        return (
+        const { apis, apisLoaded } = this.state
+
+        return apisLoaded ?
             <div className="SubmitAPIForm container">
                 <h1>Formulier API toevoegen</h1>
                 <p>
@@ -270,6 +325,35 @@ class SubmitAPIForm extends Component {
                                     <small className="form-text text-muted">Link naar een website met contactinformatie.</small>
                                 </div>
 
+                                <h3>Referentieimplementatie</h3>
+                                {
+                                    !values.reference_implementation || values.reference_implementation === '' ?
+                                        <div className="form-group">
+                                            <label htmlFor="is_reference_implementation">Deze API is een referentieimplementatie</label>
+                                            <Field component="input" type="checkbox" id="is_reference_implementation" name="is_reference_implementation"
+                                                   className="form-control" checked={values.is_reference_implementation === true} />
+                                            {errors.is_reference_implementation && touched.is_reference_implementation &&
+                                            <p className="text-danger">{errors.is_reference_implementation}</p>}
+                                        </div> : null
+                                }
+                                {
+                                    !values.is_reference_implementation ?
+                                        <div className="form-group">
+                                            <label htmlFor="reference_implementation">Gebaseerd op (referentie implementatie)</label>
+                                            <Field component="select" id="reference_implementation" name="reference_implementation"
+                                                   className="form-control" value={''}>
+                                                <option value={''}>Geen</option>
+                                                {
+                                                    apis
+                                                        .filter(api => api.is_reference_implementation)
+                                                        .map(api => <option value={api.id} key={api.id}>{api.service_name} {api.organization_name}</option>)
+                                                }
+                                            </Field>
+                                            {errors.api_specification_type && touched.api_specification_type &&
+                                            <p className="text-danger">{errors.api_specification_type}</p>}
+                                        </div> : null
+                                }
+
                                 <h3>Gebruiksvoorwaarden</h3>
 
                                 <div className="form-group">
@@ -315,7 +399,7 @@ class SubmitAPIForm extends Component {
                     />
                 }
             </div>
-        )
+        : null
     }
 }
 

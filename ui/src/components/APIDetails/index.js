@@ -6,7 +6,7 @@ import ImplementedByListContainer from '../ImplementedByListContainer'
 import './index.css'
 import LinkToAPIContainer from "../LinkToAPIContainer";
 
-const RELATION_TYPE_REFERENCE_IMPLEMENTATION = 'reference-implementation'
+import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`

@@ -24,7 +24,7 @@ class ImplementedByListContainer extends Component {
             })
     }
 
-    loadDetailsForApi(id) {
+    loadDetailsForAPI(id) {
         return this
             .fetchImplementedByInfo(id)
             .then(apis => {
@@ -39,16 +39,16 @@ class ImplementedByListContainer extends Component {
         const { id } = nextProps
         const { id: prevId } = this.props.id
 
-        if (prevId === id) {
+        if (prevId === id || typeof prevId === 'undefined') {
             return
         }
 
-        this.loadDetailsForApi(id)
+        this.loadDetailsForAPI(id)
     }
 
     componentDidMount() {
         const { id } = this.props
-        this.loadDetailsForApi(id)
+        this.loadDetailsForAPI(id)
     }
 
     render() {
@@ -61,7 +61,7 @@ class ImplementedByListContainer extends Component {
                         null :
                         error ?
                             <p data-test="error-message">Er ging iets fout tijdens het ophalen van de gerelateerde API's.</p> :
-                            apis ?
+                            apis && apis.length ?
                                 <ImplementedByList apis={apis} />
                                 : null
                 }
