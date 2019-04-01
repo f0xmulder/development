@@ -26,7 +26,7 @@ const App = () =>
                     <Route path="/" exact component={Home} />
                     <Route path="/detail/:id" component={APIDetail} />
                     <Route path="/overzicht" component={Overview} />
-                    <Route path="/api-toevoegen" exact={true} component={SubmitAPI} />
+                    <Route exact path="/api-toevoegen" component={SubmitAPI} />
                     <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
                     <Route path="/over" component={About} />
                     <Route path="/tag/:tag" component={Tag} />
