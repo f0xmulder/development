@@ -35,7 +35,7 @@ const initialValues = {
     },
     terms_of_use: {
         government_only: false,
-        cost_compensations: false,
+        pay_per_use: false,
         uptime_guarantee: 99.5,
         support_response_time: ''
     }
@@ -60,7 +60,7 @@ const validationSchema = Yup.object().shape({
     }),
     terms_of_use: Yup.object().shape({
         government_only: Yup.boolean(),
-        cost_compensations: Yup.boolean(),
+        pay_per_use: Yup.boolean(),
         uptime_guarantee: Yup.number(),
         support_response_time: Yup.string()
     })
@@ -282,11 +282,11 @@ class SubmitAPIForm extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="terms_of_use.cost_compensations">De kosten voor het gebruik van de API worden verrekend met de gebruiker</label>
-                                    <Field component="input" type="checkbox" id="terms_of_use.cost_compensations" name="terms_of_use.cost_compensations"
-                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.cost_compensations === true)} />
-                                    {errors.terms_of_use && errors.terms_of_use.cost_compensations && touched.terms_of_use && touched.terms_of_use.cost_compensations &&
-                                    <p className="text-danger">{errors.terms_of_use.cost_compensations}</p>}
+                                    <label htmlFor="terms_of_use.pay_per_use">De kosten voor het gebruik van de API worden verrekend met de gebruiker</label>
+                                    <Field component="input" type="checkbox" id="terms_of_use.pay_per_use" name="terms_of_use.pay_per_use"
+                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.pay_per_use === true)} />
+                                    {errors.terms_of_use && errors.terms_of_use.pay_per_use && touched.terms_of_use && touched.terms_of_use.pay_per_use &&
+                                    <p className="text-danger">{errors.terms_of_use.pay_per_use}</p>}
                                 </div>
 
                                 <div className="form-group">
@@ -294,8 +294,8 @@ class SubmitAPIForm extends Component {
                                     <Field component="input" type="number" max="100" min="0" step="0.01" id="terms_of_use.uptime_guarantee" name="terms_of_use.uptime_guarantee"
                                            className="form-control" />
                                     <small className="form-text text-muted">Opgegeven als een percentage, bijv. 99,5.</small>
-                                    {errors.terms_of_use && errors.terms_of_use.cost_compensations && touched.terms_of_use && touched.terms_of_use.cost_compensations &&
-                                    <p className="text-danger">{errors.terms_of_use.cost_compensations}</p>}
+                                    {errors.terms_of_use && errors.terms_of_use.pay_per_use && touched.terms_of_use && touched.terms_of_use.pay_per_use &&
+                                    <p className="text-danger">{errors.terms_of_use.pay_per_use}</p>}
                                 </div>
 
                                 <div className="form-group">
