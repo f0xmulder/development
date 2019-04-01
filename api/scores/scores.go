@@ -10,7 +10,7 @@ import (
 
 // CalculateScores calculates the scores
 func CalculateScores(api models.API) models.API {
-	api.Scores = models.APIScores{
+	api.Scores = &models.APIScores{
 		HasDocumentation:  hasDocumentation(api),
 		HasSpecification:  hasSpecification(api),
 		HasContactDetails: hasContactDetails(api),
@@ -42,6 +42,10 @@ func providesSLA(api models.API) bool {
 }
 
 func isOnline(api models.API) bool {
+	if api.APIURL == "" {
+		return false
+	}
+
 	timeout := time.Duration(2 * time.Second)
 	client := http.Client{
 		Timeout: timeout,

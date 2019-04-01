@@ -28,6 +28,7 @@ type APIContactDetails struct {
 	URL   string `json:"url"`
 }
 
+// APITermsOfUse model
 type APITermsOfUse struct {
 	GovernmentOnly      bool    `json:"government_only"`
 	PayPerUse           bool    `json:"pay_per_use"`
@@ -35,6 +36,7 @@ type APITermsOfUse struct {
 	SupportResponseTime string  `json:"support_response_time"`
 }
 
+// APIScores model
 type APIScores struct {
 	HasDocumentation  bool `json:"has_documentation"`
 	HasSpecification  bool `json:"has_specification"`

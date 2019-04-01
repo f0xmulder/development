@@ -3,9 +3,10 @@ package datareaders
 import (
 	"encoding/json"
 	"errors"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
 	"path/filepath"
+
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
 // File maps a file into an API model
@@ -30,5 +31,7 @@ func File(path string) (models.API, error) {
 	}
 
 	newAPI.ID = toAPIID(filename)
+	newAPI.Scores = nil
+
 	return newAPI, err
 }
