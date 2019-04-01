@@ -14,7 +14,7 @@ RUN npm ci --no-progress --color=false --quiet
 # Now copy the whole workdir for the build step.
 COPY ui /go/src/commonground/developer.overheid.nl/ui
 
-RUN npm run build
+RUN INLINE_RUNTIME_CHUNK=false npm run build
 
 # Copy static docs to alpine-based nginx container.
 FROM nginx:alpine as webserver
