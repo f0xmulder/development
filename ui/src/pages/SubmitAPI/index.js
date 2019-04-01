@@ -35,6 +35,10 @@ const SubmitAPI = () =>
         "chat": "https://nl-x.slack.com",
         "url": "https://github.com/VNG-Realisatie/nlx"
     },
+    "is_reference_implementation": false,
+    "relations": {
+        "example-api-id": ["reference-implementation"]
+    }
     "terms_of_use": {
       "government_only": true,
       "pay_per_use": false,
