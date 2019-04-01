@@ -27,7 +27,7 @@ type APIContactDetails struct {
 
 type APITermsOfUse struct {
 	GovernmentOnly      bool    `json:"government_only"`
-	CostCompensations   bool    `json:"cost_compensations"`
+	PayPerUse           bool    `json:"pay_per_use"`
 	UptimeGuarantee     float64 `json:"uptime_guarantee"`
 	SupportResponseTime string  `json:"support_response_time"`
 }

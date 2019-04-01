@@ -52,7 +52,7 @@ const APIDetails = ({ service_name, organization_name, description, api_url, api
                     <dd data-test="api-terms-of-use">
                         <ul>
                             <li>{ terms_of_use.government_only ? "Alleen overheid" : "Iedereen" }</li>
-                            <li>{ terms_of_use.cost_compensations ? "Kosten voor gebruik" : "Gratis gebruik" }</li>
+                            <li>{ terms_of_use.pay_per_use ? "Kosten voor gebruik" : "Gratis gebruik" }</li>
                             <li>{ terms_of_use.uptime_guarantee ? `Uptime garantie is ${terms_of_use.uptime_guarantee}%` : "Geen uptime garantie" }</li>
                             <li>{ terms_of_use.support_response_time ? `Maximale reactietijd bij ondersteuning is ${terms_of_use.support_response_time}` : "Geen minimale reactietijd ondersteuning" }</li>
                         </ul>

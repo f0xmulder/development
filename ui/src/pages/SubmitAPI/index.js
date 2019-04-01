@@ -37,7 +37,7 @@ const SubmitAPI = () =>
     },
     "terms_of_use": {
       "government_only": true,
-      "cost_compensations": false,
+      "pay_per_use": false,
       "uptime_guarantee": 99.9,
       "support_response_time": "2 dagen"
   }

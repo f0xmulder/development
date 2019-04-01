@@ -29,7 +29,7 @@ func TestDirectory(t *testing.T) {
 			},
 			models.APITermsOfUse{
 				GovernmentOnly:      true,
-				CostCompensations:   false,
+				PayPerUse:           false,
 				UptimeGuarantee:     99.9,
 				SupportResponseTime: "2 days",
 			},

@@ -34,7 +34,7 @@ func TestFile(t *testing.T) {
 				},
 				TermsOfUse: models.APITermsOfUse{
 					GovernmentOnly:      true,
-					CostCompensations:   false,
+					PayPerUse:           false,
 					UptimeGuarantee:     99.9,
 					SupportResponseTime: "2 days",
 				},
