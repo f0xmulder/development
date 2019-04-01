@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
 import { string } from 'prop-types'
+import LinkToAPI from "../LinkToAPI";
 
 class LinkToAPIContainer extends Component {
     constructor(props) {
@@ -53,7 +53,6 @@ class LinkToAPIContainer extends Component {
 
     render() {
         const { details, error, loaded } = this.state
-        const { id, service_name, organization_name } = details
 
         return (
             <div className="LinkToAPIContainer">
@@ -62,9 +61,7 @@ class LinkToAPIContainer extends Component {
                         null :
                         error ?
                             <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API.</p> :
-                                <Link to={`/detail/${id}`} data-test="link">
-                                    {service_name} - {organization_name}
-                                </Link>
+                                <LinkToAPI {...details} />
                 }
             </div>
         );

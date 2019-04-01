@@ -39,18 +39,8 @@ describe('LinkToAPIContainer', () => {
             wrapper.setState({details: dummyAPI, loaded: true})
         })
 
-        it('should show the list of APIs', () => {
-            expect(wrapper.find('Link').exists()).toBe(true)
-        })
-
-        it('should link to the API detail page', () => {
-            const link = wrapper.find('Link')
-            expect(link.props().to).toBe('/detail/42')
-        })
-
-        it('should display the service and organization name as link text', () => {
-            const homeLink = wrapper.find('Link')
-            expect(homeLink.props().children).toEqual(['Service', ' - ',  'Organization'])
+        it('should show the LinkToAPI', () => {
+            expect(wrapper.find('LinkToAPI').exists()).toBe(true)
         })
     })
 

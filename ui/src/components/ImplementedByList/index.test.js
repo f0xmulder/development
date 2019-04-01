@@ -8,7 +8,7 @@ describe('ImplementedByList', () => {
     beforeAll(() => {
         const apis = [
             {
-                id: 42,
+                id: '42',
                 service_name: 'Service',
                 organization_name: 'Organization'
             }
