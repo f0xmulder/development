@@ -52,14 +52,21 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
   annotations:
+    kubernetes.io/ingress.class: {{ .Values.ingressClass }}
+{{ if eq .Values.ingressClass "nginx" }}
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options: "deny";
+      add_header X-Content-Type-Options: "nosniff";
+      add_header X-XSS-Protection: "1; mode=block";
+      add_header X-Content-Security-Policy: "default-src 'self'";
+      add_header X-Referrer-Policy: "same-origin";
+{{ else }}
     ingress.kubernetes.io/frame-deny: "true"
     ingress.kubernetes.io/content-type-nosniff: "true"
     ingress.kubernetes.io/browser-xss-filter: "true"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'"
     ingress.kubernetes.io/referrer-policy: "same-origin"
-    kubernetes.io/ingress.class: {{ .Values.ingressClass }}
-{{ if eq .Values.ingressClass "nginx" }}
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 {{ end }}
 spec:
 {{ if eq .Values.ingressClass "nginx" }}
