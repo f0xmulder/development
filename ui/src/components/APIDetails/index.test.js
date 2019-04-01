@@ -16,6 +16,13 @@ const details = {
         "pay_per_use": false,
         "uptime_guarantee": 99.9,
         "support_response_time": "2 days"
+    },
+    "scores": {
+        "has_documentation": true,
+        "has_specification": false,
+        "has_contact_details": false,
+        "provides_sla": false,
+        "is_online": true
     }
 }
 
