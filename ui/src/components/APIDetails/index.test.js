@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import APIDetails from './index'
+import APIDetails, {referenceImplementationsFromRelations} from './index'
 
 const details = {
     "description": "Description",
@@ -18,6 +18,17 @@ const details = {
         "support_response_time": "2 days"
     }
 }
+
+describe('referenceImplementationsFromRelations', () => {
+    it('should return the API ids for its reference implementations', () => {
+        const result = referenceImplementationsFromRelations({
+            'an-api': ['reference-implementation'],
+            'another-api': [],
+        })
+
+        expect(result).toEqual(['an-api'])
+    })
+})
 
 describe('APIDetails', () => {
     let wrapper

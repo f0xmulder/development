@@ -11,7 +11,7 @@ import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
 
-const referenceImplementationsFromRelations = relations =>
+export const referenceImplementationsFromRelations = relations =>
     Object
         .keys(relations || {})
         .filter(apiId => relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION))
