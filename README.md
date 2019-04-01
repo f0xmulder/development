@@ -2,7 +2,7 @@
 This is the repository of the software backing the [developer.overheid.nl](https://developer.overheid.nl) portal. This portal provides an overview of all API's within the Dutch government.
 
 ## Adding an API to developer.overheid.nl
-See [Submit your API](https://don.commonground.nl/submit-api).
+See [Submit your API](https://test.developer.overheid.nl/submit-api).
 
 ## Developer documentation
 If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/developer.md).
