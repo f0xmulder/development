@@ -291,7 +291,7 @@ class SubmitAPIForm extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="terms_of_use.uptime_guarantee">Beschikbaarheidsgarantie van de API</label>
-                                    <Field component="input" type="number" max="100" min="90" step="0.01" id="terms_of_use.uptime_guarantee" name="terms_of_use.uptime_guarantee"
+                                    <Field component="input" type="number" max="100" min="0" step="0.01" id="terms_of_use.uptime_guarantee" name="terms_of_use.uptime_guarantee"
                                            className="form-control" />
                                     <small className="form-text text-muted">Opgegeven als een percentage, bijv. 99,5.</small>
                                     {errors.terms_of_use && errors.terms_of_use.cost_compensations && touched.terms_of_use && touched.terms_of_use.cost_compensations &&
