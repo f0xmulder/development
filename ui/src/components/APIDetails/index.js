@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import { string, array, object } from 'prop-types'
 import { string, array, bool, object } from 'prop-types'
 
 import ImplementedByListContainer from '../ImplementedByListContainer'
