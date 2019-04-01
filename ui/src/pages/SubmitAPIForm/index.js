@@ -98,7 +98,6 @@ class SubmitAPIForm extends Component {
                 })
             })
             .catch((error) => {
-                debugger
                 actions.setSubmitting(false)
                 actions.setStatus({msg: 'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.'})
                 console.error(error)
