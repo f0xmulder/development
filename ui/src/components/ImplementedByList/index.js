@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
 import { shape, string, arrayOf } from 'prop-types'
+import LinkToAPI from '../LinkToAPI'
 
 const ImplementedByList = ({ apis }) =>
     <div className="ImplementedByList">
@@ -9,11 +9,7 @@ const ImplementedByList = ({ apis }) =>
             {
                 apis
                     .map((api, i) =>
-                        <li key={i}>
-                            <Link to={`/detail/${api['id']}`} data-test="link">
-                                {api['service_name']} - {api['organization_name']}
-                            </Link>
-                        </li>
+                        <li key={i}><LinkToAPI {...api}/></li>
                     )
             }
         </ul>

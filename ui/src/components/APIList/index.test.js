@@ -19,20 +19,8 @@ describe('APIList', () => {
         expect(listItems.length).toBe(1)
     })
 
-    describe('the API links', () => {
-        let itemLink
-
-        beforeAll(() => {
-            const listItem = listItems.first()
-            itemLink = listItem.find('[data-test="link"]')
-        })
-
-        it('should navigate to the API Detail page for the API', () => {
-            expect(itemLink.props().to).toBe('/detail/test-api.json')
-        })
-
-        it('should show the organization name as label', () => {
-            expect(itemLink.props().children).toEqual(['Service Name', ' - ', 'Organization Name'])
-        })
+    it('should link to the API', () => {
+        const link = listItems.childAt(0).find('LinkToAPI')
+        expect(link.exists()).toBe(true)
     })
 })

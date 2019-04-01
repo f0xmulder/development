@@ -21,13 +21,8 @@ describe('ImplementedByList', () => {
         expect(listItems.length).toBe(1)
     })
 
-    it('should link to the API detail page', () => {
-        const link = wrapper.find('ul li').childAt(0).find('Link')
-        expect(link.props().to).toBe('/detail/42')
-    })
-
-    it('should display the service and organization name as link text', () => {
-        const homeLink = wrapper.find('ul li').childAt(0).find('Link')
-        expect(homeLink.props().children).toEqual(['Service', ' - ',  'Organization'])
+    it('should link to the API', () => {
+        const link = wrapper.find('ul li').childAt(0).find('LinkToAPI')
+        expect(link.exists()).toBe(true)
     })
 })
