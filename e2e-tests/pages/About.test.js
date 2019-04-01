@@ -4,6 +4,7 @@ const { getBaseUrl, isDebugging } = require('../environment')
 describe('About', () => {
     beforeAll(async () => {
         const baseUrl = getBaseUrl(isDebugging())
+        await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/over`, { waitUntil: 'load' });
     })
 

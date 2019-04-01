@@ -3,7 +3,8 @@ const { getBaseUrl, isDebugging } = require('../environment')
 
 describe('Submit API', () => {
     beforeAll(async () => {
-        const baseUrl = getBaseUrl(isDebugging())
+        const baseUrl = getBaseUrl(isDebugging());
+        await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/api-toevoegen`, { waitUntil: 'load' });
     })
 
