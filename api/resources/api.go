@@ -133,7 +133,7 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, errReadFile := rs.ReadFile(path)
+	api, errReadFile := rs.ReadFile(path)
 
 	if errReadFile != nil {
 		rs.Logger.Error("failed to read API file", zap.Error(errReadFile))
@@ -141,9 +141,10 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output = scores.CalculateScores(output)
+	scores := scores.CalculateScores(api)
+	api.Scores = &scores
 
-	err := json.NewEncoder(w).Encode(output)
+	err := json.NewEncoder(w).Encode(api)
 
 	if err != nil {
 		rs.Logger.Error("failed to parse JSON for API", zap.Error(err))

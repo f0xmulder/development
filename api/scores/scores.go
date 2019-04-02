@@ -8,17 +8,15 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
-// CalculateScores calculates the scores
-func CalculateScores(api models.API) models.API {
-	api.Scores = &models.APIScores{
+// CalculateScores calculates the scores and returns them in a APIScores struct
+func CalculateScores(api models.API) models.APIScores {
+	return models.APIScores{
 		HasDocumentation:  hasDocumentation(api),
 		HasSpecification:  hasSpecification(api),
 		HasContactDetails: hasContactDetails(api),
 		ProvidesSLA:       providesSLA(api),
 		IsOnline:          isOnline(api),
 	}
-
-	return api
 }
 
 func hasDocumentation(api models.API) bool {
