@@ -141,6 +141,8 @@ Remove Review App:
   image: registry.gitlab.com/commonground/don-deployer:latest
   variables:
     GIT_STRATEGY: none
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
   script:
     - helm delete --purge don-$CI_ENVIRONMENT_SLUG
   when: manual
@@ -151,9 +153,6 @@ Remove Review App:
   tags:
     - cluster
     - kubernetes
-  variables:
-    DOCKER_HOST: tcp://localhost:2375
-    DOCKER_DRIVER: overlay2
   services:
     - docker:dind
   only:
