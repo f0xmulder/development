@@ -130,4 +130,11 @@ describe('APIDetails', () => {
             expect(termsOfUse.exists()).toBe(true)
         })
     })
+
+    describe('scores', () => {
+        it('should display the scores', () => {
+            const scores = wrapper.find('[data-test="api-scores"]')
+            expect(scores.exists()).toBe(true)
+        })
+    })
 })

@@ -2,11 +2,13 @@ import React, { Fragment } from 'react'
 import { string, array, bool, object } from 'prop-types'
 
 import ImplementedByListContainer from '../ImplementedByListContainer'
-
-import './index.css'
-import LinkToAPIContainer from "../LinkToAPIContainer";
+import LinkToAPIContainer from '../LinkToAPIContainer'
+import Grade from '../../components/Grade'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
+
+import './index.css'
+import './APIDetails.css'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
@@ -68,7 +70,7 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                         </ul>
                     </dd>
 
-                    <dt>Scores</dt>
+                    <dt>Score</dt>
                     <dd data-test="api-scores">
                         <ul>
                             <li>Heeft documentatie: {scores.has_documentation ? "Ja" : "Nee"}</li>
@@ -77,6 +79,7 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                             <li>Heeft een SLA: {scores.provides_sla ? "Ja" : "Nee"}</li>
                             <li>Is online: {scores.is_online ? "Ja" : "Nee"}</li>
                         </ul>
+                        <b><Grade scores={scores} /></b>
                     </dd>
                 </dl>
 
