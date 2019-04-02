@@ -161,14 +161,16 @@ Remove Review App:
     - master
 
 E2E tests:
-  image: buildkite/puppeteer:latest
   stage: e2e-tests
   before_script:
     - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$INGRESS_BASE_DOMAIN")
-    - cd e2e-tests
-    - npm install
+    - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
-    - npm test
+    - |
+      docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      -f e2e/Dockerfile . && \
+      docker run --rm --cap-add=SYS_ADMIN \
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA npm install && npm test
   tags:
     - docker
     - nlx
