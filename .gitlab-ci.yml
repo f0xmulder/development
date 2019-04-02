@@ -55,7 +55,7 @@ Test UI:
         docker build --target build \
         --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
         -f ui/Dockerfile . && \
-        docker run -rm $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build npm test -- --coverage
+        docker run --rm $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build npm test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
@@ -87,7 +87,7 @@ Test API:
         docker build --target build \
         --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA-build \
         -f api/Dockerfile . && \
-        docker run -rm $API_IMAGE:$CI_COMMIT_SHORT_SHA-build go test -v -coverprofile coverage.out ./...
+        docker run --rm $API_IMAGE:$CI_COMMIT_SHORT_SHA-build go test -v -coverprofile coverage.out ./...
   coverage: /^coverage:\s(\d+(?:\.\d+)?%)/
 
 Release API:
