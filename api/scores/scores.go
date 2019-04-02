@@ -36,7 +36,7 @@ func hasContactDetails(api models.API) bool {
 }
 
 func providesSLA(api models.API) bool {
-	return (api.TermsOfUse.SupportResponseTime != "" && api.TermsOfUse.UptimeGuarantee > 0.9)
+	return (api.TermsOfUse.SupportResponseTime != "" && api.TermsOfUse.UptimeGuarantee >= 0.9)
 }
 
 func isOnline(api models.API) bool {
