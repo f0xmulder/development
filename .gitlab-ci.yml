@@ -170,7 +170,7 @@ E2E tests:
       docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
       -f e2e-tests/Dockerfile . && \
       docker run --rm --cap-add=SYS_ADMIN \
-      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA ls && cd e2e-tests && npm install && npm test
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA npm test
   tags:
     - docker
     - nlx

@@ -1,5 +1,7 @@
 FROM node:10.15.1-slim
 
+ENV CI=true
+
 # prerequisites for Puppeteer
 # via https://github.com/GoogleChrome/puppeteer/blob/de82b87cfa1c637787a09b90266318905ae16f42/docs/troubleshooting.md#running-puppeteer-in-docker
 
@@ -19,17 +21,10 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && apt-get purge --auto-remove -y curl \
     && rm -rf /src/*.deb
 
-# It's a good idea to use dumb-init to help prevent zombie chrome processes.
-ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 /usr/local/bin/dumb-init
-RUN chmod +x /usr/local/bin/dumb-init
-
 # Uncomment to skip the chromium download when installing puppeteer. If you do,
 # you'll need to launch puppeteer with:
 #     browser.launch({executablePath: 'google-chrome-unstable'})
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
-# Install puppeteer so it's available in the container.
-RUN npm i puppeteer
 
 # Add user so we don't need --no-sandbox.
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
@@ -40,5 +35,14 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
 # Run everything after as non-privileged user.
 USER pptruser
 
-ENTRYPOINT ["dumb-init", "--"]
-CMD ["google-chrome-unstable"]
+# Copy only package.json and package-lock.json to make the dependency fetching step optional.
+COPY e2e-tests/package.json \
+     e2e-tests/package-lock.json \
+     /go/src/commonground/developer.overheid.nl/e2e-tests/
+
+WORKDIR /go/src/commonground/developer.overheid.nl/e2e-tests
+
+RUN npm ci --no-progress --color=false --quiet
+
+# Now copy the whole workdir.
+COPY e2e-tests /go/src/commonground/developer.overheid.nl/e2e-tests
