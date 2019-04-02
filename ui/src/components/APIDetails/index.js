@@ -77,7 +77,6 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                             <li>Heeft een specificatie: {scores.has_specification ? "Ja" : "Nee"}</li>
                             <li>Heeft contactgegevens: {scores.has_contact_details ? "Ja" : "Nee"}</li>
                             <li>Heeft een SLA: {scores.provides_sla ? "Ja" : "Nee"}</li>
-                            <li>Is online: {scores.is_online ? "Ja" : "Nee"}</li>
                         </ul>
                         <b><Grade scores={scores} /></b>
                     </dd>

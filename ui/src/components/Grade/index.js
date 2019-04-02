@@ -22,8 +22,7 @@ Grade.propTypes = {
         has_documentation: bool.isRequired,
         has_specification: bool.isRequired,
         has_contact_details: bool.isRequired,
-        provides_sla: bool.isRequired,
-        is_online: bool.isRequired
+        provides_sla: bool.isRequired
     })
 }
 

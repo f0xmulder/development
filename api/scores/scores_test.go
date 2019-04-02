@@ -1,21 +1,11 @@
 package scores
 
 import (
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
-
-func mockTestServer() *httptest.Server {
-	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	}))
-
-	return testServer
-}
 
 func TestCalculateScores(t *testing.T) {
 	actualScores := CalculateScores(models.API{})
@@ -58,18 +48,4 @@ func TestProvidesSLA(t *testing.T) {
 	}}
 
 	assert.Equal(t, providesSLA(testAPI), true)
-}
-
-func TestIsOnline(t *testing.T) {
-	testServer := mockTestServer()
-
-	testAPI := models.API{}
-
-	assert.Equal(t, isOnline(testAPI), false)
-
-	testAPI = models.API{
-		APIURL: testServer.URL,
-	}
-
-	assert.Equal(t, isOnline(testAPI), true)
 }

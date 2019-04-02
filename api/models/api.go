@@ -42,5 +42,4 @@ type APIScores struct {
 	HasSpecification  bool `json:"has_specification"`
 	HasContactDetails bool `json:"has_contact_details"`
 	ProvidesSLA       bool `json:"provides_sla"`
-	IsOnline          bool `json:"is_online"`
 }

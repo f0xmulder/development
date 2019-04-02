@@ -21,8 +21,7 @@ const details = {
         "has_documentation": true,
         "has_specification": false,
         "has_contact_details": false,
-        "provides_sla": false,
-        "is_online": true
+        "provides_sla": false
     }
 }
 
