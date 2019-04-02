@@ -33,7 +33,7 @@ COPY e2e-tests/package.json \
 
 WORKDIR /go/src/commonground/developer.overheid.nl/e2e-tests
 
-RUN npm ci --no-progress --color=false --quiet
+RUN npm ci
 
 # Now copy the whole workdir.
 COPY e2e-tests /go/src/commonground/developer.overheid.nl/e2e-tests
