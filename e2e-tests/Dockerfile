@@ -26,14 +26,6 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
 #     browser.launch({executablePath: 'google-chrome-unstable'})
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-# Add user so we don't need --no-sandbox.
-RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser
-
-# Run everything after as non-privileged user.
-USER pptruser
-
 # Copy only package.json and package-lock.json to make the dependency fetching step optional.
 COPY e2e-tests/package.json \
      e2e-tests/package-lock.json \
