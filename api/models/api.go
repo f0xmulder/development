@@ -16,7 +16,7 @@ type API struct {
 	IsReferenceImplementation bool                `json:"is_reference_implementation"`
 	Relations                 map[string][]string `json:"relations,omitempty"`
 	TermsOfUse                APITermsOfUse       `json:"terms_of_use"`
-	Scores                    APIScores           `json:"scores,omitempty"`
+	Scores                    *APIScores          `json:"scores,omitempty"`
 }
 
 // APIContactDetails model

@@ -30,6 +30,7 @@ var dummyAPI = models.API{
 	false,
 	map[string][]string{},
 	models.APITermsOfUse{},
+	nil,
 }
 
 var dummyImplementationOfReferenceAPI = models.API{

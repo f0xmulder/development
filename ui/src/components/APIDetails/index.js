@@ -8,7 +8,6 @@ import Grade from '../../components/Grade'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
 import './index.css'
-import './APIDetails.css'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
