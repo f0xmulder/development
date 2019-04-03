@@ -7,7 +7,7 @@ require (
 	github.com/blevesearch/go-porterstemmer v1.0.2 // indirect
 	github.com/blevesearch/segment v0.0.0-20160915185041-762005e7a34f // indirect
 	github.com/boltdb/bolt v1.3.1 // indirect
-	github.com/couchbase/vellum v0.0.0-20190111184608-e91b68ff3efe // indirect
+	github.com/couchbase/vellum v0.0.0-20190403125519-462e86d8716b // indirect
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/glycerine/go-unsnap-stream v0.0.0-20181221182339-f9677308dec2 // indirect
 	github.com/go-chi/chi v4.0.1+incompatible

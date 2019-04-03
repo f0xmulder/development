@@ -12,6 +12,7 @@ github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
 github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
 github.com/couchbase/vellum v0.0.0-20190111184608-e91b68ff3efe h1:2o6Y7KMjJNsuMTF8f2H2eTKRhqH7+bQbjr+D+LnhE5M=
 github.com/couchbase/vellum v0.0.0-20190111184608-e91b68ff3efe/go.mod h1:prYTC8EgTu3gwbqJihkud9zRXISvyulAplQ6exdCo1g=
+github.com/couchbase/vellum v0.0.0-20190403125519-462e86d8716b/go.mod h1:prYTC8EgTu3gwbqJihkud9zRXISvyulAplQ6exdCo1g=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/edsrzf/mmap-go v1.0.0 h1:CEBF7HpRnUCSJgGUb5h1Gm7e3VkmVDrR8lvWVLtrOFw=
