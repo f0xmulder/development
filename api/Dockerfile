@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine AS build
+FROM golang:1.12-alpine AS build
 
 # Install build tools.
 RUN apk add --update git gcc musl-dev
