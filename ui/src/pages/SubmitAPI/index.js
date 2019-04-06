@@ -6,7 +6,7 @@ const SubmitAPI = () =>
         <h1>API toevoegen</h1>
         <p>
           Voor het toevoegen van een API aan <a href="https://developer.overheid.nl" target="_blank" rel="noopener noreferrer">developer.overheid.nl</a>,
-          gelieven een <a href="https://gitlab.com/commonground/developer.overheid.nl/merge_requests" target="_blank" rel="noopener noreferrer">Merge Request</a> aan te maken op
+          graag een <a href="https://gitlab.com/commonground/developer.overheid.nl/merge_requests" target="_blank" rel="noopener noreferrer">Merge Request</a> aanmaken op
           de <a href="https://gitlab.com/commonground/developer.overheid.nl" target="_blank" rel="noopener noreferrer">Git repository</a> met een JSON-bestand die de definitie van je API bevat.
         </p>
         <p>
