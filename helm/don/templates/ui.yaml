@@ -67,6 +67,7 @@ metadata: {{ include "don.common.metadata" . | nindent 2 }}
     ingress.kubernetes.io/browser-xss-filter: "true"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'"
     ingress.kubernetes.io/referrer-policy: "same-origin"
+    ingress.kubernetes.io/hsts-max-age: "315360000"
 {{ end }}
 spec:
 {{ if eq .Values.ingressClass "nginx" }}
