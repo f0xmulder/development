@@ -20,7 +20,7 @@ variables:
     - docker
     - nlx
 
-validate unit tests:
+Test validate:
   extends: .validate
   stage: test
   script:
