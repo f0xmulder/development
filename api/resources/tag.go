@@ -2,10 +2,11 @@ package resources
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
-	"net/http"
 )
 
 // TagResource enables injecting functions to deal with the Tag resource handlers
@@ -13,6 +14,17 @@ type TagResource struct {
 	Logger                      *zap.Logger
 	RootDirectoryAPIDefinitions string
 	ReadDirectory               func(directory string) ([]models.API, error)
+}
+
+// NewTagResource creates a new TagResource
+func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readDirectory func(directory string) ([]models.API, error)) *TagResource {
+	i := &TagResource{
+		Logger:                      logger,
+		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
+		ReadDirectory:               readDirectory,
+	}
+
+	return i
 }
 
 // via http://www.golangprograms.com/remove-duplicate-values-from-slice.html

@@ -2,18 +2,15 @@ package resources
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 
 	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 
-	bleveHttp "github.com/blevesearch/bleve/http"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
-	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"go.uber.org/zap"
 )
 
@@ -23,6 +20,18 @@ type APIResource struct {
 	RootDirectoryAPIDefinitions string
 	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
+}
+
+// NewAPIResource creates a new APIResource
+func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
+	readDirectory func(directory string) ([]models.API, error)) *APIResource {
+	i := &APIResource{
+		Logger:                      logger,
+		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
+		ReadFile:                    readFile,
+		ReadDirectory:               readDirectory,
+	}
+	return i
 }
 
 // via https://golangcode.com/get-a-url-parameter-from-a-request/
@@ -72,23 +81,11 @@ func filterAPIsByReferenceImplementation(items []models.API, implementingAPIID s
 func (rs APIResource) Routes() chi.Router {
 	r := chi.NewRouter()
 
-	outputList, errReadFile := rs.ReadDirectory("../data")
-
-	if errReadFile != nil {
-		log.Fatal(errReadFile)
-	}
-
-	indexDirectoryPath := "/tmp/.don-apis-bleve-index"
-	apiIndex := searchindex.Setup(outputList)
-	bleveHttp.RegisterIndexName(indexDirectoryPath, apiIndex)
-	searchHandler := bleveHttp.NewSearchHandler(indexDirectoryPath).ServeHTTP
-
 	r.Get("/", rs.List)
 	r.Route("/{id:[a-zA-Z0-9-]+}", func(r chi.Router) {
 		r.Get("/", rs.Get)
 		r.Get("/implemented-by", rs.ListImplementedBy)
 	})
-	r.Post("/search", searchHandler)
 
 	return r
 }

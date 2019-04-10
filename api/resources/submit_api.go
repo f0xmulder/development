@@ -19,6 +19,17 @@ type SubmitAPIResource struct {
 	CreateIssue  func(config gitlab.Config, issue gitlab.CreateIssueBody) (gitlab.Issue, error)
 }
 
+// NewSubmitAPIResource creates a new SubmitAPIResource
+func NewSubmitAPIResource(logger *zap.Logger, gitlabConfig gitlab.Config) *SubmitAPIResource {
+	i := &SubmitAPIResource{
+		Logger:       logger,
+		GitLabConfig: gitlabConfig,
+		CreateIssue:  gitlab.CreateIssue,
+	}
+
+	return i
+}
+
 // Routes return all routes that are exposed by the SubmitAPIResource
 func (rs SubmitAPIResource) Routes() chi.Router {
 	r := chi.NewRouter()
