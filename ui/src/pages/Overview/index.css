@@ -1,3 +1,23 @@
+.Overview .container {
+    max-width: initial;
+    padding: 0 40px;
+}
+
+.Overview__sections {
+    display: flex;
+    width: 100%;
+}
+
+.Overview__sidebar {
+    flex: 1 1 0;
+    max-width: 250px;
+    margin-right: 50px;
+}
+
+.Overview__list {
+    flex: 2 1 0;
+}
+
 .Overview ul li {
     padding-bottom: 8px;
 }

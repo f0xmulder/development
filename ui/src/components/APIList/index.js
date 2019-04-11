@@ -1,6 +1,6 @@
 import React from 'react'
 import {arrayOf, shape, string} from 'prop-types'
-import LinkToAPI from '../LinkToAPI';
+import LinkToAPI from '../LinkToAPI'
 
 const APIList = ({ apis }) =>
     <div className="APIList">
