@@ -70,17 +70,17 @@ class Overview extends Component {
                             null :
                             error ?
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
-                                apis ?
-                                    <div className="Overview__sections">
-                                        <div className="Overview__sidebar">
-                                            <APIFilter apis={apis} onSubmit={this.onFilterChange} />
-                                        </div>
-                                        <div className="Overview__list">
-                                            <APIList apis={apis}/>
-                                        </div>
+                                <div className="Overview__sections">
+                                    <div className="Overview__sidebar">
+                                        <APIFilter apis={apis} onSubmit={this.onFilterChange} />
                                     </div>
-                        :
-                                    <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
+                                    <div className="Overview__list">
+                                        (apis.length > 0) ?
+                                            <APIList apis={apis}/>
+                                        :
+                                            <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
+                                    </div>
+                                </div>
                     }
                 </div>
             </div>

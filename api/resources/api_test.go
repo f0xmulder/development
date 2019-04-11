@@ -126,6 +126,7 @@ func TestAPIList(t *testing.T) {
 				"",
 				nil,
 				tc.directoryReader,
+				nil,
 			}
 
 			req := httptest.NewRequest("GET", tc.url, nil)
@@ -183,6 +184,7 @@ func TestAPIGet(t *testing.T) {
 			zap.NewNop(),
 			tc.rootDirectoryAPIDefinitions,
 			tc.mockAPIFileReader,
+			nil,
 			nil,
 		}
 
@@ -256,6 +258,7 @@ func TestAPIImplementedBy(t *testing.T) {
 			tc.rootDirectoryAPIDefinitions,
 			nil,
 			tc.mockAPIDirectoryReader,
+			nil,
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
