@@ -75,10 +75,11 @@ class Overview extends Component {
                                         <APIFilter apis={apis} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
-                                        (apis.length > 0) ?
+                                        {apis.length > 0 ?
                                             <APIList apis={apis}/>
                                         :
                                             <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
+                                        }
                                     </div>
                                 </div>
                     }
