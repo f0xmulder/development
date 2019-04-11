@@ -2,12 +2,15 @@ package resources
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 
 	"gitlab.com/commonground/developer.overheid.nl/api/scores"
+	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
+	"github.com/blevesearch/bleve"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -20,16 +23,24 @@ type APIResource struct {
 	RootDirectoryAPIDefinitions string
 	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
+	SearchIndex                 bleve.Index
 }
 
 // NewAPIResource creates a new APIResource
 func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
 	readDirectory func(directory string) ([]models.API, error)) *APIResource {
+
+	outputList, errReadFile := readDirectory("../data")
+	if errReadFile != nil {
+		log.Fatal(errReadFile)
+	}
+
 	i := &APIResource{
 		Logger:                      logger,
 		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
 		ReadFile:                    readFile,
 		ReadDirectory:               readDirectory,
+		SearchIndex:                 searchindex.Setup(outputList),
 	}
 	return i
 }
@@ -95,22 +106,45 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	outputList, errReadFile := rs.ReadDirectory("../data")
-	tagsFilterValue := getQueryParam(r, "tags")
+	if errReadFile != nil {
+		rs.Logger.Error("oops, something went wrong while getting the info of an API", zap.Error(errReadFile))
+		http.Error(w, "server error", http.StatusInternalServerError)
+		return
+	}
 
+	tagsFilterValue := getQueryParam(r, "tags")
 	if len(tagsFilterValue) > 0 {
 		outputList = filterAPIsByTag(tagsFilterValue, outputList)
+	}
+
+	q := getQueryParam(r, "q")
+	if len(q) > 0 {
+		query := bleve.NewQueryStringQuery(q)
+		searchRequest := bleve.NewSearchRequest(query)
+
+		organizationFacet := bleve.NewFacetRequest("organization_name", 10)
+		searchRequest.AddFacet("organization_name", organizationFacet)
+
+		tagsFacet := bleve.NewFacetRequest("tags", 10)
+		searchRequest.AddFacet("tags", tagsFacet)
+
+		apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", 10)
+		searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
+
+		searchResult, err := rs.SearchIndex.Search(searchRequest)
+		if err != nil {
+			rs.Logger.Error("failed to output APIs", zap.Error(err))
+			http.Error(w, "server error", http.StatusInternalServerError)
+			return
+		}
+
+		json.NewEncoder(w).Encode(searchResult)
 	}
 
 	err := json.NewEncoder(w).Encode(outputList)
 
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
-		http.Error(w, "server error", http.StatusInternalServerError)
-		return
-	}
-
-	if errReadFile != nil {
-		rs.Logger.Error("oops, something went wrong while getting the info of an API", zap.Error(errReadFile))
 		http.Error(w, "server error", http.StatusInternalServerError)
 		return
 	}
