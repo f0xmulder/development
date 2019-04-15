@@ -1,3 +1,7 @@
 .APIFilter label {
     display: block;
 }
+
+.APIFilter h2 {
+    font-size: 1.3em;
+}

@@ -11,7 +11,7 @@ const APIFilter = ({ apis, onSubmit }) =>
         >
             {({ handleSubmit, values }) => (
                 <form onSubmit={handleSubmit}>
-                    <h4>Tags</h4>
+                    <h2>Tags</h2>
                     <FieldArray name="tags">
                         {arrayHelpers => (
                                 <React.Fragment>
@@ -34,7 +34,7 @@ const APIFilter = ({ apis, onSubmit }) =>
                         )}
                     </FieldArray>
 
-                    <h4>Organisatie</h4>
+                    <h2>Organisatie</h2>
                     <FieldArray name="organization_name">
                         {arrayHelpers => (
                                 <React.Fragment>
@@ -58,7 +58,7 @@ const APIFilter = ({ apis, onSubmit }) =>
                     </FieldArray>
 
 
-                    <h4>API type</h4>
+                    <h2>API type</h2>
                     <FieldArray name="api_specification_type">
                         {arrayHelpers => (
                                 <React.Fragment>
