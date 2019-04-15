@@ -11,7 +11,6 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
 	"github.com/blevesearch/bleve"
-	"github.com/blevesearch/bleve/search"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -25,13 +24,6 @@ type APIResource struct {
 	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
 	SearchIndex                 bleve.Index
-}
-
-// APIList contains a list of API's with their filterable facets and total count
-type APIList struct {
-	Total  uint64              `json:"total"`
-	Facets search.FacetResults `json:"facets"`
-	APIs   []models.API        `json:"apis"`
 }
 
 // NewAPIResource creates a new APIResource
@@ -145,7 +137,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := APIList{
+	result := models.APIList{
 		Total:  searchResult.Total,
 		Facets: searchResult.Facets,
 		APIs:   outputList,
