@@ -9,7 +9,7 @@ class Overview extends Component {
         super(props)
 
         this.state = {
-            apis: [],
+            list: {},
             filters: {},
             error: false,
             loaded: false
@@ -33,8 +33,8 @@ class Overview extends Component {
     componentDidMount() {
         this
             .fetchApiList()
-            .then(apis => {
-                this.setState({ apis, loaded: true })
+            .then(list => {
+                this.setState({ list, loaded: true })
             }, error => {
                 this.setState({ error: true, loaded: true })
                 console.error(error)
@@ -45,8 +45,8 @@ class Overview extends Component {
         if (prevState.filters !== this.state.filters) {
             this
                 .fetchApiList()
-                .then(apis => {
-                    this.setState({ apis })
+                .then(list => {
+                    this.setState({ list })
                 }, error => {
                     this.setState({ error: true })
                     console.log(error)
@@ -59,7 +59,7 @@ class Overview extends Component {
     }
 
     render() {
-        const { apis, error, loaded } = this.state
+        const { list, error, loaded } = this.state
 
         return (
             <div className="Overview">
@@ -72,11 +72,11 @@ class Overview extends Component {
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                                 <div className="Overview__sections">
                                     <div className="Overview__sidebar">
-                                        <APIFilter apis={apis} onSubmit={this.onFilterChange} />
+                                        <APIFilter facets={list.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
-                                        {apis.length > 0 ?
-                                            <APIList apis={apis}/>
+                                        {list.apis.length > 0 ?
+                                            <APIList apis={list.apis}/>
                                         :
                                             <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
                                         }

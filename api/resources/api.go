@@ -11,6 +11,7 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
 	"github.com/blevesearch/bleve"
+	"github.com/blevesearch/bleve/search"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -24,6 +25,13 @@ type APIResource struct {
 	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
 	SearchIndex                 bleve.Index
+}
+
+// APIList contains a list of API's with their filterable facets and total count
+type APIList struct {
+	Total  uint64              `json:"total"`
+	Facets search.FacetResults `json:"facets"`
+	APIs   []models.API        `json:"apis"`
 }
 
 // NewAPIResource creates a new APIResource
@@ -46,11 +54,11 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 }
 
 // via https://golangcode.com/get-a-url-parameter-from-a-request/
-func getQueryParam(r *http.Request, key string) string {
+func getQueryParam(r *http.Request, key string, defaultValue string) string {
 	keys, ok := r.URL.Query()[key]
 
 	if !ok || len(keys[0]) < 1 {
-		return ""
+		return defaultValue
 	}
 
 	return keys[0]
@@ -112,37 +120,38 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tagsFilterValue := getQueryParam(r, "tags")
+	tagsFilterValue := getQueryParam(r, "tags", "")
 	if len(tagsFilterValue) > 0 {
 		outputList = filterAPIsByTag(tagsFilterValue, outputList)
 	}
 
-	q := getQueryParam(r, "q")
-	if len(q) > 0 {
-		query := bleve.NewQueryStringQuery(q)
-		searchRequest := bleve.NewSearchRequest(query)
+	q := getQueryParam(r, "q", "*")
+	query := bleve.NewQueryStringQuery(q)
+	searchRequest := bleve.NewSearchRequest(query)
 
-		organizationFacet := bleve.NewFacetRequest("organization_name", 10)
-		searchRequest.AddFacet("organization_name", organizationFacet)
+	organizationFacet := bleve.NewFacetRequest("organization_name", 10)
+	searchRequest.AddFacet("organization_name", organizationFacet)
 
-		tagsFacet := bleve.NewFacetRequest("tags", 10)
-		searchRequest.AddFacet("tags", tagsFacet)
+	tagsFacet := bleve.NewFacetRequest("tags", 10)
+	searchRequest.AddFacet("tags", tagsFacet)
 
-		apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", 10)
-		searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
+	apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", 10)
+	searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
 
-		searchResult, err := rs.SearchIndex.Search(searchRequest)
-		if err != nil {
-			rs.Logger.Error("failed to output APIs", zap.Error(err))
-			http.Error(w, "server error", http.StatusInternalServerError)
-			return
-		}
-
-		json.NewEncoder(w).Encode(searchResult)
+	searchResult, err := rs.SearchIndex.Search(searchRequest)
+	if err != nil {
+		rs.Logger.Error("failed to output APIs", zap.Error(err))
+		http.Error(w, "server error", http.StatusInternalServerError)
+		return
 	}
 
-	err := json.NewEncoder(w).Encode(outputList)
+	result := APIList{
+		Total:  searchResult.Total,
+		Facets: searchResult.Facets,
+		APIs:   outputList,
+	}
 
+	err = json.NewEncoder(w).Encode(result)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)

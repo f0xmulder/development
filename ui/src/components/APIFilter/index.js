@@ -1,9 +1,15 @@
 import React from 'react'
 import {Formik, Field, FieldArray} from 'formik'
-import {arrayOf, shape, string, func} from 'prop-types'
+import {object, func} from 'prop-types'
 import './index.css'
 
-const APIFilter = ({ apis, onSubmit }) =>
+const filters = [
+    { key: 'tags', label: 'Tags' },
+    { key: 'organization_name', label: 'Organisatie' },
+    { key: 'api_specification_type', label: 'API type' },
+]
+
+const APIFilter = ({ facets, onSubmit }) =>
     <div className="APIFilter">
         <Formik
             initialValues={{ tags: [], organization_name: [], api_specification_type: [] }}
@@ -11,86 +17,39 @@ const APIFilter = ({ apis, onSubmit }) =>
         >
             {({ handleSubmit, values }) => (
                 <form onSubmit={handleSubmit}>
-                    <h2>Tags</h2>
-                    <FieldArray name="tags">
-                        {arrayHelpers => (
-                                <React.Fragment>
-                                    {['zgw', 'amsterdam'].map((value, index) => (
-                                        <label key={index} htmlFor={`tags.${index}`}>
-                                            <Field
-                                                type="checkbox"
-                                                name={`tags.${index}`}
-                                                id={`tags.${index}`}
-                                                value={value}
-                                                onChange={() => {
-                                                    values.tags.indexOf(value) === -1 ? arrayHelpers.insert(index, value) : arrayHelpers.remove(values.tags.indexOf(value))
-                                                    setTimeout(() => handleSubmit(), 0)
-                                                }}
-                                            />
-                                            {value}
-                                        </label>
-                                    ))}
-                                </React.Fragment>
-                        )}
-                    </FieldArray>
-
-                    <h2>Organisatie</h2>
-                    <FieldArray name="organization_name">
-                        {arrayHelpers => (
-                                <React.Fragment>
-                                    {['VNG', 'DB1'].map((value, index) => (
-                                        <label key={index} htmlFor={`organization_name.${index}`}>
-                                            <Field
-                                                type="checkbox"
-                                                name={`organization_name.${index}`}
-                                                id={`organization_name.${index}`}
-                                                value={value}
-                                                onChange={() => {
-                                                    values.organization_name.indexOf(value) === -1 ? arrayHelpers.insert(index, value) : arrayHelpers.remove(values.organization_name.indexOf(value))
-                                                    setTimeout(() => handleSubmit(), 0)
-                                                }}
-                                            />
-                                            {value}
-                                        </label>
-                                    ))}
-                                </React.Fragment>
-                        )}
-                    </FieldArray>
-
-
-                    <h2>API type</h2>
-                    <FieldArray name="api_specification_type">
-                        {arrayHelpers => (
-                                <React.Fragment>
-                                    {['OAS2', 'OAS3', 'gRPC'].map((value, index) => (
-                                        <label key={index} htmlFor={`api_specification_type.${index}`}>
-                                            <Field
-                                                type="checkbox"
-                                                name={`api_specification_type.${index}`}
-                                                id={`api_specification_type.${index}`}
-                                                value={value}
-                                                onChange={() => {
-                                                    values.api_specification_type.indexOf(value) === -1 ? arrayHelpers.insert(index, value) : arrayHelpers.remove(values.api_specification_type.indexOf(value))
-                                                    setTimeout(() => handleSubmit(), 0)
-                                                }}
-                                            />
-                                            {value}
-                                        </label>
-                                    ))}
-                                </React.Fragment>
-                        )}
-                    </FieldArray>
+                    {filters.map((filter, i) => (
+                        <React.Fragment key={i}>
+                            <h2>{filter.label}</h2>
+                            <FieldArray name={filter.key}>
+                                {arrayHelpers => (
+                                    <React.Fragment>
+                                        {facets[filter.key].terms.map((facet, index) => (
+                                            <label key={index} htmlFor={`${filter.key}.${index}`}>
+                                                <Field
+                                                    type="checkbox"
+                                                    name={`${filter.key}.${index}`}
+                                                    id={`${filter.key}.${index}`}
+                                                    value={facet.term}
+                                                    onChange={() => {
+                                                        values[filter.key].indexOf(facet.term) === -1 ? arrayHelpers.insert(index, facet.term) : arrayHelpers.remove(values[filter.key].indexOf(facet.term))
+                                                        setTimeout(() => handleSubmit(), 0)
+                                                    }}
+                                                />
+                                                {facet.term} ({facet.count})
+                                            </label>
+                                        ))}
+                                    </React.Fragment>
+                                )}
+                            </FieldArray>
+                        </React.Fragment>
+                    ))}
                 </form>
             )}
         </Formik>
     </div>
 
 APIFilter.propTypes = {
-    apis: arrayOf(shape({
-        id: string.isRequired,
-        service_name: string.isRequired,
-        organization_name: string.isRequired
-    })),
+    facets: object.isRequired,
     onSubmit: func.isRequired
 }
 
