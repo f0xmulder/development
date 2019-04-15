@@ -1,6 +1,7 @@
 import React from 'react'
 import {Formik, Field, FieldArray} from 'formik'
 import {arrayOf, shape, string, func} from 'prop-types'
+import './index.css'
 
 const APIFilter = ({ apis, onSubmit }) =>
     <div className="APIFilter">
