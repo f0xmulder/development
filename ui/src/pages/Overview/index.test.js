@@ -25,23 +25,23 @@ describe('Overview', () => {
 
   describe('loading the APIs', () => {
     it('should store the available apis as state', () => {
-      const apiPromise = Promise.resolve([dummyAPI])
+      const apiPromise = Promise.resolve({ apis: [dummyAPI] })
       Overview.prototype.fetchApiList = jest.fn(() => apiPromise)
 
       const wrapper = shallow(<Overview/>)
       return apiPromise
           .then(() => {
-            expect(wrapper.state('apis')).toEqual([dummyAPI])
+            expect(wrapper.state('list')).toEqual({ apis: [dummyAPI] })
           })
     })
   })
 
   describe('listing the available apis', () => {
-    let apiList
+    let wrapper, apiList
 
     beforeEach(() => {
-      const wrapper = shallow(<Overview/>)
-      wrapper.setState({ apis: [dummyAPI], loaded: true })
+      wrapper = shallow(<Overview/>)
+      wrapper.setState({ list: { apis: [dummyAPI] }, loaded: true })
       apiList = wrapper.find('APIList')
     })
 
@@ -53,7 +53,7 @@ describe('Overview', () => {
   describe('when no apis are available', () => {
     it('should show a message saying no APIs are available yet', () => {
       const wrapper = shallow(<Overview/>)
-      wrapper.setState({ apis: [], loaded: true })
+      wrapper.setState({ list: { apis: [] }, loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="no-apis-available-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
     })

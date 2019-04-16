@@ -40,13 +40,13 @@ describe('Tag', () => {
 
     describe('loading the APIs', () => {
         it('should store the available apis as state', () => {
-            const apiPromise = Promise.resolve([dummyAPI])
+            const apiPromise = Promise.resolve({ apis: [dummyAPI] })
             Tag.prototype.fetchApiList = jest.fn(() => apiPromise)
 
             const wrapper = shallow(<Tag/>)
             return apiPromise
                 .then(() => {
-                    expect(wrapper.state('apis')).toEqual([dummyAPI])
+                    expect(wrapper.state('list')).toEqual({ apis: [dummyAPI] })
                 })
         })
     })
@@ -56,7 +56,7 @@ describe('Tag', () => {
 
         beforeEach(() => {
             const wrapper = shallow(<Tag/>)
-            wrapper.setState({apis: [dummyAPI], loaded: true})
+            wrapper.setState({ list: { apis: [dummyAPI] }, loaded: true})
             apiList = wrapper.find('APIList')
         })
 

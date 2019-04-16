@@ -29,7 +29,7 @@ class Overview extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.location.search !== this.props.location.search) {
+        if (prevProps.location && (prevProps.location.search !== this.props.location.search)) {
             this.fetchApiList()
                 .then(list => {
                     this.setState({ list })
@@ -83,7 +83,7 @@ class Overview extends Component {
 
     getFilterValues() {
         const { location } = this.props
-        const values = new URLSearchParams(location.search)
+        const values = new URLSearchParams(location ? location.search : {})
 
         return {
             q: values.get('q') || '',
@@ -110,7 +110,7 @@ class Overview extends Component {
                                         <APIFilter initialValues={this.getFilterValues()} facets={list.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
-                                        {list.apis.length > 0 ?
+                                        {list && list.apis && list.apis.length > 0 ?
                                             <APIList apis={list.apis} />
                                         :
                                             <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>

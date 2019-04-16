@@ -63,7 +63,7 @@ class Tag extends Component {
                         null :
                         error ?
                             <p data-test="error-message">Failed loading the APIs for tag '{ tag }'</p> :
-                            list && list.apis.length > 0 ?
+                            list && list.apis && list.apis.length > 0 ?
                                 <APIList apis={list.apis} />
                     :
                                 <p data-test="no-apis-found-message">No APIs found for tag '{ tag }'</p>
