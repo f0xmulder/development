@@ -7,7 +7,7 @@ class Tag extends Component {
         super(props)
 
         this.state = {
-            apis: [],
+            list: {},
             error: false,
             loaded: false
         }
@@ -27,8 +27,8 @@ class Tag extends Component {
     loadAPIsForTag(tag) {
         return this
             .fetchApiList(tag)
-            .then(apis => {
-                this.setState({ apis, loaded: true })
+            .then(list => {
+                this.setState({ list, loaded: true })
             }, error => {
                 this.setState({ error: true, loaded: true })
                 console.error(error)
@@ -52,7 +52,7 @@ class Tag extends Component {
     }
 
     render() {
-        const { apis, error, loaded } = this.state
+        const { list, error, loaded } = this.state
         const { match: { params: { tag } } } = this.props
 
         return (
@@ -63,8 +63,8 @@ class Tag extends Component {
                         null :
                         error ?
                             <p data-test="error-message">Failed loading the APIs for tag '{ tag }'</p> :
-                            apis && apis.length > 0 ?
-                                <APIList apis={apis} />
+                            list && list.apis.length > 0 ?
+                                <APIList apis={list.apis} />
                     :
                                 <p data-test="no-apis-found-message">No APIs found for tag '{ tag }'</p>
                 }
