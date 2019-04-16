@@ -12,6 +12,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"go.uber.org/zap"
 )
 
@@ -71,23 +72,6 @@ func mockAPIFileReaderWithError(path string) (models.API, error) {
 	return models.API{}, errors.New("Unable to read file")
 }
 
-func TestFilterAPIsByTag(t *testing.T) {
-	testCases := []struct {
-		query    string
-		list     []models.API
-		expected []models.API
-	}{
-		{"test-tag", []models.API{dummyAPI}, []models.API{dummyAPI}},
-		{"a", []models.API{dummyAPI}, []models.API{}},
-	}
-
-	for _, tc := range testCases {
-		t.Run(fmt.Sprintf("%s", tc.query), func(t *testing.T) {
-			assert.Equal(t, tc.expected, filterAPIsByTag(tc.query, tc.list))
-		})
-	}
-}
-
 func TestAPIList(t *testing.T) {
 	testCases := []struct {
 		directoryReader  func(directory string) ([]models.API, error)
@@ -101,21 +85,21 @@ func TestAPIList(t *testing.T) {
 			"/list",
 			200,
 			"application/json",
-			"[]\n",
+			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
 			"/list?tags=test-tag",
 			200,
 			"application/json",
-			"[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]\n",
+			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
 			"/list?tags=tag-which-does-not-appear-for-any-result",
 			200,
 			"application/json",
-			"[]\n",
+			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[]}\n",
 		},
 	}
 
@@ -126,7 +110,7 @@ func TestAPIList(t *testing.T) {
 				"",
 				nil,
 				tc.directoryReader,
-				nil,
+				searchindex.Setup([]models.API{dummyAPI}),
 			}
 
 			req := httptest.NewRequest("GET", tc.url, nil)
