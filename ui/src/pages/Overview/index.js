@@ -8,37 +8,13 @@ class Overview extends Component {
         super(props)
 
         this.state = {
-            filters: this.getInitialValues(),
             list: {},
             error: false,
             loaded: false
         }
 
-        this.getInitialValues = this.getInitialValues.bind(this)
+        this.getFilterValues = this.getFilterValues.bind(this)
         this.onFilterChange = this.onFilterChange.bind(this)
-    }
-
-    getInitialValues() {
-        const { location } = this.props
-        const values = new URLSearchParams(location.search)
-
-        return {
-            q: values.get('q') || '',
-            tags: values.getAll('tags'),
-            organization_name: values.getAll('organization_name'),
-            api_specification_type: values.getAll('api_specification_type')
-        }
-    }
-
-    fetchApiList() {
-        return fetch(`/api/apis?${this.generateURL(this.state.filters)}`)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-                }
-            })
     }
 
     componentDidMount() {
@@ -53,9 +29,8 @@ class Overview extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.filters !== this.state.filters) {
-            this
-                .fetchApiList()
+        if (prevProps.location.search !== this.props.location.search) {
+            this.fetchApiList()
                 .then(list => {
                     this.setState({ list })
                 }, error => {
@@ -64,23 +39,28 @@ class Overview extends Component {
         }
     }
 
-    onFilterChange(filters) {
-        let newFilters
-        if (filters.q !== this.state.filters.q) {
-            newFilters = {
-                q: filters.q || '',
-                tags: [],
-                organization_name: [],
-                api_specification_type: []
-            }
-        } else {
-            newFilters = filters
+    fetchApiList() {
+        return fetch(`/api/apis?${this.generateURL(this.getFilterValues())}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
+                }
+            })
+    }
+
+    onFilterChange(newFilters) {
+        const currentFilters = this.getFilterValues()
+
+        if (newFilters.q !== currentFilters.q) {
+            newFilters.tags = []
+            newFilters.organization_name = []
+            newFilters.api_specification_type = []
         }
 
-        this.setState({ filters: newFilters })
-
         const { history } = this.props
-        history.push(`?${this.generateURL(filters)}`)
+        history.push(`?${this.generateURL(newFilters)}`)
     }
 
     generateURL(filters) {
@@ -101,6 +81,18 @@ class Overview extends Component {
         return urlParams
     }
 
+    getFilterValues() {
+        const { location } = this.props
+        const values = new URLSearchParams(location.search)
+
+        return {
+            q: values.get('q') || '',
+            tags: values.getAll('tags'),
+            organization_name: values.getAll('organization_name'),
+            api_specification_type: values.getAll('api_specification_type')
+        }
+    }
+
     render() {
         const { list, error, loaded } = this.state
 
@@ -115,7 +107,7 @@ class Overview extends Component {
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                                 <div className="Overview__sections">
                                     <div className="Overview__sidebar">
-                                        <APIFilter initialValues={this.state.filters} facets={list.facets} onSubmit={this.onFilterChange} />
+                                        <APIFilter initialValues={this.getFilterValues()} facets={list.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
                                         {list.apis.length > 0 ?
