@@ -11,6 +11,7 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
 	"github.com/blevesearch/bleve"
+	"github.com/blevesearch/bleve/search"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -45,31 +46,39 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	return i
 }
 
-// via https://golangcode.com/get-a-url-parameter-from-a-request/
-func getQueryParam(r *http.Request, key string, defaultValue string) string {
+func getQueryParam(r *http.Request, key string) string {
 	keys, ok := r.URL.Query()[key]
 
-	if !ok || len(keys[0]) < 1 {
-		return defaultValue
+	if ok {
+		return keys[0]
 	}
 
-	return keys[0]
+	return ""
 }
 
-func filterAPIsByTag(tag string, items []models.API) []models.API {
-	hash := make(map[string][]models.API)
+func getQueryParams(r *http.Request, key string) []string {
+	values, ok := r.URL.Query()[key]
+
+	if ok {
+		return values
+	}
+
+	return []string{}
+}
+
+func filterListBySearchResult(items []models.API, matchCollection search.DocumentMatchCollection) []models.API {
+	hash := make(map[string]models.API)
 
 	for _, API := range items {
-		for _, tag := range API.Tags {
-			hash[string(tag)] = append(hash[string(tag)], API)
-		}
+		hash[API.ID] = API
 	}
 
-	if hash[tag] != nil {
-		return hash[tag]
+	returnArray := []models.API{}
+	for _, document := range matchCollection {
+		returnArray = append(returnArray, hash[document.ID])
 	}
 
-	return []models.API{}
+	return returnArray
 }
 
 const RELATION_TYPE_REFERENCE_IMPLEMENTATION = "reference-implementation"
@@ -112,13 +121,15 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tagsFilterValue := getQueryParam(r, "tags", "")
-	if len(tagsFilterValue) > 0 {
-		outputList = filterAPIsByTag(tagsFilterValue, outputList)
+	query := bleve.NewConjunctionQuery()
+
+	q := getQueryParam(r, "q")
+	if q != "" {
+		query.AddQuery(bleve.NewQueryStringQuery(q))
+	} else {
+		query.AddQuery(bleve.NewMatchAllQuery())
 	}
 
-	q := getQueryParam(r, "q", "*")
-	query := bleve.NewQueryStringQuery(q)
 	searchRequest := bleve.NewSearchRequest(query)
 
 	organizationFacet := bleve.NewFacetRequest("organization_name", 10)
@@ -130,6 +141,41 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", 10)
 	searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
 
+	totalSearchResult, err := rs.SearchIndex.Search(searchRequest)
+	if err != nil {
+		rs.Logger.Error("failed to output APIs", zap.Error(err))
+		http.Error(w, "server error", http.StatusInternalServerError)
+		return
+	}
+
+	tags := getQueryParams(r, "tags")
+	if len(tags) > 0 {
+		tagsQuery := bleve.NewDisjunctionQuery()
+		for _, tag := range tags {
+			tagsQuery.AddQuery(bleve.NewPhraseQuery([]string{tag}, "tags"))
+		}
+		query.AddQuery(tagsQuery)
+	}
+
+	organizationNames := getQueryParams(r, "organization_name")
+	if len(organizationNames) > 0 {
+		organizationQuery := bleve.NewDisjunctionQuery()
+		for _, organizationName := range organizationNames {
+			organizationQuery.AddQuery(bleve.NewPhraseQuery([]string{organizationName}, "organization_name"))
+		}
+		query.AddQuery(organizationQuery)
+	}
+
+	apiSpecificationTypes := getQueryParams(r, "api_specification_type")
+	if len(apiSpecificationTypes) > 0 {
+		apiSpecificationTypesQuery := bleve.NewDisjunctionQuery()
+		for _, apiSpecificationType := range apiSpecificationTypes {
+			apiSpecificationTypesQuery.AddQuery(bleve.NewPhraseQuery([]string{apiSpecificationType}, "api_specification_type"))
+		}
+		query.AddQuery(apiSpecificationTypesQuery)
+	}
+
+	searchRequest = bleve.NewSearchRequest(query)
 	searchResult, err := rs.SearchIndex.Search(searchRequest)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
@@ -138,9 +184,9 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	}
 
 	result := models.APIList{
-		Total:  searchResult.Total,
-		Facets: searchResult.Facets,
-		APIs:   outputList,
+		Total:  totalSearchResult.Total,
+		Facets: totalSearchResult.Facets,
+		APIs:   filterListBySearchResult(outputList, searchResult.Hits),
 	}
 
 	err = json.NewEncoder(w).Encode(result)
