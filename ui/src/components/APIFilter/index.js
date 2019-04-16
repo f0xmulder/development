@@ -30,7 +30,7 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => {
                                             <label key={index} htmlFor={`${filter.key}.${index}`}>
                                                 <Field
                                                     type="checkbox"
-                                                    name={`${filter.key}[]`}
+                                                    name={`${filter.key}.${index}`}
                                                     id={`${filter.key}.${index}`}
                                                     value={facet.term}
                                                     checked={values[filter.key].indexOf(facet.term) !== -1}
