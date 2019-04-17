@@ -231,6 +231,7 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// ListImplementedBy returns a list of implemented API's for a specific reference API
 func (rs APIResource) ListImplementedBy(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
