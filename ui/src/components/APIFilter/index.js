@@ -1,8 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import {Formik, Field, FieldArray} from 'formik'
-import {object, func} from 'prop-types'
+import { Formik, Field } from 'formik'
+import { object, func } from 'prop-types'
 import './index.css'
+import CheckboxField from '../CheckboxField';
 
 const filters = [
     { key: 'tags', label: 'Tags' },
@@ -10,8 +11,7 @@ const filters = [
     { key: 'api_specification_type', label: 'API type' },
 ]
 
-const APIFilter = ({ initialValues, facets, onSubmit }) => {
-    return (
+const APIFilter = ({ initialValues, facets, onSubmit }) => (
     <div className="APIFilter">
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ handleSubmit, values }) => (
@@ -22,37 +22,20 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => {
 
                     {filters && filters.map((filter, i) => (
                         <React.Fragment key={i}>
-                            <h2>{filter.label}</h2>
-                            <FieldArray name={filter.key}>
-                                {arrayHelpers => (
-                                    <React.Fragment>
-                                        {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.map((facet, index) => (
-                                            <label key={index} htmlFor={`${filter.key}.${index}`}>
-                                                <Field
-                                                    type="checkbox"
-                                                    name={`${filter.key}.${index}`}
-                                                    id={`${filter.key}.${index}`}
-                                                    value={facet.term}
-                                                    checked={values[filter.key].indexOf(facet.term) !== -1}
-                                                    onChange={() => {
-                                                        values[filter.key].indexOf(facet.term) === -1 ? arrayHelpers.insert(index, facet.term) : arrayHelpers.remove(values[filter.key].indexOf(facet.term))
-                                                        setTimeout(() => handleSubmit(), 0)
-                                                    }}
-                                                />
-                                                {facet.term} ({facet.count})
-                                            </label>
-                                        ))}
-                                    </React.Fragment>
-                                )}
-                            </FieldArray>
+                            {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
+                                <React.Fragment>
+                                    <h2>{filter.label}</h2>
+                                    <CheckboxField facets={facets} filter={filter} values={values} handleSubmit={handleSubmit} />
+                                </React.Fragment>
+                            )}
                         </React.Fragment>
                     ))}
                 </form>
             )}
         </Formik>
     </div>
-    )
-}
+)
+
 APIFilter.propTypes = {
     facets: object.isRequired,
     onSubmit: func.isRequired
