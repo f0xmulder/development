@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
 import './index.css'
@@ -10,6 +9,15 @@ const filters = [
     { key: 'organization_name', label: 'Organisatie' },
     { key: 'api_specification_type', label: 'API type' },
 ]
+
+const formatOptions = (terms) => {
+    return terms.map((term) => {
+        return {
+            value: term.term,
+            label: `${term.term} (${term.count})`
+        }
+    })
+}
 
 const APIFilter = ({ initialValues, facets, onSubmit }) => (
     <div className="APIFilter">
@@ -25,7 +33,12 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => (
                             {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
                                 <React.Fragment>
                                     <h2>{filter.label}</h2>
-                                    <CheckboxField facets={facets} filter={filter} values={values} handleSubmit={handleSubmit} />
+                                    <CheckboxField
+                                        name={filter.key}
+                                        options={formatOptions(facets[filter.key].terms)}
+                                        value={values[filter.key]}
+                                        onChange={handleSubmit}
+                                    />
                                 </React.Fragment>
                             )}
                         </React.Fragment>
@@ -41,4 +54,4 @@ APIFilter.propTypes = {
     onSubmit: func.isRequired
 }
 
-export default withRouter(APIFilter)
+export default APIFilter

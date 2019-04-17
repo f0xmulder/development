@@ -1,29 +1,43 @@
 import React from 'react'
+import { string, arrayOf, shape, func } from 'prop-types'
 import { Field, FieldArray } from 'formik'
 
-const CheckboxField = ({ facets, filter, values, handleSubmit }) => (
-    <FieldArray name={filter.key}>
+const CheckboxField = ({ name, options, value, onChange }) => (
+    <FieldArray name={name}>
         {arrayHelpers => (
             <React.Fragment>
-                {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.map((facet, index) => (
-                    <label key={index} htmlFor={`${filter.key}.${index}`}>
+                {options.map((option, index) => (
+                    <label key={index} htmlFor={`${name}.${index}`}>
                         <Field
-                            type="checkbox"
-                            name={`${filter.key}.${index}`}
-                            id={`${filter.key}.${index}`}
-                            value={facet.term}
-                            checked={values[filter.key].indexOf(facet.term) !== -1}
+                            type='checkbox'
+                            id={`${name}.${index}`}
+                            name={`${name}.${index}`}
+                            value={option.value}
+                            checked={value.indexOf(option.value) !== -1}
                             onChange={() => {
-                                values[filter.key].indexOf(facet.term) === -1 ? arrayHelpers.insert(index, facet.term) : arrayHelpers.remove(values[filter.key].indexOf(facet.term))
-                                setTimeout(() => handleSubmit(), 0)
+                                value.indexOf(option.value) === -1 ? arrayHelpers.insert(index, option.value) : arrayHelpers.remove(value.indexOf(option.value))
+                                onChange && setTimeout(() => onChange(), 0)
                             }}
                         />
-                        {facet.term} ({facet.count})
+                        {option.label}
                     </label>
                 ))}
             </React.Fragment>
         )}
     </FieldArray>
 )
+
+CheckboxField.propTypes = {
+    name: string.isRequired,
+    options: arrayOf(shape({
+        value: string.isRequired,
+        label: string.isRequired
+    })),
+    onChange: func.isRequired
+}
+
+CheckboxField.defaultProps = {
+    onChange: null
+}
 
 export default CheckboxField
