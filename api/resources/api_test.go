@@ -85,7 +85,7 @@ func TestAPIList(t *testing.T) {
 			"/list",
 			200,
 			"application/json",
-			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\",\"tags\":null,\"badges\":null,\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]}\n",
+			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
@@ -99,7 +99,7 @@ func TestAPIList(t *testing.T) {
 			"/list?tags=tag-which-does-not-appear-for-any-result",
 			200,
 			"application/json",
-			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[]}\n",
+			"{\"total\":0,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":0}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":0}]},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":0}]}},\"apis\":[]}\n",
 		},
 	}
 
@@ -110,7 +110,7 @@ func TestAPIList(t *testing.T) {
 				"",
 				nil,
 				tc.directoryReader,
-				searchindex.Setup([]models.API{dummyAPI}),
+				searchindex.NewIndex(&[]models.API{dummyAPI}),
 			}
 
 			req := httptest.NewRequest("GET", tc.url, nil)
@@ -169,7 +169,7 @@ func TestAPIGet(t *testing.T) {
 			tc.rootDirectoryAPIDefinitions,
 			tc.mockAPIFileReader,
 			nil,
-			nil,
+			searchindex.Index{},
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
@@ -242,7 +242,7 @@ func TestAPIImplementedBy(t *testing.T) {
 			tc.rootDirectoryAPIDefinitions,
 			nil,
 			tc.mockAPIDirectoryReader,
-			nil,
+			searchindex.Index{},
 		}
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
