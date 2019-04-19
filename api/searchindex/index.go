@@ -7,6 +7,7 @@ import (
 	"github.com/blevesearch/bleve/analysis/analyzer/keyword"
 	"github.com/blevesearch/bleve/analysis/lang/nl"
 	"github.com/blevesearch/bleve/search"
+	"github.com/blevesearch/bleve/search/query"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
@@ -27,10 +28,9 @@ func NewIndex(apis *[]models.API) Index {
 	keywordFieldMapping.Analyzer = keyword.Name
 
 	apiMapping := bleve.NewDocumentMapping()
-	apiMapping.AddFieldMappingsAt("organization_name", keywordFieldMapping)
-	apiMapping.AddFieldMappingsAt("tags", keywordFieldMapping)
-	apiMapping.AddFieldMappingsAt("badges", keywordFieldMapping)
-	apiMapping.AddFieldMappingsAt("api_specification_type", keywordFieldMapping)
+	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
+		apiMapping.AddFieldMappingsAt(value, keywordFieldMapping)
+	}
 
 	indexMapping := bleve.NewIndexMapping()
 	indexMapping.DefaultAnalyzer = "nl"
@@ -57,72 +57,122 @@ func NewIndex(apis *[]models.API) Index {
 }
 
 // Search executes a search query in Bleve and maps the results to API models
-func (index Index) Search(searchRequest *bleve.SearchRequest, selectedFacets []string) (models.APIList, error) {
-	applyFacetsToSearchRequest(searchRequest)
+func (index Index) Search(q string, filters map[string][]string) (models.APIList, error) {
+	query := constructQuery(q, filters)
+	searchRequest := constructSearchRequest(query)
 	searchResult, err := index.Bleve.Search(searchRequest)
-
-	totalSearchRequest := bleve.NewSearchRequest(bleve.NewMatchAllQuery())
-	applyFacetsToSearchRequest(totalSearchRequest)
-
-	totalSearchResult, err := index.Bleve.Search(totalSearchRequest)
-
 	if err != nil {
 		return models.APIList{}, err
 	}
 
+	apis := mapBleveResultToAPIs(index.APIs, searchResult.Hits)
+
+	// execute a MatchAllQuery to determine the facets on the full result set
+	query = bleve.NewMatchAllQuery()
+	facetSearchRequest := constructSearchRequest(query)
+	facetSearchResult, err := index.Bleve.Search(facetSearchRequest)
+	if err != nil {
+		return models.APIList{}, err
+	}
+
+	facets := facetSearchResult.Facets
+
+	// apply total counts of original facets
+	for key, facet := range searchResult.Facets {
+		counts := map[string]int{}
+		for _, term := range facet.Terms {
+			counts[term.Term] = term.Count
+		}
+		for _, term := range facets[key].Terms {
+			newCount, ok := counts[term.Term]
+			if ok {
+				term.Count = newCount
+			} else {
+				term.Count = 0
+			}
+		}
+	}
+
+	// now execute a seperate query for all filters that are currently active
+	// because we would like users to be able to select more values
+	for key, values := range filters {
+		if len(values) == 0 {
+			continue
+		}
+
+		currentFilters := map[string][]string{}
+		for currentKey := range filters {
+			if currentKey == key {
+				continue
+			}
+
+			currentFilters[currentKey] = filters[currentKey]
+		}
+
+		query := constructQuery(q, currentFilters)
+		searchRequest := constructSearchRequest(query)
+		searchResult, err := index.Bleve.Search(searchRequest)
+		if err != nil {
+			return models.APIList{}, err
+		}
+
+		counts := map[string]int{}
+		for _, term := range searchResult.Facets[key].Terms {
+			counts[term.Term] = term.Count
+		}
+		for _, term := range facets[key].Terms {
+			newCount, ok := counts[term.Term]
+			if ok {
+				term.Count = newCount
+			} else {
+				term.Count = 0
+			}
+		}
+	}
+
 	apiList := models.APIList{
 		Total:  searchResult.Total,
-		Facets: mergeFacets(searchResult.Facets, totalSearchResult.Facets, selectedFacets),
-		APIs:   mapBleveResultToAPIs(index.APIs, searchResult.Hits),
+		Facets: facets,
+		APIs:   apis,
 	}
 
 	return apiList, err
 }
 
-func applyFacetsToSearchRequest(searchRequest *bleve.SearchRequest) {
-	organizationFacet := bleve.NewFacetRequest("organization_name", facetCount)
-	searchRequest.AddFacet("organization_name", organizationFacet)
+func constructQuery(q string, filters map[string][]string) query.Query {
+	query := bleve.NewConjunctionQuery()
 
-	tagsFacet := bleve.NewFacetRequest("tags", facetCount)
-	searchRequest.AddFacet("tags", tagsFacet)
+	if q != "" {
+		query.AddQuery(bleve.NewQueryStringQuery(q))
+	} else {
+		query.AddQuery(bleve.NewMatchAllQuery())
+	}
 
-	apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", facetCount)
-	searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
-}
-
-func mergeFacets(resultFacets search.FacetResults, totalFacets search.FacetResults, selectedFacets []string) search.FacetResults {
-	for facetKey, facet := range totalFacets {
-		facet.Total = resultFacets[facetKey].Total
-		facet.Missing = resultFacets[facetKey].Missing
-		facet.Other = resultFacets[facetKey].Other
-
-		inSelectedFacets := false
-		for _, field := range selectedFacets {
-			if field == facet.Field {
-				inSelectedFacets = true
-			}
-		}
-
-		if inSelectedFacets {
+	for key, values := range filters {
+		if len(values) == 0 {
 			continue
 		}
 
-		for _, term := range facet.Terms {
-			term.Count = getTermCount(term.Term, resultFacets[facetKey].Terms)
+		subQuery := bleve.NewDisjunctionQuery()
+		for _, value := range values {
+			subQuery.AddQuery(bleve.NewPhraseQuery([]string{value}, key))
 		}
+
+		query.AddQuery(subQuery)
 	}
 
-	return totalFacets
+	return query
 }
 
-func getTermCount(term string, termFacets search.TermFacets) int {
-	for _, facet := range termFacets {
-		if facet.Term == term {
-			return facet.Count
-		}
+func constructSearchRequest(q query.Query) *bleve.SearchRequest {
+	searchRequest := bleve.NewSearchRequest(q)
+
+	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
+		facet := bleve.NewFacetRequest(value, facetCount)
+		searchRequest.AddFacet(value, facet)
 	}
 
-	return 0
+	return searchRequest
 }
 
 func mapBleveResultToAPIs(items *[]models.API, matchCollection search.DocumentMatchCollection) []models.API {

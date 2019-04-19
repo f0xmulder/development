@@ -10,7 +10,6 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
-	"github.com/blevesearch/bleve"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -99,56 +98,24 @@ func (rs APIResource) Routes() chi.Router {
 func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	query := bleve.NewConjunctionQuery()
 	q := getQueryParam(r, "q")
-	if q != "" {
-		query.AddQuery(bleve.NewQueryStringQuery(q))
-	} else {
-		query.AddQuery(bleve.NewMatchAllQuery())
-	}
 
-	selectedFacets := []string{}
-	searchRequest := bleve.NewSearchRequest(query)
-
-	tags := getQueryParams(r, "tags")
-	if len(tags) > 0 {
-		tagsQuery := bleve.NewDisjunctionQuery()
-		for _, tag := range tags {
-			tagsQuery.AddQuery(bleve.NewPhraseQuery([]string{tag}, "tags"))
+	filters := map[string][]string{}
+	for _, key := range []string{"organization_name", "tags", "api_specification_type"} {
+		values := getQueryParams(r, key)
+		if len(values) > 0 {
+			filters[key] = values
 		}
-		query.AddQuery(tagsQuery)
-		selectedFacets = append(selectedFacets, "tags")
 	}
 
-	organizationNames := getQueryParams(r, "organization_name")
-	if len(organizationNames) > 0 {
-		organizationQuery := bleve.NewDisjunctionQuery()
-		for _, organizationName := range organizationNames {
-			organizationQuery.AddQuery(bleve.NewPhraseQuery([]string{organizationName}, "organization_name"))
-		}
-		query.AddQuery(organizationQuery)
-		selectedFacets = append(selectedFacets, "organization_name")
-	}
-
-	apiSpecificationTypes := getQueryParams(r, "api_specification_type")
-	if len(apiSpecificationTypes) > 0 {
-		apiSpecificationTypesQuery := bleve.NewDisjunctionQuery()
-		for _, apiSpecificationType := range apiSpecificationTypes {
-			apiSpecificationTypesQuery.AddQuery(bleve.NewPhraseQuery([]string{apiSpecificationType}, "api_specification_type"))
-		}
-		query.AddQuery(apiSpecificationTypesQuery)
-		selectedFacets = append(selectedFacets, "api_specification_type")
-	}
-
-	searchRequest = bleve.NewSearchRequest(query)
-	searchResult, err := rs.SearchIndex.Search(searchRequest, selectedFacets)
+	apiList, err := rs.SearchIndex.Search(q, filters)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(searchResult)
+	err = json.NewEncoder(w).Encode(apiList)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
