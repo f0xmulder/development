@@ -1,0 +1,19 @@
+{
+    "description": "Afvalcontainers en Wells in Amsterdam",
+    "organization_name": "Gemeente Amsterdam",
+    "service_name": "Afvalcontainers en putten",
+    "api_url": "https://api.data.amsterdam.nl/afval/",
+    "api_specification_type": "OpenAPI2",
+    "specification_url": "https://api.data.amsterdam.nl/afval/redoc/?format=openapi",
+    "documentation_url": "https://api.data.amsterdam.nl/afval/",
+    "tags": ["afval", "containers", "putten"],
+    "contact": {
+        "email": "datapunt@amsterdam.nl",
+        "url": "https://github.com/Amsterdam/afvalcontainers/issues"
+    },
+    "is_reference_implementation": false,
+    "terms_of_use": {
+      "government_only": false,
+      "pay_per_use": false
+  }
+}
