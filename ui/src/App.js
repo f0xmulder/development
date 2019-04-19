@@ -6,7 +6,6 @@ import SubmitAPI from './pages/SubmitAPI'
 import SubmitAPIForm from './pages/SubmitAPIForm'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
-import Tag from './pages/Tag'
 import Overview from './pages/Overview'
 
 import Navigation from './components/Navigation'
@@ -29,7 +28,6 @@ const App = () =>
                     <Route exact path="/api-toevoegen" component={SubmitAPI} />
                     <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
                     <Route path="/over" component={About} />
-                    <Route path="/tag/:tag" component={Tag} />
                 </main>
             </div>
         </Router>

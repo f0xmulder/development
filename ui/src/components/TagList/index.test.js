@@ -24,7 +24,7 @@ describe('TagList', () => {
         })
 
         it('should navigate to the tag Detail page for that tag', () => {
-            expect(itemLink.props().to).toBe('/tag/tag-a')
+            expect(itemLink.props().to).toBe('/overzicht?tags=tag-a')
         })
 
         it('should show the tag as label', () => {
