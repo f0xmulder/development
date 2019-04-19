@@ -1,0 +1,19 @@
+{
+    "description": "The live website API (which has a live link to the website platform) makes the full power of the award-winning Rijksmuseum website directly accessible to developers. Searching the collection through the API offers a wide range of interesting possibilities, as do features such as the “explore the collection” pages, the Rijksstudio users’ collections, and the tiled images used to zoom in to close-ups of works of art. Other kinds of data are also available, such as information from the Rijksmuseum’s events calendar. The JSON-based service is so easy to use that you can create an application using the Rijksmuseum’s rich and freely accessible content in no time.",
+    "organization_name": "Rijksmuseum",
+    "service_name": "Rijksmuseum API",
+    "api_url": "https://www.rijksmuseum.nl/en/api",
+    "api_specification_type": "none",
+    "documentation_url": "http://rijksmuseum.github.io",
+    "tags": ["kunst", "agenda", "collectie"],
+    "contact": {
+        "email": "website@rijksmuseum.nl",
+        "url": "https://github.com/Rijksmuseum/api-issues/issues"
+    },
+    "is_reference_implementation": false,
+    "terms_of_use": {
+      "government_only": false,
+      "pay_per_use": false,
+      "uptime_guarantee": 0
+  }
+}
