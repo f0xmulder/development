@@ -43,8 +43,8 @@ describe('APIFilter', () => {
 
         const firstField = wrapper.find(CheckboxField).first()
         const expectedOptions = [
-            { value: '41', label: '41 (5)' },
-            { value: '42', label: '42 (100)' }
+            { value: '41', label: '41 (5)', disabled: false },
+            { value: '42', label: '42 (100)', disabled: false }
         ]
 
         expect(firstField.props().options).toEqual(expectedOptions)
