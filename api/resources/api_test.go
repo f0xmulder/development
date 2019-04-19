@@ -99,7 +99,7 @@ func TestAPIList(t *testing.T) {
 			"/list?tags=tag-which-does-not-appear-for-any-result",
 			200,
 			"application/json",
-			"{\"total\":0,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":0}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":0}]},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":0}]}},\"apis\":[]}\n",
+			"{\"total\":0,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":0}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":0}]},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[]}\n",
 		},
 	}
 

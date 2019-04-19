@@ -64,7 +64,7 @@ func TestSearch(t *testing.T) {
 	index := NewIndex(&apis)
 
 	searchRequest := bleve.NewSearchRequest(bleve.NewQueryStringQuery("another"))
-	searchResult, _ := index.Search(searchRequest)
+	searchResult, _ := index.Search(searchRequest, []string{})
 
 	assert.Equal(t, []models.API{anotherDummyAPI}, searchResult.APIs)
 }
@@ -95,7 +95,7 @@ func TestMergeFacets(t *testing.T) {
 	facetResults := search.FacetResults{"result": &facetResult}
 	anotherFacetResults := search.FacetResults{"result": &anotherFacetResult}
 
-	facetResults = mergeFacets(facetResults, anotherFacetResults)
+	facetResults = mergeFacets(facetResults, anotherFacetResults, []string{})
 
 	assert.Equal(t, facetResults, anotherFacetResults)
 }

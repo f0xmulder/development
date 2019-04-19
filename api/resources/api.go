@@ -107,6 +107,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		query.AddQuery(bleve.NewMatchAllQuery())
 	}
 
+	selectedFacets := []string{}
 	searchRequest := bleve.NewSearchRequest(query)
 
 	tags := getQueryParams(r, "tags")
@@ -116,6 +117,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 			tagsQuery.AddQuery(bleve.NewPhraseQuery([]string{tag}, "tags"))
 		}
 		query.AddQuery(tagsQuery)
+		selectedFacets = append(selectedFacets, "tags")
 	}
 
 	organizationNames := getQueryParams(r, "organization_name")
@@ -125,6 +127,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 			organizationQuery.AddQuery(bleve.NewPhraseQuery([]string{organizationName}, "organization_name"))
 		}
 		query.AddQuery(organizationQuery)
+		selectedFacets = append(selectedFacets, "organization_name")
 	}
 
 	apiSpecificationTypes := getQueryParams(r, "api_specification_type")
@@ -134,10 +137,11 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 			apiSpecificationTypesQuery.AddQuery(bleve.NewPhraseQuery([]string{apiSpecificationType}, "api_specification_type"))
 		}
 		query.AddQuery(apiSpecificationTypesQuery)
+		selectedFacets = append(selectedFacets, "api_specification_type")
 	}
 
 	searchRequest = bleve.NewSearchRequest(query)
-	searchResult, err := rs.SearchIndex.Search(searchRequest)
+	searchResult, err := rs.SearchIndex.Search(searchRequest, selectedFacets)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)

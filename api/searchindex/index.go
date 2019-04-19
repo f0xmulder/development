@@ -57,12 +57,13 @@ func NewIndex(apis *[]models.API) Index {
 }
 
 // Search executes a search query in Bleve and maps the results to API models
-func (index Index) Search(searchRequest *bleve.SearchRequest) (models.APIList, error) {
+func (index Index) Search(searchRequest *bleve.SearchRequest, selectedFacets []string) (models.APIList, error) {
 	applyFacetsToSearchRequest(searchRequest)
 	searchResult, err := index.Bleve.Search(searchRequest)
 
 	totalSearchRequest := bleve.NewSearchRequest(bleve.NewMatchAllQuery())
 	applyFacetsToSearchRequest(totalSearchRequest)
+
 	totalSearchResult, err := index.Bleve.Search(totalSearchRequest)
 
 	if err != nil {
@@ -71,7 +72,7 @@ func (index Index) Search(searchRequest *bleve.SearchRequest) (models.APIList, e
 
 	apiList := models.APIList{
 		Total:  searchResult.Total,
-		Facets: mergeFacets(searchResult.Facets, totalSearchResult.Facets),
+		Facets: mergeFacets(searchResult.Facets, totalSearchResult.Facets, selectedFacets),
 		APIs:   mapBleveResultToAPIs(index.APIs, searchResult.Hits),
 	}
 
@@ -89,11 +90,22 @@ func applyFacetsToSearchRequest(searchRequest *bleve.SearchRequest) {
 	searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
 }
 
-func mergeFacets(resultFacets search.FacetResults, totalFacets search.FacetResults) search.FacetResults {
+func mergeFacets(resultFacets search.FacetResults, totalFacets search.FacetResults, selectedFacets []string) search.FacetResults {
 	for facetKey, facet := range totalFacets {
 		facet.Total = resultFacets[facetKey].Total
 		facet.Missing = resultFacets[facetKey].Missing
 		facet.Other = resultFacets[facetKey].Other
+
+		inSelectedFacets := false
+		for _, field := range selectedFacets {
+			if field == facet.Field {
+				inSelectedFacets = true
+			}
+		}
+
+		if inSelectedFacets {
+			continue
+		}
 
 		for _, term := range facet.Terms {
 			term.Count = getTermCount(term.Term, resultFacets[facetKey].Terms)
