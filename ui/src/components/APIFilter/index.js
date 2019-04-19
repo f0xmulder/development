@@ -50,7 +50,7 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => (
 )
 
 APIFilter.propTypes = {
-    facets: object.isRequired,
+    facets: object,
     onSubmit: func.isRequired
 }
 

@@ -33,7 +33,8 @@ CheckboxField.propTypes = {
         value: string.isRequired,
         label: string.isRequired
     })),
-    onChange: func.isRequired
+    onChange: func.isRequired,
+    value: arrayOf(string.isRequired).isRequired
 }
 
 CheckboxField.defaultProps = {
