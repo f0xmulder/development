@@ -95,11 +95,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 
 	// now execute a seperate query for all filters that are currently active
 	// because we would like users to be able to select more values
-	for key, values := range filters {
-		if len(values) == 0 {
-			continue
-		}
-
+	for key := range filters {
 		currentFilters := map[string][]string{}
 		for currentKey := range filters {
 			if currentKey == key {
