@@ -58,8 +58,8 @@ func NewIndex(apis *[]models.API) Index {
 
 // Search executes a search query in Bleve and maps the results to API models
 func (index Index) Search(q string, filters map[string][]string) (models.APIList, error) {
-	query := constructQuery(q, filters)
-	searchRequest := constructSearchRequest(query)
+	query := newQuery(q, filters)
+	searchRequest := newSearchRequest(query)
 	searchResult, err := index.Bleve.Search(searchRequest)
 	if err != nil {
 		return models.APIList{}, err
@@ -69,7 +69,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 
 	// execute a MatchAllQuery to determine the facets on the full result set
 	query = bleve.NewMatchAllQuery()
-	facetSearchRequest := constructSearchRequest(query)
+	facetSearchRequest := newSearchRequest(query)
 	facetSearchResult, err := index.Bleve.Search(facetSearchRequest)
 	if err != nil {
 		return models.APIList{}, err
@@ -105,8 +105,8 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 			currentFilters[currentKey] = filters[currentKey]
 		}
 
-		query := constructQuery(q, currentFilters)
-		searchRequest := constructSearchRequest(query)
+		query := newQuery(q, currentFilters)
+		searchRequest := newSearchRequest(query)
 		searchResult, err := index.Bleve.Search(searchRequest)
 		if err != nil {
 			return models.APIList{}, err
@@ -135,7 +135,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 	return apiList, err
 }
 
-func constructQuery(q string, filters map[string][]string) query.Query {
+func newQuery(q string, filters map[string][]string) query.Query {
 	query := bleve.NewConjunctionQuery()
 
 	if q != "" {
@@ -160,7 +160,7 @@ func constructQuery(q string, filters map[string][]string) query.Query {
 	return query
 }
 
-func constructSearchRequest(q query.Query) *bleve.SearchRequest {
+func newSearchRequest(q query.Query) *bleve.SearchRequest {
 	searchRequest := bleve.NewSearchRequest(q)
 
 	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
