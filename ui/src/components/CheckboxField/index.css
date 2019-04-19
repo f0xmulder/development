@@ -1,0 +1,20 @@
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+}
+
+.form-check-input {
+    position: absolute;
+    margin-top: .3rem;
+    margin-left: -1.25rem;
+}
+
+.form-check-label {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
+    color: grey;
+}

@@ -14,7 +14,8 @@ const formatOptions = (terms) => {
     return terms.map((term) => {
         return {
             value: term.term,
-            label: `${term.term} (${term.count})`
+            label: `${term.term} (${term.count})`,
+            disabled: (term.count === 0)
         }
     })
 }
