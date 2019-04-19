@@ -11,7 +11,6 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 
 	"github.com/blevesearch/bleve"
-	"github.com/blevesearch/bleve/search"
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
@@ -24,7 +23,7 @@ type APIResource struct {
 	RootDirectoryAPIDefinitions string
 	ReadFile                    func(path string) (models.API, error)
 	ReadDirectory               func(directory string) ([]models.API, error)
-	SearchIndex                 bleve.Index
+	SearchIndex                 searchindex.Index
 }
 
 // NewAPIResource creates a new APIResource
@@ -41,8 +40,9 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
 		ReadFile:                    readFile,
 		ReadDirectory:               readDirectory,
-		SearchIndex:                 searchindex.Setup(outputList),
+		SearchIndex:                 searchindex.NewIndex(&outputList),
 	}
+
 	return i
 }
 
@@ -64,21 +64,6 @@ func getQueryParams(r *http.Request, key string) []string {
 	}
 
 	return []string{}
-}
-
-func filterListBySearchResult(items []models.API, matchCollection search.DocumentMatchCollection) []models.API {
-	hash := make(map[string]models.API)
-
-	for _, API := range items {
-		hash[API.ID] = API
-	}
-
-	returnArray := []models.API{}
-	for _, document := range matchCollection {
-		returnArray = append(returnArray, hash[document.ID])
-	}
-
-	return returnArray
 }
 
 const RELATION_TYPE_REFERENCE_IMPLEMENTATION = "reference-implementation"
@@ -114,15 +99,7 @@ func (rs APIResource) Routes() chi.Router {
 func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	outputList, errReadFile := rs.ReadDirectory("../data")
-	if errReadFile != nil {
-		rs.Logger.Error("oops, something went wrong while getting the info of an API", zap.Error(errReadFile))
-		http.Error(w, "server error", http.StatusInternalServerError)
-		return
-	}
-
 	query := bleve.NewConjunctionQuery()
-
 	q := getQueryParam(r, "q")
 	if q != "" {
 		query.AddQuery(bleve.NewQueryStringQuery(q))
@@ -131,22 +108,6 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	}
 
 	searchRequest := bleve.NewSearchRequest(query)
-
-	organizationFacet := bleve.NewFacetRequest("organization_name", 10)
-	searchRequest.AddFacet("organization_name", organizationFacet)
-
-	tagsFacet := bleve.NewFacetRequest("tags", 10)
-	searchRequest.AddFacet("tags", tagsFacet)
-
-	apiSpecTypeFacet := bleve.NewFacetRequest("api_specification_type", 10)
-	searchRequest.AddFacet("api_specification_type", apiSpecTypeFacet)
-
-	totalSearchResult, err := rs.SearchIndex.Search(searchRequest)
-	if err != nil {
-		rs.Logger.Error("failed to output APIs", zap.Error(err))
-		http.Error(w, "server error", http.StatusInternalServerError)
-		return
-	}
 
 	tags := getQueryParams(r, "tags")
 	if len(tags) > 0 {
@@ -183,13 +144,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := models.APIList{
-		Total:  totalSearchResult.Total,
-		Facets: totalSearchResult.Facets,
-		APIs:   filterListBySearchResult(outputList, searchResult.Hits),
-	}
-
-	err = json.NewEncoder(w).Encode(result)
+	err = json.NewEncoder(w).Encode(searchResult)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)
