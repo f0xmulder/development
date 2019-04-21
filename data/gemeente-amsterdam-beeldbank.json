@@ -5,6 +5,7 @@
     "api_url": "https://beeldbank.amsterdam.nl/api/",
     "api_specification_type": "OpenSearch1",
     "specification_url": "https://beeldbank.amsterdam.nl/api/opensearch/description-document",
+    "documentation_url": "https://beeldbank.amsterdam.nl/api/opensearch/description-document",
     "tags": ["beeldbank", "stadsarchief", "amsterdam", "fotos", "collectie"],
     "contact": {
         "email": "informatie@stadsarchief.amsterdam.nl"
