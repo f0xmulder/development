@@ -1,5 +1,5 @@
 {
-    "description": "Afvalcontainers en Wells in Amsterdam",
+    "description": "Afvalcontainers en putten in Amsterdam",
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Afvalcontainers en putten",
     "api_url": "https://api.data.amsterdam.nl/afval/",
