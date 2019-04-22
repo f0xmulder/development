@@ -4,7 +4,7 @@
     "service_name": "Rijksmuseum API",
     "api_url": "https://www.rijksmuseum.nl/en/api",
     "api_specification_type": "none",
-    "documentation_url": "http://rijksmuseum.github.io",
+    "documentation_url": "https://rijksmuseum.github.io",
     "tags": ["kunst", "agenda", "collectie"],
     "contact": {
         "email": "website@rijksmuseum.nl",
