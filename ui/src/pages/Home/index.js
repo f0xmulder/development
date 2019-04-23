@@ -35,7 +35,7 @@ export default class Home extends Component {
 
                     <form method="POST" onSubmit={this.onSubmit} data-test="search-form">
                         <div className="search-box">
-                            <label htmlFor="searchInput" aria-label="Search query">
+                            <label htmlFor="searchInput" aria-label="Zoekterm">
                                 <input type="text" name="q" id="searchInput" placeholder="Zoeken naar een API" data-test="search-input" onChange={this.onChangeSearchInput} value={this.state.searchInput} />
                             </label>
                             <SearchIcon/>
