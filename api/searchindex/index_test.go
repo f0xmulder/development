@@ -58,10 +58,10 @@ func TestNewIndex(t *testing.T) {
 	assert.Equal(t, docCount, uint64(2))
 }
 
-func TestSearch(t *testing.T) {
+func TestSearchWorksForStringQueryByID(t *testing.T) {
 	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
-	searchResult, _ := index.Search("another", map[string][]string{})
+	searchResult, _ := index.Search("id:another", map[string][]string{})
 
 	assert.Equal(t, []models.API{anotherDummyAPI}, searchResult.APIs)
 }
