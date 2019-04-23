@@ -103,7 +103,7 @@ class SubmitAPIForm extends Component {
         this.state = {
             submitted: false,
             responseData: {},
-            list: {},
+            result: {},
             apisLoaded: false,
             apisError: false
         }
@@ -166,8 +166,8 @@ class SubmitAPIForm extends Component {
     componentDidMount() {
         this
             .fetchApiList()
-            .then(list => {
-                this.setState({ list, apisLoaded: true })
+            .then(result => {
+                this.setState({ result, apisLoaded: true })
             }, error => {
                 this.setState({ apisError: true, apisLoaded: true })
                 console.error(error)
@@ -175,7 +175,7 @@ class SubmitAPIForm extends Component {
     }
 
     render() {
-        const { list, apisLoaded } = this.state
+        const { result, apisLoaded } = this.state
 
         return apisLoaded ?
             <div className="SubmitAPIForm container">
@@ -344,7 +344,7 @@ class SubmitAPIForm extends Component {
                                                    className="form-control">
                                                 <option value={''}>Geen</option>
                                                 {
-                                                    list.apis
+                                                    result.apis
                                                     .filter(api => api.is_reference_implementation)
                                                     .map(api => <option value={api.id} key={api.id}>{api.service_name} {api.organization_name}</option>)
                                                 }

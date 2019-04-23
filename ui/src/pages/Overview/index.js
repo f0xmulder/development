@@ -8,7 +8,7 @@ class Overview extends Component {
         super(props)
 
         this.state = {
-            list: {},
+            result: {},
             error: false,
             loaded: false
         }
@@ -20,8 +20,8 @@ class Overview extends Component {
     componentDidMount() {
         this
             .fetchApiList()
-            .then(list => {
-                this.setState({ list, loaded: true })
+            .then(result => {
+                this.setState({ result, loaded: true })
             }, error => {
                 this.setState({ error: true, loaded: true })
                 console.error(error)
@@ -31,8 +31,8 @@ class Overview extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.location && (prevProps.location.search !== this.props.location.search)) {
             this.fetchApiList()
-                .then(list => {
-                    this.setState({ list })
+                .then(result => {
+                    this.setState({ result })
                 }, error => {
                     this.setState({ error: true })
                 })
@@ -94,7 +94,7 @@ class Overview extends Component {
     }
 
     render() {
-        const { list, error, loaded } = this.state
+        const { result, error, loaded } = this.state
 
         return (
             <div className="Overview">
@@ -107,11 +107,11 @@ class Overview extends Component {
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                                 <div className="Overview__sections">
                                     <div className="Overview__sidebar">
-                                        <APIFilter initialValues={this.getFilterValues()} facets={list.facets} onSubmit={this.onFilterChange} />
+                                        <APIFilter initialValues={this.getFilterValues()} facets={result.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
-                                        {list && list.apis && list.apis.length > 0 ?
-                                            <APIList apis={list.apis} />
+                                        {result && result.apis && result.apis.length > 0 ?
+                                            <APIList apis={result.apis} />
                                         :
                                             <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
                                         }

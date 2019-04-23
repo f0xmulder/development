@@ -31,7 +31,7 @@ describe('Overview', () => {
       const wrapper = shallow(<Overview/>)
       return apiPromise
           .then(() => {
-            expect(wrapper.state('list')).toEqual({ apis: [dummyAPI] })
+            expect(wrapper.state('result')).toEqual({ apis: [dummyAPI] })
           })
     })
   })
@@ -41,7 +41,7 @@ describe('Overview', () => {
 
     beforeEach(() => {
       wrapper = shallow(<Overview/>)
-      wrapper.setState({ list: { apis: [dummyAPI] }, loaded: true })
+      wrapper.setState({ result: { apis: [dummyAPI] }, loaded: true })
       apiList = wrapper.find('APIList')
     })
 
@@ -53,7 +53,7 @@ describe('Overview', () => {
   describe('when no apis are available', () => {
     it('should show a message saying no APIs are available yet', () => {
       const wrapper = shallow(<Overview/>)
-      wrapper.setState({ list: { apis: [] }, loaded: true })
+      wrapper.setState({ result: { apis: [] }, loaded: true })
       const noApisMessageElement = wrapper.find('[data-test="no-apis-available-message"]')
       expect(noApisMessageElement.exists()).toBe(true)
     })
