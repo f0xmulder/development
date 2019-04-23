@@ -9,12 +9,15 @@ import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
 
 import Navigation from './components/Navigation'
+import GlobalStyles from './components/GlobalStyles'
 
 import './App.css'
 
 const App = () =>
     <div className="App full-height">
         <Router>
+            <GlobalStyles />
+
             <div className="full-height">
                 <header className="App__TopBar">
                     <h1 className="title"><Link to="/">developer.overheid.nl</Link></h1>

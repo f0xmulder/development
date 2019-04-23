@@ -8,6 +8,7 @@
     "react-app-polyfill": "1.0.0",
     "react-dom": "16.8.6",
     "react-router-dom": "5.0.0",
+    "styled-components": "4.2.0",
     "yup": "0.27.0"
   },
   "devDependencies": {
