@@ -8,10 +8,9 @@ const CheckboxField = ({ name, options, value, onChange }) => (
         {arrayHelpers => (
             <React.Fragment>
                 {options.map((option, index) => (
-                    <div key={index} className="form-check">
+                    <div key={index} className="CheckboxField">
                         <Field
                             type="checkbox"
-                            className="form-check-input"
                             id={`${name}.${index}`}
                             name={`${name}.${index}`}
                             value={option.value}
@@ -23,7 +22,7 @@ const CheckboxField = ({ name, options, value, onChange }) => (
                                 onChange && setTimeout(() => onChange(), 0)
                             }}
                         />
-                        <label key={index} htmlFor={`${name}.${index}`} className="form-check-label">{option.label}</label>
+                        <label key={index} htmlFor={`${name}.${index}`}>{option.label}</label>
                     </div>
                 ))}
             </React.Fragment>

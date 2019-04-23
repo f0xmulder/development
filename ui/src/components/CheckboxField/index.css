@@ -1,20 +1,20 @@
-.form-check {
+.CheckboxField {
     position: relative;
     display: block;
     padding-left: 1.25rem;
 }
 
-.form-check-input {
+.CheckboxField input {
     position: absolute;
     margin-top: .3rem;
     margin-left: -1.25rem;
 }
 
-.form-check-label {
+.CheckboxField label {
     display: inline-block;
     margin-bottom: 0;
 }
 
-input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
+.CheckboxField input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
     color: grey;
 }
