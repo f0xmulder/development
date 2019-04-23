@@ -33,14 +33,14 @@ export default class Home extends Component {
                 <div className="Home__Search">
                     <h1>Een incompleet overzicht van alle API’s binnen de Nederlandse overheid</h1>
 
-                    <div className="search-box">
-                        <label htmlFor="searchInput" aria-label="Search query">
-                            <form method="POST" onSubmit={this.onSubmit} data-test="search-form">
+                    <form method="POST" onSubmit={this.onSubmit} data-test="search-form">
+                        <div className="search-box">
+                            <label htmlFor="searchInput" aria-label="Search query">
                                 <input type="text" name="q" id="searchInput" placeholder="Zoeken naar een API" data-test="search-input" onChange={this.onChangeSearchInput} value={this.state.searchInput} />
-                            </form>
-                        </label>
-                        <SearchIcon/>
-                    </div>
+                            </label>
+                            <SearchIcon/>
+                        </div>
+                    </form>
                 </div>
 
                 <div className="Home__Tags">
