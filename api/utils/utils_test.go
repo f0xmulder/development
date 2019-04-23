@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetQueryParams(t *testing.T) {
+func TestGetQueryParam(t *testing.T) {
 	testCases := []struct {
 		url    string
 		key    string
@@ -37,7 +37,7 @@ func TestGetQueryParams(t *testing.T) {
 
 			assert.Nil(t, err)
 
-			returnValues := GetQueryParams(request, tc.key)
+			returnValues := GetQueryParam(request, tc.key)
 			assert.Equal(t, tc.values, returnValues)
 		})
 	}

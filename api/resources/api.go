@@ -80,13 +80,13 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	q := ""
-	if len(utils.GetQueryParams(r, "q")) > 0 {
-		q = utils.GetQueryParams(r, "q")[0]
+	if len(utils.GetQueryParam(r, "q")) > 0 {
+		q = utils.GetQueryParam(r, "q")[0]
 	}
 
 	filters := map[string][]string{}
 	for _, key := range []string{"organization_name", "tags", "api_specification_type"} {
-		values := utils.GetQueryParams(r, key)
+		values := utils.GetQueryParam(r, key)
 		if len(values) > 0 {
 			filters[key] = values
 		}
