@@ -1,7 +1,7 @@
 import React from 'react'
-import StyledHeader, { StyledButton, StyledLink, StyledNavigation } from './index.styles'
+import StyledHeader, { StyledTitle, StyledNavigation } from './index.styles'
 import {Navigation} from '@commonground/design-system'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const PlusIcon = ({ ...props }) =>
   <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -15,13 +15,12 @@ PlusIcon.defaultProps = {
 
 export default () =>
   <StyledHeader>
-    <StyledButton to="/api-toevoegen">
-      <PlusIcon /> Voeg API toe
-    </StyledButton>
+    <StyledTitle to="/">developer.overheid.nl</StyledTitle>
+
     <StyledNavigation>
-     <Navigation.Item><Link to="/overzicht">Overzicht</Link></Navigation.Item> 
-     <Navigation.Item><Link to="/api-toevoegen">API toevoegen</Link></Navigation.Item> 
-     <Navigation.Item><Link to="/over">Over</Link></Navigation.Item> 
+     <Navigation.Item><NavLink to="/overzicht">Overzicht</NavLink></Navigation.Item> 
+     <Navigation.Item><NavLink to="/api-toevoegen">API toevoegen</NavLink></Navigation.Item> 
+     <Navigation.Item><NavLink to="/over">Over</NavLink></Navigation.Item> 
     </StyledNavigation>
   </StyledHeader>
 

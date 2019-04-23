@@ -6,23 +6,23 @@ export default styled.header`
     padding: 40px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 `
-export const StyledButton = styled(Link)`
-    background: #517FFF;
-    border-radius: 3px;
-    color: #ffffff;
+export const StyledTitle = styled(Link)`
+    color: #517FFF;
     text-decoration: none;
     padding: 0 12px;
     line-height: 32px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 800;
+    flex: 0 0 auto;
 `
 
-export const StyledLink = styled.a`
-  
-`
 export const StyledNavigation = styled(Navigation)`
-    flex: 1;
-    text-align: right;
+    flex: 0 0 auto;
+    
+    &:last-of-type {
+      margin-right: unset;
+    }
 `
 
