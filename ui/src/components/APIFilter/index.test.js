@@ -16,6 +16,19 @@ const facets = {
 }
 
 describe('APIFilter', () => {
+    it('should format API terms as options', () => {
+        const testCases = [
+            { terms: [], expected: [] },
+            { terms: [ { term: '42', count: 5 } ], expected: [ { value: '42', label: '42 (5)', disabled: false }] },
+            { terms: [ { term: 'OAS2', count: 5}, { term: 'OAS3', count: 0 } ], expected: [ { value: 'OAS2', label: 'OAS2 (5)', disabled: false }, { value: 'OAS3', label: 'OAS3 (0)', disabled: true } ] },
+        ]
+
+        testCases.forEach((testCase) => {
+            const actual = APIFilter.prototype.formatOptions(testCase.terms)
+            expect(actual).toEqual(testCase.expected)
+        })
+    })
+
     it('should show the filter headings', () => {
         const onSubmit = jest.fn()
         const wrapper = mount(
