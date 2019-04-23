@@ -9,7 +9,6 @@ import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
 import TopBar from './components/TopBar'
 
-import Navigation from './components/Navigation'
 import GlobalStyles from './components/GlobalStyles'
 
 const App = () =>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import Navigation from '../Navigation'
+import {Navigation} from '@commonground/design-system'
 
 export default styled.header`
     padding: 40px;
