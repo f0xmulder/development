@@ -3,6 +3,7 @@ package searchindex
 import (
 	"testing"
 
+	"github.com/blevesearch/bleve/search"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
@@ -43,9 +44,8 @@ var anotherDummyAPI = models.API{
 	nil,
 }
 
-var apis = []models.API{dummyAPI, anotherDummyAPI}
-
 func TestNewIndex(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
 
 	assert.Equal(t, apis, *index.apis)
@@ -59,9 +59,41 @@ func TestNewIndex(t *testing.T) {
 }
 
 func TestSearch(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
-
 	searchResult, _ := index.Search("another", map[string][]string{})
 
 	assert.Equal(t, []models.API{anotherDummyAPI}, searchResult.APIs)
+}
+
+func TestMapBleveResultToAPIs(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
+
+	testCases := []struct {
+		matchCollection search.DocumentMatchCollection
+		expected        []models.API
+	}{
+		{
+			search.DocumentMatchCollection{
+				&search.DocumentMatch{ID: "dummy-api", Score: 1},
+			},
+			[]models.API{dummyAPI},
+		},
+		{
+			search.DocumentMatchCollection{},
+			[]models.API{},
+		},
+		{
+			search.DocumentMatchCollection{
+				&search.DocumentMatch{ID: "dummy-api", Score: 1},
+				&search.DocumentMatch{ID: "another-dummy-api", Score: 1},
+			},
+			[]models.API{dummyAPI, anotherDummyAPI},
+		},
+	}
+
+	for _, tc := range testCases {
+		actual := mapBleveResultToAPIs(&apis, tc.matchCollection)
+		assert.Equal(t, tc.expected, actual)
+	}
 }
