@@ -19,15 +19,15 @@ import (
 
 // APIResource enables injecting functions to deal with the API resource handlers
 type APIResource struct {
-	Logger                      *zap.Logger
-	RootDirectoryAPIDefinitions string
-	ReadFile                    func(path string) (models.API, error)
-	ReadDirectory               func(directory string) ([]models.API, error)
-	SearchIndex                 searchindex.Index
+	Logger        *zap.Logger
+	RootDirectory string
+	ReadFile      func(path string) (models.API, error)
+	ReadDirectory func(directory string) ([]models.API, error)
+	SearchIndex   searchindex.Index
 }
 
 // NewAPIResource creates a new APIResource
-func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readFile func(path string) (models.API, error),
+func NewAPIResource(logger *zap.Logger, rootDirectory string, readFile func(path string) (models.API, error),
 	readDirectory func(directory string) ([]models.API, error)) *APIResource {
 
 	outputList, errReadFile := readDirectory("../data")
@@ -35,12 +35,14 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 		log.Fatal(errReadFile)
 	}
 
+	searchIndex := searchindex.NewIndex(&outputList)
+
 	i := &APIResource{
-		Logger:                      logger,
-		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
-		ReadFile:                    readFile,
-		ReadDirectory:               readDirectory,
-		SearchIndex:                 searchindex.NewIndex(&outputList),
+		Logger:        logger,
+		RootDirectory: rootDirectory,
+		ReadFile:      readFile,
+		ReadDirectory: readDirectory,
+		SearchIndex:   searchIndex,
 	}
 
 	return i
@@ -113,7 +115,7 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 
 	apiID := chi.URLParam(r, "id")
 	filename := datareaders.FromID(apiID)
-	path := filepath.Join(rs.RootDirectoryAPIDefinitions, filename)
+	path := filepath.Join(rs.RootDirectory, filename)
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		rs.Logger.Error("failed to find API by id", zap.Error(err))

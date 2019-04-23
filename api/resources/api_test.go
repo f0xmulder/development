@@ -12,7 +12,6 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
-	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"go.uber.org/zap"
 )
 
@@ -85,7 +84,7 @@ func TestAPIList(t *testing.T) {
 			"/list",
 			200,
 			"application/json",
-			"{\"total\":1,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Specification Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_specification_type\":\"Test Specification Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"}}]}\n",
+			"{\"total\":0,\"facets\":{\"api_specification_type\":{\"field\":\"api_specification_type\",\"total\":0,\"missing\":0,\"other\":0},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0}},\"apis\":[]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
@@ -105,13 +104,12 @@ func TestAPIList(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("%s", tc.url), func(t *testing.T) {
-			apiResource := APIResource{
+			apiResource := NewAPIResource(
 				zap.NewNop(),
 				"",
 				nil,
 				tc.directoryReader,
-				searchindex.NewIndex(&[]models.API{dummyAPI}),
-			}
+			)
 
 			req := httptest.NewRequest("GET", tc.url, nil)
 			w := httptest.NewRecorder()
@@ -131,12 +129,12 @@ func TestAPIList(t *testing.T) {
 
 func TestAPIGet(t *testing.T) {
 	testCases := []struct {
-		apiID                       string
-		rootDirectoryAPIDefinitions string
-		wantStatusCode              int
-		wantContentType             string
-		wantResponseBody            string
-		mockAPIFileReader           func(path string) (models.API, error)
+		apiID             string
+		rootDirectory     string
+		wantStatusCode    int
+		wantContentType   string
+		wantResponseBody  string
+		mockAPIFileReader func(path string) (models.API, error)
 	}{
 		{
 			"test-api-name",
@@ -164,13 +162,12 @@ func TestAPIGet(t *testing.T) {
 
 	for _, tc := range testCases {
 		url := strings.Join([]string{"/api/apis", tc.apiID}, "/")
-		apiResource := APIResource{
+		apiResource := NewAPIResource(
 			zap.NewNop(),
-			tc.rootDirectoryAPIDefinitions,
+			tc.rootDirectory,
 			tc.mockAPIFileReader,
-			nil,
-			searchindex.Index{},
-		}
+			mockAPIDirectoryReaderNoResults,
+		)
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
 			req := httptest.NewRequest("GET", url, nil)
@@ -237,13 +234,12 @@ func TestAPIImplementedBy(t *testing.T) {
 
 	for _, tc := range testCases {
 		url := strings.Join([]string{"/api/apis", tc.apiID, "implemented-by"}, "/")
-		apiResource := APIResource{
+		apiResource := NewAPIResource(
 			zap.NewNop(),
-			tc.rootDirectoryAPIDefinitions,
+			"",
 			nil,
 			tc.mockAPIDirectoryReader,
-			searchindex.Index{},
-		}
+		)
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
 			req := httptest.NewRequest("GET", url, nil)
