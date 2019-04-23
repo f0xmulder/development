@@ -83,22 +83,22 @@ describe('Overview', () => {
     })
   })
 
-  describe('when filters are set in the search parameter', () => {
-    it('is can be fetched with getFilterValues()', () => {
+  describe('getting the filters', () => {
+    it('should return the values from the query parameters', () => {
       const wrapper = shallow(<Overview location={{ search: 'tags=42&organization_name=42' }} />)
       expect(wrapper.instance().getFilterValues()).toEqual({ q: '', api_specification_type: [], organization_name: ['42'], tags: ['42']})
     })
   })
 
-  describe('when a url is generated for a specific filter setting', () => {
-    it('is translated correctly into search parameters', () => {
+  describe('generating a URL for set of filters', () => {
+    it('should translate the filters into query parameters', () => {
       const wrapper = shallow(<Overview />)
       const result = wrapper.instance().generateURL({ q: 'test', tags: ['42', '43']})
       expect(result.toString()).toEqual('q=test&tags=42&tags=43')
     })
   })
 
-  describe('when filters are changed', () => {
+  describe('when changing the filters', () => {
     it('calls history to push a state', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
@@ -108,7 +108,7 @@ describe('Overview', () => {
     })
   })
 
-  describe('when the search parameter of the location changes', () => {
+  describe('changing the filters in the URL', () => {
     it('refetches the APIs', () => {
       jest.spyOn(Overview.prototype, 'fetchApiList').mockClear()
 
