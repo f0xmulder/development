@@ -33,7 +33,7 @@ func NewIndex(apis *[]models.API) Index {
 	}
 
 	indexMapping := bleve.NewIndexMapping()
-	indexMapping.DefaultAnalyzer = "nl"
+	indexMapping.DefaultAnalyzer = nl.AnalyzerName
 	indexMapping.DefaultMapping = apiMapping
 
 	bleveIndex, err := bleve.NewMemOnly(indexMapping)
