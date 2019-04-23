@@ -74,11 +74,15 @@ class Overview extends Component {
         const urlParams = new URLSearchParams()
 
         Object.keys(filters).forEach((key) => {
-            if (filters[key] instanceof Array && filters[key].length > 0) {
+            if (filters[key].length === 0) {
+                return
+            }
+
+            if (filters[key] instanceof Array) {
                 filters[key].forEach((value) => {
                     urlParams.append(key, value)
                 })
-            } else if (filters[key].length > 0) {
+            } else {
                 urlParams.append(key, filters[key])
             }
         })
