@@ -3,12 +3,12 @@ import { string, arrayOf, shape, func, bool } from 'prop-types'
 import { Field, FieldArray } from 'formik'
 import './index.css'
 
-const CheckboxField = ({ name, options, value, onChange }) => (
+const CheckboxGroupField = ({ name, options, value, onChange }) => (
     <FieldArray name={name}>
         {arrayHelpers => (
             <React.Fragment>
                 {options.map((option, index) => (
-                    <div key={index} className="CheckboxField">
+                    <div key={index} className="CheckboxGroupField">
                         <Field
                             type="checkbox"
                             id={`${name}.${index}`}
@@ -30,7 +30,7 @@ const CheckboxField = ({ name, options, value, onChange }) => (
     </FieldArray>
 )
 
-CheckboxField.propTypes = {
+CheckboxGroupField.propTypes = {
     name: string.isRequired,
     options: arrayOf(shape({
         value: string.isRequired,
@@ -41,8 +41,8 @@ CheckboxField.propTypes = {
     value: arrayOf(string.isRequired).isRequired
 }
 
-CheckboxField.defaultProps = {
+CheckboxGroupField.defaultProps = {
     onChange: null
 }
 
-export default CheckboxField
+export default CheckboxGroupField

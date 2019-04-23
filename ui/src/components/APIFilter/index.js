@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
 import './index.css'
-import CheckboxField from '../CheckboxField';
+import CheckboxGroupField from '../CheckboxGroupField';
 
 const filters = [
     { key: 'tags', label: 'Tags' },
@@ -34,7 +34,7 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => (
                             {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
                                 <React.Fragment>
                                     <h2>{filter.label}</h2>
-                                    <CheckboxField
+                                    <CheckboxGroupField
                                         name={filter.key}
                                         options={formatOptions(facets[filter.key].terms)}
                                         value={values[filter.key]}

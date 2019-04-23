@@ -1,7 +1,7 @@
 import React from 'react'
 import {mount} from 'enzyme'
 import APIFilter from './index'
-import CheckboxField from '../CheckboxField';
+import CheckboxGroupField from '../CheckboxGroupField';
 
 const filters = [
     { key: 'tags', label: 'Tags' },
@@ -31,7 +31,7 @@ describe('APIFilter', () => {
         })
     })
 
-    it('should format the options for CheckBoxField in the correct way', () => {
+    it('should format the options for CheckboxGroupField in the correct way', () => {
         const onSubmit = jest.fn()
         const wrapper = mount(
             <APIFilter
@@ -41,7 +41,7 @@ describe('APIFilter', () => {
             />
         )
 
-        const firstField = wrapper.find(CheckboxField).first()
+        const firstField = wrapper.find(CheckboxGroupField).first()
         const expectedOptions = [
             { value: '41', label: '41 (5)', disabled: false },
             { value: '42', label: '42 (100)', disabled: false }

@@ -1,20 +1,20 @@
-.CheckboxField {
+.CheckboxGroupField {
     position: relative;
     display: block;
     padding-left: 1.25rem;
 }
 
-.CheckboxField input {
+.CheckboxGroupField input {
     position: absolute;
     margin-top: .3rem;
     margin-left: -1.25rem;
 }
 
-.CheckboxField label {
+.CheckboxGroupField label {
     display: inline-block;
     margin-bottom: 0;
 }
 
-.CheckboxField input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
+.CheckboxGroupField input[type="checkbox"]:disabled, input[type="checkbox"]:disabled + label {
     color: grey;
 }

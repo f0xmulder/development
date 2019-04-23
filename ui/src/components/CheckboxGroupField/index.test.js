@@ -1,6 +1,6 @@
 import {mount} from 'enzyme/build'
 import { Formik } from 'formik'
-import CheckboxField from './index'
+import CheckboxGroupField from './index'
 import React from 'react'
 
 const options = [
@@ -13,13 +13,13 @@ const createForm = (onChange = () => {}) => {
     return mount(
         <Formik initialValues={{ theNumber: ['42'] }}>
             {({ values }) => (
-                <CheckboxField name="theNumber" options={options} onChange={onChange} value={values.theNumber} />
+                <CheckboxGroupField name="theNumber" options={options} onChange={onChange} value={values.theNumber} />
             )}
         </Formik>
     )
 }
 
-describe('CheckboxField', () => {
+describe('CheckboxGroupField', () => {
     it('displays the labels', () => {
         const wrapper = createForm()
 
