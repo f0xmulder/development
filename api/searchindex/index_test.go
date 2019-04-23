@@ -55,7 +55,7 @@ func TestNewIndex(t *testing.T) {
 		t.Error(err)
 	}
 
-	assert.Equal(t, docCount, uint64(len(apis)))
+	assert.Equal(t, docCount, uint64(2))
 }
 
 func TestSearch(t *testing.T) {
