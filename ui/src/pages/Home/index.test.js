@@ -13,7 +13,7 @@ describe('Search', () => {
   describe('when submitting the form', () => {
     it('should call the onSubmit handler', () => {
       const onSubmitSpy = jest.spyOn(Search.prototype, 'onSubmit')
-      const wrapper = mount(<Search history={{ push: historyPush }} />)
+      const wrapper = mount(<Search history={{ push: jest.fn() }} />)
       const searchForm = wrapper.find('[data-test="search-form"]')
       searchForm.simulate('submit', { preventDefault: () => {} })
 
@@ -21,13 +21,13 @@ describe('Search', () => {
     })
 
     it('should push to history with the query parameter', () => {
-      const wrapper = mount(<Search history={{ push: historyPush }} />)
+      const wrapper = mount(<Search history={{ push: jest.fn() }} />)
       wrapper.setState({ searchInputValue: "42" })
 
       const searchForm = wrapper.find('[data-test="search-form"]')
       searchForm.simulate('submit', { preventDefault: () => {} })
 
-      expect(historyPush).toHaveBeenCalledWith(`/overzicht?q=42`)
+      expect(wrapper.props().history.push).toHaveBeenCalledWith(`/overzicht?q=42`)
     })
   })
 })
