@@ -29,7 +29,7 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => (
                         <Field type="text" name="q" placeholder="Vul een zoekterm in" />
                     </label>
 
-                    {filters && filters.map((filter, i) => (
+                    {filters ? filters.map((filter, i) => (
                         <React.Fragment key={i}>
                             {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
                                 <React.Fragment>
@@ -43,7 +43,7 @@ const APIFilter = ({ initialValues, facets, onSubmit }) => (
                                 </React.Fragment>
                             )}
                         </React.Fragment>
-                    ))}
+                    )) : null}
                 </form>
             )}
         </Formik>
