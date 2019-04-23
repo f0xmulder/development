@@ -11,7 +11,7 @@ import (
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
-const facetCount = 50
+const facetSize = 50
 
 // Index provides a friendlier API to Bleve
 type Index struct {
@@ -164,7 +164,7 @@ func newSearchRequest(q query.Query) *bleve.SearchRequest {
 	searchRequest := bleve.NewSearchRequest(q)
 
 	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
-		facet := bleve.NewFacetRequest(value, facetCount)
+		facet := bleve.NewFacetRequest(value, facetSize)
 		searchRequest.AddFacet(value, facet)
 	}
 
