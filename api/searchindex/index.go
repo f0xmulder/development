@@ -15,8 +15,8 @@ const facetCount = 50
 
 // Index provides a friendlier API to Bleve
 type Index struct {
-	Bleve bleve.Index
-	APIs  *[]models.API
+	bleve bleve.Index
+	apis  *[]models.API
 }
 
 // NewIndex will create a new Index that provides a friendlier API to Bleve
@@ -51,8 +51,8 @@ func NewIndex(apis *[]models.API) Index {
 	}
 
 	return Index{
-		Bleve: bleveIndex,
-		APIs:  apis,
+		bleve: bleveIndex,
+		apis:  apis,
 	}
 }
 
@@ -60,17 +60,17 @@ func NewIndex(apis *[]models.API) Index {
 func (index Index) Search(q string, filters map[string][]string) (models.APIList, error) {
 	query := newQuery(q, filters)
 	searchRequest := newSearchRequest(query)
-	searchResult, err := index.Bleve.Search(searchRequest)
+	searchResult, err := index.bleve.Search(searchRequest)
 	if err != nil {
 		return models.APIList{}, err
 	}
 
-	apis := mapBleveResultToAPIs(index.APIs, searchResult.Hits)
+	apis := mapBleveResultToAPIs(index.apis, searchResult.Hits)
 
 	// execute a MatchAllQuery to determine the facets on the full result set
 	query = bleve.NewMatchAllQuery()
 	facetSearchRequest := newSearchRequest(query)
-	facetSearchResult, err := index.Bleve.Search(facetSearchRequest)
+	facetSearchResult, err := index.bleve.Search(facetSearchRequest)
 	if err != nil {
 		return models.APIList{}, err
 	}
@@ -107,7 +107,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 
 		query := newQuery(q, currentFilters)
 		searchRequest := newSearchRequest(query)
-		searchResult, err := index.Bleve.Search(searchRequest)
+		searchResult, err := index.bleve.Search(searchRequest)
 		if err != nil {
 			return models.APIList{}, err
 		}

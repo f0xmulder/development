@@ -48,9 +48,9 @@ var apis = []models.API{dummyAPI, anotherDummyAPI}
 func TestNewIndex(t *testing.T) {
 	index := NewIndex(&apis)
 
-	assert.Equal(t, apis, *index.APIs)
+	assert.Equal(t, apis, *index.apis)
 
-	docCount, err := index.Bleve.DocCount()
+	docCount, err := index.bleve.DocCount()
 	if err != nil {
 		t.Error(err)
 	}
