@@ -22,7 +22,7 @@ describe('Search', () => {
 
     it('should push to history with the query parameter', () => {
       const wrapper = mount(<Search history={{ push: historyPush }} />)
-      wrapper.setState({ searchInput: "42" })
+      wrapper.setState({ searchInputValue: "42" })
 
       const searchForm = wrapper.find('[data-test="search-form"]')
       searchForm.simulate('submit', { preventDefault: () => {} })

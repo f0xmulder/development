@@ -9,21 +9,21 @@ export default class Home extends Component {
         super(props)
 
         this.state = {
-            searchInput: ''
+            searchInputValue: ''
         }
 
-        this.onChangeSearchInput = this.onChangeSearchInput.bind(this)
+        this.onSearchInputValueChanged = this.onSearchInputValueChanged.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    onChangeSearchInput(e) {
-        this.setState({ searchInput: e.target.value })
+    onSearchInputValueChanged(e) {
+        this.setState({ searchInputValue: e.target.value })
     }
 
     onSubmit(e) {
         e.preventDefault()
         const { history } = this.props
-        const urlParams = new URLSearchParams({ q: this.state.searchInput })
+        const urlParams = new URLSearchParams({ q: this.state.searchInputValue })
         history.push(`/overzicht?${urlParams.toString()}`)
     }
 
@@ -36,7 +36,7 @@ export default class Home extends Component {
                     <form method="POST" onSubmit={this.onSubmit} data-test="search-form">
                         <div className="search-box">
                             <label htmlFor="searchInput" aria-label="Zoekterm">
-                                <input type="text" name="q" id="searchInput" placeholder="Zoeken naar een API" data-test="search-input" onChange={this.onChangeSearchInput} value={this.state.searchInput} />
+                                <input type="text" name="q" id="searchInput" placeholder="Zoeken naar een API" data-test="search-input" onChange={this.onSearchInputValueChanged} value={this.state.searchInputValue} />
                             </label>
                             <SearchIcon/>
                         </div>
