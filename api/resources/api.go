@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi"
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/utils"
 	"go.uber.org/zap"
 )
 
@@ -43,26 +44,6 @@ func NewAPIResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, read
 	}
 
 	return i
-}
-
-func getQueryParam(r *http.Request, key string) string {
-	keys, ok := r.URL.Query()[key]
-
-	if ok {
-		return keys[0]
-	}
-
-	return ""
-}
-
-func getQueryParams(r *http.Request, key string) []string {
-	values, ok := r.URL.Query()[key]
-
-	if ok {
-		return values
-	}
-
-	return []string{}
 }
 
 const RELATION_TYPE_REFERENCE_IMPLEMENTATION = "reference-implementation"
@@ -98,11 +79,14 @@ func (rs APIResource) Routes() chi.Router {
 func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	q := getQueryParam(r, "q")
+	q := ""
+	if len(utils.GetQueryParams(r, "q")) > 0 {
+		q = utils.GetQueryParams(r, "q")[0]
+	}
 
 	filters := map[string][]string{}
 	for _, key := range []string{"organization_name", "tags", "api_specification_type"} {
-		values := getQueryParams(r, key)
+		values := utils.GetQueryParams(r, key)
 		if len(values) > 0 {
 			filters[key] = values
 		}

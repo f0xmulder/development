@@ -47,6 +47,7 @@ func TestCreate(t *testing.T) {
 
 		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
 			fmt.Println(url)
+
 			req := httptest.NewRequest("POST", url, strings.NewReader(tc.inputContent))
 			w := httptest.NewRecorder()
 
