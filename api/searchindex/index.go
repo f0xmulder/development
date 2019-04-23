@@ -93,7 +93,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 		}
 	}
 
-	// now execute a seperate query for all filters that are currently active
+	// now execute a separate query for all filters that are currently active
 	// because we would like users to be able to select more values
 	for key := range filters {
 		currentFilters := map[string][]string{}
