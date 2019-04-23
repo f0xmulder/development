@@ -141,7 +141,7 @@ func newQuery(q string, filters map[string][]string) query.Query {
 	if q != "" {
 		query.AddQuery(bleve.NewQueryStringQuery(q))
 	} else {
-		query.AddQuery(bleve.NewMatchAllQuery())
+		query.AddQuery(bleve.NewQueryStringQuery("*"))
 	}
 
 	for key, values := range filters {

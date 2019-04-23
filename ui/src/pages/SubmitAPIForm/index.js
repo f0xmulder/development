@@ -103,7 +103,7 @@ class SubmitAPIForm extends Component {
         this.state = {
             submitted: false,
             responseData: {},
-            apis: [],
+            list: {},
             apisLoaded: false,
             apisError: false
         }
@@ -166,8 +166,8 @@ class SubmitAPIForm extends Component {
     componentDidMount() {
         this
             .fetchApiList()
-            .then(apis => {
-                this.setState({ apis, apisLoaded: true })
+            .then(list => {
+                this.setState({ list, apisLoaded: true })
             }, error => {
                 this.setState({ apisError: true, apisLoaded: true })
                 console.error(error)
@@ -175,7 +175,7 @@ class SubmitAPIForm extends Component {
     }
 
     render() {
-        const { apis, apisLoaded } = this.state
+        const { list, apisLoaded } = this.state
 
         return apisLoaded ?
             <div className="SubmitAPIForm container">
@@ -341,12 +341,12 @@ class SubmitAPIForm extends Component {
                                         <div className="form-group">
                                             <label htmlFor="reference_implementation">Gebaseerd op (referentie implementatie)</label>
                                             <Field component="select" id="reference_implementation" name="reference_implementation"
-                                                   className="form-control" value={''}>
+                                                   className="form-control">
                                                 <option value={''}>Geen</option>
                                                 {
-                                                    apis
-                                                        .filter(api => api.is_reference_implementation)
-                                                        .map(api => <option value={api.id} key={api.id}>{api.service_name} {api.organization_name}</option>)
+                                                    list.apis
+                                                    .filter(api => api.is_reference_implementation)
+                                                    .map(api => <option value={api.id} key={api.id}>{api.service_name} {api.organization_name}</option>)
                                                 }
                                             </Field>
                                             {errors.api_specification_type && touched.api_specification_type &&
