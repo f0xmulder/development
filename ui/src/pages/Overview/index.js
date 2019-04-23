@@ -13,7 +13,7 @@ class Overview extends Component {
             loaded: false
         }
 
-        this.getFilterValues = this.getFilterValues.bind(this)
+        this.getQueryParams = this.getQueryParams.bind(this)
         this.onFilterChange = this.onFilterChange.bind(this)
     }
 
@@ -40,7 +40,7 @@ class Overview extends Component {
     }
 
     fetchApiList() {
-        return fetch(`/api/apis?${this.generateURL(this.getFilterValues())}`)
+        return fetch(`/api/apis?${this.generateQueryParams(this.getQueryParams())}`)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -51,7 +51,7 @@ class Overview extends Component {
     }
 
     onFilterChange(newFilters) {
-        const currentFilters = this.getFilterValues()
+        const currentFilters = this.getQueryParams()
 
         if (newFilters.q !== currentFilters.q) {
             newFilters.tags = []
@@ -59,37 +59,42 @@ class Overview extends Component {
             newFilters.api_specification_type = []
         }
 
-        const { history } = this.props
-        history.push(`?${this.generateURL(newFilters)}`)
-    }
-
-    generateURL(filters) {
-        const urlParams = new URLSearchParams()
-
-        if (filters.q) {
-            urlParams.append('q', filters.q)
+        const translatedFilters = {
+            q: newFilters.q,
+            tags: newFilters.tags,
+            organisatie: newFilters.organization_name,
+            specificatie: newFilters.api_specification_type
         }
 
-        ['tags', 'organization_name', 'api_specification_type'].forEach((key) => {
-            if (filters[key] && filters[key].length > 0) {
+        const { history } = this.props
+        history.push(`?${this.generateQueryParams(translatedFilters)}`)
+    }
+
+    generateQueryParams(filters) {
+        const urlParams = new URLSearchParams()
+
+        Object.keys(filters).forEach((key) => {
+            if (filters[key] instanceof Array && filters[key].length > 0) {
                 filters[key].forEach((value) => {
                     urlParams.append(key, value)
                 })
+            } else if (filters[key].length > 0) {
+                urlParams.append(key, filters[key])
             }
         })
 
         return urlParams
     }
 
-    getFilterValues() {
+    getQueryParams() {
         const { location } = this.props
         const values = new URLSearchParams(location ? location.search : {})
 
         return {
             q: values.get('q') || '',
             tags: values.getAll('tags'),
-            organization_name: values.getAll('organization_name'),
-            api_specification_type: values.getAll('api_specification_type')
+            organization_name: values.getAll('organisatie'),
+            api_specification_type: values.getAll('specificatie')
         }
     }
 
@@ -107,7 +112,7 @@ class Overview extends Component {
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                                 <div className="Overview__sections">
                                     <div className="Overview__sidebar">
-                                        <APIFilter initialValues={this.getFilterValues()} facets={result.facets} onSubmit={this.onFilterChange} />
+                                        <APIFilter initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
                                         {result && result.apis && result.apis.length > 0 ?
