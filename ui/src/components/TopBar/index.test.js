@@ -11,19 +11,19 @@ describe('the TopBar', () => {
     })
 
     it('should contain a link to the Overview page', () => {
-        const homeLink = navigation.childAt(0).find('Link')
+        const homeLink = navigation.childAt(0).find('NavLink')
         expect(homeLink.props().children).toBe('Overzicht')
         expect(homeLink.props().to).toBe('/overzicht')
     })
 
     it('should contain a link to the Submit API page', () => {
-        const homeLink = navigation.childAt(1).find('Link')
+        const homeLink = navigation.childAt(1).find('NavLink')
         expect(homeLink.props().children).toBe('API toevoegen')
         expect(homeLink.props().to).toBe('/api-toevoegen')
     })
 
     it('should contain a link to the About page', () => {
-        const homeLink = navigation.childAt(2).find('Link')
+        const homeLink = navigation.childAt(2).find('NavLink')
         expect(homeLink.props().children).toBe('Over')
         expect(homeLink.props().to).toBe('/over')
     })
