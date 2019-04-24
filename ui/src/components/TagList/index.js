@@ -1,6 +1,6 @@
 import React from 'react'
 import {arrayOf, string} from 'prop-types'
-import {Link} from 'react-router-dom'
+import {StyledLink} from './index.styles.js'
 
 const TagList = ({ tags }) =>
     <div className="TagList">
@@ -9,7 +9,7 @@ const TagList = ({ tags }) =>
                 tags
                     .map((tag, i) =>
                         <li key={i}>
-                            <Link to={`/overzicht?tags=${tag}`} data-test="link">{tag}</Link>
+                            <StyledLink to={`/overzicht?tags=${tag}`} data-test="link">{tag}</StyledLink>
                         </li>
                     )
             }

@@ -7,7 +7,8 @@ import './index.css'
 export default () =>
   <div className="Home container">
       <div className="Home__Search">
-          <h1>Een incompleet overzicht van alle API’s binnen de Nederlandse overheid</h1>
+          <h1>developer.overheid.nl</h1>
+          <h2>Een incompleet overzicht van alle API’s binnen de Nederlandse overheid</h2>
 
           <form method="GET" action="/overzicht">
               <div className="search-box">
@@ -19,7 +20,6 @@ export default () =>
       </div>
 
       <div className="Home__Tags">
-          <p>Categorieën</p>
           <TagListContainer />
       </div>
   </div>
