@@ -41,7 +41,7 @@ const initialValues = {
         support_response_time: ''
     },
     is_reference_implementation: false,
-    reference_implementation: null
+    reference_implementation: ''
 }
 
 const validationSchema = Yup.object().shape({
@@ -342,7 +342,7 @@ class SubmitAPIForm extends Component {
                                             <label htmlFor="reference_implementation">Gebaseerd op (referentie implementatie)</label>
                                             <Field component="select" id="reference_implementation" name="reference_implementation"
                                                    className="form-control">
-                                                <option value={''}>Geen</option>
+                                                <option value="">Geen</option>
                                                 {
                                                     result.apis
                                                     .filter(api => api.is_reference_implementation)
