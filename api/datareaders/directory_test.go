@@ -16,7 +16,7 @@ func TestDirectory(t *testing.T) {
 			"Test Organization Name",
 			"Test Service Name",
 			"Test API URL",
-			"Test Specification Type",
+			"Test API Type",
 			"Test Specification URL",
 			"Test Documentation URL",
 			[]models.Tag{"test tag"},

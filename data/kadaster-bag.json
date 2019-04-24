@@ -3,7 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",
-    "api_specification_type": "OpenAPI3",
+    "api_type": "REST/JSON",
     "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
     "documentation_url": "https://bag.basisregistraties.overheid.nl",
     "tags": ["basisregistratie", "kadaster", "bag"],

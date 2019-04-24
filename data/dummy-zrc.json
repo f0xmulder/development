@@ -3,7 +3,7 @@
     "organization_name": "Dummy organisatie",
     "service_name": "Dummy ZRC",
     "api_url": "https://",
-    "api_specification_type": "Custom",
+    "api_type": "Onbekend",
     "specification_url": "",
     "documentation_url": "https://www.duck.com",
     "tags": ["zgw", "zrc", "dummy"],

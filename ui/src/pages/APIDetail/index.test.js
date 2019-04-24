@@ -7,7 +7,7 @@ const details = {
   "organization_name": "Organization Name",
   "service_name": "Service Name",
   "api_url": "API URL",
-  "api_specification_type": "Specification Type",
+  "api_type": "Specification Type",
   "specification_url": "Specification URL",
   "documentation_url": "Documentation URL",
   "badges": ["Golden API", "Well-written docs"]
@@ -60,7 +60,7 @@ describe('APIDetail', () => {
         "organization_name": "Organization Name",
         "service_name": "Service Name",
         "api_url": "API URL",
-        "api_specification_type": "Specification Type",
+        "api_type": "Specification Type",
         "specification_url": "Specification URL",
         "documentation_url": "Documentation URL"
       }

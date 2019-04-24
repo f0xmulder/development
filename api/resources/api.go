@@ -87,7 +87,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 	}
 
 	filters := map[string][]string{}
-	for _, key := range []string{"organization_name", "tags", "api_specification_type"} {
+	for _, key := range []string{"organization_name", "tags", "api_type"} {
 		values := utils.GetQueryParam(r, key)
 		if len(values) > 0 {
 			filters[key] = values

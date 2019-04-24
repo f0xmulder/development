@@ -3,7 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Topografie (BRT)",
     "api_url": "https://brt.basisregistraties.overheid.nl/api/v2",
-    "api_specification_type": "OpenAPI3",
+    "api_type": "REST/JSON",
     "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/brt/oas.v2.yaml",
     "documentation_url": "https://brt.basisregistraties.overheid.nl",
     "tags": ["basisregistratie", "kadaster", "brt"]

@@ -3,7 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Kadaster (BRK)",
     "api_url": "https://brk.basisregistraties.overheid.nl/api/v1",
-    "api_specification_type": "OpenAPI3",
+    "api_type": "REST/JSON",
     "specification_url": "https://brk.basisregistraties.overheid.nl/api/v1",
     "documentation_url": "https://brk.basisregistraties.overheid.nl/api/v1",
     "tags": ["basisregistratie", "kadaster", "brk"]

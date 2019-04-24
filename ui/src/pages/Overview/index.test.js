@@ -86,7 +86,7 @@ describe('Overview', () => {
   describe('getting the filters', () => {
     it('should return the values from the query parameters', () => {
       const wrapper = shallow(<Overview location={{ search: 'tags=42&organisatie=42' }} />)
-      expect(wrapper.instance().getQueryParams()).toEqual({ q: '', api_specification_type: [], organization_name: ['42'], tags: ['42']})
+      expect(wrapper.instance().getQueryParams()).toEqual({ q: '', api_type: [], organization_name: ['42'], tags: ['42']})
     })
   })
 
@@ -103,7 +103,7 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
-      wrapper.instance().onFilterChange({ q: '', api_specification_type: [], organization_name: ['42'], tags: ['42', '43'] })
+      wrapper.instance().onFilterChange({ q: '', api_type: [], organization_name: ['42'], tags: ['42', '43'] })
       expect(history.push).toHaveBeenCalledWith('?tags=42&tags=43&organisatie=42')
     })
   })

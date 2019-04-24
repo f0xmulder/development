@@ -17,7 +17,7 @@ export const referenceImplementationsFromRelations = relations =>
         .keys(relations || {})
         .filter(apiId => relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION))
 
-const APIDetails = ({ id, service_name, organization_name, description, api_url, api_specification_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use, scores }) =>
+const APIDetails = ({ id, service_name, organization_name, description, api_url, api_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use, scores }) =>
     <div className="APIDetails">
         <h1 className="title">{ service_name }</h1>
         <h2 className="subtitle">{ organization_name }</h2>
@@ -54,9 +54,14 @@ const APIDetails = ({ id, service_name, organization_name, description, api_url,
                         <a href={api_url} target="_blank" rel="noopener noreferrer">{ api_url }</a>
                     </dd>
 
+                    <dt>API Type</dt>
+                    <dd data-test="api-type">
+                        { api_type }
+                    </dd>
+
                     <dt>API Specificatie</dt>
-                    <dd data-test="api-specification-type">
-                        <a href={getOnlineRedocUrl(specification_url)} target="_blank" rel="noopener noreferrer" data-test="api-specification-url">{ api_specification_type }</a>
+                    <dd data-test="api-specification">
+                        <a href={getOnlineRedocUrl(specification_url)} target="_blank" rel="noopener noreferrer" data-test="api-specification-url">Lees meer</a>
                     </dd>
 
                     <dt>Gebruiksvoorwaarden</dt>
@@ -106,7 +111,7 @@ APIDetails.propTypes = {
     organization_name: string.isRequired,
     description: string.isRequired,
     api_url: string.isRequired,
-    api_specification_type: string.isRequired,
+    api_type: string.isRequired,
     specification_url: string.isRequired,
     documentation_url: string.isRequired,
     is_reference_implementation: bool,

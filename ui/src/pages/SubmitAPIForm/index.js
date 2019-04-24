@@ -22,7 +22,7 @@ const initialValues = {
     organization_name: '',
     service_name: '',
     api_url: '',
-    api_specification_type: '',
+    api_type: 'Onbekend',
     specification_url: '',
     documentation_url: '',
     tags: '',
@@ -49,7 +49,7 @@ const validationSchema = Yup.object().shape({
     organization_name: Yup.string().required(),
     service_name: Yup.string().required(),
     api_url: Yup.string().url().required(),
-    api_specification_type: Yup.string(),
+    api_type: Yup.string().required(),
     specification_url: Yup.string().url(),
     documentation_url: Yup.string().url(),
     tags: Yup.string(),
@@ -231,10 +231,10 @@ class SubmitAPIForm extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="api_specification_type">API specificatie</label>
-                                    <Field component="select" id="api_specification_type" name="api_specification_type"
+                                    <label htmlFor="api_type">API type</label>
+                                    <Field component="select" id="api_type" name="api_type"
                                            className="form-control">
-                                        <option value="">Onbekend</option>
+                                        <option value="Onbekend">Onbekend</option>
                                         <option value="REST/JSON">REST/JSON</option>
                                         <option value="SOAP/XML">SOAP/XML</option>
                                         <option value="gRPC">gRPC</option>
@@ -243,8 +243,8 @@ class SubmitAPIForm extends Component {
                                         <option value="WFS">WFS</option>
                                         <option value="WMS">WMS</option>
                                     </Field>
-                                    {errors.api_specification_type && touched.api_specification_type &&
-                                    <p className="text-danger">{errors.api_specification_type}</p>}
+                                    {errors.api_type && touched.api_type &&
+                                    <p className="text-danger">{errors.api_type}</p>}
                                 </div>
 
                                 <div className="form-group">
@@ -352,8 +352,8 @@ class SubmitAPIForm extends Component {
                                                     .map(api => <option value={api.id} key={api.id}>{api.service_name} {api.organization_name}</option>)
                                                 }
                                             </Field>
-                                            {errors.api_specification_type && touched.api_specification_type &&
-                                            <p className="text-danger">{errors.api_specification_type}</p>}
+                                            {errors.api_type && touched.api_type &&
+                                            <p className="text-danger">{errors.api_type}</p>}
                                         </div> : null
                                 }
 

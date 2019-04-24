@@ -3,11 +3,12 @@ package validate
 import (
 	"encoding/json"
 	"fmt"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
 	"log"
 	"path/filepath"
 	"strings"
+
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
 // ValidationFeedback contains feedback info
@@ -74,10 +75,10 @@ func File(filePath string) ValidationFeedback {
 		}
 	}
 
-	if len(newAPI.APISpecificationType) < 1 {
+	if len(newAPI.APIType) < 1 {
 		return ValidationFeedback{
 			false,
-			"the field api_specification_type is missing",
+			"the field api_type is missing",
 		}
 	}
 

@@ -26,7 +26,7 @@ func NewIndex(apis *[]models.API) Index {
 	keywordFieldMapping.Analyzer = keyword.Name
 
 	apiMapping := bleve.NewDocumentMapping()
-	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
+	for _, value := range []string{"organization_name", "tags", "api_type"} {
 		apiMapping.AddFieldMappingsAt(value, keywordFieldMapping)
 	}
 
@@ -163,7 +163,7 @@ func newQuery(q string, filters map[string][]string) query.Query {
 func newSearchRequest(q query.Query) *bleve.SearchRequest {
 	searchRequest := bleve.NewSearchRequest(q)
 
-	for _, value := range []string{"organization_name", "tags", "api_specification_type"} {
+	for _, value := range []string{"organization_name", "tags", "api_type"} {
 		facet := bleve.NewFacetRequest(value, 50)
 		searchRequest.AddFacet(value, facet)
 	}

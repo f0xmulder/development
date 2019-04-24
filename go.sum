@@ -104,6 +104,7 @@ golang.org/x/net v0.0.0-20190415225723-1da14a5a36f2 h1:IGfhGSrexIBGJXC8r2UeAuyE4
 golang.org/x/net v0.0.0-20190415225723-1da14a5a36f2/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190420074925-afa5a82059c6 h1:gcNh9pPH/1RRswJ2D7lm9klsOJCXOhouLmyNNoT9WnE=
 golang.org/x/net v0.0.0-20190420074925-afa5a82059c6/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
+golang.org/x/net v0.0.0-20190424034658-afe8014c977f h1:F0s01mO/APxRmEOraKdCq6HBkEIvgjSTzOpAPISzzqY=
 golang.org/x/net v0.0.0-20190424034658-afe8014c977f/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190424112641-4829fb13d2c6/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f h1:wMNYb4v58l5UBM7MYRLPG6ZhfOqbKu7X5eyFl8ZhKvA=

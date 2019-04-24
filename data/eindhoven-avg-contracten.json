@@ -3,7 +3,7 @@
   "organization_name": "Eindhoven",
   "service_name": "Contracten API",
   "api_url": "https://testen.solviteers.nl/MijnApp/api",
-  "api_specification_type": "OpenAPI2",
+  "api_type": "REST/JSON",
   "specification_url": "https://raw.githubusercontent.com/solviteers/mijnapp-api/master/contracten-api.yaml",
   "documentation_url": "https://solviteers.github.io/mijnapp-api-contracts-docs-redoc/",
   "tags": ["zaken", "contractgegevens", "mijnapp"],

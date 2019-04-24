@@ -7,7 +7,7 @@ import CheckboxGroupField from '../CheckboxGroupField'
 const filters = [
     { key: 'tags', label: 'Tags' },
     { key: 'organization_name', label: 'Organisatie' },
-    { key: 'api_specification_type', label: 'API type' },
+    { key: 'api_type', label: 'API type' },
 ]
 
 class APIFilter extends React.Component {

@@ -17,7 +17,7 @@ func TestFile(t *testing.T) {
 		{"invalid-json.json", false, "invalid JSON"},
 		{"missing-service-name.json", false, "the field service_name is missing"},
 		{"missing-organization-name.json", false, "the field organization_name is missing"},
-		{"missing-api-specification-type.json", false, "the field api_specification_type is missing"},
+		{"missing-api-type.json", false, "the field api_type is missing"},
 		{"missing-api-url.json", false, "the field api_url is missing"},
 		{"missing-documentation-url.json", false, "the field documentation_url is missing"},
 		{"missing-specification-url.json", true, ""},

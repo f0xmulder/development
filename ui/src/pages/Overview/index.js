@@ -56,14 +56,14 @@ class Overview extends Component {
         if (newFilters.q !== currentFilters.q) {
             newFilters.tags = []
             newFilters.organization_name = []
-            newFilters.api_specification_type = []
+            newFilters.api_type = []
         }
 
         const translatedFilters = {
             q: newFilters.q,
             tags: newFilters.tags,
             organisatie: newFilters.organization_name,
-            specificatie: newFilters.api_specification_type
+            type: newFilters.api_type
         }
 
         const { history } = this.props
@@ -98,7 +98,7 @@ class Overview extends Component {
             q: values.get('q') || '',
             tags: values.getAll('tags'),
             organization_name: values.getAll('organisatie'),
-            api_specification_type: values.getAll('specificatie')
+            api_type: values.getAll('type')
         }
     }
 

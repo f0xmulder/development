@@ -23,13 +23,13 @@ func TestCreate(t *testing.T) {
 		wantResponseBody string
 	}{
 		{
-			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_specification_type\":\"asdf\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
+			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_type\":\"asdf\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
 			200,
 			"application/json",
 			"{\"id\":0,\"state\":\"\",\"title\":\"\",\"description\":\"\",\"created_at\":\"\",\"weight\":\"\",\"web_url\":\"\",\"labels\":null}\n",
 		},
 		{
-			"asdf{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_specification_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
+			"asdf{\"id\":\"\",\"description\":\"\",\"organization_name\":\"\",\"service_name\":\"\",\"api_url\":\"\",\"api_type\":\"\",\"specification_url\":\"\",\"documentation_url\":\"\"}\n",
 			400,
 			"text/plain; charset=utf-8",
 			"bad request\n",

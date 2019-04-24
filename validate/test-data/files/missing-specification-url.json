@@ -3,6 +3,6 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_url": "Test API URL",
-    "api_specification_type": "Test Specification Type",
+    "api_type": "Test API Type",
     "documentation_url": "Test Documentation URL"
 }

@@ -23,7 +23,7 @@ const SubmitAPI = () =>
     "organization_name": "Voorbeeld van een organisatie naam",
     "service_name": "Voorbeeld van een API naam",
     "api_url": "https://api.example.com/service/",
-    "api_specification_type": "OpenAPI2",
+    "api_type": "REST/JSON",
     "specification_url": "https://api.example.com/service/swagger/?format=openapi",
     "documentation_url": "https://api.example.com/service/",
     "tags": ["Voorbeeld tag", "Nog een tag"],

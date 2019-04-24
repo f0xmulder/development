@@ -3,7 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "ZRC",
     "api_url": "https://ref.tst.vng.cloud/zrc/api/v1/",
-    "api_specification_type": "OpenAPI2",
+    "api_type": "REST/JSON",
     "specification_url": "https://ref.tst.vng.cloud/zrc/api/v1/schema/",
     "documentation_url": "https://github.com/vng-Realisatie/gemma-zaakregistratiecomponent",
     "tags": ["zgw", "zrc"],

@@ -7,7 +7,7 @@ const details = {
     "organization_name": "Organization Name",
     "service_name": "Service Name",
     "api_url": "API URL",
-    "api_specification_type": "Specification Type",
+    "api_type": "API Type",
     "specification_url": "Specification URL",
     "documentation_url": "Documentation URL",
     "badges": ["Golden API", "Well-written docs"],
@@ -63,10 +63,10 @@ describe('APIDetails', () => {
         expect(apiURL.text()).toBe('API URL')
     })
 
-    describe('specification', () => {
-        it('should show the specification type', () => {
-            const apiSpecType = wrapper.find('[data-test="api-specification-type"]')
-            expect(apiSpecType.text()).toBe('Specification Type')
+    describe('api type', () => {
+        it('should show the api type', () => {
+            const apiSpecType = wrapper.find('[data-test="api-type"]')
+            expect(apiSpecType.text()).toBe('API Type')
         })
 
         it('should link to Rebilly with the specification URL', () => {
