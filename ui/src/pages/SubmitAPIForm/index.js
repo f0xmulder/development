@@ -22,7 +22,7 @@ const initialValues = {
     organization_name: '',
     service_name: '',
     api_url: '',
-    api_specification_type: 'REST/JSON',
+    api_specification_type: '',
     specification_url: '',
     documentation_url: '',
     tags: '',
@@ -49,7 +49,7 @@ const validationSchema = Yup.object().shape({
     organization_name: Yup.string().required(),
     service_name: Yup.string().required(),
     api_url: Yup.string().url().required(),
-    api_specification_type: Yup.string().required(),
+    api_specification_type: Yup.string(),
     specification_url: Yup.string().url(),
     documentation_url: Yup.string().url(),
     tags: Yup.string(),
@@ -234,10 +234,14 @@ class SubmitAPIForm extends Component {
                                     <label htmlFor="api_specification_type">API specificatie</label>
                                     <Field component="select" id="api_specification_type" name="api_specification_type"
                                            className="form-control">
+                                        <option value="">Onbekend</option>
                                         <option value="REST/JSON">REST/JSON</option>
                                         <option value="SOAP/XML">SOAP/XML</option>
                                         <option value="gRPC">gRPC</option>
                                         <option value="GraphQL">GraphQL</option>
+                                        <option value="SPARQL">SPARQL</option>
+                                        <option value="WFS">WFS</option>
+                                        <option value="WMS">WMS</option>
                                     </Field>
                                     {errors.api_specification_type && touched.api_specification_type &&
                                     <p className="text-danger">{errors.api_specification_type}</p>}
