@@ -238,7 +238,6 @@ class SubmitAPIForm extends Component {
                                         <option value="SOAP/XML">SOAP/XML</option>
                                         <option value="gRPC">gRPC</option>
                                         <option value="GraphQL">GraphQL</option>
-                                        <option value="WSDL">WSDL</option>
                                     </Field>
                                     {errors.api_specification_type && touched.api_specification_type &&
                                     <p className="text-danger">{errors.api_specification_type}</p>}
