@@ -66,6 +66,20 @@ func TestSearchWorksForStringQueryByID(t *testing.T) {
 	assert.Equal(t, []models.API{anotherDummyAPI}, searchResult.APIs)
 }
 
+func TestSearchWorksForFilterByTag(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
+	index := NewIndex(&apis)
+	searchResult, _ := index.Search("", map[string][]string{"tags": []string{"test-tag"}})
+	assert.Equal(t, []models.API{anotherDummyAPI, dummyAPI}, searchResult.APIs)
+}
+
+func TestSearchDoesNotCrashForEmptyTagString(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
+	index := NewIndex(&apis)
+	searchResult, _ := index.Search("", map[string][]string{"tags": []string{""}})
+	assert.Equal(t, []models.API{}, searchResult.APIs)
+}
+
 func TestMapBleveResultToAPIs(t *testing.T) {
 	apis := []models.API{dummyAPI, anotherDummyAPI}
 

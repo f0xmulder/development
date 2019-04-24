@@ -149,7 +149,9 @@ func newQuery(q string, filters map[string][]string) query.Query {
 
 		subQuery := bleve.NewDisjunctionQuery()
 		for _, value := range values {
-			subQuery.AddQuery(bleve.NewPhraseQuery([]string{value}, key))
+			if value != "" {
+				subQuery.AddQuery(bleve.NewPhraseQuery([]string{value}, key))
+			}
 		}
 
 		query.AddQuery(subQuery)
