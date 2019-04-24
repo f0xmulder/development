@@ -19,15 +19,18 @@ describe('Search', () => {
 
       expect(onSubmitSpy).toHaveBeenCalled()
     })
+  })
 
-    it('should push to history with the query parameter', () => {
-      const wrapper = mount(<Search history={{ push: jest.fn() }} />)
-      wrapper.setState({ searchInputValue: "42" })
+  describe('the onSubmit hander', () => {
+      it('should navigate to the overview page with the specified query', () => {
+        const wrapper = mount(<Search history={{ push: jest.fn() }} />)
+        wrapper.setState({ searchInputValue: "42" })
 
-      const searchForm = wrapper.find('[data-test="search-form"]')
-      searchForm.simulate('submit', { preventDefault: () => {} })
+        wrapper.instance().onSubmit({
+          preventDefault: () => {} 
+        })
 
-      expect(wrapper.props().history.push).toHaveBeenCalledWith(`/overzicht?q=42`)
+        expect(wrapper.props().history.push).toHaveBeenCalledWith(`/overzicht?q=42`)
     })
   })
 })
