@@ -31,5 +31,5 @@ require (
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.9.1
 	golang.org/x/net v0.0.0-20190424112641-4829fb13d2c6 // indirect
-	golang.org/x/sys v0.0.0-20190424164507-4347357a82bc // indirect
+	golang.org/x/sys v0.0.0-20190425053002-9f0b1ff7b46a // indirect
 )
