@@ -172,7 +172,8 @@ E2E tests:
       -f e2e-tests/Dockerfile . && \
       docker run --rm --cap-add=SYS_ADMIN \
       -e URL=${URL} \
-      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA npm test
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      /bin/sh -c "./wait-for-http.sh $URL && npm test"
   tags:
     - docker
     - nlx

@@ -6,7 +6,7 @@ ENV CI=true
 # via https://github.com/GoogleChrome/puppeteer/blob/de82b87cfa1c637787a09b90266318905ae16f42/docs/troubleshooting.md#running-puppeteer-in-docker
 
 # See https://crbug.com/795759
-RUN apt-get update && apt-get install -yq libgconf-2-4
+RUN apt-get update && apt-get install -yq curl libgconf-2-4
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
@@ -18,8 +18,10 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
       --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get purge --auto-remove -y curl \
     && rm -rf /src/*.deb
+
+COPY e2e-tests/wait-for-http.sh \
+     /go/src/commonground/developer.overheid.nl/e2e-tests/
 
 # Uncomment to skip the chromium download when installing puppeteer. If you do,
 # you'll need to launch puppeteer with:
