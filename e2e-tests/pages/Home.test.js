@@ -11,6 +11,12 @@ describe('Home', () => {
     it('should show the page title', async () => {
         const html = await page.$eval('main h1', e => e.innerHTML)
         await page.screenshot({ path: 'screenshots/home.page-title.png' });
+        expect(html).toBe('developer.overheid.nl')
+    })
+
+    it('should show the page subtitle', async () => {
+        const html = await page.$eval('main h2', e => e.innerHTML)
+        await page.screenshot({ path: 'screenshots/home.page-subtitle.png' });
         expect(html).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid')
     })
 
