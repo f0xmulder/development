@@ -8,6 +8,7 @@ import About from './pages/About'
 import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
 import TopBar from './components/TopBar'
+import MobileNavigation from './components/MobileNavigation'
 
 import GlobalStyles from './components/GlobalStyles'
 
@@ -16,6 +17,7 @@ const App = () =>
         <Router>
             <GlobalStyles />
             <TopBar />
+            <MobileNavigation />
 
             <main role="main">
                 <Route path="/" exact component={Home} />
