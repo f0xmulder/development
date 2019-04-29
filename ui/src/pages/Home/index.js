@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import TagListContainer from "../../components/TagListContainer";
 import {Search} from '@commonground/design-system'
 
