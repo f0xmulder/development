@@ -44,4 +44,9 @@ export default createGlobalStyle`
   *, *:before, *:after {
     box-sizing: border-box;
   }
+
+  .container {
+    max-width: 630px;
+    padding: 0 40px;
+  }
 `
