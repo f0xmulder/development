@@ -30,6 +30,7 @@ export default createGlobalStyle`
     font-size: 16px;
     line-height: 24px;
     text-rendering: optimizeLegibility;
+    touch-action: manipulation;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
