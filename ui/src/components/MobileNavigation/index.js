@@ -26,7 +26,7 @@ export default class MobileNavigation extends Component {
       super(props)
 
       this.state = {
-          isVisible: true
+          isVisible: false
       }
   }
 

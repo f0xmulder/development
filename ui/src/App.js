@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import MediaQuery from 'react-responsive';
 
 import Home from './pages/Home'
 import SubmitAPI from './pages/SubmitAPI'
@@ -9,15 +10,18 @@ import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
 import TopBar from './components/TopBar'
 import MobileNavigation from './components/MobileNavigation'
-
 import GlobalStyles from './components/GlobalStyles'
 
 const App = () =>
     <div className="App">
         <Router>
             <GlobalStyles />
-            <TopBar />
-            <MobileNavigation />
+            <MediaQuery maxWidth={575}>
+                <MobileNavigation />
+            </MediaQuery>
+            <MediaQuery minWidth={576}>
+                <TopBar />
+            </MediaQuery>
 
             <main role="main">
                 <Route path="/" exact component={Home} />
