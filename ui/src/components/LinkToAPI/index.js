@@ -2,8 +2,8 @@ import React from 'react'
 import {string} from 'prop-types'
 import {Link} from 'react-router-dom'
 
-const LinkToAPI = ({ id, service_name, organization_name }) =>
-    <Link to={`/detail/${id}`} data-test="link">
+const LinkToAPI = ({ id, service_name, organization_name, ...props }) =>
+    <Link to={`/detail/${id}`} data-test="link" {...props}>
         {service_name} - {organization_name}
     </Link>
 
