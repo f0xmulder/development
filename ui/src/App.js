@@ -12,22 +12,19 @@ import TopBar from './components/TopBar'
 import GlobalStyles from './components/GlobalStyles'
 
 const App = () =>
-    <div className="App full-height">
+    <div className="App">
         <Router>
             <GlobalStyles />
+            <TopBar />
 
-            <div className="full-height">
-                <TopBar />
-
-                <main role="main">
-                    <Route path="/" exact component={Home} />
-                    <Route path="/detail/:id" component={APIDetail} />
-                    <Route path="/overzicht" component={Overview} />
-                    <Route exact path="/api-toevoegen" component={SubmitAPI} />
-                    <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
-                    <Route path="/over" component={About} />
-                </main>
-            </div>
+            <main role="main">
+                <Route path="/" exact component={Home} />
+                <Route path="/detail/:id" component={APIDetail} />
+                <Route path="/overzicht" component={Overview} />
+                <Route exact path="/api-toevoegen" component={SubmitAPI} />
+                <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
+                <Route path="/over" component={About} />
+            </main>
         </Router>
     </div>
 
