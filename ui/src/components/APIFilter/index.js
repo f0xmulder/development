@@ -10,17 +10,15 @@ const filters = [
     { key: 'api_type', label: 'API type' },
 ]
 
-class APIFilter extends Component {
-    formatOptions(terms) {
-        return terms.map((term) => {
-            return {
-                value: term.term,
-                label: `${term.term} (${term.count})`,
-                disabled: (term.count === 0)
-            }
-        })
-    }
+export const formatOptions = (terms) =>
+  terms
+    .map((term) => ({ 
+      value: term.term,
+      label: `${term.term} (${term.count})`,
+      disabled: (term.count === 0)
+    }))
 
+class APIFilter extends Component {
     render() {
         const { initialValues, facets, onSubmit } = this.props
 
@@ -40,7 +38,7 @@ class APIFilter extends Component {
                                             <h2>{filter.label}</h2>
                                             <CheckboxGroupField
                                                 name={filter.key}
-                                                options={this.formatOptions(facets[filter.key].terms)}
+                                                options={formatOptions(facets[filter.key].terms)}
                                                 value={values[filter.key]}
                                                 onChange={handleSubmit}
                                             />

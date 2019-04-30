@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import APIFilter from './index'
+import APIFilter, {formatOptions} from './index'
 import CheckboxGroupField from '../CheckboxGroupField';
 
 const filters = [
@@ -15,8 +15,8 @@ const facets = {
     api_type: { terms: [ { term: 'gRPC', count: 5}, { term: 'GraphQL', count: 75 } ]}
 }
 
-describe('APIFilter', () => {
-    it('should format API terms as options', () => {
+describe('formatting API terms to options', () => {
+    it('should format terms to options', () => {
         const testCases = [
             { terms: [], expected: [] },
             { terms: [ { term: '42', count: 5 } ], expected: [ { value: '42', label: '42 (5)', disabled: false }] },
@@ -24,11 +24,13 @@ describe('APIFilter', () => {
         ]
 
         testCases.forEach((testCase) => {
-            const actual = APIFilter.prototype.formatOptions(testCase.terms)
+            const actual = formatOptions(testCase.terms)
             expect(actual).toEqual(testCase.expected)
         })
     })
+})
 
+describe('APIFilter', () => {
     it('should show the filter headings', () => {
         const onSubmit = jest.fn()
         const wrapper = mount(
