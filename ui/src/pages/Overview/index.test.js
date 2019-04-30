@@ -9,11 +9,6 @@ const dummyAPI = {
 }
 
 describe('Overview', () => {
-  it('contains the page title', () => {
-    const wrapper = shallow(<Overview/>)
-    expect(wrapper.find('h1').exists()).toBe(true)
-  })
-
   describe('on initialization', () => {
     it('should fetch the available apis', () => {
       jest.spyOn(Overview.prototype, 'fetchApiList')

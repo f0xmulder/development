@@ -108,7 +108,6 @@ class Overview extends Component {
         return (
             <div className="Overview">
                 <div className="container">
-                    <h1>Overzicht van alle beschikbare API's</h1>
                     {
                         !loaded ?
                             null :
