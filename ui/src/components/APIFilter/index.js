@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
 import './index.css'
@@ -18,41 +18,34 @@ export const formatOptions = (terms) =>
       disabled: (term.count === 0)
     }))
 
-class APIFilter extends Component {
-    render() {
-        const { initialValues, facets, onSubmit } = this.props
+const APIFilter = ({ initialValues, facets, onSubmit }) =>
+  <div className="APIFilter">
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+          {({ handleSubmit, values }) => (
+              <form onSubmit={handleSubmit}>
+                  <label htmlFor="q" name="q" id="q" aria-label="Vul een zoekterm in">
+                      <Field type="text" name="q" placeholder="Vul een zoekterm in" />
+                  </label>
 
-        return (
-            <div className="APIFilter">
-                <Formik initialValues={initialValues} onSubmit={onSubmit}>
-                    {({ handleSubmit, values }) => (
-                        <form onSubmit={handleSubmit}>
-                            <label htmlFor="q" name="q" id="q" aria-label="Vul een zoekterm in">
-                                <Field type="text" name="q" placeholder="Vul een zoekterm in" />
-                            </label>
-
-                            {filters ? filters.map((filter, i) => (
-                                <React.Fragment key={i}>
-                                    {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
-                                        <React.Fragment>
-                                            <h2>{filter.label}</h2>
-                                            <CheckboxGroupField
-                                                name={filter.key}
-                                                options={formatOptions(facets[filter.key].terms)}
-                                                value={values[filter.key]}
-                                                onChange={handleSubmit}
-                                            />
-                                        </React.Fragment>
-                                    )}
-                                </React.Fragment>
-                            )) : null}
-                        </form>
-                    )}
-                </Formik>
-            </div>
-        )
-    }
-}
+                  {filters ? filters.map((filter, i) => (
+                      <React.Fragment key={i}>
+                          {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
+                              <React.Fragment>
+                                  <h2>{filter.label}</h2>
+                                  <CheckboxGroupField
+                                      name={filter.key}
+                                      options={formatOptions(facets[filter.key].terms)}
+                                      value={values[filter.key]}
+                                      onChange={handleSubmit}
+                                  />
+                              </React.Fragment>
+                          )}
+                      </React.Fragment>
+                  )) : null}
+              </form>
+          )}
+      </Formik>
+  </div>
 
 APIFilter.propTypes = {
     facets: object,
