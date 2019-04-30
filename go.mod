@@ -29,7 +29,7 @@ require (
 	github.com/tecbot/gorocksdb v0.0.0-20181010114359-8752a9433481 // indirect
 	go.uber.org/atomic v1.3.2 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
-	go.uber.org/zap v1.9.1
+	go.uber.org/zap v1.10.0
 	golang.org/x/net v0.0.0-20190424112641-4829fb13d2c6 // indirect
 	golang.org/x/sys v0.0.0-20190429104711-2cc0cad0ac78 // indirect
 )
