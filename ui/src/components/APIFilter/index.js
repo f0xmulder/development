@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
 import './index.css'
@@ -10,7 +10,7 @@ const filters = [
     { key: 'api_type', label: 'API type' },
 ]
 
-class APIFilter extends React.Component {
+class APIFilter extends Component {
     formatOptions(terms) {
         return terms.map((term) => {
             return {
