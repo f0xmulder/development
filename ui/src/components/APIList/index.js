@@ -2,12 +2,13 @@ import React from 'react'
 import {arrayOf, shape, string} from 'prop-types'
 import {Table} from '@commonground/design-system'
 import {StyledTable, StyledLinkToAPI} from './index.styles'
+import Grade from '../Grade'
 
 const APIList = ({ apis }) =>
   <StyledTable>
     <Table.Head>
       <Table.Row>
-        <Table.HeadCell colspan="2">
+        <Table.HeadCell colSpan={2}>
           { apis.length } API's  
         </Table.HeadCell>
       </Table.Row>
@@ -17,10 +18,13 @@ const APIList = ({ apis }) =>
       apis.map((api, i) => 
         <Table.Row key={i}>
           <Table.BodyCell>
-            <StyledLinkToAPI {...api} /> 
+            <StyledLinkToAPI id={api.id} 
+              service_name={api.service_name}
+              organization_name={api.organization_name}
+            /> 
           </Table.BodyCell>
-          <Table.BodyCell>
-            Score x
+          <Table.BodyCell style={({ width: '200px' })}>
+            <Grade scores={api.scores}></Grade>
           </Table.BodyCell>
         </Table.Row>
       )

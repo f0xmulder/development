@@ -9,6 +9,7 @@ import (
 	"github.com/blevesearch/bleve/search"
 	"github.com/blevesearch/bleve/search/query"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 )
 
 // Index provides a friendlier API to Bleve
@@ -175,6 +176,8 @@ func mapBleveResultToAPIs(items *[]models.API, matchCollection search.DocumentMa
 	hash := make(map[string]models.API)
 
 	for _, API := range *items {
+    scores := scores.CalculateScores(API)
+    API.Scores = &scores
 		hash[API.ID] = API
 	}
 

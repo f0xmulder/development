@@ -5,7 +5,8 @@ import (
 
 	"github.com/blevesearch/bleve/search"
 	"github.com/stretchr/testify/assert"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
+  "gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 )
 
 var dummyAPI = models.API{
@@ -42,6 +43,14 @@ var anotherDummyAPI = models.API{
 	map[string][]string{},
 	models.APITermsOfUse{},
 	nil,
+}
+
+func init() {
+  dummyAPIScores := scores.CalculateScores(dummyAPI)
+  dummyAPI.Scores = &dummyAPIScores
+
+  anotherDummyAPIScores := scores.CalculateScores(anotherDummyAPI)
+  anotherDummyAPI.Scores = &anotherDummyAPIScores
 }
 
 func TestNewIndex(t *testing.T) {

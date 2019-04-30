@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import {shape,bool} from 'prop-types'
+import React from 'react'
+import {shape, bool} from 'prop-types'
+import {StyledGrade,StyledLabel,StyledBar} from './index.styles'
 
 export const calculateGrade = (scores) => {
     const values = Object.values(scores)
@@ -7,16 +8,15 @@ export const calculateGrade = (scores) => {
     return Math.round(percentage * 10 * 10) / 10
 }
 
-class Grade extends Component {
-    render() {
-      const { scores } = this.props
+const Grade = ({ scores }) => {
+  const grade = calculateGrade(scores)
 
-      return (
-          <React.Fragment>
-              {calculateGrade(scores)}
-          </React.Fragment>
-      )
-    }
+  return (
+    <StyledGrade>
+      <StyledLabel>{grade}</StyledLabel>
+      <StyledBar grade={grade} />
+    </StyledGrade>
+  )
 }
 
 Grade.propTypes = {
