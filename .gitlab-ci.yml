@@ -182,7 +182,7 @@ Deploy test:
   stage: deploy
   script:
     - |
-        helm upgrade --install don-prod ./helm/don \
+        helm upgrade --install don-test ./helm/don \
         --namespace don-test \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
