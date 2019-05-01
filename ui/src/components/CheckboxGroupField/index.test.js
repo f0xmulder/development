@@ -4,9 +4,9 @@ import CheckboxGroupField from './index'
 import React from 'react'
 
 const options = [
-    { value: '41', label: '41' },
-    { value: '42', label: '42' },
-    { value: '43', label: '43' }
+    { value: '41', label: '41', count: 1 },
+    { value: '42', label: '42', count: 2 },
+    { value: '43', label: '43', count: 3 }
 ]
 
 const createForm = (onChange = () => {}) => {

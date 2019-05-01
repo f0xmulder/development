@@ -14,7 +14,8 @@ export const formatOptions = (terms) =>
   terms
     .map((term) => ({ 
       value: term.term,
-      label: `${term.term} (${term.count})`,
+      label: `${term.term}`,
+      count: term.count,
       disabled: (term.count === 0)
     }))
 
@@ -28,13 +29,13 @@ const APIFilter = ({ initialValues, facets, onSubmit }) =>
                   </label>
 
                   {filters ? filters.map((filter, i) => (
-                      <React.Fragment key={i}>
-                          {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
-                              <React.Fragment>
-                                  <h2>{filter.label}</h2>
-                                  <CheckboxGroupField
-                                      name={filter.key}
-                                      options={formatOptions(facets[filter.key].terms)}
+                    <React.Fragment key={i}>
+                      {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
+                        <React.Fragment>
+                          <h2>{filter.label}</h2>
+                          <CheckboxGroupField
+                            name={filter.key}
+                            options={formatOptions(facets[filter.key].terms)}
                                       value={values[filter.key]}
                                       onChange={handleSubmit}
                                   />

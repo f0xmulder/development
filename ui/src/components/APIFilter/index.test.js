@@ -19,8 +19,8 @@ describe('formatting API terms to options', () => {
     it('should format terms to options', () => {
         const testCases = [
             { terms: [], expected: [] },
-            { terms: [ { term: '42', count: 5 } ], expected: [ { value: '42', label: '42 (5)', disabled: false }] },
-            { terms: [ { term: 'gRPC', count: 5}, { term: 'GraphQL', count: 0 } ], expected: [ { value: 'gRPC', label: 'gRPC (5)', disabled: false }, { value: 'GraphQL', label: 'GraphQL (0)', disabled: true } ] },
+            { terms: [ { term: '42', count: 5 } ], expected: [ { value: '42', label: '42', count: 5, disabled: false }] },
+            { terms: [ { term: 'gRPC', count: 5}, { term: 'GraphQL', count: 0 } ], expected: [ { value: 'gRPC', label: 'gRPC', count: 5, disabled: false }, { value: 'GraphQL', label: 'GraphQL', count: 0, disabled: true } ] },
         ]
 
         testCases.forEach((testCase) => {
@@ -44,24 +44,5 @@ describe('APIFilter', () => {
         filters.forEach((filter, i) => {
             expect(wrapper.find('h2').at(i).text()).toEqual(filter.label)
         })
-    })
-
-    it('should format the options for CheckboxGroupField in the correct way', () => {
-        const onSubmit = jest.fn()
-        const wrapper = mount(
-            <APIFilter
-                initialValues={{ tags: [], organization_name: [], api_type: [] }}
-                facets={facets}
-                onSubmit={onSubmit}
-            />
-        )
-
-        const firstField = wrapper.find(CheckboxGroupField).first()
-        const expectedOptions = [
-            { value: '41', label: '41 (5)', disabled: false },
-            { value: '42', label: '42 (100)', disabled: false }
-        ]
-
-        expect(firstField.props().options).toEqual(expectedOptions)
     })
 })
