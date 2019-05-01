@@ -10,7 +10,7 @@ stages:
 
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
-  INGRESS_BASE_DOMAIN: test.developer.overheid.nl
+  INGRESS_BASE_DOMAIN: developer.overheid.nl
 
 .validate:
   image: golang:1.12.4
