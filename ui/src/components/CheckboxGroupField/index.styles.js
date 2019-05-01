@@ -11,11 +11,6 @@ export const StyledCheckboxGroupField = styled.div`
     input {
       flex: 0 1 auto;
       margin-right: 8px;
-
-      &[type="checkbox"]:disabled,
-      &[type="checkbox"]:disabled + label {
-        color: grey;
-      }
     }
 
     label {
@@ -47,15 +42,15 @@ export const StyledCheckboxField = styled(Field)`
   &:checked {
     background: #517FFF;
     border: 0 none;
-  }
-
-  &:checked:after {
-    content: '';
-    background: url(${checkbox}) no-repeat;
-    background-position: center;
-    position: absolute;
-    width: 14px;
-    height: 14px;
+    
+    &:after {
+      content: '';
+      background: url(${checkbox}) no-repeat;
+      background-position: center;
+      position: absolute;
+      width: 14px;
+      height: 14px;
+    }
   }
 `
 
