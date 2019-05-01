@@ -178,6 +178,28 @@ E2E tests:
     - docker
     - nlx
 
+Deploy test:
+  stage: deploy
+  script:
+    - |
+        helm upgrade --install don-prod ./helm/don \
+        --namespace don-test \
+        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+        --set "gitlabUrl=$GITLAB_URL" \
+        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+        --set domain="test.$INGRESS_BASE_DOMAIN" \
+        --set "ingressClass=traefik"
+  environment:
+    name: prod
+    url: https://test.$INGRESS_BASE_DOMAIN
+  tags:
+    - nlx-privileged
+    - shell
+  only:
+    - master
+    
 Deploy production:
   stage: deploy
   script:
