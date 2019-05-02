@@ -30,19 +30,3 @@ describe('formatting API terms to options', () => {
     })
 })
 
-describe('APIFilters', () => {
-    it('should show the filter headings', () => {
-        const onSubmit = jest.fn()
-        const wrapper = mount(
-            <APIFilters
-                initialValues={{ tags: [], organization_name: [], api_type: [] }}
-                facets={facets}
-                onSubmit={onSubmit}
-            />
-        )
-
-        filters.forEach((filter, i) => {
-            expect(wrapper.find('h2').at(i).text()).toEqual(filter.label)
-        })
-    })
-})

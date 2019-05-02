@@ -2,10 +2,6 @@
     display: block;
 }
 
-.APIFilters h2 {
-    font-size: 1.3em;
-}
-
 .APIFilters input[type="text"] {
     padding: 0 0 0 16px;
     height: 48px;
