@@ -20,6 +20,9 @@ export const formatOptions = (terms) =>
       disabled: (term.count === 0)
     }))
 
+export const facetsContainTermsForFilterByKey = (facets, filterKey) =>
+  facets[filterKey] && facets[filterKey].terms && facets[filterKey].terms.length > 0
+
 const APIFilters = ({ initialValues, facets, onSubmit }) =>
   <StyledAPIFilters>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -29,18 +32,18 @@ const APIFilters = ({ initialValues, facets, onSubmit }) =>
                       <Field type="text" name="q" placeholder="Vul een zoekterm in" />
                   </label>
 
-                  {filters ? filters.map((filter, i) => (
-                    <React.Fragment key={i}>
-                      {facets[filter.key] && facets[filter.key].terms && facets[filter.key].terms.length > 0 && (
-                        <APIFilter title={filter.label}
-                                   name={filter.key} 
-                                   options={formatOptions(facets[filter.key].terms)}
-                                   value={values[filter.key]}
-                                   onChangeHandler={handleSubmit}
+                  {filters && filters.length ? 
+                      filters
+                      .filter(filter => facetsContainTermsForFilterByKey(facets, filter.key))
+                      .map((filter, i) => (
+                        <APIFilter key={i}
+                          title={filter.label}
+                          name={filter.key} 
+                          options={formatOptions(facets[filter.key].terms)}
+                          value={values[filter.key]}
+                          onChangeHandler={handleSubmit}
                         />
-                      )}
-                    </React.Fragment>
-                  )) : null}
+                      )) : null}
               </form>
           )}
       </Formik>

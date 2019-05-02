@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import APIFilters, {formatOptions} from './index'
+import APIFilters, {formatOptions, facetsContainTermsForFilterByKey} from './index'
 import CheckboxGroupField from '../CheckboxGroupField';
 
 const filters = [
@@ -28,5 +28,19 @@ describe('formatting API terms to options', () => {
             expect(actual).toEqual(testCase.expected)
         })
     })
+})
+
+describe('check if facets contains terms for a filter', () => {
+  it('should return a boolean', () => {
+    const testCases = [
+      {facets: {tags: {terms: []}}, filter: 'tags', expected: false},
+      {facets: {tags: {terms: [{term: 'foo', count: 1}]}}, filter: 'tags', expected: true}
+    ]
+
+    testCases.forEach((testCase) => {
+      const actual = facetsContainTermsForFilterByKey(testCase.facets, testCase.filter)
+      expect(actual).toEqual(testCase.expected)
+    })
+  })
 })
 
