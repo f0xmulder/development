@@ -9,7 +9,7 @@ export default styled.header`
     justify-content: space-between;
 `
 export const StyledTitle = styled(Link)`
-    color: #517FFF;
+    color: #2B63FF;
     text-decoration: none;
     padding: 0 12px;
     line-height: 32px;
@@ -20,7 +20,7 @@ export const StyledTitle = styled(Link)`
 
 export const StyledNavigation = styled(Navigation)`
     flex: 0 0 auto;
-    
+
     &:last-of-type {
       margin-right: unset;
     }

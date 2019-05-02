@@ -40,7 +40,7 @@ export const Link = styled(NavLink)`
 
   &.active {
     position: relative;
-    color: #517FFF;
+    color: #2B63FF;
 
     &:before {
       content: '';
@@ -49,7 +49,7 @@ export const Link = styled(NavLink)`
       bottom: 4px;
       left: 0;
       width: 2px;
-      background-color: #517FFF;
+      background-color: #2B63FF;
     }
   }
 `
