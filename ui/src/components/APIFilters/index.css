@@ -1,12 +1,12 @@
-.APIFilter label {
+.APIFilters label {
     display: block;
 }
 
-.APIFilter h2 {
+.APIFilters h2 {
     font-size: 1.3em;
 }
 
-.APIFilter input[type="text"] {
+.APIFilters input[type="text"] {
     padding: 0 0 0 16px;
     height: 48px;
     font-size: 18px;

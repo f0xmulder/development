@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import APIFilter, {formatOptions} from './index'
+import APIFilters, {formatOptions} from './index'
 import CheckboxGroupField from '../CheckboxGroupField';
 
 const filters = [
@@ -30,11 +30,11 @@ describe('formatting API terms to options', () => {
     })
 })
 
-describe('APIFilter', () => {
+describe('APIFilters', () => {
     it('should show the filter headings', () => {
         const onSubmit = jest.fn()
         const wrapper = mount(
-            <APIFilter
+            <APIFilters
                 initialValues={{ tags: [], organization_name: [], api_type: [] }}
                 facets={facets}
                 onSubmit={onSubmit}

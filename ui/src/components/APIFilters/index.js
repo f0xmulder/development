@@ -19,8 +19,8 @@ export const formatOptions = (terms) =>
       disabled: (term.count === 0)
     }))
 
-const APIFilter = ({ initialValues, facets, onSubmit }) =>
-  <div className="APIFilter">
+const APIFilters = ({ initialValues, facets, onSubmit }) =>
+  <div className="APIFilters">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ handleSubmit, values }) => (
               <form onSubmit={handleSubmit}>
@@ -48,9 +48,9 @@ const APIFilter = ({ initialValues, facets, onSubmit }) =>
       </Formik>
   </div>
 
-APIFilter.propTypes = {
+APIFilters.propTypes = {
     facets: object,
     onSubmit: func.isRequired
 }
 
-export default APIFilter
+export default APIFilters

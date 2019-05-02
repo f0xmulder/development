@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import APIFilter from '../../components/APIFilter'
+import APIFilters from '../../components/APIFilters'
 import APIList from '../../components/APIList'
 import './index.css'
 
@@ -115,7 +115,7 @@ class Overview extends Component {
                                 <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
                                 <div className="Overview__sections">
                                     <div className="Overview__sidebar">
-                                        <APIFilter initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
+                                        <APIFilters initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
                                     </div>
                                     <div className="Overview__list">
                                         {result && result.apis && result.apis.length > 0 ?
