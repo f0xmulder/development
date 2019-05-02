@@ -2,7 +2,6 @@ import React from 'react'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
 import {StyledAPIFilters} from './index.styles'
-import './index.css'
 import APIFilter from '../APIFilter'
 
 const filters = [
