@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, Field } from 'formik'
 import { object, func } from 'prop-types'
+import {StyledAPIFilters} from './index.styles'
 import './index.css'
 import APIFilter from '../APIFilter'
 
@@ -20,7 +21,7 @@ export const formatOptions = (terms) =>
     }))
 
 const APIFilters = ({ initialValues, facets, onSubmit }) =>
-  <div className="APIFilters">
+  <StyledAPIFilters>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ handleSubmit, values }) => (
               <form onSubmit={handleSubmit}>
@@ -43,7 +44,7 @@ const APIFilters = ({ initialValues, facets, onSubmit }) =>
               </form>
           )}
       </Formik>
-  </div>
+  </StyledAPIFilters>
 
 APIFilters.propTypes = {
     facets: object,
