@@ -4,7 +4,6 @@ import MediaQuery from 'react-responsive';
 
 import Home from './pages/Home'
 import SubmitAPI from './pages/SubmitAPI'
-import SubmitAPIForm from './pages/SubmitAPIForm'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
@@ -29,8 +28,7 @@ const App = () =>
                 <Route path="/" exact component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/overzicht" component={Overview} />
-                <Route exact path="/api-toevoegen" component={SubmitAPI} />
-                <Route path="/api-toevoegen/formulier" component={SubmitAPIForm} />
+                <Route path="/api-toevoegen" component={SubmitAPI} />
                 <Route path="/over" component={About} />
             </main>
         </Router>
