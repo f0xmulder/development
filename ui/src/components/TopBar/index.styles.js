@@ -9,7 +9,7 @@ export default styled.header`
     justify-content: space-between;
 `
 export const StyledTitle = styled(Link)`
-    color: #2B63FF;
+    color: #2961FF;
     text-decoration: none;
     padding: 0 12px;
     line-height: 32px;
