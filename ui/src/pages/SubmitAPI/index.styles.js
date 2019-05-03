@@ -6,9 +6,12 @@ export const StyledSubmitAPI = styled.div`
   margin: 0 auto;
 
   p {
-    text-align: center;
     font-size: 14px;
     color: #676D80;
+  }
+
+  & > p {
+    text-align: center;
   }
 `
 
