@@ -179,14 +179,6 @@ class SubmitAPIForm extends Component {
 
         return apisLoaded ?
             <div className="SubmitAPIForm container">
-                <h1>Formulier API toevoegen</h1>
-                <p>
-                    Voor het toevoegen van je API aan <a href="https://developer.overheid.nl" target="_blank"
-                                                         rel="noopener noreferrer">developer.overheid.nl</a>,
-                    gelieve onderstaand formulier in te vullen, of <Link to="/api-toevoegen">een Merge Request aan te
-                    maken</Link>.
-                </p>
-
                 {this.state.submitted ? <p data-test="api-submitted-message">
                         De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken. Blijf op de hoogte door het issue
                         op GitLab in de gaten te houden. <a href={this.state.responseData.web_url} target="_blank"
