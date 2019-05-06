@@ -3,7 +3,7 @@ import { shape, string } from 'prop-types'
 import { NavLink, Route, Redirect } from 'react-router-dom'
 import SubmitAPIForm from '../SubmitAPIForm'
 import SubmitAPIMergeRequest from '../SubmitAPIMergeRequest'
-import {StyledSubmitAPI, StyledPageTitle, StyledCard, StyledTabs} from './index.styles'
+import {StyledSubmitAPI, StyledPageTitle, StyledTabs} from './index.styles'
 import PageContentCard from '../../components/PageContentCard'
 
 const SubmitAPI = ({ match: { url } }) =>
