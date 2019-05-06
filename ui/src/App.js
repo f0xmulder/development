@@ -16,10 +16,10 @@ const App = () =>
     <div className="App">
         <Router>
             <GlobalStyles />
-            <MediaQuery maxWidth={575}>
+            <MediaQuery maxWidth={575}> {/* portrait phones */}
                 <MobileNavigation />
             </MediaQuery>
-            <MediaQuery minWidth={576}>
+            <MediaQuery minWidth={576}> {/* landscape phones and up */}
                 <TopBar />
             </MediaQuery>
 
