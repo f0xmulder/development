@@ -51,10 +51,6 @@ describe('SubmitAPI', () => {
       wrapper.setState({ apis: [], apisLoaded: true })
     })
 
-    it('contains the page title', () => {
-      expect(wrapper.find('h1').exists()).toBe(true)
-    })
-
     it('contains a form', () => {
       const form = wrapper.find(Formik)
       expect(form.exists()).toBe(true)

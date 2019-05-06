@@ -1,17 +1,18 @@
 import React from 'react'
+import {StyledPre} from './index.styles'
 
 const SubmitAPIMergeRequest = () => 
   <div>
     <p>
       De bestandsnaam moet voldoen aan de volgende afspraken:
     </p>
-    <pre>{ `data/{organization}-{api}.json` }</pre>
+    <StyledPre>{ `data/{organization}-{api}.json` }</StyledPre>
 
     <p>
       En de inhoud moet overeenkomen met onderstaande structuur:
     </p>
 
-    <pre>
+    <StyledPre>
         {`
 {
     "description": "Voorbeeld van een omschrijving",
@@ -42,7 +43,7 @@ const SubmitAPIMergeRequest = () =>
   }
 }
             `}
-    </pre>
+    </StyledPre>
   </div>
 
 export default SubmitAPIMergeRequest
