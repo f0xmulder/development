@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { NavButton, Navigation, Menu, Link, Divider } from './index.styles'
 
 const HamburgerIcon = ({ ...props }) =>
@@ -21,42 +21,31 @@ CrossIcon.defaultProps = {
   height: '14px'
 }
 
-export default class MobileNavigation extends Component {
-  constructor(props) {
-      super(props)
+const MobileNavigation = () => {
+  const [isVisible, setIsVisible] = useState(false)
 
-      this.state = {
-          isVisible: false
-      }
-  }
+  return (
+    <Fragment>
+      <NavButton onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ?
+          <CrossIcon />
+        :
+          <HamburgerIcon />
+        }
+      </NavButton>
 
-  toggleVisibility() {
-   this.setState({isVisible: !this.state.isVisible})
+      <Navigation isVisible={isVisible}>
+        <Menu>
+          <li><Link to="/" exact>Home</Link></li>
+          <li><Link to="/overzicht">Overzicht</Link></li>
+          <li><Link to="/over">Over</Link></li>
+        </Menu>
+        <Divider />
+        <Link to="/api-toevoegen">+ Voeg API toe</Link>
+      </Navigation>
+    </Fragment>
+  )
 }
 
-  render() {
-    const { isVisible } = this.state
+export default MobileNavigation
 
-    return (
-      <Fragment>
-        <NavButton onClick={() => this.toggleVisibility()}>
-          {isVisible ?
-            <CrossIcon />
-          :
-            <HamburgerIcon />
-          }
-        </NavButton>
-
-        <Navigation isVisible={isVisible}>
-          <Menu>
-            <li><Link to="/" exact>Home</Link></li>
-            <li><Link to="/overzicht">Overzicht</Link></li>
-            <li><Link to="/over">Over</Link></li>
-          </Menu>
-          <Divider />
-          <Link to="/api-toevoegen">+ Voeg API toe</Link>
-        </Navigation>
-      </Fragment>
-    )
-  }
-}
