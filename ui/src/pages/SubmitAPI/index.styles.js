@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import {Card} from '@commonground/design-system'
 
 export const StyledSubmitAPI = styled.div`
-  width: 900px;
+  max-width: 900px;
   margin: 0 auto;
 
   p {
@@ -20,10 +19,6 @@ export const StyledPageTitle = styled.h1`
   font-weight: 800;
   margin-bottom: 32px;
   text-align: center;
-`
-
-export const StyledCard = styled(Card)`
-  padding: 40px 80px;
 `
 
 export const StyledTabs = styled.div`

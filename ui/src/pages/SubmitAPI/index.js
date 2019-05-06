@@ -4,6 +4,7 @@ import { NavLink, Route, Redirect } from 'react-router-dom'
 import SubmitAPIForm from '../SubmitAPIForm'
 import SubmitAPIMergeRequest from '../SubmitAPIMergeRequest'
 import {StyledSubmitAPI, StyledPageTitle, StyledCard, StyledTabs} from './index.styles'
+import PageContentCard from '../../components/PageContentCard'
 
 const SubmitAPI = ({ match: { url } }) =>
     <StyledSubmitAPI>
@@ -18,11 +19,11 @@ const SubmitAPI = ({ match: { url } }) =>
         <NavLink to={`${url}/merge-request`}>Merge Request</NavLink>
       </StyledTabs>
 
-      <StyledCard>
+      <PageContentCard>
         <Route path={url} exact render={() => <Redirect to={`${url}/formulier`} />} />
         <Route path={`${url}/formulier`} component={SubmitAPIForm} />
         <Route path={`${url}/merge-request`} component={SubmitAPIMergeRequest} />
-      </StyledCard>
+      </PageContentCard>
     </StyledSubmitAPI>
 
 SubmitAPI.propTypes = {
