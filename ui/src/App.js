@@ -12,14 +12,16 @@ import TopBar from './components/TopBar'
 import MobileNavigation from './components/MobileNavigation'
 import GlobalStyles from './components/GlobalStyles'
 
+const LANDSCAPE_PHONES = 576
+
 const App = () =>
     <div className="App">
         <Router>
             <GlobalStyles />
-            <MediaQuery maxWidth={575}> {/* portrait phones */}
+            <MediaQuery maxWidth={LANDSCAPE_PHONES - 1}>
                 <MobileNavigation />
             </MediaQuery>
-            <MediaQuery minWidth={576}> {/* landscape phones and up */}
+            <MediaQuery minWidth={LANDSCAPE_PHONES}>
                 <TopBar />
             </MediaQuery>
 
