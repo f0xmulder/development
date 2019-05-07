@@ -22,8 +22,8 @@ export const formatOptions = (terms) =>
 export const facetsContainTermsForFilterByKey = (facets, filterKey) =>
   facets[filterKey] && facets[filterKey].terms && facets[filterKey].terms.length > 0
 
-const APIFilters = ({ initialValues, facets, onSubmit }) =>
-  <StyledAPIFilters>
+const APIFilters = ({ initialValues, facets, onSubmit, ...props }) =>
+  <StyledAPIFilters {...props}>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ handleSubmit, values }) => (
               <form onSubmit={handleSubmit}>
