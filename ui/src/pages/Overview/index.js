@@ -115,12 +115,12 @@ class Overview extends Component {
                       </p> :
                         <Fragment>
                           <StyledAPIFilters initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
-                      <StyledResultsContainer> 
-                          {result && result.apis && result.apis.length > 0 ?
-                              <APIList apis={result.apis} />
-                          :
-                              <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
-                          }
+                          <StyledResultsContainer> 
+                            {
+                              result && result.apis && result.apis.length > 0 ?
+                                <APIList apis={result.apis} /> :
+                                <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
+                            }
                         </StyledResultsContainer>
                       </Fragment>
             }
