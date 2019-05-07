@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import APIFilters from '../../components/APIFilters'
 import APIList from '../../components/APIList'
 import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer} from './index.styles'
 import './index.css'
