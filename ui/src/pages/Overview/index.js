@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import APIFilters from '../../components/APIFilters'
 import APIList from '../../components/APIList'
+import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer} from './index.styles'
 import './index.css'
 
 class Overview extends Component {
@@ -106,28 +107,26 @@ class Overview extends Component {
         const { result, error, loaded } = this.state
 
         return (
-            <div className="Overview">
-                <div className="container">
-                    {
-                        !loaded ?
-                            null :
-                            error ?
-                                <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API's.</p> :
-                                <div className="Overview__sections">
-                                    <div className="Overview__sidebar">
-                                        <APIFilters initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
-                                    </div>
-                                    <div className="Overview__list">
-                                        {result && result.apis && result.apis.length > 0 ?
-                                            <APIList apis={result.apis} />
-                                        :
-                                            <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
-                                        }
-                                    </div>
-                                </div>
-                    }
-                </div>
-            </div>
+            <StyledOverviewPage>
+            {
+                !loaded ?
+                    null :
+                    error ?
+                      <p data-test="error-message">
+                        Er ging iets fout tijdens het ophalen van de API's.
+                      </p> :
+                        <Fragment>
+                          <StyledAPIFilters initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
+                      <StyledResultsContainer> 
+                          {result && result.apis && result.apis.length > 0 ?
+                              <APIList apis={result.apis} />
+                          :
+                              <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
+                          }
+                        </StyledResultsContainer>
+                      </Fragment>
+            }
+            </StyledOverviewPage>
         );
     }
 }
