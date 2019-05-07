@@ -11,6 +11,7 @@ export const StyledCheckboxGroupField = styled.div`
     input {
       flex: 0 1 auto;
       margin-right: 8px;
+      margin-left: 0;
     }
 
     label {
