@@ -13,7 +13,7 @@ variables:
   INGRESS_BASE_DOMAIN: developer.overheid.nl
 
 .validate:
-  image: golang:1.12.4
+  image: golang:1.12.5
   before_script:
     - cd validate
   tags:
