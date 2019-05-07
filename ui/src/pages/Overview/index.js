@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import APIList from '../../components/APIList'
 import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer} from './index.styles'
-import './index.css'
 
 class Overview extends Component {
     constructor(props) {
