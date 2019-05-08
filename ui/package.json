@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@commonground/design-system": "4.1.2",
+    "@commonground/design-system": "5.0.0",
     "formik": "1.5.4",
     "react": "16.8.6",
     "react-app-polyfill": "1.0.0",
