@@ -18,14 +18,16 @@ const TopBar = ({ showSearch, onSearchSubmitHandler, query }) =>
     {
       showSearch ?
         <StyledForm onSubmit={(event) => formSubmitHandler(event, onSearchSubmitHandler)}>
-          <StyledSearch 
-            inputProps={({
-              placeholder: 'Zoeken naar een API',
-              name: 'query',
-              id: 'topbar-search-api',
-              defaultValue: query
-            })}
-          />
+          <label htmlFor="topbar-search-api" aria-label="Zoekterm">
+            <StyledSearch 
+              inputProps={({
+                placeholder: 'Zoeken naar een API',
+                name: 'query',
+                id: 'topbar-search-api',
+                defaultValue: query
+              })}
+            />
+        </label>
         </StyledForm>
         : null
     }
