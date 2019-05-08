@@ -7,7 +7,7 @@ import SubmitAPI from './pages/SubmitAPI'
 import About from './pages/About'
 import APIDetail from './pages/APIDetail'
 import Overview from './pages/Overview'
-import TopBar from './components/TopBar'
+import TopBarContainer from './components/TopBarContainer'
 import MobileNavigation from './components/MobileNavigation'
 import GlobalStyles from './components/GlobalStyles'
 
@@ -21,11 +21,11 @@ const App = () =>
                 <MobileNavigation />
             </MediaQuery>
             <MediaQuery minWidth={LANDSCAPE_PHONES}>
-                <TopBar />
+                <TopBarContainer />
             </MediaQuery>
 
             <main role="main">
-                <Route path="/" exact component={Home} />
+              <Route path="/" exact component={Home} />
                 <Route path="/detail/:id" component={APIDetail} />
                 <Route path="/overzicht" component={Overview} />
                 <Route path="/api-toevoegen" component={SubmitAPI} />

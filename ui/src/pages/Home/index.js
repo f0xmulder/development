@@ -13,7 +13,11 @@ export default () =>
           <form method="GET" action="/overzicht">
               <div className="search-box">
                   <label htmlFor="searchInput" aria-label="Zoekterm">
-                    <Search placeholder="Zoeken naar een API" inputName="q" inputId="searchInput" />
+                    <Search inputProps={({
+                      placeholder: 'Zoeken naar een API',
+                      name: 'q',
+                      id: 'searchInput'
+                    })} />
                   </label>
               </div>
           </form>

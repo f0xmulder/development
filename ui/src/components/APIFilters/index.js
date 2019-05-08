@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Field } from 'formik'
+import { Formik } from 'formik'
 import { object, func } from 'prop-types'
 import {StyledAPIFilters} from './index.styles'
 import APIFilter from '../APIFilter'
@@ -24,13 +24,9 @@ export const facetsContainTermsForFilterByKey = (facets, filterKey) =>
 
 const APIFilters = ({ initialValues, facets, onSubmit, ...props }) =>
   <StyledAPIFilters {...props}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} onSubmit={onSubmit} enableReinitialize={true}>
           {({ handleSubmit, values }) => (
-              <form onSubmit={handleSubmit}>
-                  <label htmlFor="q" name="q" id="q" aria-label="Vul een zoekterm in">
-                      <Field type="text" name="q" placeholder="Vul een zoekterm in" />
-                  </label>
-
+            <form onSubmit={handleSubmit}>
                   {filters && filters.length ? 
                       filters
                       .filter(filter => facetsContainTermsForFilterByKey(facets, filter.key))
