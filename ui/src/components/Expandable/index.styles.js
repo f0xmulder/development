@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledContent = styled.div`
   overflow-y: hidden;
-  height: ${p => p.isExpanded ? 'auto' : '86px'}
+  height: ${p => p.isExpanded ? 'auto' : '86px'};
 `
 
 export const StyledToggleButton = styled.button`
@@ -16,5 +16,6 @@ export const StyledToggleButton = styled.button`
   font-weight: 400;
   text-align: center;
   margin-top: 5px;
+  cursor: pointer;
 `
 

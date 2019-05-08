@@ -14,7 +14,7 @@ export default () =>
               <div className="search-box">
                   <label htmlFor="searchInput" aria-label="Zoekterm">
                     <Search inputProps={({
-                      placeholder: 'Zoeken naar een API',
+                      placeholder: 'Zoek API',
                       name: 'q',
                       id: 'searchInput'
                     })} />

@@ -19,9 +19,9 @@ const TopBar = ({ showSearch, onSearchSubmitHandler, query }) =>
       showSearch ?
         <StyledForm onSubmit={(event) => formSubmitHandler(event, onSearchSubmitHandler)}>
           <label htmlFor="topbar-search-api" aria-label="Zoekterm">
-            <StyledSearch 
+            <StyledSearch
               inputProps={({
-                placeholder: 'Zoeken naar een API',
+                placeholder: 'Zoek API',
                 name: 'query',
                 id: 'topbar-search-api',
                 defaultValue: query
@@ -33,9 +33,9 @@ const TopBar = ({ showSearch, onSearchSubmitHandler, query }) =>
     }
 
     <StyledNavigation>
-      <Navigation.Item><NavLink to="/overzicht">Overzicht</NavLink></Navigation.Item> 
-      <Navigation.Item><NavLink to="/api-toevoegen">API toevoegen</NavLink></Navigation.Item> 
-      <Navigation.Item><NavLink to="/over">Over</NavLink></Navigation.Item> 
+      <Navigation.Item><NavLink to="/overzicht">Overzicht</NavLink></Navigation.Item>
+      <Navigation.Item><NavLink to="/api-toevoegen">API toevoegen</NavLink></Navigation.Item>
+      <Navigation.Item><NavLink to="/over">Over</NavLink></Navigation.Item>
     </StyledNavigation>
   </StyledHeader>
 

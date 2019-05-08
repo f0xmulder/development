@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import {Field} from 'formik'
 
 export const StyledFieldset = styled.fieldset`
-  border: 0 none;
-  margin-bottom: 40px;
+  border: none;
+  padding: 0;
+  margin: 0 0 40px 0;
 `
 
 export const StyledLegend = styled.legend`
@@ -45,32 +46,34 @@ export const StyledFormGroupColumnContainer = styled.div`
   justify-content: space-between;
 
   @media screen and (min-width: 688px) {
-    & > div + div {
-      padding-left: 25px;
-    }
+    margin: 0 -28px;
   }
 `
 
 export const StyledFormGroupColumn = styled.div`
-  flex: 1 1 310px;
+  padding: 0 28px;
+  flex: 1 1 50%;
 `
 
 export const StyledFormGroup = styled.div`
   margin-bottom: 1rem;
   display: flex;
-  align-items: center;
 
   input[type="checkbox"] {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     order: 1;
-    width: initial;
-    margin-right: 12px;
+    width: auto;
+    height: auto;
+    margin: 3px 10px 0 0;
+    cursor: pointer;
   }
 
   label {
-    flex: 1;
+    flex: 0 1 auto;
     order: 2;
     margin-bottom: 0;
+    cursor: pointer;
+    user-select: none;
   }
 `
 

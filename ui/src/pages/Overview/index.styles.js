@@ -4,7 +4,7 @@ import APIFilters from '../../components/APIFilters'
 export const StyledOverviewPage = styled.div`
   display: flex;
   max-width: 1240px;
-  margin-left: 40px;
+  margin: 0 40px;
 `
 
 export const StyledAPIFilters = styled(APIFilters)`

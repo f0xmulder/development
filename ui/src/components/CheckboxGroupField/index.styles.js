@@ -6,20 +6,17 @@ export const StyledCheckboxGroupField = styled.div`
     position: relative;
     display: flex;
     margin-top: .3rem;
-    align-items: center;
 
     input {
-      flex: 0 1 auto;
-      margin-right: 8px;
-      margin-left: 0;
+      flex: 0 0 auto;
+      margin: 3px 8px 0 0;
     }
 
     label {
-      display: inline-block;
-      margin-bottom: 0;
       flex: 1;
       color: #2D3240;
       font-size: 14px;
+      line-height: 20px;
     }
 
     .count {

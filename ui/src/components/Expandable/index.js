@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import {StyledContent,StyledToggleButton} from './index.styles'
 
 const Expandable = ({ children }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <div>
+    <Fragment>
       <StyledContent isExpanded={isExpanded} data-test="content">
         {children}
       </StyledContent>
@@ -13,11 +13,11 @@ const Expandable = ({ children }) => {
       <StyledToggleButton onClick={() => setIsExpanded(!isExpanded)}>
         {
           isExpanded ?
-            '- Minder opties' : 
-            '+ Toon alle'
+            '- Minder opties' :
+            '+ Alle opties'
         }
       </StyledToggleButton>
-    </div>
+    </Fragment>
   )
 }
 

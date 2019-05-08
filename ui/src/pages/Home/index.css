@@ -70,12 +70,14 @@
     padding: 0;
     margin: 0;
     line-height: 1.65rem;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .Home .Home__Tags .TagList li {
-    display: inline-block;
-    margin-right: 5px;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .Home .Home__Tags .TagList li:last-child {
