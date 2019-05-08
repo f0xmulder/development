@@ -84,7 +84,7 @@ export const convertLinkToRIToRelation = formData => {
     }
 
     delete formData['reference_implementation']
-    
+
     return formData
 }
 
@@ -191,7 +191,7 @@ class SubmitAPIForm extends Component {
                         render={({values, errors, status, touched, handleBlur, handleChange, handleSubmit, isSubmitting}) => (
                             <Form onSubmit={handleSubmit} data-test="form">
                               <StyledFieldset>
-                                <StyledLegend>Organisatie</StyledLegend> 
+                                <StyledLegend>Organisatie</StyledLegend>
 
                                 <StyledFormGroupColumnContainer>
                                   <StyledFormGroupColumn>
@@ -217,7 +217,7 @@ class SubmitAPIForm extends Component {
 
                                     <div className="form-group">
                                         <StyledLabel htmlFor="description">Omschrijving*</StyledLabel>
-                                        <StyledField style={({ minHeight: '80px' })} component="textarea" id="description" name="description" />
+                                        <StyledField style={({ minHeight: '80px', resize: 'vertical' })} component="textarea" id="description" name="description" />
                                         {errors.description && touched.description &&
                                         <p className="text-danger">{errors.description}</p>}
                                     </div>

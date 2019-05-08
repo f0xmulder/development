@@ -12,6 +12,7 @@ export const StyledLegend = styled.legend`
   font-weight: 700;
   color: #2961FF;
   margin-bottom: 16px;
+  padding: 0;
 `
 
 export const StyledLabel = styled.label`
@@ -24,6 +25,7 @@ export const StyledLabel = styled.label`
 `
 
 export const StyledField = styled(Field)`
+  display: block;
   width: 100%;
   height: calc(1.5rem + 2px);
   padding: 9px 16px 11px 16px;
