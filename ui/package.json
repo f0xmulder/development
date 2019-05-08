@@ -6,7 +6,7 @@
     "@commonground/design-system": "5.0.0",
     "formik": "1.5.4",
     "react": "16.8.6",
-    "react-app-polyfill": "1.0.0",
+    "react-app-polyfill": "1.0.1",
     "react-dom": "16.8.6",
     "react-responsive": "6.1.2",
     "react-router-dom": "5.0.0",
