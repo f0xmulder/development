@@ -6,6 +6,7 @@ export const StyledContent = styled.div`
 `
 
 export const StyledToggleButton = styled.button`
+  background: #F7F9FC;
   display: block;
   width: 100%;
   line-height: 22px;
