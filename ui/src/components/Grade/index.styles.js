@@ -15,7 +15,7 @@ export const StyledLabel = styled.div`
   &:before {
     content: 'Score';
     text-transform: uppercase;
-    color: #A3AABF;
+    color: #676D80;
     padding-right: 6px;
     font-weight: 400;
   }

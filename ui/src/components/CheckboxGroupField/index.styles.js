@@ -25,7 +25,7 @@ export const StyledCheckboxGroupField = styled.div`
     .count {
       flex: 0 1 auto;
       text-align: right;
-      color: #A3AABF;
+      color: #676D80;
       font-size: 12px;
     }
 `
@@ -41,9 +41,9 @@ export const StyledCheckboxField = styled(Field)`
   position: relative;
 
   &:checked {
-    background: #517FFF;
+    background: #2961FF;
     border: 0 none;
-    
+
     &:after {
       content: '';
       background: url(${checkbox}) no-repeat;

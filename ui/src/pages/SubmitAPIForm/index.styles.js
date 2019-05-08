@@ -9,7 +9,7 @@ export const StyledFieldset = styled.fieldset`
 export const StyledLegend = styled.legend`
   font-size: 20px;
   font-weight: 700;
-  color: #517FFF;
+  color: #2961FF;
   margin-bottom: 16px;
 `
 
@@ -30,10 +30,10 @@ export const StyledField = styled(Field)`
   font-weight: 400;
   line-height: 20px;
   height: 40px;
-  border-sizing: border-box;
+  box-sizing: border-box;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #E6EAF5;
   border-radius: 3px;
   transition: border-color .15s ease-in-out,
               box-shadow .15s ease-in-out;
@@ -75,7 +75,7 @@ export const StyledFormGroup = styled.div`
 `
 
 export const StyledSubmitButton = styled.button`
-  background-color: #517FFF;
+  background-color: #2961FF;
   border-radius: 5px;
   color: #ffffff;
   font-weight: 700;

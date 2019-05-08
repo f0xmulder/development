@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledAPIFilter = styled.div`
   h2 {
    font-size: 12px;
-   color: #A3AABF;
+   color: #676D80;
    font-weight: 600;
   }
 `

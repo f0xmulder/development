@@ -32,11 +32,11 @@ export const StyledTabs = styled.div`
     line-height: 24px;
     font-size: 14px;
     text-decoration: none;
-    color: #A3AABF;
+    color: #676D80;
 
     &.active {
-      border-bottom: 1px solid #517FFF;
-      color: #517FFF;
+      border-bottom: 1px solid #2961FF;
+      color: #2961FF;
       padding-bottom: 7px;
     }
   }
