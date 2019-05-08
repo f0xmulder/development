@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import APIList from '../../components/APIList'
-import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer} from './index.styles'
+import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer, StyledH1} from './index.styles'
 
 class Overview extends Component {
   constructor(props) {
@@ -106,6 +106,7 @@ class Overview extends Component {
 
     return (
       <StyledOverviewPage>
+        <StyledH1>Overzicht van API's</StyledH1>
         {
           !loaded ?
             null :
