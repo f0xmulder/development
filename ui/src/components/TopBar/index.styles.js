@@ -16,10 +16,13 @@ export const StyledTitle = styled(Link)`
     font-size: 16px;
     font-weight: 800;
     flex: 0 0 auto;
+    width: calc(50% - 150px);
 `
 
 export const StyledNavigation = styled(Navigation)`
     flex: 0 0 auto;
+    width: calc(50% - 150px);
+    justify-content: right;
 
     &:last-of-type {
       margin-right: unset;
