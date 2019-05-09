@@ -22,7 +22,7 @@ export const StyledTitle = styled(Link)`
 export const StyledNavigation = styled(Navigation)`
     flex: 0 0 auto;
     width: calc(50% - 150px);
-    justify-content: right;
+    justify-content: flex-end;
 
     &:last-of-type {
       margin-right: unset;
