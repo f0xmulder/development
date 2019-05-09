@@ -3,8 +3,9 @@ import APIFilters from '../../components/APIFilters'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
-  max-width: 1240px;
-  margin: 0 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
   flex-wrap: wrap;
 `
 
