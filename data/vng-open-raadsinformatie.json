@@ -1,0 +1,32 @@
+{
+    "description": "Raadsinformatie van gemeenten. Onder andere notulen, moties, agenda’s en raadsbesluiten. Beschikbaar voor hergebruik via deze API.",
+    "organization_name": "VNG Realisatie",
+    "service_name": "Open Raadsinformatie",
+    "api_url": "http://api.openraadsinformatie.nl/v0",
+    "api_type": "REST/JSON",
+    "specification_url": "",
+    "documentation_url": "https://docs.openraadsinformatie.nl/user/api.html#general-notes",
+    "tags": [
+        "gemeente",
+        "gemeenteraad",
+        "raadsinformatie",
+        "open data",
+        "Council data"
+    ],
+    "badges": [],
+    "contact": {
+        "email": "paul.suijkerbuijk@vng.nl",
+        "phone": "+31620490628",
+        "fax": "",
+        "chat": "",
+        "url": ""
+    },
+    "is_reference_implementation": false,
+    "relations": {},
+    "terms_of_use": {
+        "government_only": false,
+        "pay_per_use": false,
+        "uptime_guarantee": 99.5,
+        "support_response_time": "2 werk dagen"
+    }
+}
