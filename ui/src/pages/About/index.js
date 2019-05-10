@@ -8,7 +8,7 @@ const About = () =>
 
       <PageContentCard>
         <p>
-            De website developer.overheid.nl is een wegwijzer naar de Application Programming Interfaces (API’s) die (semi-)overheidsorganisaties in Nederland aanbieden.
+            De website developer.overheid.nl is een wegwijzer naar de <abbr title="Application Programming Interfaces">API’s</abbr> die (semi-)overheidsorganisaties in Nederland aanbieden.
         </p>
         <p>
             Deze website is ‘permanent beta’, en zal worden aangepast naar de behoeften van gebruikers. Wensen en opmerkingen kunnen via het contactadres worden doorgegeven.
