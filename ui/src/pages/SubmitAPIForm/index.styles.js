@@ -10,7 +10,7 @@ export const StyledFieldset = styled.fieldset`
 export const StyledLegend = styled.legend`
   font-size: 20px;
   font-weight: 700;
-  color: #2961ff;
+  color: ${p => p.theme.color.primary.main};
   margin-bottom: 16px;
   padding: 0;
 `
@@ -82,7 +82,7 @@ export const StyledFormSetting = styled.div`
 `
 
 export const StyledSubmitButton = styled.button`
-  background-color: #2961ff;
+  background-color: ${p => p.theme.color.primary.main};
   border-radius: 5px;
   color: #ffffff;
   font-weight: 700;

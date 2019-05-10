@@ -35,8 +35,8 @@ export const StyledTabs = styled.div`
     color: #676d80;
 
     &.active {
-      border-bottom: 1px solid #2961ff;
-      color: #2961ff;
+      border-bottom: 1px solid ${p => p.theme.color.primary.main};
+      color: ${p => p.theme.color.primary.main};
       padding-bottom: 7px;
     }
   }

@@ -26,8 +26,8 @@ export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   height: 24px;
-  background: #f1f5ff;
-  color: #2961ff;
+  background: #F1F5FF;
+  color: ${p => p.theme.color.primary.main};
   border-radius: 12px;
   font-size: 12px;
   line-height: 16px;

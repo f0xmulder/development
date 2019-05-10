@@ -56,7 +56,7 @@ export const StyledCheckboxField = styled(Field)`
   position: relative;
 
   &:checked {
-    background: #2961ff;
+    background: ${p => p.theme.color.primary.main};
     border: 0 none;
 
     &:after {

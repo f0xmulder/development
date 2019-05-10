@@ -7,7 +7,7 @@ export const Container = styled.div`
 `
 
 export const PageTitle = styled.h1`
-  color: #2961FF;
+  color: ${p => p.theme.color.primary.main};
   font-size: 28px;
   line-height: 36px;
   font-weight: 800;
