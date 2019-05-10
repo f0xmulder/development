@@ -17,7 +17,7 @@ describe('Home', () => {
     it('should show the page subtitle', async () => {
         const html = await page.$eval('main h2', e => e.innerHTML)
         await page.screenshot({ path: 'screenshots/home.page-subtitle.png' });
-        expect(html).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid')
+        expect(html).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid.')
     })
 
     it('should not have accessibility issues', async () => {
