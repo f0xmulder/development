@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {StyledAbout, StyledPageTitle} from './index.styles'
 import PageContentCard from '../../components/PageContentCard'
 
