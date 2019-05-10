@@ -34,3 +34,6 @@ export const StyledCard = styled(Card)`
   }
 `
 
+export const StyledH2 = styled.h2`
+  
+`
