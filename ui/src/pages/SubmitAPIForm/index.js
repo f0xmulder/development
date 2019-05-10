@@ -3,9 +3,7 @@ import { Form, Formik } from 'formik'
 import { array, boolean, date, mixed, number, object, string } from './yup-translations'
 import * as Yup from 'yup'
 import {RELATION_TYPE_REFERENCE_IMPLEMENTATION} from '../../constants';
-import {StyledFieldset, StyledLegend, StyledLabel, StyledField, StyledFormGroupColumn, StyledFormGroupColumnContainer, StyledFormGroup, StyledSubmitButton} from './index.styles'
-
-import './index.css'
+import {StyledFieldset, StyledLegend, StyledLabel, StyledField, StyledFormGroupColumn, StyledFormGroupColumnContainer, StyledFormGroup, StyledFormSetting, StyledSubmitButton, HelperMessage, ErrorMessage} from './index.styles'
 
 Yup.setLocale({
     mixed,
@@ -178,7 +176,7 @@ class SubmitAPIForm extends Component {
         const { result, apisLoaded } = this.state
 
         return apisLoaded ?
-            <div className="SubmitAPIForm">
+            <div>
                 {this.state.submitted ? <p data-test="api-submitted-message">
                         De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken. Blijf op de hoogte door het issue
                         op GitLab in de gaten te houden. <a href={this.state.responseData.web_url} target="_blank"
@@ -198,7 +196,7 @@ class SubmitAPIForm extends Component {
                                   <StyledLabel htmlFor="organization_name">Naam*</StyledLabel>
                                   <StyledField component="input" type="text" id="organization_name" name="organization_name" />
                                   {errors.organization_name && touched.organization_name &&
-                                      <p className="text-danger">{errors.organization_name}</p>}
+                                      <ErrorMessage>{errors.organization_name}</ErrorMessage>}
                                     </StyledFormGroupColumn>
                                   </StyledFormGroupColumnContainer>
                                 </StyledFieldset>
@@ -208,49 +206,49 @@ class SubmitAPIForm extends Component {
 
                                   <StyledFormGroupColumnContainer>
                                     <StyledFormGroupColumn>
-                                    <div className="form-group">
+                                    <StyledFormGroup>
                                         <StyledLabel htmlFor="service_name">Naam*</StyledLabel>
                                         <StyledField component="input" type="text" id="service_name" name="service_name" />
                                         {errors.service_name && touched.service_name &&
-                                        <p className="text-danger">{errors.service_name}</p>}
-                                    </div>
+                                        <ErrorMessage>{errors.service_name}</ErrorMessage>}
+                                    </StyledFormGroup>
 
-                                    <div className="form-group">
+                                    <StyledFormGroup>
                                         <StyledLabel htmlFor="description">Omschrijving*</StyledLabel>
                                         <StyledField style={({ minHeight: '80px', resize: 'vertical' })} component="textarea" id="description" name="description" />
                                         {errors.description && touched.description &&
-                                        <p className="text-danger">{errors.description}</p>}
-                                    </div>
+                                        <ErrorMessage>{errors.description}</ErrorMessage>}
+                                    </StyledFormGroup>
 
-                                    <div className="form-group">
+                                    <StyledFormGroup>
                                         <StyledLabel htmlFor="tags">Tags</StyledLabel>
                                         <StyledField component="input" type="text" id="tags" name="tags" />
-                                        <small className="form-text text-muted">Door komma's gescheiden lijst van tags.
-                                        </small>
-                                        {errors.tags && touched.tags && <p className="text-danger">{errors.tags}</p>}
-                                    </div>
+                                        <HelperMessage>Door komma's gescheiden lijst van tags.
+                                        </HelperMessage>
+                                        {errors.tags && touched.tags && <ErrorMessage>{errors.tags}</ErrorMessage>}
+                                    </StyledFormGroup>
 
-                                    <div className="form-group">
+                                    <StyledFormGroup>
                                       <StyledLabel htmlFor="badges">Badges</StyledLabel>
                                       <StyledField component="input" type="text" id="badges" name="badges" />
-                                        <small className="form-text text-muted">Door komma's gescheiden lijst van tags.
-                                        </small>
-                                        {errors.badges && touched.badges && <p className="text-danger">{errors.badges}</p>}
-                                    </div>
+                                        <HelperMessage>Door komma's gescheiden lijst van tags.
+                                        </HelperMessage>
+                                        {errors.badges && touched.badges && <ErrorMessage>{errors.badges}</ErrorMessage>}
+                                    </StyledFormGroup>
 
                                   </StyledFormGroupColumn>
 
                                 <StyledFormGroupColumn>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="api_url">API URL*</StyledLabel>
                                     <StyledField component="input" type="text" id="api_url" name="api_url"
-                                           className="form-control"/>
+                                           />
                                     {errors.api_url && touched.api_url &&
-                                    <p className="text-danger">{errors.api_url}</p>}
-                                </div>
+                                    <ErrorMessage>{errors.api_url}</ErrorMessage>}
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="api_type">API type</StyledLabel>
                                     <StyledField component="select" id="api_type" name="api_type">
                                         <option value="Onbekend">Onbekend</option>
@@ -263,26 +261,26 @@ class SubmitAPIForm extends Component {
                                         <option value="WMS">WMS</option>
                                     </StyledField>
                                     {errors.api_type && touched.api_type &&
-                                    <p className="text-danger">{errors.api_type}</p>}
-                                </div>
+                                    <ErrorMessage>{errors.api_type}</ErrorMessage>}
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="specification_url">Specificatie URL</StyledLabel>
                                     <StyledField component="input" type="text" id="specification_url" name="specification_url" />
                                     {errors.specification_url && touched.specification_url &&
-                                    <p className="text-danger">{errors.specification_url}</p>}
-                                    <small className="form-text text-muted">Link naar een machine leesbare documentatie.</small>
-                                </div>
+                                    <ErrorMessage>{errors.specification_url}</ErrorMessage>}
+                                    <HelperMessage>Link naar een machine leesbare documentatie.</HelperMessage>
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="documentation_url">Documentatie URL</StyledLabel>
                                     <StyledField component="input" type="text" id="documentation_url" name="documentation_url"
-                                           className="form-control"/>
+                                           />
                                     {errors.documentation_url && touched.documentation_url &&
-                                    <p className="text-danger">{errors.documentation_url}</p>}
-                                    <small className="form-text text-muted">Link naar een menselijk leesbare documentatie.
-                                    </small>
-                                  </div>
+                                    <ErrorMessage>{errors.documentation_url}</ErrorMessage>}
+                                    <HelperMessage>Link naar een menselijk leesbare documentatie.
+                                    </HelperMessage>
+                                  </StyledFormGroup>
 
                                 </StyledFormGroupColumn>
                               </StyledFormGroupColumnContainer>
@@ -292,48 +290,48 @@ class SubmitAPIForm extends Component {
 
                                   <StyledFormGroupColumnContainer>
                                 <StyledFormGroupColumn>
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="contact.email">E-mailadres</StyledLabel>
                                     <StyledField component="input" type="email" id="contact.email" name="contact.email"
-                                           className="form-control"/>
+                                           />
                                     {errors.contact && errors.contact.email && touched.contact && touched.contact.email &&
-                                    <p className="text-danger">{errors.contact.email}</p>}
-                                </div>
+                                    <ErrorMessage>{errors.contact.email}</ErrorMessage>}
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="contact.phone">Telefoonnummer</StyledLabel>
                                     <StyledField component="input" type="text" id="contact.phone" name="contact.phone" />
                                     {errors.contact && errors.contact.phone && touched.contact && touched.contact.phone &&
-                                    <p className="text-danger">{errors.contact.phone}</p>}
-                                </div>
+                                    <ErrorMessage>{errors.contact.phone}</ErrorMessage>}
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="contact.fax">Fax</StyledLabel>
                                     <StyledField component="input" type="text" id="contact.fax" name="contact.fax" />
                                     {errors.contact && errors.contact.fax && touched.contact && touched.contact.fax &&
-                                    <p className="text-danger">{errors.contact.fax}</p>}
-                                  </div>
+                                    <ErrorMessage>{errors.contact.fax}</ErrorMessage>}
+                                  </StyledFormGroup>
 
 
                                 </StyledFormGroupColumn>
                                 <StyledFormGroupColumn>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="contact.chat">Chat</StyledLabel>
                                     <StyledField component="input" type="text" id="contact.chat" name="contact.chat"
-                                           className="form-control"/>
+                                           />
                                     {errors.contact && errors.contact.chat && touched.contact && touched.contact.chat &&
-                                    <p className="text-danger">{errors.contact.chat}</p>}
-                                    <small className="form-text text-muted">Link naar een chat-platform.</small>
-                                </div>
+                                    <ErrorMessage>{errors.contact.chat}</ErrorMessage>}
+                                    <HelperMessage>Link naar een chat-platform.</HelperMessage>
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="contact.url">URL</StyledLabel>
                                     <StyledField component="input" type="text" id="contact.url" name="contact.url" />
                                     {errors.contact && errors.contact.url && touched.contact && touched.contact.url &&
-                                    <p className="text-danger">{errors.contact.url}</p>}
-                                    <small className="form-text text-muted">Link naar een website met contactinformatie.</small>
-                                  </div>
+                                    <ErrorMessage>{errors.contact.url}</ErrorMessage>}
+                                    <HelperMessage>Link naar een website met contactinformatie.</HelperMessage>
+                                  </StyledFormGroup>
                                 </StyledFormGroupColumn>
                                   </StyledFormGroupColumnContainer>
 
@@ -347,16 +345,18 @@ class SubmitAPIForm extends Component {
                                 {
                                     !values.reference_implementation || values.reference_implementation === '' ?
                                         <StyledFormGroup>
+                                        <StyledFormSetting>
                                             <StyledLabel htmlFor="is_reference_implementation">Deze API is een referentieimplementatie</StyledLabel>
                                             <StyledField component="input" type="checkbox" id="is_reference_implementation" name="is_reference_implementation"
                                               checked={values.is_reference_implementation === true} />
                                             {errors.is_reference_implementation && touched.is_reference_implementation &&
-                                            <p className="text-danger">{errors.is_reference_implementation}</p>}
+                                            <ErrorMessage>{errors.is_reference_implementation}</ErrorMessage>}
+                                        </StyledFormSetting>
                                         </StyledFormGroup> : null
                                 }
                                 {
                                     !values.is_reference_implementation ?
-                                        <div className="form-group">
+                                        <StyledFormGroup>
                                             <StyledLabel htmlFor="reference_implementation">Gebaseerd op (referentie implementatie)</StyledLabel>
                                             <StyledField component="select" id="reference_implementation" name="reference_implementation"
                                             >
@@ -368,8 +368,8 @@ class SubmitAPIForm extends Component {
                                                 }
                                             </StyledField>
                                             {errors.api_type && touched.api_type &&
-                                            <p className="text-danger">{errors.api_type}</p>}
-                                        </div> : null
+                                            <ErrorMessage>{errors.api_type}</ErrorMessage>}
+                                        </StyledFormGroup> : null
                                 }
                               </StyledFieldset>
 
@@ -379,41 +379,45 @@ class SubmitAPIForm extends Component {
                                 <StyledFormGroupColumnContainer>
                                 <StyledFormGroupColumn>
                                 <StyledFormGroup>
+                                <StyledFormSetting>
                                     <StyledLabel htmlFor="terms_of_use.government_only">Deze API is alleen beschikbaar voor overheden</StyledLabel>
                                     <StyledField component="input" type="checkbox" id="terms_of_use.government_only" name="terms_of_use.government_only"
-                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.government_only === true)} />
+                                            checked={values.terms_of_use && (values.terms_of_use.government_only === true)} />
                                     {errors.terms_of_use && errors.terms_of_use.government_only && touched.terms_of_use && touched.terms_of_use.government_only &&
-                                    <p className="text-danger">{errors.terms_of_use.government_only}</p>}
+                                    <ErrorMessage>{errors.terms_of_use.government_only}</ErrorMessage>}
+                                </StyledFormSetting>
                                 </StyledFormGroup>
 
                                 <StyledFormGroup>
+                                <StyledFormSetting>
                                     <StyledLabel htmlFor="terms_of_use.pay_per_use">De kosten voor het gebruik van de API worden verrekend met de gebruiker</StyledLabel>
                                     <StyledField component="input" type="checkbox" id="terms_of_use.pay_per_use" name="terms_of_use.pay_per_use"
-                                           className="form-control" checked={values.terms_of_use && (values.terms_of_use.pay_per_use === true)} />
+                                            checked={values.terms_of_use && (values.terms_of_use.pay_per_use === true)} />
                                     {errors.terms_of_use && errors.terms_of_use.pay_per_use && touched.terms_of_use && touched.terms_of_use.pay_per_use &&
-                                    <p className="text-danger">{errors.terms_of_use.pay_per_use}</p>}
+                                    <ErrorMessage>{errors.terms_of_use.pay_per_use}</ErrorMessage>}
+                                  </StyledFormSetting>
                                   </StyledFormGroup>
 
                                 </StyledFormGroupColumn>
                                   <StyledFormGroupColumn>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="terms_of_use.uptime_guarantee">Beschikbaarheidsgarantie van de API</StyledLabel>
                                     <StyledField component="input" type="number" max="100" min="0" step="0.01" id="terms_of_use.uptime_guarantee" name="terms_of_use.uptime_guarantee"
-                                           className="form-control" />
-                                    <small className="form-text text-muted">Opgegeven als een percentage, bijv. 99,5.</small>
+                                            />
+                                    <HelperMessage>Opgegeven als een percentage, bijv. 99,5.</HelperMessage>
                                     {errors.terms_of_use && errors.terms_of_use.pay_per_use && touched.terms_of_use && touched.terms_of_use.pay_per_use &&
-                                    <p className="text-danger">{errors.terms_of_use.pay_per_use}</p>}
-                                </div>
+                                    <ErrorMessage>{errors.terms_of_use.pay_per_use}</ErrorMessage>}
+                                </StyledFormGroup>
 
-                                <div className="form-group">
+                                <StyledFormGroup>
                                     <StyledLabel htmlFor="terms_of_use.support_response_time">Reactietijd van de helpdesk</StyledLabel>
                                     <StyledField component="input" type="text" id="terms_of_use.support_response_time" name="terms_of_use.support_response_time"
-                                           className="form-control" />
-                                    <small className="form-text text-muted">Bijv. 2 werkdagen</small>
+                                            />
+                                    <HelperMessage>Bijv. 2 werkdagen</HelperMessage>
                                     {errors.terms_of_use && errors.terms_of_use.support_response_time && touched.terms_of_use && touched.terms_of_use.support_response_time &&
-                                    <p className="text-danger">{errors.terms_of_use.support_response_time}</p>}
-                                  </div>
+                                    <ErrorMessage>{errors.terms_of_use.support_response_time}</ErrorMessage>}
+                                  </StyledFormGroup>
                                 </StyledFormGroupColumn>
                                 </StyledFormGroupColumnContainer>
                                 </StyledFieldset>

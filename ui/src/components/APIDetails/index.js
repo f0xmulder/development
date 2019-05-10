@@ -8,6 +8,7 @@ import Grade from '../../components/Grade'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
 import './index.css'
+import { PageTitle, SubTitle } from './index.styles'
 
 const getOnlineRedocUrl = specUrl =>
     `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
@@ -19,8 +20,8 @@ export const referenceImplementationsFromRelations = relations =>
 
 const APIDetails = ({ id, service_name, organization_name, description, api_url, api_type, specification_url, documentation_url, badges, is_reference_implementation, relations, terms_of_use, scores }) =>
     <div className="APIDetails">
-        <h1 className="title">{ service_name }</h1>
-        <h2 className="subtitle">{ organization_name }</h2>
+        <PageTitle>{ service_name }</PageTitle>
+        <SubTitle>{ organization_name }</SubTitle>
 
         <div className="APIDetails__sections">
             <div className="APIDetails__general">

@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 
 import APIDetails from '../../components/APIDetails'
-
-import './index.css'
+import { Container } from './index.styles'
 
 class APIDetail extends Component {
     constructor(props) {
@@ -65,9 +64,9 @@ class APIDetail extends Component {
                         error ?
                             <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API.</p> :
                             details ?
-                                <div className="container">
+                                <Container>
                                     <APIDetails {...details} />
-                                </div> : null
+                                </Container> : null
                 }
             </div>
         );

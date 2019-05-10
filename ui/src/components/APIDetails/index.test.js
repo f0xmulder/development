@@ -1,6 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import APIDetails, {referenceImplementationsFromRelations} from './index'
+import { PageTitle, SubTitle } from './index.styles'
 
 const details = {
     "description": "Description",
@@ -44,12 +45,12 @@ describe('APIDetails', () => {
     })
 
     it('should show the service as title', () => {
-        const pageTitle = wrapper.find('.title')
+        const pageTitle = wrapper.find(PageTitle)
         expect(pageTitle.text()).toBe('Service Name')
     })
 
     it('should show the organization name as subtitle', () => {
-        const pageTitle = wrapper.find('.subtitle')
+        const pageTitle = wrapper.find(SubTitle)
         expect(pageTitle.text()).toBe('Organization Name')
     })
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import {arrayOf, string} from 'prop-types'
-import {StyledLink} from './index.styles.js'
+import {Container, StyledLink} from './index.styles.js'
 
 const TagList = ({ tags }) =>
-    <div className="TagList">
+    <Container>
         <ul>
             {
                 tags
@@ -14,7 +14,7 @@ const TagList = ({ tags }) =>
                     )
             }
         </ul>
-    </div>
+    </Container>
 
 TagList.propTypes = {
     tags: arrayOf(string)

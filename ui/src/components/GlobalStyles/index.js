@@ -46,11 +46,6 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  .container {
-    max-width: 630px;
-    padding: 0 40px;
-  }
-
   p {
     margin: 0 0 14px 0;
   }

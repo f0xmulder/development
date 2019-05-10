@@ -59,6 +59,9 @@ export const StyledFormGroupColumn = styled.div`
 
 export const StyledFormGroup = styled.div`
   margin-bottom: 1rem;
+  `
+
+export const StyledFormSetting = styled.div`
   display: flex;
 
   input[type="checkbox"] {
@@ -92,3 +95,14 @@ export const StyledSubmitButton = styled.button`
   line-height: 20px;
 `
 
+export const HelperMessage = styled.small`
+  font-size: 14px;
+  line-height: 22px;
+  color: #6c757d;
+`
+
+export const ErrorMessage = styled.small`
+  font-size: 14px;
+  line-height: 22px;
+  color: #dc3545;
+`
