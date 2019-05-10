@@ -13,7 +13,7 @@ const About = () =>
             Deze website is ‘permanent beta’, en zal worden aangepast naar de behoeften van gebruikers. Wensen en opmerkingen kunnen via het contactadres worden doorgegeven.
         </p>
         <p>
-            Deze website is een initiatief van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties in samenwerking met de Vereniging van Nederlandse Gemeenten / VNG Realisatie
+            Deze website is een initiatief van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties in samenwerking met de Vereniging van Nederlandse Gemeenten / VNG Realisatie.
         </p>
 
         <strong>Verantwoordelijkheid</strong>
