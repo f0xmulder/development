@@ -33,7 +33,3 @@ export const StyledCard = styled(Card)`
     border-bottom: 1px dotted #A3AABF;
   }
 `
-
-export const StyledH2 = styled.h2`
-  
-`
