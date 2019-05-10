@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const PageTitle = styled.h1`
-  color: #2D3240;
+  color: ${p => p.theme.color.text.normal};
   font-size: 28px;
   line-height: 36px;
   font-weight: 800;
@@ -9,7 +9,7 @@ export const PageTitle = styled.h1`
 `
 
 export const SubTitle = styled.h2`
-  color: #676D80;
+  color: ${p => p.theme.color.text.light};
   font-size: 18px;
   line-height: 26px;
   font-weight: 400;

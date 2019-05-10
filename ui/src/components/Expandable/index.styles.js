@@ -13,7 +13,7 @@ export const StyledToggleButton = styled.button`
   border: 1px solid #cad0e0;
   border-radius: 3px;
   font-size: 12px;
-  color: #676d80;
+  color: ${p => p.theme.color.text.light};
   font-weight: 400;
   text-align: center;
   margin-top: 5px;

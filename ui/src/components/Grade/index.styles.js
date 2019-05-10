@@ -7,7 +7,7 @@ export const StyledGrade = styled.div`
 
 export const StyledLabel = styled.div`
   flex: 0 1 auto;
-  color: #2d3240;
+  color: ${p => p.theme.color.text.normal};
   font-size: 13px;
   font-weight: 600;
   min-width: 80px;
@@ -15,7 +15,7 @@ export const StyledLabel = styled.div`
   &:before {
     content: 'Score';
     text-transform: uppercase;
-    color: #676d80;
+    color: ${p => p.theme.color.text.light};
     padding-right: 6px;
     font-weight: 400;
   }

@@ -16,7 +16,7 @@ export const PageTitle = styled.h1`
 `
 
 export const SubTitle = styled.h2`
-  color: #676D80;
+  color: ${p => p.theme.color.text.light};
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;

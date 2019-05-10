@@ -8,7 +8,7 @@ export const StyledAPIFilter = styled.div`
   h2 {
     margin: 0;
     font-size: 12px;
-    color: #676d80;
+    color: ${p => p.theme.color.text.light};
     font-weight: 600;
   }
 `

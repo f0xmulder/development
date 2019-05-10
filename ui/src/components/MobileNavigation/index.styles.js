@@ -33,7 +33,7 @@ export const Menu = styled.ul`
 
 export const Link = styled(NavLink)`
   display: block;
-  color: #2d3240;
+  color: ${p => p.theme.color.text.normal};
   text-decoration: none;
   font-weight: 600;
   padding: 12px 24px;

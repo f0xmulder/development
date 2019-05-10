@@ -31,7 +31,7 @@ export default createGlobalStyle`
   ${generateFontFaceDefinitions(fontDefinitions)}
 
   html {
-    color: #2D3240;
+    color: ${p => p.theme.color.text.normal};
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
     line-height: 24px;

@@ -12,6 +12,6 @@ export const StyledTable = styled(Table)`
 
 export const StyledLinkToAPI = styled(LinkToAPI)`
   text-decoration: none;
-  color: #2d3240;
+  color: ${p => p.theme.color.text.normal};
   font-weight: 600;
 `

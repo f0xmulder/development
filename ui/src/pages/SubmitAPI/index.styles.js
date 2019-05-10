@@ -6,7 +6,7 @@ export const StyledSubmitAPI = styled.div`
 
   p {
     font-size: 14px;
-    color: #676d80;
+    color: ${p => p.theme.color.text.light};
   }
 
   & > p {
@@ -32,7 +32,7 @@ export const StyledTabs = styled.div`
     line-height: 24px;
     font-size: 14px;
     text-decoration: none;
-    color: #676d80;
+    color: ${p => p.theme.color.text.light};
 
     &.active {
       border-bottom: 1px solid ${p => p.theme.color.primary.main};
@@ -41,3 +41,4 @@ export const StyledTabs = styled.div`
     }
   }
 `
+

@@ -19,7 +19,7 @@ export const StyledLabel = styled.label`
   font-size: 16px;
   line-height: 20px;
   margin-bottom: 10px;
-  color: #2d3240;
+  color: ${p => p.theme.color.text.normal};
   font-weight: 600;
   display: inline-block;
 `

@@ -30,19 +30,19 @@ export const StyledCheckboxGroupField = styled.div`
       }
     }
 
-  label {
-    flex: 1;
-    color: #2d3240;
-    font-size: 14px;
-    line-height: 20px;
-  }
+    label {
+      flex: 1;
+      color: ${p => p.theme.color.text.normal};
+      font-size: 14px;
+      line-height: 20px;
+    }
 
-  .count {
-    flex: 0 1 auto;
-    text-align: right;
-    color: #676d80;
-    font-size: 12px;
-  }
+    .count {
+      flex: 0 1 auto;
+      text-align: right;
+      color: ${p => p.theme.color.text.light};
+      font-size: 12px;
+    }
 `
 
 export const StyledCheckboxField = styled(Field)`
