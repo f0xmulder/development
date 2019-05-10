@@ -8,16 +8,17 @@ export const StyledGrade = styled.div`
 export const StyledLabel = styled.div`
   flex: 0 1 auto;
   color: ${p => p.theme.color.text.normal};
-  font-size: 13px;
-  font-weight: 600;
-  min-width: 80px;
+  font-size: ${p => p.theme.font.size.tiny};
+  line-height: ${p => p.theme.font.lineHeight.tiny};
+  font-weight: ${p => p.theme.font.weight.semibold};
+  min-width: 68px;
 
   &:before {
     content: 'Score';
     text-transform: uppercase;
     color: ${p => p.theme.color.text.light};
     padding-right: 6px;
-    font-weight: 400;
+    font-weight: ${p => p.theme.font.weight.normal};
   }
 `
 

@@ -12,7 +12,8 @@ const APIList = ({ apis }) => (
       </Table.Row>
     </Table.Head>
     <Table.Body>
-      {apis.map((api, i) => (
+    {
+      apis.map((api, i) => 
         <Table.Row key={i}>
           <Table.BodyCell>
             <StyledLinkToAPI
@@ -21,7 +22,7 @@ const APIList = ({ apis }) => (
               organizationName={api.organizationName}
             />
           </Table.BodyCell>
-          <Table.BodyCell style={{ width: '200px' }}>
+          <Table.BodyCell style={{ width: '180px' }}>
             <Grade scores={api.scores} />
           </Table.BodyCell>
         </Table.Row>

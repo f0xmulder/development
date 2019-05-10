@@ -7,8 +7,9 @@ export const StyledAPIFilter = styled.div`
 
   h2 {
     margin: 0;
-    font-size: 12px;
+    font-size: ${p => p.theme.font.size.tiny};
+    line-height: ${p => p.theme.font.lineHeight.tiny};
     color: ${p => p.theme.color.text.light};
-    font-weight: 600;
+    font-weight: ${p => p.theme.font.weight.semibold};
   }
 `

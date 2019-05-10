@@ -32,16 +32,17 @@ export const StyledCheckboxGroupField = styled.div`
 
     label {
       flex: 1;
+      font-size: ${p => p.theme.font.size.small};
+      line-height: ${p => p.theme.font.lineHeight.small};
       color: ${p => p.theme.color.text.normal};
-      font-size: 14px;
-      line-height: 20px;
     }
 
     .count {
       flex: 0 1 auto;
       text-align: right;
       color: ${p => p.theme.color.text.light};
-      font-size: 12px;
+      font-size: ${p => p.theme.font.size.tiny};
+      line-height: ${p => p.theme.font.lineHeight.tiny};
     }
 `
 
@@ -56,7 +57,7 @@ export const StyledCheckboxField = styled(Field)`
   position: relative;
 
   &:checked {
-    background: ${p => p.theme.color.primary.main};
+    background: ${p => p.theme.color.primary.normal};
     border: 0 none;
 
     &:after {

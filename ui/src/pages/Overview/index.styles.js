@@ -21,8 +21,9 @@ export const StyledResultsContainer = styled.div`
 
 export const StyledH1 = styled.h1`
   flex: 0 0 100%;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: ${p => p.theme.font.size.title.normal};
+  line-height: ${p => p.theme.font.lineHeight.title.normal};
+  font-weight: ${p => p.theme.font.weight.bold};
   margin-bottom: 32px;
   text-align: center;
 `

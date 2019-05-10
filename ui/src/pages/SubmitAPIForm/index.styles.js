@@ -8,30 +8,28 @@ export const StyledFieldset = styled.fieldset`
 `
 
 export const StyledLegend = styled.legend`
-  font-size: 20px;
-  font-weight: 700;
-  color: ${p => p.theme.color.primary.main};
+  font-size: ${p => p.theme.font.size.title.normal};
+  line-height: ${p => p.theme.font.lineHeight.title.normal};
+  font-weight: ${p => p.theme.font.weight.bold};
+  color: ${p => p.theme.color.primary.normal};
   margin-bottom: 16px;
   padding: 0;
 `
 
 export const StyledLabel = styled.label`
-  font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 10px;
-  color: ${p => p.theme.color.text.normal};
-  font-weight: 600;
-  display: inline-block;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: ${p => p.theme.font.weight.semibold};
 `
 
 export const StyledField = styled(Field)`
   display: block;
   width: 100%;
-  height: calc(1.5rem + 2px);
   padding: 9px 16px 11px 16px;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 20px;
+  font-family: inherit;
+  font-size: ${p => p.theme.font.size.normal};
+  line-height: ${p => p.theme.font.lineHeight.normal};
+  font-weight: ${p => p.theme.font.weight.normal};
   height: 40px;
   box-sizing: border-box;
   background-color: #fff;
@@ -82,26 +80,31 @@ export const StyledFormSetting = styled.div`
 `
 
 export const StyledSubmitButton = styled.button`
-  background-color: ${p => p.theme.color.primary.main};
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background-color: ${p => p.theme.color.primary.normal};
   border-radius: 5px;
   color: #ffffff;
-  font-weight: 700;
   text-align: center;
-  padding: 9px 20px 11px 20px;
+  margin: 0 auto;
+  padding: 0 20px 2px;
   border: 0 none;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
+  font-family: inherit;
+  font-size: ${p => p.theme.font.size.normal};
+  line-height: ${p => p.theme.font.lineHeight.normal};
+  font-weight: ${p => p.theme.font.weight.semibold};
 `
 
 export const HelperMessage = styled.small`
-  font-size: 14px;
-  line-height: 22px;
+  font-size: ${p => p.theme.font.size.small};
+  line-height: ${p => p.theme.font.lineHeight.small};
   color: #6c757d;
 `
 
 export const ErrorMessage = styled.small`
-  font-size: 14px;
-  line-height: 22px;
+  font-size: ${p => p.theme.font.size.small};
+  line-height: ${p => p.theme.font.lineHeight.small};
   color: #dc3545;
 `

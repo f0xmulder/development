@@ -35,12 +35,12 @@ export const Link = styled(NavLink)`
   display: block;
   color: ${p => p.theme.color.text.normal};
   text-decoration: none;
-  font-weight: 600;
+  font-weight: ${p => p.theme.font.weight.semibold};
   padding: 12px 24px;
 
   &.active {
     position: relative;
-    color: ${p => p.theme.color.primary.main};
+    color: ${p => p.theme.color.primary.normal};
 
     &:before {
       content: '';
@@ -49,7 +49,7 @@ export const Link = styled(NavLink)`
       bottom: 4px;
       left: 0;
       width: 2px;
-      background-color: ${p => p.theme.color.primary.main};
+      background-color: ${p => p.theme.color.primary.normal};
     }
   }
 `

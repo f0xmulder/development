@@ -13,5 +13,5 @@ export const StyledTable = styled(Table)`
 export const StyledLinkToAPI = styled(LinkToAPI)`
   text-decoration: none;
   color: ${p => p.theme.color.text.normal};
-  font-weight: 600;
+  font-weight: ${p => p.theme.font.weight.semibold};
 `

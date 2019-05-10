@@ -27,11 +27,11 @@ export const StyledLink = styled(Link)`
   align-items: center;
   height: 24px;
   background: #F1F5FF;
-  color: ${p => p.theme.color.primary.main};
+  color: ${p => p.theme.color.primary.normal};
   border-radius: 12px;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
+  font-size: ${p => p.theme.font.size.tiny};
+  line-height: ${p => p.theme.font.lineHeight.tiny};
+  font-weight: ${p => p.theme.font.weight.semibold};
   padding: 0 12px 2px;
   text-decoration: none;
 `
