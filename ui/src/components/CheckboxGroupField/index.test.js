@@ -2,6 +2,8 @@ import { mount } from 'enzyme/build'
 import { Formik } from 'formik'
 import CheckboxGroupField from './index'
 import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import theme from '../../theme'
 
 const options = [
   { value: '41', label: '41', count: 1 },
@@ -11,16 +13,18 @@ const options = [
 
 const createForm = (onChange = () => {}) => {
   return mount(
-    <Formik initialValues={{ theNumber: ['42'] }}>
-      {({ values }) => (
-        <CheckboxGroupField
-          name="theNumber"
-          options={options}
-          onChange={onChange}
-          value={values.theNumber}
-        />
-      )}
-    </Formik>,
+    <ThemeProvider theme={theme}>
+      <Formik initialValues={{ theNumber: ['42'] }}>
+        {({ values }) => (
+          <CheckboxGroupField
+            name="theNumber"
+            options={options}
+            onChange={onChange}
+            value={values.theNumber}
+          />
+        )}
+      </Formik>
+  </ThemeProvider>,
   )
 }
 
