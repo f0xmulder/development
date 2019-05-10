@@ -6,7 +6,8 @@ export default {
         text: {
             normal: '#2D3240',
             light: '#676D80',
-        }
+        },
+        warning: '#e02424'
     },
     font: {
         size: {

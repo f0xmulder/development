@@ -106,5 +106,5 @@ export const HelperMessage = styled.small`
 export const ErrorMessage = styled.small`
   font-size: ${p => p.theme.font.size.small};
   line-height: ${p => p.theme.font.lineHeight.small};
-  color: #dc3545;
+  color: ${p => p.theme.color.warning};
 `
