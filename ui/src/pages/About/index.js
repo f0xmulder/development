@@ -17,17 +17,17 @@ const About = () =>
             Deze website is een initiatief van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties in samenwerking met de Vereniging van Nederlandse Gemeenten / VNG Realisatie
         </p>
         
-        <h3>Verantwoordelijkheid</h3>
+        <p>Verantwoordelijkheid</p>
         <p>
             De informatie die op deze site wordt aangeboden is afkomstig van andere overheidsorganisaties. Deze organisaties zijn zelf verantwoordelijk voor hun diensten en gegevens. 
         </p>
 
-        <h3>Persoonsgegevens en cookies</h3>
+        <p>Persoonsgegevens en cookies</p>
         <p>
             Deze website verzamelt geen persoonsgegevens, zet geen cookies en verzamelt geen persoonsgebonden analytische informatie. 
         </p>
 
-        <h3>Toegankelijkheid</h3>
+        <p>Toegankelijkheid</p>
         <p>
             Deze site is ontworpen om te voldoen aan de vereisten van WCAG 2.0 en de Nederlandse extensies daarop. Omdat aanmelden en omschrijven van de API’s een open systeem is, kunnen we niet garanderen dat de site altijd aan de redactionele vereisten voldoet. Verbeterpunten kunnen worden doorgegeven via het contactadres.
         </p>
