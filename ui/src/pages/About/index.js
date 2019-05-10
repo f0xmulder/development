@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledCard, StyledAbout, StyledPageTitle, StyledH2} from './index.styles'
+import {StyledCard, StyledAbout, StyledPageTitle} from './index.styles'
 
 const About = () =>
     <StyledAbout>
@@ -16,17 +16,17 @@ const About = () =>
             Deze website is een initiatief van het ministerie van Binnenlandse Zaken en Koninkrijksrelaties in samenwerking met de Vereniging van Nederlandse Gemeenten / VNG Realisatie.
         </p>
 
-        <StyledH2>Verantwoordelijkheid</StyledH2>
+        <h2>Verantwoordelijkheid</h2>
         <p>
             De informatie die op deze site wordt aangeboden is afkomstig van andere overheidsorganisaties. Deze organisaties zijn zelf verantwoordelijk voor hun diensten en gegevens.
         </p>
 
-        <StyledH2>Persoonsgegevens en cookies</StyledH2>
+        <h2>Persoonsgegevens en cookies</h2>
         <p>
             Deze website verzamelt geen persoonsgegevens, zet geen cookies en verzamelt geen persoonsgebonden analytische informatie.
         </p>
 
-        <StyledH2>Toegankelijkheid</StyledH2>
+        <h2>Toegankelijkheid</h2>
         <p>
             Deze site is ontworpen om te voldoen aan de vereisten van WCAG 2.0 en de Nederlandse extensies daarop. Omdat aanmelden en omschrijven van de API’s een open systeem is, kunnen we niet garanderen dat de site altijd aan de redactionele vereisten voldoet. Verbeterpunten kunnen worden doorgegeven via <a href="https://gitlab.com/commonground/developer.overheid.nl/" target="_blank" rel="noopener noreferrer">Gitlab</a>.
         </p>
