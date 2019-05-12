@@ -22,7 +22,7 @@ require (
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/jmhodges/levigo v1.0.0 // indirect
 	github.com/pkg/errors v0.8.1
-	github.com/remyoudompheng/bigfft v0.0.0-20190321074620-2f0d2b0e0001 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20190512093250-babf20351dd7 // indirect
 	github.com/steveyen/gtreap v0.0.0-20150807155958-0abe01ef9be2 // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/syndtr/goleveldb v1.0.0 // indirect
