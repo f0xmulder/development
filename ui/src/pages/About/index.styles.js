@@ -7,10 +7,10 @@ export const StyledAbout = styled.div`
 `
 
 export const StyledPageTitle = styled.h1`
-  color: ${p => p.theme.color.text.normal};
-  font-size: ${p => p.theme.font.size.title.normal};
-  line-height: ${p => p.theme.font.lineHeight.title.normal};
-  font-weight: ${p => p.theme.font.weight.bold};
+  color: ${(p) => p.theme.color.text.normal};
+  font-size: ${(p) => p.theme.font.size.title.normal};
+  line-height: ${(p) => p.theme.font.lineHeight.title.normal};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   text-align: center;
   margin-bottom: 32px;
 `
@@ -25,12 +25,12 @@ export const StyledCard = styled(Card)`
   }
 
   a {
-    color: #2961FF;
+    color: #2961ff;
     text-decoration: none;
   }
 
   abbr {
     text-decoration: none;
-    border-bottom: 1px dotted #A3AABF;
+    border-bottom: 1px dotted #a3aabf;
   }
 `

@@ -31,10 +31,10 @@ export default createGlobalStyle`
   ${generateFontFaceDefinitions(fontDefinitions)}
 
   html {
-    color: ${p => p.theme.color.text.normal};
+    color: ${(p) => p.theme.color.text.normal};
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: ${p => p.theme.font.size.normal};
-    line-height: ${p => p.theme.font.lineHeight.normal};
+    font-size: ${(p) => p.theme.font.size.normal};
+    line-height: ${(p) => p.theme.font.lineHeight.normal};
     text-rendering: optimizeLegibility;
     touch-action: manipulation;
     -webkit-font-smoothing: antialiased;

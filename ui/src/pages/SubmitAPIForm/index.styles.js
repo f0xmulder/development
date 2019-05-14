@@ -8,10 +8,10 @@ export const StyledFieldset = styled.fieldset`
 `
 
 export const StyledLegend = styled.legend`
-  font-size: ${p => p.theme.font.size.title.normal};
-  line-height: ${p => p.theme.font.lineHeight.title.normal};
-  font-weight: ${p => p.theme.font.weight.bold};
-  color: ${p => p.theme.color.primary.normal};
+  font-size: ${(p) => p.theme.font.size.title.normal};
+  line-height: ${(p) => p.theme.font.lineHeight.title.normal};
+  font-weight: ${(p) => p.theme.font.weight.bold};
+  color: ${(p) => p.theme.color.primary.normal};
   margin-bottom: 16px;
   padding: 0;
 `
@@ -19,7 +19,7 @@ export const StyledLegend = styled.legend`
 export const StyledLabel = styled.label`
   display: block;
   margin-bottom: 8px;
-  font-weight: ${p => p.theme.font.weight.semibold};
+  font-weight: ${(p) => p.theme.font.weight.semibold};
 `
 
 export const StyledField = styled(Field)`
@@ -27,9 +27,9 @@ export const StyledField = styled(Field)`
   width: 100%;
   padding: 9px 16px 11px 16px;
   font-family: inherit;
-  font-size: ${p => p.theme.font.size.normal};
-  line-height: ${p => p.theme.font.lineHeight.normal};
-  font-weight: ${p => p.theme.font.weight.normal};
+  font-size: ${(p) => p.theme.font.size.normal};
+  line-height: ${(p) => p.theme.font.lineHeight.normal};
+  font-weight: ${(p) => p.theme.font.weight.normal};
   height: 40px;
   box-sizing: border-box;
   background-color: #fff;
@@ -56,7 +56,7 @@ export const StyledFormGroupColumn = styled.div`
 
 export const StyledFormGroup = styled.div`
   margin-bottom: 1rem;
-  `
+`
 
 export const StyledFormSetting = styled.div`
   display: flex;
@@ -83,7 +83,7 @@ export const StyledSubmitButton = styled.button`
   display: flex;
   align-items: center;
   height: 40px;
-  background-color: ${p => p.theme.color.primary.normal};
+  background-color: ${(p) => p.theme.color.primary.normal};
   border-radius: 5px;
   color: #ffffff;
   text-align: center;
@@ -92,19 +92,19 @@ export const StyledSubmitButton = styled.button`
   border: 0 none;
   cursor: pointer;
   font-family: inherit;
-  font-size: ${p => p.theme.font.size.normal};
-  line-height: ${p => p.theme.font.lineHeight.normal};
-  font-weight: ${p => p.theme.font.weight.semibold};
+  font-size: ${(p) => p.theme.font.size.normal};
+  line-height: ${(p) => p.theme.font.lineHeight.normal};
+  font-weight: ${(p) => p.theme.font.weight.semibold};
 `
 
 export const HelperMessage = styled.small`
-  font-size: ${p => p.theme.font.size.small};
-  line-height: ${p => p.theme.font.lineHeight.small};
+  font-size: ${(p) => p.theme.font.size.small};
+  line-height: ${(p) => p.theme.font.lineHeight.small};
   color: #6c757d;
 `
 
 export const ErrorMessage = styled.small`
-  font-size: ${p => p.theme.font.size.small};
-  line-height: ${p => p.theme.font.lineHeight.small};
-  color: ${p => p.theme.color.warning};
+  font-size: ${(p) => p.theme.font.size.small};
+  line-height: ${(p) => p.theme.font.lineHeight.small};
+  color: ${(p) => p.theme.color.warning};
 `

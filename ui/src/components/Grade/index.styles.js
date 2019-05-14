@@ -7,18 +7,18 @@ export const StyledGrade = styled.div`
 
 export const StyledLabel = styled.div`
   flex: 0 1 auto;
-  color: ${p => p.theme.color.text.normal};
-  font-size: ${p => p.theme.font.size.tiny};
-  line-height: ${p => p.theme.font.lineHeight.tiny};
-  font-weight: ${p => p.theme.font.weight.semibold};
+  color: ${(p) => p.theme.color.text.normal};
+  font-size: ${(p) => p.theme.font.size.tiny};
+  line-height: ${(p) => p.theme.font.lineHeight.tiny};
+  font-weight: ${(p) => p.theme.font.weight.semibold};
   min-width: 68px;
 
   &:before {
     content: 'Score';
     text-transform: uppercase;
-    color: ${p => p.theme.color.text.light};
+    color: ${(p) => p.theme.color.text.light};
     padding-right: 6px;
-    font-weight: ${p => p.theme.font.weight.normal};
+    font-weight: ${(p) => p.theme.font.weight.normal};
   }
 `
 

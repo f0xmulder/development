@@ -6,16 +6,16 @@ export const StyledSubmitAPI = styled.div`
 `
 
 export const StyledDescription = styled.p`
-    font-size: ${p => p.theme.font.size.small};
-    line-height: ${p => p.theme.font.lineHeight.small};
-    color: ${p => p.theme.color.text.light};
-    text-align: center;
+  font-size: ${(p) => p.theme.font.size.small};
+  line-height: ${(p) => p.theme.font.lineHeight.small};
+  color: ${(p) => p.theme.color.text.light};
+  text-align: center;
 `
 
 export const StyledPageTitle = styled.h1`
-  font-size: ${p => p.theme.font.size.title.large};
-  line-height: ${p => p.theme.font.lineHeight.title.large};
-  font-weight: ${p => p.theme.font.weight.bold};
+  font-size: ${(p) => p.theme.font.size.title.large};
+  line-height: ${(p) => p.theme.font.lineHeight.title.large};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   text-align: center;
 `
 
@@ -27,16 +27,15 @@ export const StyledTabs = styled.div`
   & > a {
     flex: 0 0 auto;
     padding: 8px 10px;
-    font-size: ${p => p.theme.font.size.small};
-    line-height: ${p => p.theme.font.lineHeight.small};
-    color: ${p => p.theme.color.text.light};
+    font-size: ${(p) => p.theme.font.size.small};
+    line-height: ${(p) => p.theme.font.lineHeight.small};
+    color: ${(p) => p.theme.color.text.light};
     text-decoration: none;
 
     &.active {
-      border-bottom: 1px solid ${p => p.theme.color.primary.normal};
-      color: ${p => p.theme.color.primary.normal};
+      border-bottom: 1px solid ${(p) => p.theme.color.primary.normal};
+      color: ${(p) => p.theme.color.primary.normal};
       padding-bottom: 7px;
     }
   }
 `
-

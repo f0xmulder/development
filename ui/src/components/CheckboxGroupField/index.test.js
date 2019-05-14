@@ -24,7 +24,7 @@ const createForm = (onChange = () => {}) => {
           />
         )}
       </Formik>
-  </ThemeProvider>,
+    </ThemeProvider>,
   )
 }
 

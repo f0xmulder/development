@@ -37,18 +37,18 @@ class TagListContainer extends Component {
   render() {
     const { tags, error, loaded } = this.state
 
-        return (
-            !loaded ?
-                null :
-                error ?
-                    <p data-test="error-message">Er ging iets fout tijdens het ophalen van de tags.</p>
-                :
-                    tags && tags.length > 0 ?
-                        <TagList tags={tags} />
-                    :
-                        <p data-test="no-tags-available-message">Er zijn (nog) geen tags beschikbaar.</p>
-        );
-    }
+    return !loaded ? null : error ? (
+      <p data-test="error-message">
+        Er ging iets fout tijdens het ophalen van de tags.
+      </p>
+    ) : tags && tags.length > 0 ? (
+      <TagList tags={tags} />
+    ) : (
+      <p data-test="no-tags-available-message">
+        Er zijn (nog) geen tags beschikbaar.
+      </p>
+    )
+  }
 }
 
 export default TagListContainer

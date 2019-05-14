@@ -33,14 +33,14 @@ export const Menu = styled.ul`
 
 export const Link = styled(NavLink)`
   display: block;
-  color: ${p => p.theme.color.text.normal};
+  color: ${(p) => p.theme.color.text.normal};
   text-decoration: none;
-  font-weight: ${p => p.theme.font.weight.semibold};
+  font-weight: ${(p) => p.theme.font.weight.semibold};
   padding: 12px 24px;
 
   &.active {
     position: relative;
-    color: ${p => p.theme.color.primary.normal};
+    color: ${(p) => p.theme.color.primary.normal};
 
     &:before {
       content: '';
@@ -49,7 +49,7 @@ export const Link = styled(NavLink)`
       bottom: 4px;
       left: 0;
       width: 2px;
-      background-color: ${p => p.theme.color.primary.normal};
+      background-color: ${(p) => p.theme.color.primary.normal};
     }
   }
 `

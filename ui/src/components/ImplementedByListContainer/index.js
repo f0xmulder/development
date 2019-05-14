@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { string } from 'prop-types'
 import ImplementedByList from '../ImplementedByList'
-import {modelFromAPIResponse} from '../../models/api'
+import { modelFromAPIResponse } from '../../models/api'
 
 class ImplementedByListContainer extends Component {
   constructor(props) {
@@ -28,16 +28,16 @@ class ImplementedByListContainer extends Component {
 
   loadDetailsForAPI(id) {
     return this.fetchImplementedByInfo(id)
-    .then(response => response.map(api => modelFromAPIResponse(api)))
+      .then((response) => response.map((api) => modelFromAPIResponse(api)))
       .then(
-      (apis) => {
-        this.setState({ apis: apis, loaded: true })
-      },
-      (error) => {
-        this.setState({ error: true, loaded: true })
-        console.error(error)
-      },
-    )
+        (apis) => {
+          this.setState({ apis: apis, loaded: true })
+        },
+        (error) => {
+          this.setState({ error: true, loaded: true })
+          console.error(error)
+        },
+      )
   }
 
   componentWillUpdate(nextProps) {

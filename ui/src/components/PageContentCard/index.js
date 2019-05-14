@@ -11,7 +11,7 @@ export default styled(Card)`
   }
 
   a {
-    color: ${p => p.theme.color.primary.normal};
+    color: ${(p) => p.theme.color.primary.normal};
     text-decoration: none;
   }
 `
