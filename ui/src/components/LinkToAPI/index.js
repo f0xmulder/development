@@ -1,16 +1,17 @@
 import React from 'react'
-import {string} from 'prop-types'
-import {Link} from 'react-router-dom'
+import { string } from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const LinkToAPI = ({ id, service_name, organization_name, ...props }) =>
-    <Link to={`/detail/${id}`} data-test="link" {...props}>
-        {service_name} - {organization_name}
-    </Link>
+const LinkToAPI = ({ id, serviceName, organizationName, ...props }) => (
+  <Link to={`/detail/${id}`} data-test="link" {...props}>
+    {serviceName} - {organizationName}
+  </Link>
+)
 
 LinkToAPI.propTypes = {
-    id: string.isRequired,
-    service_name: string.isRequired,
-    organization_name: string.isRequired
+  id: string.isRequired,
+  serviceName: string.isRequired,
+  organizationName: string.isRequired,
 }
 
 export default LinkToAPI

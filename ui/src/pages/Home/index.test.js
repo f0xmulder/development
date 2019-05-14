@@ -1,5 +1,5 @@
 import React from 'react'
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import Search from './index'
 import {PageTitle, SubTitle} from './index.styles'
 
@@ -10,4 +10,3 @@ describe('Search', () => {
     expect(wrapper.find(SubTitle).text()).toBe('Een incompleet overzicht van alle API’s binnen de Nederlandse overheid.')
   })
 })
-

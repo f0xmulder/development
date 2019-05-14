@@ -1,10 +1,9 @@
-import React, {Component} from 'react'
-import {shape, string, func} from 'prop-types'
-import {withRouter} from 'react-router'
+import React, { Component } from 'react'
+import { shape, string, func } from 'prop-types'
+import { withRouter } from 'react-router'
 import TopBar from '../TopBar'
 
-export const isURLHomePage = url =>
-  url === '/'
+export const isURLHomePage = (url) => url === '/'
 
 export class TopBarContainer extends Component {
   constructor(props) {
@@ -26,22 +25,23 @@ export class TopBarContainer extends Component {
     const urlSearchParams = new URLSearchParams(location.search)
     const query = urlSearchParams.get('q') || ''
 
-    return <TopBar 
-      query={query}
-      showSearch={!isURLHomePage(location.pathname)} 
-      onSearchSubmitHandler={this.onSearchSubmitHandler}
-    />
+    return (
+      <TopBar
+        query={query}
+        showSearch={!isURLHomePage(location.pathname)}
+        onSearchSubmitHandler={this.onSearchSubmitHandler}
+      />
+    )
   }
 }
 
 TopBarContainer.propTypes = {
   location: shape({
-    pathname: string.isRequired
+    pathname: string.isRequired,
   }).isRequired,
   history: shape({
-    push: func.isRequired
-  }).isRequired 
+    push: func.isRequired,
+  }).isRequired,
 }
 
 export default withRouter(TopBarContainer)
-

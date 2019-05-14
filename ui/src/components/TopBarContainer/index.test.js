@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import {TopBarContainer, isURLHomePage} from './index'
+import { TopBarContainer, isURLHomePage } from './index'
 
 describe('TopBarContainer', () => {
   let wrapper
@@ -13,17 +13,17 @@ describe('TopBarContainer', () => {
     wrapper = shallow(<TopBarContainer {...props} />)
   })
 
-  describe('the onSearchSubmitHandler', ()  => {
+  describe('the onSearchSubmitHandler', () => {
     it('should navigate to the Overzicht page and pass the query', () => {
       wrapper.instance().onSearchSubmitHandler('amsterdam')
-      expect(props.history.push)
-        .toHaveBeenCalledWith('/overzicht?q=amsterdam')
+      expect(props.history.push).toHaveBeenCalledWith('/overzicht?q=amsterdam')
     })
-    
+
     it('should encode the query', () => {
       wrapper.instance().onSearchSubmitHandler('special # query')
-      expect(props.history.push)
-        .toHaveBeenCalledWith('/overzicht?q=special+%23+query')
+      expect(props.history.push).toHaveBeenCalledWith(
+        '/overzicht?q=special+%23+query',
+      )
     })
   })
 })
@@ -34,4 +34,3 @@ describe('is URL Home page', () => {
     expect(isURLHomePage('/contact')).toEqual(false)
   })
 })
-

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Field} from 'formik'
+import { Field } from 'formik'
 
 export const StyledFieldset = styled.fieldset`
   border: none;
@@ -10,7 +10,7 @@ export const StyledFieldset = styled.fieldset`
 export const StyledLegend = styled.legend`
   font-size: 20px;
   font-weight: 700;
-  color: #2961FF;
+  color: #2961ff;
   margin-bottom: 16px;
   padding: 0;
 `
@@ -19,7 +19,7 @@ export const StyledLabel = styled.label`
   font-size: 16px;
   line-height: 20px;
   margin-bottom: 10px;
-  color: #2D3240;
+  color: #2d3240;
   font-weight: 600;
   display: inline-block;
 `
@@ -36,10 +36,9 @@ export const StyledField = styled(Field)`
   box-sizing: border-box;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #E6EAF5;
+  border: 1px solid #e6eaf5;
   border-radius: 3px;
-  transition: border-color .15s ease-in-out,
-              box-shadow .15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `
 
 export const StyledFormGroupColumnContainer = styled.div`
@@ -64,7 +63,7 @@ export const StyledFormGroup = styled.div`
 export const StyledFormSetting = styled.div`
   display: flex;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     flex: 0 0 auto;
     order: 1;
     width: auto;
@@ -83,7 +82,7 @@ export const StyledFormSetting = styled.div`
 `
 
 export const StyledSubmitButton = styled.button`
-  background-color: #2961FF;
+  background-color: #2961ff;
   border-radius: 5px;
   color: #ffffff;
   font-weight: 700;

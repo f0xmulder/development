@@ -11,8 +11,7 @@ export default styled(Card)`
   }
 
   a {
-    color: #2961FF;
+    color: #2961ff;
     text-decoration: none;
   }
 `
-

@@ -17,11 +17,11 @@ const TagList = ({ tags }) =>
     </Container>
 
 TagList.propTypes = {
-    tags: arrayOf(string)
+  tags: arrayOf(string),
 }
 
 TagList.defaultProps = {
-    tags: []
+  tags: [],
 }
 
 export default TagList

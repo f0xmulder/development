@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Field} from 'formik'
+import { Field } from 'formik'
 import checkbox from './checkbox.svg'
 
 export const StyledCheckboxGroupField = styled.div`
@@ -30,25 +30,25 @@ export const StyledCheckboxGroupField = styled.div`
       }
     }
 
-    label {
-      flex: 1;
-      color: #2D3240;
-      font-size: 14px;
-      line-height: 20px;
-    }
+  label {
+    flex: 1;
+    color: #2d3240;
+    font-size: 14px;
+    line-height: 20px;
+  }
 
-    .count {
-      flex: 0 1 auto;
-      text-align: right;
-      color: #676D80;
-      font-size: 12px;
-    }
+  .count {
+    flex: 0 1 auto;
+    text-align: right;
+    color: #676d80;
+    font-size: 12px;
+  }
 `
 
 export const StyledCheckboxField = styled(Field)`
   -webkit-appearance: none;
   appearance: none;
-  border: 1px solid #CAD0E0;
+  border: 1px solid #cad0e0;
   background: #ffffff;
   border-radius: 2px;
   width: 14px;
@@ -56,7 +56,7 @@ export const StyledCheckboxField = styled(Field)`
   position: relative;
 
   &:checked {
-    background: #2961FF;
+    background: #2961ff;
     border: 0 none;
 
     &:after {
@@ -69,4 +69,3 @@ export const StyledCheckboxField = styled(Field)`
     }
   }
 `
-

@@ -1,13 +1,13 @@
 import React from 'react'
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 import MobileNavigation from './index'
-import {Menu, Link} from './index.styles'
+import { Menu, Link } from './index.styles'
 
 describe('the MobileNavigation', () => {
   let menu
 
   beforeAll(() => {
-    const wrapper = shallow(<MobileNavigation/>)
+    const wrapper = shallow(<MobileNavigation />)
     menu = wrapper.find(Menu)
   })
 

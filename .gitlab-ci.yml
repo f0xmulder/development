@@ -55,7 +55,8 @@ Test UI:
         docker build --target build \
         --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
         -f ui/Dockerfile . && \
-        docker run --rm $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build npm test -- --coverage
+        docker run --rm $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
+        /bin/ash -c "npm run lint && npm run test -- --coverage"
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:

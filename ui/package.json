@@ -15,12 +15,23 @@
   },
   "devDependencies": {
     "enzyme": "3.9.0",
-    "enzyme-adapter-react-16": "1.13.0",
-    "react-scripts": "3.0.1"
+    "enzyme-adapter-react-16": "1.12.1",
+    "react-scripts": "3.0.1",
+    "eslint-config-jest-enzyme": "7.0.2",
+    "eslint-config-prettier": "4.2.0",
+    "eslint-config-standard": "12.0.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-jest": "22.5.1",
+    "eslint-plugin-node": "9.0.1",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-promise": "4.1.1",
+    "eslint-plugin-standard": "4.0.0",
+    "prettier": "1.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src/**/*.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

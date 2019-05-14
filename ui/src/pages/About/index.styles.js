@@ -7,7 +7,7 @@ export const StyledAbout = styled.div`
 `
 
 export const StyledPageTitle = styled.h1`
-  color: #2D3240;
+  color: #2d3240;
   font-size: 28px;
   font-weight: 800;
   text-align: center;

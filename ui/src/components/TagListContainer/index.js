@@ -1,41 +1,41 @@
 import React, { Component } from 'react'
-import TagList from '../TagList';
+import TagList from '../TagList'
 
 class TagListContainer extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            tags: [],
-            error: false,
-            loaded: false
-        }
+    this.state = {
+      tags: [],
+      error: false,
+      loaded: false,
     }
+  }
 
-    fetchTagList() {
-        return fetch('/api/tags')
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Er ging iets fout tijdens het ophalen van de tags')
-                }
-            })
-    }
+  fetchTagList() {
+    return fetch('/api/tags').then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Er ging iets fout tijdens het ophalen van de tags')
+      }
+    })
+  }
 
-    componentDidMount() {
-        this
-            .fetchTagList()
-            .then(tags => {
-                this.setState({ tags, loaded: true })
-            }, error => {
-                this.setState({ error: true, loaded: true })
-                console.error(error)
-            })
-    }
+  componentDidMount() {
+    this.fetchTagList().then(
+      (tags) => {
+        this.setState({ tags, loaded: true })
+      },
+      (error) => {
+        this.setState({ error: true, loaded: true })
+        console.error(error)
+      },
+    )
+  }
 
-    render() {
-        const { tags, error, loaded } = this.state
+  render() {
+    const { tags, error, loaded } = this.state
 
         return (
             !loaded ?

@@ -3,40 +3,44 @@ import { shape, string } from 'prop-types'
 import { NavLink, Route, Redirect } from 'react-router-dom'
 import SubmitAPIForm from '../SubmitAPIForm'
 import SubmitAPIMergeRequest from '../SubmitAPIMergeRequest'
-import {StyledSubmitAPI, StyledPageTitle, StyledTabs} from './index.styles'
+import { StyledSubmitAPI, StyledPageTitle, StyledTabs } from './index.styles'
 import PageContentCard from '../../components/PageContentCard'
 
-const SubmitAPI = ({ match: { url } }) =>
-    <StyledSubmitAPI>
-      <StyledPageTitle>API toevoegen</StyledPageTitle> 
-      <p>
-        Voeg je API toe aan developer.overheid.nl door onderstaand 
-        formulier in te vullen of een Merge Request aan te maken.
-      </p>
+const SubmitAPI = ({ match: { url } }) => (
+  <StyledSubmitAPI>
+    <StyledPageTitle>API toevoegen</StyledPageTitle>
+    <p>
+      Voeg je API toe aan developer.overheid.nl door onderstaand formulier in te
+      vullen of een Merge Request aan te maken.
+    </p>
 
-      <StyledTabs>
-        <NavLink to={`${url}/formulier`}>Formulier</NavLink>
-        <NavLink to={`${url}/merge-request`}>Merge Request</NavLink>
-      </StyledTabs>
+    <StyledTabs>
+      <NavLink to={`${url}/formulier`}>Formulier</NavLink>
+      <NavLink to={`${url}/merge-request`}>Merge Request</NavLink>
+    </StyledTabs>
 
-      <PageContentCard>
-        <Route path={url} exact render={() => <Redirect to={`${url}/formulier`} />} />
-        <Route path={`${url}/formulier`} component={SubmitAPIForm} />
-        <Route path={`${url}/merge-request`} component={SubmitAPIMergeRequest} />
-      </PageContentCard>
-    </StyledSubmitAPI>
+    <PageContentCard>
+      <Route
+        path={url}
+        exact
+        render={() => <Redirect to={`${url}/formulier`} />}
+      />
+      <Route path={`${url}/formulier`} component={SubmitAPIForm} />
+      <Route path={`${url}/merge-request`} component={SubmitAPIMergeRequest} />
+    </PageContentCard>
+  </StyledSubmitAPI>
+)
 
 SubmitAPI.propTypes = {
   match: shape({
-    url: string
-  })
+    url: string,
+  }),
 }
 
 SubmitAPI.defaultProps = {
   match: {
-    url: 'api-toevoegen'
-  }
+    url: 'api-toevoegen',
+  },
 }
 
 export default SubmitAPI
-

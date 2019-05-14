@@ -1,21 +1,21 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
-import {Navigation, Search} from '@commonground/design-system'
+import { Link } from 'react-router-dom'
+import { Navigation, Search } from '@commonground/design-system'
 
 export default styled.header`
-    padding: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
 export const StyledTitle = styled(Link)`
-    color: #2961FF;
-    text-decoration: none;
-    padding: 0 12px;
-    line-height: 42px;
-    font-size: 16px;
-    font-weight: 800;
-    flex: 0 0 auto;
+  color: #2961ff;
+  text-decoration: none;
+  padding: 0 12px;
+  line-height: 42px;
+  font-size: 16px;
+  font-weight: 800;
+  flex: 0 0 auto;
 `
 
 export const StyledNavigation = styled(Navigation)`
@@ -35,4 +35,3 @@ export const StyledSearch = styled(Search)`
     height: 41px;
   }
 `
-

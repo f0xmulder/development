@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import APIList from '../../components/APIList'
-import {StyledOverviewPage, StyledAPIFilters, StyledResultsContainer, StyledH1} from './index.styles'
+import {
+  StyledOverviewPage,
+  StyledAPIFilters,
+  StyledResultsContainer,
+  StyledH1,
+} from './index.styles'
+import { modelFromAPIResponse } from '../../models/api'
 
 class Overview extends Component {
   constructor(props) {
@@ -9,44 +15,54 @@ class Overview extends Component {
     this.state = {
       result: {},
       error: false,
-      loaded: false
+      loaded: false,
     }
 
     this.getQueryParams = this.getQueryParams.bind(this)
     this.onFilterChange = this.onFilterChange.bind(this)
   }
 
-  componentDidMount() {
-    this
+  loadAPIList() {
+    return this
       .fetchApiList()
-      .then(result => {
-        this.setState({ result, loaded: true })
-      }, error => {
-        this.setState({ error: true, loaded: true })
-        console.error(error)
-      })
+      .then((response) => (
+          Object.assign({}, response, {
+            apis: response.apis.map((api) => modelFromAPIResponse(api))
+          })))
+      .then(
+        (result) => {
+          this.setState({ result, loaded: true })
+        },
+        (error) => {
+          this.setState({ error: true, loaded: true })
+          console.error(error)
+        },
+      )
+  }
+
+  componentDidMount() {
+    this.loadAPIList()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.location && (prevProps.location.search !== this.props.location.search)) {
-      this.fetchApiList()
-        .then(result => {
-          this.setState({ result })
-        }, error => {
-          this.setState({ error: true })
-        })
+    if (
+      prevProps.location &&
+      prevProps.location.search !== this.props.location.search
+    ) {
+       this.loadAPIList() 
     }
   }
 
   fetchApiList() {
-    return fetch(`/api/apis?${this.generateQueryParams(this.getQueryParams())}`)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-        }
-      })
+    return fetch(
+      `/api/apis?${this.generateQueryParams(this.getQueryParams())}`,
+    ).then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
+      }
+    })
   }
 
   onFilterChange(newFilters) {
@@ -54,15 +70,15 @@ class Overview extends Component {
 
     if (newFilters.q !== currentFilters.q) {
       newFilters.tags = []
-      newFilters.organization_name = []
-      newFilters.api_type = []
+      newFilters['organization_name'] = []
+      newFilters['api_type'] = []
     }
 
     const translatedFilters = {
       q: newFilters.q,
       tags: newFilters.tags,
       organisatie: newFilters.organization_name,
-      type: newFilters.api_type
+      type: newFilters.api_type,
     }
 
     const { history } = this.props
@@ -97,7 +113,7 @@ class Overview extends Component {
       q: values.get('q') || '',
       tags: values.getAll('tags'),
       organization_name: values.getAll('organisatie'),
-      api_type: values.getAll('type')
+      api_type: values.getAll('type'),
     }
   }
 
@@ -107,28 +123,31 @@ class Overview extends Component {
     return (
       <StyledOverviewPage>
         <StyledH1>Overzicht van API's</StyledH1>
-        {
-          !loaded ?
-            null :
-            error ?
-            <p data-test="error-message">
-              Er ging iets fout tijdens het ophalen van de API's.
-            </p> :
-            <Fragment>
-              <StyledAPIFilters initialValues={this.getQueryParams()} facets={result.facets} onSubmit={this.onFilterChange} />
-              <StyledResultsContainer> 
-                {
-                  result && result.apis && result.apis.length > 0 ?
-                    <APIList apis={result.apis} /> :
-                    <p data-test="no-apis-available-message">Er zijn (nog) geen API's beschikbaar.</p>
-                }
-              </StyledResultsContainer>
-            </Fragment>
-        }
+        {!loaded ? null : error ? (
+          <p data-test="error-message">
+            Er ging iets fout tijdens het ophalen van de API's.
+          </p>
+        ) : (
+          <Fragment>
+            <StyledAPIFilters
+              initialValues={this.getQueryParams()}
+              facets={result.facets}
+              onSubmit={this.onFilterChange}
+            />
+            <StyledResultsContainer>
+              {result && result.apis && result.apis.length > 0 ? (
+                <APIList apis={result.apis} />
+              ) : (
+                <p data-test="no-apis-available-message">
+                  Er zijn (nog) geen API's beschikbaar.
+                </p>
+              )}
+            </StyledResultsContainer>
+          </Fragment>
+        )}
       </StyledOverviewPage>
-    );
+    )
   }
 }
 
-export default Overview;
-
+export default Overview

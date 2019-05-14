@@ -7,11 +7,10 @@ describe('Expandable', () => {
     const wrapper = shallow(
       <Expandable>
         <p>Content</p>
-      </Expandable>
+      </Expandable>,
     )
-   
+
     const contentElement = wrapper.find('[data-test="content"]')
     expect(contentElement.children().html()).toEqual('<p>Content</p>')
   })
 })
-
