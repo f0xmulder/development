@@ -12,8 +12,7 @@ const APIList = ({ apis }) => (
       </Table.Row>
     </Table.Head>
     <Table.Body>
-    {
-      apis.map((api, i) => 
+      {apis.map((api, i) => (
         <Table.Row key={i}>
           <Table.BodyCell>
             <StyledLinkToAPI
