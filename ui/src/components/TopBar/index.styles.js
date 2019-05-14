@@ -24,14 +24,6 @@ export const StyledNavigation = styled(Navigation)`
     }
 `
 
-export const StyledNavigation = styled(Navigation)`
-    flex: 0 0 auto;
-    
-    &:last-of-type {
-      margin-right: unset;
-    }
-`
-
 export const StyledForm = styled.form`
   flex: 0 0 300px;
 `
