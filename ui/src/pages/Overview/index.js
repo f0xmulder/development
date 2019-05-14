@@ -23,12 +23,12 @@ class Overview extends Component {
   }
 
   loadAPIList() {
-    return this
-      .fetchApiList()
-      .then((response) => (
-          Object.assign({}, response, {
-            apis: response.apis.map((api) => modelFromAPIResponse(api))
-          })))
+    return this.fetchApiList()
+      .then((response) =>
+        Object.assign({}, response, {
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+        }),
+      )
       .then(
         (result) => {
           this.setState({ result, loaded: true })
@@ -49,7 +49,7 @@ class Overview extends Component {
       prevProps.location &&
       prevProps.location.search !== this.props.location.search
     ) {
-       this.loadAPIList() 
+      this.loadAPIList()
     }
   }
 
