@@ -119,7 +119,7 @@ describe('SubmitAPI', () => {
       describe('submitToApi is unsuccessful', () => {
         it('should call the setStatus action', () => {
           const apiPromise = Promise.reject(
-            'arbitrary reject reason coming from tests',
+            new Error('arbitrary reject reason coming from tests'),
           )
           SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
 

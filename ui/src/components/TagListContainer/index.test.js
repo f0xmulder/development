@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import TagListContainer from './index'
+import { flushPromises } from '../../test-helpers'
 
 const dummyTag = 'tag-a'
 
@@ -53,18 +54,15 @@ describe('TagListContainer', () => {
 
   describe('when an error occurred while fetching the tags', () => {
     it('should set the error state', () => {
-      return new Promise((done) => {
-        const thePromise = Promise.reject(
-          'arbitrary reject reason coming from tests',
-        )
-        TagListContainer.prototype.fetchTagList = jest.fn(() => thePromise)
+      const thePromise = Promise.reject(
+        new Error('arbitrary reject reason coming from tests'),
+      )
+      TagListContainer.prototype.fetchTagList = jest.fn(() => thePromise)
 
-        const wrapper = shallow(<TagListContainer />)
+      const wrapper = shallow(<TagListContainer />)
 
-        return thePromise.catch(() => {
-          expect(wrapper.state().error).toBe(true)
-          done()
-        })
+      return flushPromises().then(() => {
+        expect(wrapper.state().error).toBe(true)
       })
     })
   })

@@ -54,7 +54,7 @@ describe('CheckboxGroupField', () => {
   })
 
   it('triggers onChange when a checkbox is changed', () => {
-    return new Promise((done) => {
+    return new Promise((resolve) => {
       const onChange = jest.fn()
       const wrapper = createForm(onChange)
 
@@ -63,7 +63,7 @@ describe('CheckboxGroupField', () => {
 
       setTimeout(() => {
         expect(onChange).toHaveBeenCalled()
-        done()
+        resolve()
       }, 1)
     })
   })

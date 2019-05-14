@@ -122,10 +122,10 @@ class Overview extends Component {
 
     return (
       <StyledOverviewPage>
-        <StyledH1>Overzicht van API's</StyledH1>
+        <StyledH1>Overzicht van API&#39;s</StyledH1>
         {!loaded ? null : error ? (
           <p data-test="error-message">
-            Er ging iets fout tijdens het ophalen van de API's.
+            Er ging iets fout tijdens het ophalen van de API&#39;s.
           </p>
         ) : (
           <Fragment>
@@ -139,7 +139,7 @@ class Overview extends Component {
                 <APIList apis={result.apis} />
               ) : (
                 <p data-test="no-apis-available-message">
-                  Er zijn (nog) geen API's beschikbaar.
+                  Er zijn (nog) geen API&#39;s beschikbaar.
                 </p>
               )}
             </StyledResultsContainer>

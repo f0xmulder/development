@@ -63,7 +63,7 @@ class ImplementedByListContainer extends Component {
       <div className="ImplementedByListContainer">
         {!loaded ? null : error ? (
           <p data-test="error-message">
-            Er ging iets fout tijdens het ophalen van de gerelateerde API's.
+            Er ging iets fout tijdens het ophalen van de gerelateerde API&#39;s.
           </p>
         ) : apis && apis.length ? (
           <ImplementedByList apis={apis} />

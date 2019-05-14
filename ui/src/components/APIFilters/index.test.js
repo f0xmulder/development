@@ -1,24 +1,4 @@
-import React from 'react'
-import { mount } from 'enzyme'
-import APIFilters, {
-  formatOptions,
-  facetsContainTermsForFilterByKey,
-} from './index'
-import CheckboxGroupField from '../CheckboxGroupField'
-
-const filters = [
-  { key: 'tags', label: 'Tags' },
-  { key: 'organization_name', label: 'Organisatie' },
-  { key: 'api_type', label: 'API type' },
-]
-
-const facets = {
-  tags: { terms: [{ term: '41', count: 5 }, { term: '42', count: 100 }] },
-  organization_name: { terms: [{ term: 'VNG', count: 10 }] },
-  api_type: {
-    terms: [{ term: 'gRPC', count: 5 }, { term: 'GraphQL', count: 75 }],
-  },
-}
+import { formatOptions, facetsContainTermsForFilterByKey } from './index'
 
 describe('formatting API terms to options', () => {
   it('should format terms to options', () => {
