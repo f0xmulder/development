@@ -30,6 +30,6 @@ require (
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0
-	golang.org/x/net v0.0.0-20190509223728-a4d6f7feada5 // indirect
+	golang.org/x/net v0.0.0-20190515124732-3ec191127204 // indirect
 	golang.org/x/sys v0.0.0-20190515114046-f91f9b37d0e9 // indirect
 )
