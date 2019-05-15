@@ -64,18 +64,15 @@ describe('Overview', () => {
 
   describe('when an error occurred while fetching the apis', () => {
     it('should set the error state', () => {
-      return new Promise((resolve) => {
-        const thePromise = Promise.reject(
-          new Error('arbitrary reject reason coming from tests'),
-        )
-        Overview.prototype.fetchApiList = jest.fn(() => thePromise)
+      const ARBITRARY_ERROR_MESSAGE =
+        'arbitrary reject reason coming from tests'
+      const thePromise = Promise.reject(new Error(ARBITRARY_ERROR_MESSAGE))
+      Overview.prototype.fetchApiList = jest.fn(() => thePromise)
 
-        const wrapper = shallow(<Overview />)
+      const wrapper = shallow(<Overview />)
 
-        flushPromises().then(() => {
-          expect(wrapper.state().error).toBe(true)
-          resolve()
-        })
+      return flushPromises().then(() => {
+        expect(wrapper.state().error).toBe(true)
       })
     })
   })
@@ -94,12 +91,14 @@ describe('Overview', () => {
       const wrapper = shallow(
         <Overview location={{ search: 'tags=42&organisatie=42' }} />,
       )
-      expect(wrapper.instance().getQueryParams()).toEqual({
-        q: '',
-        api_type: [],
-        organization_name: ['42'],
-        tags: ['42'],
-      })
+
+      const expectedFilters = {}
+      expectedFilters['q'] = ''
+      expectedFilters['api_type'] = []
+      expectedFilters['organization_name'] = ['42']
+      expectedFilters['tags'] = ['42']
+
+      expect(wrapper.instance().getQueryParams()).toEqual(expectedFilters)
     })
   })
 
@@ -118,12 +117,13 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
-      wrapper.instance().onFilterChange({
-        q: '',
-        api_type: [],
-        organization_name: ['42'],
-        tags: ['42', '43'],
-      })
+      const newFilters = {}
+      newFilters['q'] = ''
+      newFilters['api_type'] = []
+      newFilters['organization_name'] = ['42']
+      newFilters['tags'] = ['42', '43']
+
+      wrapper.instance().onFilterChange(newFilters)
       expect(history.push).toHaveBeenCalledWith(
         '?tags=42&tags=43&organisatie=42',
       )
