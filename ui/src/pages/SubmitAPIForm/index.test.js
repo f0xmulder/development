@@ -8,19 +8,23 @@ import { Formik } from 'formik'
 
 describe('convertRIFormDataToAPIDefinition', () => {
   it('should unset the link to a RI if the API itself is marked as a RI', () => {
-    const result = convertRIFormDataToAPIDefinition({
-      is_reference_implementation: true,
-      reference_implementation: 'dummy-api-id',
-    })
+    const referenceImplementationFormData = {}
+    referenceImplementationFormData['is_reference_implementation'] = true
+    referenceImplementationFormData['reference_implementation'] = 'dummy-api-id'
+
+    const result = convertRIFormDataToAPIDefinition(
+      referenceImplementationFormData,
+    )
     expect(result.reference_implementation).toBeUndefined()
   })
 })
 
 describe('convertLinkToRIToRelation', () => {
   it('should convert the link to a relation object', () => {
-    const result = convertLinkToRIToRelation({
-      reference_implementation: 'dummy-api-id',
-    })
+    const linkToReferenceImplementation = {}
+    linkToReferenceImplementation['reference_implementation'] = 'dummy-api-id'
+
+    const result = convertLinkToRIToRelation(linkToReferenceImplementation)
 
     expect(result).toEqual({
       relations: {
@@ -65,9 +69,13 @@ describe('SubmitAPI', () => {
 
     describe('when component state is submitted', () => {
       beforeEach(() => {
+        const responseData = {}
+        responseData['id'] = 1
+        responseData['web_url'] = 'http://gitlab.com/issues/1'
+
         wrapper.setState({
           submitted: true,
-          responseData: { id: 1, web_url: 'http://gitlab.com/issues/1' },
+          responseData,
         })
       })
 

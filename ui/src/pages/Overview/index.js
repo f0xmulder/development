@@ -109,12 +109,13 @@ class Overview extends Component {
     const { location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
 
-    return {
-      q: values.get('q') || '',
-      tags: values.getAll('tags'),
-      organization_name: values.getAll('organisatie'),
-      api_type: values.getAll('type'),
-    }
+    const queryParams = {}
+    queryParams['q'] = values.get('q') || ''
+    queryParams['tags'] = values.getAll('tags')
+    queryParams['organization_name'] = values.getAll('organisatie')
+    queryParams['api_type'] = values.getAll('type')
+
+    return queryParams
   }
 
   render() {

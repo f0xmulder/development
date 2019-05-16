@@ -92,13 +92,13 @@ describe('Overview', () => {
         <Overview location={{ search: 'tags=42&organisatie=42' }} />,
       )
 
-      const expectedFilters = {}
-      expectedFilters['q'] = ''
-      expectedFilters['api_type'] = []
-      expectedFilters['organization_name'] = ['42']
-      expectedFilters['tags'] = ['42']
+      const expectedQueryParams = {}
+      expectedQueryParams['q'] = ''
+      expectedQueryParams['api_type'] = []
+      expectedQueryParams['organization_name'] = ['42']
+      expectedQueryParams['tags'] = ['42']
 
-      expect(wrapper.instance().getQueryParams()).toEqual(expectedFilters)
+      expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
     })
   })
 
