@@ -11,6 +11,7 @@ stages:
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
   INGRESS_BASE_DOMAIN: developer.overheid.nl
+  KUBECTL_CONTEXT: bravo.k8s.nlx.io
 
 .validate:
   image: golang:1.12.5
@@ -107,6 +108,8 @@ Release API:
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/don-deployer:latest
+  before_script:
+    - kubectl config use-context $KUBECTL_CONTEXT
   script:
     - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN" > ci_environment_url.txt
     - |
@@ -145,6 +148,8 @@ Remove Review App:
     GIT_STRATEGY: none
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
+  before_script:
+    - kubectl config use-context $KUBECTL_CONTEXT 
   script:
     - helm delete --purge don-$CI_ENVIRONMENT_SLUG
   when: manual
@@ -181,6 +186,8 @@ E2E tests:
 
 Deploy production:
   stage: deploy
+  before_script:
+    - kubectl config use-context $KUBECTL_CONTEXT 
   script:
     - |
         helm upgrade --install don-prod ./helm/don \
