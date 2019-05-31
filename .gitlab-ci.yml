@@ -108,8 +108,6 @@ Release API:
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/don-deployer:latest
-  before_script:
-    - kubectl config use-context $KUBECTL_CONTEXT
   script:
     - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN" > ci_environment_url.txt
     - |
@@ -148,8 +146,6 @@ Remove Review App:
     GIT_STRATEGY: none
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
-  before_script:
-    - kubectl config use-context $KUBECTL_CONTEXT 
   script:
     - helm delete --purge don-$CI_ENVIRONMENT_SLUG
   when: manual
