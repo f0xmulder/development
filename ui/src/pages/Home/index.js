@@ -1,37 +1,43 @@
-import React from 'react'
-import { Search } from '@commonground/design-system'
+import React, { Component } from 'react'
+import HomePage from '../../components/HomePage'
 
-import {
-  Container,
-  PageTitle,
-  SubTitle,
-  SearchBox,
-  StyledTagListContainer,
-} from './index.styles'
+class Home extends Component {
+  constructor(props) {
+    super(props)
 
-const Home = () => (
-  <Container className="Home">
-    <PageTitle>developer.overheid.nl</PageTitle>
-    <SubTitle>
-      Een incompleet overzicht van alle API’s binnen de Nederlandse overheid.
-    </SubTitle>
+    this.state = {
+      amountOfAPIs: null,
+    }
+  }
 
-    <form method="GET" action="/overzicht">
-      <SearchBox>
-        <label htmlFor="searchInput" aria-label="Zoekterm">
-          <Search
-            inputProps={{
-              placeholder: 'Zoek API',
-              name: 'q',
-              id: 'searchInput',
-            }}
-          />
-        </label>
-      </SearchBox>
-    </form>
+  fetchAPIs() {
+    return fetch(`/api/apis`).then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error(
+          `Er ging iets fout bij het ophalen van de lijst met API's`,
+        )
+      }
+    })
+  }
 
-    <StyledTagListContainer />
-  </Container>
-)
+  loadAmountOfAPIs() {
+    this.fetchAPIs().then((response) => {
+      this.setState({
+        amountOfAPIs: response.total,
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.loadAmountOfAPIs()
+  }
+
+  render() {
+    const { amountOfAPIs } = this.state
+    return amountOfAPIs ? <HomePage amountOfAPIs={amountOfAPIs} /> : null
+  }
+}
 
 export default Home
