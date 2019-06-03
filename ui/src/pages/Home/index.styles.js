@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import TagListContainer from '../../components/TagListContainer'
 
 export const Container = styled.div`
   max-width: 630px;
@@ -27,4 +28,10 @@ export const SubTitle = styled.h2`
 export const SearchBox = styled.div`
   max-width: 380px;
   margin: 0 auto 40px;
+`
+
+export const StyledTagListContainer = styled(TagListContainer)`
+  ul {
+    justify-content: center;
+  }
 `

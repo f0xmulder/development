@@ -2,8 +2,8 @@ import React from 'react'
 import { arrayOf, string } from 'prop-types'
 import { Container, StyledLink } from './index.styles.js'
 
-const TagList = ({ tags }) => (
-  <Container>
+const TagList = ({ tags, ...props }) => (
+  <Container {...props}>
     <ul>
       {tags.map((tag, i) => (
         <li key={i}>

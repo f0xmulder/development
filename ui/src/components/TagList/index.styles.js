@@ -9,7 +9,6 @@ export const Container = styled.div`
     line-height: 1.65rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   li {
