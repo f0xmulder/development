@@ -6,6 +6,7 @@ describe('Home', () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
         await page.goto(baseUrl, { waitUntil: 'load' });
+        await page.waitForSelector('main h1');
     })
 
     it('should show the page title', async () => {
