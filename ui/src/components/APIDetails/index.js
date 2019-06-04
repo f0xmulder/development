@@ -1,5 +1,6 @@
 import React from 'react'
 import { string, array, bool, object } from 'prop-types'
+import { Formik, Form } from 'formik'
 
 import ImplementedByListContainer from '../ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer'
@@ -17,7 +18,7 @@ import {
   DocumentationButton,
   StyledTagList,
   CardsContainer,
-  StyledInput,
+  StyledField,
   StyledDl,
   StyledScoresUl,
   StyledScoresLi,
@@ -70,7 +71,11 @@ const APIDetails = ({
             <StyledTagList tags={tags} />
           </PageContentCard.Body>
           <PageContentCard.Footer>
-            <StyledInput type="text" value={apiUrl} readOnly />
+            <Formik>
+              <Form>
+                <StyledField type="text" value={apiUrl} name="documentation-url" readOnly />
+              </Form>
+            </Formik>
           </PageContentCard.Footer>
         </PageContentCard>
       </CardsContainer.Main>
@@ -101,9 +106,7 @@ const APIDetails = ({
 
               <dt>Kosten</dt>
               <dd>
-                {termsOfUse.pay_per_use
-                  ? 'Kosten voor gebruik'
-                  : 'Gratis'}
+                {termsOfUse.pay_per_use ? 'Kosten voor gebruik' : 'Gratis'}
               </dd>
 
               <dt>Uptime garantie</dt>

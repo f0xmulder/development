@@ -3,6 +3,7 @@ import TagList from '../TagList'
 import available from './icons/available.svg'
 import unavailable from './icons/unavailable.svg'
 import Card from '../Card'
+import { Field } from '../Form'
 
 export const StyledAPIDetails = styled.div`
   width: 100%;
@@ -79,15 +80,10 @@ CardsContainer.SideBar = styled.div`
   }
 `
 
-export const StyledInput = styled.input`
-  border: 1px solid #cad0e0;
-  border-radius: 3px;
-  line-height: 40px;
-  width: 100%;
-  color: ${(p) => p.theme.color.primary.normal};
+export const StyledField = styled(Field)`
   font-weight: ${(p) => p.theme.font.weight.semibold};
-  font-size: ${(p) => p.theme.font.size.small};
-  padding: 0 16px;
+  color: ${(p) => p.theme.color.primary.normal};
+  width: 100%;
 `
 
 export const StyledDl = styled.dl`
