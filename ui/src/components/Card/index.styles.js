@@ -1,22 +1,23 @@
 import styled from 'styled-components'
 import { Card } from '@commonground/design-system'
 
-export const StyledCard = styled(Card)``
-
-export const Body = styled.div`
-  padding: 12px 10px;
-
-  @media screen and (min-width: 768px) {
-    padding: 20px 40px;
+export const StyledCard = styled(Card)`
+  a {
+    color: ${(p) => p.theme.color.primary.normal};
+    text-decoration: none;
   }
 `
-export const Footer = styled.div`
-  border-top: 1px solid #f0f2f7;
-  padding: 12px 10px;
+
+export const Body = styled.div`
+  padding: 24px 21px;
 
   @media screen and (min-width: 768px) {
-    padding: 20px 40px;
+    padding: 24px;
   }
+`
+
+export const Footer = styled(Body)`
+  border-top: 1px solid #f0f2f7;
 `
 
 export const Title = styled.p`

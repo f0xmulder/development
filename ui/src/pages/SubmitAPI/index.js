@@ -3,6 +3,7 @@ import { shape, string } from 'prop-types'
 import { NavLink, Route, Redirect } from 'react-router-dom'
 import SubmitAPIForm from '../SubmitAPIForm'
 import SubmitAPIMergeRequest from '../SubmitAPIMergeRequest'
+import Card from '../../components/Card'
 import {
   StyledSubmitAPI,
   StyledPageTitle,
@@ -25,13 +26,18 @@ const SubmitAPI = ({ match: { url } }) => (
     </StyledTabs>
 
     <PageContentCard>
-      <Route
-        path={url}
-        exact
-        render={() => <Redirect to={`${url}/formulier`} />}
-      />
-      <Route path={`${url}/formulier`} component={SubmitAPIForm} />
-      <Route path={`${url}/merge-request`} component={SubmitAPIMergeRequest} />
+      <PageContentCard.Body>
+        <Route
+          path={url}
+          exact
+          render={() => <Redirect to={`${url}/formulier`} />}
+        />
+        <Route path={`${url}/formulier`} component={SubmitAPIForm} />
+        <Route
+          path={`${url}/merge-request`}
+          component={SubmitAPIMergeRequest}
+        />
+      </PageContentCard.Body>
     </PageContentCard>
   </StyledSubmitAPI>
 )

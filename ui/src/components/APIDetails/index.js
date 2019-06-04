@@ -6,6 +6,7 @@ import LinkToAPIContainer from '../LinkToAPIContainer'
 import Grade from '../Grade'
 import External from '../Icons/External'
 import Card from '../Card'
+import PageContentCard from '../PageContentCard'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
@@ -63,15 +64,15 @@ const APIDetails = ({
 
     <CardsContainer>
       <CardsContainer.Main>
-        <Card>
-          <Card.Body>
+        <PageContentCard>
+          <PageContentCard.Body>
             <p>{description}</p>
             <StyledTagList tags={tags} />
-          </Card.Body>
-          <Card.Footer>
+          </PageContentCard.Body>
+          <PageContentCard.Footer>
             <StyledInput type="text" value={apiUrl} readOnly />
-          </Card.Footer>
-        </Card>
+          </PageContentCard.Footer>
+        </PageContentCard>
       </CardsContainer.Main>
 
       <CardsContainer.SideBar>

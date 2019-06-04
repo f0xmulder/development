@@ -92,6 +92,7 @@ export const StyledInput = styled.input`
 
 export const StyledDl = styled.dl`
   overflow: hidden;
+  margin: 0;
 
   dt {
     width: 120px;
@@ -108,11 +109,6 @@ export const StyledDl = styled.dl`
     margin-left: 0;
     line-height: ${(p) => p.theme.font.lineHeight.small}
     margin-bottom: 4px;
-  }
-
-  a {
-    color: ${(p) => p.theme.color.primary.normal}
-    text-decoration: none;
   }
 `
 
