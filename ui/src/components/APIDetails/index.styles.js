@@ -13,7 +13,7 @@ export const PageTitle = styled.h1`
   font-size: ${(p) => p.theme.font.size.title.large};
   line-height: ${(p) => p.theme.font.lineHeight.title.large};
   font-weight: ${(p) => p.theme.font.weight.bold};
-  margin: 0;
+  margin-bottom: 0;
   text-align: center;
 `
 
@@ -55,15 +55,19 @@ export const StyledTagList = styled(TagList)`
 export const CardsContainer = styled.div`
   margin-top: 32px;
   margin-bottom: 80px;
-  display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 1fr 280px;
   grid-column-gap: 20px;
+  
+  @media screen and (min-width: 768px) {
+    display: grid;
+  }
 `
 
 CardsContainer.Main = styled.div`
   grid-column-start: 1;
   grid-column-end: span 1;
+  margin-bottom: 20px;
 `
 
 CardsContainer.SideBar = styled.div`
