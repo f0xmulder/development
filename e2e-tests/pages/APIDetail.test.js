@@ -18,11 +18,11 @@ describe('API Detail', () => {
             ]);
         })
 
-        it('should contain the page documentation label', async () => {
-            await page.waitForSelector('dl dt')
-            const apiDocumentationLabel = await page.$eval('dl dt', e => e.innerHTML)
-            await page.screenshot({ path: 'screenshots/api-detail.documentation-label.png' });
-            expect(apiDocumentationLabel).toBe('Documentatie')
+        it('should contain a link to the API specification', async () => {
+            await page.waitForSelector('[data-test="api-specification"]')
+            const apiSpecificationLinkText = await page.$eval('[data-test="api-specification"] a', e => e.innerHTML)
+            await page.screenshot({ path: 'screenshots/api-detail.specification.png' });
+            expect(apiSpecificationLinkText).toBe('Lees meer')
         })
 
         it('should not have accessibility issues', async () => {
