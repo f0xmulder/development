@@ -22,4 +22,5 @@ export const modelFromAPIResponse = (api) => ({
   relations: api['relations'],
   termsOfUse: api['terms_of_use'],
   scores: mapScores(api['scores']),
+  tags: api['tags'],
 })

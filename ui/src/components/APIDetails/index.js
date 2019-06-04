@@ -1,14 +1,27 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { string, array, bool, object } from 'prop-types'
 
 import ImplementedByListContainer from '../ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer'
-import Grade from '../../components/Grade'
+import Grade from '../Grade'
+import External from '../Icons/External'
+import Card from '../Card'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
-import './index.css'
-import { PageTitle, SubTitle } from './index.styles'
+import {
+  PageTitle,
+  SubTitle,
+  DocumentationButton,
+  StyledTagList,
+  CardsContainer,
+  StyledInput,
+  StyledDl,
+  StyledScoresUl,
+  StyledScoresLi,
+  StyledInfoCard,
+  StyledAPIDetails,
+} from './index.styles'
 
 const getOnlineRedocUrl = (specUrl) =>
   `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
@@ -28,130 +41,138 @@ const APIDetails = ({
   specificationUrl,
   documentationUrl,
   badges,
+  tags,
   isReferenceImplementation,
   relations,
   termsOfUse,
   scores,
 }) => (
-  <div className="APIDetails">
+  <StyledAPIDetails>
     <PageTitle>{serviceName}</PageTitle>
     <SubTitle>{organizationName}</SubTitle>
 
-    <div className="APIDetails__sections">
-      <div className="APIDetails__general">
-        <p>{description}</p>
+    <DocumentationButton>
+      Documentatie <External width="12px" height="12px" />
+    </DocumentationButton>
 
-        {badges && badges.length ? (
-          <Fragment>
-            <h2 data-test="badges-title">Badges</h2>
-            <ul data-test="badges">
-              {badges.map((badge, i) => (
-                <li key={i}>{badge}</li>
-              ))}
-            </ul>
-          </Fragment>
-        ) : null}
-      </div>
+    <CardsContainer>
+      <CardsContainer.Main>
+        <Card>
+          <Card.Body>
+            <p>{description}</p>
+            <StyledTagList tags={tags} />
+          </Card.Body>
+          <Card.Footer>
+            <StyledInput type="text" value={apiUrl} readOnly />
+          </Card.Footer>
+        </Card>
+      </CardsContainer.Main>
 
-      <div className="APIDetails__other">
-        <dl>
-          <dt>Documentatie</dt>
-          <dd data-test="api-documentation-url">
-            <a
-              href={documentationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Lees meer
-            </a>
-          </dd>
+      <CardsContainer.SideBar>
+        <Card>
+          <Card.Body>
+            <StyledDl>
+              <dt>API Type</dt>
+              <dd data-test="api-type">{apiType}</dd>
 
-          <dt>Basis URL</dt>
-          <dd data-test="api-url" className="base-url">
-            <a href={apiUrl} target="_blank" rel="noopener noreferrer">
-              {apiUrl}
-            </a>
-          </dd>
+              <dt>API Specificatie</dt>
+              <dd data-test="api-specification">
+                <a
+                  href={getOnlineRedocUrl(specificationUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-test="api-specification-url"
+                >
+                  Lees meer
+                </a>
+              </dd>
 
-          <dt>API Type</dt>
-          <dd data-test="api-type">{apiType}</dd>
-
-          <dt>API Specificatie</dt>
-          <dd data-test="api-specification">
-            <a
-              href={getOnlineRedocUrl(specificationUrl)}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-test="api-specification-url"
-            >
-              Lees meer
-            </a>
-          </dd>
-
-          <dt>Gebruiksvoorwaarden</dt>
-          <dd data-test="api-terms-of-use">
-            <ul>
-              <li>
+              <dt>Gebruik</dt>
+              <dd>
                 {termsOfUse.government_only ? 'Alleen overheid' : 'Iedereen'}
-              </li>
-              <li>
+              </dd>
+
+              <dt>Kosten</dt>
+              <dd>
                 {termsOfUse.pay_per_use
                   ? 'Kosten voor gebruik'
-                  : 'Gratis gebruik'}
-              </li>
-              <li>
-                {termsOfUse.uptime_guarantee
-                  ? `Uptime garantie is ${termsOfUse.uptime_guarantee}%`
-                  : 'Geen uptime garantie'}
-              </li>
-              <li>
-                {termsOfUse.support_response_time
-                  ? `Maximale reactietijd bij ondersteuning is ${
-                      termsOfUse.support_response_time
-                    }`
-                  : 'Geen minimale reactietijd ondersteuning'}
-              </li>
-            </ul>
-          </dd>
+                  : 'Gratis'}
+              </dd>
 
-          <dt>Score</dt>
-          <dd data-test="api-scores">
-            <ul>
-              <li>
-                Heeft documentatie: {scores.has_documentation ? 'Ja' : 'Nee'}
-              </li>
-              <li>
-                Heeft een specificatie:{' '}
-                {scores.has_specification ? 'Ja' : 'Nee'}
-              </li>
-              <li>
-                Heeft contactgegevens:{' '}
-                {scores.has_contact_details ? 'Ja' : 'Nee'}
-              </li>
-              <li>Heeft een SLA: {scores.provides_sla ? 'Ja' : 'Nee'}</li>
-            </ul>
-            <b>
-              <Grade scores={scores} />
-            </b>
-          </dd>
-        </dl>
+              <dt>Uptime garantie</dt>
+              <dd>
+                {termsOfUse.uptime_guarantee
+                  ? `${termsOfUse.uptime_guarantee}%`
+                  : 'Geen'}
+              </dd>
+
+              <dt>Helpdesk response</dt>
+              <dd>
+                {termsOfUse.support_response_time
+                  ? `${termsOfUse.support_response_time}`
+                  : 'Geen'}
+              </dd>
+            </StyledDl>
+          </Card.Body>
+        </Card>
+
+        <Card>
+          <Card.Body>
+            <Grade scores={scores} />
+
+            <StyledScoresUl>
+              <StyledScoresLi available={scores.hasDocumentation}>
+                Documentatie
+              </StyledScoresLi>
+              <StyledScoresLi available={scores.hasSpecification}>
+                Specificatie
+              </StyledScoresLi>
+              <StyledScoresLi available={scores.hasContactDetails}>
+                Contactgegevens
+              </StyledScoresLi>
+              <StyledScoresLi available={scores.providesSla}>
+                SLA
+              </StyledScoresLi>
+            </StyledScoresUl>
+          </Card.Body>
+        </Card>
 
         {isReferenceImplementation ? (
-          <ImplementedByListContainer id={id} />
+          <Card>
+            <Card.Body>
+              <Card.Title>Geïmplementeerd door</Card.Title>
+              <ImplementedByListContainer id={id} />
+            </Card.Body>
+          </Card>
         ) : null}
 
         {!isReferenceImplementation &&
         referenceImplementationsFromRelations(relations).length > 0 ? (
-          <Fragment>
-            <h3>Referentie implementatie</h3>
-            {referenceImplementationsFromRelations(relations).map((apiId) => (
-              <LinkToAPIContainer id={apiId} key={apiId} />
-            ))}
-          </Fragment>
+          <Card>
+            <Card.Body>
+              <Card.Title>Referentie implementatie</Card.Title>
+              {referenceImplementationsFromRelations(relations).map((apiId) => (
+                <LinkToAPIContainer id={apiId} key={apiId} />
+              ))}
+            </Card.Body>
+          </Card>
         ) : null}
-      </div>
-    </div>
-  </div>
+
+        {badges && badges.length ? (
+          <Card>
+            <Card.Body>
+              <Card.Title>Badges</Card.Title>
+              <ul data-test="badges">
+                {badges.map((badge, i) => (
+                  <li key={i}>{badge}</li>
+                ))}
+              </ul>
+            </Card.Body>
+          </Card>
+        ) : null}
+      </CardsContainer.SideBar>
+    </CardsContainer>
+  </StyledAPIDetails>
 )
 
 APIDetails.propTypes = {
@@ -163,6 +184,7 @@ APIDetails.propTypes = {
   specificationUrl: string.isRequired,
   documentationUrl: string.isRequired,
   isReferenceImplementation: bool,
+  tags: array,
   badges: array,
   relations: object,
   termsOfUse: object,

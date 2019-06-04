@@ -16,6 +16,7 @@ describe('create an API model from the API response', () => {
     apiModel['relations'] = 'relations'
     apiModel['terms_of_use'] = 'terms of use'
     apiModel['scores'] = {}
+    apiModel['tags'] = ['tag']
     apiModel['scores']['has_documentation'] = false
     apiModel['scores']['has_specification'] = false
     apiModel['scores']['has_contact_details'] = false
@@ -31,6 +32,7 @@ describe('create an API model from the API response', () => {
       specificationUrl: 'specification url',
       documentationUrl: 'documentation url',
       badges: 'badges',
+      tags: ['tag'],
       isReferenceImplementation: 'is reference implementation',
       relations: 'relations',
       termsOfUse: 'terms of use',

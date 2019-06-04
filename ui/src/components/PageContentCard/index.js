@@ -1,12 +1,10 @@
 import styled from 'styled-components'
-import { Card } from '@commonground/design-system'
+import Card from '../Card'
 
 export default styled(Card)`
-  padding: 24px 20px;
   margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
-    padding: 40px 80px;
     margin-bottom: 80px;
   }
 

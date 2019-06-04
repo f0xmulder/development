@@ -4,7 +4,6 @@ import LinkToAPI from '../LinkToAPI'
 
 const ImplementedByList = ({ apis }) => (
   <div className="ImplementedByList">
-    <h3>Geïmplementeerd door</h3>
     <ul>
       {apis.map((api, i) => (
         <li key={i}>
