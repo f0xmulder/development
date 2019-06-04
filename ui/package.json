@@ -14,7 +14,7 @@
     "yup": "0.27.0"
   },
   "devDependencies": {
-    "enzyme": "3.9.0",
+    "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "react-scripts": "3.0.1",
     "eslint-config-jest-enzyme": "7.0.2",
