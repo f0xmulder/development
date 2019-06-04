@@ -8,6 +8,7 @@ import Grade from '../Grade'
 import External from '../Icons/External'
 import Card from '../Card'
 import PageContentCard from '../PageContentCard'
+import { Label } from '../Form'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
@@ -73,7 +74,13 @@ const APIDetails = ({
           <PageContentCard.Footer>
             <Formik>
               <Form>
-                <StyledField type="text" value={apiUrl} name="documentation-url" readOnly />
+                <Label for="base-url">Basis URL</Label>
+                <StyledField
+                  component="input"
+                  value={apiUrl}
+                  name="base-url"
+                  readOnly
+                />
               </Form>
             </Formik>
           </PageContentCard.Footer>
