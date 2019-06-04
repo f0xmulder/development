@@ -1,7 +1,13 @@
 import React from 'react'
 import { Search } from '@commonground/design-system'
 
-import { Container, PageTitle, SubTitle, SearchBox, StyledTagListContainer } from './index.styles'
+import {
+  Container,
+  PageTitle,
+  SubTitle,
+  SearchBox,
+  StyledTagListContainer,
+} from './index.styles'
 
 const Home = () => (
   <Container className="Home">

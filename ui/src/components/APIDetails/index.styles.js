@@ -59,7 +59,7 @@ export const CardsContainer = styled.div`
   grid-template-rows: 100%;
   grid-template-columns: 1fr 280px;
   grid-column-gap: 20px;
-  
+
   @media screen and (min-width: 768px) {
     display: grid;
   }
