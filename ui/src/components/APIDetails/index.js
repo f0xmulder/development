@@ -12,6 +12,7 @@ import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import {
   PageTitle,
   SubTitle,
+  DocumentationContainer,
   DocumentationButton,
   StyledTagList,
   CardsContainer,
@@ -19,7 +20,6 @@ import {
   StyledDl,
   StyledScoresUl,
   StyledScoresLi,
-  StyledInfoCard,
   StyledAPIDetails,
 } from './index.styles'
 
@@ -51,9 +51,15 @@ const APIDetails = ({
     <PageTitle>{serviceName}</PageTitle>
     <SubTitle>{organizationName}</SubTitle>
 
-    <DocumentationButton>
-      Documentatie <External width="12px" height="12px" />
-    </DocumentationButton>
+    <DocumentationContainer>
+      <DocumentationButton
+        href={documentationUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Documentatie <External width="12px" height="12px" />
+      </DocumentationButton>
+    </DocumentationContainer>
 
     <CardsContainer>
       <CardsContainer.Main>
