@@ -79,7 +79,7 @@ const APIDetails = ({
                 <StyledField
                   component="input"
                   value={apiUrl}
-                  name="base-url"
+                  id="base-url"
                   data-test="api-url"
                   readOnly
                 />

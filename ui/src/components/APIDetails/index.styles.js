@@ -97,7 +97,7 @@ export const StyledDl = styled.dl`
     line-height: ${(p) => p.theme.font.lineHeight.small}
     margin-bottom: 4px;
     font-weight: ${(p) => p.theme.font.weight.semibold}
-    color: #a3aabf;
+    color: ${(p) => p.theme.color.text.light};
     font-size: 12px;
   }
 
@@ -116,8 +116,17 @@ export const StyledScoresUl = styled.ul`
 
 export const StyledScoresLi = styled.li`
   padding-left: 30px;
-  background-image: url(${(p) => (p.available ? available : unavailable)});
-  background-size: 18px;
-  background-position: left center;
-  background-repeat: no-repeat;
+  position: relative;
+
+  &:before {
+    content: '';
+    width: 18px;
+    height: 24px;
+    left: 0;
+    position: absolute;
+    background-image: url(${(p) => (p.available ? available : unavailable)});
+    background-size: 18px;
+    background-position: left center;
+    background-repeat: no-repeat;
+  }
 `
