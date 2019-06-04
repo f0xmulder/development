@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card } from '@commonground/design-system'
+import PageContentCard from '../../components/PageContentCard'
 
 export const StyledAbout = styled.div`
   max-width: 600px;
@@ -15,20 +15,7 @@ export const StyledPageTitle = styled.h1`
   margin-bottom: 32px;
 `
 
-export const StyledCard = styled(Card)`
-  padding: 24px 24px;
-  margin-bottom: 40px;
-
-  @media screen and (min-width: 768px) {
-    padding: 40px 56px;
-    margin-bottom: 80px;
-  }
-
-  a {
-    color: #2961ff;
-    text-decoration: none;
-  }
-
+export const StyledPageContentCard = styled(PageContentCard)`
   abbr {
     text-decoration: none;
     border-bottom: 1px dotted #a3aabf;
