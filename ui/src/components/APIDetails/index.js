@@ -59,6 +59,7 @@ const APIDetails = ({
         href={documentationUrl}
         target="_blank"
         rel="noopener noreferrer"
+        data-test="api-documentation-url"
       >
         Documentatie <External width="12px" height="12px" />
       </DocumentationButton>
@@ -79,6 +80,7 @@ const APIDetails = ({
                   component="input"
                   value={apiUrl}
                   name="base-url"
+                  data-test="api-url"
                   readOnly
                 />
               </Form>
@@ -88,7 +90,7 @@ const APIDetails = ({
       </CardsContainer.Main>
 
       <CardsContainer.SideBar>
-        <Card>
+        <Card data-test="api-terms-of-use">
           <Card.Body>
             <StyledDl>
               <dt>API Type</dt>
@@ -133,7 +135,7 @@ const APIDetails = ({
           </Card.Body>
         </Card>
 
-        <Card>
+        <Card data-test="api-scores">
           <Card.Body>
             <Grade scores={scores} />
 
@@ -176,10 +178,10 @@ const APIDetails = ({
         ) : null}
 
         {badges && badges.length ? (
-          <Card>
+          <Card data-test="api-badges">
             <Card.Body>
               <Card.Title>Badges</Card.Title>
-              <ul data-test="badges">
+              <ul data-test="api-badges-list">
                 {badges.map((badge, i) => (
                   <li key={i}>{badge}</li>
                 ))}

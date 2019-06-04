@@ -59,9 +59,9 @@ describe('APIDetails', () => {
     expect(description.text()).toBe('Description')
   })
 
-  it('should show the API URL', () => {
+  it('should show the API URL as an input element', () => {
     const apiURL = wrapper.find('[data-test="api-url"]')
-    expect(apiURL.text()).toBe('API URL')
+    expect(apiURL.prop('value')).toBe('API URL')
   })
 
   describe('api type', () => {
@@ -83,47 +83,37 @@ describe('APIDetails', () => {
       const documentationUrl = wrapper.find(
         '[data-test="api-documentation-url"]',
       )
-      expect(documentationUrl.text()).toBe('Lees meer')
-    })
-
-    it('should link to the documentation URL', () => {
-      const apiSpecUrl = wrapper.find('[data-test="api-documentation-url"] a')
-      expect(apiSpecUrl.prop('href')).toBe('Documentation URL')
+      expect(documentationUrl.prop('href')).toBe('Documentation URL')
     })
   })
 
   describe('badges', () => {
-    let badgesTitle
     let badges
+    let badgesList
+
+    const BADGES_SELECTOR = '[data-test="api-badges"]'
+    const BADGES_LIST_SELECTOR = '[data-test="api-badges-list"]'
 
     beforeEach(() => {
-      badgesTitle = wrapper.find('[data-test="badges-title"]')
-      badges = wrapper.find('[data-test="badges"]')
+      badges = wrapper.find(BADGES_SELECTOR)
+      badgesList = wrapper.find(BADGES_LIST_SELECTOR)
     })
 
-    it('should show the badges title', () => {
-      expect(badgesTitle.exists()).toBe(true)
-      expect(badgesTitle.text()).toBe('Badges')
+    it('should show the badges', () => {
+      expect(badges.exists()).toBe(true)
     })
 
     it('should display every badge', () => {
-      expect(badges.children()).toHaveLength(2)
+      expect(badgesList.children()).toHaveLength(2)
     })
 
     describe('when the API has no badges', () => {
       beforeEach(() => {
         wrapper.setProps({ badges: null })
-
-        badgesTitle = wrapper.find('[data-test="badges-title"]')
-        badges = wrapper.find('[data-test="badges"]')
       })
 
-      it('should hide the badges title', () => {
-        expect(badgesTitle.exists()).toBe(false)
-      })
-
-      it('should hide the badges element', () => {
-        expect(badges.exists()).toBe(false)
+      it('should hide the badges', () => {
+        expect(wrapper.find(BADGES_SELECTOR).exists()).toBe(false)
       })
     })
   })
