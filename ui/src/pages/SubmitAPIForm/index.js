@@ -12,18 +12,14 @@ import {
 import * as Yup from 'yup'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import {
-  StyledFieldset,
-  StyledLegend,
-  StyledLabel,
-  StyledField,
   StyledFormGroupColumn,
   StyledFormGroupColumnContainer,
   StyledFormGroup,
   StyledFormSetting,
-  StyledSubmitButton,
   HelperMessage,
   ErrorMessage,
 } from './index.styles'
+import { Fieldset, Legend, Label, Field, Button } from '../../components/Form'
 
 Yup.setLocale({
   mixed,
@@ -242,15 +238,13 @@ class SubmitAPIForm extends Component {
               isSubmitting,
             }) => (
               <Form onSubmit={handleSubmit} data-test="form">
-                <StyledFieldset>
-                  <StyledLegend>Organisatie</StyledLegend>
+                <Fieldset>
+                  <Legend>Organisatie</Legend>
 
                   <StyledFormGroupColumnContainer>
                     <StyledFormGroupColumn>
-                      <StyledLabel htmlFor="organization_name">
-                        Naam*
-                      </StyledLabel>
-                      <StyledField
+                      <Label htmlFor="organization_name">Naam*</Label>
+                      <Field
                         component="input"
                         type="text"
                         id="organization_name"
@@ -264,16 +258,16 @@ class SubmitAPIForm extends Component {
                         )}
                     </StyledFormGroupColumn>
                   </StyledFormGroupColumnContainer>
-                </StyledFieldset>
+                </Fieldset>
 
-                <StyledFieldset>
-                  <StyledLegend>API</StyledLegend>
+                <Fieldset>
+                  <Legend>API</Legend>
 
                   <StyledFormGroupColumnContainer>
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="service_name">Naam*</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="service_name">Naam*</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="service_name"
@@ -285,10 +279,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="description">
-                          Omschrijving*
-                        </StyledLabel>
-                        <StyledField
+                        <Label htmlFor="description">Omschrijving*</Label>
+                        <Field
                           style={{ minHeight: '80px', resize: 'vertical' }}
                           component="textarea"
                           id="description"
@@ -300,8 +292,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="tags">Tags</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="tags">Tags</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="tags"
@@ -316,8 +308,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="badges">Badges</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="badges">Badges</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="badges"
@@ -334,8 +326,8 @@ class SubmitAPIForm extends Component {
 
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="api_url">API URL*</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="api_url">API URL*</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="api_url"
@@ -347,12 +339,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="api_type">API type</StyledLabel>
-                        <StyledField
-                          component="select"
-                          id="api_type"
-                          name="api_type"
-                        >
+                        <Label htmlFor="api_type">API type</Label>
+                        <Field component="select" id="api_type" name="api_type">
                           <option value="Onbekend">Onbekend</option>
                           <option value="REST/JSON">REST/JSON</option>
                           <option value="SOAP/XML">SOAP/XML</option>
@@ -361,17 +349,17 @@ class SubmitAPIForm extends Component {
                           <option value="SPARQL">SPARQL</option>
                           <option value="WFS">WFS</option>
                           <option value="WMS">WMS</option>
-                        </StyledField>
+                        </Field>
                         {errors.api_type && touched.api_type && (
                           <ErrorMessage>{errors.api_type}</ErrorMessage>
                         )}
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="specification_url">
+                        <Label htmlFor="specification_url">
                           Specificatie URL
-                        </StyledLabel>
-                        <StyledField
+                        </Label>
+                        <Field
                           component="input"
                           type="text"
                           id="specification_url"
@@ -389,10 +377,10 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="documentation_url">
+                        <Label htmlFor="documentation_url">
                           Documentatie URL
-                        </StyledLabel>
-                        <StyledField
+                        </Label>
+                        <Field
                           component="input"
                           type="text"
                           id="documentation_url"
@@ -410,17 +398,15 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
                     </StyledFormGroupColumn>
                   </StyledFormGroupColumnContainer>
-                </StyledFieldset>
-                <StyledFieldset>
-                  <StyledLegend>Contact</StyledLegend>
+                </Fieldset>
+                <Fieldset>
+                  <Legend>Contact</Legend>
 
                   <StyledFormGroupColumnContainer>
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="contact.email">
-                          E-mailadres
-                        </StyledLabel>
-                        <StyledField
+                        <Label htmlFor="contact.email">E-mailadres</Label>
+                        <Field
                           component="input"
                           type="email"
                           id="contact.email"
@@ -435,10 +421,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="contact.phone">
-                          Telefoonnummer
-                        </StyledLabel>
-                        <StyledField
+                        <Label htmlFor="contact.phone">Telefoonnummer</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="contact.phone"
@@ -453,8 +437,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="contact.fax">Fax</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="contact.fax">Fax</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="contact.fax"
@@ -470,8 +454,8 @@ class SubmitAPIForm extends Component {
                     </StyledFormGroupColumn>
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="contact.chat">Chat</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="contact.chat">Chat</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="contact.chat"
@@ -489,8 +473,8 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="contact.url">URL</StyledLabel>
-                        <StyledField
+                        <Label htmlFor="contact.url">URL</Label>
+                        <Field
                           component="input"
                           type="text"
                           id="contact.url"
@@ -508,19 +492,19 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
                     </StyledFormGroupColumn>
                   </StyledFormGroupColumnContainer>
-                </StyledFieldset>
+                </Fieldset>
 
-                <StyledFieldset>
-                  <StyledLegend>Referentieimplementatie</StyledLegend>
+                <Fieldset>
+                  <Legend>Referentieimplementatie</Legend>
 
                   {!values.reference_implementation ||
                   values.reference_implementation === '' ? (
                     <StyledFormGroup>
                       <StyledFormSetting>
-                        <StyledLabel htmlFor="is_reference_implementation">
+                        <Label htmlFor="is_reference_implementation">
                           Deze API is een referentieimplementatie
-                        </StyledLabel>
-                        <StyledField
+                        </Label>
+                        <Field
                           component="input"
                           type="checkbox"
                           id="is_reference_implementation"
@@ -538,10 +522,10 @@ class SubmitAPIForm extends Component {
                   ) : null}
                   {!values.is_reference_implementation ? (
                     <StyledFormGroup>
-                      <StyledLabel htmlFor="reference_implementation">
+                      <Label htmlFor="reference_implementation">
                         Gebaseerd op (referentie implementatie)
-                      </StyledLabel>
-                      <StyledField
+                      </Label>
+                      <Field
                         component="select"
                         id="reference_implementation"
                         name="reference_implementation"
@@ -554,25 +538,25 @@ class SubmitAPIForm extends Component {
                               {api.service_name} {api.organization_name}
                             </option>
                           ))}
-                      </StyledField>
+                      </Field>
                       {errors.api_type && touched.api_type && (
                         <ErrorMessage>{errors.api_type}</ErrorMessage>
                       )}
                     </StyledFormGroup>
                   ) : null}
-                </StyledFieldset>
+                </Fieldset>
 
-                <StyledFieldset>
-                  <StyledLegend>Gebruiksvoorwaarden</StyledLegend>
+                <Fieldset>
+                  <Legend>Gebruiksvoorwaarden</Legend>
 
                   <StyledFormGroupColumnContainer>
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
                         <StyledFormSetting>
-                          <StyledLabel htmlFor="terms_of_use.government_only">
+                          <Label htmlFor="terms_of_use.government_only">
                             Deze API is alleen beschikbaar voor overheden
-                          </StyledLabel>
-                          <StyledField
+                          </Label>
+                          <Field
                             component="input"
                             type="checkbox"
                             id="terms_of_use.government_only"
@@ -595,11 +579,11 @@ class SubmitAPIForm extends Component {
 
                       <StyledFormGroup>
                         <StyledFormSetting>
-                          <StyledLabel htmlFor="terms_of_use.pay_per_use">
+                          <Label htmlFor="terms_of_use.pay_per_use">
                             De kosten voor het gebruik van de API worden
                             verrekend met de gebruiker
-                          </StyledLabel>
-                          <StyledField
+                          </Label>
+                          <Field
                             component="input"
                             type="checkbox"
                             id="terms_of_use.pay_per_use"
@@ -622,10 +606,10 @@ class SubmitAPIForm extends Component {
                     </StyledFormGroupColumn>
                     <StyledFormGroupColumn>
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="terms_of_use.uptime_guarantee">
+                        <Label htmlFor="terms_of_use.uptime_guarantee">
                           Beschikbaarheidsgarantie van de API
-                        </StyledLabel>
-                        <StyledField
+                        </Label>
+                        <Field
                           component="input"
                           type="number"
                           max="100"
@@ -648,10 +632,10 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
 
                       <StyledFormGroup>
-                        <StyledLabel htmlFor="terms_of_use.support_response_time">
+                        <Label htmlFor="terms_of_use.support_response_time">
                           Reactietijd van de helpdesk
-                        </StyledLabel>
-                        <StyledField
+                        </Label>
+                        <Field
                           component="input"
                           type="text"
                           id="terms_of_use.support_response_time"
@@ -669,20 +653,20 @@ class SubmitAPIForm extends Component {
                       </StyledFormGroup>
                     </StyledFormGroupColumn>
                   </StyledFormGroupColumnContainer>
-                </StyledFieldset>
+                </Fieldset>
 
                 {status && status.msg && (
                   <div data-test="status-message">{status.msg}</div>
                 )}
 
                 <p style={{ textAlign: 'center', margin: 0 }}>
-                  <StyledSubmitButton
+                  <Button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn btn-primary"
                   >
                     Verstuur
-                  </StyledSubmitButton>
+                  </Button>
                 </p>
               </Form>
             )}
