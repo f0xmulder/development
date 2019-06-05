@@ -1,14 +1,16 @@
 import React from 'react'
-import { arrayOf, shape, string } from 'prop-types'
+import { arrayOf, shape, string, number } from 'prop-types'
 import { Table } from '@commonground/design-system'
 import { StyledTable, StyledLinkToAPI } from './index.styles'
 import Grade from '../Grade'
 
-const APIList = ({ apis }) => (
+const APIList = ({ total, apis }) => (
   <StyledTable>
     <Table.Head>
       <Table.Row>
-        <Table.HeadCell colSpan={2}>{apis.length} API&#39;s</Table.HeadCell>
+        <Table.HeadCell colSpan={2}>
+          <span data-test="total">{total}</span> API&#39;s
+        </Table.HeadCell>
       </Table.Row>
     </Table.Head>
     <Table.Body>
@@ -38,6 +40,7 @@ APIList.propTypes = {
       organizationName: string.isRequired,
     }),
   ),
+  total: number.isRequired,
 }
 
 export default APIList

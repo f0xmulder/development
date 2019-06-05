@@ -137,7 +137,7 @@ class Overview extends Component {
             />
             <StyledResultsContainer>
               {result && result.apis && result.apis.length > 0 ? (
-                <APIList apis={result.apis} />
+                <APIList total={result.total} apis={result.apis} />
               ) : (
                 <p data-test="no-apis-available-message">
                   Er zijn (nog) geen API&#39;s beschikbaar.
