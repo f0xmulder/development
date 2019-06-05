@@ -1,9 +1,14 @@
 import React from 'react'
 import { number } from 'prop-types'
-import TagListContainer from '../../components/TagListContainer'
 import { Search } from '@commonground/design-system'
 
-import { Container, PageTitle, SubTitle, SearchBox } from './index.styles'
+import {
+  Container,
+  PageTitle,
+  SubTitle,
+  SearchBox,
+  StyledTagListContainer,
+} from './index.styles'
 
 const HomePage = ({ amountOfAPIs }) => (
   <Container className="Home">
@@ -26,7 +31,7 @@ const HomePage = ({ amountOfAPIs }) => (
       </SearchBox>
     </form>
 
-    <TagListContainer />
+    <StyledTagListContainer />
   </Container>
 )
 
