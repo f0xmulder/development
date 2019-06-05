@@ -4,15 +4,17 @@ import { Container, StyledLink } from './index.styles.js'
 
 const TagList = ({ tags, ...props }) => (
   <Container {...props}>
-    <ul>
-      {tags.map((tag, i) => (
-        <li key={i}>
-          <StyledLink to={`/overzicht?tags=${tag}`} data-test="link">
-            {tag}
-          </StyledLink>
-        </li>
-      ))}
-    </ul>
+    {tags && tags.length > 0 ? (
+      <ul>
+        {tags.map((tag, i) => (
+          <li key={i}>
+            <StyledLink to={`/overzicht?tags=${tag}`} data-test="link">
+              {tag}
+            </StyledLink>
+          </li>
+        ))}
+      </ul>
+    ) : null}
   </Container>
 )
 
