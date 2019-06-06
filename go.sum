@@ -14,8 +14,8 @@ github.com/blevesearch/snowballstem v0.0.0-20180110192139-26b06a2c243d h1:iPCfLX
 github.com/blevesearch/snowballstem v0.0.0-20180110192139-26b06a2c243d/go.mod h1:cdytUvf6FKWA9NpXJihYdZq8TN2AiQ5HOS0UZUz0C9g=
 github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
 github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
-github.com/couchbase/vellum v0.0.0-20190403125519-462e86d8716b h1:Z1E9XgHJbpdlX5IxQtdLEiiqYrATHroXhkjfqm8eQz8=
-github.com/couchbase/vellum v0.0.0-20190403125519-462e86d8716b/go.mod h1:prYTC8EgTu3gwbqJihkud9zRXISvyulAplQ6exdCo1g=
+github.com/couchbase/vellum v0.0.0-20190606013847-5f4edc22838b h1:bbqQ0bsMBhRgvi0TdszSHJoaOO9grKcgPQxfrKa+j/s=
+github.com/couchbase/vellum v0.0.0-20190606013847-5f4edc22838b/go.mod h1:prYTC8EgTu3gwbqJihkud9zRXISvyulAplQ6exdCo1g=
 github.com/cznic/b v0.0.0-20181122101859-a26611c4d92d h1:SwD98825d6bdB+pEuTxWOXiSjBrHdOl/UVp75eI7JT8=
 github.com/cznic/b v0.0.0-20181122101859-a26611c4d92d/go.mod h1:URriBxXwVq5ijiJ12C7iIZqlA69nTlI+LgI6/pwftG8=
 github.com/cznic/mathutil v0.0.0-20181122101859-297441e03548 h1:iwZdTE0PVqJCos1vaoKsclOGD3ADKpshg3SRtYBbwso=

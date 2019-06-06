@@ -9,7 +9,7 @@ require (
 	github.com/blevesearch/segment v0.0.0-20160915185041-762005e7a34f // indirect
 	github.com/blevesearch/snowballstem v0.0.0-20180110192139-26b06a2c243d // indirect
 	github.com/boltdb/bolt v1.3.1 // indirect
-	github.com/couchbase/vellum v0.0.0-20190403125519-462e86d8716b // indirect
+	github.com/couchbase/vellum v0.0.0-20190606013847-5f4edc22838b // indirect
 	github.com/cznic/b v0.0.0-20181122101859-a26611c4d92d // indirect
 	github.com/cznic/mathutil v0.0.0-20181122101859-297441e03548 // indirect
 	github.com/cznic/strutil v0.0.0-20181122101858-275e90344537 // indirect
