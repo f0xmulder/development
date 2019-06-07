@@ -7,12 +7,8 @@ const generateFontFaceDefinition = (fontDefinition) => `
       font-style: ${fontDefinition.style}
       font-stretch: normal
       src:
-        url('/public/fonts/source-sans-pro/SourceSansPro-${
-          fontDefinition.fileName
-        }.woff2') format('woff2'),
-        url('/public/fonts/source-sans-pro/SourceSansPro-${
-          fontDefinition.fileName
-        }.woff') format('woff')
+        url('/public/fonts/source-sans-pro/SourceSansPro-${fontDefinition.fileName}.woff2') format('woff2'),
+        url('/public/fonts/source-sans-pro/SourceSansPro-${fontDefinition.fileName}.woff') format('woff')
   }
 `
 
