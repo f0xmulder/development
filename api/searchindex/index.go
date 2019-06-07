@@ -56,9 +56,9 @@ func NewIndex(apis *[]models.API) Index {
 }
 
 // Search executes a search query in Bleve and maps the results to API models
-func (index Index) Search(q string, filters map[string][]string) (models.APIList, error) {
+func (index Index) Search(q string, filters map[string][]string, page int, rowsPerPage int) (models.APIList, error) {
 	query := newQuery(q, filters)
-	searchRequest := newSearchRequest(query)
+	searchRequest := newSearchRequest(query, page, rowsPerPage)
 	searchResult, err := index.bleve.Search(searchRequest)
 	if err != nil {
 		return models.APIList{}, err
@@ -68,7 +68,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 
 	// execute a MatchAllQuery to determine the facets on the full result set
 	query = bleve.NewMatchAllQuery()
-	facetSearchRequest := newSearchRequest(query)
+	facetSearchRequest := newSearchRequest(query, page, rowsPerPage)
 	facetSearchResult, err := index.bleve.Search(facetSearchRequest)
 	if err != nil {
 		return models.APIList{}, err
@@ -105,7 +105,7 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 		}
 
 		query := newQuery(q, currentFilters)
-		searchRequest := newSearchRequest(query)
+		searchRequest := newSearchRequest(query, page, rowsPerPage)
 		searchResult, err := index.bleve.Search(searchRequest)
 		if err != nil {
 			return models.APIList{}, err
@@ -126,9 +126,11 @@ func (index Index) Search(q string, filters map[string][]string) (models.APIList
 	}
 
 	apiList := models.APIList{
-		Total:  searchResult.Total,
-		Facets: facets,
-		APIs:   apis,
+		Total:       searchResult.Total,
+		Page:        page,
+		RowsPerPage: rowsPerPage,
+		Facets:      facets,
+		APIs:        apis,
 	}
 
 	return apiList, err
@@ -161,8 +163,9 @@ func newQuery(q string, filters map[string][]string) query.Query {
 	return query
 }
 
-func newSearchRequest(q query.Query) *bleve.SearchRequest {
-	searchRequest := bleve.NewSearchRequest(q)
+func newSearchRequest(q query.Query, page int, rowsPerPage int) *bleve.SearchRequest {
+	from := (page - 1) * rowsPerPage
+	searchRequest := bleve.NewSearchRequestOptions(q, rowsPerPage, from, false)
 
 	for _, value := range []string{"organization_name", "tags", "api_type"} {
 		facet := bleve.NewFacetRequest(value, 50)
@@ -176,8 +179,8 @@ func mapBleveResultToAPIs(items *[]models.API, matchCollection search.DocumentMa
 	hash := make(map[string]models.API)
 
 	for _, API := range *items {
-    scores := scores.CalculateScores(API)
-    API.Scores = &scores
+		scores := scores.CalculateScores(API)
+		API.Scores = &scores
 		hash[API.ID] = API
 	}
 

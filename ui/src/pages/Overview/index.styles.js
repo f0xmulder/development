@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import APIFilters from '../../components/APIFilters'
+import { Pagination } from '@commonground/design-system'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
@@ -26,4 +27,9 @@ export const StyledH1 = styled.h1`
   font-weight: ${(p) => p.theme.font.weight.bold};
   margin-bottom: 32px;
   text-align: center;
+`
+
+export const StyledPagination = styled(Pagination)`
+  justify-content: center;
+  margin: 24px 0 80px 0;
 `

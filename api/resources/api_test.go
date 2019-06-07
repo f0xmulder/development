@@ -84,21 +84,21 @@ func TestAPIList(t *testing.T) {
 			"/list",
 			200,
 			"application/json",
-			"{\"total\":0,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":0,\"missing\":0,\"other\":0},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0}},\"apis\":[]}\n",
+			"{\"total\":0,\"page\":1,\"rowsPerPage\":10,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":0,\"missing\":0,\"other\":0},\"organization_name\":{\"field\":\"organization_name\",\"total\":0,\"missing\":0,\"other\":0},\"tags\":{\"field\":\"tags\",\"total\":0,\"missing\":0,\"other\":0}},\"apis\":[]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
 			"/list?tags=test-tag",
 			200,
 			"application/json",
-			"{\"total\":1,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test API Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_type\":\"Test API Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"},\"scores\":{\"has_documentation\":true,\"has_specification\":true,\"has_contact_details\":false,\"provides_sla\":false}}]}\n",
+			"{\"total\":1,\"page\":1,\"rowsPerPage\":10,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test API Type\",\"count\":1}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":1}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[{\"id\":\"test-api-name\",\"description\":\"Test Description\",\"organization_name\":\"Test Organization Name\",\"service_name\":\"Test Service Name\",\"api_url\":\"Test API URL\",\"api_type\":\"Test API Type\",\"specification_url\":\"Test Specification URL\",\"documentation_url\":\"Test Documentation URL\",\"tags\":[\"test-tag\"],\"badges\":[],\"contact\":{\"email\":\"\",\"phone\":\"\",\"fax\":\"\",\"chat\":\"\",\"url\":\"\"},\"is_reference_implementation\":false,\"terms_of_use\":{\"government_only\":false,\"pay_per_use\":false,\"uptime_guarantee\":0,\"support_response_time\":\"\"},\"scores\":{\"has_documentation\":true,\"has_specification\":true,\"has_contact_details\":false,\"provides_sla\":false}}]}\n",
 		},
 		{
 			mockAPIDirectoryReaderOneResult,
 			"/list?tags=tag-which-does-not-appear-for-any-result",
 			200,
 			"application/json",
-			"{\"total\":0,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test API Type\",\"count\":0}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":0}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[]}\n",
+			"{\"total\":0,\"page\":1,\"rowsPerPage\":10,\"facets\":{\"api_type\":{\"field\":\"api_type\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test API Type\",\"count\":0}]},\"organization_name\":{\"field\":\"organization_name\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"Test Organization Name\",\"count\":0}]},\"tags\":{\"field\":\"tags\",\"total\":1,\"missing\":0,\"other\":0,\"terms\":[{\"term\":\"test-tag\",\"count\":1}]}},\"apis\":[]}\n",
 		},
 	}
 

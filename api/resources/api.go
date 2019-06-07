@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
@@ -86,6 +87,20 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		q = utils.GetQueryParam(r, "q")[0]
 	}
 
+	page := 1
+	if len(utils.GetQueryParam(r, "page")) > 0 {
+		pageAsString := utils.GetQueryParam(r, "page")[0]
+		pageAsInt, convErr := strconv.Atoi(pageAsString)
+
+		if convErr != nil {
+			rs.Logger.Error("failed to convert page to int", zap.Error(convErr))
+			http.Error(w, "invalid page specified, should be a natural number", http.StatusUnprocessableEntity)
+			return
+		}
+
+		page = pageAsInt
+	}
+
 	filters := map[string][]string{}
 	for _, key := range []string{"organization_name", "tags", "api_type"} {
 		values := utils.GetQueryParam(r, key)
@@ -94,7 +109,7 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	apiList, err := rs.SearchIndex.Search(q, filters)
+	apiList, err := rs.SearchIndex.Search(q, filters, page, 10)
 	if err != nil {
 		rs.Logger.Error("failed to output APIs", zap.Error(err))
 		http.Error(w, "server error", http.StatusInternalServerError)

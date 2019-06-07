@@ -21,13 +21,17 @@ describe('Overview', () => {
 
   describe('loading the APIs', () => {
     it('should store the available apis as state', () => {
-      const apiPromise = Promise.resolve({ apis: [apiFromAPIResponse] })
+      const apiPromise = Promise.resolve({
+        total: 1,
+        apis: [apiFromAPIResponse],
+      })
       Overview.prototype.fetchApiList = jest.fn(() => apiPromise)
 
       const wrapper = shallow(<Overview />)
 
       return flushPromises().then(() => {
         expect(wrapper.state('result')).toEqual({
+          total: 1,
           apis: [modelFromAPIResponse(apiFromAPIResponse)],
         })
       })
@@ -40,7 +44,7 @@ describe('Overview', () => {
     beforeEach(() => {
       wrapper = shallow(<Overview />)
       wrapper.setState({
-        result: { apis: [modelFromAPIResponse(apiFromAPIResponse)] },
+        result: { total: 1, apis: [modelFromAPIResponse(apiFromAPIResponse)] },
         loaded: true,
       })
       apiList = wrapper.find('APIList')
@@ -54,7 +58,7 @@ describe('Overview', () => {
   describe('when no apis are available', () => {
     it('should show a message saying no APIs are available yet', () => {
       const wrapper = shallow(<Overview />)
-      wrapper.setState({ result: { apis: [] }, loaded: true })
+      wrapper.setState({ total: 0, result: { apis: [] }, loaded: true })
       const noApisMessageElement = wrapper.find(
         '[data-test="no-apis-available-message"]',
       )
@@ -97,6 +101,7 @@ describe('Overview', () => {
       expectedQueryParams['api_type'] = []
       expectedQueryParams['organization_name'] = ['42']
       expectedQueryParams['tags'] = ['42']
+      expectedQueryParams['page'] = 1
 
       expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
     })
@@ -137,6 +142,26 @@ describe('Overview', () => {
       const wrapper = shallow(<Overview location={{ search: '' }} />)
       wrapper.setProps({ location: { search: 'tags=42' } })
       expect(wrapper.instance().fetchApiList).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  describe('when changing the page', () => {
+    it('should persist the page in the URL', () => {
+      const history = { push: jest.fn() }
+      const wrapper = shallow(<Overview history={history} />)
+
+      wrapper.instance().onPageChange(1)
+      expect(history.push).toHaveBeenCalledWith('?pagina=1')
+    })
+
+    it('should preserve other query params', () => {
+      const history = { push: jest.fn() }
+      const wrapper = shallow(
+        <Overview history={history} location={{ search: 'foo=bar' }} />,
+      )
+
+      wrapper.instance().onPageChange(1)
+      expect(history.push).toHaveBeenCalledWith('?foo=bar&pagina=1')
     })
   })
 })

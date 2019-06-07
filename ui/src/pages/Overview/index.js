@@ -5,6 +5,7 @@ import {
   StyledAPIFilters,
   StyledResultsContainer,
   StyledH1,
+  StyledPagination,
 } from './index.styles'
 import { modelFromAPIResponse } from '../../models/api'
 
@@ -20,6 +21,7 @@ class Overview extends Component {
 
     this.getQueryParams = this.getQueryParams.bind(this)
     this.onFilterChange = this.onFilterChange.bind(this)
+    this.onPageChange = this.onPageChange.bind(this)
   }
 
   loadAPIList() {
@@ -85,6 +87,13 @@ class Overview extends Component {
     history.push(`?${this.generateQueryParams(translatedFilters)}`)
   }
 
+  onPageChange(page) {
+    const { history, location } = this.props
+    const values = new URLSearchParams(location ? location.search : {})
+    values.set('pagina', page)
+    history.push(`?${values.toString()}`)
+  }
+
   generateQueryParams(filters) {
     const urlParams = new URLSearchParams()
 
@@ -114,12 +123,14 @@ class Overview extends Component {
     queryParams['tags'] = values.getAll('tags')
     queryParams['organization_name'] = values.getAll('organisatie')
     queryParams['api_type'] = values.getAll('type')
+    queryParams['page'] = parseInt(values.get('pagina'), 10) || 1
 
     return queryParams
   }
 
   render() {
     const { result, error, loaded } = this.state
+    const { page } = this.getQueryParams()
 
     return (
       <StyledOverviewPage>
@@ -137,7 +148,14 @@ class Overview extends Component {
             />
             <StyledResultsContainer>
               {result && result.apis && result.apis.length > 0 ? (
-                <APIList total={result.total} apis={result.apis} />
+                <Fragment>
+                  <APIList total={result.total} apis={result.apis} />
+                  <StyledPagination
+                    currentPage={page}
+                    amountOfPages={Math.ceil(result.total / result.rowsPerPage)}
+                    onPageChangedHandler={this.onPageChange}
+                  />
+                </Fragment>
               ) : (
                 <p data-test="no-apis-available-message">
                   Er zijn (nog) geen API&#39;s beschikbaar.

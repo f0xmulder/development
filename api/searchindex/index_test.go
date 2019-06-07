@@ -5,7 +5,7 @@ import (
 
 	"github.com/blevesearch/bleve/search"
 	"github.com/stretchr/testify/assert"
-  "gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"gitlab.com/commonground/developer.overheid.nl/api/scores"
 )
 
@@ -46,11 +46,11 @@ var anotherDummyAPI = models.API{
 }
 
 func init() {
-  dummyAPIScores := scores.CalculateScores(dummyAPI)
-  dummyAPI.Scores = &dummyAPIScores
+	dummyAPIScores := scores.CalculateScores(dummyAPI)
+	dummyAPI.Scores = &dummyAPIScores
 
-  anotherDummyAPIScores := scores.CalculateScores(anotherDummyAPI)
-  anotherDummyAPI.Scores = &anotherDummyAPIScores
+	anotherDummyAPIScores := scores.CalculateScores(anotherDummyAPI)
+	anotherDummyAPI.Scores = &anotherDummyAPIScores
 }
 
 func TestNewIndex(t *testing.T) {
@@ -70,7 +70,7 @@ func TestNewIndex(t *testing.T) {
 func TestSearchWorksForStringQueryByID(t *testing.T) {
 	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
-	searchResult, _ := index.Search("id:another", map[string][]string{})
+	searchResult, _ := index.Search("id:another", map[string][]string{}, 1, 10)
 
 	assert.Equal(t, []models.API{anotherDummyAPI}, searchResult.APIs)
 }
@@ -78,15 +78,26 @@ func TestSearchWorksForStringQueryByID(t *testing.T) {
 func TestSearchWorksForFilterByTag(t *testing.T) {
 	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
-	searchResult, _ := index.Search("", map[string][]string{"tags": []string{"test-tag"}})
+	searchResult, _ := index.Search("", map[string][]string{"tags": []string{"test-tag"}}, 1, 10)
 	assert.Equal(t, []models.API{anotherDummyAPI, dummyAPI}, searchResult.APIs)
 }
 
 func TestSearchDoesNotCrashForEmptyTagString(t *testing.T) {
 	apis := []models.API{dummyAPI, anotherDummyAPI}
 	index := NewIndex(&apis)
-	searchResult, _ := index.Search("", map[string][]string{"tags": []string{""}})
+	searchResult, _ := index.Search("", map[string][]string{"tags": []string{""}}, 1, 10)
 	assert.Equal(t, []models.API{}, searchResult.APIs)
+}
+
+func TestSearchPagination(t *testing.T) {
+	apis := []models.API{dummyAPI, anotherDummyAPI}
+	index := NewIndex(&apis)
+
+	searchResultFirstPage, _ := index.Search("", map[string][]string{}, 1, 1)
+	assert.Equal(t, []models.API{anotherDummyAPI}, searchResultFirstPage.APIs)
+
+	searchResultSecondPage, _ := index.Search("", map[string][]string{}, 2, 1)
+	assert.Equal(t, []models.API{dummyAPI}, searchResultSecondPage.APIs)
 }
 
 func TestMapBleveResultToAPIs(t *testing.T) {
