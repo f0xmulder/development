@@ -28,4 +28,10 @@ To start the frontend application:
 cd ui/ && npm install && npm start
 ```
 
+To run the API tests as a watcher:
+
+```bash
+cd api/ && modd -f tests.conf
+```
+
 The last command should automatically open a browser on [http://localhost:3000](http://localhost:3000/).
