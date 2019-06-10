@@ -1,7 +1,7 @@
 module gitlab.com/commonground/developer.overheid.nl
 
 require (
-	github.com/RoaringBitmap/roaring v0.4.17 // indirect
+	github.com/RoaringBitmap/roaring v0.4.18 // indirect
 	github.com/Smerity/govarint v0.0.0-20150407073650-7265e41f48f1 // indirect
 	github.com/blevesearch/bleve v0.7.0
 	github.com/blevesearch/blevex v0.0.0-20180227211930-4b158bb555a3 // indirect
