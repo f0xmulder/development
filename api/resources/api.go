@@ -92,9 +92,9 @@ func (rs APIResource) List(w http.ResponseWriter, r *http.Request) {
 		pageAsString := utils.GetQueryParam(r, "page")[0]
 		pageAsInt, convErr := strconv.Atoi(pageAsString)
 
-		if convErr != nil {
+		if convErr != nil || pageAsInt < 1 {
 			rs.Logger.Error("failed to convert page to int", zap.Error(convErr))
-			http.Error(w, "invalid page specified, should be a natural number", http.StatusUnprocessableEntity)
+			http.Error(w, "invalid page specified, should be a natural number greater than zero", http.StatusUnprocessableEntity)
 			return
 		}
 

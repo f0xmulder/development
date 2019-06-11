@@ -103,6 +103,20 @@ func TestAPIList(t *testing.T) {
 			`{"total":0,"page":1,"rowsPerPage":10,"facets":{"api_type":{"field":"api_type","total":1,"missing":0,"other":0,"terms":[{"term":"Test API Type","count":0}]},"organization_name":{"field":"organization_name","total":1,"missing":0,"other":0,"terms":[{"term":"Test Organization Name","count":0}]},"tags":{"field":"tags","total":1,"missing":0,"other":0,"terms":[{"term":"test-tag","count":1}]}},"apis":[]}
 `,
 		},
+		{
+			mockAPIDirectoryReaderOneResult,
+			"/list?tags=test-tag&page=0",
+			422,
+			"text/plain; charset=utf-8",
+			"invalid page specified, should be a natural number greater than zero\n",
+		},
+		{
+			mockAPIDirectoryReaderOneResult,
+			"/list?tags=test-tag&page=-42",
+			422,
+			"text/plain; charset=utf-8",
+			"invalid page specified, should be a natural number greater than zero\n",
+		},
 	}
 
 	for _, tc := range testCases {
