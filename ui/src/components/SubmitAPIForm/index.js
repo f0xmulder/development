@@ -426,7 +426,7 @@ SubmitAPIForm.propTypes = {
 
 SubmitAPIForm.defaultProps = {
   errors: {},
-  values: {}
+  values: {},
 }
 
 export default SubmitAPIForm
