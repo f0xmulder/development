@@ -152,7 +152,8 @@ class Overview extends Component {
                   <APIList total={result.total} apis={result.apis} />
                   <StyledPagination
                     currentPage={page}
-                    amountOfPages={Math.ceil(result.total / result.rowsPerPage)}
+                    totalRows={result.total}
+                    rowsPerPage={result.rowsPerPage}
                     onPageChangedHandler={this.onPageChange}
                   />
                 </Fragment>
