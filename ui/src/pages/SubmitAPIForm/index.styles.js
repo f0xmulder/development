@@ -11,8 +11,13 @@ export const StyledFormGroupColumnContainer = styled.div`
 `
 
 export const StyledFormGroupColumn = styled.div`
-  padding: 0 28px;
-  flex: 1 1 50%;
+  flex: 1 0 100%;
+  padding: 0;
+
+  @media screen and (min-width: 688px) {
+    padding: 0 28px;
+    flex: 1 1 50%;
+  }
 `
 
 export const StyledFormGroup = styled.div`

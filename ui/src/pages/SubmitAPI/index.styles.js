@@ -10,6 +10,7 @@ export const StyledDescription = styled.p`
   line-height: ${(p) => p.theme.font.lineHeight.small};
   color: ${(p) => p.theme.color.text.light};
   text-align: center;
+  padding: 0 22px;
 `
 
 export const StyledPageTitle = styled.h1`
