@@ -14,7 +14,7 @@ variables:
   KUBECTL_CONTEXT: bravo.k8s.nlx.io
 
 .validate:
-  image: golang:1.12.5
+  image: golang:1.12.6
   before_script:
     - cd validate
   tags:
