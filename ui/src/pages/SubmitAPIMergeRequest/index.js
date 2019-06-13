@@ -3,10 +3,16 @@ import { StyledPre } from './index.styles'
 
 const SubmitAPIMergeRequest = () => (
   <div>
-    <p>De bestandsnaam moet voldoen aan de volgende afspraken:</p>
+    <p>
+      Maak op{' '}
+      <a href="https://gitlab.com/commonground/developer.overheid.nl">Gitlab</a>{' '}
+      een fork van de repository onder een eigen account en maak een nieuwe
+      branch aan met de naam <b>{`data/{organization}-{api}`}</b>.
+    </p>
+    <p>Voeg een bestand toe aan de branch met de volgende naam:</p>
     <StyledPre>{`data/{organization}-{api}.json`}</StyledPre>
 
-    <p>En de inhoud moet overeenkomen met onderstaande structuur:</p>
+    <p>En voeg de inhoud toe aan de hand van de onderstaande structuur:</p>
 
     <StyledPre>
       {`
@@ -40,6 +46,13 @@ const SubmitAPIMergeRequest = () => (
 }
             `}
     </StyledPre>
+    <p>
+      Maak vervolgens een{' '}
+      <a href="https://gitlab.com/commonground/developer.overheid.nl/merge_requests/new">
+        Merge Request
+      </a>{' '}
+      aan om jouw toevoeging in te dienen.
+    </p>
   </div>
 )
 

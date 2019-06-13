@@ -19,13 +19,14 @@ variables:
     - cd validate
   tags:
     - docker
-    - nlx
+    - linux
 
 Test validate:
   extends: .validate
   stage: test
   script:
     - go test ./... -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o coverage.html
     - go tool cover -func=coverage.out
   coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
   artifacts:
@@ -33,7 +34,7 @@ Test validate:
     paths:
       - validate/coverage.html
 
-validate API definitions:
+Validate API definitions:
   extends: .validate
   stage: validate
   script:
@@ -46,7 +47,12 @@ validate API definitions:
     - export UI_IMAGE=${IMAGE_PREFIX}/ui
   tags:
     - docker
-    - nlx
+    - linux
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
 
 Test UI:
   extends: .ui
@@ -71,6 +77,9 @@ Release UI:
         -f ui/Dockerfile . && \
         docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - master
+    - /^feature\/.*$/
 
 ## API ##
 .api:
@@ -79,7 +88,12 @@ Release UI:
     - export API_IMAGE=${IMAGE_PREFIX}/api
   tags:
     - docker
-    - nlx
+    - linux
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
 
 Test API:
   extends: .api
@@ -104,6 +118,9 @@ Release API:
         -f api/Dockerfile . && \
         docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - master
+    - /^feature\/.*$/
 
 Deploy Review App:
   stage: review
@@ -127,14 +144,12 @@ Deploy Review App:
     - cluster
     - kubernetes
   variables:
-    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_HOST: tcp://localhost:2375/
     DOCKER_DRIVER: overlay2
   services:
     - docker:dind
   only:
     - /^feature\/.*$/
-  except:
-    - master
   artifacts:
     paths:
       - ci_environment_url.txt
@@ -144,7 +159,7 @@ Remove Review App:
   image: registry.gitlab.com/commonground/don-deployer:latest
   variables:
     GIT_STRATEGY: none
-    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_HOST: tcp://localhost:2375/
     DOCKER_DRIVER: overlay2
   script:
     - helm delete --purge don-$CI_ENVIRONMENT_SLUG
@@ -160,8 +175,6 @@ Remove Review App:
     - docker:dind
   only:
     - /^feature\/.*$/
-  except:
-    - master
 
 E2E tests:
   stage: e2e-tests
@@ -181,12 +194,12 @@ E2E tests:
     - /^feature\/.*$/
   tags:
     - docker
-    - nlx
+    - linux
 
 Deploy production:
   stage: deploy
   before_script:
-    - kubectl config use-context $KUBECTL_CONTEXT 
+    - kubectl config use-context $KUBECTL_CONTEXT
   script:
     - |
         helm upgrade --install don-prod ./helm/don \
