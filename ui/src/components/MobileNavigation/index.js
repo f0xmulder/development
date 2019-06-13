@@ -41,19 +41,25 @@ const MobileNavigation = () => {
       <Navigation isVisible={isVisible}>
         <Menu>
           <li>
-            <Link to="/" exact>
+            <Link exact to="/" onClick={() => setIsVisible(false)}>
               Home
             </Link>
           </li>
           <li>
-            <Link to="/overzicht">Overzicht</Link>
+            <Link to="/overzicht" onClick={() => setIsVisible(false)}>
+              Overzicht
+            </Link>
           </li>
           <li>
-            <Link to="/over">Over</Link>
+            <Link to="/over" onClick={() => setIsVisible(false)}>
+              Over
+            </Link>
           </li>
         </Menu>
         <Divider />
-        <Link to="/api-toevoegen">+ Voeg API toe</Link>
+        <Link to="/api-toevoegen" onClick={() => setIsVisible(false)}>
+          + Voeg API toe
+        </Link>
       </Navigation>
     </Fragment>
   )
