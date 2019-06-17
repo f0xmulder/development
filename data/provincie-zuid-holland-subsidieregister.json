@@ -1,0 +1,20 @@
+{
+    "description": "Subsidieregister van de provincie Zuid-Holland",
+    "organization_name": "Provincie Zuid-Holland",
+    "service_name": "Subsidieregister",
+    "api_url": "https://subsidieregister.zuid-holland.nl/api/",
+    "api_type": "REST/JSON",
+    "specification_url": "https://subsidieregister.zuid-holland.nl/api/?format=openapi",
+    "documentation_url": "https://subsidieregister.zuid-holland.nl/api/",
+    "tags": ["Subsidieregister", "Subsidie"],
+    "contact": {
+        "email": "zuidholland@pzh.nl",
+        "phone": "0031704416622",
+        "url": "https://www.zuid-holland.nl"
+    },
+    "is_reference_implementation": false,
+    "terms_of_use": {
+      "government_only": false,
+      "pay_per_use": false
+  }
+}
