@@ -6,10 +6,10 @@
     "api_type": "REST/JSON",
     "specification_url": "https://ref.tst.vng.cloud/zrc/api/v1/schema/",
     "documentation_url": "https://github.com/vng-Realisatie/gemma-zaakregistratiecomponent",
-    "tags": ["zgw", "zrc"],
+    "tags": ["zgw", "zrc", "zaakgericht werken", "zaakregistratiecomponent"],
     "is_reference_implementation": true,
     "contact": {
-        "email": "support@maykinmedia.nl"
+        "email": "standaarden.ondersteuning@vng.nl"
     },
     "terms_of_use": {
         "government_only": false,
