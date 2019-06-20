@@ -178,6 +178,9 @@ Remove Review App:
 
 E2E tests:
   stage: e2e-tests
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   before_script:
     - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$INGRESS_BASE_DOMAIN")
     - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
@@ -189,12 +192,14 @@ E2E tests:
       -e URL=${URL} \
       $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
       /bin/sh -c "./wait-for-http.sh $URL && npm test"
-  only:
-    - master
-    - /^feature\/.*$/
   tags:
     - docker
     - linux
+  services:
+    - docker:dind
+  only:
+    - master
+    - /^feature\/.*$/
 
 Deploy production:
   stage: deploy
