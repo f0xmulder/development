@@ -12,7 +12,7 @@ variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
   DOMAIN: developer.overheid.nl
   REVIEW_BASE_DOMAIN: review.developer.overheid.nl
-  KUBECTL_CONTEXT: bravo.k8s.nlx.io
+  KUBECTL_CONTEXT: delta.k8s.nlx.io
 
 .validate:
   image: golang:1.12.6
