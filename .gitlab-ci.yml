@@ -215,11 +215,11 @@ Deploy production:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set domain="$INGRESS_BASE_DOMAIN" \
+        --set domain="$DOMAIN" \
         --set "ingressClass=traefik"
   environment:
     name: prod
-    url: https://$INGRESS_BASE_DOMAIN
+    url: https://$DOMAIN
   tags:
     - nlx-privileged
     - shell
