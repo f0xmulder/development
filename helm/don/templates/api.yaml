@@ -3,9 +3,12 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
 spec:
-  replicas: 1
+  replicas: {{.Values.replicas}}
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels: {{ include "don.common.metadata-labels" . | nindent 6 }}
   template:
@@ -14,7 +17,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: {{.Values.apiImage}}
+          image: {{.Values.apiImage | quote}}
           imagePullPolicy: {{.Values.imagePullPolicy}}
           readinessProbe:
             failureThreshold: 3

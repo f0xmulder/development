@@ -9,3 +9,5 @@ uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui:master
 gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
 gitlabProjectId: "0"
+
+replicas: 3
