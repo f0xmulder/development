@@ -10,7 +10,8 @@ stages:
 
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY/$CI_PROJECT_PATH"
-  INGRESS_BASE_DOMAIN: developer.overheid.nl
+  DOMAIN: developer.overheid.nl
+  REVIEW_BASE_DOMAIN: review.developer.overheid.nl
   KUBECTL_CONTEXT: bravo.k8s.nlx.io
 
 .validate:
@@ -126,7 +127,7 @@ Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/don-deployer:latest
   script:
-    - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN" > ci_environment_url.txt
+    - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
         helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don \
         --namespace don-$CI_ENVIRONMENT_SLUG \
@@ -135,10 +136,10 @@ Deploy Review App:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set domain=$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
+        --set domain=$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
   environment:
     name: $CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
+    url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
     - cluster
@@ -166,7 +167,7 @@ Remove Review App:
   when: manual
   environment:
     name: $CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.$INGRESS_BASE_DOMAIN
+    url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
     - cluster
@@ -182,7 +183,7 @@ E2E tests:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
   before_script:
-    - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$INGRESS_BASE_DOMAIN")
+    - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$DOMAIN")
     - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
     - |
