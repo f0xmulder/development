@@ -1,0 +1,18 @@
+{
+    "description": "De referentieimplementatie van het autorisatiecomponent.",
+    "organization_name": "VNG Realisatie",
+    "service_name": "Autorisatiecomponent (AC)",
+    "api_url": "https://ref.tst.vng.cloud/ac/api/v1/",
+    "api_type": "REST/JSON",
+    "specification_url": "https://ref.tst.vng.cloud/ac/api/v1/schema/",
+    "documentation_url": "https://github.com/VNG-Realisatie/gemma-autorisatiecomponent",
+    "tags": ["zgw", "ac", "zaakgericht werken", "autorisatiecomponent"],
+    "is_reference_implementation": true,
+    "contact": {
+        "email": "standaarden.ondersteuning@vng.nl"
+    },
+    "terms_of_use": {
+        "government_only": false,
+        "pay_per_use": false
+    }
+}

@@ -1,12 +1,12 @@
 {
-    "description": "Een API om een zaakregistratiecomponent te benaderen.",
+    "description": "De referentieimplementatie van het zaakregistratiecomponent.",
     "organization_name": "VNG Realisatie",
-    "service_name": "ZRC",
+    "service_name": "Zaakregistratiecomponent (ZRC)",
     "api_url": "https://ref.tst.vng.cloud/zrc/api/v1/",
     "api_type": "REST/JSON",
     "specification_url": "https://ref.tst.vng.cloud/zrc/api/v1/schema/",
-    "documentation_url": "https://github.com/vng-Realisatie/gemma-zaakregistratiecomponent",
-    "tags": ["zgw", "zrc", "zaakgericht werken", "zaakregistratiecomponent"],
+    "documentation_url": "https://ref.tst.vng.cloud/zrc/",
+    "tags": ["zgw", "ztc", "zaakgericht werken", "zaakregistratiecomponent"],
     "is_reference_implementation": true,
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
