@@ -15,7 +15,7 @@ variables:
   KUBECTL_CONTEXT: delta.k8s.nlx.io
 
 .validate:
-  image: golang:1.12.6
+  image: golang:1.12.7
   before_script:
     - cd validate
   tags:
