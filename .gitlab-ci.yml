@@ -125,7 +125,7 @@ Release API:
 
 Deploy Review App:
   stage: review
-  image: registry.gitlab.com/commonground/don-deployer:latest
+  image: registry.gitlab.com/commonground/cg-review-app-deployer:latest
   script:
     - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
@@ -157,7 +157,7 @@ Deploy Review App:
 
 Remove Review App:
   stage: review
-  image: registry.gitlab.com/commonground/don-deployer:latest
+  image: registry.gitlab.com/commonground/cg-review-app-deployer:latest
   variables:
     GIT_STRATEGY: none
     DOCKER_HOST: tcp://localhost:2375/
