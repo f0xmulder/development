@@ -1,3 +1,6 @@
+import 'core-js/web/url-search-params'
+import 'core-js/es/object/values'
+import 'core-js/es/array/includes'
 import 'react-app-polyfill/ie11'
 
 import React from 'react'
