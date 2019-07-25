@@ -136,19 +136,15 @@ Deploy Review App:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set domain=$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
+        --set domain=$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN \
+        --set "ingressClass=traefik"
   environment:
     name: $CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
-    - cluster
+    - review
     - kubernetes
-  variables:
-    DOCKER_HOST: tcp://localhost:2375/
-    DOCKER_DRIVER: overlay2
-  services:
-    - docker:dind
   only:
     - /^feature\/.*$/
   artifacts:
@@ -160,8 +156,6 @@ Remove Review App:
   image: registry.gitlab.com/commonground/cg-review-app-deployer:latest
   variables:
     GIT_STRATEGY: none
-    DOCKER_HOST: tcp://localhost:2375/
-    DOCKER_DRIVER: overlay2
   script:
     - helm delete --purge don-$CI_ENVIRONMENT_SLUG
   when: manual
@@ -170,10 +164,8 @@ Remove Review App:
     url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
-    - cluster
+    - review
     - kubernetes
-  services:
-    - docker:dind
   only:
     - /^feature\/.*$/
 
