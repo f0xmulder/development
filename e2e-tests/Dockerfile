@@ -1,4 +1,4 @@
-FROM node:10.16.0-slim
+FROM node:10.16.1-slim
 
 ENV CI=true
 
