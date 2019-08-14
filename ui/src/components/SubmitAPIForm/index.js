@@ -112,6 +112,7 @@ const SubmitAPIForm = ({
             <Field component="select" id="api_type" name="api_type">
               <option value="Onbekend">Onbekend</option>
               <option value="REST/JSON">REST/JSON</option>
+              <option value="REST/XML">REST/XML</option>
               <option value="SOAP/XML">SOAP/XML</option>
               <option value="gRPC">gRPC</option>
               <option value="GraphQL">GraphQL</option>
