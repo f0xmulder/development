@@ -105,6 +105,7 @@ export const StyledDl = styled.dl`
     margin-left: 0;
     line-height: ${(p) => p.theme.font.lineHeight.small}
     margin-bottom: 4px;
+    float: left;
   }
 `
 
