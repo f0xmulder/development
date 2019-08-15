@@ -2,7 +2,6 @@ package resources
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -33,7 +32,7 @@ func NewAPIResource(logger *zap.Logger, rootDirectory string, readFile func(path
 
 	outputList, errReadFile := readDirectory("../data")
 	if errReadFile != nil {
-		log.Fatal(errReadFile)
+		logger.Fatal("error while reading the data directory. check its contents", zap.Error(errReadFile))
 	}
 
 	searchIndex := searchindex.NewIndex(&outputList)
