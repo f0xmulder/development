@@ -1,5 +1,5 @@
-github.com/RoaringBitmap/roaring v0.4.18 h1:nh8Ngxctxt5QAoMLuR7MHJe4jEqpn+EnsdgDWPryQWo=
-github.com/RoaringBitmap/roaring v0.4.18/go.mod h1:D3qVegWTmfCaX4Bl5CrBE9hfrSrrXIr8KVNvRsDi1NI=
+github.com/RoaringBitmap/roaring v0.4.19 h1:xy932fRqfJ3qXVm8XKymSfwSnv3bXvC0n4TNs2LdeQs=
+github.com/RoaringBitmap/roaring v0.4.19/go.mod h1:D3qVegWTmfCaX4Bl5CrBE9hfrSrrXIr8KVNvRsDi1NI=
 github.com/blevesearch/bleve v0.8.0 h1:DCoCrxscCXrlzVWK92k7Vq4d28lTAFuigVmcgIX0VCo=
 github.com/blevesearch/bleve v0.8.0/go.mod h1:Y2lmIkzV6mcNfAnAdOd+ZxHkHchhBfU/xroGIp61wfw=
 github.com/blevesearch/blevex v0.0.0-20180227211930-4b158bb555a3 h1:U6vnxZrTfItfiUiYx0lf/LgHjRSfaKK5QHSom3lEbnA=
