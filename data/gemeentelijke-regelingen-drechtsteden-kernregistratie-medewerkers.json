@@ -1,0 +1,30 @@
+{
+    "description": "API voor het opvragen van medewerkergegevens.",
+    "organization_name": "Gemeenschappelijke Regeling Drechtsteden",
+    "service_name": "Kernregistratie Medewerkers",
+    "api_url": "https://cdvtest.drechtsteden.nl/Services/KRMDW/",
+    "api_type": "REST/JSON",
+    "specification_url": "https://github.com/Drechtsteden/API/blob/master/YAML/%5BYAML%5D%20OpvragenMDW.yml",
+    "documentation_url": "https://github.com/Drechtsteden/API/blob/master/SPECS/%5BSPEC%5D%20Opvragen%20MDW.docx",
+    "tags": [
+        "Kernregistratie",
+        "Medewerkers",
+        "Drechtsteden"
+    ],
+    "badges": [
+    ],
+    "contact": {
+        "email": "d.de.wit@drechtsteden.nl",
+        "phone": "06-39863120",
+        "fax": "",
+        "chat": "",
+        "url": ""
+    },
+    "is_reference_implementation": true,
+    "terms_of_use": {
+        "government_only": true,
+        "pay_per_use": false,
+        "uptime_guarantee": 99.5,
+        "support_response_time": "1 werkdag"
+    }
+}
