@@ -2,7 +2,7 @@ import { shallow } from 'enzyme/build'
 import APIList from './index'
 import React from 'react'
 
-let TOTAL_SELECTOR = '[data-test="total"]'
+const TOTAL_SELECTOR = '[data-test="total"]'
 
 describe('APIList', () => {
   let apiElements
