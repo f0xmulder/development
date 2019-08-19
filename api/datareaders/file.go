@@ -3,6 +3,7 @@ package datareaders
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 
@@ -15,7 +16,7 @@ func File(path string) (models.API, error) {
 	filename := filepath.Base(path)
 
 	if !isValid(filename) {
-		return newAPI, errors.New("invalid path")
+		return newAPI, errors.New(fmt.Sprintf("path is invalid for file '%s'", filename))
 	}
 
 	content, err := ioutil.ReadFile(path)

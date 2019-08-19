@@ -75,7 +75,7 @@ const APIDetails = ({
           <PageContentCard.Footer>
             <Formik>
               <Form>
-                <Label for="base-url">Basis URL</Label>
+                <Label htmlFor="base-url">Basis URL</Label>
                 <StyledField
                   component="input"
                   value={apiUrl}
