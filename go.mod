@@ -23,7 +23,7 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/remyoudompheng/bigfft v0.0.0-20190512093250-babf20351dd7 // indirect
 	github.com/steveyen/gtreap v0.0.0-20150807155958-0abe01ef9be2 // indirect
-	github.com/stretchr/testify v1.3.0
+	github.com/stretchr/testify v1.4.0
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tecbot/gorocksdb v0.0.0-20190705092833-162552197222 // indirect
 	go.etcd.io/bbolt v1.3.3 // indirect
