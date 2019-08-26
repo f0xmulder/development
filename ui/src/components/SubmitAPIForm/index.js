@@ -30,15 +30,15 @@ const SubmitAPIForm = ({
 
       <StyledFormGroupColumnContainer>
         <StyledFormGroupColumn>
-          <Label htmlFor="organization_name">Naam*</Label>
+          <Label htmlFor="organizationName">Naam*</Label>
           <Field
             component="input"
             type="text"
-            id="organization_name"
-            name="organization_name"
+            id="organizationName"
+            name="organizationName"
           />
-          {errors.organization_name && touched.organization_name && (
-            <ErrorMessage>{errors.organization_name}</ErrorMessage>
+          {errors.organizationName && touched.organizationName && (
+            <ErrorMessage>{errors.organizationName}</ErrorMessage>
           )}
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
@@ -50,15 +50,15 @@ const SubmitAPIForm = ({
       <StyledFormGroupColumnContainer>
         <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="service_name">Naam*</Label>
+            <Label htmlFor="serviceName">Naam*</Label>
             <Field
               component="input"
               type="text"
-              id="service_name"
-              name="service_name"
+              id="serviceName"
+              name="serviceName"
             />
-            {errors.service_name && touched.service_name && (
-              <ErrorMessage>{errors.service_name}</ErrorMessage>
+            {errors.serviceName && touched.serviceName && (
+              <ErrorMessage>{errors.serviceName}</ErrorMessage>
             )}
           </StyledFormGroup>
 
@@ -100,16 +100,16 @@ const SubmitAPIForm = ({
 
         <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="api_url">API URL*</Label>
-            <Field component="input" type="text" id="api_url" name="api_url" />
-            {errors.api_url && touched.api_url && (
-              <ErrorMessage>{errors.api_url}</ErrorMessage>
+            <Label htmlFor="apiURL">API URL*</Label>
+            <Field component="input" type="text" id="apiURL" name="apiURL" />
+            {errors.apiURL && touched.apiURL && (
+              <ErrorMessage>{errors.apiURL}</ErrorMessage>
             )}
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="api_type">API type</Label>
-            <Field component="select" id="api_type" name="api_type">
+            <Label htmlFor="apiType">API type</Label>
+            <Field component="select" id="apiType" name="apiType">
               <option value="Onbekend">Onbekend</option>
               <option value="REST/JSON">REST/JSON</option>
               <option value="REST/XML">REST/XML</option>
@@ -120,21 +120,21 @@ const SubmitAPIForm = ({
               <option value="WFS">WFS</option>
               <option value="WMS">WMS</option>
             </Field>
-            {errors.api_type && touched.api_type && (
-              <ErrorMessage>{errors.api_type}</ErrorMessage>
+            {errors.apiType && touched.apiType && (
+              <ErrorMessage>{errors.apiType}</ErrorMessage>
             )}
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="specification_url">Specificatie URL</Label>
+            <Label htmlFor="specificationURL">Specificatie URL</Label>
             <Field
               component="input"
               type="text"
-              id="specification_url"
-              name="specification_url"
+              id="specificationURL"
+              name="specificationURL"
             />
-            {errors.specification_url && touched.specification_url && (
-              <ErrorMessage>{errors.specification_url}</ErrorMessage>
+            {errors.specificationURL && touched.specificationURL && (
+              <ErrorMessage>{errors.specificationURL}</ErrorMessage>
             )}
             <HelperMessage>
               Link naar een machine leesbare documentatie.
@@ -146,11 +146,11 @@ const SubmitAPIForm = ({
             <Field
               component="input"
               type="text"
-              id="documentation_url"
-              name="documentation_url"
+              id="documentationURL"
+              name="documentationURL"
             />
-            {errors.documentation_url && touched.documentation_url && (
-              <ErrorMessage>{errors.documentation_url}</ErrorMessage>
+            {errors.documentationURL && touched.documentationURL && (
+              <ErrorMessage>{errors.documentationURL}</ErrorMessage>
             )}
             <HelperMessage>
               Link naar een menselijk leesbare documentatie.
@@ -238,6 +238,7 @@ const SubmitAPIForm = ({
               id="contact.url"
               name="contact.url"
             />
+            {console.log(errors)}
             {errors.contact &&
               errors.contact.url &&
               touched.contact &&
@@ -255,50 +256,50 @@ const SubmitAPIForm = ({
     <Fieldset>
       <Legend>Referentieimplementatie</Legend>
 
-      {!values.reference_implementation ||
-      values.reference_implementation === '' ? (
+      {!values.referenceImplementation ||
+      values.referenceImplementation === '' ? (
         <StyledFormGroup>
           <StyledFormSetting>
-            <Label htmlFor="is_reference_implementation">
+            <Label htmlFor="isReferenceImplementation">
               Deze API is een referentieimplementatie
             </Label>
             <Field
               component="input"
               type="checkbox"
-              id="is_reference_implementation"
-              name="is_reference_implementation"
-              checked={values.is_reference_implementation === true}
+              id="isReferenceImplementation"
+              name="isReferenceImplementation"
+              checked={values.isReferenceImplementation === true}
             />
-            {errors.is_reference_implementation &&
-              touched.is_reference_implementation && (
+            {errors.isReferenceImplementation &&
+              touched.isReferenceImplementation && (
                 <ErrorMessage>
-                  {errors.is_reference_implementation}
+                  {errors.isReferenceImplementation}
                 </ErrorMessage>
               )}
           </StyledFormSetting>
         </StyledFormGroup>
       ) : null}
-      {!values.is_reference_implementation ? (
+      {!values.isReferenceImplementation ? (
         <StyledFormGroup>
-          <Label htmlFor="reference_implementation">
+          <Label htmlFor="referenceImplementation">
             Gebaseerd op (referentie implementatie)
           </Label>
           <Field
             component="select"
-            id="reference_implementation"
-            name="reference_implementation"
+            id="referenceImplementation"
+            name="referenceImplementation"
           >
             <option value="">Geen</option>
             {apis
-              .filter((api) => api.is_reference_implementation)
+              .filter((api) => api.isReferenceImplementation)
               .map((api) => (
                 <option value={api.id} key={api.id}>
                   {api.service_name} {api.organization_name}
                 </option>
               ))}
           </Field>
-          {errors.api_type && touched.api_type && (
-            <ErrorMessage>{errors.api_type}</ErrorMessage>
+          {errors.apiType && touched.apiType && (
+            <ErrorMessage>{errors.apiType}</ErrorMessage>
           )}
         </StyledFormGroup>
       ) : null}
@@ -311,25 +312,25 @@ const SubmitAPIForm = ({
         <StyledFormGroupColumn>
           <StyledFormGroup>
             <StyledFormSetting>
-              <Label htmlFor="terms_of_use.government_only">
+              <Label htmlFor="termsOfUse.governmentOnly">
                 Deze API is alleen beschikbaar voor overheden
               </Label>
               <Field
                 component="input"
                 type="checkbox"
-                id="terms_of_use.government_only"
-                name="terms_of_use.government_only"
+                id="termsOfUse.governmentOnly"
+                name="termsOfUse.governmentOnly"
                 checked={
-                  values.terms_of_use &&
-                  values.terms_of_use.government_only === true
+                  values.termsOfUse &&
+                  values.termsOfUse.governmentOnly === true
                 }
               />
-              {errors.terms_of_use &&
-                errors.terms_of_use.government_only &&
-                touched.terms_of_use &&
-                touched.terms_of_use.government_only && (
+              {errors.termsOfUse &&
+                errors.termsOfUse.governmentOnly &&
+                touched.termsOfUse &&
+                touched.termsOfUse.governmentOnly && (
                   <ErrorMessage>
-                    {errors.terms_of_use.government_only}
+                    {errors.termsOfUse.governmentOnly}
                   </ErrorMessage>
                 )}
             </StyledFormSetting>
@@ -337,32 +338,32 @@ const SubmitAPIForm = ({
 
           <StyledFormGroup>
             <StyledFormSetting>
-              <Label htmlFor="terms_of_use.pay_per_use">
+              <Label htmlFor="termsOfUse.payPerUse">
                 De kosten voor het gebruik van de API worden verrekend met de
                 gebruiker
               </Label>
               <Field
                 component="input"
                 type="checkbox"
-                id="terms_of_use.pay_per_use"
-                name="terms_of_use.pay_per_use"
+                id="termsOfUse.payPerUse"
+                name="termsOfUse.payPerUse"
                 checked={
-                  values.terms_of_use &&
-                  values.terms_of_use.pay_per_use === true
+                  values.termsOfUse &&
+                  values.termsOfUse.payPerUse === true
                 }
               />
-              {errors.terms_of_use &&
-                errors.terms_of_use.pay_per_use &&
-                touched.terms_of_use &&
-                touched.terms_of_use.pay_per_use && (
-                  <ErrorMessage>{errors.terms_of_use.pay_per_use}</ErrorMessage>
+              {errors.termsOfUse &&
+                errors.termsOfUse.payPerUse &&
+                touched.termsOfUse &&
+                touched.termsOfUse.payPerUse && (
+                  <ErrorMessage>{errors.termsOfUse.payPerUse}</ErrorMessage>
                 )}
             </StyledFormSetting>
           </StyledFormGroup>
         </StyledFormGroupColumn>
         <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="terms_of_use.uptime_guarantee">
+            <Label htmlFor="termsOfUse.uptimeGuarantee">
               Beschikbaarheidsgarantie van de API
             </Label>
             <Field
@@ -371,37 +372,37 @@ const SubmitAPIForm = ({
               max="100"
               min="0"
               step="0.01"
-              id="terms_of_use.uptime_guarantee"
-              name="terms_of_use.uptime_guarantee"
+              id="termsOfUse.uptimeGuarantee"
+              name="termsOfUse.uptimeGuarantee"
             />
             <HelperMessage>
               Opgegeven als een percentage, bijv. 99,5.
             </HelperMessage>
-            {errors.terms_of_use &&
-              errors.terms_of_use.pay_per_use &&
-              touched.terms_of_use &&
-              touched.terms_of_use.pay_per_use && (
-                <ErrorMessage>{errors.terms_of_use.pay_per_use}</ErrorMessage>
+            {errors.termsOfUse &&
+              errors.termsOfUse.payPerUse &&
+              touched.termsOfUse &&
+              touched.termsOfUse.payPerUse && (
+                <ErrorMessage>{errors.termsOfUse.payPerUse}</ErrorMessage>
               )}
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="terms_of_use.support_response_time">
+            <Label htmlFor="termsOfUse.support_response_time">
               Reactietijd van de helpdesk
             </Label>
             <Field
               component="input"
               type="text"
-              id="terms_of_use.support_response_time"
-              name="terms_of_use.support_response_time"
+              id="termsOfUse.supportResponseTime"
+              name="termsOfUse.supportResponseTime"
             />
             <HelperMessage>Bijv. 2 werkdagen</HelperMessage>
-            {errors.terms_of_use &&
-              errors.terms_of_use.support_response_time &&
-              touched.terms_of_use &&
-              touched.terms_of_use.support_response_time && (
+            {errors.termsOfUse &&
+              errors.termsOfUse.supportResponseTime &&
+              touched.termsOfUse &&
+              touched.termsOfUse.supportResponseTime && (
                 <ErrorMessage>
-                  {errors.terms_of_use.support_response_time}
+                  {errors.termsOfUse.supportResponseTime}
                 </ErrorMessage>
               )}
           </StyledFormGroup>

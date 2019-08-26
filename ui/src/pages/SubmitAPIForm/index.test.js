@@ -10,20 +10,20 @@ import { Formik } from 'formik'
 describe('convertRIFormDataToAPIDefinition', () => {
   it('should unset the link to a RI if the API itself is marked as a RI', () => {
     const referenceImplementationFormData = {}
-    referenceImplementationFormData.is_reference_implementation = true
-    referenceImplementationFormData.reference_implementation = 'dummy-api-id'
+    referenceImplementationFormData.isReferenceImplementation = true
+    referenceImplementationFormData.referenceImplementation = 'dummy-api-id'
 
     const result = convertRIFormDataToAPIDefinition(
       referenceImplementationFormData,
     )
-    expect(result.reference_implementation).toBeUndefined()
+    expect(result.referenceImplementation).toBeUndefined()
   })
 })
 
 describe('convertLinkToRIToRelation', () => {
   it('should convert the link to a relation object', () => {
     const linkToReferenceImplementation = {}
-    linkToReferenceImplementation.reference_implementation = 'dummy-api-id'
+    linkToReferenceImplementation.referenceImplementation = 'dummy-api-id'
 
     const result = convertLinkToRIToRelation(linkToReferenceImplementation)
 
