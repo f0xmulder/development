@@ -4,13 +4,13 @@ import APIDetail from './index'
 import { modelFromAPIResponse } from '../../models/api'
 
 const apiResponseObject = {}
-apiResponseObject['description'] = 'Description'
-apiResponseObject['organization_name'] = 'Organization Name'
-apiResponseObject['service_name'] = 'Service Name'
-apiResponseObject['api_url'] = 'API URL'
-apiResponseObject['api_type'] = 'API Type'
-apiResponseObject['specification_url'] = 'Specification URL'
-apiResponseObject['documentation_url'] = 'Documentation URL'
+apiResponseObject.description = 'Description'
+apiResponseObject.organization_name = 'Organization Name'
+apiResponseObject.service_name = 'Service Name'
+apiResponseObject.api_url = 'API URL'
+apiResponseObject.api_type = 'API Type'
+apiResponseObject.specification_url = 'Specification URL'
+apiResponseObject.documentation_url = 'Documentation URL'
 
 describe('APIDetail', () => {
   afterEach(() => {

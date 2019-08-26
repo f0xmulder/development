@@ -5,9 +5,9 @@ import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
 const apiFromAPIResponse = {}
-apiFromAPIResponse['id'] = '42'
-apiFromAPIResponse['service_name'] = 'Service'
-apiFromAPIResponse['organization_name'] = 'Organization'
+apiFromAPIResponse.id = '42'
+apiFromAPIResponse.service_name = 'Service'
+apiFromAPIResponse.organization_name = 'Organization'
 
 describe('LinkToAPIContainer', () => {
   describe('on initialization', () => {

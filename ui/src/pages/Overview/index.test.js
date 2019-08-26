@@ -5,9 +5,9 @@ import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
 const apiFromAPIResponse = {}
-apiFromAPIResponse['id'] = 'test-api.json'
-apiFromAPIResponse['organization_name'] = 'Organization Name'
-apiFromAPIResponse['service_name'] = 'Service Name'
+apiFromAPIResponse.id = 'test-api.json'
+apiFromAPIResponse.organization_name = 'Organization Name'
+apiFromAPIResponse.service_name = 'Service Name'
 
 describe('Overview', () => {
   describe('on initialization', () => {
@@ -97,11 +97,11 @@ describe('Overview', () => {
       )
 
       const expectedQueryParams = {}
-      expectedQueryParams['q'] = ''
-      expectedQueryParams['api_type'] = []
-      expectedQueryParams['organization_name'] = ['42']
-      expectedQueryParams['tags'] = ['42']
-      expectedQueryParams['page'] = 1
+      expectedQueryParams.q = ''
+      expectedQueryParams.api_type = []
+      expectedQueryParams.organization_name = ['42']
+      expectedQueryParams.tags = ['42']
+      expectedQueryParams.page = 1
 
       expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
     })
@@ -123,10 +123,10 @@ describe('Overview', () => {
       const wrapper = shallow(<Overview history={history} />)
 
       const newFilters = {}
-      newFilters['q'] = ''
-      newFilters['api_type'] = []
-      newFilters['organization_name'] = ['42']
-      newFilters['tags'] = ['42', '43']
+      newFilters.q = ''
+      newFilters.api_type = []
+      newFilters.organization_name = ['42']
+      newFilters.tags = ['42', '43']
 
       wrapper.instance().onFilterChange(newFilters)
       expect(history.push).toHaveBeenCalledWith(

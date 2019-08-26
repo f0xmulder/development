@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom'
 const formSubmitHandler = (event, onSearchSubmitHandler) => {
   event.preventDefault()
 
-  const input = event.target['query']
+  const input = event.target.query
   onSearchSubmitHandler(input.value)
 }
 

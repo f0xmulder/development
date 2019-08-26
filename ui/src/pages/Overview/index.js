@@ -72,8 +72,8 @@ class Overview extends Component {
 
     if (newFilters.q !== currentFilters.q) {
       newFilters.tags = []
-      newFilters['organization_name'] = []
-      newFilters['api_type'] = []
+      newFilters.organization_name = []
+      newFilters.api_type = []
     }
 
     const translatedFilters = {
@@ -119,11 +119,11 @@ class Overview extends Component {
     const values = new URLSearchParams(location ? location.search : {})
 
     const queryParams = {}
-    queryParams['q'] = values.get('q') || ''
-    queryParams['tags'] = values.getAll('tags')
-    queryParams['organization_name'] = values.getAll('organisatie')
-    queryParams['api_type'] = values.getAll('type')
-    queryParams['page'] = parseInt(values.get('pagina'), 10) || 1
+    queryParams.q = values.get('q') || ''
+    queryParams.tags = values.getAll('tags')
+    queryParams.organization_name = values.getAll('organisatie')
+    queryParams.api_type = values.getAll('type')
+    queryParams.page = parseInt(values.get('pagina'), 10) || 1
 
     return queryParams
   }

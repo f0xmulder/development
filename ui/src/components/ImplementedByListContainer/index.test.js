@@ -6,8 +6,8 @@ import { flushPromises } from '../../test-helpers'
 
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = '1'
-apiFromAPIResponse['service_name'] = 'service'
-apiFromAPIResponse['organization_name'] = 'organization'
+apiFromAPIResponse.service_name = 'service'
+apiFromAPIResponse.organization_name = 'organization'
 
 describe('ImplementedByListContainer', () => {
   describe('on initialization', () => {

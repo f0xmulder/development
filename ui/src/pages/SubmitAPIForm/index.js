@@ -24,16 +24,16 @@ Yup.setLocale({
 })
 
 const initialValues = {}
-initialValues['description'] = ''
-initialValues['organization_name'] = ''
-initialValues['service_name'] = ''
-initialValues['api_url'] = ''
-initialValues['api_type'] = 'Onbekend'
-initialValues['specification_url'] = ''
-initialValues['documentation_url'] = ''
-initialValues['tags'] = []
-initialValues['badges'] = ''
-initialValues['contact'] = {
+initialValues.description = ''
+initialValues.organization_name = ''
+initialValues.service_name = ''
+initialValues.api_url = ''
+initialValues.api_type = 'Onbekend'
+initialValues.specification_url = ''
+initialValues.documentation_url = ''
+initialValues.tags = []
+initialValues.badges = ''
+initialValues.contact = {
   email: '',
   phone: '',
   fax: '',
@@ -41,72 +41,70 @@ initialValues['contact'] = {
   url: '',
 }
 const termsOfUse = {}
-termsOfUse['government_only'] = false
-termsOfUse['pay_per_use'] = false
-termsOfUse['uptime_guarantee'] = 99.5
-termsOfUse['support_response_time'] = ''
+termsOfUse.government_only = false
+termsOfUse.pay_per_use = false
+termsOfUse.uptime_guarantee = 99.5
+termsOfUse.support_response_time = ''
 
-initialValues['terms_of_use'] = termsOfUse
-initialValues['is_reference_implementation'] = false
-initialValues['reference_implementation'] = ''
+initialValues.terms_of_use = termsOfUse
+initialValues.is_reference_implementation = false
+initialValues.reference_implementation = ''
 
 const validationSchemaConfiguration = {}
-validationSchemaConfiguration['description'] = Yup.string()
+validationSchemaConfiguration.description = Yup.string()
   .trim()
   .required()
-validationSchemaConfiguration['organization_name'] = Yup.string().required()
-validationSchemaConfiguration['service_name'] = Yup.string().required()
-validationSchemaConfiguration['api_url'] = Yup.string()
+validationSchemaConfiguration.organization_name = Yup.string().required()
+validationSchemaConfiguration.service_name = Yup.string().required()
+validationSchemaConfiguration.api_url = Yup.string()
   .url()
   .required()
-validationSchemaConfiguration['api_type'] = Yup.string().required()
-validationSchemaConfiguration['specification_url'] = Yup.string().url()
-validationSchemaConfiguration['documentation_url'] = Yup.string().url()
-validationSchemaConfiguration['tags'] = Yup.string()
-validationSchemaConfiguration['badges'] = Yup.string()
-validationSchemaConfiguration['contact'] = Yup.object().shape({
+validationSchemaConfiguration.api_type = Yup.string().required()
+validationSchemaConfiguration.specification_url = Yup.string().url()
+validationSchemaConfiguration.documentation_url = Yup.string().url()
+validationSchemaConfiguration.tags = Yup.string()
+validationSchemaConfiguration.badges = Yup.string()
+validationSchemaConfiguration.contact = Yup.object().shape({
   email: Yup.string().email(),
   phone: Yup.string(),
   fax: Yup.string(),
   chat: Yup.string().url(),
   url: Yup.string().url(),
 })
-validationSchemaConfiguration['contact'] = Yup.object().shape()
+validationSchemaConfiguration.contact = Yup.object().shape()
 
 const termsOfUseSchemaConfiguration = {}
-termsOfUseSchemaConfiguration['government_only'] = Yup.boolean()
-termsOfUseSchemaConfiguration['pay_per_use'] = Yup.boolean()
-termsOfUseSchemaConfiguration['uptime_guarantee'] = Yup.number()
-termsOfUseSchemaConfiguration['support_response_time'] = Yup.string()
-validationSchemaConfiguration['terms_of_use'] = Yup.object().shape(
+termsOfUseSchemaConfiguration.government_only = Yup.boolean()
+termsOfUseSchemaConfiguration.pay_per_use = Yup.boolean()
+termsOfUseSchemaConfiguration.uptime_guarantee = Yup.number()
+termsOfUseSchemaConfiguration.support_response_time = Yup.string()
+validationSchemaConfiguration.terms_of_use = Yup.object().shape(
   termsOfUseSchemaConfiguration,
 )
-validationSchemaConfiguration['is_reference_implementation'] = Yup.boolean()
-validationSchemaConfiguration['reference_implementation'] = Yup.string()
+validationSchemaConfiguration.is_reference_implementation = Yup.boolean()
+validationSchemaConfiguration.reference_implementation = Yup.string()
 
 const validationSchema = Yup.object().shape(validationSchemaConfiguration)
 
 const arrayFields = ['tags', 'badges']
 
 export const convertLinkToRIToRelation = (formData) => {
-  if (formData['reference_implementation']) {
-    formData['relations'] = {
-      [formData['reference_implementation']]: [
+  if (formData.reference_implementation) {
+    formData.relations = {
+      [formData.reference_implementation]: [
         RELATION_TYPE_REFERENCE_IMPLEMENTATION,
       ],
     }
   }
 
-  delete formData['reference_implementation']
+  delete formData.reference_implementation
 
   return formData
 }
 
 export const convertRIFormDataToAPIDefinition = (formData) => {
-  formData['reference_implementation'] = !formData[
-    'is_reference_implementation'
-  ]
-    ? formData['reference_implementation']
+  formData.reference_implementation = !formData.is_reference_implementation
+    ? formData.reference_implementation
     : ''
 
   formData = convertLinkToRIToRelation(formData)
