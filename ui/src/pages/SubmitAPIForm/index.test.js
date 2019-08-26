@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import SubmitAPI, {
   convertRIFormDataToAPIDefinition,
   convertLinkToRIToRelation,
+  mapFormValuesToAPIRequestBody,
 } from './index'
 import { Formik } from 'formik'
 
@@ -30,6 +31,64 @@ describe('convertLinkToRIToRelation', () => {
       relations: {
         'dummy-api-id': ['reference-implementation'],
       },
+    })
+  })
+})
+
+describe('map form values to API request body for submitting an API', () => {
+  it('should map the values from camelBack notation to snake_case', () => {
+    const input = {
+      description: '',
+      organizationName: '',
+      serviceName: '',
+      apiURL: '',
+      apiType: '',
+      specificationURL: '',
+      documentationURL: '',
+      tags: [],
+      badges: '',
+      contact: {
+        email: '',
+        phone: '',
+        fax: '',
+        chat: '',
+        url: '',
+      },
+      termsOfUse: {
+        governmentOnly: false,
+        payPerUse: false,
+        uptimeGuarantee: 99.5,
+        supportResponseTime: ''
+      },
+      isReferenceImplementation: false,
+      referenceImplementation: ''
+    }
+
+    expect(mapFormValuesToAPIRequestBody(input)).toEqual({
+      description: '',
+      organization_name: '',
+      service_name: '',
+      api_url: '',
+      api_type: '',
+      specification_url: '',
+      documentation_url: '',
+      tags: [],
+      badges: '',
+      contact: {
+        email: '',
+        phone: '',
+        fax: '',
+        chat: '',
+        url: '',
+      },
+      terms_of_use: {
+        government_only: false,
+        pay_per_use: false,
+        uptime_guarantee: 99.5,
+        support_response_time: ''
+      },
+      is_reference_implementation: false,
+      reference_implementation: ''
     })
   })
 })

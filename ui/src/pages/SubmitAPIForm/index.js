@@ -111,6 +111,41 @@ export const convertRIFormDataToAPIDefinition = (formData) => {
   return formData
 }
 
+export const mapFormValuesToAPIRequestBody = (formValues) => {
+    const requestBody = {}
+
+    requestBody.description = formValues.description
+    requestBody.organization_name = formValues.organizationName
+    requestBody.service_name = formValues.organizationName
+    requestBody.api_url = formValues.apiURL
+    requestBody.api_type = formValues.apiType
+    requestBody.specification_url = formValues.specificationURL
+    requestBody.documentation_url = formValues.documentationURL
+    requestBody.tags = formValues.tags
+    requestBody.badges = formValues.badges
+    requestBody.is_reference_implementation = formValues.isReferenceImplementation
+    requestBody.reference_implementation = formValues.referenceImplementation
+
+    formValues.contact = formValues.contact || {}
+    requestBody.contact = {
+        email: formValues.contact.email,
+        phone: formValues.contact.phone,
+        fax: formValues.contact.fax,
+        chat: formValues.contact.chat,
+        url: formValues.contact.url
+    }
+
+    formValues.termsOfUse = formValues.termsOfUse || {}
+    requestBody.terms_of_use = {
+        government_only: formValues.termsOfUse.governmentOnly,
+        pay_per_use: formValues.termsOfUse.payPerUse,
+        uptime_guarantee: formValues.termsOfUse.uptimeGuarantee,
+        support_response_time: formValues.termsOfUse.supportResponseTime,
+    }
+
+    return requestBody
+}
+
 class SubmitAPIFormPage extends Component {
   constructor(props) {
     super(props)
@@ -136,6 +171,8 @@ class SubmitAPIFormPage extends Component {
     })
 
     data = convertRIFormDataToAPIDefinition(data)
+
+    data = mapFormValuesToAPIRequestBody(data)
 
     return this.submitToApi(data)
       .then((responseData) => {
