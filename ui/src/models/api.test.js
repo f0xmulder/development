@@ -2,6 +2,7 @@ import { modelFromAPIResponse } from './api'
 
 describe('create an API model from the API response', () => {
   it('should transform the response to an API model', () => {
+    /* eslint-disable camelcase */
     const apiModel = {}
     apiModel.id = 'id'
     apiModel.service_name = 'service name'
@@ -21,6 +22,7 @@ describe('create an API model from the API response', () => {
     apiModel.scores.has_specification = false
     apiModel.scores.has_contact_details = false
     apiModel.scores.provides_sla = false
+    /* eslint-enable camelcase */
 
     expect(modelFromAPIResponse(apiModel)).toEqual({
       id: 'id',

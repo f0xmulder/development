@@ -12,6 +12,7 @@ import {
 import * as Yup from 'yup'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm'
+import { modelFromAPIResponse } from '../../models/api'
 
 Yup.setLocale({
   mixed,
@@ -112,38 +113,41 @@ export const convertRIFormDataToAPIDefinition = (formData) => {
 }
 
 export const mapFormValuesToAPIRequestBody = (formValues) => {
-    const requestBody = {}
+  /* eslint-disable camelcase */
+  const requestBody = {}
 
-    requestBody.description = formValues.description
-    requestBody.organization_name = formValues.organizationName
-    requestBody.service_name = formValues.organizationName
-    requestBody.api_url = formValues.apiURL
-    requestBody.api_type = formValues.apiType
-    requestBody.specification_url = formValues.specificationURL
-    requestBody.documentation_url = formValues.documentationURL
-    requestBody.tags = formValues.tags
-    requestBody.badges = formValues.badges
-    requestBody.is_reference_implementation = formValues.isReferenceImplementation
-    requestBody.reference_implementation = formValues.referenceImplementation
+  requestBody.description = formValues.description
+  requestBody.organization_name = formValues.organizationName
+  requestBody.service_name = formValues.organizationName
+  requestBody.api_url = formValues.apiURL
+  requestBody.api_type = formValues.apiType
+  requestBody.specification_url = formValues.specificationURL
+  requestBody.documentation_url = formValues.documentationURL
+  requestBody.tags = formValues.tags
+  requestBody.badges = formValues.badges
+  requestBody.is_reference_implementation = formValues.isReferenceImplementation
+  requestBody.reference_implementation = formValues.referenceImplementation
 
-    formValues.contact = formValues.contact || {}
-    requestBody.contact = {
-        email: formValues.contact.email,
-        phone: formValues.contact.phone,
-        fax: formValues.contact.fax,
-        chat: formValues.contact.chat,
-        url: formValues.contact.url
-    }
+  formValues.contact = formValues.contact || {}
+  requestBody.contact = {
+    email: formValues.contact.email,
+    phone: formValues.contact.phone,
+    fax: formValues.contact.fax,
+    chat: formValues.contact.chat,
+    url: formValues.contact.url,
+  }
 
-    formValues.termsOfUse = formValues.termsOfUse || {}
-    requestBody.terms_of_use = {
-        government_only: formValues.termsOfUse.governmentOnly,
-        pay_per_use: formValues.termsOfUse.payPerUse,
-        uptime_guarantee: formValues.termsOfUse.uptimeGuarantee,
-        support_response_time: formValues.termsOfUse.supportResponseTime,
-    }
+  formValues.termsOfUse = formValues.termsOfUse || {}
+  requestBody.terms_of_use = {
+    government_only: formValues.termsOfUse.governmentOnly,
+    pay_per_use: formValues.termsOfUse.payPerUse,
+    uptime_guarantee: formValues.termsOfUse.uptimeGuarantee,
+    support_response_time: formValues.termsOfUse.supportResponseTime,
+  }
 
-    return requestBody
+  /* eslint-enable camelcase */
+
+  return requestBody
 }
 
 class SubmitAPIFormPage extends Component {
@@ -221,15 +225,21 @@ class SubmitAPIFormPage extends Component {
   }
 
   componentDidMount() {
-    this.fetchApiList().then(
-      (result) => {
-        this.setState({ result, apisLoaded: true })
-      },
-      (error) => {
-        this.setState({ apisError: true, apisLoaded: true })
-        console.error(error)
-      },
-    )
+    this.fetchApiList()
+      .then((response) =>
+        Object.assign({}, response, {
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+        }),
+      )
+      .then(
+        (result) => {
+          this.setState({ result, apisLoaded: true })
+        },
+        (error) => {
+          this.setState({ apisError: true, apisLoaded: true })
+          console.error(error)
+        },
+      )
   }
 
   render() {

@@ -6,6 +6,9 @@ import SubmitAPI, {
   mapFormValuesToAPIRequestBody,
 } from './index'
 import { Formik } from 'formik'
+import Overview from '../Overview'
+import { flushPromises } from '../../test-helpers'
+import { modelFromAPIResponse } from '../../models/api'
 
 describe('convertRIFormDataToAPIDefinition', () => {
   it('should unset the link to a RI if the API itself is marked as a RI', () => {
@@ -58,12 +61,13 @@ describe('map form values to API request body for submitting an API', () => {
         governmentOnly: false,
         payPerUse: false,
         uptimeGuarantee: 99.5,
-        supportResponseTime: ''
+        supportResponseTime: '',
       },
       isReferenceImplementation: false,
-      referenceImplementation: ''
+      referenceImplementation: '',
     }
 
+    /* eslint-disable camelcase */
     expect(mapFormValuesToAPIRequestBody(input)).toEqual({
       description: '',
       organization_name: '',
@@ -85,11 +89,12 @@ describe('map form values to API request body for submitting an API', () => {
         government_only: false,
         pay_per_use: false,
         uptime_guarantee: 99.5,
-        support_response_time: ''
+        support_response_time: '',
       },
       is_reference_implementation: false,
-      reference_implementation: ''
+      reference_implementation: '',
     })
+    /* eslint-enable camelcase */
   })
 })
 
@@ -102,6 +107,32 @@ describe('SubmitAPI', () => {
 
       const wrapper = shallow(<SubmitAPI />)
       expect(wrapper.instance().fetchApiList).toHaveBeenCalled()
+    })
+  })
+
+  describe('loading the available APIs', () => {
+    /* eslint-disable camelcase */
+    const apiFromAPIResponse = {}
+    apiFromAPIResponse.id = 'test-api.json'
+    apiFromAPIResponse.organization_name = 'Organization Name'
+    apiFromAPIResponse.service_name = 'Service Name'
+    /* eslint-enable camelcase */
+
+    it('should store the available apis as state', () => {
+      const apiPromise = Promise.resolve({
+        total: 1,
+        apis: [apiFromAPIResponse],
+      })
+      Overview.prototype.fetchApiList = jest.fn(() => apiPromise)
+
+      const wrapper = shallow(<SubmitAPI />)
+
+      return flushPromises().then(() => {
+        expect(wrapper.state('result')).toEqual({
+          total: 1,
+          apis: [modelFromAPIResponse(apiFromAPIResponse)],
+        })
+      })
     })
   })
 
@@ -129,8 +160,10 @@ describe('SubmitAPI', () => {
     describe('when component state is submitted', () => {
       beforeEach(() => {
         const responseData = {}
+        /* eslint-disable camelcase */
         responseData.id = 1
         responseData.web_url = 'http://gitlab.com/issues/1'
+        /* eslint-enable camelcase */
 
         wrapper.setState({
           submitted: true,

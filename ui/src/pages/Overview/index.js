@@ -71,17 +71,21 @@ class Overview extends Component {
     const currentFilters = this.getQueryParams()
 
     if (newFilters.q !== currentFilters.q) {
+      /* eslint-disable camelcase */
       newFilters.tags = []
       newFilters.organization_name = []
       newFilters.api_type = []
+      /* eslint-enable camelcase */
     }
 
+    /* eslint-disable camelcase */
     const translatedFilters = {
       q: newFilters.q,
       tags: newFilters.tags,
       organisatie: newFilters.organization_name,
       type: newFilters.api_type,
     }
+    /* eslint-enable camelcase */
 
     const { history } = this.props
     history.push(`?${this.generateQueryParams(translatedFilters)}`)
@@ -118,12 +122,14 @@ class Overview extends Component {
     const { location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
 
+    /* eslint-disable camelcase */
     const queryParams = {}
     queryParams.q = values.get('q') || ''
     queryParams.tags = values.getAll('tags')
     queryParams.organization_name = values.getAll('organisatie')
     queryParams.api_type = values.getAll('type')
     queryParams.page = parseInt(values.get('pagina'), 10) || 1
+    /* eslint-enable camelcase */
 
     return queryParams
   }

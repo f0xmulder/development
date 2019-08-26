@@ -4,10 +4,12 @@ import ImplementedByListContainer from './index'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
+/* eslint-disable camelcase */
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = '1'
 apiFromAPIResponse.service_name = 'service'
 apiFromAPIResponse.organization_name = 'organization'
+/* eslint-enable camelcase */
 
 describe('ImplementedByListContainer', () => {
   describe('on initialization', () => {

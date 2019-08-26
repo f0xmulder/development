@@ -4,10 +4,12 @@ import Overview from './index'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
+/* eslint-disable camelcase */
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = 'test-api.json'
 apiFromAPIResponse.organization_name = 'Organization Name'
 apiFromAPIResponse.service_name = 'Service Name'
+/* eslint-enable camelcase */
 
 describe('Overview', () => {
   describe('on initialization', () => {
@@ -96,12 +98,14 @@ describe('Overview', () => {
         <Overview location={{ search: 'tags=42&organisatie=42' }} />,
       )
 
+      /* eslint-disable camelcase */
       const expectedQueryParams = {}
       expectedQueryParams.q = ''
       expectedQueryParams.api_type = []
       expectedQueryParams.organization_name = ['42']
       expectedQueryParams.tags = ['42']
       expectedQueryParams.page = 1
+      /* eslint-enable camelcase */
 
       expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
     })
@@ -122,11 +126,13 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
+      /* eslint-disable camelcase */
       const newFilters = {}
       newFilters.q = ''
       newFilters.api_type = []
       newFilters.organization_name = ['42']
       newFilters.tags = ['42', '43']
+      /* eslint-enable camelcase */
 
       wrapper.instance().onFilterChange(newFilters)
       expect(history.push).toHaveBeenCalledWith(

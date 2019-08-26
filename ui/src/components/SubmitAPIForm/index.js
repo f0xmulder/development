@@ -238,7 +238,6 @@ const SubmitAPIForm = ({
               id="contact.url"
               name="contact.url"
             />
-            {console.log(errors)}
             {errors.contact &&
               errors.contact.url &&
               touched.contact &&
@@ -272,9 +271,7 @@ const SubmitAPIForm = ({
             />
             {errors.isReferenceImplementation &&
               touched.isReferenceImplementation && (
-                <ErrorMessage>
-                  {errors.isReferenceImplementation}
-                </ErrorMessage>
+                <ErrorMessage>{errors.isReferenceImplementation}</ErrorMessage>
               )}
           </StyledFormSetting>
         </StyledFormGroup>
@@ -294,7 +291,7 @@ const SubmitAPIForm = ({
               .filter((api) => api.isReferenceImplementation)
               .map((api) => (
                 <option value={api.id} key={api.id}>
-                  {api.service_name} {api.organization_name}
+                  {api.serviceName} {api.organizationName}
                 </option>
               ))}
           </Field>
@@ -321,8 +318,7 @@ const SubmitAPIForm = ({
                 id="termsOfUse.governmentOnly"
                 name="termsOfUse.governmentOnly"
                 checked={
-                  values.termsOfUse &&
-                  values.termsOfUse.governmentOnly === true
+                  values.termsOfUse && values.termsOfUse.governmentOnly === true
                 }
               />
               {errors.termsOfUse &&
@@ -348,8 +344,7 @@ const SubmitAPIForm = ({
                 id="termsOfUse.payPerUse"
                 name="termsOfUse.payPerUse"
                 checked={
-                  values.termsOfUse &&
-                  values.termsOfUse.payPerUse === true
+                  values.termsOfUse && values.termsOfUse.payPerUse === true
                 }
               />
               {errors.termsOfUse &&
