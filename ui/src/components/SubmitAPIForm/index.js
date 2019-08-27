@@ -142,7 +142,7 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="documentation_url">Documentatie URL</Label>
+            <Label htmlFor="documentationURL">Documentatie URL</Label>
             <Field
               component="input"
               type="text"
@@ -382,7 +382,7 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="termsOfUse.support_response_time">
+            <Label htmlFor="termsOfUse.supportResponseTime">
               Reactietijd van de helpdesk
             </Label>
             <Field
