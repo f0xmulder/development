@@ -6,7 +6,6 @@ import SubmitAPI, {
   mapFormValuesToAPIRequestBody,
 } from './index'
 import { Formik } from 'formik'
-import Overview from '../Overview'
 import { flushPromises } from '../../test-helpers'
 import { modelFromAPIResponse } from '../../models/api'
 
@@ -98,6 +97,13 @@ describe('map form values to API request body for submitting an API', () => {
   })
 })
 
+/* eslint-disable camelcase */
+const apiFromAPIResponse = {}
+apiFromAPIResponse.id = 'test-api.json'
+apiFromAPIResponse.organization_name = 'Organization Name'
+apiFromAPIResponse.service_name = 'Service Name'
+/* eslint-enable camelcase */
+
 describe('SubmitAPI', () => {
   afterEach(() => jest.clearAllMocks())
 
@@ -111,19 +117,12 @@ describe('SubmitAPI', () => {
   })
 
   describe('loading the available APIs', () => {
-    /* eslint-disable camelcase */
-    const apiFromAPIResponse = {}
-    apiFromAPIResponse.id = 'test-api.json'
-    apiFromAPIResponse.organization_name = 'Organization Name'
-    apiFromAPIResponse.service_name = 'Service Name'
-    /* eslint-enable camelcase */
-
     it('should store the available apis as state', () => {
       const apiPromise = Promise.resolve({
         total: 1,
         apis: [apiFromAPIResponse],
       })
-      Overview.prototype.fetchApiList = jest.fn(() => apiPromise)
+      SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
 
       const wrapper = shallow(<SubmitAPI />)
 
