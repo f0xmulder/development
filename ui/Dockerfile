@@ -16,6 +16,14 @@ COPY ui /go/src/commonground/developer.overheid.nl/ui
 
 RUN INLINE_RUNTIME_CHUNK=false npm run build
 
+# Test the code
+FROM build AS test
+
+ENV CI=true
+
+RUN npm run lint
+RUN npm run test -- --coverage
+
 # Copy static docs to alpine-based nginx container.
 FROM nginx:alpine as webserver
 

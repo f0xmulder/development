@@ -61,10 +61,11 @@ Test UI:
   script:
     - |
         docker build --target build \
-        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
-        -f ui/Dockerfile . && \
-        docker run --rm $UI_IMAGE:$CI_COMMIT_SHORT_SHA-build \
-        /bin/ash -c "npm run lint && npm run test -- --coverage"
+        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-test \
+        -f ui/Dockerfile .
+  except:
+    - master
+    - /^feature\/.*$/
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
 
 Release UI:
@@ -78,6 +79,7 @@ Release UI:
         -f ui/Dockerfile . && \
         docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
   only:
     - master
     - /^feature\/.*$/
@@ -102,11 +104,12 @@ Test API:
   script:
     - |
         docker build --target build \
-        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA-build \
-        -f api/Dockerfile . && \
-        docker run --rm $API_IMAGE:$CI_COMMIT_SHORT_SHA-build \
-        /bin/ash -c "go test ./... -coverprofile coverage.out && go tool cover -func=coverage.out"
+        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA-test \
+        -f api/Dockerfile .
   coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
+  except:
+    - master
+    - /^feature\/.*$/
 
 Release API:
   extends: .api
@@ -119,6 +122,7 @@ Release API:
         -f api/Dockerfile . && \
         docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
+  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
   only:
     - master
     - /^feature\/.*$/

@@ -17,6 +17,14 @@ WORKDIR /go/src/commonground/developer.overheid.nl/api
 
 RUN go build -o dist/bin/don-api ./cmd/don-api
 
+# Test the code
+FROM build AS test
+
+ENV CI=true
+WORKDIR /go/src/commonground/developer.overheid.nl/api
+
+RUN go test ./... -coverprofile coverage.out && go tool cover -func=coverage.out
+
 # Release binary on latest alpine image.
 FROM alpine:latest
 
