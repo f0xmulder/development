@@ -13,6 +13,7 @@ variables:
   DOMAIN: developer.overheid.nl
   REVIEW_BASE_DOMAIN: review.developer.overheid.nl
   KUBECTL_CONTEXT: delta.k8s.nlx.io
+  NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
 
 .validate:
   image: golang:1.13.1
@@ -133,8 +134,8 @@ Deploy Review App:
   script:
     - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
-        helm upgrade --install don-$CI_ENVIRONMENT_SLUG ./helm/don \
-        --namespace don-$CI_ENVIRONMENT_SLUG \
+        helm upgrade --install $NAMESPACE ./helm/don \
+        --namespace $NAMESPACE \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
@@ -161,7 +162,8 @@ Remove Review App:
   variables:
     GIT_STRATEGY: none
   script:
-    - helm delete --purge don-$CI_ENVIRONMENT_SLUG
+    - helm delete --purge $NAMESPACE
+    - kubectl delete namespace $NAMESPACE
   when: manual
   environment:
     name: $CI_COMMIT_REF_NAME
