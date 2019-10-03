@@ -27,7 +27,7 @@ import {
 } from './index.styles'
 
 const getOnlineRedocUrl = (specUrl) =>
-  `https://rebilly.github.io/ReDoc/?url=${encodeURIComponent(specUrl)}`
+  `https://redocly.github.io/redoc/?url=${encodeURIComponent(specUrl)}`
 
 export const referenceImplementationsFromRelations = (relations) =>
   Object.keys(relations || {}).filter((apiId) =>

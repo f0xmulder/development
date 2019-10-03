@@ -70,10 +70,10 @@ describe('APIDetails', () => {
       expect(apiSpecType.text()).toBe('API Type')
     })
 
-    it('should link to Rebilly with the specification URL', () => {
+    it('should link to Redocly with the specification URL', () => {
       const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
       expect(apiSpecUrl.prop('href')).toBe(
-        'https://rebilly.github.io/ReDoc/?url=Specification%20URL',
+        'https://redocly.github.io/redoc/?url=Specification%20URL',
       )
     })
   })
