@@ -24,7 +24,7 @@ require (
 	github.com/steveyen/gtreap v0.0.0-20150807155958-0abe01ef9be2 // indirect
 	github.com/stretchr/testify v1.4.0
 	github.com/syndtr/goleveldb v1.0.0 // indirect
-	github.com/tecbot/gorocksdb v0.0.0-20190924200004-f3d486edd4ec // indirect
+	github.com/tecbot/gorocksdb v0.0.0-20190930194452-65a88f08537a // indirect
 	go.etcd.io/bbolt v1.3.3 // indirect
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
