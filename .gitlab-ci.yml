@@ -11,9 +11,9 @@ stages:
 variables:
   IMAGE_PREFIX: $CI_REGISTRY_IMAGE
   DOMAIN: developer.overheid.nl
-  REVIEW_BASE_DOMAIN: review.developer.overheid.nl
   KUBECTL_CONTEXT: delta.k8s.nlx.io
-  NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
+  REVIEW_BASE_DOMAIN: nlx.reviews
+  REVIEW_NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
 
 .validate:
   image: golang:1.13.1
@@ -132,20 +132,21 @@ Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/cg-review-app-deployer:latest
   script:
-    - echo -e -n "https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
+    - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
-        helm upgrade --install $NAMESPACE ./helm/don \
-        --namespace $NAMESPACE \
+        helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
+        --namespace $REVIEW_NAMESPACE \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set domain=$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN \
+        --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
+        --set "replicas=1" \
         --set "ingressClass=traefik"
   environment:
     name: $CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
+    url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
     - review
@@ -162,12 +163,12 @@ Remove Review App:
   variables:
     GIT_STRATEGY: none
   script:
-    - helm delete --purge $NAMESPACE
-    - kubectl delete namespace $NAMESPACE
+    - helm delete --purge $REVIEW_NAMESPACE
+    - kubectl delete namespace $REVIEW_NAMESPACE
   when: manual
   environment:
     name: $CI_COMMIT_REF_NAME
-    url: https://$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
+    url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
     - review
