@@ -43,7 +43,7 @@ const APIFilters = ({ initialValues, facets, onSubmit, ...props }) => (
                     title={filter.label}
                     name={filter.key}
                     options={formatOptions(facets[filter.key].terms)}
-                    value={values[filter.key]}
+                    value={values[filter.key] || []}
                     onChangeHandler={handleSubmit}
                   />
                 ))

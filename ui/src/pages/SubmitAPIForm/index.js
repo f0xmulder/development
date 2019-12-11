@@ -268,8 +268,9 @@ class SubmitAPIFormPage extends Component {
             initialValues={initialValues}
             onSubmit={this.onSubmit}
             validationSchema={validationSchema}
-            render={(props) => <SubmitAPIForm {...props} apis={apis} />}
-          />
+          >
+            {(props) => <SubmitAPIForm {...props} apis={apis} />}
+          </Formik>
         )}
       </div>
     ) : null
