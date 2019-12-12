@@ -1,0 +1,19 @@
+{
+  "extends": ["config:base", "schedule:nonOfficeHours", "group:allNonMajor", ":semanticCommits"],
+  "postUpdateOptions": ["gomodTidy"],
+  "packageRules": [
+    {
+      "groupName": "ui",
+      "paths": ["ui/**"],
+      "stabilityDays": 3
+    },
+    {
+      "groupName": "api",
+      "paths": ["api/**"]
+    },
+    {
+      "groupName": "e2e",
+      "paths": ["e2e-tests/**"]
+    }
+  ]
+}
