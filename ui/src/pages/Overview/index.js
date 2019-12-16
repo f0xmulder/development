@@ -26,16 +26,16 @@ class Overview extends Component {
 
   loadAPIList() {
     return this.fetchApiList()
-      .then(response =>
+      .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map(api => modelFromAPIResponse(api)),
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
         }),
       )
       .then(
-        result => {
+        (result) => {
           this.setState({ result, loaded: true })
         },
-        error => {
+        (error) => {
           this.setState({ error: true, loaded: true })
           console.error(error)
         },
@@ -47,14 +47,19 @@ class Overview extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.location && prevProps.location.search !== this.props.location.search) {
+    if (
+      prevProps.location &&
+      prevProps.location.search !== this.props.location.search
+    ) {
       this.loadAPIList()
     }
   }
 
   fetchApiList() {
-    const fetched = fetch(`/api/apis?${this.generateQueryParams(this.getQueryParams())}`)
-    return fetched.then(response => {
+    const fetched = fetch(
+      `/api/apis?${this.generateQueryParams(this.getQueryParams())}`,
+    )
+    return fetched.then((response) => {
       if (response.ok) {
         return response.json()
       } else {
@@ -98,13 +103,13 @@ class Overview extends Component {
   generateQueryParams(filters) {
     const urlParams = new URLSearchParams()
 
-    Object.keys(filters).forEach(key => {
+    Object.keys(filters).forEach((key) => {
       if (filters[key].length === 0) {
         return
       }
 
       if (filters[key] instanceof Array) {
-        filters[key].forEach(value => {
+        filters[key].forEach((value) => {
           urlParams.append(key, value)
         })
       } else {
@@ -139,33 +144,35 @@ class Overview extends Component {
       <StyledOverviewPage>
         <StyledH1>Overzicht van API&#39;s</StyledH1>
         {!loaded ? null : error ? (
-          <p data-test="error-message">Er ging iets fout tijdens het ophalen van de API&#39;s.</p>
+          <p data-test="error-message">
+            Er ging iets fout tijdens het ophalen van de API&#39;s.
+          </p>
         ) : (
-            <Fragment>
-              <StyledAPIFilters
-                initialValues={this.getQueryParams()}
-                facets={result.facets}
-                onSubmit={this.onFilterChange}
-              />
-              <StyledResultsContainer>
-                {result && result.apis && result.apis.length > 0 ? (
-                  <Fragment>
-                    <APIList total={result.total} apis={result.apis} />
-                    <StyledPagination
-                      currentPage={page}
-                      totalRows={result.total}
-                      rowsPerPage={result.rowsPerPage}
-                      onPageChangedHandler={this.onPageChange}
-                    />
-                  </Fragment>
-                ) : (
-                    <p data-test="no-apis-available-message">
-                      Er zijn (nog) geen API&#39;s beschikbaar.
+          <Fragment>
+            <StyledAPIFilters
+              initialValues={this.getQueryParams()}
+              facets={result.facets}
+              onSubmit={this.onFilterChange}
+            />
+            <StyledResultsContainer>
+              {result && result.apis && result.apis.length > 0 ? (
+                <Fragment>
+                  <APIList total={result.total} apis={result.apis} />
+                  <StyledPagination
+                    currentPage={page}
+                    totalRows={result.total}
+                    rowsPerPage={result.rowsPerPage}
+                    onPageChangedHandler={this.onPageChange}
+                  />
+                </Fragment>
+              ) : (
+                <p data-test="no-apis-available-message">
+                  Er zijn (nog) geen API&#39;s beschikbaar.
                 </p>
-                  )}
-              </StyledResultsContainer>
-            </Fragment>
-          )}
+              )}
+            </StyledResultsContainer>
+          </Fragment>
+        )}
       </StyledOverviewPage>
     )
   }

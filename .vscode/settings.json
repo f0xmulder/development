@@ -1,0 +1,7 @@
+{
+  "eslint.workingDirectories": [
+    "./ui"
+  ],
+  "eslint.autoFixOnSave": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+}
