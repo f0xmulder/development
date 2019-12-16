@@ -1,7 +1,8 @@
 {
-  "extends": ["config:base", "group:allNonMajor", ":semanticCommits"],
+  "extends": ["config:base", "schedule:nonOfficeHours", "group:allNonMajor", ":semanticCommits"],
   "postUpdateOptions": ["gomodTidy"],
   "masterIssue": true,
+  "masterIssueApproval": true,  
   "groupName": "Root packages",
   "packageRules": [
     {
