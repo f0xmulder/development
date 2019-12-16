@@ -1,12 +1,9 @@
 {
-  "extends": ["config:base", "schedule:nonOfficeHours", "group:allNonMajor", ":semanticCommits"],
+  "extends": ["config:base", "group:allNonMajor", ":semanticCommits"],
   "postUpdateOptions": ["gomodTidy"],
+  "masterIssue": true,
+  "groupName": "Root packages",
   "packageRules": [
-    {
-      "groupName": "ui",
-      "paths": ["ui/**"],
-      "stabilityDays": 3
-    },
     {
       "groupName": "api",
       "paths": ["api/**"]
@@ -14,6 +11,11 @@
     {
       "groupName": "e2e",
       "paths": ["e2e-tests/**"]
+    },
+    {
+      "groupName": "ui",
+      "paths": ["ui/**"],
+      "stabilityDays": 3
     }
   ]
 }
