@@ -1,5 +1,5 @@
 import { mount } from 'enzyme/build'
-import { Formik } from 'formik'
+import { Formik, useFormikContext } from 'formik'
 import CheckboxGroupField from './index'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
@@ -11,10 +11,10 @@ const options = [
   { value: '43', label: '43', count: 3 },
 ]
 
-const createForm = (onChange = () => {}) => {
+const createForm = (onChange = () => {}, onSubmit = () => {}) => {
   return mount(
     <ThemeProvider theme={theme}>
-      <Formik initialValues={{ theNumber: ['42'] }}>
+      <Formik initialValues={{ theNumber: ['42'] }} onSubmit={onSubmit}>
         {({ values }) => (
           <CheckboxGroupField
             name="theNumber"
@@ -69,12 +69,37 @@ describe('CheckboxGroupField', () => {
   })
 
   it('returns the correct value when checked', () => {
-    const wrapper = createForm()
-    const form = wrapper.find(Formik)
+    let formikValues = null
 
-    const firstInput = wrapper.find(`input[value="41"]`)
+    const TransferValues = () => {
+      const { values, submitForm } = useFormikContext()
+      React.useEffect(() => {
+        formikValues = values
+      }, [values, submitForm])
+      return null
+    }
+
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <Formik initialValues={{ theNumber: ['42'] }}>
+          {({ values }) => (
+            <>
+              <CheckboxGroupField
+                name="theNumber"
+                options={options}
+                onChange={() => {}}
+                value={values.theNumber}
+              />
+              <TransferValues />
+            </>
+          )}
+        </Formik>
+      </ThemeProvider>,
+    )
+
+    const firstInput = wrapper.find('input[value="41"]')
     firstInput.simulate('change', { target: { checked: true } })
 
-    expect(form.state().values).toEqual({ theNumber: ['41', '42'] })
+    expect(formikValues).toEqual({ theNumber: ['41', '42'] })
   })
 })
