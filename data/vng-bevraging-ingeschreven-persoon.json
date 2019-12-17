@@ -6,13 +6,13 @@
     "api_type": "REST/JSON",
     "specification_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/api-specificatie/Bevraging-Ingeschreven-Persoon/openapi.yaml",
     "documentation_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen",
-    "tags": [],
-    "badges": [
+    "tags": [
         "BRP",
         "Persoonsgegevens",
         "Ingeschreven persoon",
         "Gemeente"
     ],
+    "badges": [],
     "contact": {
         "email": "",
         "phone": "",
