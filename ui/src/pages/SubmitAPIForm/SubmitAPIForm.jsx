@@ -12,7 +12,7 @@ import {
 import * as Yup from 'yup'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
-import { emptyIsZero } from '../../components/Form/yup-utils'
+import { convertEmptyValueTo } from '../../components/Form/yup-utils'
 import { modelFromAPIResponse } from '../../models/api'
 
 Yup.setLocale({
@@ -79,7 +79,7 @@ const termsOfUseSchemaConfiguration = {}
 termsOfUseSchemaConfiguration.governmentOnly = Yup.boolean()
 termsOfUseSchemaConfiguration.payPerUse = Yup.boolean()
 termsOfUseSchemaConfiguration.uptimeGuarantee = Yup.number().transform(
-  emptyIsZero,
+  convertEmptyValueTo(0),
 )
 termsOfUseSchemaConfiguration.supportResponseTime = Yup.string()
 validationSchemaConfiguration.termsOfUse = Yup.object().shape(
@@ -178,7 +178,6 @@ class SubmitAPIFormPage extends Component {
     })
 
     data = convertRIFormDataToAPIDefinition(data)
-
     data = mapFormValuesToAPIRequestBody(data)
 
     return this.submitToApi(data)
