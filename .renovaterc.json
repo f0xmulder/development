@@ -1,20 +1,22 @@
 {
-  "extends": ["config:base", "schedule:nonOfficeHours", "group:allNonMajor", ":semanticCommits"],
+  "extends": ["config:base", "schedule:nonOfficeHours", ":semanticCommits"],
   "postUpdateOptions": ["gomodTidy"],
   "masterIssue": true,
-  "masterIssueApproval": true,  
-  "groupName": "Root packages",
+  "masterIssueApproval": true,
   "packageRules": [
     {
-      "groupName": "api",
-      "paths": ["api/**"]
+      "groupName": "api non-major dependencies",
+      "groupSlug": "go-minor-patch",
+      "paths": ["*", "api/**"]
     },
     {
-      "groupName": "e2e",
+      "groupName": "e2e non-major dependencies",
+      "groupSlug": "e2e-minor-patch",
       "paths": ["e2e-tests/**"]
     },
     {
-      "groupName": "ui",
+      "groupName": "ui non-major dependencies",
+      "groupSlug": "ui-minor-patch",
       "paths": ["ui/**"],
       "stabilityDays": 3
     }
