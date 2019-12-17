@@ -12,6 +12,7 @@ import {
 import * as Yup from 'yup'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
+import { emptyIsZero } from '../../components/Form/yup-utils'
 import { modelFromAPIResponse } from '../../models/api'
 
 Yup.setLocale({
@@ -77,7 +78,9 @@ validationSchemaConfiguration.contact = Yup.object().shape()
 const termsOfUseSchemaConfiguration = {}
 termsOfUseSchemaConfiguration.governmentOnly = Yup.boolean()
 termsOfUseSchemaConfiguration.payPerUse = Yup.boolean()
-termsOfUseSchemaConfiguration.uptimeGuarantee = Yup.number()
+termsOfUseSchemaConfiguration.uptimeGuarantee = Yup.number().transform(
+  emptyIsZero,
+)
 termsOfUseSchemaConfiguration.supportResponseTime = Yup.string()
 validationSchemaConfiguration.termsOfUse = Yup.object().shape(
   termsOfUseSchemaConfiguration,
