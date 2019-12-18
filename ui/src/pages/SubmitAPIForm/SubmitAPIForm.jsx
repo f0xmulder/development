@@ -12,7 +12,7 @@ import {
 import * as Yup from 'yup'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
-import { convertEmptyValueTo } from '../../components/Form/yup-utils'
+import { convertEmptyValueTo } from '../../components/Form/yup-transforms'
 import { modelFromAPIResponse } from '../../models/api'
 
 Yup.setLocale({

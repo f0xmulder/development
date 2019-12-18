@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-import { convertEmptyValueTo } from './yup-utils'
+import { convertEmptyValueTo } from './yup-transforms'
 
 describe('yup-utils', () => {
   describe('convertEmptyValueTo', () => {
