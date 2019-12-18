@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Field as FormikField } from 'formik'
 
 export const Fieldset = styled.fieldset`
@@ -39,20 +39,36 @@ export const Field = styled(FormikField)`
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `
 
-export const Button = styled.button`
+export const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: 40px;
-  background-color: ${(p) => p.theme.color.primary.normal};
-  border-radius: 5px;
-  color: #ffffff;
+`
+
+export const Button = styled.button`
   text-align: center;
-  margin: 0 auto;
-  padding: 0 20px 2px;
+  height: 40px;
+  line-height: ${(p) => p.theme.font.lineHeight.normal};
+  padding: 0 20px;
   border: 0 none;
+  border-radius: 5px;
+  background-color: ${(p) => p.theme.color.primary.normal};
+  color: #ffffff;
   cursor: pointer;
   font-family: inherit;
   font-size: ${(p) => p.theme.font.size.normal};
-  line-height: ${(p) => p.theme.font.lineHeight.normal};
   font-weight: ${(p) => p.theme.font.weight.semibold};
+
+  ${(p) =>
+    p.variant === 'secondary'
+      ? css`
+          background-color: #ffffff;
+          color: ${p.theme.color.primary.normal};
+          border: 1px solid ${p.theme.color.primary.normal};
+        `
+      : ''}
+
+  &:not(:first-child) {
+    margin-left: 1rem;
+  }
 `

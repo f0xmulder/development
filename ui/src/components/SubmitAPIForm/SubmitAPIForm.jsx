@@ -10,7 +10,14 @@ import {
   ErrorMessage,
 } from './SubmitAPIForm.styles'
 
-import { Fieldset, Legend, Label, Field, Button } from '../Form/Form'
+import {
+  Fieldset,
+  Legend,
+  Label,
+  Field,
+  ButtonWrapper,
+  Button,
+} from '../Form/Form'
 
 const SubmitAPIForm = ({
   apis,
@@ -407,11 +414,14 @@ const SubmitAPIForm = ({
 
     {status && status.msg && <div data-test="status-message">{status.msg}</div>}
 
-    <p style={{ textAlign: 'center', margin: 0 }}>
-      <Button type="submit" disabled={isSubmitting} className="btn btn-primary">
+    <ButtonWrapper>
+      <Button type="reset" variant="secondary">
+        Reset
+      </Button>
+      <Button type="submit" disabled={isSubmitting}>
         Verstuur
       </Button>
-    </p>
+    </ButtonWrapper>
   </form>
 )
 

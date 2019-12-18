@@ -239,4 +239,30 @@ describe('SubmitAPI', () => {
       })
     })
   })
+
+  describe('Form data', () => {
+    let formWrapper
+    const testValue = { organizationName: 'VNG' }
+
+    beforeEach(() => {
+      global.sessionStorage.removeItem('storedFormValues')
+      formWrapper = shallow(<SubmitAPI />)
+      formWrapper.setState({ storedFormValues: testValue })
+    })
+
+    it('Should be saved when the component unmounts', () => {
+      formWrapper.unmount()
+
+      const storedValue = JSON.parse(
+        global.sessionStorage.getItem('storedFormValues'),
+      )
+      expect(storedValue).toEqual(testValue)
+    })
+
+    it('should clear stored values when resetting the form', () => {
+      formWrapper.instance().onReset()
+      expect(formWrapper.state('storedFormValues')).toBeNull()
+      expect(global.sessionStorage.getItem('storedFormValues')).toBeNull()
+    })
+  })
 })

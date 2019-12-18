@@ -1,94 +1,38 @@
 import React, { Component } from 'react'
 import { Formik } from 'formik'
-import {
-  array,
-  boolean,
-  date,
-  mixed,
-  number,
-  object,
-  string,
-} from './yup-translations'
-import * as Yup from 'yup'
+
+import validationSchema from './validationSchema'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
-import { convertEmptyValueTo } from '../../components/Form/yup-transforms'
+import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
 import { modelFromAPIResponse } from '../../models/api'
 
-Yup.setLocale({
-  mixed,
-  array,
-  string,
-  object,
-  date,
-  boolean,
-  number,
-})
-
-const initialValues = {}
-initialValues.description = ''
-initialValues.organizationName = ''
-initialValues.serviceName = ''
-initialValues.apiURL = ''
-initialValues.apiType = 'Onbekend'
-initialValues.specificationURL = ''
-initialValues.documentationURL = ''
-initialValues.tags = []
-initialValues.badges = ''
-initialValues.contact = {
-  email: '',
-  phone: '',
-  fax: '',
-  chat: '',
-  url: '',
+const initialValues = {
+  description: '',
+  organizationName: '',
+  serviceName: '',
+  apiURL: '',
+  apiType: 'Onbekend',
+  specificationURL: '',
+  documentationURL: '',
+  tags: [],
+  badges: '',
+  contact: {
+    email: '',
+    phone: '',
+    fax: '',
+    chat: '',
+    url: '',
+  },
+  termsOfUse: {
+    governmentOnly: false,
+    payPerUse: false,
+    uptimeGuarantee: 99.5,
+    supportResponseTime: '',
+  },
+  isReferenceImplementation: false,
+  referenceImplementation: '',
 }
-const termsOfUse = {}
-termsOfUse.governmentOnly = false
-termsOfUse.payPerUse = false
-termsOfUse.uptimeGuarantee = 99.5
-termsOfUse.supportResponseTime = ''
-
-initialValues.termsOfUse = termsOfUse
-initialValues.isReferenceImplementation = false
-initialValues.referenceImplementation = ''
-
-const validationSchemaConfiguration = {}
-validationSchemaConfiguration.description = Yup.string()
-  .trim()
-  .required()
-validationSchemaConfiguration.organizationName = Yup.string().required()
-validationSchemaConfiguration.serviceName = Yup.string().required()
-validationSchemaConfiguration.apiURL = Yup.string()
-  .url()
-  .required()
-validationSchemaConfiguration.apiType = Yup.string().required()
-validationSchemaConfiguration.specificationURL = Yup.string().url()
-validationSchemaConfiguration.documentationURL = Yup.string().url()
-validationSchemaConfiguration.tags = Yup.string()
-validationSchemaConfiguration.badges = Yup.string()
-validationSchemaConfiguration.contact = Yup.object().shape({
-  email: Yup.string().email(),
-  phone: Yup.string(),
-  fax: Yup.string(),
-  chat: Yup.string().url(),
-  url: Yup.string().url(),
-})
-validationSchemaConfiguration.contact = Yup.object().shape()
-
-const termsOfUseSchemaConfiguration = {}
-termsOfUseSchemaConfiguration.governmentOnly = Yup.boolean()
-termsOfUseSchemaConfiguration.payPerUse = Yup.boolean()
-termsOfUseSchemaConfiguration.uptimeGuarantee = Yup.number().transform(
-  convertEmptyValueTo(0),
-)
-termsOfUseSchemaConfiguration.supportResponseTime = Yup.string()
-validationSchemaConfiguration.termsOfUse = Yup.object().shape(
-  termsOfUseSchemaConfiguration,
-)
-validationSchemaConfiguration.isReferenceImplementation = Yup.boolean()
-validationSchemaConfiguration.referenceImplementation = Yup.string()
-
-const validationSchema = Yup.object().shape(validationSchemaConfiguration)
 
 const arrayFields = ['tags', 'badges']
 
@@ -157,12 +101,19 @@ class SubmitAPIFormPage extends Component {
   constructor(props) {
     super(props)
 
+    const sessionFormValues = sessionStorage.getItem('storedFormValues')
+    let storedFormValues = null
+    try {
+      storedFormValues = JSON.parse(sessionFormValues)
+    } catch (e) {}
+
     this.state = {
       submitted: false,
       responseData: {},
       result: {},
       apisLoaded: false,
       apisError: false,
+      storedFormValues, // Only use this to save values when unmounting
     }
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -186,7 +137,9 @@ class SubmitAPIFormPage extends Component {
         this.setState({
           submitted: true,
           responseData,
+          storedFormValues: null,
         })
+        this.onReset()
       })
       .catch((error) => {
         actions.setSubmitting(false)
@@ -212,6 +165,15 @@ class SubmitAPIFormPage extends Component {
         throw new Error('Er ging iets fout tijdens het toevoegen van de API.')
       }
     })
+  }
+
+  formikValueChange = (values) => {
+    this.setState({ storedFormValues: values })
+  }
+
+  onReset = () => {
+    sessionStorage.removeItem('storedFormValues')
+    this.setState({ storedFormValues: null })
   }
 
   fetchApiList() {
@@ -242,10 +204,22 @@ class SubmitAPIFormPage extends Component {
           console.error(error)
         },
       )
+
+    window && window.addEventListener('beforeunload', this.onReset)
+  }
+
+  componentWillUnmount() {
+    sessionStorage.setItem(
+      'storedFormValues',
+      JSON.stringify(this.state.storedFormValues),
+    )
+
+    window && window.removeEventListener('beforeunload', this.onReset)
   }
 
   render() {
     const {
+      storedFormValues,
       result: { apis },
       apisLoaded,
     } = this.state
@@ -267,11 +241,18 @@ class SubmitAPIFormPage extends Component {
           </p>
         ) : (
           <Formik
-            initialValues={initialValues}
+            initialValues={storedFormValues || initialValues}
+            enableReinitialize={true}
             onSubmit={this.onSubmit}
+            onReset={this.onReset}
             validationSchema={validationSchema}
           >
-            {(props) => <SubmitAPIForm {...props} apis={apis} />}
+            {(props) => (
+              <>
+                <OnFormikValueChange handle={this.formikValueChange} />
+                <SubmitAPIForm {...props} apis={apis} />
+              </>
+            )}
           </Formik>
         )}
       </div>
