@@ -10,7 +10,10 @@ const Expandable = ({ children }) => {
         {children}
       </StyledContent>
 
-      <StyledToggleButton onClick={() => setIsExpanded(!isExpanded)}>
+      <StyledToggleButton
+        onClick={() => setIsExpanded(!isExpanded)}
+        type="button"
+      >
         {isExpanded ? '- Minder opties' : '+ Alle opties'}
       </StyledToggleButton>
     </Fragment>
