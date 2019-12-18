@@ -43,7 +43,7 @@ func File(filePath string) ValidationFeedback {
 	if err != nil {
 		return ValidationFeedback{
 			false,
-			"invalid JSON",
+			fmt.Sprintf("invalid JSON: %s", err.Error()),
 		}
 	}
 
@@ -72,13 +72,6 @@ func File(filePath string) ValidationFeedback {
 		return ValidationFeedback{
 			false,
 			"the field api_url is missing",
-		}
-	}
-
-	if len(newAPI.APIType) < 1 {
-		return ValidationFeedback{
-			false,
-			"the field api_type is missing",
 		}
 	}
 

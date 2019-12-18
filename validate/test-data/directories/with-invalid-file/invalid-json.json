@@ -2,7 +2,7 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_url": "Test API URL",
-    "api_type": "Test API Type",
+    "api_type": "REST/JSON",
     "specification_url": "Test Specification URL",
     "documentation_url": "Test Documentation URL"
 }, foo bar baz

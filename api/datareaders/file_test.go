@@ -21,7 +21,7 @@ func TestFile(t *testing.T) {
 				OrganizationName: "Test Organization Name",
 				ServiceName:      "Test Service Name",
 				APIURL:           "Test API URL",
-				APIType:          "Test API Type",
+				APIType:          "REST/JSON",
 				SpecificationURL: "Test Specification URL",
 				DocumentationURL: "Test Documentation URL",
 				Tags:             []models.Tag{"test tag"},
