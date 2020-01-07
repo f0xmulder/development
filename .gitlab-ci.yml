@@ -56,20 +56,7 @@ Validate API definitions:
   services:
     - docker:dind
 
-Test UI:
-  extends: .ui
-  stage: test
-  script:
-    - |
-        docker build --target build \
-        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA-test \
-        -f ui/Dockerfile .
-  except:
-    - master
-    - /^feature\/.*$/
-  coverage: /All\sfiles.*?\s+(\d+.\d+)/
-
-Release UI:
+Test and release UI:
   extends: .ui
   stage: release
   script:
@@ -81,9 +68,6 @@ Release UI:
         docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
-  only:
-    - master
-    - /^feature\/.*$/
 
 ## API ##
 .api:
@@ -99,20 +83,7 @@ Release UI:
   services:
     - docker:dind
 
-Test API:
-  extends: .api
-  stage: test
-  script:
-    - |
-        docker build --target build \
-        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA-test \
-        -f api/Dockerfile .
-  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
-  except:
-    - master
-    - /^feature\/.*$/
-
-Release API:
+Test and release API:
   extends: .api
   stage: release
   script:
@@ -124,9 +95,6 @@ Release API:
         docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
-  only:
-    - master
-    - /^feature\/.*$/
 
 Deploy Review App:
   stage: review
@@ -151,8 +119,8 @@ Deploy Review App:
   tags:
     - review
     - kubernetes
-  only:
-    - /^feature\/.*$/
+  except:
+    - master
   artifacts:
     paths:
       - ci_environment_url.txt
@@ -173,8 +141,8 @@ Remove Review App:
   tags:
     - review
     - kubernetes
-  only:
-    - /^feature\/.*$/
+  except:
+    - master
 
 E2E tests:
   stage: e2e-tests
@@ -197,9 +165,6 @@ E2E tests:
     - linux
   services:
     - docker:dind
-  only:
-    - master
-    - /^feature\/.*$/
 
 Deploy production:
   stage: deploy
