@@ -47,11 +47,11 @@ const SubmitAPIMergeRequest = () => (
             `}
     </StyledPre>
     <p>
-      Maak vervolgens een{' '}
-      <a href="https://gitlab.com/commonground/developer.overheid.nl/merge_requests/new">
-        Merge Request
+      Maak vervolgens een Merge Request aan van{' '}
+      <a href="https://gitlab.com/commonground/developer.overheid.nl/-/forks">
+        jouw geforkte repository
       </a>{' '}
-      aan om jouw toevoeging in te dienen.
+      naar de officiële repository om jouw toevoeging in te dienen.
     </p>
   </div>
 )
