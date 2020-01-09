@@ -129,7 +129,8 @@ class SubmitAPIFormPage extends Component<Props, State> {
       storedFormValues, // Only use this to save values when unmounting
     }
 
-    this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.submitToApi = this.submitToApi.bind(this)
   }
 
   handleSubmit(values: SchemaType, actions: FormikHelpers<SchemaType>) {
