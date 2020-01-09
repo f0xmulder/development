@@ -27,7 +27,7 @@ export const formDataMock: SchemaType = {
   },
 }
 
-export const submitDataMock: any = {
+export const submitDataMock: { [key: string]: unknown } = {
   /* eslint-disable @typescript-eslint/camelcase */
   service_name: 'service name',
   organization_name: 'organization name',

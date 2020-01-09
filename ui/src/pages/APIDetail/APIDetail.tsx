@@ -53,29 +53,16 @@ class APIDetail extends Component<Props, State> {
     )
   }
 
-  UNSAFE_componentWillUpdate(nextProps: Props) {
-    const {
-      match: {
-        params: { id },
-      },
-    } = nextProps
-    const {
-      match: {
-        params: { id: prevId },
-      },
-    } = this.props
-    if (prevId === id) {
-      return
-    }
+  componentDidUpdate(prevProps: Props) {
+    const { id } = this.props.match.params
+    const prevId = prevProps.match.params.id
+
+    if (prevId === id) return
     this.loadDetailsForApi(id)
   }
 
   componentDidMount() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props
+    const { id } = this.props.match.params
     this.loadDetailsForApi(id)
   }
 

@@ -38,7 +38,7 @@ module.exports = {
     
     // CUSTOM RULES ---
     
-    // 'react/no-unsafe': 'warn', // TODO: uncomment when done converting to TS. Highlights whole class if present, so highly annoying :)
+    'react/no-unsafe': 'warn',
     
     'no-console': [
       'warn',
