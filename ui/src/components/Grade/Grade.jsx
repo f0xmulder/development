@@ -23,10 +23,10 @@ const Grade = ({ scores }) => {
 
 Grade.propTypes = {
   scores: shape({
-    hasDocumentation: bool.isRequired,
-    hasSpecification: bool.isRequired,
-    hasContactDetails: bool.isRequired,
-    providesSla: bool.isRequired,
+    hasDocumentation: bool,
+    hasSpecification: bool,
+    hasContactDetails: bool,
+    providesSla: bool,
   }),
 }
 

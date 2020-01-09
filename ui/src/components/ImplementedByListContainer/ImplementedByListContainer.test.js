@@ -4,19 +4,19 @@ import ImplementedByListContainer from './ImplementedByListContainer'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
-/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/camelcase */
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = '1'
 apiFromAPIResponse.service_name = 'service'
 apiFromAPIResponse.organization_name = 'organization'
-/* eslint-enable camelcase */
+/* eslint-enable @typescript-eslint/camelcase */
 
 describe('ImplementedByListContainer', () => {
   describe('on initialization', () => {
     it('should fetch the implementedBy info', () => {
       jest.spyOn(ImplementedByListContainer.prototype, 'fetchImplementedByInfo')
 
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
       expect(wrapper.instance().fetchImplementedByInfo).toHaveBeenCalled()
     })
   })
@@ -28,7 +28,7 @@ describe('ImplementedByListContainer', () => {
         () => apiPromise,
       )
 
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
 
       return flushPromises().then(() => {
         expect(wrapper.state('apis')).toEqual([
@@ -42,7 +42,7 @@ describe('ImplementedByListContainer', () => {
     let apiList
 
     beforeEach(() => {
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
       wrapper.setState({
         apis: [modelFromAPIResponse(apiFromAPIResponse)],
         loaded: true,
@@ -57,7 +57,7 @@ describe('ImplementedByListContainer', () => {
 
   describe('when the API is not implemented by another API', () => {
     it('should be empty', () => {
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
       wrapper.setState({ apis: [], loaded: true })
       expect(wrapper.children().exists()).toBe(false)
     })
@@ -72,7 +72,7 @@ describe('ImplementedByListContainer', () => {
         () => thePromise,
       )
 
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
 
       return flushPromises().then(() => {
         expect(wrapper.state().error).toBe(true)
@@ -82,7 +82,7 @@ describe('ImplementedByListContainer', () => {
 
   describe('when the component is in the error state', () => {
     it('an error message should be visible', () => {
-      const wrapper = shallow(<ImplementedByListContainer id={'42'} />)
+      const wrapper = shallow(<ImplementedByListContainer id="42" />)
       wrapper.setState({ error: true, loaded: true })
       const noTagsMessageElement = wrapper.find('[data-test="error-message"]')
       expect(noTagsMessageElement.exists()).toBe(true)

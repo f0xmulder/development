@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+
 import APIDetails, { referenceImplementationsFromRelations } from './APIDetails'
 import { PageTitle, SubTitle } from './APIDetails.styles'
 
@@ -60,8 +61,8 @@ describe('APIDetails', () => {
   })
 
   it('should show the API URL as an input element', () => {
-    const apiURL = wrapper.find('[data-test="api-url"]')
-    expect(apiURL.prop('value')).toBe('API URL')
+    const apiUrl = wrapper.find('[data-test="api-url"]')
+    expect(apiUrl.text()).toBe('API URL')
   })
 
   describe('api type', () => {

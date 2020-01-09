@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { RouteComponentProps } from 'react-router-dom'
 
+import { Api } from '../../models/apiTypes'
 import APIDetails from '../../components/APIDetails/APIDetails'
-import { Container } from './APIDetail.styles'
 import { modelFromAPIResponse } from '../../models/api'
+import { Container } from './APIDetail.styles'
 
-class APIDetail extends Component {
-  constructor(props) {
-    super(props)
+type MatchParams = {
+  id: string
+}
 
-    this.state = {
-      details: {},
-      error: false,
-      loaded: false,
-    }
+type Props = RouteComponentProps<MatchParams>
+
+type State = {
+  details: Api
+  loaded: boolean
+  error: boolean
+}
+
+class APIDetail extends Component<Props, State> {
+  static defaultProps = {
+    match: { params: {} },
   }
 
-  fetchApiDetails(id) {
+  state = {
+    details: {} as Api,
+    error: false,
+    loaded: false,
+  }
+
+  fetchApiDetails(id: string) {
     return fetch(`/api/apis/${id}`).then((response) => {
       if (response.ok) {
         return response.json()
@@ -28,7 +41,7 @@ class APIDetail extends Component {
     })
   }
 
-  loadDetailsForApi(id) {
+  loadDetailsForApi(id: string) {
     return this.fetchApiDetails(id).then(
       (details) => {
         this.setState({ details: modelFromAPIResponse(details), loaded: true })
@@ -40,7 +53,7 @@ class APIDetail extends Component {
     )
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps: Props) {
     const {
       match: {
         params: { id },
@@ -51,11 +64,9 @@ class APIDetail extends Component {
         params: { id: prevId },
       },
     } = this.props
-
     if (prevId === id) {
       return
     }
-
     this.loadDetailsForApi(id)
   }
 
@@ -70,7 +81,6 @@ class APIDetail extends Component {
 
   render() {
     const { details, error, loaded } = this.state
-
     return (
       <div className="APIDetail">
         {!loaded ? null : error ? (
@@ -85,14 +95,6 @@ class APIDetail extends Component {
       </div>
     )
   }
-}
-
-APIDetail.propTypes = {
-  match: object,
-}
-
-APIDetail.defaultProps = {
-  match: { params: {} },
 }
 
 export default APIDetail

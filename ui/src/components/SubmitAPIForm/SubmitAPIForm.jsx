@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { array, object } from 'prop-types'
 
@@ -23,10 +24,8 @@ const SubmitAPIForm = ({
   apis,
   values,
   errors,
-  status,
+  status = undefined,
   touched,
-  handleBlur,
-  handleChange,
   handleReset,
   handleSubmit,
   isSubmitting,
@@ -107,10 +106,10 @@ const SubmitAPIForm = ({
 
         <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="apiURL">API URL*</Label>
-            <Field component="input" type="text" id="apiURL" name="apiURL" />
-            {errors.apiURL && touched.apiURL && (
-              <ErrorMessage>{errors.apiURL}</ErrorMessage>
+            <Label htmlFor="apiUrl">API URL*</Label>
+            <Field component="input" type="text" id="apiUrl" name="apiUrl" />
+            {errors.apiUrl && touched.apiUrl && (
+              <ErrorMessage>{errors.apiUrl}</ErrorMessage>
             )}
           </StyledFormGroup>
 
@@ -133,15 +132,15 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="specificationURL">Specificatie URL</Label>
+            <Label htmlFor="specificationUrl">Specificatie URL</Label>
             <Field
               component="input"
               type="text"
-              id="specificationURL"
-              name="specificationURL"
+              id="specificationUrl"
+              name="specificationUrl"
             />
-            {errors.specificationURL && touched.specificationURL && (
-              <ErrorMessage>{errors.specificationURL}</ErrorMessage>
+            {errors.specificationUrl && touched.specificationUrl && (
+              <ErrorMessage>{errors.specificationUrl}</ErrorMessage>
             )}
             <HelperMessage>
               Link naar een machine leesbare documentatie.
@@ -149,15 +148,15 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="documentationURL">Documentatie URL</Label>
+            <Label htmlFor="documentationUrl">Documentatie URL</Label>
             <Field
               component="input"
               type="text"
-              id="documentationURL"
-              name="documentationURL"
+              id="documentationUrl"
+              name="documentationUrl"
             />
-            {errors.documentationURL && touched.documentationURL && (
-              <ErrorMessage>{errors.documentationURL}</ErrorMessage>
+            {errors.documentationUrl && touched.documentationUrl && (
+              <ErrorMessage>{errors.documentationUrl}</ErrorMessage>
             )}
             <HelperMessage>
               Link naar een menselijk leesbare documentatie.

@@ -1,17 +1,16 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+
 import Overview from './Overview'
+import { goApiMock } from '../../models/api.mock'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
-/* eslint-disable camelcase */
-const apiFromAPIResponse = {}
-apiFromAPIResponse.id = 'test-api.json'
-apiFromAPIResponse.organization_name = 'Organization Name'
-apiFromAPIResponse.service_name = 'Service Name'
-/* eslint-enable camelcase */
-
 describe('Overview', () => {
+  beforeAll(() => {
+    global.console.error = jest.fn()
+  })
+
   describe('on initialization', () => {
     it('should fetch the available apis', () => {
       jest.spyOn(Overview.prototype, 'fetchApiList')
@@ -25,7 +24,7 @@ describe('Overview', () => {
     it('should store the available apis as state', () => {
       const apiPromise = Promise.resolve({
         total: 1,
-        apis: [apiFromAPIResponse],
+        apis: [goApiMock],
       })
       Overview.prototype.fetchApiList = jest.fn(() => apiPromise)
 
@@ -34,7 +33,7 @@ describe('Overview', () => {
       return flushPromises().then(() => {
         expect(wrapper.state('result')).toEqual({
           total: 1,
-          apis: [modelFromAPIResponse(apiFromAPIResponse)],
+          apis: [modelFromAPIResponse(goApiMock)],
         })
       })
     })
@@ -46,7 +45,7 @@ describe('Overview', () => {
     beforeEach(() => {
       wrapper = shallow(<Overview />)
       wrapper.setState({
-        result: { total: 1, apis: [modelFromAPIResponse(apiFromAPIResponse)] },
+        result: { total: 1, apis: [modelFromAPIResponse(goApiMock)] },
         loaded: true,
       })
       apiList = wrapper.find('APIList')
@@ -98,26 +97,16 @@ describe('Overview', () => {
         <Overview location={{ search: 'tags=42&organisatie=42' }} />,
       )
 
-      /* eslint-disable camelcase */
+      /* eslint-disable @typescript-eslint/camelcase */
       const expectedQueryParams = {}
       expectedQueryParams.q = ''
       expectedQueryParams.api_type = []
       expectedQueryParams.organization_name = ['42']
       expectedQueryParams.tags = ['42']
-      expectedQueryParams.page = 1
-      /* eslint-enable camelcase */
+      expectedQueryParams.page = '1'
+      /* eslint-enable @typescript-eslint/camelcase */
 
       expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
-    })
-  })
-
-  describe('generating query parameters for set of filters', () => {
-    it('should translate the filters into query parameters', () => {
-      const wrapper = shallow(<Overview />)
-      const result = wrapper
-        .instance()
-        .generateQueryParams({ q: 'test', tags: ['42', '43'] })
-      expect(result.toString()).toEqual('q=test&tags=42&tags=43')
     })
   })
 
@@ -126,15 +115,15 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
-      /* eslint-disable camelcase */
+      /* eslint-disable @typescript-eslint/camelcase */
       const newFilters = {}
       newFilters.q = ''
       newFilters.api_type = []
       newFilters.organization_name = ['42']
       newFilters.tags = ['42', '43']
-      /* eslint-enable camelcase */
+      /* eslint-enable @typescript-eslint/camelcase */
 
-      wrapper.instance().onFilterChange(newFilters)
+      wrapper.instance().handleFilterChange(newFilters)
       expect(history.push).toHaveBeenCalledWith(
         '?tags=42&tags=43&organisatie=42',
       )
@@ -156,7 +145,7 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
-      wrapper.instance().onPageChange(1)
+      wrapper.instance().handlePageChange(1)
       expect(history.push).toHaveBeenCalledWith('?pagina=1')
     })
 
@@ -166,7 +155,7 @@ describe('Overview', () => {
         <Overview history={history} location={{ search: 'foo=bar' }} />,
       )
 
-      wrapper.instance().onPageChange(1)
+      wrapper.instance().handlePageChange(1)
       expect(history.push).toHaveBeenCalledWith('?foo=bar&pagina=1')
     })
   })

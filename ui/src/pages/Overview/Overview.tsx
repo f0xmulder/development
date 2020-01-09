@@ -1,5 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
+
+import { GoApi, Api } from '../../models/apiTypes'
 import APIList from '../../components/APIList/APIList'
+import { modelFromAPIResponse } from '../../models/api'
+
+import { generateQueryParams } from './uriHelpers'
 import {
   StyledOverviewPage,
   StyledAPIFilters,
@@ -7,32 +13,45 @@ import {
   StyledH1,
   StyledPagination,
 } from './Overview.styles'
-import { modelFromAPIResponse } from '../../models/api'
 
-class Overview extends Component {
-  constructor(props) {
-    super(props)
+type FilterParams = {
+  q: string
+  tags: string[]
+  organization_name: string[]
+  api_type: string[]
+  page: string
+}
 
-    this.state = {
-      result: {},
-      error: false,
-      loaded: false,
-    }
+type Props = RouteComponentProps
 
-    this.getQueryParams = this.getQueryParams.bind(this)
-    this.onFilterChange = this.onFilterChange.bind(this)
-    this.onPageChange = this.onPageChange.bind(this)
+type State = {
+  result: {
+    total: number
+    page: number
+    rowsPerPage: number
+    facets: object
+    apis: Api[]
+  }
+  error: boolean
+  loaded: boolean
+}
+
+class Overview extends Component<Props, State> {
+  state = {
+    result: {} as State['result'],
+    error: false,
+    loaded: false,
   }
 
   loadAPIList() {
     return this.fetchApiList()
       .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+          apis: response.apis.map((api: GoApi) => modelFromAPIResponse(api)),
         }),
       )
       .then(
-        (result) => {
+        (result: State['result']) => {
           this.setState({ result, loaded: true })
         },
         (error) => {
@@ -46,7 +65,7 @@ class Overview extends Component {
     this.loadAPIList()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: Props) {
     if (
       prevProps.location &&
       prevProps.location.search !== this.props.location.search
@@ -57,8 +76,9 @@ class Overview extends Component {
 
   fetchApiList() {
     const fetched = fetch(
-      `/api/apis?${this.generateQueryParams(this.getQueryParams())}`,
+      `/api/apis?${generateQueryParams(this.getQueryParams())}`,
     )
+
     return fetched.then((response) => {
       if (response.ok) {
         return response.json()
@@ -68,77 +88,57 @@ class Overview extends Component {
     })
   }
 
-  onFilterChange(newFilters) {
+  handleFilterChange = (newFilters: FilterParams): void => {
     const currentFilters = this.getQueryParams()
 
     // Reset facets when starting a new text search
     if (newFilters.q !== currentFilters.q) {
-      /* eslint-disable camelcase */
+      /* eslint-disable @typescript-eslint/camelcase */
       newFilters.tags = []
       newFilters.organization_name = []
       newFilters.api_type = []
-      /* eslint-enable camelcase */
+      /* eslint-enable @typescript-eslint/camelcase */
     }
 
-    /* eslint-disable camelcase */
     const translatedFilters = {
+      /* eslint-disable @typescript-eslint/camelcase */
       q: newFilters.q,
       tags: newFilters.tags || [],
       organisatie: newFilters.organization_name || [],
       type: newFilters.api_type || [],
+      /* eslint-enable @typescript-eslint/camelcase */
     }
-    /* eslint-enable camelcase */
 
     const { history } = this.props
-    history.push(`?${this.generateQueryParams(translatedFilters)}`)
+    history.push(`?${generateQueryParams(translatedFilters)}`)
   }
 
-  onPageChange(page) {
+  handlePageChange = (page: number): void => {
     const { history, location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
-    values.set('pagina', page)
-    history.push(`?${values.toString()}`)
+    values.set('pagina', page.toString())
+    history.push(`?${values}`)
   }
 
-  generateQueryParams(filters) {
-    const urlParams = new URLSearchParams()
-
-    Object.keys(filters).forEach((key) => {
-      if (filters[key].length === 0) {
-        return
-      }
-
-      if (filters[key] instanceof Array) {
-        filters[key].forEach((value) => {
-          urlParams.append(key, value)
-        })
-      } else {
-        urlParams.append(key, filters[key])
-      }
-    })
-
-    return urlParams
-  }
-
-  getQueryParams() {
+  getQueryParams = (): FilterParams => {
     const { location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
 
-    /* eslint-disable camelcase */
-    const queryParams = {}
-    queryParams.q = values.get('q') || ''
-    queryParams.tags = values.getAll('tags')
-    queryParams.organization_name = values.getAll('organisatie')
-    queryParams.api_type = values.getAll('type')
-    queryParams.page = parseInt(values.get('pagina'), 10) || 1
-    /* eslint-enable camelcase */
-
-    return queryParams
+    /* eslint-disable @typescript-eslint/camelcase */
+    return {
+      q: values.get('q') || '',
+      tags: values.getAll('tags'),
+      organization_name: values.getAll('organisatie'),
+      api_type: values.getAll('type'),
+      page: values.get('pagina') || '1',
+    }
+    /* eslint-enable @typescript-eslint/camelcase */
   }
 
   render() {
     const { result, error, loaded } = this.state
-    const { page } = this.getQueryParams()
+    const queryParams = this.getQueryParams()
+    const { page } = queryParams
 
     return (
       <StyledOverviewPage>
@@ -148,30 +148,30 @@ class Overview extends Component {
             Er ging iets fout tijdens het ophalen van de API&#39;s.
           </p>
         ) : (
-          <Fragment>
+          <>
             <StyledAPIFilters
-              initialValues={this.getQueryParams()}
+              initialValues={queryParams}
               facets={result.facets}
-              onSubmit={this.onFilterChange}
+              onSubmit={this.handleFilterChange}
             />
             <StyledResultsContainer>
               {result && result.apis && result.apis.length > 0 ? (
-                <Fragment>
+                <>
                   <APIList total={result.total} apis={result.apis} />
                   <StyledPagination
-                    currentPage={page}
+                    currentPage={parseInt(page, 10)}
                     totalRows={result.total}
                     rowsPerPage={result.rowsPerPage}
-                    onPageChangedHandler={this.onPageChange}
+                    onPageChangedHandler={this.handlePageChange}
                   />
-                </Fragment>
+                </>
               ) : (
                 <p data-test="no-apis-available-message">
                   Er zijn (nog) geen API&#39;s beschikbaar.
                 </p>
               )}
             </StyledResultsContainer>
-          </Fragment>
+          </>
         )}
       </StyledOverviewPage>
     )

@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
-import { Formik } from 'formik'
+import { Formik, FormikHelpers } from 'formik'
 
-import validationSchema from './validationSchema'
+import { GoApi, Api } from '../../models/apiTypes'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
 import { modelFromAPIResponse } from '../../models/api'
 
-const initialValues = {
+import { schema, SchemaType } from './validationSchema'
+
+const initialValues: SchemaType = {
   description: '',
   organizationName: '',
   serviceName: '',
-  apiURL: '',
+  apiUrl: '',
   apiType: 'Onbekend',
-  specificationURL: '',
-  documentationURL: '',
-  tags: [],
+  specificationUrl: '',
+  documentationUrl: '',
+  tags: '',
   badges: '',
   contact: {
     email: '',
@@ -34,104 +36,107 @@ const initialValues = {
   referenceImplementation: '',
 }
 
-const arrayFields = ['tags', 'badges']
-
-export const convertLinkToRIToRelation = (formData) => {
-  if (formData.referenceImplementation) {
-    formData.relations = {
-      [formData.referenceImplementation]: [
-        RELATION_TYPE_REFERENCE_IMPLEMENTATION,
-      ],
-    }
-  }
-
-  delete formData.referenceImplementation
-
-  return formData
+export const createRelation = (
+  isReferenceImplementation: SchemaType['isReferenceImplementation'],
+  referenceImplementation: SchemaType['referenceImplementation'] = '',
+): Api['relations'] => {
+  return !isReferenceImplementation
+    ? {
+        [referenceImplementation]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION],
+      }
+    : undefined
 }
 
-export const convertRIFormDataToAPIDefinition = (formData) => {
-  formData.referenceImplementation = !formData.isReferenceImplementation
-    ? formData.referenceImplementation
-    : ''
+export const convertFormDataToRequestBody = (formData: SchemaType): GoApi => {
+  const toArray = (value: string): string[] =>
+    value
+      .split(',')
+      .map((v: string) => v.trim())
+      .filter((v) => !!v)
 
-  formData = convertLinkToRIToRelation(formData)
-  return formData
-}
+  const requestBody = {} as GoApi
 
-export const mapFormValuesToAPIRequestBody = (formValues) => {
-  /* eslint-disable camelcase */
-  const requestBody = {}
+  /* eslint-disable @typescript-eslint/camelcase */
+  requestBody.description = formData.description
+  requestBody.organization_name = formData.organizationName
+  requestBody.service_name = formData.serviceName
+  requestBody.api_url = formData.apiUrl
+  requestBody.api_type = formData.apiType
+  requestBody.specification_url = formData.specificationUrl
+  requestBody.documentation_url = formData.documentationUrl
+  requestBody.tags = toArray(formData.tags)
+  requestBody.badges = toArray(formData.badges)
 
-  requestBody.description = formValues.description
-  requestBody.organization_name = formValues.organizationName
-  requestBody.service_name = formValues.organizationName
-  requestBody.api_url = formValues.apiURL
-  requestBody.api_type = formValues.apiType
-  requestBody.specification_url = formValues.specificationURL
-  requestBody.documentation_url = formValues.documentationURL
-  requestBody.tags = formValues.tags
-  requestBody.badges = formValues.badges
-  requestBody.is_reference_implementation = formValues.isReferenceImplementation
-  requestBody.reference_implementation = formValues.referenceImplementation
+  requestBody.is_reference_implementation = formData.isReferenceImplementation
+  requestBody.relations = createRelation(
+    formData.isReferenceImplementation,
+    formData.referenceImplementation,
+  )
 
-  formValues.contact = formValues.contact || {}
+  formData.contact = formData.contact || {}
   requestBody.contact = {
-    email: formValues.contact.email,
-    phone: formValues.contact.phone,
-    fax: formValues.contact.fax,
-    chat: formValues.contact.chat,
-    url: formValues.contact.url,
+    email: formData.contact.email,
+    phone: formData.contact.phone,
+    fax: formData.contact.fax,
+    chat: formData.contact.chat,
+    url: formData.contact.url,
   }
 
-  formValues.termsOfUse = formValues.termsOfUse || {}
+  formData.termsOfUse = formData.termsOfUse || {}
   requestBody.terms_of_use = {
-    government_only: formValues.termsOfUse.governmentOnly,
-    pay_per_use: formValues.termsOfUse.payPerUse,
-    uptime_guarantee: formValues.termsOfUse.uptimeGuarantee,
-    support_response_time: formValues.termsOfUse.supportResponseTime,
+    government_only: formData.termsOfUse.governmentOnly,
+    pay_per_use: formData.termsOfUse.payPerUse,
+    uptime_guarantee: formData.termsOfUse.uptimeGuarantee,
+    support_response_time: formData.termsOfUse.supportResponseTime,
   }
-
-  /* eslint-enable camelcase */
+  /* eslint-enable @typescript-eslint/camelcase */
 
   return requestBody
 }
 
-class SubmitAPIFormPage extends Component {
-  constructor(props) {
+type Props = {}
+
+type State = {
+  submitted: boolean
+  responseData: {
+    web_url: string
+  }
+  result: {
+    apis: Api[]
+  }
+  apisLoaded: boolean
+  apisError: boolean
+  storedFormValues: SchemaType | null
+}
+
+class SubmitAPIFormPage extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
 
-    const sessionFormValues = sessionStorage.getItem('storedFormValues')
     let storedFormValues = null
     try {
-      storedFormValues = JSON.parse(sessionFormValues)
+      storedFormValues = JSON.parse(sessionStorage.getItem(
+        'storedFormValues',
+      ) as string)
     } catch (e) {}
 
     this.state = {
       submitted: false,
-      responseData: {},
-      result: {},
+      responseData: {} as State['responseData'],
+      result: {} as State['result'],
       apisLoaded: false,
       apisError: false,
       storedFormValues, // Only use this to save values when unmounting
     }
 
-    this.onSubmit = this.onSubmit.bind(this)
+    this.handleSubmit.bind(this)
   }
 
-  onSubmit(values = {}, actions = {}) {
-    let data = validationSchema.cast(values)
+  handleSubmit(values: SchemaType, actions: FormikHelpers<SchemaType>) {
+    const formData: SchemaType = schema.cast(values)
+    const submitData = convertFormDataToRequestBody(formData)
 
-    arrayFields.forEach((fieldName) => {
-      data[fieldName] = data[fieldName]
-        ? data[fieldName].split(',').map((v) => v.trim())
-        : []
-    })
-
-    data = convertRIFormDataToAPIDefinition(data)
-    data = mapFormValuesToAPIRequestBody(data)
-
-    return this.submitToApi(data)
+    return this.submitToApi(submitData)
       .then((responseData) => {
         actions.setSubmitting(false)
         this.setState({
@@ -139,7 +144,7 @@ class SubmitAPIFormPage extends Component {
           responseData,
           storedFormValues: null,
         })
-        this.onReset()
+        this.handleReset()
       })
       .catch((error) => {
         actions.setSubmitting(false)
@@ -151,7 +156,7 @@ class SubmitAPIFormPage extends Component {
       })
   }
 
-  submitToApi(data) {
+  submitToApi(data: GoApi) {
     return fetch('/api/submit-api', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -167,11 +172,11 @@ class SubmitAPIFormPage extends Component {
     })
   }
 
-  formikValueChange = (values) => {
+  formikValueChange = (values: SchemaType) => {
     this.setState({ storedFormValues: values })
   }
 
-  onReset = () => {
+  handleReset = () => {
     sessionStorage.removeItem('storedFormValues')
     this.setState({ storedFormValues: null })
   }
@@ -192,7 +197,7 @@ class SubmitAPIFormPage extends Component {
     this.fetchApiList()
       .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+          apis: response.apis.map((api: GoApi) => modelFromAPIResponse(api)),
         }),
       )
       .then(
@@ -205,7 +210,7 @@ class SubmitAPIFormPage extends Component {
         },
       )
 
-    window && window.addEventListener('beforeunload', this.onReset)
+    window && window.addEventListener('beforeunload', this.handleReset)
   }
 
   componentWillUnmount() {
@@ -214,7 +219,7 @@ class SubmitAPIFormPage extends Component {
       JSON.stringify(this.state.storedFormValues),
     )
 
-    window && window.removeEventListener('beforeunload', this.onReset)
+    window && window.removeEventListener('beforeunload', this.handleReset)
   }
 
   render() {
@@ -242,11 +247,12 @@ class SubmitAPIFormPage extends Component {
         ) : (
           <Formik
             initialValues={storedFormValues || initialValues}
-            enableReinitialize={true}
-            onSubmit={this.onSubmit}
-            onReset={this.onReset}
-            validationSchema={validationSchema}
+            enableReinitialize
+            onSubmit={this.handleSubmit}
+            onReset={this.handleReset}
+            validationSchema={schema}
           >
+            {/* Seems not to be inferred correctly. But type: `FormikProps<SchemaType>` gives same problem */}
             {(props) => (
               <>
                 <OnFormikValueChange handle={this.formikValueChange} />

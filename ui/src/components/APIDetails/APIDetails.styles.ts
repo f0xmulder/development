@@ -1,9 +1,8 @@
-import styled from 'styled-components'
+import styled, { AnyStyledComponent } from 'styled-components'
 import TagList from '../TagList/TagList'
-import available from './icons/available.svg'
-import unavailable from './icons/unavailable.svg'
+import availableIcon from './icons/available.svg'
+import unavailableIcon from './icons/unavailable.svg'
 import Card from '../Card/Card'
-import { Field } from '../Form/Form'
 
 export const StyledAPIDetails = styled.div`
   width: 100%;
@@ -53,6 +52,8 @@ export const StyledTagList = styled(TagList)`
   display: inline-block;
 `
 
+export type CompoundCardsContainer = AnyStyledComponent
+
 export const CardsContainer = styled.div`
   margin-top: 32px;
   margin-bottom: 80px;
@@ -63,7 +64,7 @@ export const CardsContainer = styled.div`
   @media screen and (min-width: 768px) {
     display: grid;
   }
-`
+` as CompoundCardsContainer
 
 CardsContainer.Main = styled.div`
   grid-column-start: 1;
@@ -80,7 +81,7 @@ CardsContainer.SideBar = styled.div`
   }
 `
 
-export const StyledField = styled(Field)`
+export const ApiLink = styled.a`
   font-weight: ${(p) => p.theme.font.weight.semibold};
   color: ${(p) => p.theme.color.primary.normal};
   width: 100%;
@@ -94,16 +95,16 @@ export const StyledDl = styled.dl`
     width: 120px;
     float: left;
     clear: both;
-    line-height: ${(p) => p.theme.font.lineHeight.small}
+    line-height: ${(p) => p.theme.font.lineHeight.small};
     margin-bottom: 4px;
-    font-weight: ${(p) => p.theme.font.weight.semibold}
+    font-weight: ${(p) => p.theme.font.weight.semibold};
     color: ${(p) => p.theme.color.text.light};
     font-size: 12px;
   }
 
   dd {
     margin-left: 0;
-    line-height: ${(p) => p.theme.font.lineHeight.small}
+    line-height: ${(p) => p.theme.font.lineHeight.small};
     margin-bottom: 4px;
     float: left;
   }
@@ -115,7 +116,7 @@ export const StyledScoresUl = styled.ul`
   list-style-type: none;
 `
 
-export const StyledScoresLi = styled.li`
+export const StyledScoresLi = styled.li<{ available: boolean }>`
   padding-left: 30px;
   position: relative;
 
@@ -125,7 +126,10 @@ export const StyledScoresLi = styled.li`
     height: 24px;
     left: 0;
     position: absolute;
-    background-image: url(${(p) => (p.available ? available : unavailable)});
+    ${(p) =>
+      p.available
+        ? `background-image: url(${availableIcon});`
+        : `background-image: url(${unavailableIcon});`}
     background-size: 18px;
     background-position: left center;
     background-repeat: no-repeat;

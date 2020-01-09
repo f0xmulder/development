@@ -1,108 +1,39 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import SubmitAPI, {
-  convertRIFormDataToAPIDefinition,
-  convertLinkToRIToRelation,
-  mapFormValuesToAPIRequestBody,
-} from './SubmitAPIForm'
 import { Formik } from 'formik'
+
+import { goApiMock } from '../../models/api.mock'
+import { formDataMock, submitDataMock } from './formData.mock'
+
+import SubmitAPI, {
+  createRelation,
+  convertFormDataToRequestBody,
+} from './SubmitAPIForm'
 import { flushPromises } from '../../test-helpers'
 import { modelFromAPIResponse } from '../../models/api'
 
-describe('convertRIFormDataToAPIDefinition', () => {
-  it('should unset the link to a RI if the API itself is marked as a RI', () => {
-    const referenceImplementationFormData = {}
-    referenceImplementationFormData.isReferenceImplementation = true
-    referenceImplementationFormData.referenceImplementation = 'dummy-api-id'
-
-    const result = convertRIFormDataToAPIDefinition(
-      referenceImplementationFormData,
-    )
-    expect(result.referenceImplementation).toBeUndefined()
+describe('createRelation', () => {
+  it('should not create a relation object when this is a reference implementation', () => {
+    const result = createRelation(true, 'dummy-api-id')
+    expect(result).toBeUndefined()
   })
-})
 
-describe('convertLinkToRIToRelation', () => {
-  it('should convert the link to a relation object', () => {
-    const linkToReferenceImplementation = {}
-    linkToReferenceImplementation.referenceImplementation = 'dummy-api-id'
-
-    const result = convertLinkToRIToRelation(linkToReferenceImplementation)
-
+  it('should create a relation object when this has a link to a referenceImplementation', () => {
+    const result = createRelation(false, 'dummy-api-id')
     expect(result).toEqual({
-      relations: {
-        'dummy-api-id': ['reference-implementation'],
-      },
+      'dummy-api-id': ['reference-implementation'],
     })
   })
 })
 
 describe('map form values to API request body for submitting an API', () => {
   it('should map the values from camelBack notation to snake_case', () => {
-    const input = {
-      description: '',
-      organizationName: '',
-      serviceName: '',
-      apiURL: '',
-      apiType: '',
-      specificationURL: '',
-      documentationURL: '',
-      tags: [],
-      badges: '',
-      contact: {
-        email: '',
-        phone: '',
-        fax: '',
-        chat: '',
-        url: '',
-      },
-      termsOfUse: {
-        governmentOnly: false,
-        payPerUse: false,
-        uptimeGuarantee: 99.5,
-        supportResponseTime: '',
-      },
-      isReferenceImplementation: false,
-      referenceImplementation: '',
-    }
+    const submitData = JSON.parse(JSON.stringify(submitDataMock))
+    delete submitData.id
 
-    /* eslint-disable camelcase */
-    expect(mapFormValuesToAPIRequestBody(input)).toEqual({
-      description: '',
-      organization_name: '',
-      service_name: '',
-      api_url: '',
-      api_type: '',
-      specification_url: '',
-      documentation_url: '',
-      tags: [],
-      badges: '',
-      contact: {
-        email: '',
-        phone: '',
-        fax: '',
-        chat: '',
-        url: '',
-      },
-      terms_of_use: {
-        government_only: false,
-        pay_per_use: false,
-        uptime_guarantee: 99.5,
-        support_response_time: '',
-      },
-      is_reference_implementation: false,
-      reference_implementation: '',
-    })
-    /* eslint-enable camelcase */
+    expect(convertFormDataToRequestBody(formDataMock)).toEqual(submitData)
   })
 })
-
-/* eslint-disable camelcase */
-const apiFromAPIResponse = {}
-apiFromAPIResponse.id = 'test-api.json'
-apiFromAPIResponse.organization_name = 'Organization Name'
-apiFromAPIResponse.service_name = 'Service Name'
-/* eslint-enable camelcase */
 
 describe('SubmitAPI', () => {
   afterEach(() => jest.clearAllMocks())
@@ -120,7 +51,7 @@ describe('SubmitAPI', () => {
     it('should store the available apis as state', () => {
       const apiPromise = Promise.resolve({
         total: 1,
-        apis: [apiFromAPIResponse],
+        apis: [goApiMock],
       })
       SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
 
@@ -129,7 +60,7 @@ describe('SubmitAPI', () => {
       return flushPromises().then(() => {
         expect(wrapper.state('result')).toEqual({
           total: 1,
-          apis: [modelFromAPIResponse(apiFromAPIResponse)],
+          apis: [modelFromAPIResponse(goApiMock)],
         })
       })
     })
@@ -137,11 +68,11 @@ describe('SubmitAPI', () => {
 
   describe("when the API's are loaded", () => {
     let wrapper
-    let onSubmitSpy
+    let handleSubmitSpy
     let submitToApiSpy
 
     beforeEach(() => {
-      onSubmitSpy = jest.spyOn(SubmitAPI.prototype, 'onSubmit')
+      handleSubmitSpy = jest.spyOn(SubmitAPI.prototype, 'handleSubmit')
       submitToApiSpy = jest.spyOn(SubmitAPI.prototype, 'submitToApi')
       wrapper = shallow(<SubmitAPI />)
       wrapper.setState({ apis: [], apisLoaded: true })
@@ -159,10 +90,10 @@ describe('SubmitAPI', () => {
     describe('when component state is submitted', () => {
       beforeEach(() => {
         const responseData = {}
-        /* eslint-disable camelcase */
+        /* eslint-disable @typescript-eslint/camelcase */
         responseData.id = 1
         responseData.web_url = 'http://gitlab.com/issues/1'
-        /* eslint-enable camelcase */
+        /* eslint-enable @typescript-eslint/camelcase */
 
         wrapper.setState({
           submitted: true,
@@ -185,18 +116,9 @@ describe('SubmitAPI', () => {
       })
     })
 
-    describe('when submit event on form is triggered', () => {
-      it('should call the onSubmit function', () => {
-        const form = wrapper.find(Formik)
-        form.simulate('submit')
-
-        expect(onSubmitSpy).toHaveBeenCalled()
-      })
-    })
-
-    describe('when onSubmit is called', () => {
+    describe('when handleSubmit is called', () => {
       it('should call the submitToApi method', () => {
-        wrapper.instance().onSubmit()
+        wrapper.instance().handleSubmit(formDataMock, jest.fn())
         expect(submitToApiSpy).toHaveBeenCalled()
       })
 
@@ -206,7 +128,9 @@ describe('SubmitAPI', () => {
           SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
 
           const wrapper = shallow(<SubmitAPI />)
-          wrapper.instance().onSubmit({}, { setSubmitting: () => {} })
+          wrapper
+            .instance()
+            .handleSubmit(formDataMock, { setSubmitting: jest.fn() })
 
           return apiPromise.then(() => {
             expect(wrapper.state('submitted')).toEqual(true)
@@ -217,6 +141,9 @@ describe('SubmitAPI', () => {
 
       describe('submitToApi is unsuccessful', () => {
         it('should call the setStatus action', () => {
+          // Suppress error in test console
+          global.console.error = jest.fn()
+
           const apiPromise = Promise.reject(
             new Error('arbitrary reject reason coming from tests'),
           )
@@ -231,7 +158,7 @@ describe('SubmitAPI', () => {
 
           return wrapper
             .instance()
-            .onSubmit({}, actions)
+            .handleSubmit(formDataMock, actions)
             .then(() => {
               expect(actions.setStatus).toHaveBeenCalled()
             })
@@ -260,7 +187,7 @@ describe('SubmitAPI', () => {
     })
 
     it('should clear stored values when resetting the form', () => {
-      formWrapper.instance().onReset()
+      formWrapper.instance().handleReset()
       expect(formWrapper.state('storedFormValues')).toBeNull()
       expect(global.sessionStorage.getItem('storedFormValues')).toBeNull()
     })

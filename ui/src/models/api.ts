@@ -1,4 +1,13 @@
-const mapScores = (scores) =>
+import {
+  Api,
+  TermsOfUse,
+  Scores,
+  GoApi,
+  GoTermsOfUse,
+  GoScores,
+} from './apiTypes'
+
+const mapScores = (scores: GoScores): Scores =>
   scores
     ? {
         hasDocumentation: scores.has_documentation,
@@ -8,7 +17,16 @@ const mapScores = (scores) =>
       }
     : {}
 
-export const modelFromAPIResponse = (api) => ({
+const mapTermsOfUse = (termsOfUse: GoTermsOfUse): TermsOfUse => {
+  return {
+    governmentOnly: termsOfUse.government_only,
+    payPerUse: termsOfUse.pay_per_use,
+    uptimeGuarantee: termsOfUse.uptime_guarantee || 0,
+    supportResponseTime: termsOfUse.support_response_time || '',
+  }
+}
+
+export const modelFromAPIResponse = (api: GoApi): Api => ({
   id: api.id,
   serviceName: api.service_name,
   organizationName: api.organization_name,
@@ -20,7 +38,7 @@ export const modelFromAPIResponse = (api) => ({
   badges: api.badges,
   isReferenceImplementation: api.is_reference_implementation,
   relations: api.relations,
-  termsOfUse: api.terms_of_use,
+  termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
   scores: mapScores(api.scores),
   tags: api.tags,
 })

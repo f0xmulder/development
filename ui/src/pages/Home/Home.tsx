@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import HomePage from '../../components/HomePage/HomePage'
 
-class Home extends Component {
-  constructor(props) {
-    super(props)
+type Props = {}
 
-    this.state = {
-      amountOfAPIs: null,
-    }
+type State = {
+  amountOfAPIs: number
+}
+
+class Home extends Component<Props, State> {
+  state = {
+    amountOfAPIs: 0,
   }
 
   fetchAPIs() {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Card from '../Card/Card'
+import Card, { CardType } from '../Card/Card'
 
 const PageContentCard = styled(Card)`
   margin-bottom: 20px;
@@ -7,7 +7,7 @@ const PageContentCard = styled(Card)`
   @media screen and (min-width: 768px) {
     margin-bottom: 40px;
   }
-`
+` as CardType
 
 const Body = styled(Card.Body)`
   @media screen and (min-width: 768px) {
@@ -25,3 +25,4 @@ PageContentCard.Body = Body
 PageContentCard.Footer = Footer
 
 export default PageContentCard
+export type PageContentCardType = CardType

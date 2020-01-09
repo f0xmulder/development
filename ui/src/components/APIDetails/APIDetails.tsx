@@ -1,6 +1,7 @@
 import React from 'react'
-import { string, array, bool, object } from 'prop-types'
-import { Formik, Form } from 'formik'
+
+import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
+import { Api } from '../../models/apiTypes'
 
 import ImplementedByListContainer from '../ImplementedByListContainer/ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
@@ -8,9 +9,6 @@ import Grade from '../Grade/Grade'
 import External from '../Icons/External'
 import Card from '../Card/Card'
 import PageContentCard from '../PageContentCard/PageContentCard'
-import { Label } from '../Form/Form'
-
-import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
 import {
   PageTitle,
@@ -19,18 +17,20 @@ import {
   DocumentationButton,
   StyledTagList,
   CardsContainer,
-  StyledField,
+  ApiLink,
   StyledDl,
   StyledScoresUl,
   StyledScoresLi,
   StyledAPIDetails,
 } from './APIDetails.styles'
 
-const getOnlineRedocUrl = (specUrl) =>
+const getOnlineRedocUrl = (specUrl: Api['specificationUrl']): string =>
   `https://redocly.github.io/redoc/?url=${encodeURIComponent(specUrl)}`
 
-export const referenceImplementationsFromRelations = (relations) =>
-  Object.keys(relations || {}).filter((apiId) =>
+export const referenceImplementationsFromRelations = (
+  relations: Api['relations'] = {},
+) =>
+  Object.keys(relations).filter((apiId: string) =>
     relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION),
   )
 
@@ -49,7 +49,7 @@ const APIDetails = ({
   relations,
   termsOfUse,
   scores,
-}) => (
+}: Api) => (
   <StyledAPIDetails>
     <PageTitle>{serviceName}</PageTitle>
     <SubTitle>{organizationName}</SubTitle>
@@ -73,18 +73,10 @@ const APIDetails = ({
             <StyledTagList tags={tags} />
           </PageContentCard.Body>
           <PageContentCard.Footer>
-            <Formik>
-              <Form>
-                <Label htmlFor="base-url">Basis URL</Label>
-                <StyledField
-                  component="input"
-                  value={apiUrl}
-                  id="base-url"
-                  data-test="api-url"
-                  readOnly
-                />
-              </Form>
-            </Formik>
+            <h3>Basis URL</h3>
+            <ApiLink href={apiUrl} target="_blank" data-test="api-url">
+              {apiUrl}
+            </ApiLink>
           </PageContentCard.Footer>
         </PageContentCard>
       </CardsContainer.Main>
@@ -110,25 +102,23 @@ const APIDetails = ({
 
               <dt>Gebruik</dt>
               <dd>
-                {termsOfUse.government_only ? 'Alleen overheid' : 'Iedereen'}
+                {termsOfUse.governmentOnly ? 'Alleen overheid' : 'Iedereen'}
               </dd>
 
               <dt>Kosten</dt>
-              <dd>
-                {termsOfUse.pay_per_use ? 'Kosten voor gebruik' : 'Gratis'}
-              </dd>
+              <dd>{termsOfUse.payPerUse ? 'Kosten voor gebruik' : 'Gratis'}</dd>
 
               <dt>Uptime garantie</dt>
               <dd>
-                {termsOfUse.uptime_guarantee
-                  ? `${termsOfUse.uptime_guarantee}%`
+                {termsOfUse.uptimeGuarantee
+                  ? `${termsOfUse.uptimeGuarantee}%`
                   : 'Geen'}
               </dd>
 
               <dt>Helpdesk response</dt>
               <dd>
-                {termsOfUse.support_response_time
-                  ? `${termsOfUse.support_response_time}`
+                {termsOfUse.supportResponseTime
+                  ? `${termsOfUse.supportResponseTime}`
                   : 'Geen'}
               </dd>
             </StyledDl>
@@ -140,16 +130,16 @@ const APIDetails = ({
             <Grade scores={scores} />
 
             <StyledScoresUl>
-              <StyledScoresLi available={scores.hasDocumentation}>
+              <StyledScoresLi available={!!scores.hasDocumentation}>
                 Documentatie
               </StyledScoresLi>
-              <StyledScoresLi available={scores.hasSpecification}>
+              <StyledScoresLi available={!!scores.hasSpecification}>
                 Specificatie
               </StyledScoresLi>
-              <StyledScoresLi available={scores.hasContactDetails}>
+              <StyledScoresLi available={!!scores.hasContactDetails}>
                 Contactgegevens
               </StyledScoresLi>
-              <StyledScoresLi available={scores.providesSla}>
+              <StyledScoresLi available={!!scores.providesSla}>
                 SLA
               </StyledScoresLi>
             </StyledScoresUl>
@@ -182,8 +172,8 @@ const APIDetails = ({
             <Card.Body>
               <Card.Title>Badges</Card.Title>
               <ul data-test="api-badges-list">
-                {badges.map((badge, i) => (
-                  <li key={i}>{badge}</li>
+                {badges.map((badge: string, i: number) => (
+                  <li key={`${i}-${badge}`}>{badge}</li>
                 ))}
               </ul>
             </Card.Body>
@@ -193,20 +183,5 @@ const APIDetails = ({
     </CardsContainer>
   </StyledAPIDetails>
 )
-
-APIDetails.propTypes = {
-  serviceName: string.isRequired,
-  organizationName: string.isRequired,
-  description: string.isRequired,
-  apiUrl: string.isRequired,
-  apiType: string.isRequired,
-  specificationUrl: string.isRequired,
-  documentationUrl: string.isRequired,
-  isReferenceImplementation: bool,
-  tags: array,
-  badges: array,
-  relations: object,
-  termsOfUse: object,
-}
 
 export default APIDetails

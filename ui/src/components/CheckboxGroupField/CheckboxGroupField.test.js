@@ -11,7 +11,7 @@ const options = [
   { value: '43', label: '43', count: 3 },
 ]
 
-const createForm = (onChange = () => {}, onSubmit = () => {}) => {
+const createForm = (onChange = null, onSubmit = null) => {
   return mount(
     <ThemeProvider theme={theme}>
       <Formik initialValues={{ theNumber: ['42'] }} onSubmit={onSubmit}>
@@ -87,7 +87,7 @@ describe('CheckboxGroupField', () => {
               <CheckboxGroupField
                 name="theNumber"
                 options={options}
-                onChange={() => {}}
+                onChange={null}
                 value={values.theNumber}
               />
               <TransferValues />
