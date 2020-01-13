@@ -74,7 +74,12 @@ const APIDetails = ({
           </PageContentCard.Body>
           <PageContentCard.Footer>
             <h3>Basis URL</h3>
-            <ApiLink href={apiUrl} target="_blank" data-test="api-url">
+            <ApiLink
+              href={apiUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-test="api-url"
+            >
               {apiUrl}
             </ApiLink>
           </PageContentCard.Footer>

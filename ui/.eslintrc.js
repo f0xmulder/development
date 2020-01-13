@@ -5,13 +5,15 @@ module.exports = {
     'standard-react',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:jsx-a11y/recommended',
   ],
   plugins: [
     'react',
     '@typescript-eslint',
     'prettier',
+    'jsx-a11y',
     'jest',
   ],
   env: {
