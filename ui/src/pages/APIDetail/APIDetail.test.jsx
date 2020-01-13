@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import { modelFromAPIResponse } from '../../models/api'
 import APIDetail from './APIDetail'
 
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 const apiResponseObject = {}
 apiResponseObject.description = 'Description'
 apiResponseObject.organization_name = 'Organization Name'
@@ -13,7 +13,7 @@ apiResponseObject.api_url = 'API URL'
 apiResponseObject.api_type = 'API Type'
 apiResponseObject.specification_url = 'Specification URL'
 apiResponseObject.documentation_url = 'Documentation URL'
-/* eslint-enable @typescript-eslint/camelcase */
+/* eslint-enable camelcase */
 
 describe('APIDetail', () => {
   afterEach(() => {

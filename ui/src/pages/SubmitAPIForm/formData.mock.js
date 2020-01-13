@@ -1,6 +1,4 @@
-import { SchemaType } from './validationSchema'
-
-export const formDataMock: SchemaType = {
+export const formDataMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
   description: 'description',
@@ -27,8 +25,8 @@ export const formDataMock: SchemaType = {
   },
 }
 
-export const submitDataMock: { [key: string]: unknown } = {
-  /* eslint-disable @typescript-eslint/camelcase */
+export const submitDataMock = {
+  /* eslint-disable camelcase */
   service_name: 'service name',
   organization_name: 'organization name',
   description: 'description',
@@ -52,5 +50,5 @@ export const submitDataMock: { [key: string]: unknown } = {
     chat: '',
     url: '',
   },
-  /* eslint-enable @typescript-eslint/camelcase */
+  /* eslint-enable camelcase */
 }

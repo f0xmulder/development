@@ -1,35 +1,22 @@
 import React, { Component } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { object } from 'prop-types'
 
-import { Api } from '../../models/apiTypes'
 import APIDetails from '../../components/APIDetails/APIDetails'
 import { modelFromAPIResponse } from '../../models/api'
 import { Container } from './APIDetail.styles'
 
-type MatchParams = {
-  id: string
-}
-
-type Props = RouteComponentProps<MatchParams>
-
-type State = {
-  details: Api
-  loaded: boolean
-  error: boolean
-}
-
-class APIDetail extends Component<Props, State> {
+class APIDetail extends Component {
   static defaultProps = {
     match: { params: {} },
   }
 
   state = {
-    details: {} as Api,
+    details: {},
     error: false,
     loaded: false,
   }
 
-  fetchApiDetails(id: string) {
+  fetchApiDetails(id) {
     return fetch(`/api/apis/${id}`).then((response) => {
       if (response.ok) {
         return response.json()
@@ -41,7 +28,7 @@ class APIDetail extends Component<Props, State> {
     })
   }
 
-  loadDetailsForApi(id: string) {
+  loadDetailsForApi(id) {
     return this.fetchApiDetails(id).then(
       (details) => {
         this.setState({ details: modelFromAPIResponse(details), loaded: true })
@@ -53,7 +40,7 @@ class APIDetail extends Component<Props, State> {
     )
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps) {
     const { id } = this.props.match.params
     const prevId = prevProps.match.params.id
 
@@ -82,6 +69,14 @@ class APIDetail extends Component<Props, State> {
       </div>
     )
   }
+}
+
+APIDetail.propTypes = {
+  match: object,
+}
+
+APIDetail.defaultProps = {
+  match: { params: {} },
 }
 
 export default APIDetail

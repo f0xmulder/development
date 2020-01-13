@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import {
   NavButton,
   Navigation,
@@ -39,7 +39,7 @@ const MobileNavigation = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   return (
-    <Fragment>
+    <>
       <NavButton onClick={() => setIsVisible(!isVisible)}>
         {isVisible ? <CrossIcon /> : <HamburgerIcon />}
       </NavButton>
@@ -67,7 +67,7 @@ const MobileNavigation = () => {
           + Voeg API toe
         </Link>
       </Navigation>
-    </Fragment>
+    </>
   )
 }
 

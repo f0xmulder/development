@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import HomePage from '../../components/HomePage/HomePage'
 
-type Props = {}
-
-type State = {
-  amountOfAPIs: number
-}
-
-class Home extends Component<Props, State> {
+class Home extends Component {
   state = {
     amountOfAPIs: 0,
   }

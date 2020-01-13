@@ -9,10 +9,10 @@ export class TopBarContainer extends Component {
   constructor(props) {
     super(props)
 
-    this.onSearchSubmitHandler = this.onSearchSubmitHandler.bind(this)
+    this.handleSearchSubmitHandler = this.handleSearchSubmitHandler.bind(this)
   }
 
-  onSearchSubmitHandler(query) {
+  handleSearchSubmitHandler(query) {
     const { history } = this.props
 
     const urlParams = new URLSearchParams()
@@ -29,7 +29,7 @@ export class TopBarContainer extends Component {
       <TopBar
         query={query}
         showSearch={!isURLHomePage(location.pathname)}
-        onSearchSubmitHandler={this.onSearchSubmitHandler}
+        onSearchSubmitHandler={this.handleSearchSubmitHandler}
       />
     )
   }

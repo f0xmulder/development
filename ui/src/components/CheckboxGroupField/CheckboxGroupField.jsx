@@ -9,7 +9,7 @@ import {
 const CheckboxGroupField = ({ name, options, value, onChange }) => (
   <FieldArray name={name}>
     {(arrayHelpers) => (
-      <React.Fragment>
+      <>
         {options.map((option, index) => (
           <StyledCheckboxGroupField key={index}>
             <StyledCheckboxField
@@ -32,7 +32,7 @@ const CheckboxGroupField = ({ name, options, value, onChange }) => (
             <span className="count">{option.count}</span>
           </StyledCheckboxGroupField>
         ))}
-      </React.Fragment>
+      </>
     )}
   </FieldArray>
 )

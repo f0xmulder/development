@@ -68,11 +68,9 @@ describe('SubmitAPI', () => {
 
   describe("when the API's are loaded", () => {
     let wrapper
-    let handleSubmitSpy
     let submitToApiSpy
 
     beforeEach(() => {
-      handleSubmitSpy = jest.spyOn(SubmitAPI.prototype, 'handleSubmit')
       submitToApiSpy = jest.spyOn(SubmitAPI.prototype, 'submitToApi')
       wrapper = shallow(<SubmitAPI />)
       wrapper.setState({ apis: [], apisLoaded: true })
@@ -90,10 +88,10 @@ describe('SubmitAPI', () => {
     describe('when component state is submitted', () => {
       beforeEach(() => {
         const responseData = {}
-        /* eslint-disable @typescript-eslint/camelcase */
+        /* eslint-disable camelcase */
         responseData.id = 1
         responseData.web_url = 'http://gitlab.com/issues/1'
-        /* eslint-enable @typescript-eslint/camelcase */
+        /* eslint-enable camelcase */
 
         wrapper.setState({
           submitted: true,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { object } from 'prop-types'
 
-import { GoApi, Api } from '../../models/apiTypes'
 import APIList from '../../components/APIList/APIList'
 import { modelFromAPIResponse } from '../../models/api'
 
@@ -14,31 +13,9 @@ import {
   StyledPagination,
 } from './Overview.styles'
 
-type FilterParams = {
-  q: string
-  tags: string[]
-  organization_name: string[]
-  api_type: string[]
-  page: string
-}
-
-type Props = RouteComponentProps
-
-type State = {
-  result: {
-    total: number
-    page: number
-    rowsPerPage: number
-    facets: object
-    apis: Api[]
-  }
-  error: boolean
-  loaded: boolean
-}
-
-class Overview extends Component<Props, State> {
+class Overview extends Component {
   state = {
-    result: {} as State['result'],
+    result: {},
     error: false,
     loaded: false,
   }
@@ -47,11 +24,11 @@ class Overview extends Component<Props, State> {
     return this.fetchApiList()
       .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map((api: GoApi) => modelFromAPIResponse(api)),
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
         }),
       )
       .then(
-        (result: State['result']) => {
+        (result) => {
           this.setState({ result, loaded: true })
         },
         (error) => {
@@ -65,7 +42,7 @@ class Overview extends Component<Props, State> {
     this.loadAPIList()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps) {
     if (
       prevProps.location &&
       prevProps.location.search !== this.props.location.search
@@ -88,43 +65,43 @@ class Overview extends Component<Props, State> {
     })
   }
 
-  handleFilterChange = (newFilters: FilterParams): void => {
+  handleFilterChange = (newFilters) => {
     const currentFilters = this.getQueryParams()
 
     // Reset facets when starting a new text search
     if (newFilters.q !== currentFilters.q) {
-      /* eslint-disable @typescript-eslint/camelcase */
+      /* eslint-disable camelcase */
       newFilters.tags = []
       newFilters.organization_name = []
       newFilters.api_type = []
-      /* eslint-enable @typescript-eslint/camelcase */
+      /* eslint-enable camelcase */
     }
 
     const translatedFilters = {
-      /* eslint-disable @typescript-eslint/camelcase */
+      /* eslint-disable camelcase */
       q: newFilters.q,
       tags: newFilters.tags || [],
       organisatie: newFilters.organization_name || [],
       type: newFilters.api_type || [],
-      /* eslint-enable @typescript-eslint/camelcase */
+      /* eslint-enable camelcase */
     }
 
     const { history } = this.props
     history.push(`?${generateQueryParams(translatedFilters)}`)
   }
 
-  handlePageChange = (page: number): void => {
+  handlePageChange = (page) => {
     const { history, location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
     values.set('pagina', page.toString())
     history.push(`?${values}`)
   }
 
-  getQueryParams = (): FilterParams => {
+  getQueryParams = () => {
     const { location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
 
-    /* eslint-disable @typescript-eslint/camelcase */
+    /* eslint-disable camelcase */
     return {
       q: values.get('q') || '',
       tags: values.getAll('tags'),
@@ -132,7 +109,7 @@ class Overview extends Component<Props, State> {
       api_type: values.getAll('type'),
       page: values.get('pagina') || '1',
     }
-    /* eslint-enable @typescript-eslint/camelcase */
+    /* eslint-enable camelcase */
   }
 
   render() {
@@ -176,6 +153,11 @@ class Overview extends Component<Props, State> {
       </StyledOverviewPage>
     )
   }
+}
+
+Overview.propTypes = {
+  history: object,
+  location: object,
 }
 
 export default Overview

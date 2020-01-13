@@ -13,14 +13,14 @@ describe('TopBarContainer', () => {
     wrapper = shallow(<TopBarContainer {...props} />)
   })
 
-  describe('the onSearchSubmitHandler', () => {
+  describe('the handleSearchSubmitHandler', () => {
     it('should navigate to the Overzicht page and pass the query', () => {
-      wrapper.instance().onSearchSubmitHandler('amsterdam')
+      wrapper.instance().handleSearchSubmitHandler('amsterdam')
       expect(props.history.push).toHaveBeenCalledWith('/overzicht?q=amsterdam')
     })
 
     it('should encode the query', () => {
-      wrapper.instance().onSearchSubmitHandler('special # query')
+      wrapper.instance().handleSearchSubmitHandler('special # query')
       expect(props.history.push).toHaveBeenCalledWith(
         '/overzicht?q=special+%23+query',
       )

@@ -1,7 +1,5 @@
-import { GoApi, Api } from './apiTypes'
-
-export const goApiMock: GoApi = {
-  /* eslint-disable @typescript-eslint/camelcase */
+export const goApiMock = {
+  /* eslint-disable camelcase */
   id: 'id',
   service_name: 'service name',
   organization_name: 'organization name',
@@ -28,10 +26,10 @@ export const goApiMock: GoApi = {
     has_contact_details: false,
     provides_sla: false,
   },
-  /* eslint-enable @typescript-eslint/camelcase */
+  /* eslint-enable camelcase */
 }
 
-export const apiMock: Api = {
+export const apiMock = {
   id: 'id',
   serviceName: 'service name',
   organizationName: 'organization name',

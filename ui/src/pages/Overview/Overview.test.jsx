@@ -97,14 +97,14 @@ describe('Overview', () => {
         <Overview location={{ search: 'tags=42&organisatie=42' }} />,
       )
 
-      /* eslint-disable @typescript-eslint/camelcase */
+      /* eslint-disable camelcase */
       const expectedQueryParams = {}
       expectedQueryParams.q = ''
       expectedQueryParams.api_type = []
       expectedQueryParams.organization_name = ['42']
       expectedQueryParams.tags = ['42']
       expectedQueryParams.page = '1'
-      /* eslint-enable @typescript-eslint/camelcase */
+      /* eslint-enable camelcase */
 
       expect(wrapper.instance().getQueryParams()).toEqual(expectedQueryParams)
     })
@@ -115,13 +115,13 @@ describe('Overview', () => {
       const history = { push: jest.fn() }
       const wrapper = shallow(<Overview history={history} />)
 
-      /* eslint-disable @typescript-eslint/camelcase */
+      /* eslint-disable camelcase */
       const newFilters = {}
       newFilters.q = ''
       newFilters.api_type = []
       newFilters.organization_name = ['42']
       newFilters.tags = ['42', '43']
-      /* eslint-enable @typescript-eslint/camelcase */
+      /* eslint-enable camelcase */
 
       wrapper.instance().handleFilterChange(newFilters)
       expect(history.push).toHaveBeenCalledWith(

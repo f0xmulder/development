@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import { Formik, FormikHelpers } from 'formik'
+import { Formik } from 'formik'
 
-import { GoApi, Api } from '../../models/apiTypes'
+import { schema } from './validationSchema'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
 import { modelFromAPIResponse } from '../../models/api'
 
-import { schema, SchemaType } from './validationSchema'
-
-const initialValues: SchemaType = {
+const initialValues = {
   description: '',
   organizationName: '',
   serviceName: '',
@@ -37,9 +35,9 @@ const initialValues: SchemaType = {
 }
 
 export const createRelation = (
-  isReferenceImplementation: SchemaType['isReferenceImplementation'],
-  referenceImplementation: SchemaType['referenceImplementation'] = '',
-): Api['relations'] => {
+  isReferenceImplementation,
+  referenceImplementation,
+) => {
   return !isReferenceImplementation
     ? {
         [referenceImplementation]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION],
@@ -47,16 +45,16 @@ export const createRelation = (
     : undefined
 }
 
-export const convertFormDataToRequestBody = (formData: SchemaType): GoApi => {
-  const toArray = (value: string): string[] =>
+export const convertFormDataToRequestBody = (formData) => {
+  const toArray = (value) =>
     value
       .split(',')
-      .map((v: string) => v.trim())
+      .map((v) => v.trim())
       .filter((v) => !!v)
 
-  const requestBody = {} as GoApi
+  const requestBody = {}
 
-  /* eslint-disable @typescript-eslint/camelcase */
+  /* eslint-disable camelcase */
   requestBody.description = formData.description
   requestBody.organization_name = formData.organizationName
   requestBody.service_name = formData.serviceName
@@ -89,41 +87,24 @@ export const convertFormDataToRequestBody = (formData: SchemaType): GoApi => {
     uptime_guarantee: formData.termsOfUse.uptimeGuarantee,
     support_response_time: formData.termsOfUse.supportResponseTime,
   }
-  /* eslint-enable @typescript-eslint/camelcase */
+  /* eslint-enable camelcase */
 
   return requestBody
 }
 
-type Props = {}
-
-type State = {
-  submitted: boolean
-  responseData: {
-    web_url: string
-  }
-  result: {
-    apis: Api[]
-  }
-  apisLoaded: boolean
-  apisError: boolean
-  storedFormValues: SchemaType | null
-}
-
-class SubmitAPIFormPage extends Component<Props, State> {
-  constructor(props: Props) {
+class SubmitAPIFormPage extends Component {
+  constructor(props) {
     super(props)
 
     let storedFormValues = null
     try {
-      storedFormValues = JSON.parse(sessionStorage.getItem(
-        'storedFormValues',
-      ) as string)
+      storedFormValues = JSON.parse(sessionStorage.getItem('storedFormValues'))
     } catch (e) {}
 
     this.state = {
       submitted: false,
-      responseData: {} as State['responseData'],
-      result: {} as State['result'],
+      responseData: {},
+      result: {},
       apisLoaded: false,
       apisError: false,
       storedFormValues, // Only use this to save values when unmounting
@@ -133,8 +114,8 @@ class SubmitAPIFormPage extends Component<Props, State> {
     this.submitToApi = this.submitToApi.bind(this)
   }
 
-  handleSubmit(values: SchemaType, actions: FormikHelpers<SchemaType>) {
-    const formData: SchemaType = schema.cast(values)
+  handleSubmit(values, actions) {
+    const formData = schema.cast(values)
     const submitData = convertFormDataToRequestBody(formData)
 
     return this.submitToApi(submitData)
@@ -157,7 +138,7 @@ class SubmitAPIFormPage extends Component<Props, State> {
       })
   }
 
-  submitToApi(data: GoApi) {
+  submitToApi(data) {
     return fetch('/api/submit-api', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -173,7 +154,7 @@ class SubmitAPIFormPage extends Component<Props, State> {
     })
   }
 
-  formikValueChange = (values: SchemaType) => {
+  formikValueChange = (values) => {
     this.setState({ storedFormValues: values })
   }
 
@@ -198,7 +179,7 @@ class SubmitAPIFormPage extends Component<Props, State> {
     this.fetchApiList()
       .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map((api: GoApi) => modelFromAPIResponse(api)),
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
         }),
       )
       .then(
@@ -253,7 +234,6 @@ class SubmitAPIFormPage extends Component<Props, State> {
             onReset={this.handleReset}
             validationSchema={schema}
           >
-            {/* Seems not to be inferred correctly. But type: `FormikProps<SchemaType>` gives same problem */}
             {(props) => (
               <>
                 <OnFormikValueChange handle={this.formikValueChange} />

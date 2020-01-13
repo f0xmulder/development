@@ -1,4 +1,4 @@
-import styled, { AnyStyledComponent } from 'styled-components'
+import styled from 'styled-components'
 import TagList from '../TagList/TagList'
 import availableIcon from './icons/available.svg'
 import unavailableIcon from './icons/unavailable.svg'
@@ -52,8 +52,6 @@ export const StyledTagList = styled(TagList)`
   display: inline-block;
 `
 
-export type CompoundCardsContainer = AnyStyledComponent
-
 export const CardsContainer = styled.div`
   margin-top: 32px;
   margin-bottom: 80px;
@@ -64,7 +62,7 @@ export const CardsContainer = styled.div`
   @media screen and (min-width: 768px) {
     display: grid;
   }
-` as CompoundCardsContainer
+`
 
 CardsContainer.Main = styled.div`
   grid-column-start: 1;
@@ -116,7 +114,7 @@ export const StyledScoresUl = styled.ul`
   list-style-type: none;
 `
 
-export const StyledScoresLi = styled.li<{ available: boolean }>`
+export const StyledScoresLi = styled.li`
   padding-left: 30px;
   position: relative;
 

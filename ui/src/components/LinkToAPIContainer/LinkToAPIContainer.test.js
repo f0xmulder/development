@@ -4,12 +4,12 @@ import LinkToAPIContainer from './LinkToAPIContainer'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = '42'
 apiFromAPIResponse.service_name = 'Service'
 apiFromAPIResponse.organization_name = 'Organization'
-/* eslint-enable @typescript-eslint/camelcase */
+/* eslint-enable camelcase */
 
 describe('LinkToAPIContainer', () => {
   describe('on initialization', () => {

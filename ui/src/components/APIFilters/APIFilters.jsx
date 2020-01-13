@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { object, func } from 'prop-types'
+import PropTypes from 'prop-types'
 import { StyledAPIFilters } from './APIFilters.styles'
 import APIFilter from '../APIFilter/APIFilter'
 
@@ -28,7 +28,7 @@ const APIFilters = ({ initialValues, facets, onSubmit, ...props }) => (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
-      enableReinitialize={true}
+      enableReinitialize
     >
       {({ handleSubmit, values }) => (
         <form onSubmit={handleSubmit}>
@@ -55,8 +55,9 @@ const APIFilters = ({ initialValues, facets, onSubmit, ...props }) => (
 )
 
 APIFilters.propTypes = {
-  facets: object,
-  onSubmit: func.isRequired,
+  initialValues: PropTypes.object,
+  facets: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired,
 }
 
 export default APIFilters

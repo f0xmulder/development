@@ -54,4 +54,3 @@ const validationSchemaConfiguration = {
 }
 
 export const schema = Yup.object().shape(validationSchemaConfiguration)
-export type SchemaType = Yup.InferType<typeof schema>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavLink, Route, Redirect, RouteComponentProps } from 'react-router-dom'
+import { shape, string } from 'prop-types'
+import { NavLink, Route, Redirect } from 'react-router-dom'
 
 import SubmitAPIForm from '../SubmitAPIForm/SubmitAPIForm'
 import SubmitAPIMergeRequest from '../SubmitAPIMergeRequest/SubmitAPIMergeRequest'
@@ -12,7 +13,7 @@ import {
   StyledDescription,
 } from './SubmitAPI.styles'
 
-const SubmitAPI = ({ match: { url } }: RouteComponentProps) => (
+const SubmitAPI = ({ match: { url } }) => (
   <StyledSubmitAPI>
     <StyledPageTitle>API toevoegen</StyledPageTitle>
     <StyledDescription>
@@ -41,5 +42,17 @@ const SubmitAPI = ({ match: { url } }: RouteComponentProps) => (
     </PageContentCard>
   </StyledSubmitAPI>
 )
+
+SubmitAPI.propTypes = {
+  match: shape({
+    url: string,
+  }),
+}
+
+SubmitAPI.defaultProps = {
+  match: {
+    url: 'api-toevoegen',
+  },
+}
 
 export default SubmitAPI

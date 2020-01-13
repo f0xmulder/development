@@ -4,12 +4,12 @@ import ImplementedByListContainer from './ImplementedByListContainer'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
 
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 const apiFromAPIResponse = {}
 apiFromAPIResponse.id = '1'
 apiFromAPIResponse.service_name = 'service'
 apiFromAPIResponse.organization_name = 'organization'
-/* eslint-enable @typescript-eslint/camelcase */
+/* eslint-enable camelcase */
 
 describe('ImplementedByListContainer', () => {
   describe('on initialization', () => {

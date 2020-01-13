@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
-import { Api } from '../../models/apiTypes'
 
 import ImplementedByListContainer from '../ImplementedByListContainer/ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
@@ -24,13 +24,11 @@ import {
   StyledAPIDetails,
 } from './APIDetails.styles'
 
-const getOnlineRedocUrl = (specUrl: Api['specificationUrl']): string =>
+const getOnlineRedocUrl = (specUrl) =>
   `https://redocly.github.io/redoc/?url=${encodeURIComponent(specUrl)}`
 
-export const referenceImplementationsFromRelations = (
-  relations: Api['relations'] = {},
-) =>
-  Object.keys(relations).filter((apiId: string) =>
+export const referenceImplementationsFromRelations = (relations = {}) =>
+  Object.keys(relations).filter((apiId) =>
     relations[apiId].includes(RELATION_TYPE_REFERENCE_IMPLEMENTATION),
   )
 
@@ -49,7 +47,7 @@ const APIDetails = ({
   relations,
   termsOfUse,
   scores,
-}: Api) => (
+}) => (
   <StyledAPIDetails>
     <PageTitle>{serviceName}</PageTitle>
     <SubTitle>{organizationName}</SubTitle>
@@ -177,7 +175,7 @@ const APIDetails = ({
             <Card.Body>
               <Card.Title>Badges</Card.Title>
               <ul data-test="api-badges-list">
-                {badges.map((badge: string, i: number) => (
+                {badges.map((badge, i) => (
                   <li key={`${i}-${badge}`}>{badge}</li>
                 ))}
               </ul>
@@ -188,5 +186,32 @@ const APIDetails = ({
     </CardsContainer>
   </StyledAPIDetails>
 )
+
+APIDetails.propTypes = {
+  id: PropTypes.string.isRequired,
+  serviceName: PropTypes.string.isRequired,
+  organizationName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  apiUrl: PropTypes.string.isRequired,
+  apiType: PropTypes.string.isRequired,
+  specificationUrl: PropTypes.string,
+  documentationUrl: PropTypes.string,
+  badges: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.string),
+  isReferenceImplementation: PropTypes.bool,
+  relations: PropTypes.object,
+  termsOfUse: PropTypes.shape({
+    governmentOnly: PropTypes.bool,
+    payPerUse: PropTypes.bool,
+    uptimeGuarantee: PropTypes.number,
+    supportResponseTime: PropTypes.string,
+  }),
+  scores: PropTypes.shape({
+    hasDocumentation: PropTypes.bool,
+    hasSpecification: PropTypes.bool,
+    hasContactDetails: PropTypes.bool,
+    providesSla: PropTypes.bool,
+  }),
+}
 
 export default APIDetails

@@ -45,11 +45,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 `
 
-export type ButtonType = {
-  variant?: 'secondary'
-}
-
-export const Button = styled.button<ButtonType>`
+export const Button = styled.button`
   text-align: center;
   height: 40px;
   line-height: ${(p) => p.theme.font.lineHeight.normal};

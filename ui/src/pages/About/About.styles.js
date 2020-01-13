@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
-import PageContentCard, {
-  PageContentCardType,
-} from '../../components/PageContentCard/PageContentCard'
+import PageContentCard from '../../components/PageContentCard/PageContentCard'
 
 export const StyledAbout = styled.div`
   max-width: 600px;
@@ -23,4 +21,4 @@ export const StyledPageContentCard = styled(PageContentCard)`
     text-decoration: none;
     border-bottom: 1px dotted #a3aabf;
   }
-` as PageContentCardType
+`
