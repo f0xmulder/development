@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "config:base",
+    ":semanticCommits",
+    "schedule:nonOfficeHours",
+    "group:allNonMajor"
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "ignoreDeps": [
+    "github.com/coreos/etcd"
+  ],
+  "gomod": {
+    "major": {
+      "masterIssueApproval": true
+    }
+  }
+}
