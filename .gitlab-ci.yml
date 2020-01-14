@@ -96,6 +96,33 @@ Test and release API:
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
 
+## Docs ##
+.docs:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
+  tags:
+    - docker
+    - linux
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+
+Release Docs:
+  extends: .docs
+  stage: release
+  script:
+    - |
+        docker build \
+        --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
+        --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
+        -f docs/Dockerfile . && \
+        docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
+        docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
+
+## Review App ##
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
@@ -109,6 +136,7 @@ Deploy Review App:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+        --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
         --set "replicas=1" \
         --set "ingressClass=traefik"
@@ -144,6 +172,7 @@ Remove Review App:
   except:
     - master
 
+## E2E Tests
 E2E tests:
   stage: e2e-tests
   variables:
@@ -166,6 +195,7 @@ E2E tests:
   services:
     - docker:dind
 
+## Depoyment ##
 Deploy production:
   stage: deploy
   before_script:
@@ -179,6 +209,7 @@ Deploy production:
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+        --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set domain="$DOMAIN" \
         --set "ingressClass=traefik"
   environment:

@@ -91,4 +91,8 @@ spec:
             backend:
               serviceName: api
               servicePort: http
+          - path: /docs
+            backend:
+              serviceName: docs
+              servicePort: http
 {{ end }}

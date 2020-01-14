@@ -5,10 +5,10 @@ This is the repository of the software backing the [developer.overheid.nl](https
 See [Submit your API](https://test.developer.overheid.nl/api-toevoegen).
 
 ## Developer documentation
-If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/developer.md).
+If you would like to contribute to the developer.overheid.nl software itself, consult the [developer documentation](./docs/docs/developer.md).
 
 ## Deployment and releases
-If you would like to learn more about the deployment en release process of developer.overheid.nl, consult the [deployment and releases documentation](./docs/deployment-releases.md).
+If you would like to learn more about the deployment en release process of developer.overheid.nl, consult the [deployment and releases documentation](./docs/docs/deployment-releases.md).
 
 ## Licence
 Copyright © VNG Realisatie 2019
