@@ -6,7 +6,6 @@ export const formDataMock = {
   apiType: 'api type',
   specificationUrl: 'specification url',
   documentationUrl: 'documentation url',
-  badges: '',
   isReferenceImplementation: true,
   referenceImplementation: '',
   termsOfUse: {
@@ -34,7 +33,6 @@ export const submitDataMock = {
   api_type: 'api type',
   specification_url: 'specification url',
   documentation_url: 'documentation url',
-  badges: [],
   is_reference_implementation: true,
   terms_of_use: {
     government_only: false,

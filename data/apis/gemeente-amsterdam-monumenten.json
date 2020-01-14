@@ -6,6 +6,5 @@
     "api_type": "REST/JSON",
     "specification_url": "https://api.data.amsterdam.nl/monumenten/docs/api-docs/monumenten/?format=openapi",
     "documentation_url": "https://api.data.amsterdam.nl/monumenten/",
-    "tags": ["gemeente", "amsterdam", "monumenten"],
-    "badges": []
+    "tags": ["gemeente", "amsterdam", "monumenten"]
 }

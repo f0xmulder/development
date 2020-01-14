@@ -13,5 +13,6 @@
         "fax": "0031687654321",
         "chat": "https://nl-x.slack.com",
         "url": "https://github.com/VNG-Realisatie/nlx"
-    }
+    },
+    "random_superfluous_property": "EXTRA CONTENT"
 }

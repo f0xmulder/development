@@ -7,7 +7,6 @@
   "specification_url": "https://raw.githubusercontent.com/solviteers/mijnapp-api/master/contracten-api.yaml",
   "documentation_url": "https://solviteers.github.io/mijnapp-api-contracts-docs-redoc/",
   "tags": ["zaken", "contractgegevens", "mijnapp"],
-  "badges": [],
   "contact": {
     "email": "helpdesk@solviteers.nl"
   }

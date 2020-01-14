@@ -25,7 +25,6 @@ const SubmitAPIMergeRequest = () => (
     "specification_url": "https://api.example.com/service/swagger/?format=openapi",
     "documentation_url": "https://api.example.com/service/",
     "tags": ["Voorbeeld tag", "Nog een tag"],
-    "badges": ["Gouden API"],
     "contact": {
         "email": "helpdesk@voorbeeld.nl",
         "phone": "0031612345678",

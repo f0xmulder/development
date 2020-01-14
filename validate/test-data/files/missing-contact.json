@@ -5,6 +5,5 @@
     "api_url": "Test API URL",
     "api_type": "REST/JSON",
     "documentation_url": "Test Documentation URL",
-    "tags": ["test-tag"],
-    "badges": ["Test badge"]
+    "tags": ["test-tag"]
 }

@@ -11,7 +11,7 @@ import (
 )
 
 var options struct {
-	DirectoryToValidate string `long:"directory-to-validate" env:"DIRECTORY_TO_VALIDATE" default:"../data" description:"Path to the directory for which the data should be validated"`
+	DirectoryToValidate string `long:"directory-to-validate" env:"DIRECTORY_TO_VALIDATE" default:"../data/apis" description:"Path to the directory for which the data should be validated"`
 }
 
 func main() {

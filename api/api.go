@@ -7,8 +7,9 @@ import (
 	"net/http"
 
 	"github.com/pkg/errors"
-	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 	"go.uber.org/zap"
+
+	"gitlab.com/commonground/developer.overheid.nl/api/gitlab"
 )
 
 // Server is the server itself

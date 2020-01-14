@@ -16,7 +16,6 @@ const initialValues = {
   specificationUrl: '',
   documentationUrl: '',
   tags: '',
-  badges: '',
   contact: {
     email: '',
     phone: '',
@@ -63,7 +62,6 @@ export const convertFormDataToRequestBody = (formData) => {
   requestBody.specification_url = formData.specificationUrl
   requestBody.documentation_url = formData.documentationUrl
   requestBody.tags = toArray(formData.tags)
-  requestBody.badges = toArray(formData.badges)
 
   requestBody.is_reference_implementation = formData.isReferenceImplementation
   requestBody.relations = createRelation(

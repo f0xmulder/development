@@ -1,15 +1,16 @@
 package datareaders
 
 import (
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
 // Directory maps every file from a directory into an API model
 func Directory(directory string) ([]models.API, error) {
-	files, err := ioutil.ReadDir(directory)
+	apiFiles, err := ioutil.ReadDir(directory)
 
 	output := []models.API{}
 
@@ -20,12 +21,12 @@ func Directory(directory string) ([]models.API, error) {
 	inputChan := make(chan string)
 	resultChan := make(chan result)
 
-	filePaths := filesToFullPath(directory, files)
+	apiFilePaths := filesToFullPath(directory, apiFiles)
 
 	go worker(inputChan, resultChan)
-	go addWorkToInputChannel(filePaths, inputChan)
+	go addWorkToInputChannel(apiFilePaths, inputChan)
 
-	for i := 0; i < len(filePaths); i++ {
+	for i := 0; i < len(apiFilePaths); i++ {
 		result := <-resultChan
 
 		if result.err != nil {

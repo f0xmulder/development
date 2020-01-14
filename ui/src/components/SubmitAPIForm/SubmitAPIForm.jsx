@@ -91,17 +91,6 @@ const SubmitAPIForm = ({
               <ErrorMessage>{errors.tags}</ErrorMessage>
             )}
           </StyledFormGroup>
-
-          <StyledFormGroup>
-            <Label htmlFor="badges">Badges</Label>
-            <Field component="input" type="text" id="badges" name="badges" />
-            <HelperMessage>
-              Door komma&#39;s gescheiden lijst van tags.
-            </HelperMessage>
-            {errors.badges && touched.badges && (
-              <ErrorMessage>{errors.badges}</ErrorMessage>
-            )}
-          </StyledFormGroup>
         </StyledFormGroupColumn>
 
         <StyledFormGroupColumn>

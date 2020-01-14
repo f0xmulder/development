@@ -24,7 +24,6 @@ func TestFile(t *testing.T) {
 		{"missing-documentation-url.json", false, "", "the field documentation_url is missing"},
 		{"missing-specification-url.json", true, "", ""},
 		{"missing-tags.json", true, "", ""},
-		{"missing-badges.json", true, "", ""},
 		{"missing-contact.json", true, "", ""},
 		{"empty-api-type.json", false, "", INVALID_JSON_PREFIX + "the field api_type is empty or missing"},
 		{"invalid-json.json", false, INVALID_JSON_PREFIX, ""},
@@ -32,6 +31,7 @@ func TestFile(t *testing.T) {
 		{"invalid-val-api-type.json", false, "", INVALID_JSON_PREFIX + "invalid value for the field api_type"},
 		{"invalid-tags.json", false, INVALID_JSON_PREFIX, ""},
 		{"invalid-contact.json", false, INVALID_JSON_PREFIX, ""},
+		{"superfluous-props.json", true, "", ""},
 		{"valid.json", true, "", ""},
 	}
 
@@ -71,11 +71,11 @@ func TestDirectory(t *testing.T) {
 }
 
 func EvaluateTestResult(
-	t               *testing.T,
-	got              ValidationFeedback,
-	wantValid        bool,
+	t *testing.T,
+	got ValidationFeedback,
+	wantValid bool,
 	wantReasonPrefix string,
-	wantReason       string,
+	wantReason string,
 ) {
 	if got.Valid != wantValid {
 		t.Errorf("got Valid %s, want %s", strconv.FormatBool(got.Valid), strconv.FormatBool(wantValid))

@@ -33,7 +33,6 @@ const validationSchemaConfiguration = {
   specificationUrl: Yup.string().url(),
   documentationUrl: Yup.string().url(),
   tags: Yup.string(),
-  badges: Yup.string(),
   isReferenceImplementation: Yup.boolean(),
   referenceImplementation: Yup.string(),
 

@@ -34,5 +34,7 @@ func File(path string) (models.API, error) {
 	newAPI.ID = toAPIID(filename)
 	newAPI.Scores = nil
 
+	err = addBadges(path, &newAPI)
+
 	return newAPI, err
 }

@@ -5,23 +5,28 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
 	"go.uber.org/zap"
+
+	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
+	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"path/filepath"
 )
 
 // TagResource enables injecting functions to deal with the Tag resource handlers
 type TagResource struct {
-	Logger                      *zap.Logger
-	RootDirectoryAPIDefinitions string
-	ReadDirectory               func(directory string) ([]models.API, error)
+	Logger        *zap.Logger
+	APIDirectory  string
+	ReadDirectory func(directory string) ([]models.API, error)
 }
 
 // NewTagResource creates a new TagResource
-func NewTagResource(logger *zap.Logger, rootDirectoryAPIDefinitions string, readDirectory func(directory string) ([]models.API, error)) *TagResource {
+func NewTagResource(logger *zap.Logger, rootDirectory string, readDirectory func(directory string) ([]models.API, error)) *TagResource {
+	apiDirectory := filepath.Join(rootDirectory, datareaders.API_DIR)
+
 	i := &TagResource{
-		Logger:                      logger,
-		RootDirectoryAPIDefinitions: rootDirectoryAPIDefinitions,
-		ReadDirectory:               readDirectory,
+		Logger:        logger,
+		APIDirectory:  apiDirectory,
+		ReadDirectory: readDirectory,
 	}
 
 	return i
@@ -54,7 +59,7 @@ func (rs TagResource) Routes() chi.Router {
 func (rs TagResource) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	apis, errReadFile := rs.ReadDirectory("../data")
+	apis, errReadFile := rs.ReadDirectory(rs.APIDirectory)
 
 	tags := []models.Tag{}
 	for _, api := range apis {

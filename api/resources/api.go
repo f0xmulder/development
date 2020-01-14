@@ -7,20 +7,20 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"gitlab.com/commonground/developer.overheid.nl/api/scores"
-	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
-
 	"github.com/go-chi/chi"
+	"go.uber.org/zap"
+
 	"gitlab.com/commonground/developer.overheid.nl/api/datareaders"
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/api/scores"
+	"gitlab.com/commonground/developer.overheid.nl/api/searchindex"
 	"gitlab.com/commonground/developer.overheid.nl/api/utils"
-	"go.uber.org/zap"
 )
 
 // APIResource enables injecting functions to deal with the API resource handlers
 type APIResource struct {
 	Logger        *zap.Logger
-	RootDirectory string
+	APIDirectory  string
 	ReadFile      func(path string) (models.API, error)
 	ReadDirectory func(directory string) ([]models.API, error)
 	SearchIndex   searchindex.Index
@@ -30,7 +30,8 @@ type APIResource struct {
 func NewAPIResource(logger *zap.Logger, rootDirectory string, readFile func(path string) (models.API, error),
 	readDirectory func(directory string) ([]models.API, error)) *APIResource {
 
-	outputList, errReadFile := readDirectory("../data")
+	apiDirectory := filepath.Join(rootDirectory, datareaders.API_DIR)
+	outputList, errReadFile := readDirectory(apiDirectory)
 	if errReadFile != nil {
 		logger.Fatal("error while reading the data directory. check its contents", zap.Error(errReadFile))
 	}
@@ -39,7 +40,7 @@ func NewAPIResource(logger *zap.Logger, rootDirectory string, readFile func(path
 
 	i := &APIResource{
 		Logger:        logger,
-		RootDirectory: rootDirectory,
+		APIDirectory:  apiDirectory,
 		ReadFile:      readFile,
 		ReadDirectory: readDirectory,
 		SearchIndex:   searchIndex,
@@ -129,7 +130,7 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 
 	apiID := chi.URLParam(r, "id")
 	filename := datareaders.FromID(apiID)
-	path := filepath.Join(rs.RootDirectory, filename)
+	path := filepath.Join(rs.APIDirectory, filename)
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		rs.Logger.Error("failed to find API by id", zap.Error(err))
@@ -163,7 +164,7 @@ func (rs APIResource) ListImplementedBy(w http.ResponseWriter, r *http.Request) 
 
 	apiID := chi.URLParam(r, "id")
 
-	outputList, errReadFile := rs.ReadDirectory("../data")
+	outputList, errReadFile := rs.ReadDirectory(rs.APIDirectory)
 	outputList = filterAPIsByReferenceImplementation(outputList, apiID)
 
 	err := json.NewEncoder(w).Encode(outputList)

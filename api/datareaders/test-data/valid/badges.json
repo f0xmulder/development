@@ -1,0 +1,17 @@
+{
+  "badges": [
+    {
+      "name": "Gouden API",
+      "apis": [
+        "company-service"
+      ]
+    },
+    {
+      "name": "Zilveren Kalf",
+      "apis": [
+        "other-service",
+        "company-service"
+      ]
+    }
+  ]
+}
