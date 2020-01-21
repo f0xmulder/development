@@ -2,12 +2,15 @@
     "description": "De referentieimplementatie van het documentregistratiecomponent.",
     "organization_name": "VNG Realisatie",
     "service_name": "Documentregistratiecomponent (DRC)",
-    "api_url": "https://ref.tst.vng.cloud/drc/api/v1/",
     "api_type": "REST/JSON",
-    "specification_url": "https://ref.tst.vng.cloud/drc/api/v1/schema/",
-    "documentation_url": "https://ref.tst.vng.cloud/drc/",
     "tags": ["zgw", "drc", "zaakgericht werken", "documentregistratiecomponent"],
     "is_reference_implementation": true,
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://ref.tst.vng.cloud/drc/api/v1/",
+        "specification_url": "https://ref.tst.vng.cloud/drc/api/v1/schema/",
+        "documentation_url": "https://ref.tst.vng.cloud/drc/"
+    }],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
     },

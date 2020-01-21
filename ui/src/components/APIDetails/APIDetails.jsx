@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Table } from '@commonground/design-system'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
 import ImplementedByListContainer from '../ImplementedByListContainer/ImplementedByListContainer'
@@ -13,11 +14,10 @@ import PageContentCard from '../PageContentCard/PageContentCard'
 import {
   PageTitle,
   SubTitle,
-  DocumentationContainer,
-  DocumentationButton,
   StyledTagList,
   CardsContainer,
   ApiLink,
+  StyledTable,
   StyledDl,
   StyledScoresUl,
   StyledScoresLi,
@@ -37,12 +37,10 @@ const APIDetails = ({
   serviceName,
   organizationName,
   description,
-  apiUrl,
   apiType,
-  specificationUrl,
-  documentationUrl,
   badges,
   tags,
+  environments,
   isReferenceImplementation,
   relations,
   termsOfUse,
@@ -52,17 +50,6 @@ const APIDetails = ({
     <PageTitle>{serviceName}</PageTitle>
     <SubTitle>{organizationName}</SubTitle>
 
-    <DocumentationContainer>
-      <DocumentationButton
-        href={documentationUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-test="api-documentation-url"
-      >
-        Documentatie <External width="12px" height="12px" />
-      </DocumentationButton>
-    </DocumentationContainer>
-
     <CardsContainer>
       <CardsContainer.Main>
         <PageContentCard>
@@ -71,15 +58,63 @@ const APIDetails = ({
             <StyledTagList tags={tags} />
           </PageContentCard.Body>
           <PageContentCard.Footer>
-            <h3>Basis URL</h3>
-            <ApiLink
-              href={apiUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-test="api-url"
-            >
-              {apiUrl}
-            </ApiLink>
+            {environments && environments.length > 0 && (
+              <StyledTable>
+                <Table.Head>
+                  <Table.Row>
+                    <Table.HeadCell>Omgeving</Table.HeadCell>
+                    <Table.HeadCell>URL</Table.HeadCell>
+                    <Table.HeadCell>API Specificatie</Table.HeadCell>
+                    <Table.HeadCell>API Documentatie</Table.HeadCell>
+                  </Table.Row>
+                </Table.Head>
+                <Table.Body data-test="environments-table-body">
+                  {environments.map((env, i) => (
+                    <Table.Row key={i}>
+                      <Table.BodyCell>{env.name}</Table.BodyCell>
+                      <Table.BodyCell>
+                        <ApiLink
+                          href={env.apiUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-test="api-url"
+                        >
+                          {env.apiUrl} <External />
+                        </ApiLink>
+                      </Table.BodyCell>
+                      <Table.BodyCell>
+                        {env.specificationUrl ? (
+                          <ApiLink
+                            href={getOnlineRedocUrl(env.specificationUrl)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-test="api-specification-url"
+                          >
+                            Specificatie <External />
+                          </ApiLink>
+                        ) : (
+                          '—'
+                        )}
+                      </Table.BodyCell>
+                      <Table.BodyCell>
+                        {env.documentationUrl ? (
+                          <ApiLink
+                            href={env.documentationUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-test="api-documentation-url"
+                          >
+                            Documentatie <External />
+                          </ApiLink>
+                        ) : (
+                          '—'
+                        )}
+                      </Table.BodyCell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </StyledTable>
+            )}
           </PageContentCard.Footer>
         </PageContentCard>
       </CardsContainer.Main>
@@ -90,19 +125,6 @@ const APIDetails = ({
             <StyledDl>
               <dt>API Type</dt>
               <dd data-test="api-type">{apiType}</dd>
-
-              <dt>API Specificatie</dt>
-              <dd data-test="api-specification">
-                <a
-                  href={getOnlineRedocUrl(specificationUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-test="api-specification-url"
-                >
-                  Lees meer
-                </a>
-              </dd>
-
               <dt>Gebruik</dt>
               <dd>
                 {termsOfUse.governmentOnly ? 'Alleen overheid' : 'Iedereen'}
@@ -192,12 +214,10 @@ APIDetails.propTypes = {
   serviceName: PropTypes.string.isRequired,
   organizationName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  apiUrl: PropTypes.string.isRequired,
   apiType: PropTypes.string.isRequired,
-  specificationUrl: PropTypes.string,
-  documentationUrl: PropTypes.string,
   badges: PropTypes.arrayOf(PropTypes.string),
   tags: PropTypes.arrayOf(PropTypes.string),
+  environments: PropTypes.arrayOf(PropTypes.object),
   isReferenceImplementation: PropTypes.bool,
   relations: PropTypes.object,
   termsOfUse: PropTypes.shape({

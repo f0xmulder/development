@@ -26,15 +26,40 @@ const validationSchemaConfiguration = {
     .required(),
   organizationName: Yup.string().required(),
   serviceName: Yup.string().required(),
-  apiUrl: Yup.string()
+  apiType: Yup.string().required(),
+  tags: Yup.string(),
+
+  productionApiUrl: Yup.string()
     .url()
     .required(),
-  apiType: Yup.string().required(),
-  specificationUrl: Yup.string().url(),
-  documentationUrl: Yup.string().url(),
-  tags: Yup.string(),
-  isReferenceImplementation: Yup.boolean(),
-  referenceImplementation: Yup.string(),
+  productionSpecificationUrl: Yup.string().url(),
+  productionDocumentationUrl: Yup.string().url(),
+
+  hasAcceptanceEnvironment: Yup.boolean(),
+  acceptanceApiUrl: Yup.string()
+    .url()
+    .when('hasAcceptanceEnvironment', {
+      is: true,
+      then: Yup.string()
+        .url()
+        .required(),
+      otherwise: Yup.string().url(),
+    }),
+  acceptanceSpecificationUrl: Yup.string().url(),
+  acceptanceDocumentationUrl: Yup.string().url(),
+
+  hasDemoEnvironment: Yup.boolean(),
+  demoApiUrl: Yup.string()
+    .url()
+    .when('hasDemoEnvironment', {
+      is: true,
+      then: Yup.string()
+        .url()
+        .required(),
+      otherwise: Yup.string().url(),
+    }),
+  demoSpecificationUrl: Yup.string().url(),
+  demoDocumentationUrl: Yup.string().url(),
 
   contact: Yup.object().shape({
     email: Yup.string().email(),
@@ -43,6 +68,9 @@ const validationSchemaConfiguration = {
     chat: Yup.string().url(),
     url: Yup.string().url(),
   }),
+
+  isReferenceImplementation: Yup.boolean(),
+  referenceImplementation: Yup.string(),
 
   termsOfUse: Yup.object().shape({
     governmentOnly: Yup.boolean(),

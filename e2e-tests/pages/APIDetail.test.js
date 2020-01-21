@@ -10,6 +10,12 @@ describe('API Detail', () => {
 
     describe('navigating to the first API Detail page', () => {
         beforeAll(async () => {
+            await page.setViewport({
+                width: 1024,
+                height: 768,
+                deviceScaleFactor: 1,
+            });
+
             await page.waitForSelector('[data-test="link"]')
 
             await Promise.all([
@@ -19,10 +25,10 @@ describe('API Detail', () => {
         })
 
         it('should contain a link to the API specification', async () => {
-            await page.waitForSelector('[data-test="api-specification"]')
-            const apiSpecificationLinkText = await page.$eval('[data-test="api-specification"] a', e => e.innerHTML)
+            await page.waitForSelector('[data-test="api-specification-url"]')
+            const apiSpecificationLinkText = await page.$eval('[data-test="api-specification-url"]', e => e.innerHTML)
             await page.screenshot({ path: 'screenshots/api-detail.specification.png' });
-            expect(apiSpecificationLinkText).toBe('Lees meer')
+            expect(apiSpecificationLinkText).toEqual(expect.stringContaining('Specificatie'))
         })
 
         it('should not have accessibility issues', async () => {

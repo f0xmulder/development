@@ -20,11 +20,28 @@ const SubmitAPIMergeRequest = () => (
     "description": "Voorbeeld van een omschrijving",
     "organization_name": "Voorbeeld van een organisatie naam",
     "service_name": "Voorbeeld van een API naam",
-    "api_url": "https://api.example.com/service/",
     "api_type": "REST/JSON",
-    "specification_url": "https://api.example.com/service/swagger/?format=openapi",
-    "documentation_url": "https://api.example.com/service/",
     "tags": ["Voorbeeld tag", "Nog een tag"],
+    "environments": [
+      {
+        "name": "Productie"
+        "api_url": "https://api.example.com/service/",
+        "specification_url": "https://api.example.com/service/swagger/?format=openapi",
+        "documentation_url": "https://api.example.com/service/",
+      },
+      {
+        "name": "Acceptatie"
+        "api_url": "https://acpt.api.example.com/service/",
+        "specification_url": "https://acpt.api.example.com/service/swagger/?format=openapi",
+        "documentation_url": "https://acpt.api.example.com/service/",
+      },
+      {
+        "name": "Demo"
+        "api_url": "https://demo.api.example.com/service/",
+        "specification_url": "https://demo.api.example.com/service/swagger/?format=openapi",
+        "documentation_url": "https://demo.api.example.com/service/",
+      }
+    ],
     "contact": {
         "email": "helpdesk@voorbeeld.nl",
         "phone": "0031612345678",
@@ -45,6 +62,10 @@ const SubmitAPIMergeRequest = () => (
 }
             `}
     </StyledPre>
+
+    <p>
+      Een productieomgeving is verplicht, acceptatie en demo zijn optioneel.
+    </p>
     <p>
       Maak vervolgens een Merge Request aan van{' '}
       <a href="https://gitlab.com/commonground/developer.overheid.nl/-/forks">

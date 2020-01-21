@@ -20,12 +20,17 @@ var dummyAPI = models.API{
 	"Test Description",
 	"Test Organization Name",
 	"Test Service Name",
-	"Test API URL",
 	"REST/JSON",
-	"Test Specification URL",
-	"Test Documentation URL",
 	[]models.Tag{"test-tag"},
 	[]string{},
+	[]models.APIEnvironment{
+		{
+			Name:             models.ProductionEnvironment,
+			APIURL:           "Test API URL",
+			SpecificationURL: "Test Specification URL",
+			DocumentationURL: "Test Documentation URL",
+		},
+	},
 	models.APIContactDetails{},
 	false,
 	map[string][]string{},
@@ -38,12 +43,17 @@ var dummyImplementationOfReferenceAPI = models.API{
 	"Test Description",
 	"Test Organization Name",
 	"Test Service Name",
-	"Test API URL",
 	"REST/JSON",
-	"Test Specification URL",
-	"Test Documentation URL",
 	[]models.Tag{},
 	[]string{},
+	[]models.APIEnvironment{
+		{
+			Name:             models.ProductionEnvironment,
+			APIURL:           "Test API URL",
+			SpecificationURL: "Test Specification URL",
+			DocumentationURL: "Test Documentation URL",
+		},
+	},
 	models.APIContactDetails{},
 	false,
 	map[string][]string{
@@ -92,7 +102,7 @@ func TestAPIList(t *testing.T) {
 			"/list?tags=test-tag",
 			200,
 			"application/json",
-			`{"total":1,"page":1,"rowsPerPage":10,"facets":{"api_type":{"field":"api_type","total":1,"missing":0,"other":0,"terms":[{"term":"REST/JSON","count":1}]},"organization_name":{"field":"organization_name","total":1,"missing":0,"other":0,"terms":[{"term":"Test Organization Name","count":1}]},"tags":{"field":"tags","total":1,"missing":0,"other":0,"terms":[{"term":"test-tag","count":1}]}},"apis":[{"id":"test-api-name","description":"Test Description","organization_name":"Test Organization Name","service_name":"Test Service Name","api_url":"Test API URL","api_type":"REST/JSON","specification_url":"Test Specification URL","documentation_url":"Test Documentation URL","tags":["test-tag"],"badges":[],"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""},"scores":{"has_documentation":true,"has_specification":true,"has_contact_details":false,"provides_sla":false}}]}
+			`{"total":1,"page":1,"rowsPerPage":10,"facets":{"api_type":{"field":"api_type","total":1,"missing":0,"other":0,"terms":[{"term":"REST/JSON","count":1}]},"organization_name":{"field":"organization_name","total":1,"missing":0,"other":0,"terms":[{"term":"Test Organization Name","count":1}]},"tags":{"field":"tags","total":1,"missing":0,"other":0,"terms":[{"term":"test-tag","count":1}]}},"apis":[{"id":"test-api-name","description":"Test Description","organization_name":"Test Organization Name","service_name":"Test Service Name","api_type":"REST/JSON","tags":["test-tag"],"badges":[],"environments":[{"name":"Productie","api_url":"Test API URL","specification_url":"Test Specification URL","documentation_url":"Test Documentation URL"}],"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""},"scores":{"has_documentation":true,"has_specification":true,"has_contact_details":false,"provides_sla":false}}]}
 `,
 		},
 		{
@@ -158,7 +168,7 @@ func TestAPIGet(t *testing.T) {
 			"./test-data/valid",
 			200,
 			"application/json",
-			`{"description":"","organization_name":"","service_name":"","api_url":"","api_type":"","specification_url":"","documentation_url":"","tags":null,"badges":null,"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""},"scores":{"has_documentation":false,"has_specification":false,"has_contact_details":false,"provides_sla":false}}
+			`{"description":"","organization_name":"","service_name":"","api_type":"","tags":null,"badges":null,"environments":null,"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""},"scores":{"has_documentation":false,"has_specification":false,"has_contact_details":false,"provides_sla":false}}
 `,
 			mockAPIFileReader,
 		}, {
@@ -241,7 +251,7 @@ func TestAPIImplementedBy(t *testing.T) {
 			"./test-data/valid",
 			200,
 			"application/json",
-			`[{"id":"test-implementation-of-reference-api","description":"Test Description","organization_name":"Test Organization Name","service_name":"Test Service Name","api_url":"Test API URL","api_type":"REST/JSON","specification_url":"Test Specification URL","documentation_url":"Test Documentation URL","tags":[],"badges":[],"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"relations":{"test-reference-api":["reference-implementation"]},"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""}}]
+			`[{"id":"test-implementation-of-reference-api","description":"Test Description","organization_name":"Test Organization Name","service_name":"Test Service Name","api_type":"REST/JSON","tags":[],"badges":[],"environments":[{"name":"Productie","api_url":"Test API URL","specification_url":"Test Specification URL","documentation_url":"Test Documentation URL"}],"contact":{"email":"","phone":"","fax":"","chat":"","url":""},"is_reference_implementation":false,"relations":{"test-reference-api":["reference-implementation"]},"terms_of_use":{"government_only":false,"pay_per_use":false,"uptime_guarantee":0,"support_response_time":""}}]
 `,
 			func(directory string) ([]models.API, error) {
 				return []models.API{

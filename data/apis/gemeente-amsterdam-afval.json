@@ -2,11 +2,15 @@
     "description": "Afvalcontainers en putten in Amsterdam",
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Afvalcontainers en putten",
-    "api_url": "https://api.data.amsterdam.nl/afval/",
     "api_type": "REST/JSON",
-    "specification_url": "https://api.data.amsterdam.nl/afval/redoc/?format=openapi",
-    "documentation_url": "https://api.data.amsterdam.nl/afval/",
     "tags": ["afval", "containers", "putten"],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://api.data.amsterdam.nl/afval/",
+        "specification_url": "https://api.data.amsterdam.nl/afval/redoc/?format=openapi",
+        "documentation_url": "https://api.data.amsterdam.nl/afval/"
+    }],
+
     "contact": {
         "email": "datapunt@amsterdam.nl",
         "url": "https://github.com/Amsterdam/afvalcontainers/issues"

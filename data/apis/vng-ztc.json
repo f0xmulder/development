@@ -2,12 +2,15 @@
     "description": "De referentieimplementatie van de zaaktypecatalogus.",
     "organization_name": "VNG Realisatie",
     "service_name": "Zaaktypecatalogus (ZTC)",
-    "api_url": "https://ref.tst.vng.cloud/ztc/api/v1/",
     "api_type": "REST/JSON",
-    "specification_url": "https://ref.tst.vng.cloud/ztc/api/v1/schema/",
-    "documentation_url": "https://ref.tst.vng.cloud/ztc/",
     "tags": ["zgw", "ztc", "zaakgericht werken", "zaaktypecatalogus"],
     "is_reference_implementation": true,
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://ref.tst.vng.cloud/ztc/api/v1/",
+        "specification_url": "https://ref.tst.vng.cloud/ztc/api/v1/schema/",
+        "documentation_url": "https://ref.tst.vng.cloud/ztc/"
+    }],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
     },

@@ -2,6 +2,7 @@
 import React from 'react'
 import { array, object } from 'prop-types'
 
+import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
 import {
   StyledFormGroupColumn,
   StyledFormGroupColumnContainer,
@@ -80,7 +81,9 @@ const SubmitAPIForm = ({
               <ErrorMessage>{errors.description}</ErrorMessage>
             )}
           </StyledFormGroup>
+        </StyledFormGroupColumn>
 
+        <StyledFormGroupColumn>
           <StyledFormGroup>
             <Label htmlFor="tags">Tags</Label>
             <Field component="input" type="text" id="tags" name="tags" />
@@ -89,16 +92,6 @@ const SubmitAPIForm = ({
             </HelperMessage>
             {errors.tags && touched.tags && (
               <ErrorMessage>{errors.tags}</ErrorMessage>
-            )}
-          </StyledFormGroup>
-        </StyledFormGroupColumn>
-
-        <StyledFormGroupColumn>
-          <StyledFormGroup>
-            <Label htmlFor="apiUrl">API URL*</Label>
-            <Field component="input" type="text" id="apiUrl" name="apiUrl" />
-            {errors.apiUrl && touched.apiUrl && (
-              <ErrorMessage>{errors.apiUrl}</ErrorMessage>
             )}
           </StyledFormGroup>
 
@@ -119,41 +112,36 @@ const SubmitAPIForm = ({
               <ErrorMessage>{errors.apiType}</ErrorMessage>
             )}
           </StyledFormGroup>
-
-          <StyledFormGroup>
-            <Label htmlFor="specificationUrl">Specificatie URL</Label>
-            <Field
-              component="input"
-              type="text"
-              id="specificationUrl"
-              name="specificationUrl"
-            />
-            {errors.specificationUrl && touched.specificationUrl && (
-              <ErrorMessage>{errors.specificationUrl}</ErrorMessage>
-            )}
-            <HelperMessage>
-              Link naar een machine leesbare documentatie.
-            </HelperMessage>
-          </StyledFormGroup>
-
-          <StyledFormGroup>
-            <Label htmlFor="documentationUrl">Documentatie URL</Label>
-            <Field
-              component="input"
-              type="text"
-              id="documentationUrl"
-              name="documentationUrl"
-            />
-            {errors.documentationUrl && touched.documentationUrl && (
-              <ErrorMessage>{errors.documentationUrl}</ErrorMessage>
-            )}
-            <HelperMessage>
-              Link naar een menselijk leesbare documentatie.
-            </HelperMessage>
-          </StyledFormGroup>
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
     </Fieldset>
+
+    <EnvironmentFormInputs
+      title="Productie"
+      environment="production"
+      values={values}
+      touched={touched}
+      errors={errors}
+    />
+
+    <EnvironmentFormInputs
+      title="Acceptatie"
+      environment="acceptance"
+      optional
+      values={values}
+      touched={touched}
+      errors={errors}
+    />
+
+    <EnvironmentFormInputs
+      title="Demo"
+      environment="demo"
+      optional
+      values={values}
+      touched={touched}
+      errors={errors}
+    />
+
     <Fieldset>
       <Legend>Contact</Legend>
 

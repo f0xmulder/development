@@ -2,13 +2,16 @@
     "description": "This API grants direct access to detailed information of the stations and the measurements of  air quality on several measuring stations in the Netherlands and the calculated air quality maps",
     "organization_name": "Luchtmeetnet",
     "service_name": "Luchtmeetnet",
-    "api_url": "https://api.luchtmeetnet.nl/open_api/",
     "api_type": "REST/JSON",
-    "specification_url": "",
-    "documentation_url": "https://api-docs.luchtmeetnet.nl",
     "tags": [
         "luchtkwaliteit"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://api.luchtmeetnet.nl/open_api/",
+        "specification_url": "",
+        "documentation_url": "https://api-docs.luchtmeetnet.nl"
+    }],
     "contact": {
         "email": "",
         "phone": "",

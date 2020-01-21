@@ -2,6 +2,9 @@
   "eslint.workingDirectories": [
     "./ui"
   ],
+  "[go]": {
+    "editor.defaultFormatter": "ms-vscode.Go"
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

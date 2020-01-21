@@ -2,8 +2,11 @@
     "description": "Met deze API worden alle omgevingsdocumenten ontsloten die door overheden beschikbaar zijn gesteld aan de Landelijke Voorziening Bekendmaken en Beschikbaar stellen (LVBB). Het betreft alle gegevens waar het omgevingsdocument uit is opgebouwd. De gegevens worden objectgericht ontsloten op basis van de API strategie van het digitaal stelsel Omgevingswet.",
     "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
     "service_name": "Omgevingsdocumenten Opvragen",
-    "api_url": "https://service.pre.omgevingswet.overheid.nl/publiek/omgevingsdocumenten/api/opvragen/v2",
     "api_type": "REST/JSON",
-    "specification_url": "https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Kadaster/Omgevingsdocumenten-Opvragen/v2",
-    "documentation_url": "https://aandeslagmetdeomgevingswet.nl/publish/pages/155982/20181121_functionele_documentatie_ozon_api_omgevingsdocumenten_opvragen.pdf"
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://service.pre.omgevingswet.overheid.nl/publiek/omgevingsdocumenten/api/opvragen/v2",
+        "specification_url": "https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Kadaster/Omgevingsdocumenten-Opvragen/v2",
+        "documentation_url": "https://aandeslagmetdeomgevingswet.nl/publish/pages/155982/20181121_functionele_documentatie_ozon_api_omgevingsdocumenten_opvragen.pdf"
+    }]
 }

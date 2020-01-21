@@ -2,12 +2,25 @@
     "description": "API with one badge",
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
-    "api_url": "Test API URL",
     "api_type": "REST/JSON",
-    "specification_url": "Test Specification URL",
-    "documentation_url": "Test Documentation URL",
     "tags": ["test tag"],
     "badges": ["Sneaky self-defined badge"],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "Test API URL",
+        "specification_url": "Test Specification URL",
+        "documentation_url": "Test Documentation URL"
+    }, {
+        "name": "Acceptatie",
+        "api_url": "Test Acceptatie API URL",
+        "specification_url": "Test Acceptatie Specification URL",
+        "documentation_url": "Test Acceptatie Documentation URL"
+    }, {
+        "name": "Demo",
+        "api_url": "Test Demo API URL",
+        "specification_url": "Test Demo Specification URL",
+        "documentation_url": "Test Demo Documentation URL"
+    }],
     "contact": {
         "email": "name@example.nl",
         "phone": "0031612345678",

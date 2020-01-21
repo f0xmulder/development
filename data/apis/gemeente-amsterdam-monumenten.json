@@ -2,9 +2,12 @@
     "description": "Een lijst van alle monumenten",
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Monumenten",
-    "api_url": "https://api.data.amsterdam.nl/monumenten/",
     "api_type": "REST/JSON",
-    "specification_url": "https://api.data.amsterdam.nl/monumenten/docs/api-docs/monumenten/?format=openapi",
-    "documentation_url": "https://api.data.amsterdam.nl/monumenten/",
-    "tags": ["gemeente", "amsterdam", "monumenten"]
+    "tags": ["gemeente", "amsterdam", "monumenten"],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://api.data.amsterdam.nl/monumenten/",
+        "specification_url": "https://api.data.amsterdam.nl/monumenten/docs/api-docs/monumenten/?format=openapi",
+        "documentation_url": "https://api.data.amsterdam.nl/monumenten/"
+    }]
 }

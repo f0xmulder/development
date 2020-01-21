@@ -2,12 +2,15 @@
     "description": "De referentieimplementatie van het besluitregistratiecomponent.",
     "organization_name": "VNG Realisatie",
     "service_name": "Besluitregistratiecomponent (BRC)",
-    "api_url": "https://ref.tst.vng.cloud/brc/api/v1/",
     "api_type": "REST/JSON",
-    "specification_url": "https://ref.tst.vng.cloud/brc/api/v1/schema/",
-    "documentation_url": "https://github.com/VNG-Realisatie/gemma-besluitregistratiecomponent",
     "tags": ["zgw", "brc", "zaakgericht werken", "besluitregistratie"],
     "is_reference_implementation": true,
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://ref.tst.vng.cloud/brc/api/v1/",
+        "specification_url": "https://ref.tst.vng.cloud/brc/api/v1/schema/",
+        "documentation_url": "https://github.com/VNG-Realisatie/gemma-besluitregistratiecomponent"
+    }],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
     },

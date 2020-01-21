@@ -2,12 +2,24 @@ export const formDataMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
   description: 'description',
-  apiUrl: 'api url',
   apiType: 'api type',
-  specificationUrl: 'specification url',
-  documentationUrl: 'documentation url',
   isReferenceImplementation: true,
   referenceImplementation: '',
+
+  productionApiUrl: 'api url',
+  productionSpecificationUrl: 'specification url',
+  productionDocumentationUrl: 'documentation url',
+
+  hasAcceptanceEnvironment: false,
+  acceptanceApiUrl: '',
+  acceptanceDocumentationUrl: '',
+  acceptanceSpecificationUrl: '',
+
+  hasDemoEnvironment: false,
+  demoApiUrl: '',
+  demoDocumentationUrl: '',
+  demoSpecificationUrl: '',
+
   termsOfUse: {
     governmentOnly: false,
     payPerUse: false,
@@ -29,10 +41,15 @@ export const submitDataMock = {
   service_name: 'service name',
   organization_name: 'organization name',
   description: 'description',
-  api_url: 'api url',
   api_type: 'api type',
-  specification_url: 'specification url',
-  documentation_url: 'documentation url',
+  environments: [
+    {
+      name: 'Productie',
+      api_url: 'api url',
+      specification_url: 'specification url',
+      documentation_url: 'documentation url',
+    },
+  ],
   is_reference_implementation: true,
   terms_of_use: {
     government_only: false,

@@ -8,11 +8,56 @@ const details = {
   description: 'Description',
   organizationName: 'Organization Name',
   serviceName: 'Service Name',
-  apiUrl: 'API URL',
   apiType: 'API Type',
-  specificationUrl: 'Specification URL',
-  documentationUrl: 'Documentation URL',
   badges: ['Golden API', 'Well-written docs'],
+  environments: [
+    {
+      name: 'Productie',
+      apiUrl: 'API URL',
+      specificationUrl: 'Specification URL',
+      documentationUrl: 'Documentation URL',
+    },
+  ],
+  termsOfUse: {
+    governmentOnly: true,
+    payPerUse: false,
+    uptimeGuarantee: 99.9,
+    supportResponseTime: '2 days',
+  },
+  scores: {
+    hasDocumentation: true,
+    hasSpecification: false,
+    hasContactDetails: false,
+    providesSla: false,
+  },
+}
+
+const detailsWithMultipleEnvironments = {
+  description: 'Description',
+  organizationName: 'Organization Name',
+  serviceName: 'Service Name',
+  apiType: 'API Type',
+  badges: ['Golden API', 'Well-written docs'],
+  environments: [
+    {
+      name: 'Productie',
+      apiUrl: 'API URL',
+      specificationUrl: 'Specification URL',
+      documentationUrl: 'Documentation URL',
+    },
+    {
+      name: 'Acceptance',
+      apiUrl: 'API URL',
+      specificationUrl: 'Specification URL',
+      documentationUrl: 'Documentation URL',
+    },
+    {
+      name: 'Demo',
+      apiUrl: 'API URL',
+      specificationUrl: 'Specification URL',
+      documentationUrl: 'Documentation URL',
+    },
+  ],
   termsOfUse: {
     governmentOnly: true,
     payPerUse: false,
@@ -60,31 +105,50 @@ describe('APIDetails', () => {
     expect(description.text()).toBe('Description')
   })
 
-  it('should show the API URL as an input element', () => {
-    const apiUrl = wrapper.find('[data-test="api-url"]')
-    expect(apiUrl.text()).toBe('API URL')
-  })
-
   describe('api type', () => {
     it('should show the api type', () => {
       const apiSpecType = wrapper.find('[data-test="api-type"]')
       expect(apiSpecType.text()).toBe('API Type')
     })
-
-    it('should link to Redocly with the specification URL', () => {
-      const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
-      expect(apiSpecUrl.prop('href')).toBe(
-        'https://redocly.github.io/redoc/?url=Specification%20URL',
-      )
-    })
   })
 
-  describe('documentation', () => {
-    it('should show a link to the documentation url', () => {
-      const documentationUrl = wrapper.find(
-        '[data-test="api-documentation-url"]',
-      )
-      expect(documentationUrl.prop('href')).toBe('Documentation URL')
+  describe('environments table', () => {
+    it('should show the API URL', () => {
+      const apiUrl = wrapper.find('[data-test="api-url"]')
+
+      expect(apiUrl.prop('href')).toBe('API URL')
+    })
+
+    describe('specification', () => {
+      it('should link to Redocly with the specification URL', () => {
+        const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
+
+        expect(apiSpecUrl.prop('href')).toBe(
+          'https://redocly.github.io/redoc/?url=Specification%20URL',
+        )
+      })
+    })
+
+    describe('documentation', () => {
+      it('should show a link to the documentation url', () => {
+        const documentationUrl = wrapper.find(
+          '[data-test="api-documentation-url"]',
+        )
+        expect(documentationUrl.prop('href')).toBe('Documentation URL')
+      })
+    })
+
+    it('should have a single row for the production environment', () => {
+      const tableBody = wrapper.find('[data-test="environments-table-body"]')
+
+      expect(tableBody.children()).toHaveLength(1)
+    })
+
+    it('should show a row for the each environment', () => {
+      wrapper = shallow(<APIDetails {...detailsWithMultipleEnvironments} />)
+      const tableBody = wrapper.find('[data-test="environments-table-body"]')
+
+      expect(tableBody.children()).toHaveLength(3)
     })
   })
 

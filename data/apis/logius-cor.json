@@ -2,16 +2,19 @@
     "description": "Met de COR API kunnen de OIN’s van geregistreerde organisaties worden opgevraagd en de organisatienamen bij bestaande OIN’s worden opgezocht.",
     "organization_name": "Logius",
     "service_name": "Centrale OIN Raadpleegvoorziening (COR)",
-    "api_url": "https://portaal.digikoppeling.nl/registers/api/",
     "api_type": "REST/JSON",
-    "specification_url": "https://portaal.digikoppeling.nl/registers/api/",
-    "documentation_url": "https://portaal.digikoppeling.nl/registers/corApi/index",
     "tags": [
         "COR",
         "OIN",
         "Raadpleegvoorziening",
         "Logius"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://portaal.digikoppeling.nl/registers/api/",
+        "specification_url": "https://portaal.digikoppeling.nl/registers/api/",
+        "documentation_url": "https://portaal.digikoppeling.nl/registers/corApi/index"
+    }],
     "contact": {
         "email": "servicecentrum@logius.nl",
         "phone": "0900-5554555",

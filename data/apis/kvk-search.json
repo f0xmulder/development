@@ -2,15 +2,18 @@
     "description": "Zoek naar een bedrijf, vind relevante data in het Handelsregister",
     "organization_name": "Kamers van Koophandel",
     "service_name": "KvK Search",
-    "api_url": "https://api.kvk.nl:443",
     "api_type": "REST/JSON",
-    "specification_url": "https://developers.kvk.nl/resources/swagger.search.json",
-    "documentation_url": "https://developers.kvk.nl/documentation/search-v2",
     "tags": [
         "handelsregister",
         "koophandel",
         "bedrijveninformatie"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://api.kvk.nl:443",
+        "specification_url": "https://developers.kvk.nl/resources/swagger.search.json",
+        "documentation_url": "https://developers.kvk.nl/documentation/search-v2"
+    }],
     "contact": {
         "email": "",
         "phone": "",

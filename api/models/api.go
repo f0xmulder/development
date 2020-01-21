@@ -2,6 +2,7 @@ package models
 
 import "encoding/json"
 import "errors"
+import "fmt"
 
 // API model
 type API struct {
@@ -9,17 +10,23 @@ type API struct {
 	Description               string              `json:"description"`
 	OrganizationName          string              `json:"organization_name"`
 	ServiceName               string              `json:"service_name"`
-	APIURL                    string              `json:"api_url"`
 	APIType                   APIType             `json:"api_type"`
-	SpecificationURL          string              `json:"specification_url"`
-	DocumentationURL          string              `json:"documentation_url"`
 	Tags                      []Tag               `json:"tags"`
 	Badges                    []string            `json:"badges"`
+	Environments              []APIEnvironment    `json:"environments"`
 	Contact                   APIContactDetails   `json:"contact"`
 	IsReferenceImplementation bool                `json:"is_reference_implementation"`
 	Relations                 map[string][]string `json:"relations,omitempty"`
 	TermsOfUse                APITermsOfUse       `json:"terms_of_use"`
 	Scores                    *APIScores          `json:"scores,omitempty"`
+}
+
+// APIEnvironment model
+type APIEnvironment struct {
+	Name             string `json:"name"`
+	APIURL           string `json:"api_url"`
+	SpecificationURL string `json:"specification_url"`
+	DocumentationURL string `json:"documentation_url"`
 }
 
 // APIContactDetails model
@@ -91,4 +98,29 @@ func (result *API) UnmarshalJSON(data []byte) error {
 		result.APIType = ""
 		return errors.New("invalid value for the field api_type")
 	}
+}
+
+// Every API must have an APIEnvironment with this name
+const ProductionEnvironment string = "Productie"
+
+func IsValidEnvironmentName(envName string) bool {
+	switch envName {
+	case
+		ProductionEnvironment,
+		"Acceptatie",
+		"Demo":
+		return true
+	}
+
+	return false
+}
+
+func (api *API) GetProductionEnvironment() (APIEnvironment, error) {
+	for _, env := range api.Environments {
+		if env.Name == ProductionEnvironment {
+			return env, nil
+		}
+	}
+
+	return APIEnvironment{}, fmt.Errorf("api does not contain a production environment")
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Table } from '@commonground/design-system'
 import TagList from '../TagList/TagList'
 import availableIcon from './icons/available.svg'
 import unavailableIcon from './icons/unavailable.svg'
@@ -24,28 +25,6 @@ export const SubTitle = styled.h2`
   font-weight: ${(p) => p.theme.font.weight.normal};
   margin: 0 0 24px;
   text-align: center;
-`
-
-export const DocumentationContainer = styled.p`
-  text-align: center;
-`
-
-export const DocumentationButton = styled.a`
-  display: inline;
-  margin: 0 auto;
-  color: ${(p) => p.theme.color.primary.normal};
-  font-size: ${(p) => p.theme.font.size.small};
-  padding: 6px 12px 8px 12px;
-  border: 2px solid ${(p) => p.theme.color.primary.normal};
-  border-radius: 5px;
-  font-weight: ${(p) => p.theme.font.weight.semibold};
-  background: transparent;
-  text-decoration: none;
-
-  svg {
-    vertical-align: middle;
-    margin-left: 5px;
-  }
 `
 
 export const StyledTagList = styled(TagList)`
@@ -79,8 +58,20 @@ CardsContainer.SideBar = styled.div`
   }
 `
 
+export const StyledTable = styled(Table)`
+  width: 100%;
+
+  tbody td {
+    background-color: #ffffff;
+  }
+
+  svg {
+    margin-left: 5px;
+  }
+`
+
 export const ApiLink = styled.a`
-  font-weight: ${(p) => p.theme.font.weight.semibold};
+  font-weight: ${(p) => p.theme.font.weight.normal};
   color: ${(p) => p.theme.color.primary.normal};
   width: 100%;
 `

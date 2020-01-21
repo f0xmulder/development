@@ -2,14 +2,17 @@
     "description": "Met deze API is het mogelijk om volledig geautomatiseerd brondocumenten aan te leveren aan het Bronhouderportaal BRO. De API is RESTful opgezet. In vogelvlucht werkt de API door eerst een Upload aan te maken waar vervolgens, door middel van het sturen van een POST request met als body de XML van het brondocument, meerdere Brondocumenten aan kunnen worden toegevoegd. Van de Upload kan een Levering gemaakt worden. Vervolgens kan de status van de levering periodiek worden opgevraagd, waarbij uiteindelijk een BRO-ID teruggeven wordt. Ter ondersteuning van de kwaliteitscontrole van een levering is het mogelijk om een levering en/of de brondocumenten van een levering te verrijken met extra gegevens. Daarnaast kunnen brondocumenten gevalideerd worden, zonder dat hiervoor een levering wordt aangemaakt. Deze functionaliteit is tevens geschikt om te testen of de koppeling met de API correct functioneert.",
     "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
     "service_name": "Bronhouderportaal BRO API (1.0.0)",
-    "api_url": "https://demo.bronhouderportaal-bro.nl/bpbro-frontend/external",
     "api_type": "REST/XML",
-    "specification_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/openapi.yaml",
-    "documentation_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/api.html",
     "tags": [
         "Basisregistratie",
         "Basisregistratie ondergrond"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://demo.bronhouderportaal-bro.nl/bpbro-frontend/external",
+        "specification_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/openapi.yaml",
+        "documentation_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/api.html"
+    }],
     "contact": {
         "email": "",
         "phone": "0031888664999",

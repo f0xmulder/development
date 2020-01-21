@@ -68,18 +68,47 @@ func File(filePath string) ValidationFeedback {
 		}
 	}
 
-	if len(newAPI.APIURL) < 1 {
+	_, envErr := newAPI.GetProductionEnvironment()
+
+	if envErr != nil {
 		return ValidationFeedback{
 			false,
-			"the field api_url is missing",
+			fmt.Sprintf("the api is missing an environment with the name %s", models.ProductionEnvironment),
 		}
 	}
 
-	if len(newAPI.DocumentationURL) < 1 {
-		return ValidationFeedback{
-			false,
-			"the field documentation_url is missing",
+	for i, env := range newAPI.Environments {
+		if !models.IsValidEnvironmentName(env.Name) {
+			return ValidationFeedback{
+				false,
+				fmt.Sprintf("%s is not a valid environment name", env.Name),
+			}
 		}
+
+		for j, otherEnv := range newAPI.Environments {
+			if i != j && env.Name == otherEnv.Name {
+				return ValidationFeedback{
+					false,
+					fmt.Sprintf("duplicate environment name found: %s", env.Name),
+				}
+			}
+
+		}
+
+		if len(env.APIURL) < 1 {
+			return ValidationFeedback{
+				false,
+				fmt.Sprintf("the field api_url is missing for environment %s", env.Name),
+			}
+		}
+
+		if len(env.DocumentationURL) < 1 {
+			return ValidationFeedback{
+				false,
+				fmt.Sprintf("the field documentation_url is missing for environment %s", env.Name),
+			}
+		}
+
 	}
 
 	return ValidationFeedback{

@@ -11,11 +11,23 @@ const initialValues = {
   description: '',
   organizationName: '',
   serviceName: '',
-  apiUrl: '',
   apiType: 'Onbekend',
-  specificationUrl: '',
-  documentationUrl: '',
   tags: '',
+
+  productionApiUrl: '',
+  productionSpecificationUrl: '',
+  productionDocumentationUrl: '',
+
+  hasAcceptanceEnvironment: false,
+  acceptanceApiUrl: '',
+  acceptanceDocumentationUrl: '',
+  acceptanceSpecificationUrl: '',
+
+  hasDemoEnvironment: false,
+  demoApiUrl: '',
+  demoDocumentationUrl: '',
+  demoSpecificationUrl: '',
+
   contact: {
     email: '',
     phone: '',
@@ -57,10 +69,7 @@ export const convertFormDataToRequestBody = (formData) => {
   requestBody.description = formData.description
   requestBody.organization_name = formData.organizationName
   requestBody.service_name = formData.serviceName
-  requestBody.api_url = formData.apiUrl
   requestBody.api_type = formData.apiType
-  requestBody.specification_url = formData.specificationUrl
-  requestBody.documentation_url = formData.documentationUrl
   requestBody.tags = toArray(formData.tags)
 
   requestBody.is_reference_implementation = formData.isReferenceImplementation
@@ -68,6 +77,33 @@ export const convertFormDataToRequestBody = (formData) => {
     formData.isReferenceImplementation,
     formData.referenceImplementation,
   )
+
+  requestBody.environments = [
+    {
+      name: 'Productie',
+      api_url: formData.productionApiUrl,
+      specification_url: formData.productionSpecificationUrl,
+      documentation_url: formData.productionDocumentationUrl,
+    },
+  ]
+
+  if (formData.hasAcceptanceEnvironment) {
+    requestBody.environments.push({
+      name: 'Acceptance',
+      api_url: formData.acceptanceApiUrl,
+      specification_url: formData.acceptanceSpecificationUrl,
+      documentation_url: formData.acceptanceDocumentationUrl,
+    })
+  }
+
+  if (formData.hasDemoEnvironment) {
+    requestBody.environments.push({
+      name: 'Demo',
+      api_url: formData.demoApiUrl,
+      specification_url: formData.demoSpecificationUrl,
+      documentation_url: formData.demoDocumentationUrl,
+    })
+  }
 
   formData.contact = formData.contact || {}
   requestBody.contact = {

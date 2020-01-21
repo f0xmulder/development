@@ -2,10 +2,7 @@
     "description": "De Terugmelding API bevat recente terugmeldingen op informatie uit de Basisregistratie Adressen en Gebouwen (BAG), Basisregistratie Grootschalige Topografie (BGT) en Basisregistratie Topografie (BRT) waarover twijfel bestaat. De API toont de locaties, inhoud en status van de meldingen. De informatie in de services wordt continu bijgewerkt. Ook is het mogelijk om via de API een terugmelding te doen. De API is beveiligd met een API-key.",
     "organization_name": "Kadaster",
     "service_name": "Terugmelding",
-    "api_url": "https://api.kadaster.nl/tms/v1/terugmeldingen",
     "api_type": "REST/JSON",
-    "specification_url": "https://api.kadaster.nl/tms/v1/terugmeldingen-apidoc",
-    "documentation_url": "https://www.pdok.nl/restful-api/-/article/terugmeldingen-1",
     "tags": [
         "kadaster",
         "basisregistratie",
@@ -13,6 +10,12 @@
         "bgt",
         "brt"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://api.kadaster.nl/tms/v1/terugmeldingen",
+        "specification_url": "https://api.kadaster.nl/tms/v1/terugmeldingen-apidoc",
+        "documentation_url": "https://www.pdok.nl/restful-api/-/article/terugmeldingen-1"
+    }],
     "contact": {
         "email": "terugmeldingapi@kadaster.nl",
         "phone": "088-1834600",

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
 	"gitlab.com/commonground/developer.overheid.nl/api/models"
 )
 
@@ -18,15 +19,45 @@ func TestHasDocumentation(t *testing.T) {
 	testAPI := models.API{}
 	assert.Equal(t, hasDocumentation(testAPI), false)
 
-	testAPI = models.API{DocumentationURL: "https://www.example.com"}
+	testAPI = models.API{
+		Environments: []models.APIEnvironment{
+			{
+				Name:             "Some random env",
+				DocumentationURL: "https://www.example.com",
+			},
+		}}
+	assert.Equal(t, hasDocumentation(testAPI), false)
+
+	testAPI = models.API{
+		Environments: []models.APIEnvironment{
+			{
+				Name:             models.ProductionEnvironment,
+				DocumentationURL: "https://www.example.com",
+			},
+		}}
 	assert.Equal(t, hasDocumentation(testAPI), true)
 }
 
 func TestHasSpecification(t *testing.T) {
 	testAPI := models.API{}
-	assert.Equal(t, hasSpecification(testAPI), false)
+	assert.Equal(t, hasDocumentation(testAPI), false)
 
-	testAPI = models.API{SpecificationURL: "https://www.example.com"}
+	testAPI = models.API{
+		Environments: []models.APIEnvironment{
+			{
+				Name:             "Some random env",
+				SpecificationURL: "https://www.example.com",
+			},
+		}}
+	assert.Equal(t, hasDocumentation(testAPI), false)
+
+	testAPI = models.API{
+		Environments: []models.APIEnvironment{
+			{
+				Name:             models.ProductionEnvironment,
+				SpecificationURL: "https://www.example.com",
+			},
+		}}
 	assert.Equal(t, hasSpecification(testAPI), true)
 }
 

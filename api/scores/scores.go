@@ -15,11 +15,15 @@ func CalculateScores(api models.API) models.APIScores {
 }
 
 func hasDocumentation(api models.API) bool {
-	return (api.DocumentationURL != "")
+	production, err := api.GetProductionEnvironment()
+
+	return (err == nil && production.DocumentationURL != "")
 }
 
 func hasSpecification(api models.API) bool {
-	return (api.SpecificationURL != "")
+	production, err := api.GetProductionEnvironment()
+
+	return (err == nil && production.SpecificationURL != "")
 }
 
 func hasContactDetails(api models.API) bool {

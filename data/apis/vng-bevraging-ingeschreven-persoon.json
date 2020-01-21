@@ -2,16 +2,19 @@
     "description": "API voor het opvragen van persoonsgegevens van een ingeschreven persoon, Voor de getoonde API URL is een APIkey vereist.",
     "organization_name": "VNG Realisatie",
     "service_name": "Bevraging Ingeschreven Persoon",
-    "api_url": "https://www.haalcentraal.nl/haalcentraal/api/brp",
     "api_type": "REST/JSON",
-    "specification_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/api-specificatie/Bevraging-Ingeschreven-Persoon/openapi.yaml",
-    "documentation_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen",
     "tags": [
         "BRP",
         "Persoonsgegevens",
         "Ingeschreven persoon",
         "Gemeente"
     ],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://www.haalcentraal.nl/haalcentraal/api/brp",
+        "specification_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/api-specificatie/Bevraging-Ingeschreven-Persoon/openapi.yaml",
+        "documentation_url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen"
+    }],
     "contact": {
         "email": "",
         "phone": "",

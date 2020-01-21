@@ -4,11 +4,16 @@ export const goApiMock = {
   service_name: 'service name',
   organization_name: 'organization name',
   description: 'description',
-  api_url: 'api url',
   api_type: 'api type',
-  specification_url: 'specification url',
-  documentation_url: 'documentation url',
   badges: [],
+  environments: [
+    {
+      name: 'Production',
+      api_url: 'api url',
+      specification_url: 'specification_url',
+      documentation_url: 'documentation_url',
+    },
+  ],
   is_reference_implementation: true,
   relations: {
     x: ['y'],
@@ -34,12 +39,17 @@ export const apiMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
   description: 'description',
-  apiUrl: 'api url',
   apiType: 'api type',
-  specificationUrl: 'specification url',
-  documentationUrl: 'documentation url',
   badges: [],
   tags: ['tag1', 'tag2'],
+  environments: [
+    {
+      name: 'Production',
+      apiUrl: 'api url',
+      specificationUrl: 'specification_url',
+      documentationUrl: 'documentation_url',
+    },
+  ],
   isReferenceImplementation: true,
   relations: {
     x: ['y'],

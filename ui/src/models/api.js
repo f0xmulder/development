@@ -1,3 +1,13 @@
+const mapEnvironments = (environments) =>
+  environments.map((env) => {
+    return {
+      name: env.name,
+      apiUrl: env.api_url,
+      specificationUrl: env.specification_url,
+      documentationUrl: env.documentation_url,
+    }
+  })
+
 const mapScores = (scores) =>
   scores
     ? {
@@ -22,10 +32,8 @@ export const modelFromAPIResponse = (api) => ({
   serviceName: api.service_name,
   organizationName: api.organization_name,
   description: api.description,
-  apiUrl: api.api_url,
   apiType: api.api_type,
-  specificationUrl: api.specification_url,
-  documentationUrl: api.documentation_url,
+  environments: mapEnvironments(api.environments || []),
   badges: api.badges,
   isReferenceImplementation: api.is_reference_implementation,
   relations: api.relations,

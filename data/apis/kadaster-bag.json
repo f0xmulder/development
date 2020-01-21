@@ -2,9 +2,12 @@
     "description": "De Basisregistratie Adressen en Gebouwen (BAG) is onderdeel van het overheidsstelsel van basisregistraties. Gemeenten zijn bronhouders van de BAG. Zij zijn verantwoordelijk voor het opnemen van de gegevens in de BAG en voor de kwaliteit ervan. Alle gemeenten stellen gegevens over adressen en gebouwen centraal beschikbaar via de Landelijke Voorziening BAG (LV BAG). Het Kadaster beheert de LV BAG en stelt de gegevens beschikbaar aan de diverse afnemers. Organisaties met een publieke taak, zoals ministeries, waterschappen, politiekorpsen en veiligheidsregio's zijn verplicht de authentieke gegevens uit de registraties te gebruiken.",
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
-    "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",
     "api_type": "REST/JSON",
-    "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
-    "documentation_url": "https://bag.basisregistraties.overheid.nl",
-    "tags": ["basisregistratie", "kadaster", "bag"]
+    "tags": ["basisregistratie", "kadaster", "bag"],
+    "environments": [{
+        "name": "Productie",
+        "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",
+        "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
+        "documentation_url": "https://bag.basisregistraties.overheid.nl"
+    }]
 }

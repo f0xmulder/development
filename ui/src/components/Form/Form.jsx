@@ -20,6 +20,13 @@ export const Label = styled.label`
   display: block;
   margin-bottom: 8px;
   font-weight: ${(p) => p.theme.font.weight.semibold};
+
+  ${(p) =>
+    p.fontWeightNormal
+      ? css`
+          font-weight: ${(p) => p.theme.font.weight.normal};
+        `
+      : ''}
 `
 
 export const Field = styled(FormikField)`
