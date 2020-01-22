@@ -1,5 +1,5 @@
 {{ with set . "component" "api" }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
 spec:
@@ -39,7 +39,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          envFrom:
+            - secretRef:
+                name: postgres-auth
           env:
+            - name: POSTGRES_DSN
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres/{{ .Values.postgresDb }}?sslmode=disable
             - name: GITLAB_URL
               valueFrom:
                 secretKeyRef:

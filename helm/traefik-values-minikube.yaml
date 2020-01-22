@@ -24,4 +24,7 @@ service:
     http: 30080
     https: 30443
 
-cpuLimit: 2
+resources:
+  limits:
+    cpu: 2
+    memory: 1024Mi

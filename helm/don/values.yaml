@@ -11,4 +11,13 @@ gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
 gitlabProjectId: "0"
 
+postgresUser: don
+postgresPassword: don
+postgresDb: don
+postgresDsn: postgres://don:don@postgres/don?sslmode=disable
+postgresPvcName: postgres-data-volume
+loadDatabaseFixtures: false
+
+storageType: Durable
+
 replicas: 3

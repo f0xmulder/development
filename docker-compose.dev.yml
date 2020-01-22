@@ -1,0 +1,10 @@
+version: "3"
+services:
+  database:
+    image: postgres:11.6-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=don
+      - POSTGRES_PASSWORD=don
+      - POSTGRES_DB=don

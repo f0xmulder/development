@@ -1,0 +1,32 @@
+{{ with set . "component" "postgres" }}
+apiVersion: kubedb.com/v1alpha1
+kind: Postgres
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+spec:
+  version: "11.1"
+  storageType: {{ .Values.storageType }}
+  {{ if eq .Values.storageType "Durable" }}
+  storage:
+    storageClassName: standard
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+    terminationPolicy: {{ .Values.dbTerminationPolicy | default "WipeOut" }}
+  {{ end }}
+  init:
+    scriptSource:
+      configMap:
+        name: {{ .component }}-init-script
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .component }}-init-script
+  namespace: {{ .Release.Namespace }}
+  labels: {{- include "don.common.metadata-labels" . | nindent 4 }}
+data:
+  createdb.sql: |+
+    CREATE DATABASE "{{ .Values.postgresDb }}";
+{{ end }}

@@ -1,0 +1,32 @@
+version: "3"
+services:
+  api:
+    image: "${IMAGE_PREFIX}api:${IMAGE_TAG}"
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      POSTGRES_DSN: postgres://don:don@database/don?sslmode=disable
+    links:
+      - database
+  ui:
+    image: "${IMAGE_PREFIX}ui:${IMAGE_TAG}"
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+  docs:
+    image: "${IMAGE_PREFIX}docs:${IMAGE_TAG}"
+    build:
+      context: .
+      dockerfile: docs/Dockerfile
+      args:
+        GIT_COMMIT_HASH: "${GIT_COMMIT_HASH}"
+        GIT_TAG_NAME: "${GIT_TAG_NAME}"
+  database:
+    image: postgres:11.6-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=appstore
+      - POSTGRES_PASSWORD=appstore
+      - POSTGRES_DB=appstore
