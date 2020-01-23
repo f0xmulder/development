@@ -3,11 +3,19 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_type": "REST/JSON",
-    "tags": ["basisregistratie", "kadaster", "bag"],
     "environments": [{
         "name": "Productie",
         "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",
         "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
         "documentation_url": "https://bag.basisregistraties.overheid.nl"
-    }]
+    }],
+    "forum": {
+        "vendor": "discourse",
+        "url": "https://geoforum.nl/c/datasets/bag"
+    },
+    "tags": [
+        "basisregistratie",
+        "kadaster",
+        "bag"
+    ]
 }

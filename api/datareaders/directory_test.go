@@ -26,6 +26,10 @@ func TestDirectory(t *testing.T) {
 					DocumentationURL: "Test Documentation URL",
 				},
 			},
+			Forum: &models.Forum{
+				Vendor: "discourse",
+				URL:    "https://forum.test.org",
+			},
 			Contact: models.APIContactDetails{
 				Email: "name@example.nl",
 				Phone: "0031612345678",

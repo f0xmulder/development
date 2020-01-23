@@ -1,13 +1,16 @@
 export default {
   color: {
     primary: {
-      normal: '#2961FF',
+      normal: '#2961ff',
     },
     text: {
-      normal: '#2D3240',
-      light: '#676D80',
+      normal: '#2d3240',
+      light: '#676d80',
+      inactive: '#a3a3a3',
     },
-    warning: '#e02424',
+    error: '#e02424',
+    notify: '#ab6262',
+    tagBackground: '#f1f5ff',
   },
   font: {
     size: {

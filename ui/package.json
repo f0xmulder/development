@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@commonground/design-system": "7.2.0",
+    "change-case": "4.1.1",
     "core-js": "3.3.2",
     "formik": "2.0.7",
     "react": "16.10.2",

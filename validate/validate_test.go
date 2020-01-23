@@ -35,8 +35,11 @@ func TestFile(t *testing.T) {
 		{"missing-api-url.json", false, "", "the field api_url is missing for environment Acceptatie"},
 		{"missing-documentation-url.json", false, "", "the field documentation_url is missing for environment Productie"},
 		{"missing-specification-url.json", true, "", ""},
+		{"invalid-forum-vendor.json", false, "", "Only \"discourse\" is a valid vendor"},
+		{"invalid-forum-url.json", false, "", "Invalid forum url given"},
 		{"superfluous-props.json", true, "", ""},
 		{"valid.json", true, "", ""},
+		{"valid-forum.json", true, "", ""},
 	}
 
 	rootFilePath := "./test-data/files"

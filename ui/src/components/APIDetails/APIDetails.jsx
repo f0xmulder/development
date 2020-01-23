@@ -10,6 +10,7 @@ import Grade from '../Grade/Grade'
 import External from '../Icons/External'
 import Card from '../Card/Card'
 import PageContentCard from '../PageContentCard/PageContentCard'
+import ForumPosts from '../ForumPosts/ForumPosts'
 
 import {
   PageTitle,
@@ -41,6 +42,7 @@ const APIDetails = ({
   badges,
   tags,
   environments,
+  forum,
   isReferenceImplementation,
   relations,
   termsOfUse,
@@ -117,6 +119,14 @@ const APIDetails = ({
             )}
           </PageContentCard.Footer>
         </PageContentCard>
+
+        {forum && forum.url && (
+          <PageContentCard>
+            <PageContentCard.Body>
+              <ForumPosts forum={forum} />
+            </PageContentCard.Body>
+          </PageContentCard>
+        )}
       </CardsContainer.Main>
 
       <CardsContainer.SideBar>
@@ -218,6 +228,7 @@ APIDetails.propTypes = {
   badges: PropTypes.arrayOf(PropTypes.string),
   tags: PropTypes.arrayOf(PropTypes.string),
   environments: PropTypes.arrayOf(PropTypes.object),
+  forum: PropTypes.object,
   isReferenceImplementation: PropTypes.bool,
   relations: PropTypes.object,
   termsOfUse: PropTypes.shape({

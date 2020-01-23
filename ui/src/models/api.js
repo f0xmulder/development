@@ -34,6 +34,7 @@ export const modelFromAPIResponse = (api) => ({
   description: api.description,
   apiType: api.api_type,
   environments: mapEnvironments(api.environments || []),
+  forum: api.forum,
   badges: api.badges,
   isReferenceImplementation: api.is_reference_implementation,
   relations: api.relations,

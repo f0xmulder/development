@@ -14,6 +14,7 @@ type API struct {
 	Tags                      []Tag               `json:"tags"`
 	Badges                    []string            `json:"badges"`
 	Environments              []APIEnvironment    `json:"environments"`
+	Forum                     *Forum              `json:"forum,omitempty"`
 	Contact                   APIContactDetails   `json:"contact"`
 	IsReferenceImplementation bool                `json:"is_reference_implementation"`
 	Relations                 map[string][]string `json:"relations,omitempty"`
@@ -27,6 +28,12 @@ type APIEnvironment struct {
 	APIURL           string `json:"api_url"`
 	SpecificationURL string `json:"specification_url"`
 	DocumentationURL string `json:"documentation_url"`
+}
+
+// Forum model
+type Forum struct {
+	Vendor string `json:"vendor"`
+	URL    string `json:"url"`
 }
 
 // APIContactDetails model

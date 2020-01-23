@@ -1,0 +1,17 @@
+{
+    "description": "Test Description",
+    "organization_name": "Test Organization Name",
+    "service_name": "Test Service Name",
+    "api_url": "Test API URL",
+    "api_type": "REST/JSON",
+    "environments": [{
+        "name": "Productie",
+        "api_url": "Test API URL",
+        "specification_url": "Test Specification URL",
+        "documentation_url": "Test Documentation URL"
+    }],
+    "forum": {
+      "vendor": "discourse",
+      "url": "http://api.forum"
+    }
+}

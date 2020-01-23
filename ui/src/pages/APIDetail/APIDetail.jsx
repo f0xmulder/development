@@ -55,6 +55,7 @@ class APIDetail extends Component {
 
   render() {
     const { details, error, loaded } = this.state
+
     return (
       <div className="APIDetail">
         {!loaded ? null : error ? (

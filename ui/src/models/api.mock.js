@@ -14,6 +14,10 @@ export const goApiMock = {
       documentation_url: 'documentation_url',
     },
   ],
+  forum: {
+    vendor: 'discourse',
+    url: 'https://forum.api',
+  },
   is_reference_implementation: true,
   relations: {
     x: ['y'],
@@ -50,6 +54,10 @@ export const apiMock = {
       documentationUrl: 'documentation_url',
     },
   ],
+  forum: {
+    vendor: 'discourse',
+    url: 'https://forum.api',
+  },
   isReferenceImplementation: true,
   relations: {
     x: ['y'],

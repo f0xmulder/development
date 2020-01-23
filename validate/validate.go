@@ -111,6 +111,22 @@ func File(filePath string) ValidationFeedback {
 
 	}
 
+	if newAPI.Forum != nil {
+		if newAPI.Forum.Vendor != "discourse" {
+			return ValidationFeedback{
+				false,
+				"Only \"discourse\" is a valid vendor",
+			}
+		}
+
+		if newAPI.Forum.URL == "" || !strings.HasPrefix(newAPI.Forum.URL, "http") {
+			return ValidationFeedback{
+				false,
+				"Invalid forum url given",
+			}
+		}
+	}
+
 	return ValidationFeedback{
 		Valid: true,
 	}

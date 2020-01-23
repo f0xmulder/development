@@ -25,7 +25,7 @@ export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   height: 24px;
-  background: #f1f5ff;
+  background: ${(p) => p.theme.color.tagBackground};
   color: ${(p) => p.theme.color.primary.normal};
   border-radius: 12px;
   font-size: ${(p) => p.theme.font.size.tiny};

@@ -31,6 +31,7 @@ var dummyAPI = models.API{
 			DocumentationURL: "Test Documentation URL",
 		},
 	},
+	nil,
 	models.APIContactDetails{},
 	false,
 	map[string][]string{},
@@ -54,6 +55,7 @@ var dummyImplementationOfReferenceAPI = models.API{
 			DocumentationURL: "Test Documentation URL",
 		},
 	},
+	nil,
 	models.APIContactDetails{},
 	false,
 	map[string][]string{
