@@ -5,8 +5,8 @@
     "schedule:nonOfficeHours",
     "group:allNonMajor"
   ],
-  "ignoreDeps": [
-    "github.com/coreos/etcd"
+  "enabledManagers": [
+    "npm", "nvm"
   ],
   "separateMultipleMajor": true,
   "major": {
@@ -14,25 +14,5 @@
   },
   "js": {
     "stabilityDays": 3
-  },
-  "gomod": {
-    "postUpdateOptions": [
-      "gomodTidy"
-    ]
-  },
-
-  "packageRules": [
-    {
-      "managers": ["npm", "nvm"],
-      "groupName": "NPM dependencies"
-    },
-    {
-      "managers": ["dockerfile", "docker-compose", "gitlabci"],
-      "groupName": "CI dependencies"
-    },
-    {
-      "managers": ["gomod"],
-      "groupName": "Go dependencies"
-    }
-  ]
+  }
 }
