@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import APIDetails, { referenceImplementationsFromRelations } from './APIDetails'
-import { PageTitle, SubTitle } from './APIDetails.styles'
 
 const details = {
+  id: 'organization-service',
   description: 'Description',
   organizationName: 'Organization Name',
   serviceName: 'Service Name',
@@ -90,16 +90,6 @@ describe('APIDetails', () => {
     wrapper = shallow(<APIDetails {...details} />)
   })
 
-  it('should show the service as title', () => {
-    const pageTitle = wrapper.find(PageTitle)
-    expect(pageTitle.text()).toBe('Service Name')
-  })
-
-  it('should show the organization name as subtitle', () => {
-    const pageTitle = wrapper.find(SubTitle)
-    expect(pageTitle.text()).toBe('Organization Name')
-  })
-
   it('should show the description', () => {
     const description = wrapper.find('p')
     expect(description.text()).toBe('Description')
@@ -119,14 +109,13 @@ describe('APIDetails', () => {
       expect(apiUrl.prop('href')).toBe('API URL')
     })
 
-    describe('specification', () => {
-      it('should link to Redocly with the specification URL', () => {
-        const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
-
-        expect(apiSpecUrl.prop('href')).toBe(
-          'https://redocly.github.io/redoc/?url=Specification%20URL',
-        )
-      })
+    it('should link to the specification page', () => {
+      const apiSpecUrl = wrapper.find('[data-test="api-specification-url"]')
+      expect(apiSpecUrl.prop('to')).toBe(
+        `/detail/${
+          details.id
+        }/${details.environments[0].name.toLowerCase()}/specificatie`,
+      )
     })
 
     describe('documentation', () => {

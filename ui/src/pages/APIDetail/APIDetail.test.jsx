@@ -6,6 +6,7 @@ import APIDetail from './APIDetail'
 
 /* eslint-disable camelcase */
 const apiResponseObject = {}
+apiResponseObject.id = 'organization-service'
 apiResponseObject.description = 'Description'
 apiResponseObject.organization_name = 'Organization Name'
 apiResponseObject.service_name = 'Service Name'
@@ -71,6 +72,8 @@ describe('APIDetail', () => {
   })
 
   describe('when an error occurred while fetching the apis', () => {
+    console.error = jest.fn()
+
     it('should set the error state', () => {
       return new Promise((resolve) => {
         const thePromise = Promise.reject(

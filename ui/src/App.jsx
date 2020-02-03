@@ -8,6 +8,7 @@ import Home from './pages/Home/Home'
 import SubmitAPI from './pages/SubmitAPI/SubmitAPI'
 import About from './pages/About/About'
 import APIDetail from './pages/APIDetail/APIDetail'
+import APISpecification from './pages/APISpecification/APISpecification'
 import Overview from './pages/Overview/Overview'
 import TopBarContainer from './components/TopBarContainer/TopBarContainer'
 import MobileNavigation from './components/MobileNavigation/MobileNavigation'
@@ -29,7 +30,11 @@ const App = () => (
 
         <main role="main">
           <Route path="/" exact component={Home} />
-          <Route path="/detail/:id" component={APIDetail} />
+          <Route path="/detail/:id" exact component={APIDetail} />
+          <Route
+            path="/detail/:id/:environment/specificatie"
+            component={APISpecification}
+          />
           <Route path="/overzicht" component={Overview} />
           <Route path="/api-toevoegen" component={SubmitAPI} />
           <Route path="/over" component={About} />

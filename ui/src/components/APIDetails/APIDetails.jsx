@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { Table } from '@commonground/design-system'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 
+import APIDetailsHeader from '../APIDetailsHeader/APIDetailsHeader'
 import ImplementedByListContainer from '../ImplementedByListContainer/ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
 import Grade from '../Grade/Grade'
@@ -13,8 +15,6 @@ import PageContentCard from '../PageContentCard/PageContentCard'
 import ForumPosts from '../ForumPosts/ForumPosts'
 
 import {
-  PageTitle,
-  SubTitle,
   StyledTagList,
   CardsContainer,
   ApiLink,
@@ -24,9 +24,6 @@ import {
   StyledScoresLi,
   StyledAPIDetails,
 } from './APIDetails.styles'
-
-const getOnlineRedocUrl = (specUrl) =>
-  `https://redocly.github.io/redoc/?url=${encodeURIComponent(specUrl)}`
 
 export const referenceImplementationsFromRelations = (relations = {}) =>
   Object.keys(relations).filter((apiId) =>
@@ -49,8 +46,10 @@ const APIDetails = ({
   scores,
 }) => (
   <StyledAPIDetails>
-    <PageTitle>{serviceName}</PageTitle>
-    <SubTitle>{organizationName}</SubTitle>
+    <APIDetailsHeader
+      serviceName={serviceName}
+      organizationName={organizationName}
+    />
 
     <CardsContainer>
       <CardsContainer.Main>
@@ -85,15 +84,13 @@ const APIDetails = ({
                         </ApiLink>
                       </Table.BodyCell>
                       <Table.BodyCell>
-                        {env.specificationUrl ? (
-                          <ApiLink
-                            href={getOnlineRedocUrl(env.specificationUrl)}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        {env.specificationUrl && env.name ? (
+                          <Link
+                            to={`/detail/${id}/${env.name.toLowerCase()}/specificatie`}
                             data-test="api-specification-url"
                           >
-                            Specificatie <External />
-                          </ApiLink>
+                            Specificatie
+                          </Link>
                         ) : (
                           '—'
                         )}
