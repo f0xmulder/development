@@ -3,6 +3,7 @@
     "organization_name": "Logius",
     "service_name": "CPA-register",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "ebMS",
         "Digikoppeling",

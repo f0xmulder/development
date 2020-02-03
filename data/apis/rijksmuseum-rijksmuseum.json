@@ -3,6 +3,7 @@
     "organization_name": "Rijksmuseum",
     "service_name": "Rijksmuseum API",
     "api_type": "Onbekend",
+    "api_authentication": "Onbekend",
     "tags": ["kunst", "agenda", "collectie"],
     "environments": [{
         "name": "Productie",

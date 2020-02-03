@@ -3,6 +3,7 @@
     "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
     "service_name": "Omgevingsdocumenten Opvragen",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "environments": [{
         "name": "Productie",
         "api_url": "https://service.pre.omgevingswet.overheid.nl/publiek/omgevingsdocumenten/api/opvragen/v2",

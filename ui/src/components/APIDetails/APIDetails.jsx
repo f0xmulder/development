@@ -36,6 +36,7 @@ const APIDetails = ({
   organizationName,
   description,
   apiType,
+  apiAuthentication,
   badges,
   tags,
   environments,
@@ -132,6 +133,10 @@ const APIDetails = ({
             <StyledDl>
               <dt>API Type</dt>
               <dd data-test="api-type">{apiType}</dd>
+
+              <dt>API Authenticatie</dt>
+              <dd data-test="api-authentication">{apiAuthentication}</dd>
+
               <dt>Gebruik</dt>
               <dd>
                 {termsOfUse.governmentOnly ? 'Alleen overheid' : 'Iedereen'}
@@ -222,6 +227,7 @@ APIDetails.propTypes = {
   organizationName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   apiType: PropTypes.string.isRequired,
+  apiAuthentication: PropTypes.string.isRequired,
   badges: PropTypes.arrayOf(PropTypes.string),
   tags: PropTypes.arrayOf(PropTypes.string),
   environments: PropTypes.arrayOf(PropTypes.object),

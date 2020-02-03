@@ -3,6 +3,7 @@ export const formDataMock = {
   organizationName: 'organization name',
   description: 'description',
   apiType: 'api type',
+  apiAuthentication: 'api authentication',
   isReferenceImplementation: true,
   referenceImplementation: '',
 
@@ -42,6 +43,7 @@ export const submitDataMock = {
   organization_name: 'organization name',
   description: 'description',
   api_type: 'api type',
+  api_authentication: 'api authentication',
   environments: [
     {
       name: 'Productie',

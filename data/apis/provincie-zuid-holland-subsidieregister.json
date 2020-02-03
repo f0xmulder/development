@@ -3,6 +3,7 @@
     "organization_name": "Provincie Zuid-Holland",
     "service_name": "Subsidieregister",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["Subsidieregister", "Subsidie"],
     "environments": [{
         "name": "Productie",

@@ -3,6 +3,7 @@
   "organization_name": "RVO Rijksdienst voor Ondernemend Nederland",
   "service_name": "Digitale BereikbaarheidsService (DBS)",
   "api_type": "REST/JSON",
+  "api_authentication": "Onbekend",
   "tags": [
     "BereikbaarheidsService",
     "ondernemers",

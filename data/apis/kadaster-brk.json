@@ -3,6 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Kadaster (BRK)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["basisregistratie", "kadaster", "brk"],
     "environments": [{
         "name": "Productie",

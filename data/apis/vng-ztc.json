@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Zaaktypecatalogus (ZTC)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["zgw", "ztc", "zaakgericht werken", "zaaktypecatalogus"],
     "is_reference_implementation": true,
     "environments": [{

@@ -3,6 +3,7 @@
     "organization_name": "Luchtmeetnet",
     "service_name": "Luchtmeetnet",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "luchtkwaliteit"
     ],

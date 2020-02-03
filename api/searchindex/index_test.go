@@ -15,6 +15,7 @@ var dummyAPI = models.API{
 	"Test Organization Name",
 	"Test Service Name",
 	"REST/JSON",
+	"API Key",
 	[]models.Tag{"test-tag"},
 	[]string{},
 	[]models.APIEnvironment{
@@ -39,6 +40,7 @@ var anotherDummyAPI = models.API{
 	"Test Organization Name",
 	"Test Service Name",
 	"REST/JSON",
+	"API Key",
 	[]models.Tag{"test-tag"},
 	[]string{},
 	[]models.APIEnvironment{

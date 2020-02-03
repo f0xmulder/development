@@ -33,6 +33,7 @@ export const modelFromAPIResponse = (api) => ({
   organizationName: api.organization_name,
   description: api.description,
   apiType: api.api_type,
+  apiAuthentication: api.api_authentication,
   environments: mapEnvironments(api.environments || []),
   forum: api.forum,
   badges: api.badges,

@@ -3,6 +3,7 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_type": "REST/JSON",
+    "api_authentication": "API Key",
     "documentation_url": "Test Documentation URL",
     "tags": ["test-tag"],
     "environments": [{

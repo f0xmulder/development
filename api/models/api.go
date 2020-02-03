@@ -11,6 +11,7 @@ type API struct {
 	OrganizationName          string              `json:"organization_name"`
 	ServiceName               string              `json:"service_name"`
 	APIType                   APIType             `json:"api_type"`
+	APIAuthentication         APIAuthentication   `json:"api_authentication"`
 	Tags                      []Tag               `json:"tags"`
 	Badges                    []string            `json:"badges"`
 	Environments              []APIEnvironment    `json:"environments"`
@@ -65,15 +66,26 @@ type APIScores struct {
 type APIType string
 
 const (
-	UNKNOWN   APIType = "Onbekend"
-	REST_JSON APIType = "REST/JSON"
-	REST_XML  APIType = "REST/XML"
-	SOAP_XML  APIType = "SOAP/XML"
-	GRPC      APIType = "gRPC"
-	GRAPHQL   APIType = "GraphQL"
-	SPARQL    APIType = "SPARQL"
-	WFS       APIType = "WFS"
-	WMS       APIType = "WMS"
+	API_TYPE_UNKNOWN   APIType = "Onbekend"
+	API_TYPE_REST_JSON APIType = "REST/JSON"
+	API_TYPE_REST_XML  APIType = "REST/XML"
+	API_TYPE_SOAP_XML  APIType = "SOAP/XML"
+	API_TYPE_GRPC      APIType = "gRPC"
+	API_TYPE_GRAPHQL   APIType = "GraphQL"
+	API_TYPE_SPARQL    APIType = "SPARQL"
+	API_TYPE_WFS       APIType = "WFS"
+	API_TYPE_WMS       APIType = "WMS"
+)
+
+// APIAuthentication enum
+type APIAuthentication string
+
+const (
+	API_AUTHENTICATION_UNKNOWN      APIAuthentication = "Onbekend"
+	API_AUTHENTICATION_NONE         APIAuthentication = "Geen"
+	API_AUTHENTICATION_MUTUAL_TLS   APIAuthentication = "Mutual TLS"
+	API_AUTHENTICATION_API_KEY      APIAuthentication = "API Key"
+	API_AUTHENTICATION_IP_WHITELIST APIAuthentication = "IP Whitelist"
 )
 
 // API functions
@@ -86,24 +98,39 @@ func (result *API) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	// Validate the valid enum values
+	// Validate the valid APIType enum values
 	switch result.APIType {
 	case
-		UNKNOWN,
-		REST_JSON,
-		REST_XML,
-		SOAP_XML,
-		GRPC,
-		GRAPHQL,
-		SPARQL,
-		WFS,
-		WMS:
-		return nil
+		API_TYPE_UNKNOWN,
+		API_TYPE_REST_JSON,
+		API_TYPE_REST_XML,
+		API_TYPE_SOAP_XML,
+		API_TYPE_GRPC,
+		API_TYPE_GRAPHQL,
+		API_TYPE_SPARQL,
+		API_TYPE_WFS,
+		API_TYPE_WMS:
 	case "":
 		return errors.New("the field api_type is empty or missing")
 	default:
 		result.APIType = ""
 		return errors.New("invalid value for the field api_type")
+	}
+
+	// Validate the valid APIAuthentication enum values
+	switch result.APIAuthentication {
+	case
+		API_AUTHENTICATION_UNKNOWN,
+		API_AUTHENTICATION_NONE,
+		API_AUTHENTICATION_MUTUAL_TLS,
+		API_AUTHENTICATION_API_KEY,
+		API_AUTHENTICATION_IP_WHITELIST:
+		return nil
+	case "":
+		return errors.New("the field api_authentication is empty or missing")
+	default:
+		result.APIType = ""
+		return errors.New("invalid value for the field api_authentication")
 	}
 }
 

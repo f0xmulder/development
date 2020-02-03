@@ -3,6 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "environments": [{
         "name": "Productie",
         "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",

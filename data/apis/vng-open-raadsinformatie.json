@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Open Raadsinformatie",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "gemeente",
         "gemeenteraad",

@@ -23,7 +23,7 @@ func TestCreate(t *testing.T) {
 		wantResponseBody string
 	}{
 		{
-			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_type\":\"REST/JSON\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
+			"{\"id\":\"asdf\",\"description\":\"asdf\",\"organization_name\":\"asdf\",\"service_name\":\"asdf\",\"api_url\":\"asdf\",\"api_type\":\"REST/JSON\",\"api_authentication\":\"API Key\",\"specification_url\":\"asdf\",\"documentation_url\":\"asdf\", \"tags\":[], \"badges\":[]}\n",
 			200,
 			"application/json",
 			"{\"id\":0,\"state\":\"\",\"title\":\"\",\"description\":\"\",\"created_at\":\"\",\"weight\":\"\",\"web_url\":\"\",\"labels\":null}\n",

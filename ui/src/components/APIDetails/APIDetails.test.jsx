@@ -9,6 +9,7 @@ const details = {
   organizationName: 'Organization Name',
   serviceName: 'Service Name',
   apiType: 'API Type',
+  apiAuthentication: 'API Authentication',
   badges: ['Golden API', 'Well-written docs'],
   environments: [
     {
@@ -99,6 +100,13 @@ describe('APIDetails', () => {
     it('should show the api type', () => {
       const apiSpecType = wrapper.find('[data-test="api-type"]')
       expect(apiSpecType.text()).toBe('API Type')
+    })
+  })
+
+  describe('api authentication', () => {
+    it('should show the api authentication', () => {
+      const apiAuthentication = wrapper.find('[data-test="api-authentication"]')
+      expect(apiAuthentication.text()).toBe('API Authentication')
     })
   })
 

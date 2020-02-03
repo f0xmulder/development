@@ -27,6 +27,7 @@ const validationSchemaConfiguration = {
   organizationName: Yup.string().required(),
   serviceName: Yup.string().required(),
   apiType: Yup.string().required(),
+  apiAuthentication: Yup.string().required(),
   tags: Yup.string(),
 
   productionApiUrl: Yup.string()

@@ -3,6 +3,7 @@
     "organization_name": "Kadaster",
     "service_name": "Basisregistratie Topografie (BRT)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["basisregistratie", "kadaster", "brt"],
     "environments": [{
         "name": "Productie",

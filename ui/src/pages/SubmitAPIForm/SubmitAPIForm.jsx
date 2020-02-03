@@ -12,6 +12,7 @@ const initialValues = {
   organizationName: '',
   serviceName: '',
   apiType: 'Onbekend',
+  apiAuthentication: 'Onbekend',
   tags: '',
 
   productionApiUrl: '',
@@ -70,6 +71,7 @@ export const convertFormDataToRequestBody = (formData) => {
   requestBody.organization_name = formData.organizationName
   requestBody.service_name = formData.serviceName
   requestBody.api_type = formData.apiType
+  requestBody.api_authentication = formData.apiAuthentication
   requestBody.tags = toArray(formData.tags)
 
   requestBody.is_reference_implementation = formData.isReferenceImplementation
@@ -151,7 +153,6 @@ class SubmitAPIFormPage extends Component {
   handleSubmit(values, actions) {
     const formData = schema.cast(values)
     const submitData = convertFormDataToRequestBody(formData)
-
     return this.submitToApi(submitData)
       .then((responseData) => {
         actions.setSubmitting(false)

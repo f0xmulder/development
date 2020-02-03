@@ -17,13 +17,14 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/valid/apis/company-service.json",
 			models.API{
-				ID:               "company-service",
-				Description:      "Test Description",
-				OrganizationName: "Test Organization Name",
-				ServiceName:      "Test Service Name",
-				APIType:          "REST/JSON",
-				Tags:             []models.Tag{"test tag"},
-				Badges:           []string{"Gouden API", "Zilveren Kalf"},
+				ID:                "company-service",
+				Description:       "Test Description",
+				OrganizationName:  "Test Organization Name",
+				ServiceName:       "Test Service Name",
+				APIType:           "REST/JSON",
+				APIAuthentication: "API Key",
+				Tags:              []models.Tag{"test tag"},
+				Badges:            []string{"Gouden API", "Zilveren Kalf"},
 				Environments: []models.APIEnvironment{
 					{
 						Name:             models.ProductionEnvironment,
@@ -57,13 +58,14 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/valid/apis/other-service.json",
 			models.API{
-				ID:               "other-service",
-				Description:      "API with one badge",
-				OrganizationName: "Test Organization Name",
-				ServiceName:      "Test Service Name",
-				APIType:          "REST/JSON",
-				Tags:             []models.Tag{"test tag"},
-				Badges:           []string{"Zilveren Kalf"},
+				ID:                "other-service",
+				Description:       "API with one badge",
+				OrganizationName:  "Test Organization Name",
+				ServiceName:       "Test Service Name",
+				APIType:           "REST/JSON",
+				APIAuthentication: "API Key",
+				Tags:              []models.Tag{"test tag"},
+				Badges:            []string{"Zilveren Kalf"},
 				Environments: []models.APIEnvironment{
 					{
 						Name:             models.ProductionEnvironment,
@@ -105,14 +107,15 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/valid/apis/inferior-service.json",
 			models.API{
-				ID:               "inferior-service",
-				Description:      "API with no badges",
-				OrganizationName: "Test Organization Name",
-				ServiceName:      "Test Service Name",
-				APIType:          "REST/JSON",
-				Tags:             []models.Tag{"test tag"},
-				Badges:           []string{},
-				Environments:     []models.APIEnvironment{},
+				ID:                "inferior-service",
+				Description:       "API with no badges",
+				OrganizationName:  "Test Organization Name",
+				ServiceName:       "Test Service Name",
+				APIType:           "REST/JSON",
+				APIAuthentication: "API Key",
+				Tags:              []models.Tag{"test tag"},
+				Badges:            []string{},
+				Environments:      []models.APIEnvironment{},
 				Contact: models.APIContactDetails{
 					Email: "name@example.nl",
 					Phone: "0031612345678",
@@ -144,13 +147,14 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/invalid-badges/apis/company-service.json",
 			models.API{
-				ID:               "company-service",
-				Description:      "Test Description",
-				OrganizationName: "Test Organization Name",
-				ServiceName:      "Test Service Name",
-				APIType:          "REST/JSON",
-				Tags:             []models.Tag{"test tag"},
-				Badges:           nil,
+				ID:                "company-service",
+				Description:       "Test Description",
+				OrganizationName:  "Test Organization Name",
+				ServiceName:       "Test Service Name",
+				APIType:           "REST/JSON",
+				APIAuthentication: "API Key",
+				Tags:              []models.Tag{"test tag"},
+				Badges:            nil,
 				Environments: []models.APIEnvironment{
 					{
 						Name:             models.ProductionEnvironment,

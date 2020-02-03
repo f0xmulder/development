@@ -72,7 +72,7 @@ const SubmitAPIForm = ({
           <StyledFormGroup>
             <Label htmlFor="description">Omschrijving*</Label>
             <Field
-              style={{ minHeight: '80px', resize: 'vertical' }}
+              style={{ minHeight: '152px', resize: 'vertical' }}
               component="textarea"
               id="description"
               name="description"
@@ -110,6 +110,24 @@ const SubmitAPIForm = ({
             </Field>
             {errors.apiType && touched.apiType && (
               <ErrorMessage>{errors.apiType}</ErrorMessage>
+            )}
+          </StyledFormGroup>
+
+          <StyledFormGroup>
+            <Label htmlFor="apiAuthentication">API authenticatie</Label>
+            <Field
+              component="select"
+              id="apiAuthentication"
+              name="apiAuthentication"
+            >
+              <option value="Onbekend">Onbekend</option>
+              <option value="Geen">Geen</option>
+              <option value="Mutual TLS">Mutual TLS</option>
+              <option value="API Key">API Key</option>
+              <option value="IP Whitelist">IP Whitelist</option>
+            </Field>
+            {errors.apiAuthentication && touched.apiAuthentication && (
+              <ErrorMessage>{errors.apiAuthentication}</ErrorMessage>
             )}
           </StyledFormGroup>
         </StyledFormGroupColumn>

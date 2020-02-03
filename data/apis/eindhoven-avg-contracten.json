@@ -3,6 +3,7 @@
   "organization_name": "Eindhoven",
   "service_name": "Contracten API",
   "api_type": "REST/JSON",
+  "api_authentication": "Onbekend",
   "tags": ["zaken", "contractgegevens", "mijnapp"],
   "environments": [{
     "name": "Productie",

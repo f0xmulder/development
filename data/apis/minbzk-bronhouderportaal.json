@@ -3,6 +3,7 @@
     "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
     "service_name": "Bronhouderportaal BRO API (1.0.0)",
     "api_type": "REST/XML",
+    "api_authentication": "Onbekend",
     "tags": [
         "Basisregistratie",
         "Basisregistratie ondergrond"

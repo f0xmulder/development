@@ -3,6 +3,7 @@
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Beeldbank Amsterdam",
     "api_type": "SOAP/XML",
+    "api_authentication": "Onbekend",
     "tags": ["beeldbank", "stadsarchief", "amsterdam", "fotos", "collectie"],
     "environments": [{
         "name": "Productie",

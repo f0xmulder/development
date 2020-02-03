@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Bevraging Ingeschreven Persoon",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "BRP",
         "Persoonsgegevens",

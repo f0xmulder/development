@@ -3,6 +3,7 @@
     "organization_name": "RDW",
     "service_name": "Gekentekende voertuigen",
     "api_type": "Onbekend",
+    "api_authentication": "Onbekend",
     "tags": ["basisregistratie", "rdw", "brv"],
     "environments": [{
         "name": "Productie",

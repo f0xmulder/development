@@ -3,6 +3,7 @@
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Afvalcontainers en putten",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["afval", "containers", "putten"],
     "environments": [{
         "name": "Productie",

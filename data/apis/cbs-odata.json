@@ -3,6 +3,7 @@
     "organization_name": "Centraal Bureau voor de Statistiek (CBS)",
     "service_name": "CBS OData",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [],
     "environments": [{
         "name": "Productie",

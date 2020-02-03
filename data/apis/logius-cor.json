@@ -3,6 +3,7 @@
     "organization_name": "Logius",
     "service_name": "Centrale OIN Raadpleegvoorziening (COR)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "COR",
         "OIN",

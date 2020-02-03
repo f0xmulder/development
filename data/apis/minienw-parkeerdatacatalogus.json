@@ -3,6 +3,7 @@
     "organization_name": "Ministerie van Infrastructuur en Waterstaat",
     "service_name": "parkeerdatacatalogus",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "parkeerdata"
     ],

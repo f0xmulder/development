@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Autorisatiecomponent (AC)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["zgw", "ac", "zaakgericht werken", "autorisatiecomponent"],
     "is_reference_implementation": true,
     "environments": [{

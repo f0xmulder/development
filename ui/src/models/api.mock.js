@@ -5,6 +5,7 @@ export const goApiMock = {
   organization_name: 'organization name',
   description: 'description',
   api_type: 'api type',
+  api_authentication: 'api authentication',
   badges: [],
   environments: [
     {
@@ -44,6 +45,7 @@ export const apiMock = {
   organizationName: 'organization name',
   description: 'description',
   apiType: 'api type',
+  apiAuthentication: 'api authentication',
   badges: [],
   tags: ['tag1', 'tag2'],
   environments: [

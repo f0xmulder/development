@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Notificatierouteringscomponent (NRC)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["zgw", "nrc", "zaakgericht werken", "notificatiecomponent"],
     "is_reference_implementation": true,
     "environments": [{

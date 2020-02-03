@@ -3,6 +3,7 @@
     "organization_name": "Kamers van Koophandel",
     "service_name": "KvK Search",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "handelsregister",
         "koophandel",

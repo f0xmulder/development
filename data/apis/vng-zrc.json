@@ -3,6 +3,7 @@
     "organization_name": "VNG Realisatie",
     "service_name": "Zaakregistratiecomponent (ZRC)",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["zgw", "ztc", "zaakgericht werken", "zaakregistratiecomponent"],
     "is_reference_implementation": true,
     "environments": [{

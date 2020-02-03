@@ -3,6 +3,7 @@
     "organization_name": "Gemeente Amsterdam",
     "service_name": "Monumenten",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": ["gemeente", "amsterdam", "monumenten"],
     "environments": [{
         "name": "Productie",

@@ -3,6 +3,7 @@
     "organization_name": "Gemeenschappelijke Regeling Drechtsteden",
     "service_name": "Kernregistratie Medewerkers",
     "api_type": "REST/JSON",
+    "api_authentication": "Onbekend",
     "tags": [
         "Kernregistratie",
         "Medewerkers",

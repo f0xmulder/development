@@ -3,6 +3,7 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_type": "REST/JSON",
+    "api_authentication": "API Key",
     "environments": [{
         "name": "Productie",
         "api_url": "Test API URL",
