@@ -2,10 +2,12 @@ package resources
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
+	"time"
 
 	"github.com/go-chi/chi"
 	"go.uber.org/zap"
@@ -27,8 +29,12 @@ type APIResource struct {
 }
 
 // NewAPIResource creates a new APIResource
-func NewAPIResource(logger *zap.Logger, rootDirectory string, readFile func(path string) (models.API, error),
-	readDirectory func(directory string) ([]models.API, error)) *APIResource {
+func NewAPIResource(
+	logger *zap.Logger,
+	rootDirectory string,
+	readFile func(path string) (models.API, error),
+	readDirectory func(directory string) ([]models.API, error),
+) *APIResource {
 
 	apiDirectory := filepath.Join(rootDirectory, datareaders.API_DIR)
 	outputList, errReadFile := readDirectory(apiDirectory)
@@ -73,6 +79,7 @@ func (rs APIResource) Routes() chi.Router {
 	r.Route("/{id:[a-zA-Z0-9-]+}", func(r chi.Router) {
 		r.Get("/", rs.Get)
 		r.Get("/implemented-by", rs.ListImplementedBy)
+		r.Get("/forum-posts", rs.ForumPosts)
 	})
 
 	return r
@@ -129,27 +136,15 @@ func (rs APIResource) Get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	apiID := chi.URLParam(r, "id")
-	filename := datareaders.FromID(apiID)
-	path := filepath.Join(rs.APIDirectory, filename)
-
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		rs.Logger.Error("failed to find API by id", zap.Error(err))
-		http.Error(w, "404 page not found", http.StatusNotFound)
-		return
-	}
-
-	api, errReadFile := rs.ReadFile(path)
-
-	if errReadFile != nil {
-		rs.Logger.Error("failed to read API file", zap.Error(errReadFile))
-		http.Error(w, "oops, something went wrong while getting the API info", http.StatusInternalServerError)
+	api, err := rs.GetAPIForID(apiID, w)
+	if err != nil {
 		return
 	}
 
 	scores := scores.CalculateScores(api)
 	api.Scores = &scores
 
-	err := json.NewEncoder(w).Encode(api)
+	err = json.NewEncoder(w).Encode(api)
 
 	if err != nil {
 		rs.Logger.Error("failed to parse JSON for API", zap.Error(err))
@@ -180,4 +175,63 @@ func (rs APIResource) ListImplementedBy(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "server error", http.StatusInternalServerError)
 		return
 	}
+}
+
+var client = &http.Client{Timeout: 10 * time.Second}
+
+// ForumPosts returns the forum posts of an external forum integration when available
+func (rs APIResource) ForumPosts(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	apiID := chi.URLParam(r, "id")
+	api, err := rs.GetAPIForID(apiID, w)
+	if err != nil {
+		return
+	}
+
+	forum, err := api.GetForum()
+	if err != nil {
+		rs.Logger.Error("failed to read API forum integration", zap.Error(err))
+		http.Error(w, "404 forum integration not found", http.StatusNotFound)
+		return
+	}
+
+	url := forum.URL + ".json"
+	res, err := client.Get(url)
+	if err != nil {
+		rs.Logger.Error("failed to GET forum post JSON", zap.Error(err))
+		http.Error(w, "oops, something went wrong while getting the API forum info", http.StatusInternalServerError)
+		return
+	}
+
+	body, err := ioutil.ReadAll(res.Body)
+	defer res.Body.Close()
+	if err != nil {
+		rs.Logger.Error("failed to read forum posts JSON", zap.Error(err))
+		http.Error(w, "oops, something went wrong while getting the API forum info", http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(body)
+}
+
+func (rs APIResource) GetAPIForID(apiID string, w http.ResponseWriter) (models.API, error) {
+	filename := datareaders.FromID(apiID)
+	path := filepath.Join(rs.APIDirectory, filename)
+
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		rs.Logger.Error("failed to find API by id", zap.Error(err))
+		http.Error(w, "404 page not found", http.StatusNotFound)
+		return models.API{}, err
+	}
+
+	api, errReadFile := rs.ReadFile(path)
+
+	if errReadFile != nil {
+		rs.Logger.Error("failed to read API file", zap.Error(errReadFile))
+		http.Error(w, "oops, something went wrong while getting the API info", http.StatusInternalServerError)
+		return models.API{}, errReadFile
+	}
+
+	return api, nil
 }

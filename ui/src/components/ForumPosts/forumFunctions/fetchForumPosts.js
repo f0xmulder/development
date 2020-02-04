@@ -1,13 +1,13 @@
 import objectKeysToCamelCase from '../../../utils/objectKeysToCamelCase'
 
-export default async function(vendor, url) {
+export default async function(vendor, apiId) {
   if (vendor !== 'discourse') {
     console.error('Forum vendor is not discourse.')
     return null
   }
 
   try {
-    const response = await fetch(`${url}.json`)
+    const response = await fetch(`/api/apis/${apiId}/forum-posts`)
     const json = await response.json()
     return {
       error: null,

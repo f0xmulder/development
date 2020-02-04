@@ -67,6 +67,34 @@ var dummyImplementationOfReferenceAPI = models.API{
 	nil,
 }
 
+var dummyAPIWithForumIntegration = models.API{
+	"test-api-name",
+	"Test Description",
+	"Test Organization Name",
+	"Test Service Name",
+	"REST/JSON",
+	"API Key",
+	[]models.Tag{"test-tag"},
+	[]string{},
+	[]models.APIEnvironment{
+		{
+			Name:             models.ProductionEnvironment,
+			APIURL:           "Test API URL",
+			SpecificationURL: "Test Specification URL",
+			DocumentationURL: "Test Documentation URL",
+		},
+	},
+	&models.Forum{
+		Vendor: "Test Vendor",
+		URL:    "Test Forum URL",
+	},
+	models.APIContactDetails{},
+	false,
+	map[string][]string{},
+	models.APITermsOfUse{},
+	nil,
+}
+
 func mockAPIDirectoryReaderNoResults(directory string) ([]models.API, error) {
 	return []models.API{}, nil
 }
@@ -284,6 +312,85 @@ func TestAPIImplementedBy(t *testing.T) {
 			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, ctx))
 
 			apiResource.ListImplementedBy(w, req)
+			resp := w.Result()
+			body, _ := ioutil.ReadAll(resp.Body)
+
+			if string(body) != tc.wantResponseBody {
+				t.Errorf("got body %s, want %s", string(body), tc.wantResponseBody)
+			}
+
+			if resp.StatusCode != tc.wantStatusCode {
+				t.Errorf("got status code %d, want %d", resp.StatusCode, tc.wantStatusCode)
+			}
+
+			if resp.Header.Get("Content-Type") != tc.wantContentType {
+				t.Errorf("got content-type %s, want %s", resp.Header.Get("Content-Type"), tc.wantContentType)
+			}
+		})
+	}
+}
+
+func TestAPIForumPosts(t *testing.T) {
+	testCases := []struct {
+		apiID             string
+		rootDirectory     string
+		wantStatusCode    int
+		wantContentType   string
+		wantResponseBody  string
+		mockAPIFileReader func(path string) (models.API, error)
+	}{
+		{
+			"non-existing-api-id",
+			"./test-data/valid",
+			404,
+			"text/plain; charset=utf-8",
+			"404 page not found\n",
+			mockAPIFileReader,
+		}, {
+			"invalid-json",
+			"./test-data/invalid",
+			500,
+			"text/plain; charset=utf-8",
+			"oops, something went wrong while getting the API info\n",
+			mockAPIFileReaderWithError,
+		}, {
+			"test-api-name",
+			"./test-data/valid",
+			404,
+			"text/plain; charset=utf-8",
+			"404 forum integration not found\n",
+			mockAPIFileReader,
+		}, {
+			"test-api-name",
+			"./test-data/valid",
+			500,
+			"text/plain; charset=utf-8",
+			"oops, something went wrong while getting the API forum info\n",
+			func(path string) (models.API, error) {
+				return dummyAPIWithForumIntegration, nil
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		url := strings.Join([]string{"/api/apis", tc.apiID, "forum-posts"}, "/")
+		apiResource := NewAPIResource(
+			zap.NewNop(),
+			tc.rootDirectory,
+			tc.mockAPIFileReader,
+			mockAPIDirectoryReaderNoResults,
+		)
+
+		t.Run(fmt.Sprintf("%s", url), func(t *testing.T) {
+			req := httptest.NewRequest("GET", url, nil)
+			w := httptest.NewRecorder()
+
+			ctx := chi.NewRouteContext()
+			ctx.URLParams.Add("id", tc.apiID)
+
+			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, ctx))
+
+			apiResource.ForumPosts(w, req)
 			resp := w.Result()
 			body, _ := ioutil.ReadAll(resp.Body)
 

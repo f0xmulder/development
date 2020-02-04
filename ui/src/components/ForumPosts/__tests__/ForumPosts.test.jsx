@@ -1,4 +1,5 @@
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 import { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 
@@ -25,7 +26,13 @@ describe('ForumPosts', () => {
       .spyOn(forumFunctions, 'default')
       .mockResolvedValueOnce(posts)
 
-    await act(() => mount(<ForumPosts forum={forum} />))
+    await act(() =>
+      mount(
+        <MemoryRouter>
+          <ForumPosts forum={forum} />
+        </MemoryRouter>,
+      ),
+    )
 
     expect(spy).toHaveBeenCalled()
   })

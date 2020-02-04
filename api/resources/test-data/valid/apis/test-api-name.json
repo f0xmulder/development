@@ -10,6 +10,10 @@
         "specification_url": "Test Specification URL",
         "documentation_url": "Test Documentation URL"
     }],
+    "forum": {
+        "vendor": "Test Vendor",
+        "url": "Test forum URL"
+    },
     "contact": {
         "email": "name@example.nl",
         "phone": "0031612345678",

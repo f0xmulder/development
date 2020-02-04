@@ -158,3 +158,12 @@ func (api *API) GetProductionEnvironment() (APIEnvironment, error) {
 
 	return APIEnvironment{}, fmt.Errorf("api does not contain a production environment")
 }
+
+func (api *API) GetForum() (Forum, error) {
+	forum := api.Forum
+	if forum != nil {
+		return *forum, nil
+	}
+
+	return Forum{}, fmt.Errorf("api does not contain a forum object")
+}
