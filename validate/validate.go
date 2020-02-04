@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/validate/models"
 )
 
 // ValidationFeedback contains feedback info

@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/validate/models"
 )
 
 // File maps a file into an API model
@@ -33,8 +33,6 @@ func File(path string) (models.API, error) {
 
 	newAPI.ID = toAPIID(filename)
 	newAPI.Scores = nil
-
-	err = addBadges(path, &newAPI)
 
 	return newAPI, err
 }

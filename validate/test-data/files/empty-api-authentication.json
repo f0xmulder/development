@@ -3,12 +3,11 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_url": "Test API URL",
-    "api_type": "REST/JSON",    
+    "api_type": "REST/JSON",
     "api_authentication": "",
     "specification_url": "Test Specification URL",
     "documentation_url": "Test Documentation URL",
     "tags": ["test-tag"],
-    "badges": ["Test badge"],
     "contact": {
         "email": "name@example.nl",
         "phone": "0031612345678",

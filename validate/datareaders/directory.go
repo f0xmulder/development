@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/validate/models"
 )
 
 // Directory maps every file from a directory into an API model

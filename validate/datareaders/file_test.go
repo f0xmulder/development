@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"gitlab.com/commonground/developer.overheid.nl/api/models"
+	"gitlab.com/commonground/developer.overheid.nl/validate/models"
 )
 
 func TestFile(t *testing.T) {
@@ -24,7 +24,6 @@ func TestFile(t *testing.T) {
 				APIType:           "REST/JSON",
 				APIAuthentication: "API Key",
 				Tags:              []models.Tag{"test tag"},
-				Badges:            []string{"Gouden API", "Zilveren Kalf"},
 				Environments: []models.APIEnvironment{
 					{
 						Name:             models.ProductionEnvironment,
@@ -59,13 +58,12 @@ func TestFile(t *testing.T) {
 			"./test-data/valid/apis/other-service.json",
 			models.API{
 				ID:                "other-service",
-				Description:       "API with one badge",
+				Description:       "Some other API",
 				OrganizationName:  "Test Organization Name",
 				ServiceName:       "Test Service Name",
 				APIType:           "REST/JSON",
 				APIAuthentication: "API Key",
 				Tags:              []models.Tag{"test tag"},
-				Badges:            []string{"Zilveren Kalf"},
 				Environments: []models.APIEnvironment{
 					{
 						Name:             models.ProductionEnvironment,
@@ -105,36 +103,6 @@ func TestFile(t *testing.T) {
 			false,
 		},
 		{
-			"./test-data/valid/apis/inferior-service.json",
-			models.API{
-				ID:                "inferior-service",
-				Description:       "API with no badges",
-				OrganizationName:  "Test Organization Name",
-				ServiceName:       "Test Service Name",
-				APIType:           "REST/JSON",
-				APIAuthentication: "API Key",
-				Tags:              []models.Tag{"test tag"},
-				Badges:            []string{},
-				Environments:      []models.APIEnvironment{},
-				Contact: models.APIContactDetails{
-					Email: "name@example.nl",
-					Phone: "0031612345678",
-					Fax:   "0031687654321",
-					Chat:  "https://nl-x.slack.com",
-				},
-				Relations: map[string][]string{
-					"api-id": {"reference-implementation"},
-				},
-				TermsOfUse: models.APITermsOfUse{
-					GovernmentOnly:      true,
-					PayPerUse:           false,
-					UptimeGuarantee:     99.9,
-					SupportResponseTime: "2 days",
-				},
-			},
-			false,
-		},
-		{
 			"./test-data/invalid-file-path",
 			models.API{},
 			true,
@@ -142,43 +110,6 @@ func TestFile(t *testing.T) {
 		{
 			"./test-data/invalid/apis/company-service.json",
 			models.API{},
-			true,
-		},
-		{
-			"./test-data/invalid-badges/apis/company-service.json",
-			models.API{
-				ID:                "company-service",
-				Description:       "Test Description",
-				OrganizationName:  "Test Organization Name",
-				ServiceName:       "Test Service Name",
-				APIType:           "REST/JSON",
-				APIAuthentication: "API Key",
-				Tags:              []models.Tag{"test tag"},
-				Badges:            nil,
-				Environments: []models.APIEnvironment{
-					{
-						Name:             models.ProductionEnvironment,
-						APIURL:           "Test API URL",
-						SpecificationURL: "Test Specification URL",
-						DocumentationURL: "Test Documentation URL",
-					},
-				},
-				Contact: models.APIContactDetails{
-					Email: "name@example.nl",
-					Phone: "0031612345678",
-					Fax:   "0031687654321",
-					Chat:  "https://nl-x.slack.com",
-				},
-				Relations: map[string][]string{
-					"api-id": {"reference-implementation"},
-				},
-				TermsOfUse: models.APITermsOfUse{
-					GovernmentOnly:      true,
-					PayPerUse:           false,
-					UptimeGuarantee:     99.9,
-					SupportResponseTime: "2 days",
-				},
-			},
 			true,
 		},
 	}

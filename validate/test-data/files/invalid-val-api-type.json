@@ -5,7 +5,6 @@
     "api_type": "Nonexistant API Type",
     "api_authentication": "API Key",
     "tags": ["test-tag"],
-    "badges": ["Test badge"],
     "environments": [{
         "name": "Productie",
         "api_url": "Test API URL",
