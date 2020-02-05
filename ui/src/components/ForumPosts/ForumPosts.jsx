@@ -34,7 +34,7 @@ const ForumPosts = ({ forum }) => {
           Fout bij het ophalen van forumcontent
         </ErrorMessage>
       )}
-      {!error && posts && posts.length && (
+      {!error && posts && posts.length > 0 && (
         <ForumPostsView url={url} posts={posts} />
       )}
     </>
