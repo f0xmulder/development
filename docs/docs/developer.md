@@ -31,6 +31,11 @@ Then, run the migrations and fill the database with fixtures:
 go run migrate-and-fill/cmd/migrate-and-fill/*.go --fixtures-path=fixtures.sql --migrations-path=migrations
 ```
 
+For the Python API migrations and fictures run:
+```bash
+python manage.py sync_apis
+```
+
 Finally, to start the API server:
 
 ```bash
