@@ -145,6 +145,8 @@ Deploy Review App:
   tags:
     - review
     - kubernetes
+  only:
+    - branches@commonground/developer.overheid.nl
   except:
     - master
   artifacts:
@@ -167,6 +169,8 @@ Remove Review App:
   tags:
     - review
     - kubernetes
+  only:
+    - branches@commonground/developer.overheid.nl
   except:
     - master
 
@@ -187,6 +191,8 @@ E2E tests:
   tags:
     - docker
     - linux
+  only:
+    - branches@commonground/developer.overheid.nl
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -216,4 +222,4 @@ Deploy production:
     - nlx-privileged
     - shell
   only:
-    - master
+    - master@commonground/developer.overheid.nl
