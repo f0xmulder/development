@@ -1,4 +1,4 @@
-image: docker:stable
+image: docker:19.03.1
 
 stages:
   - validate
@@ -51,10 +51,9 @@ Validate API definitions:
     - docker
     - linux
   variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:dind
+    - docker:19.03.1-dind
 
 Test and release UI:
   extends: .ui
@@ -78,10 +77,9 @@ Test and release UI:
     - docker
     - linux
   variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:dind
+    - docker:19.03.1-dind
 
 Test and release API:
   extends: .api
@@ -105,10 +103,9 @@ Test and release API:
     - docker
     - linux
   variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:dind
+    - docker:19.03.1-dind
 
 Release Docs:
   extends: .docs
@@ -176,9 +173,6 @@ Remove Review App:
 ## E2E Tests
 E2E tests:
   stage: e2e-tests
-  variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
   before_script:
     - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$DOMAIN")
     - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
@@ -193,8 +187,10 @@ E2E tests:
   tags:
     - docker
     - linux
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:dind
+    - docker:19.03.1-dind
 
 ## Depoyment ##
 Deploy production:
