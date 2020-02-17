@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { object, func } from 'prop-types'
 
+import APIDetailsRepository from '../../domain/api-details-repository'
 import APIDetails from '../../components/APIDetails/APIDetails'
-import { modelFromAPIResponse } from '../../models/api'
 import { Container } from './APIDetail.styles'
 
 class APIDetail extends Component {
@@ -16,22 +16,10 @@ class APIDetail extends Component {
     loaded: false,
   }
 
-  fetchApiDetails(id) {
-    return fetch(`/api/apis/${id}`).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout bij het ophalen voor de API met ID '${id}'`,
-        )
-      }
-    })
-  }
-
   loadDetailsForApi(id) {
-    return this.fetchApiDetails(id).then(
+    return this.props.getApiDetailsById(id).then(
       (details) => {
-        this.setState({ details: modelFromAPIResponse(details), loaded: true })
+        this.setState({ details, loaded: true })
       },
       (error) => {
         this.setState({ error: true, loaded: true })
@@ -74,10 +62,12 @@ class APIDetail extends Component {
 
 APIDetail.propTypes = {
   match: object,
+  getApiDetailsById: func.isRequired,
 }
 
 APIDetail.defaultProps = {
   match: { params: {} },
+  getApiDetailsById: APIDetailsRepository.getById,
 }
 
 export default APIDetail

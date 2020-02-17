@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { object, func } from 'prop-types'
 import { RedocStandalone } from 'redoc'
 
-import { modelFromAPIResponse } from '../../models/api'
+import APIDetailsRepository from '../../domain/api-details-repository'
 import APIDetailsHeader from '../../components/APIDetailsHeader/APIDetailsHeader'
 import { Container } from './ApiSpecification.styles'
 
@@ -13,22 +13,10 @@ class APISpecification extends Component {
     loaded: false,
   }
 
-  fetchApiDetails(id) {
-    return fetch(`/api/apis/${id}`).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout bij het ophalen voor de API met ID '${id}'`,
-        )
-      }
-    })
-  }
-
   loadDetailsForApi(id) {
-    return this.fetchApiDetails(id).then(
+    return this.props.getApiDetailsById(id).then(
       (details) => {
-        this.setState({ details: modelFromAPIResponse(details), loaded: true })
+        this.setState({ details, loaded: true })
       },
       (error) => {
         this.setState({ error: true, loaded: true })
@@ -91,6 +79,11 @@ class APISpecification extends Component {
 
 APISpecification.propTypes = {
   match: object,
+  getApiDetailsById: func.isRequired,
+}
+
+APISpecification.defaultProps = {
+  getApiDetailsById: APIDetailsRepository.getById,
 }
 
 export default APISpecification

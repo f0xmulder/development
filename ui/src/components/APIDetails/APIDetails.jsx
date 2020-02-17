@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import { Table } from '@commonground/design-system'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
@@ -13,6 +13,7 @@ import External from '../Icons/External'
 import Card from '../Card/Card'
 import PageContentCard from '../PageContentCard/PageContentCard'
 import ForumPosts from '../ForumPosts/ForumPosts'
+import APIDesignRulesPane from '../APIDesignRulesPane/APIDesignRulesPane'
 
 import {
   StyledTagList,
@@ -45,6 +46,7 @@ const APIDetails = ({
   relations,
   termsOfUse,
   scores,
+  apiDesignRules,
 }) => (
   <StyledAPIDetails>
     <APIDetailsHeader
@@ -183,6 +185,26 @@ const APIDetails = ({
           </Card.Body>
         </Card>
 
+        {apiDesignRules && apiDesignRules.length && (
+          <Card data-test="api-design-rules">
+            <Card.Body>
+              <Card.Title>API Design Rules</Card.Title>
+              <StyledScoresUl data-test="api-design-rules-list">
+                {apiDesignRules.map((rule) => (
+                  <StyledScoresLi
+                    title={rule.title}
+                    available={rule.compliant}
+                    key={rule.title}
+                  >
+                    {rule.id}
+                  </StyledScoresLi>
+                ))}
+              </StyledScoresUl>
+              <Link to={`${id}/api-design-rules`}>Meer informatie</Link>
+            </Card.Body>
+          </Card>
+        )}
+
         {isReferenceImplementation ? (
           <Card>
             <Card.Body>
@@ -218,6 +240,11 @@ const APIDetails = ({
         ) : null}
       </CardsContainer.SideBar>
     </CardsContainer>
+    <Route
+      exact
+      path="/detail/:id/api-design-rules"
+      component={() => <APIDesignRulesPane parentUrl={`/detail/${id}`} />}
+    />
   </StyledAPIDetails>
 )
 
@@ -246,6 +273,7 @@ APIDetails.propTypes = {
     hasContactDetails: PropTypes.bool,
     providesSla: PropTypes.bool,
   }),
+  apiDesignRules: PropTypes.array,
 }
 
 export default APIDetails

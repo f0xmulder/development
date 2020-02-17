@@ -41,5 +41,6 @@ export const modelFromAPIResponse = (api) => ({
   relations: api.relations,
   termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
   scores: mapScores(api.scores),
+  apiDesignRules: api.api_design_rules,
   tags: api.tags,
 })

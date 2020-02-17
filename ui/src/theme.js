@@ -37,4 +37,22 @@ export default {
       bold: '700',
     },
   },
+  tokens: {
+    spacing02: '0.25rem',
+    spacing03: '0.5rem',
+    spacing04: '0.75rem',
+    spacing05: '1rem',
+    spacing06: '1.5rem',
+    spacing07: '2rem',
+    spacing08: '2.5rem',
+    spacing09: '3rem',
+    spacing10: '4rem',
+    spacing11: '5rem',
+    spacing12: '6rem',
+
+    colors: {
+      colorPaletteGray600: '#757575',
+      colorPaletteGray900: '#212121',
+    },
+  },
 }

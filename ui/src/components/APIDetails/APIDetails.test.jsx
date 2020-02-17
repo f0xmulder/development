@@ -31,6 +31,25 @@ const details = {
     hasContactDetails: false,
     providesSla: false,
   },
+  apiDesignRules: [
+    {
+      id: 'API-03',
+      title: 'API-03: Only apply default HTTP operations',
+      description:
+        'A RESTful API is an application programming interface that supports the default HTTP operations GET, PUT, POST, PATCH and DELETE.',
+      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-03',
+      compliant: true,
+    },
+    {
+      id: 'API-04',
+      title:
+        'API-04: Define interfaces in Dutch unless there is an official English glossary',
+      description:
+        'Define resources and the underlying entities, fields and so on (the information model ad the external interface) in Dutch. English is allowed in case there is an official English glossary.',
+      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-04',
+      compliant: true,
+    },
+  ],
 }
 
 const detailsWithMultipleEnvironments = {
@@ -146,6 +165,37 @@ describe('APIDetails', () => {
       const tableBody = wrapper.find('[data-test="environments-table-body"]')
 
       expect(tableBody.children()).toHaveLength(3)
+    })
+  })
+
+  describe('API Design Rules', () => {
+    let designRules
+    let designRulesList
+
+    const DESIGN_RULES_SELECTOR = '[data-test="api-design-rules"]'
+    const DESIGN_RULES_LIST_SELECTOR = '[data-test="api-design-rules-list"]'
+
+    beforeEach(() => {
+      designRules = wrapper.find(DESIGN_RULES_SELECTOR)
+      designRulesList = wrapper.find(DESIGN_RULES_LIST_SELECTOR)
+    })
+
+    it('should show the API Design Rules', () => {
+      expect(designRules.exists()).toBe(true)
+    })
+
+    it('should display every design rule', () => {
+      expect(designRulesList.children()).toHaveLength(2)
+    })
+
+    describe('when there are no design rules', () => {
+      beforeEach(() => {
+        wrapper.setProps({ apiDesignRules: null })
+      })
+
+      it('should hide the design rules', () => {
+        expect(wrapper.find(DESIGN_RULES_SELECTOR).exists()).toBe(false)
+      })
     })
   })
 

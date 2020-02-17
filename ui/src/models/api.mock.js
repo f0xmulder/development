@@ -36,6 +36,15 @@ export const goApiMock = {
     has_contact_details: false,
     provides_sla: false,
   },
+  api_design_rules: [
+    {
+      id: 'API-01',
+      title: 'API-01: First API Design Rule',
+      description: 'Description of first API Design Rule',
+      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-01',
+      compliant: true,
+    },
+  ],
   /* eslint-enable camelcase */
 }
 
@@ -76,4 +85,13 @@ export const apiMock = {
     hasContactDetails: false,
     providesSla: false,
   },
+  apiDesignRules: [
+    {
+      id: 'API-01',
+      title: 'API-01: First API Design Rule',
+      description: 'Description of first API Design Rule',
+      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-01',
+      compliant: true,
+    },
+  ],
 }

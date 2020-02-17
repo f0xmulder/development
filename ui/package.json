@@ -13,11 +13,14 @@
     "react-dom": "16.10.2",
     "react-responsive": "8.0.1",
     "react-router-dom": "5.1.2",
+    "react-transition-group": "4.3.0",
     "redoc": "2.0.0-rc.20",
     "styled-components": "4.4.0",
     "yup": "0.27.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "5.0.2",
+    "@testing-library/react": "9.4.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",
     "eslint-config-prettier": "6.7.0",
