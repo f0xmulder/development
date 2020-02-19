@@ -1,0 +1,22 @@
+ignore-paths:
+  - manage.py
+inherits:
+  - strictness_medium
+uses:
+  - django
+
+strictness: medium
+test-warnings: false
+doc-warnings: false
+autodetect: false
+
+pylint:
+  run: true
+pep8:
+  run: true
+mccabe:
+  run: false
+dodgy:
+  run: false
+pyflakes:
+  run: false
