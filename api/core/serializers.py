@@ -21,8 +21,8 @@ class BadgeSerializer(serializers.ModelSerializer):
         model = Badge
         fields = ['name']
 
-    def to_representation(self, obj):
-        return obj.name
+    def to_representation(self, instance):
+        return instance.name
 
 
 class APISerializer(NonNullModelSerializer):
@@ -51,11 +51,11 @@ class APISerializer(NonNullModelSerializer):
     def get_forum(self, obj):
         if not obj.forum_url and not obj.forum_vendor:
             return None
-        else:
-            return {
-                'url': obj.forum_url,
-                'vendor': obj.forum_vendor
-            }
+
+        return {
+            'url': obj.forum_url,
+            'vendor': obj.forum_vendor
+        }
 
     def get_terms_of_use(self, obj):
         return {
