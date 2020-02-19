@@ -91,6 +91,10 @@ spec:
             backend:
               serviceName: api
               servicePort: http
+          - path: /admin
+            backend:
+              serviceName: api
+              servicePort: http
           - path: /docs
             backend:
               serviceName: docs

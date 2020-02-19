@@ -21,45 +21,40 @@ spec:
           imagePullPolicy: {{.Values.imagePullPolicy}}
           readinessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /health
-              port: 8080
-              scheme: HTTP
+            tcpSocket:
+              port: 8000
             initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /health
-              port: 8080
-              scheme: HTTP
+            tcpSocket:
+              port: 8000
             initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
           envFrom:
             - secretRef:
-                name: postgres-auth
+                name: {{.component}}
           env:
-            - name: POSTGRES_DSN
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres/{{ .Values.postgresDb }}?sslmode=disable
-            - name: GITLAB_URL
+            - name: ALLOWED_HOST
+              value: "{{.Values.domain}}"
+            - name: DB_HOST
+              value: postgres
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .component }}
-                  key: gitlabUrl
-            - name: GITLAB_ACCESS_TOKEN
+                  name: postgres-auth
+                  key: POSTGRES_USER
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .component }}
-                  key: gitlabAccessToken
-            - name: GITLAB_PROJECT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .component }}
-                  key: gitlabProjectId
+                  name: postgres-auth
+                  key: POSTGRES_PASSWORD
+            - name: DB_NAME
+              value: "{{ .Values.postgresDb }}"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -70,14 +65,15 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 8080
+      port: 8000
 ---
 apiVersion: v1
 kind: Secret
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
 type: Opaque
 data:
-  gitlabUrl: {{.Values.gitlabUrl | b64enc | quote}}
-  gitlabAccessToken: {{.Values.gitlabAccessToken | b64enc | quote}}
-  gitlabProjectId: {{.Values.gitlabProjectId | b64enc | quote}}
+  SECRET_KEY: {{.Values.secretKey | b64enc | quote}}
+  GITLAB_URL: {{.Values.gitlabUrl | b64enc | quote}}
+  GITLAB_ACCESS_TOKEN: {{.Values.gitlabAccessToken | b64enc | quote}}
+  GITLAB_PROJECT_ID: {{.Values.gitlabProjectId | b64enc | quote}}
 {{ end }}

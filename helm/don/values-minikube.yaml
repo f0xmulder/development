@@ -7,7 +7,6 @@ apiImage: don/api
 uiImage: don/ui
 docsImage: don/docs
 
-loadDatabaseFixtures: true
 storageType: "Ephemeral"
 
 replicas: 2

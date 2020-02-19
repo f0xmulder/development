@@ -7,6 +7,8 @@ apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api:master
 uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui:master
 docsImage: registry.gitlab.com/commonground/developer.overheid.nl/docs:master
 
+secretKey: supersecretkey
+
 gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
 gitlabProjectId: "0"
@@ -14,9 +16,7 @@ gitlabProjectId: "0"
 postgresUser: don
 postgresPassword: don
 postgresDb: don
-postgresDsn: postgres://don:don@postgres/don?sslmode=disable
 postgresPvcName: postgres-data-volume
-loadDatabaseFixtures: false
 
 storageType: Durable
 

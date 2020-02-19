@@ -131,14 +131,15 @@ Deploy Review App:
         kubectl create namespace $REVIEW_NAMESPACE || true
         helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
         --namespace $REVIEW_NAMESPACE \
+        --set "secretKey=$SECRET_KEY" \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "loadDatabaseFixtures=true" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
+        --set "storageType=Ephemeral" \
         --set "replicas=1" \
         --set "ingressClass=traefik"
   environment:
@@ -212,13 +213,14 @@ Deploy production:
     - |
         helm upgrade --install don-prod ./helm/don \
         --namespace don-prod \
+        --set "secretKey=$SECRET_KEY" \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
         --set "gitlabUrl=$GITLAB_URL" \
         --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
-        --set domain="$DOMAIN" \
+        --set "domain=$DOMAIN" \
         --set "ingressClass=traefik"
   environment:
     name: prod
