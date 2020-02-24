@@ -9,6 +9,7 @@ First make sure the following tools are available on your computer:
 * [Node.js](https://nodejs.org/) (with NPM)
 * [Modd](https://github.com/cortesi/modd)
 * [Docker](https://docker.com), including [docker-compose](https://docs.docker.com/compose/)
+* [Python (v3.8)](https://www.python.org)
 
 Then clone this repository:
 
@@ -17,7 +18,7 @@ git clone git@gitlab.com:commonground/developer.overheid.nl.git
 cd developer.overheid.nl/
 ```
 
-### Backend
+### Database
 
 First, start a database for local development:
 
@@ -26,27 +27,65 @@ docker-compose -f docker-compose.dev.yml up
 ```
 Tip: if you want to completely restart and reset the database, use `docker-compose -f docker-compose.dev.yml down`
 
-Then, run the migrations and fill the database with fixtures:
+
+### Django API
+
+First, set up a python virtual environment with python 3.8 and activate it.
+
+Then install the python dependencies:
+
 ```bash
-go run migrate-and-fill/cmd/migrate-and-fill/*.go --fixtures-path=fixtures.sql --migrations-path=migrations
+cd api && pip install -r requirements.txt
 ```
 
-For the Python API migrations and fictures run:
+Run the migrations:
+```bash
+python manage.py migrate
+```
+
+To sync the API JSON files to your database, run:
+
 ```bash
 python manage.py sync_apis
 ```
 
-Finally, to start the API server:
+You can now start the Django API (develpoment version) with:
 
 ```bash
-cd api/ && modd
+python manage.py runserver
 ```
 
-If you want to run the backend tests as a watcher, use:
+If you want to run the python tests:
 
 ```bash
-modd -f test-go.conf
+python manage.py test
 ```
+
+If you want to run the python linter:
+
+```bash
+prospector
+```
+
+If you want to add a python dependency:
+1. `pip install some-library`
+1. `pip freeze > requirements.txt`
+
+
+### Go Validator
+
+To run the Go validator:
+
+```bash
+cd validate/ && go run cmd/don-validate/*.go
+```
+
+If you want to run the validator tests as a watcher, use:
+
+```bash
+modd -f test.conf
+```
+
 
 ### Frontend
 
@@ -60,7 +99,7 @@ This command should automatically open a browser on [http://localhost:3000](http
 
 ## Running with minikube
 
-Run this project with minikube if you want to test changes to the helm charts locally.
+Run this project with minikube if you want to test changes to the helm charts or Dockerfiles locally.
 
 ### Install dependencies
 
