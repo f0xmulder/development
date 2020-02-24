@@ -66,21 +66,29 @@ class APISerializer(NonNullModelSerializer):
         }
 
     def get_scores(self, obj):
-        def has_documentation(obj):
-            production_environment = obj.environments.filter(
+        def has_documentation(api):
+            production_environment = api.environments.filter(
                 name='Productie').first()
+
+            if production_environment is None:
+                return False
+
             return production_environment.documentation_url != ''
 
-        def has_specification(obj):
-            production_environment = obj.environments.filter(
+        def has_specification(api):
+            production_environment = api.environments.filter(
                 name='Productie').first()
+
+            if production_environment is None:
+                return False
+
             return production_environment.specification_url != ''
 
-        def has_contact_details(obj):
-            return obj.contact_email != '' or obj.contact_phone != '' or obj.contact_fax != '' or obj.contact_chat != '' or obj.contact_url != ''
+        def has_contact_details(api):
+            return api.contact_email != '' or api.contact_phone != '' or api.contact_fax != '' or api.contact_chat != '' or api.contact_url != ''
 
-        def provides_sla(obj):
-            return obj.terms_support_response_time != '' and obj.terms_uptime_guarantee >= 0.9
+        def provides_sla(api):
+            return api.terms_support_response_time != '' and api.terms_uptime_guarantee >= 0.9
 
         return {
             'has_documentation': has_documentation(obj),
