@@ -4,8 +4,9 @@
 package main
 
 import (
-	"gitlab.com/commonground/developer.overheid.nl/validate"
 	"log"
+
+	"gitlab.com/commonground/developer.overheid.nl/validate"
 
 	"github.com/jessevdk/go-flags"
 )
@@ -34,4 +35,6 @@ func main() {
 	if !directoryValidation.Valid {
 		log.Fatalf("directory '%s' contains one or more invalid API definition files. %s", options.DirectoryToValidate, directoryValidation.Reason)
 	}
+
+	log.Printf("All files are valid")
 }
