@@ -36,8 +36,22 @@ class APISerializer(NonNullModelSerializer):
 
     class Meta:
         model = API
-        fields = ['id', 'description', 'organization_name', 'service_name', 'api_type', 'api_authentication', 'tags',
-                  'badges', 'environments', 'forum', 'contact', 'is_reference_implementation', 'referenced_apis', 'terms_of_use', 'scores']
+        fields = [
+            'id',
+            'description',
+            'organization_name',
+            'service_name',
+            'api_type',
+            'api_authentication',
+            'badges',
+            'environments',
+            'forum',
+            'contact',
+            'is_reference_implementation',
+            'referenced_apis',
+            'terms_of_use',
+            'scores'
+        ]
 
     def get_contact(self, obj):
         return {
@@ -85,7 +99,11 @@ class APISerializer(NonNullModelSerializer):
             return production_environment.specification_url != ''
 
         def has_contact_details(api):
-            return api.contact_email != '' or api.contact_phone != '' or api.contact_fax != '' or api.contact_chat != '' or api.contact_url != ''
+            return (api.contact_email != '' or
+                    api.contact_phone != '' or
+                    api.contact_fax != '' or
+                    api.contact_chat != '' or
+                    api.contact_url != '')
 
         def provides_sla(api):
             return api.terms_support_response_time != '' and api.terms_uptime_guarantee >= 0.9

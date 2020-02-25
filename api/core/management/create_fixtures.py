@@ -104,15 +104,15 @@ def transform_to_fixtures(api_dir, file_name, pk):
     return fixtures
 
 
-def create_fixtures(apiDir, fixturesDir):
-    files = os.listdir(apiDir)
+def create_fixtures(api_dir, fixtures_dir):
+    files = os.listdir(api_dir)
     fixtures = []
     pk = 0
 
     for file in files:
         pk += 1
-        fixtures.extend(transform_to_fixtures(apiDir, file, pk))
+        fixtures.extend(transform_to_fixtures(api_dir, file, pk))
 
-    if not os.path.exists(fixturesDir):
-        os.makedirs(fixturesDir)
-    write_json(os.path.join(fixturesDir, 'apis.json'), fixtures)
+    if not os.path.exists(fixtures_dir):
+        os.makedirs(fixtures_dir)
+    write_json(os.path.join(fixtures_dir, 'apis.json'), fixtures)

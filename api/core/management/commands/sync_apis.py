@@ -27,13 +27,16 @@ class Command(BaseCommand):
 
         if apis.count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all APIs were deleted\nPlease delete all APIs before syncing' + CEND)
+                CRED + 'Error: Not all APIs were deleted\nPlease delete all APIs before syncing'
+                + CEND)
         if Environment.objects.all().count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all Environments were deleted\nPlease delete all Environments before syncing' + CEND)
+                CRED + 'Error: Not all Environments were deleted\n'
+                + 'Please delete all Environments before syncing' + CEND)
         if Relation.objects.all().count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all Relations were deleted\nPlease delete all Relations before syncing' + CEND)
+                CRED + 'Error: Not all Relations were deleted\n'
+                + 'Please delete all Relations before syncing' + CEND)
 
         create_fixtures(options['api_dir'], options['fixtures_dir'])
 

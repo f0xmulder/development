@@ -1,19 +1,24 @@
 ignore-paths:
   - manage.py
 inherits:
+  - full_pep8
   - strictness_medium
 uses:
   - django
 
 strictness: medium
-test-warnings: false
+test-warnings: true
 doc-warnings: false
 autodetect: false
 
 pylint:
   run: true
+  enable:
+    - wrong-import-order
 pep8:
   run: true
+  options:
+    max-line-length: 99
 mccabe:
   run: false
 dodgy:

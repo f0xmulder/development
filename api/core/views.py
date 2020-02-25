@@ -1,7 +1,8 @@
-from core.models import API
-from core.serializers import APISerializer
 from django.shortcuts import HttpResponse
 from rest_framework.viewsets import ReadOnlyModelViewSet
+
+from core.models import API
+from core.serializers import APISerializer
 
 
 # Create your views here.
