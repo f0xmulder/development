@@ -99,6 +99,8 @@ class Environment(models.Model):
 
 
 class Relation(models.Model):
+    TYPE_REFERENCE_IMPLEMENTATION = "reference-implementation"
+
     name = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
     from_api = models.ForeignKey(
         API,
