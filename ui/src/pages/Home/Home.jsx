@@ -18,7 +18,7 @@ const Home = () => (
       <p>
         Ben je een developer die iets voor of met de overheid ontwikkelt? Dan
         vind je hier handige bronnen en de community voor de ontwikkeling van
-        jou digitale services.
+        jouw digitale services.
       </p>
     </StyledHeading>
 
