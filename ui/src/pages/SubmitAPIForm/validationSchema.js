@@ -21,19 +21,33 @@ Yup.setLocale({
 })
 
 const validationSchemaConfiguration = {
+  serviceName: Yup.string()
+    .required()
+    .label('API naam'),
+  organizationName: Yup.string()
+    .required()
+    .label('Organisatienaam'),
   description: Yup.string()
     .trim()
-    .required(),
-  organizationName: Yup.string().required(),
-  serviceName: Yup.string().required(),
-  apiType: Yup.string().required(),
-  apiAuthentication: Yup.string().required(),
+    .required()
+    .label('API Omschrijving'),
+  apiType: Yup.string()
+    .required()
+    .label('API type'),
+  apiAuthentication: Yup.string()
+    .required()
+    .label('API Authenticatie'),
 
   productionApiUrl: Yup.string()
     .url()
-    .required(),
-  productionSpecificationUrl: Yup.string().url(),
-  productionDocumentationUrl: Yup.string().url(),
+    .required()
+    .label('API URL voor productie'),
+  productionSpecificationUrl: Yup.string()
+    .url()
+    .label('Specificatie URL voor productie'),
+  productionDocumentationUrl: Yup.string()
+    .url()
+    .label('Documentatie URL voor productie'),
 
   hasAcceptanceEnvironment: Yup.boolean(),
   acceptanceApiUrl: Yup.string()
@@ -44,7 +58,8 @@ const validationSchemaConfiguration = {
         .url()
         .required(),
       otherwise: Yup.string().url(),
-    }),
+    })
+    .label('URL'),
   acceptanceSpecificationUrl: Yup.string().url(),
   acceptanceDocumentationUrl: Yup.string().url(),
 
@@ -57,7 +72,8 @@ const validationSchemaConfiguration = {
         .url()
         .required(),
       otherwise: Yup.string().url(),
-    }),
+    })
+    .label('URL'),
   demoSpecificationUrl: Yup.string().url(),
   demoDocumentationUrl: Yup.string().url(),
 

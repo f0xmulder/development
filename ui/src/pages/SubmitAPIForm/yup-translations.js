@@ -3,9 +3,9 @@
 /* eslint-disable no-template-curly-in-string */
 export const mixed = {
   default: '${path} is ongeldig',
-  required: '${path} is een verplicht veld',
+  required: '${path} is verplicht',
   oneOf: '${path} moet een van deze waarden zijn: ${values}',
-  notOneOf: '${path} mag geen van de deze waarden zijn: ${values}',
+  notOneOf: '${path} mag niet een van de deze waarden zijn: ${values}',
 }
 
 export const string = {

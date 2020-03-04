@@ -12,7 +12,7 @@ const initialValues = {
   organizationName: '',
   serviceName: '',
   apiType: 'Onbekend',
-  apiAuthentication: 'Onbekend',
+  apiAuthentication: '',
 
   productionApiUrl: '',
   productionSpecificationUrl: '',
@@ -167,8 +167,7 @@ class SubmitAPIFormPage extends Component {
   }
 
   handleSubmit(values, actions) {
-    const formData = schema.cast(values)
-    const submitData = convertFormDataToRequestBody(formData)
+    const submitData = convertFormDataToRequestBody(values)
     return this.submitToApi(submitData)
       .then((responseData) => {
         actions.setSubmitting(false)

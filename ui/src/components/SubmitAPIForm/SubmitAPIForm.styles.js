@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import externalIcon from '../Icons/exclamationmark.svg'
+
 export const StyledFormGroupColumnContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +47,9 @@ export const HelperMessage = styled.small`
 `
 
 export const ErrorMessage = styled.small`
+  padding-left: ${(p) => p.theme.tokens.spacing06}
   font-size: ${(p) => p.theme.fontSizeSmall};
+  font-weight: bold;
   color: ${(p) => p.theme.tokens.colorAlertError};
+  background: url(${externalIcon}) no-repeat;
 `
