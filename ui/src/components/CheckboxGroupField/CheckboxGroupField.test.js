@@ -29,12 +29,12 @@ const createForm = (onChange = null, onSubmit = null) => {
 }
 
 describe('CheckboxGroupField', () => {
-  it('displays the labels', () => {
+  it('displays the labels together with the count', () => {
     const wrapper = createForm()
 
     options.forEach((option, i) => {
       expect(wrapper.find(`label[htmlFor="theNumber.${i}"]`).text()).toEqual(
-        option.label,
+        `${option.label}(${option.count})`,
       )
     })
   })

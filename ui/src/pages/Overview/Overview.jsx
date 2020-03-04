@@ -71,7 +71,6 @@ class Overview extends Component {
     // Reset facets when starting a new text search
     if (newFilters.q !== currentFilters.q) {
       /* eslint-disable camelcase */
-      newFilters.tags = []
       newFilters.organization_name = []
       newFilters.api_type = []
       /* eslint-enable camelcase */
@@ -80,7 +79,6 @@ class Overview extends Component {
     const translatedFilters = {
       /* eslint-disable camelcase */
       q: newFilters.q,
-      tags: newFilters.tags || [],
       organisatie: newFilters.organization_name || [],
       type: newFilters.api_type || [],
       /* eslint-enable camelcase */
@@ -104,7 +102,6 @@ class Overview extends Component {
     /* eslint-disable camelcase */
     return {
       q: values.get('q') || '',
-      tags: values.getAll('tags'),
       organization_name: values.getAll('organisatie'),
       api_type: values.getAll('type'),
       page: values.get('pagina') || '1',

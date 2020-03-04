@@ -21,7 +21,7 @@ describe('ImplementedByListContainer', () => {
     })
   })
 
-  describe('loading the tags', () => {
+  describe('loading the APIs', () => {
     it("should store the implemented by API's as state", () => {
       const apiPromise = Promise.resolve([apiFromAPIResponse])
       ImplementedByListContainer.prototype.fetchImplementedByInfo = jest.fn(
@@ -59,7 +59,9 @@ describe('ImplementedByListContainer', () => {
     it('should be empty', () => {
       const wrapper = shallow(<ImplementedByListContainer id="42" />)
       wrapper.setState({ apis: [], loaded: true })
-      expect(wrapper.children().exists()).toBe(false)
+      expect(wrapper.find('[data-test="no-consumers-message"]').exists()).toBe(
+        true,
+      )
     })
   })
 

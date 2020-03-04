@@ -29,7 +29,6 @@ export const goApiMock = {
     uptime_guarantee: 99.9,
     support_response_time: 'asap',
   },
-  tags: ['tag1', 'tag2'],
   scores: {
     has_documentation: false,
     has_specification: false,
@@ -56,7 +55,6 @@ export const apiMock = {
   apiType: 'api type',
   apiAuthentication: 'api authentication',
   badges: [],
-  tags: ['tag1', 'tag2'],
   environments: [
     {
       name: 'Production',

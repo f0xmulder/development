@@ -1,31 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
-
-const generateFontFaceDefinition = (fontDefinition) => `
-  @font-face {
-      font-family: 'Source Sans Pro'
-      font-weight: ${fontDefinition.weight}
-      font-style: ${fontDefinition.style}
-      font-stretch: normal
-      src:
-        url('/public/fonts/source-sans-pro/SourceSansPro-${fontDefinition.fileName}.woff2') format('woff2'),
-        url('/public/fonts/source-sans-pro/SourceSansPro-${fontDefinition.fileName}.woff') format('woff')
-  }
-`
-
-const generateFontFaceDefinitions = (fontDefinitions) =>
-  fontDefinitions.map((fontDefinition) =>
-    generateFontFaceDefinition(fontDefinition),
-  )
-
-const fontDefinitions = [
-  { weight: 400, style: 'normal', fileName: 'Regular' },
-  { weight: 600, style: 'normal', fileName: 'Semibold' },
-  { weight: 700, style: 'normal', fileName: 'Bold' },
-]
+import 'typeface-source-sans-pro/index.css'
 
 export default createGlobalStyle`
-  ${generateFontFaceDefinitions(fontDefinitions)}
-
   html {
     color: ${(p) => p.theme.color.text.normal};
     font-family: 'Source Sans Pro', sans-serif;
@@ -38,7 +14,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: #F7F9FC;
+    background-color: ${(p) => p.theme.color.siteBackground};
     margin: 0;
     word-wrap: break-word;
     word-break: break-word;
@@ -48,7 +24,18 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  h1 {
+    margin-top: 0;
+    margin-bottom: ${(p) => p.theme.tokens.spacing05};
+    font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+    line-height: ${(p) => p.theme.tokens.lineHeightHeading};
+  }
+
   p {
     margin: 0 0 14px 0;
+  }
+
+  a {
+    color: ${(p) => p.theme.tokens.colors.colorTextLink};
   }
 `

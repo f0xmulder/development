@@ -3,7 +3,6 @@ import { object, func } from 'prop-types'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
 import APIDetails from '../../components/APIDetails/APIDetails'
-import { Container } from './APIDetail.styles'
 
 class APIDetail extends Component {
   static defaultProps = {
@@ -51,9 +50,7 @@ class APIDetail extends Component {
             Er ging iets fout tijdens het ophalen van de API.
           </p>
         ) : details ? (
-          <Container>
-            <APIDetails {...details} />
-          </Container>
+          <APIDetails {...details} />
         ) : null}
       </div>
     )

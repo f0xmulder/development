@@ -1,10 +1,8 @@
 import React from 'react'
 import { string, arrayOf, shape, func, bool, number } from 'prop-types'
 import { FieldArray } from 'formik'
-import {
-  StyledCheckboxGroupField,
-  StyledCheckboxField,
-} from './CheckboxGroupField.styles'
+import { StyledCheckboxGroupField } from './CheckboxGroupField.styles'
+import { CheckboxField } from '../Form/Form'
 
 const CheckboxGroupField = ({ name, options, value, onChange }) => (
   <FieldArray name={name}>
@@ -12,7 +10,7 @@ const CheckboxGroupField = ({ name, options, value, onChange }) => (
       <>
         {options.map((option, index) => (
           <StyledCheckboxGroupField key={index}>
-            <StyledCheckboxField
+            <CheckboxField
               type="checkbox"
               id={`${name}.${index}`}
               name={`${name}.${index}`}
@@ -28,8 +26,8 @@ const CheckboxGroupField = ({ name, options, value, onChange }) => (
             />
             <label key={index} htmlFor={`${name}.${index}`}>
               {option.label}
+              <span className="count">({option.count})</span>
             </label>
-            <span className="count">{option.count}</span>
           </StyledCheckboxGroupField>
         ))}
       </>

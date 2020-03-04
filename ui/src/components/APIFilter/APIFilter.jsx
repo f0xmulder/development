@@ -17,7 +17,7 @@ const APIFilter = ({ title, name, options, value, onChangeHandler }) => {
   return (
     <StyledAPIFilter>
       <h2>{title}</h2>
-      {options.length > 3 ? (
+      {options.length > 20 ? (
         <Expandable>{checkboxGroupField}</Expandable>
       ) : (
         checkboxGroupField

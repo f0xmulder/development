@@ -1,18 +1,25 @@
 import styled from 'styled-components'
 import { Card } from '@commonground/design-system'
 
+import mq from '../../theme/mediaQueries'
+
 export const StyledCard = styled(Card)`
-  a {
-    color: ${(p) => p.theme.color.primary.normal};
-    text-decoration: none;
-  }
+  width: auto;
+  margin: ${(p) => p.theme.tokens.spacing07} -${(p) => p.theme.tokens.spacing05};
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+
+  ${mq.smUp`
+    margin-left: 0;
+    margin-right: 0;
+  `}
 `
 
 export const Body = styled.div`
-  padding: 24px 21px;
+  padding: ${(p) => p.theme.tokens.spacing06};
 
   @media screen and (min-width: 768px) {
-    padding: 24px;
+    padding: ${(p) => p.theme.tokens.spacing06};
   }
 `
 

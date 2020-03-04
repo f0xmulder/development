@@ -1,5 +1,50 @@
 import React from 'react'
-import { StyledPre } from './SubmitAPIMergeRequest.styles'
+
+import CodeBlock from '../../components/CodeBlock/CodeBlock'
+
+const branchName = `data/{organization}-{api}`
+const fileName = `data/{organization}-{api}.json`
+const exampleJSON = `{
+  "service_name": "Voorbeeld van een API naam",
+  "description": "Voorbeeld van een omschrijving",
+  "organization_name": "Voorbeeld van een organisatie naam",
+  "api_type": "REST/JSON",
+  "api_authentication": "API Key",
+  "environments": [
+    {
+      "name": "Productie"
+      "api_url": "https://api.example.com/service/",
+      "specification_url": "https://api.example.com/service/swagger/?format=openapi",
+      "documentation_url": "https://api.example.com/service/",
+    },
+    {
+      "name": "Acceptatie"
+      "api_url": "https://acpt.api.example.com/service/",
+      "specification_url": "https://acpt.api.example.com/service/swagger/?format=openapi",
+      "documentation_url": "https://acpt.api.example.com/service/",
+    },
+    {
+      "name": "Demo"
+      "api_url": "https://demo.api.example.com/service/",
+      "specification_url": "https://demo.api.example.com/service/swagger/?format=openapi",
+      "documentation_url": "https://demo.api.example.com/service/",
+    }
+  ],
+  "contact": {
+      "email": "helpdesk@voorbeeld.nl",
+      "phone": "0031612345678",
+      "url": "https://github.com/VNG-Realisatie/nlx"
+  },
+  "is_reference_implementation": false,
+  "relations": {
+      "example-api-id": ["reference-implementation"]
+  },
+  "terms_of_use": {
+    "government_only": true,
+    "pay_per_use": false,
+    "uptime_guarantee": 99.9
+  }
+}`
 
 const SubmitAPIMergeRequest = () => (
   <div>
@@ -7,61 +52,15 @@ const SubmitAPIMergeRequest = () => (
       Maak op{' '}
       <a href="https://gitlab.com/commonground/developer.overheid.nl">Gitlab</a>{' '}
       een fork van de repository onder een eigen account en maak een nieuwe
-      branch aan met de naam <b>{`data/{organization}-{api}`}</b>.
+      branch aan met de naam:
     </p>
+    <CodeBlock>{branchName}</CodeBlock>
+
     <p>Voeg een bestand toe aan de branch met de volgende naam:</p>
-    <StyledPre>{`data/{organization}-{api}.json`}</StyledPre>
+    <CodeBlock>{fileName}</CodeBlock>
 
     <p>En voeg de inhoud toe aan de hand van de onderstaande structuur:</p>
-
-    <StyledPre>
-      {`
-{
-    "description": "Voorbeeld van een omschrijving",
-    "organization_name": "Voorbeeld van een organisatie naam",
-    "service_name": "Voorbeeld van een API naam",
-    "api_type": "REST/JSON",
-    "tags": ["Voorbeeld tag", "Nog een tag"],
-    "environments": [
-      {
-        "name": "Productie"
-        "api_url": "https://api.example.com/service/",
-        "specification_url": "https://api.example.com/service/swagger/?format=openapi",
-        "documentation_url": "https://api.example.com/service/",
-      },
-      {
-        "name": "Acceptatie"
-        "api_url": "https://acpt.api.example.com/service/",
-        "specification_url": "https://acpt.api.example.com/service/swagger/?format=openapi",
-        "documentation_url": "https://acpt.api.example.com/service/",
-      },
-      {
-        "name": "Demo"
-        "api_url": "https://demo.api.example.com/service/",
-        "specification_url": "https://demo.api.example.com/service/swagger/?format=openapi",
-        "documentation_url": "https://demo.api.example.com/service/",
-      }
-    ],
-    "contact": {
-        "email": "helpdesk@voorbeeld.nl",
-        "phone": "0031612345678",
-        "fax": "0031687654321",
-        "chat": "https://nl-x.slack.com",
-        "url": "https://github.com/VNG-Realisatie/nlx"
-    },
-    "is_reference_implementation": false,
-    "relations": {
-        "example-api-id": ["reference-implementation"]
-    },
-    "terms_of_use": {
-      "government_only": true,
-      "pay_per_use": false,
-      "uptime_guarantee": 99.9,
-      "support_response_time": "2 dagen"
-  }
-}
-            `}
-    </StyledPre>
+    <CodeBlock>{exampleJSON}</CodeBlock>
 
     <p>
       Een productieomgeving is verplicht, acceptatie en demo zijn optioneel.

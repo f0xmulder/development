@@ -12,7 +12,7 @@ describe('Grade', () => {
       providesSla: true,
     }
     const wrapper = shallow(<Grade scores={scores} />)
-    expect(wrapper.text()).toBe('10')
+    expect(wrapper.text()).toBe('10/10')
   })
 })
 

@@ -11,21 +11,20 @@ describe('ImplementedByList', () => {
         id: '42',
         serviceName: 'Service',
         organizationName: 'Organization',
+        apiType: 'json',
+        scores: {
+          hasDocumentation: true,
+          hasSpecification: true,
+          hasContactDetails: false,
+          providesSla: false,
+        },
       },
     ]
     wrapper = shallow(<ImplementedByList apis={apis} />)
   })
 
   it('should list all provided apis', () => {
-    const listItems = wrapper.find('li')
+    const listItems = wrapper.find('APISummary')
     expect(listItems).toHaveLength(1)
-  })
-
-  it('should link to the API', () => {
-    const link = wrapper
-      .find('ul li')
-      .childAt(0)
-      .find('LinkToAPI')
-    expect(link.exists()).toBe(true)
   })
 })

@@ -4,7 +4,7 @@ import { RedocStandalone } from 'redoc'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
 import APIDetailsHeader from '../../components/APIDetailsHeader/APIDetailsHeader'
-import { Container } from './ApiSpecification.styles'
+import { Container } from '../../components/design-system-candidates/Grid'
 
 class APISpecification extends Component {
   state = {
@@ -59,11 +59,12 @@ class APISpecification extends Component {
         {loaded &&
           (error ? (
             <p data-test="error-message">
-              Er ging iets fout tijdens het ophalen van de API.
+              Er ging iets fout tijdens het ophalen van de API specificatie.
             </p>
           ) : (
             <>
               <APIDetailsHeader
+                previousName="API details"
                 serviceName={details.serviceName}
                 organizationName={details.organizationName}
               />

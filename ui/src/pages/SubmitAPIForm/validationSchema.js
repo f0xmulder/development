@@ -28,7 +28,6 @@ const validationSchemaConfiguration = {
   serviceName: Yup.string().required(),
   apiType: Yup.string().required(),
   apiAuthentication: Yup.string().required(),
-  tags: Yup.string(),
 
   productionApiUrl: Yup.string()
     .url()
@@ -65,12 +64,10 @@ const validationSchemaConfiguration = {
   contact: Yup.object().shape({
     email: Yup.string().email(),
     phone: Yup.string(),
-    fax: Yup.string(),
-    chat: Yup.string().url(),
     url: Yup.string().url(),
   }),
 
-  isReferenceImplementation: Yup.boolean(),
+  isBasedOnReferenceImplementation: Yup.boolean(),
   referenceImplementation: Yup.string(),
 
   termsOfUse: Yup.object().shape({

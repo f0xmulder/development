@@ -94,7 +94,7 @@ describe('Overview', () => {
   describe('getting the filters', () => {
     it('should return the values from the query parameters', () => {
       const wrapper = shallow(
-        <Overview location={{ search: 'tags=42&organisatie=42' }} />,
+        <Overview location={{ search: 'organisatie=42' }} />,
       )
 
       /* eslint-disable camelcase */
@@ -102,7 +102,6 @@ describe('Overview', () => {
       expectedQueryParams.q = ''
       expectedQueryParams.api_type = []
       expectedQueryParams.organization_name = ['42']
-      expectedQueryParams.tags = ['42']
       expectedQueryParams.page = '1'
       /* eslint-enable camelcase */
 
@@ -120,13 +119,10 @@ describe('Overview', () => {
       newFilters.q = ''
       newFilters.api_type = []
       newFilters.organization_name = ['42']
-      newFilters.tags = ['42', '43']
       /* eslint-enable camelcase */
 
       wrapper.instance().handleFilterChange(newFilters)
-      expect(history.push).toHaveBeenCalledWith(
-        '?tags=42&tags=43&organisatie=42',
-      )
+      expect(history.push).toHaveBeenCalledWith('?organisatie=42')
     })
   })
 
@@ -135,7 +131,7 @@ describe('Overview', () => {
       jest.spyOn(Overview.prototype, 'fetchApiList').mockClear()
 
       const wrapper = shallow(<Overview location={{ search: '' }} />)
-      wrapper.setProps({ location: { search: 'tags=42' } })
+      wrapper.setProps({ location: { search: 'organisatie=42' } })
       expect(wrapper.instance().fetchApiList).toHaveBeenCalledTimes(2)
     })
   })

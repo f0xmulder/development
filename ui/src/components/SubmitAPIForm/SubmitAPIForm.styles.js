@@ -27,15 +27,6 @@ export const StyledFormGroup = styled.div`
 export const StyledFormSetting = styled.div`
   display: flex;
 
-  input[type='checkbox'] {
-    flex: 0 0 auto;
-    order: 1;
-    width: auto;
-    height: auto;
-    margin: 3px 10px 0 0;
-    cursor: pointer;
-  }
-
   label {
     flex: 0 1 auto;
     order: 2;
@@ -46,9 +37,11 @@ export const StyledFormSetting = styled.div`
 `
 
 export const HelperMessage = styled.small`
-  font-size: ${(p) => p.theme.font.size.small};
-  line-height: ${(p) => p.theme.font.lineHeight.small};
-  color: #6c757d;
+  display: block;
+  margin-bottom: ${(p) => p.theme.tokens.spacing02};
+  font-size: ${(p) => p.theme.tokens.fontSizeSmall};
+  line-height: ${(p) => p.theme.tokens.lineHeightHeading};
+  color: ${(p) => p.theme.tokens.colors.colorTextLabel};
 `
 
 export const ErrorMessage = styled.small`

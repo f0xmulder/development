@@ -1,42 +1,32 @@
 import styled from 'styled-components'
 
 export const StyledSubmitAPI = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-`
-
-export const StyledDescription = styled.p`
-  font-size: ${(p) => p.theme.font.size.small};
-  line-height: ${(p) => p.theme.font.lineHeight.small};
-  color: ${(p) => p.theme.color.text.light};
-  text-align: center;
-  padding: 0 22px;
-`
-
-export const StyledPageTitle = styled.h1`
-  font-size: ${(p) => p.theme.font.size.title.large};
-  line-height: ${(p) => p.theme.font.lineHeight.title.large};
-  font-weight: ${(p) => p.theme.font.weight.bold};
-  text-align: center;
+  max-width: ${(p) => p.theme.tokens.containerWidth};
+  margin: 0 auto 100px;
+  padding: 0 ${(p) => p.theme.tokens.containerPadding};
 `
 
 export const StyledTabs = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
+  margin-top: 40px;
 
   & > a {
-    flex: 0 0 auto;
-    padding: 8px 10px;
-    font-size: ${(p) => p.theme.font.size.small};
-    line-height: ${(p) => p.theme.font.lineHeight.small};
-    color: ${(p) => p.theme.color.text.light};
+    flex: 0 1 auto;
+    padding: 11px ${(p) => p.theme.tokens.spacing05};
+    font-size: ${(p) => p.theme.tokens.fontSizeMedium};
+    line-height: ${(p) => p.theme.tokens.lineHeightText};
+    color: ${(p) => p.theme.tokens.colors.colorTextLink};
     text-decoration: none;
 
     &.active {
-      border-bottom: 1px solid ${(p) => p.theme.color.primary.normal};
-      color: ${(p) => p.theme.color.primary.normal};
-      padding-bottom: 7px;
+      font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+      color: ${(p) => p.theme.tokens.colors.colorText};
+      background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 8px 0 0 rgb(255, 255, 255), 0 0 2px 0 rgba(0, 0, 0, 0.12),
+        0 2px 2px 0 rgba(0, 0, 0, 0.24);
     }
   }
 `

@@ -1,39 +1,40 @@
-import React, { Component } from 'react'
-import HomePage from '../../components/HomePage/HomePage'
+import React from 'react'
 
-class Home extends Component {
-  state = {
-    amountOfAPIs: 0,
-  }
+import { H1, H2 } from '../../components/Headings/Headings'
+import {
+  StyledHomePage,
+  StyledHeading,
+  StyledCard,
+  StyledIconButton,
+} from './Home.styles'
 
-  fetchAPIs() {
-    return fetch(`/api/apis`).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout bij het ophalen van de lijst met API's`,
-        )
-      }
-    })
-  }
+const Home = () => (
+  <StyledHomePage>
+    <StyledHeading>
+      <H1>
+        Eén centrale plek voor de developer die voor of met de overheid
+        ontwikkelt
+      </H1>
+      <p>
+        Ben je een developer die iets voor of met de overheid ontwikkelt? Dan
+        vind je hier handige bronnen en de community voor de ontwikkeling van
+        jou digitale services.
+      </p>
+    </StyledHeading>
 
-  loadAmountOfAPIs() {
-    this.fetchAPIs().then((response) => {
-      this.setState({
-        amountOfAPIs: response.total,
-      })
-    })
-  }
+    <H2>Direct naar</H2>
 
-  componentDidMount() {
-    this.loadAmountOfAPIs()
-  }
-
-  render() {
-    const { amountOfAPIs } = this.state
-    return amountOfAPIs ? <HomePage amountOfAPIs={amountOfAPIs} /> : null
-  }
-}
+    <StyledCard>
+      <StyledCard.Body>
+        <h3>API’s binnen de Nederlandse overheid</h3>
+        <p>
+          Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
+          Nederland aanbieden.
+        </p>
+        <StyledIconButton to="/apis">API overzicht</StyledIconButton>
+      </StyledCard.Body>
+    </StyledCard>
+  </StyledHomePage>
+)
 
 export default Home

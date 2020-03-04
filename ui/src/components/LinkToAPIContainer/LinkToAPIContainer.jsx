@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { string } from 'prop-types'
-import LinkToAPI from '../LinkToAPI/LinkToAPI'
+import APISummary from '../APISummary/APISummary'
 import { modelFromAPIResponse } from '../../models/api'
 
 class LinkToAPIContainer extends Component {
@@ -66,7 +66,7 @@ class LinkToAPIContainer extends Component {
             Er ging iets fout tijdens het ophalen van de API.
           </p>
         ) : (
-          <LinkToAPI
+          <APISummary
             serviceName={details.serviceName}
             organizationName={details.organizationName}
             id={details.id}

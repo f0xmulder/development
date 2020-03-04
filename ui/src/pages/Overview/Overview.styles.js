@@ -4,9 +4,9 @@ import { Pagination } from '@commonground/design-system'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
-  max-width: 1320px;
+  max-width: ${(p) => p.theme.tokens.containerWidth};
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 ${(p) => p.theme.tokens.containerPadding};
   flex-wrap: wrap;
 `
 

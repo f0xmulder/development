@@ -13,18 +13,17 @@ const initialValues = {
   serviceName: '',
   apiType: 'Onbekend',
   apiAuthentication: 'Onbekend',
-  tags: '',
 
   productionApiUrl: '',
   productionSpecificationUrl: '',
   productionDocumentationUrl: '',
 
-  hasAcceptanceEnvironment: false,
+  hasAcceptanceEnvironment: 'false',
   acceptanceApiUrl: '',
   acceptanceDocumentationUrl: '',
   acceptanceSpecificationUrl: '',
 
-  hasDemoEnvironment: false,
+  hasDemoEnvironment: 'false',
   demoApiUrl: '',
   demoDocumentationUrl: '',
   demoSpecificationUrl: '',
@@ -32,8 +31,6 @@ const initialValues = {
   contact: {
     email: '',
     phone: '',
-    fax: '',
-    chat: '',
     url: '',
   },
   termsOfUse: {
@@ -42,15 +39,15 @@ const initialValues = {
     uptimeGuarantee: 99.5,
     supportResponseTime: '',
   },
-  isReferenceImplementation: false,
+  isBasedOnReferenceImplementation: 'false',
   referenceImplementation: '',
 }
 
 export const createRelation = (
-  isReferenceImplementation,
+  isBasedOnReferenceImplementation,
   referenceImplementation,
 ) => {
-  return !isReferenceImplementation
+  return isBasedOnReferenceImplementation
     ? {
         [referenceImplementation]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION],
       }
@@ -58,12 +55,6 @@ export const createRelation = (
 }
 
 export const convertFormDataToRequestBody = (formData) => {
-  const toArray = (value) =>
-    value
-      .split(',')
-      .map((v) => v.trim())
-      .filter((v) => !!v)
-
   const requestBody = {}
 
   /* eslint-disable camelcase */
@@ -72,11 +63,9 @@ export const convertFormDataToRequestBody = (formData) => {
   requestBody.service_name = formData.serviceName
   requestBody.api_type = formData.apiType
   requestBody.api_authentication = formData.apiAuthentication
-  requestBody.tags = toArray(formData.tags)
 
-  requestBody.is_reference_implementation = formData.isReferenceImplementation
   requestBody.relations = createRelation(
-    formData.isReferenceImplementation,
+    formData.isBasedOnReferenceImplementation,
     formData.referenceImplementation,
   )
 
@@ -111,8 +100,6 @@ export const convertFormDataToRequestBody = (formData) => {
   requestBody.contact = {
     email: formData.contact.email,
     phone: formData.contact.phone,
-    fax: formData.contact.fax,
-    chat: formData.contact.chat,
     url: formData.contact.url,
   }
 

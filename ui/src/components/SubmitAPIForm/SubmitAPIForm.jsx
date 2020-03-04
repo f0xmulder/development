@@ -17,9 +17,13 @@ import {
   Legend,
   Label,
   Field,
-  ButtonWrapper,
-  Button,
+  SelectField,
+  CheckboxField,
+  RadioOptionGroup,
+  RadioOptionWrapper,
 } from '../Form/Form'
+import PercentageInput from './PercentageInput'
+import Button from '../Button/Button'
 
 const SubmitAPIForm = ({
   apis,
@@ -33,36 +37,15 @@ const SubmitAPIForm = ({
 }) => (
   <form onSubmit={handleSubmit} onReset={handleReset} data-test="form">
     <Fieldset>
-      <Legend>Organisatie</Legend>
-
-      <StyledFormGroupColumnContainer>
-        <StyledFormGroupColumn>
-          <Label htmlFor="organizationName">Naam*</Label>
-          <Field
-            component="input"
-            type="text"
-            id="organizationName"
-            name="organizationName"
-          />
-          {errors.organizationName && touched.organizationName && (
-            <ErrorMessage>{errors.organizationName}</ErrorMessage>
-          )}
-        </StyledFormGroupColumn>
-      </StyledFormGroupColumnContainer>
-    </Fieldset>
-
-    <Fieldset>
-      <Legend>API</Legend>
-
       <StyledFormGroupColumnContainer>
         <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="serviceName">Naam*</Label>
+            <Label htmlFor="serviceName">API naam</Label>
             <Field
-              component="input"
               type="text"
               id="serviceName"
               name="serviceName"
+              maxWidth="medium"
             />
             {errors.serviceName && touched.serviceName && (
               <ErrorMessage>{errors.serviceName}</ErrorMessage>
@@ -70,34 +53,40 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="description">Omschrijving*</Label>
+            <Label htmlFor="description">API omschrijving</Label>
             <Field
               style={{ minHeight: '152px', resize: 'vertical' }}
               component="textarea"
               id="description"
               name="description"
+              maxWidth="large"
             />
             {errors.description && touched.description && (
               <ErrorMessage>{errors.description}</ErrorMessage>
             )}
           </StyledFormGroup>
-        </StyledFormGroupColumn>
 
-        <StyledFormGroupColumn>
           <StyledFormGroup>
-            <Label htmlFor="tags">Tags</Label>
-            <Field component="input" type="text" id="tags" name="tags" />
-            <HelperMessage>
-              Door komma&#39;s gescheiden lijst van tags.
-            </HelperMessage>
-            {errors.tags && touched.tags && (
-              <ErrorMessage>{errors.tags}</ErrorMessage>
+            <Label htmlFor="organizationName">Naam van organisatie</Label>
+            <Field
+              type="text"
+              id="organizationName"
+              name="organizationName"
+              maxWidth="medium"
+            />
+            {errors.organizationName && touched.organizationName && (
+              <ErrorMessage>{errors.organizationName}</ErrorMessage>
             )}
           </StyledFormGroup>
 
           <StyledFormGroup>
             <Label htmlFor="apiType">API type</Label>
-            <Field component="select" id="apiType" name="apiType">
+            <SelectField
+              component="select"
+              id="apiType"
+              name="apiType"
+              maxWidth="small"
+            >
               <option value="Onbekend">Onbekend</option>
               <option value="REST/JSON">REST/JSON</option>
               <option value="REST/XML">REST/XML</option>
@@ -107,25 +96,57 @@ const SubmitAPIForm = ({
               <option value="SPARQL">SPARQL</option>
               <option value="WFS">WFS</option>
               <option value="WMS">WMS</option>
-            </Field>
+            </SelectField>
             {errors.apiType && touched.apiType && (
               <ErrorMessage>{errors.apiType}</ErrorMessage>
             )}
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="apiAuthentication">API authenticatie</Label>
-            <Field
-              component="select"
-              id="apiAuthentication"
-              name="apiAuthentication"
-            >
-              <option value="Onbekend">Onbekend</option>
-              <option value="Geen">Geen</option>
-              <option value="Mutual TLS">Mutual TLS</option>
-              <option value="API Key">API Key</option>
-              <option value="IP Whitelist">IP Whitelist</option>
-            </Field>
+            <Label>API authenticatie</Label>
+            <RadioOptionGroup>
+              <RadioOptionWrapper>
+                <Field
+                  id="apiAuthenticationNone"
+                  name="apiAuthentication"
+                  type="radio"
+                  value="Geen"
+                />
+                <Label htmlFor="apiAuthenticationNone">Geen</Label>
+              </RadioOptionWrapper>
+
+              <RadioOptionWrapper>
+                <Field
+                  id="apiAuthenticationMutualTLS"
+                  name="apiAuthentication"
+                  type="radio"
+                  value="Mutual TLS"
+                />
+                <Label htmlFor="apiAuthenticationMutualTLS">Mutual TLS</Label>
+              </RadioOptionWrapper>
+
+              <RadioOptionWrapper>
+                <Field
+                  id="apiAuthenticationAPIKey"
+                  name="apiAuthentication"
+                  type="radio"
+                  value="API Key"
+                />
+                <Label htmlFor="apiAuthenticationAPIKey">API Key</Label>
+              </RadioOptionWrapper>
+
+              <RadioOptionWrapper>
+                <Field
+                  id="apiAuthenticationIPWhitelist"
+                  name="apiAuthentication"
+                  type="radio"
+                  value="IP Whitelist"
+                />
+                <Label htmlFor="apiAuthenticationIPWhitelist">
+                  IP Whitelist
+                </Label>
+              </RadioOptionWrapper>
+            </RadioOptionGroup>
             {errors.apiAuthentication && touched.apiAuthentication && (
               <ErrorMessage>{errors.apiAuthentication}</ErrorMessage>
             )}
@@ -134,31 +155,39 @@ const SubmitAPIForm = ({
       </StyledFormGroupColumnContainer>
     </Fieldset>
 
-    <EnvironmentFormInputs
-      title="Productie"
-      environment="production"
-      values={values}
-      touched={touched}
-      errors={errors}
-    />
+    <Fieldset>
+      <Legend>Omgevingen</Legend>
 
-    <EnvironmentFormInputs
-      title="Acceptatie"
-      environment="acceptance"
-      optional
-      values={values}
-      touched={touched}
-      errors={errors}
-    />
+      <StyledFormGroupColumnContainer>
+        <StyledFormGroupColumn>
+          <EnvironmentFormInputs
+            title="Productie"
+            environment="production"
+            values={values}
+            touched={touched}
+            errors={errors}
+          />
 
-    <EnvironmentFormInputs
-      title="Demo"
-      environment="demo"
-      optional
-      values={values}
-      touched={touched}
-      errors={errors}
-    />
+          <EnvironmentFormInputs
+            title="Acceptatie"
+            environment="acceptance"
+            optional
+            values={values}
+            touched={touched}
+            errors={errors}
+          />
+
+          <EnvironmentFormInputs
+            title="Demo"
+            environment="demo"
+            optional
+            values={values}
+            touched={touched}
+            errors={errors}
+          />
+        </StyledFormGroupColumn>
+      </StyledFormGroupColumnContainer>
+    </Fieldset>
 
     <Fieldset>
       <Legend>Contact</Legend>
@@ -167,11 +196,14 @@ const SubmitAPIForm = ({
         <StyledFormGroupColumn>
           <StyledFormGroup>
             <Label htmlFor="contact.email">E-mailadres</Label>
+            <HelperMessage>
+              Dit wordt als contactinformatie bij de API getoond
+            </HelperMessage>
             <Field
-              component="input"
               type="email"
               id="contact.email"
               name="contact.email"
+              maxWidth="large"
             />
             {errors.contact &&
               errors.contact.email &&
@@ -183,11 +215,14 @@ const SubmitAPIForm = ({
 
           <StyledFormGroup>
             <Label htmlFor="contact.phone">Telefoonnummer</Label>
+            <HelperMessage>
+              Dit wordt als contactinformatie bij de API getoond
+            </HelperMessage>
             <Field
-              component="input"
               type="text"
               id="contact.phone"
               name="contact.phone"
+              maxWidth="large"
             />
             {errors.contact &&
               errors.contact.phone &&
@@ -198,46 +233,15 @@ const SubmitAPIForm = ({
           </StyledFormGroup>
 
           <StyledFormGroup>
-            <Label htmlFor="contact.fax">Fax</Label>
-            <Field
-              component="input"
-              type="text"
-              id="contact.fax"
-              name="contact.fax"
-            />
-            {errors.contact &&
-              errors.contact.fax &&
-              touched.contact &&
-              touched.contact.fax && (
-                <ErrorMessage>{errors.contact.fax}</ErrorMessage>
-              )}
-          </StyledFormGroup>
-        </StyledFormGroupColumn>
-        <StyledFormGroupColumn>
-          <StyledFormGroup>
-            <Label htmlFor="contact.chat">Chat</Label>
-            <Field
-              component="input"
-              type="text"
-              id="contact.chat"
-              name="contact.chat"
-            />
-            {errors.contact &&
-              errors.contact.chat &&
-              touched.contact &&
-              touched.contact.chat && (
-                <ErrorMessage>{errors.contact.chat}</ErrorMessage>
-              )}
-            <HelperMessage>Link naar een chat-platform.</HelperMessage>
-          </StyledFormGroup>
-
-          <StyledFormGroup>
             <Label htmlFor="contact.url">URL</Label>
+            <HelperMessage>
+              Link naar een website met contactinformatie.
+            </HelperMessage>
             <Field
-              component="input"
               type="text"
               id="contact.url"
               name="contact.url"
+              maxWidth="large"
             />
             {errors.contact &&
               errors.contact.url &&
@@ -245,9 +249,6 @@ const SubmitAPIForm = ({
               touched.contact.url && (
                 <ErrorMessage>{errors.contact.url}</ErrorMessage>
               )}
-            <HelperMessage>
-              Link naar een website met contactinformatie.
-            </HelperMessage>
           </StyledFormGroup>
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
@@ -255,52 +256,59 @@ const SubmitAPIForm = ({
 
     <Fieldset>
       <Legend>Referentieimplementatie</Legend>
+      <StyledFormGroupColumnContainer>
+        <StyledFormGroupColumn>
+          <StyledFormGroup>
+            <Label>Is de API gebaseerd op een referentieimplementatie?</Label>
+            <RadioOptionGroup>
+              <RadioOptionWrapper>
+                <Field
+                  id="isBasedOnReferenceImplementation"
+                  name="isBasedOnReferenceImplementation"
+                  type="radio"
+                  value="true"
+                />
+                <Label htmlFor="isBasedOnReferenceImplementation">Ja</Label>
+              </RadioOptionWrapper>
 
-      {!values.referenceImplementation ||
-      values.referenceImplementation === '' ? (
-        <StyledFormGroup>
-          <StyledFormSetting>
-            <Label htmlFor="isReferenceImplementation">
-              Deze API is een referentieimplementatie
-            </Label>
-            <Field
-              component="input"
-              type="checkbox"
-              id="isReferenceImplementation"
-              name="isReferenceImplementation"
-              checked={values.isReferenceImplementation === true}
-            />
-            {errors.isReferenceImplementation &&
-              touched.isReferenceImplementation && (
-                <ErrorMessage>{errors.isReferenceImplementation}</ErrorMessage>
+              <RadioOptionWrapper>
+                <Field
+                  id="isNotBasedOnReferenceImplementation"
+                  name="isBasedOnReferenceImplementation"
+                  type="radio"
+                  value="false"
+                />
+                <Label htmlFor="isBasedOnReferenceImplementation">Nee</Label>
+              </RadioOptionWrapper>
+            </RadioOptionGroup>
+          </StyledFormGroup>
+          {values.isBasedOnReferenceImplementation === 'true' ? (
+            <StyledFormGroup>
+              <Label htmlFor="referenceImplementation">
+                Gebaseerd op (referentie implementatie)
+              </Label>
+              <SelectField
+                component="select"
+                id="referenceImplementation"
+                name="referenceImplementation"
+                maxWidth="large"
+              >
+                <option value="">Geen</option>
+                {apis
+                  .filter((api) => api.isReferenceImplementation)
+                  .map((api) => (
+                    <option value={api.id} key={api.id}>
+                      {api.serviceName} {api.organizationName}
+                    </option>
+                  ))}
+              </SelectField>
+              {errors.apiType && touched.apiType && (
+                <ErrorMessage>{errors.apiType}</ErrorMessage>
               )}
-          </StyledFormSetting>
-        </StyledFormGroup>
-      ) : null}
-      {!values.isReferenceImplementation ? (
-        <StyledFormGroup>
-          <Label htmlFor="referenceImplementation">
-            Gebaseerd op (referentie implementatie)
-          </Label>
-          <Field
-            component="select"
-            id="referenceImplementation"
-            name="referenceImplementation"
-          >
-            <option value="">Geen</option>
-            {apis
-              .filter((api) => api.isReferenceImplementation)
-              .map((api) => (
-                <option value={api.id} key={api.id}>
-                  {api.serviceName} {api.organizationName}
-                </option>
-              ))}
-          </Field>
-          {errors.apiType && touched.apiType && (
-            <ErrorMessage>{errors.apiType}</ErrorMessage>
-          )}
-        </StyledFormGroup>
-      ) : null}
+            </StyledFormGroup>
+          ) : null}
+        </StyledFormGroupColumn>
+      </StyledFormGroupColumnContainer>
     </Fieldset>
 
     <Fieldset>
@@ -313,8 +321,7 @@ const SubmitAPIForm = ({
               <Label htmlFor="termsOfUse.governmentOnly">
                 Deze API is alleen beschikbaar voor overheden
               </Label>
-              <Field
-                component="input"
+              <CheckboxField
                 type="checkbox"
                 id="termsOfUse.governmentOnly"
                 name="termsOfUse.governmentOnly"
@@ -339,8 +346,7 @@ const SubmitAPIForm = ({
                 De kosten voor het gebruik van de API worden verrekend met de
                 gebruiker
               </Label>
-              <Field
-                component="input"
+              <CheckboxField
                 type="checkbox"
                 id="termsOfUse.payPerUse"
                 name="termsOfUse.payPerUse"
@@ -356,24 +362,21 @@ const SubmitAPIForm = ({
                 )}
             </StyledFormSetting>
           </StyledFormGroup>
-        </StyledFormGroupColumn>
-        <StyledFormGroupColumn>
+
           <StyledFormGroup>
             <Label htmlFor="termsOfUse.uptimeGuarantee">
               Beschikbaarheidsgarantie van de API
             </Label>
             <Field
-              component="input"
+              component={PercentageInput}
               type="number"
               max="100"
               min="0"
               step="0.01"
               id="termsOfUse.uptimeGuarantee"
               name="termsOfUse.uptimeGuarantee"
+              maxWidth="small"
             />
-            <HelperMessage>
-              Opgegeven als een percentage, bijv. 99,5.
-            </HelperMessage>
             {errors.termsOfUse &&
               errors.termsOfUse.payPerUse &&
               touched.termsOfUse &&
@@ -382,12 +385,12 @@ const SubmitAPIForm = ({
               )}
           </StyledFormGroup>
 
-          <StyledFormGroup>
+          {/* <StyledFormGroup>
             <Label htmlFor="termsOfUse.supportResponseTime">
               Reactietijd van de helpdesk
             </Label>
             <Field
-              component="input"
+              
               type="text"
               id="termsOfUse.supportResponseTime"
               name="termsOfUse.supportResponseTime"
@@ -401,21 +404,16 @@ const SubmitAPIForm = ({
                   {errors.termsOfUse.supportResponseTime}
                 </ErrorMessage>
               )}
-          </StyledFormGroup>
+          </StyledFormGroup> */}
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
     </Fieldset>
 
     {status && status.msg && <div data-test="status-message">{status.msg}</div>}
 
-    <ButtonWrapper>
-      <Button type="reset" variant="secondary">
-        Reset
-      </Button>
-      <Button type="submit" disabled={isSubmitting}>
-        Verstuur
-      </Button>
-    </ButtonWrapper>
+    <Button primary type="submit" disabled={isSubmitting}>
+      API toevoegen
+    </Button>
   </form>
 )
 

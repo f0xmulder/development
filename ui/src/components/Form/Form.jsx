@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components'
 import { Field as FormikField } from 'formik'
+import mq from '../../theme/mediaQueries'
+import ExtendedFormikField from '../design-system-candidates/Field'
+
+import checkboxIcon from '../Icons/checkbox-icon.svg'
+import arrowDownSolidIcon from '../Icons/arrow-down-solid-icon.svg'
 
 export const Fieldset = styled.fieldset`
   border: none;
@@ -8,48 +13,126 @@ export const Fieldset = styled.fieldset`
 `
 
 export const Legend = styled.legend`
-  font-size: ${(p) => p.theme.font.size.title.normal};
-  line-height: ${(p) => p.theme.font.lineHeight.title.normal};
-  font-weight: ${(p) => p.theme.font.weight.bold};
-  color: ${(p) => p.theme.color.primary.normal};
-  margin-bottom: 16px;
+  font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
+  line-height: ${(p) => p.theme.tokens.lineHeightHeading};
+  font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
+  color: ${(p) => p.theme.tokens.colors.colorText};
+  margin-bottom: ${(p) => p.theme.tokens.spacing06};
   padding: 0;
 `
 
 export const Label = styled.label`
   display: block;
-  margin-bottom: 8px;
-  font-weight: ${(p) => p.theme.font.weight.semibold};
-
-  ${(p) =>
-    p.fontWeightNormal
-      ? css`
-          font-weight: ${(p) => p.theme.font.weight.normal};
-        `
-      : ''}
+  margin-bottom: ${(p) => p.theme.tokens.spacing02};
+  color: ${(p) => p.theme.tokens.colors.colorTextInputLabel};
+  font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
 `
 
-export const Field = styled(FormikField)`
-  display: block;
-  width: 100%;
-  padding: 9px 16px 11px 16px;
-  font-family: inherit;
-  font-size: ${(p) => p.theme.font.size.normal};
-  line-height: ${(p) => p.theme.font.lineHeight.normal};
-  font-weight: ${(p) => p.theme.font.weight.normal};
-  height: 40px;
-  box-sizing: border-box;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #e6eaf5;
-  border-radius: 3px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+export const Field = styled(ExtendedFormikField)`
+  height: 48px;
+  border-radius: 0;
+  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+
+  ${mq.xs`
+    max-width: 100%;
+  `}
 `
 
-export const ButtonWrapper = styled.div`
+export const SelectField = styled(ExtendedFormikField)`
+  -webkit-appearance: none;
+  appearance: none;
+  height: 48px;
+  border-radius: 0;
+  background: url(${arrowDownSolidIcon}) right center no-repeat;
+  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+
+  ${mq.xs`
+    max-width: 100%;
+  `}
+`
+
+export const CheckboxField = styled(FormikField)`
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 18px;
+  height: 18px;
+  margin-right: ${(p) => p.theme.tokens.spacing05};
+  padding: 0;
+  position: relative;
+  border: 1px solid ${(p) => p.theme.tokens.colors.colorBorderInput};
+  background: #ffffff;
+  border-radius: 2px;
+
+  &:focus {
+    padding: 0;
+  }
+
+  &:checked {
+    background: ${(p) => p.theme.tokens.colors.brandPrimary1};
+    border: 0 none;
+
+    &::after {
+      content: '';
+      background: url(${checkboxIcon}) no-repeat;
+      background-position: center;
+      position: absolute;
+      width: 18px;
+      height: 18px;
+    }
+  }
+`
+
+export const RadioOptionGroup = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  width: fit-content;
+  border: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+
+  ${mq.xs`
+    width: 100%;
+  `}
+`
+
+export const RadioOptionWrapper = styled.div`
+  position: relative;
+  color: ${(p) => p.theme.tokens.colors.colorText};
+  font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+
+  &:not(:last-child) {
+    border-right: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+  }
+
+  ${mq.xs`
+    flex: 1 1 auto;
+    text-align: center;
+  `}
+
+  label {
+    margin: 0;
+    padding: ${(p) => p.theme.tokens.spacing04}
+      ${(p) => p.theme.tokens.spacing06};
+    white-space: nowrap;
+    background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray300};
+    font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked + label {
+      color: white;
+      background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+      box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    &:focus + label {
+      color: white;
+      background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+    }
+  }
 `
 
 export const Button = styled.button`
@@ -74,8 +157,4 @@ export const Button = styled.button`
           border: 1px solid ${p.theme.color.primary.normal};
         `
       : ''}
-
-  &:not(:first-child) {
-    margin-left: 1rem;
-  }
 `

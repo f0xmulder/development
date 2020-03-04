@@ -27,10 +27,14 @@ describe('formatting API terms to options', () => {
 describe('check if facets contains terms for a filter', () => {
   it('should return a boolean', () => {
     const testCases = [
-      { facets: { tags: { terms: [] } }, filter: 'tags', expected: false },
       {
-        facets: { tags: { terms: [{ term: 'foo', count: 1 }] } },
-        filter: 'tags',
+        facets: { organization_name: { terms: [] } },
+        filter: 'organization_name',
+        expected: false,
+      },
+      {
+        facets: { organization_name: { terms: [{ term: 'foo', count: 1 }] } },
+        filter: 'organization_name',
         expected: true,
       },
     ]

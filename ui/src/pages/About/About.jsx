@@ -1,13 +1,11 @@
 import React from 'react'
-import {
-  StyledPageContentCard,
-  StyledAbout,
-  StyledPageTitle,
-} from './About.styles'
+
+import { Container } from '../../components/design-system-candidates/Grid'
+import { StyledPageTitle, StyledPageContentCard } from './About.styles'
 
 const About = () => (
-  <StyledAbout>
-    <StyledPageTitle>Over</StyledPageTitle>
+  <Container>
+    <StyledPageTitle>Over Developer Overheid</StyledPageTitle>
 
     <StyledPageContentCard>
       <StyledPageContentCard.Body>
@@ -76,7 +74,7 @@ const About = () => (
         </p>
       </StyledPageContentCard.Body>
     </StyledPageContentCard>
-  </StyledAbout>
+  </Container>
 )
 
 export default About

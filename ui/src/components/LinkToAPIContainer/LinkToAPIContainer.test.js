@@ -48,7 +48,7 @@ describe('LinkToAPIContainer', () => {
     })
 
     it('should show the LinkToAPI', () => {
-      expect(wrapper.find('LinkToAPI').exists()).toBe(true)
+      expect(wrapper.find('APISummary').exists()).toBe(true)
     })
   })
 

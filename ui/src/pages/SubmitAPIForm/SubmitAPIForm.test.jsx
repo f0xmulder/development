@@ -13,13 +13,13 @@ import { flushPromises } from '../../test-helpers'
 import { modelFromAPIResponse } from '../../models/api'
 
 describe('createRelation', () => {
-  it('should not create a relation object when this is a reference implementation', () => {
-    const result = createRelation(true, 'dummy-api-id')
+  it('should not create a relation object when it is not based on a reference implementation', () => {
+    const result = createRelation(false, undefined)
     expect(result).toBeUndefined()
   })
 
   it('should create a relation object when this has a link to a referenceImplementation', () => {
-    const result = createRelation(false, 'dummy-api-id')
+    const result = createRelation(true, 'dummy-api-id')
     expect(result).toEqual({
       'dummy-api-id': ['reference-implementation'],
     })

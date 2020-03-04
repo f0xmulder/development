@@ -1,6 +1,10 @@
 import React from 'react'
-import { shape, bool } from 'prop-types'
-import { StyledGrade, StyledLabel, StyledBar } from './Grade.styles'
+import { shape, bool, string } from 'prop-types'
+import {
+  StyledBorder,
+  StyledCircle,
+  StyledScoreSubscript,
+} from './Grade.styles'
 
 export const calculateGrade = (scores) => {
   const values = Object.values(scores)
@@ -10,14 +14,22 @@ export const calculateGrade = (scores) => {
   return Math.round(percentage * 10 * 10) / 10
 }
 
-const Grade = ({ scores }) => {
+const Grade = ({ scores, largeAtMediaQuery, ...props }) => {
   const grade = calculateGrade(scores)
 
   return (
-    <StyledGrade>
-      <StyledLabel>{grade}</StyledLabel>
-      <StyledBar grade={grade} />
-    </StyledGrade>
+    <StyledBorder
+      grade={grade}
+      largeAtMediaQuery={largeAtMediaQuery}
+      {...props}
+    >
+      <StyledCircle largeAtMediaQuery={largeAtMediaQuery}>
+        {grade}
+        <StyledScoreSubscript largeAtMediaQuery={largeAtMediaQuery}>
+          /10
+        </StyledScoreSubscript>
+      </StyledCircle>
+    </StyledBorder>
   )
 }
 
@@ -28,6 +40,12 @@ Grade.propTypes = {
     hasContactDetails: bool,
     providesSla: bool,
   }),
+  // Use function names from `theme/mediaQueries`
+  largeAtMediaQuery: string,
+}
+
+Grade.defaultProps = {
+  largeAtMediaQuery: null,
 }
 
 export default Grade

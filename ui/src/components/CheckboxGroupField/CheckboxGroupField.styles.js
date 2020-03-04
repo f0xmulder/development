@@ -1,11 +1,9 @@
 import styled from 'styled-components'
-import { Field } from 'formik'
-import checkbox from './checkbox.svg'
 
 export const StyledCheckboxGroupField = styled.div`
   position: relative;
   display: flex;
-  margin-top: 0.3rem;
+  margin-top: ${(p) => p.theme.tokens.spacing04};
   user-select: none;
 
   input {
@@ -31,42 +29,15 @@ export const StyledCheckboxGroupField = styled.div`
   }
 
   label {
-    flex: 1;
-    font-size: ${(p) => p.theme.font.size.small};
-    line-height: ${(p) => p.theme.font.lineHeight.small};
-    color: ${(p) => p.theme.color.text.normal};
+    font-size: ${(p) => p.theme.tokens.fontSizeMedium};
+    line-height: ${(p) => p.theme.tokens.lineHeightText};
+    color: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
   }
 
   .count {
-    flex: 0 1 auto;
-    text-align: right;
+    margin-left: ${(p) => p.theme.tokens.spacing03};
     color: ${(p) => p.theme.color.text.light};
-    font-size: ${(p) => p.theme.font.size.tiny};
-    line-height: ${(p) => p.theme.font.lineHeight.tiny};
-  }
-`
-
-export const StyledCheckboxField = styled(Field)`
-  -webkit-appearance: none;
-  appearance: none;
-  border: 1px solid #cad0e0;
-  background: #ffffff;
-  border-radius: 2px;
-  width: 14px;
-  height: 14px;
-  position: relative;
-
-  &:checked {
-    background: ${(p) => p.theme.color.primary.normal};
-    border: 0 none;
-
-    &:after {
-      content: '';
-      background: url(${checkbox}) no-repeat;
-      background-position: center;
-      position: absolute;
-      width: 14px;
-      height: 14px;
-    }
+    font-size: ${(p) => p.theme.tokens.fontSizeSmall};
+    line-height: ${(p) => p.theme.tokens.lineHeightText};
   }
 `

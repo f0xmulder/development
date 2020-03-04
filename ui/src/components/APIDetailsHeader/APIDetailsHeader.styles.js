@@ -1,54 +1,30 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import ArrowLeftIcon from '../Icons/ArrowLeft'
 
-export const StyledAPIDetailsHeader = styled.div`
-  @media screen and (min-width: 825px) {
-    display: grid;
-    grid-template-columns: 97px 1fr 97px;
-  }
+const ButtonStyling = css`
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  margin-bottom: ${(p) => p.theme.tokens.spacing07};
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: ${(p) => p.theme.tokens.fontSizeMedium};
+  font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
+  background: transparent;
+  color: ${(p) => p.theme.tokens.colors.colorTextLink};
+  cursor: pointer;
 `
 
 export const BackButton = styled.button`
-  display: flex;
-  align-self: flex-start;
-  margin-top: 15px;
-  margin-left: 15px;
-  padding: 5px;
-  border: none;
-  font-size: ${(p) => p.theme.font.size.normal};
-  font-weight: ${(p) => p.theme.font.weight.semibold};
-  cursor: pointer;
-  color: ${(p) => p.theme.color.primary.normal};
-  background: transparent;
+  ${ButtonStyling}
+`
 
-  @media screen and (min-width: 576px) {
-    margin-top: 0;
-  }
-
-  @media screen and (min-width: 825px) {
-    margin-top: 24px;
-  }
+export const BackLink = styled(Link)`
+  ${ButtonStyling}
 `
 
 export const StyledArrowIcon = styled(ArrowLeftIcon)`
   margin-right: 3px;
-`
-
-export const PageTitle = styled.h1`
-  color: ${(p) => p.theme.color.text.normal};
-  font-size: ${(p) => p.theme.font.size.title.large};
-  line-height: ${(p) => p.theme.font.lineHeight.title.large};
-  font-weight: ${(p) => p.theme.font.weight.bold};
-  margin-bottom: 0;
-  text-align: center;
-`
-
-export const SubTitle = styled.h2`
-  color: ${(p) => p.theme.color.text.light};
-  font-size: ${(p) => p.theme.font.size.normal};
-  line-height: ${(p) => p.theme.font.lineHeight.normal};
-  font-weight: ${(p) => p.theme.font.weight.normal};
-  margin: 0 0 24px;
-  text-align: center;
 `

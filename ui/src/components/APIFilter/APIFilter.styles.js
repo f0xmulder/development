@@ -2,14 +2,14 @@ import styled from 'styled-components'
 
 export const StyledAPIFilter = styled.div`
   &:not(:last-child) {
-    margin-bottom: 24px;
+    margin-bottom: ${(p) => p.theme.tokens.spacing09};
   }
 
   h2 {
-    margin: 0;
-    font-size: ${(p) => p.theme.font.size.tiny};
-    line-height: ${(p) => p.theme.font.lineHeight.tiny};
-    color: ${(p) => p.theme.color.text.light};
+    margin: 0 0 ${(p) => p.theme.tokens.spacing05};
+    font-size: ${(p) => p.theme.tokens.fontSizeMedium};
+    line-height: ${(p) => p.theme.tokens.lineHeightText};
+    color: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
     font-weight: ${(p) => p.theme.font.weight.semibold};
   }
 `

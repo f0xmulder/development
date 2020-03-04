@@ -18,7 +18,7 @@ describe('APIList', () => {
     ]
 
     wrapper = shallow(<APIList total={1} apis={apis} />)
-    apiElements = wrapper.find('Body Row')
+    apiElements = wrapper.find('Styled(APISummary)')
   })
 
   it("should show the total amount of API's available", () => {
@@ -33,7 +33,7 @@ describe('APIList', () => {
   })
 
   it('should link to the API', () => {
-    const link = apiElements.find('Styled(LinkToAPI)')
+    const link = apiElements.find('Styled(APISummary)')
     expect(link.exists()).toBe(true)
   })
 })

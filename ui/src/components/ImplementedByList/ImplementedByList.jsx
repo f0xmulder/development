@@ -1,20 +1,18 @@
 import React from 'react'
 import { shape, string, arrayOf } from 'prop-types'
-import LinkToAPI from '../LinkToAPI/LinkToAPI'
+import APISummary from '../APISummary/APISummary'
+
+import { StyledList, StyledListItem } from '../APIList/APIList.styles'
 
 const ImplementedByList = ({ apis }) => (
   <div className="ImplementedByList">
-    <ul>
+    <StyledList>
       {apis.map((api, i) => (
-        <li key={i}>
-          <LinkToAPI
-            serviceName={api.serviceName}
-            organizationName={api.organizationName}
-            id={api.id}
-          />
-        </li>
+        <StyledListItem key={i}>
+          <APISummary {...api} />
+        </StyledListItem>
       ))}
-    </ul>
+    </StyledList>
   </div>
 )
 
