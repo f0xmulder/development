@@ -10,5 +10,9 @@
         "api_url": "https://brk.basisregistraties.overheid.nl/api/v1",
         "specification_url": "https://brk.basisregistraties.overheid.nl/api/v1",
         "documentation_url": "https://brk.basisregistraties.overheid.nl/api/v1"
-    }]
+    }],
+    "forum": {
+        "vendor": "discourse",
+        "url": "https://geoforum.nl/c/datasets/brk"
+    }
 }
