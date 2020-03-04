@@ -1,0 +1,36 @@
+{
+    "description": "AERIUS stelt een API (Application Programming Interface) beschikbaar aan ontwikkelaars, waarmee zij via een computer interface (API) opdrachten kunnen uitvoeren op de AERIUS Calculator, zonder gebruik te maken van een gebruikersomgeving (GUI). Voor de AERIUS Connect API betreft het opdrachten voor het valideren, converteren en rekenen met AERIUS Calculator.",
+    "organization_name": "RIVM",
+    "service_name": "AERIUS Connect",
+    "api_type": "REST/JSON",
+    "api_authentication": "API Key",
+    "tags": [],
+    "badges": null,
+    "environments": [
+        {
+            "name": "Productie",
+            "api_url": "https://connect.aerius.nl/api",
+            "specification_url": "https://connect.aerius.nl/api/5/swagger.yaml",
+            "documentation_url": "https://connect.aerius.nl/api/doc/"
+        }
+    ],
+    "contact": {
+        "email": "pasbureau@bij12.nl",
+        "phone": "085 – 486 25 90",
+        "fax": "",
+        "chat": "",
+        "url": "https://www.bij12.nl/onderwerpen/stikstof-en-natura2000/helpdesk/"
+    },
+    "is_reference_implementation": false,
+    "relations": {
+        "": [
+            "reference-implementation"
+        ]
+    },
+    "terms_of_use": {
+        "government_only": false,
+        "pay_per_use": false,
+        "uptime_guarantee": 99.5,
+        "support_response_time": ""
+    }
+}
