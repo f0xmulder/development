@@ -10,5 +10,9 @@
         "api_url": "https://brt.basisregistraties.overheid.nl/api/v2",
         "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/brt/oas.v2.yaml",
         "documentation_url": "https://brt.basisregistraties.overheid.nl"
-    }]
+    }],
+    "forum": {
+        "vendor": "discourse",
+        "url": "https://geoforum.nl/c/datasets/brt"
+    }
 }
