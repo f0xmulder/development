@@ -1,3 +1,4 @@
+from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.shortcuts import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -24,6 +25,28 @@ class APIImplementedByView(APIView):
             .filter(relations_from__to_api=api_id,
                     relations_from__name=Relation.TYPE_REFERENCE_IMPLEMENTATION) \
             .order_by('api_id')
+
+        serializer = APISerializer(apis, many=True)
+        return Response(serializer.data)
+
+
+class APISearchView(APIView):
+    def get(self, request):
+        search_text = request.GET.get('q', '')
+
+        apis = API.objects
+
+        if search_text:
+            search_vector = (
+                SearchVector('service_name', config='dutch') +
+                SearchVector('description', config='dutch') +
+                SearchVector('organization_name', config='dutch') +
+                SearchVector('api_type', config='dutch')
+            )
+
+            apis = apis \
+                .annotate(searchable=search_vector) \
+                .filter(searchable=SearchQuery(search_text, config='dutch'))
 
         serializer = APISerializer(apis, many=True)
         return Response(serializer.data)
