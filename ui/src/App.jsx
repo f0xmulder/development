@@ -8,7 +8,6 @@ import SubmitAPI from './pages/SubmitAPI/SubmitAPI'
 import About from './pages/About/About'
 import APIDetail from './pages/APIDetail/APIDetail'
 import APIOverview from './pages/APIOverview/APIOverview'
-import Overview from './pages/Overview/Overview'
 import Header from './components/Header/Header'
 import Feedback from './components/Feedback/Feedback'
 import Footer from './components/Footer/Footer'
@@ -41,7 +40,6 @@ const App = () => (
                 <Route path="/apis" exact component={APIOverview} />
                 <Route path="/apis/toevoegen" component={SubmitAPI} />
                 <Route path="/apis/:id" component={APIDetail} />
-                <Route path="/overzicht" component={Overview} />
                 <Route path="/api-toevoegen" component={SubmitAPI} />
                 <Route path="/over" component={About} />
               </Switch>

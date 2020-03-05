@@ -5,7 +5,7 @@ import APIList from '../../components/APIList/APIList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
 
-import { generateQueryParams } from '../Overview/uriHelpers'
+import { generateQueryParams } from './uriHelpers'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
