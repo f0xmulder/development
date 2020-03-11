@@ -35,24 +35,6 @@ class APIViewTest(TestCase):
         # Display whole JSON diffs
         self.maxDiff = None
 
-    def test_get_list(self):
-        response = self.client.get(API_PATH)
-
-        self.assertEqual(response.status_code, 200)
-
-        api1_json = json.dumps(APISerializer(self.api1).data)
-        api2_json = json.dumps(APISerializer(self.api2).data)
-        expected = """{
-            "count": 2,
-            "next": null,
-            "previous": null,
-            "results": [
-                """ + api1_json + ',' + api2_json + """
-            ]
-        }"""
-
-        self.assertJSONEqual(response.content, expected)
-
     def test_get_single(self):
         response = self.client.get(API_PATH + 'api2/')
 

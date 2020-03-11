@@ -42,7 +42,7 @@ class APIOverview extends Component {
     return this.fetchApiList()
       .then((response) =>
         Object.assign({}, response, {
-          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+          apis: response.results.map((api) => modelFromAPIResponse(api)),
         }),
       )
       .then(
@@ -175,10 +175,10 @@ class APIOverview extends Component {
             <StyledResultsContainer>
               {result && result.apis && result.apis.length > 0 ? (
                 <>
-                  <APIList total={result.total} apis={result.apis} />
+                  <APIList total={result.totalResults} apis={result.apis} />
                   <Pagination
                     currentPage={parseInt(page, 10)}
-                    totalRows={result.total}
+                    totalRows={result.totalResults}
                     rowsPerPage={result.rowsPerPage}
                     onPageChangedHandler={this.handlePageChange}
                   />

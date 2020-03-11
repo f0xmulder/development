@@ -3,11 +3,13 @@ from functools import reduce
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Q, Count, F
 from django.shortcuts import HttpResponse
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from core.models import API, Relation
+from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
 
 
@@ -33,7 +35,10 @@ class APIImplementedByView(APIView):
         return Response(serializer.data)
 
 
-class APISearchView(APIView):
+class APISearchView(GenericAPIView):
+    serializer_class = APISerializer
+    pagination_class = StandardResultsSetPagination
+
     search_vector = (
         SearchVector('service_name', config='dutch') +
         SearchVector('description', config='dutch') +
@@ -62,7 +67,6 @@ class APISearchView(APIView):
 
         # Results
         results = apis.filter(api_type_filter, organization_filter, search_filter)
-        results_list = APISerializer(results, many=True).data
 
         # Facets
         api_type_terms = apis \
@@ -77,9 +81,10 @@ class APISearchView(APIView):
         }
 
         # Response
-        response = {
-            'facets': facets,
-            'apis': results_list,
-        }
+        page = self.paginate_queryset(results)
+        serializer = self.get_serializer(page, many=True)
+        paginated_response = self.get_paginated_response(serializer.data)
+        response_data = paginated_response.data.copy()
+        response_data['facets'] = facets
 
-        return Response(response)
+        return Response(response_data)

@@ -1,6 +1,10 @@
 import json
+from collections import OrderedDict
+from unittest.mock import patch, MagicMock
 
 from django.test import TestCase
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 
 from core.models import API
 from core.serializers import APISerializer
@@ -50,11 +54,19 @@ class APISearchTest(TestCase):
                         expected_api_type_facets,
                         excepted_organization_facets):
         response = self.client.get(API_PATH + '?' + query_string)
-
         self.assertEqual(response.status_code, 200)
 
-        api_jsons = [json.dumps(APISerializer(api).data) for api in expected_apis]
-        facets_dict = {
+        try:
+            response_data = json.loads(response.content)
+        except json.JSONDecodeError:
+            self.fail('response.content is not valid JSON: {}'.format(response.content))
+
+        expected_results = APISerializer(expected_apis, many=True).data
+        # Convert results from OrderedDict to dict
+        expected_results = [dict(r) for r in expected_results]
+        self.assertEqual(response_data['results'], expected_results)
+
+        expected_facets = {
             'api_type': {
                 'terms': [{'term': t, 'count': expected_api_type_facets[t]}
                           for t in expected_api_type_facets]
@@ -64,14 +76,65 @@ class APISearchTest(TestCase):
                           for t in excepted_organization_facets]
             },
         }
-        expected = """{
-            "apis": [
-                """ + ', '.join(api_jsons) + """
-            ],
-            "facets": """ + json.dumps(facets_dict) + """
-        }"""
+        self.assertEqual(response_data['facets'], expected_facets)
 
-        self.assertJSONEqual(response.content, expected)
+        return response_data
+
+    @patch('core.views.APISearchView.pagination_class')
+    def test_pagination(self, mock_pagination_class):
+        mock_results = [self.api1, self.api2, self.api3]
+        serialized_mock_results = APISerializer(mock_results, many=True).data
+        mock_response_dict = OrderedDict([
+            ('page', 10),
+            ('rowsPerPage', 2),
+            ('totalResults', 30),
+            ('results', serialized_mock_results)
+        ])
+
+        instance = mock_pagination_class.return_value
+        instance.paginate_queryset = MagicMock(return_value=mock_results)
+        instance.get_paginated_response = MagicMock(return_value=Response(mock_response_dict))
+
+        response_data = self.run_search_test(
+            '',
+            [self.api1, self.api2, self.api3],
+            {
+                'graphql': 1,
+                'rest_json': 2,
+            },
+            {
+                'Het bureau': 1,
+                'De staat': 2,
+            }
+        )
+
+        instance.paginate_queryset.assert_called()
+        instance.get_paginated_response.assert_called_with(serialized_mock_results)
+
+        for k, v in mock_response_dict.items():
+            if k == 'results':
+                continue
+
+            self.assertEqual(
+                response_data[k],
+                v,
+                'response_data.{0} does not equal mock_response_dict.{0}'.format(k)
+            )
+
+    @patch('core.views.APISearchView.pagination_class')
+    def test_pagination_invalid_page(self, mock_pagination_class):
+        def raise_not_found(*args, **kwargs):
+            raise NotFound('test msg')
+
+        def raise_attribute_error(*args, **kwargs):
+            raise AttributeError('self.page not set because paginate_queryset failed')
+
+        instance = mock_pagination_class.return_value
+        instance.paginate_queryset = MagicMock(side_effect=raise_not_found)
+        instance.get_paginated_response = MagicMock(side_effect=raise_attribute_error)
+
+        response = self.client.get(API_PATH + '?page=99')
+        self.assertEqual(response.status_code, 404)
 
     def test_no_params(self):
         self.run_search_test(
