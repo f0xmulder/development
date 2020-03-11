@@ -10,9 +10,9 @@
     ],
     "environments": [{
         "name": "Productie",
-        "api_url": "https://demo.bronhouderportaal-bro.nl/bpbro-frontend/external",
-        "specification_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/openapi.yaml",
-        "documentation_url": "https://www.bronhouderportaal-bro.nl/bpbro-frontend/documentation/api.html"
+        "api_url": "https://demo.bronhouderportaal-bro.nl/api",
+        "specification_url": "https://www.bronhouderportaal-bro.nl/doc/openapi.yaml",
+        "documentation_url": "https://www.bronhouderportaal-bro.nl/doc/api.html"
     }],
     "contact": {
         "email": "",
