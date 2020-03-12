@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import debounce from 'debounce'
 
-import primaryNavigationTypes from './primaryNavigationTypes'
 import { breakpoints } from '../../../theme'
+import primaryNavigationTypes from './primaryNavigationTypes'
 import DesktopNavigation from './DesktopNavigation'
 import MobileNavigation from './MobileNavigation'
 
@@ -19,6 +19,12 @@ class PrimaryNavigation extends Component {
     this.handleWindowResize()
   }
 
+  handleWindowResize = () => {
+    this.setState({ isMobile: window.innerWidth < breakpoints.md })
+  }
+
+  debouncedWindowResize = debounce(this.handleWindowResize, 150)
+
   render() {
     const { isMobile } = this.state
     return isMobile ? (
@@ -27,12 +33,6 @@ class PrimaryNavigation extends Component {
       <DesktopNavigation {...this.props} />
     )
   }
-
-  handleWindowResize = () => {
-    this.setState({ isMobile: window.innerWidth < breakpoints.md })
-  }
-
-  debouncedWindowResize = debounce(this.handleWindowResize, 150)
 }
 
 PrimaryNavigation.propTypes = { ...primaryNavigationTypes }

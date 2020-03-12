@@ -14,6 +14,22 @@ class ImplementedByListContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    const { id } = this.props
+    this.loadDetailsForAPI(id)
+  }
+
+  componentWillUpdate(nextProps) {
+    const { id } = nextProps
+    const { id: prevId } = this.props.id
+
+    if (prevId === id || typeof prevId === 'undefined') {
+      return
+    }
+
+    this.loadDetailsForAPI(id)
+  }
+
   fetchImplementedByInfo(id) {
     return fetch(`/api/apis/${id}/implemented-by`).then((response) => {
       if (response.ok) {
@@ -38,22 +54,6 @@ class ImplementedByListContainer extends Component {
           console.error(error)
         },
       )
-  }
-
-  componentWillUpdate(nextProps) {
-    const { id } = nextProps
-    const { id: prevId } = this.props.id
-
-    if (prevId === id || typeof prevId === 'undefined') {
-      return
-    }
-
-    this.loadDetailsForAPI(id)
-  }
-
-  componentDidMount() {
-    const { id } = this.props
-    this.loadDetailsForAPI(id)
   }
 
   render() {

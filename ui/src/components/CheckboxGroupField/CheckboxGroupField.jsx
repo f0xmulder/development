@@ -1,8 +1,8 @@
 import React from 'react'
 import { string, arrayOf, shape, func, bool, number } from 'prop-types'
 import { FieldArray } from 'formik'
-import { StyledCheckboxGroupField } from './CheckboxGroupField.styles'
 import { CheckboxField } from '../Form/Form'
+import { StyledCheckboxGroupField } from './CheckboxGroupField.styles'
 
 const CheckboxGroupField = ({ name, options, value, onChange }) => (
   <FieldArray name={name}>

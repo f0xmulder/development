@@ -15,16 +15,9 @@ class APIDetail extends Component {
     loaded: false,
   }
 
-  loadDetailsForApi(id) {
-    return this.props.getApiDetailsById(id).then(
-      (details) => {
-        this.setState({ details, loaded: true })
-      },
-      (error) => {
-        this.setState({ error: true, loaded: true })
-        console.error(error)
-      },
-    )
+  componentDidMount() {
+    const { id } = this.props.match.params
+    this.loadDetailsForApi(id)
   }
 
   componentDidUpdate(prevProps) {
@@ -35,9 +28,16 @@ class APIDetail extends Component {
     this.loadDetailsForApi(id)
   }
 
-  componentDidMount() {
-    const { id } = this.props.match.params
-    this.loadDetailsForApi(id)
+  loadDetailsForApi(id) {
+    return this.props.getApiDetailsById(id).then(
+      (details) => {
+        this.setState({ details, loaded: true })
+      },
+      (error) => {
+        this.setState({ error: true, loaded: true })
+        console.error(error)
+      },
+    )
   }
 
   render() {

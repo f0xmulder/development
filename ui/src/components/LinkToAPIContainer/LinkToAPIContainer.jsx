@@ -14,6 +14,22 @@ class LinkToAPIContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    const { id } = this.props
+    this.loadDetailsForApi(id)
+  }
+
+  componentWillUpdate(nextProps) {
+    const { id } = nextProps
+    const { id: prevId } = this.props
+
+    if (prevId === id && typeof prevId !== 'undefined') {
+      return
+    }
+
+    this.loadDetailsForApi(id)
+  }
+
   fetchAPIDetails(id) {
     return fetch(`/api/apis/${id}`).then((response) => {
       if (response.ok) {
@@ -38,22 +54,6 @@ class LinkToAPIContainer extends Component {
           console.error(error)
         },
       )
-  }
-
-  componentWillUpdate(nextProps) {
-    const { id } = nextProps
-    const { id: prevId } = this.props
-
-    if (prevId === id && typeof prevId !== 'undefined') {
-      return
-    }
-
-    this.loadDetailsForApi(id)
-  }
-
-  componentDidMount() {
-    const { id } = this.props
-    this.loadDetailsForApi(id)
   }
 
   render() {

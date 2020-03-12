@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme/build'
-import APIList from './APIList'
 import React from 'react'
+import APIList from './APIList'
 
 const TOTAL_SELECTOR = '[data-test="total"]'
 

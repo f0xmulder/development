@@ -13,16 +13,17 @@ class APISpecification extends Component {
     loaded: false,
   }
 
-  loadDetailsForApi(id) {
-    return this.props.getApiDetailsById(id).then(
-      (details) => {
-        this.setState({ details, loaded: true })
-      },
-      (error) => {
-        this.setState({ error: true, loaded: true })
-        console.error(error)
-      },
-    )
+  componentDidMount() {
+    const { id } = this.props.match.params
+    this.loadDetailsForApi(id)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { id } = this.props.match.params
+    const prevId = prevProps.match.params.id
+
+    if (prevId === id) return
+    this.loadDetailsForApi(id)
   }
 
   getSpecificationUrl() {
@@ -37,17 +38,16 @@ class APISpecification extends Component {
     return undefined
   }
 
-  componentDidUpdate(prevProps) {
-    const { id } = this.props.match.params
-    const prevId = prevProps.match.params.id
-
-    if (prevId === id) return
-    this.loadDetailsForApi(id)
-  }
-
-  componentDidMount() {
-    const { id } = this.props.match.params
-    this.loadDetailsForApi(id)
+  loadDetailsForApi(id) {
+    return this.props.getApiDetailsById(id).then(
+      (details) => {
+        this.setState({ details, loaded: true })
+      },
+      (error) => {
+        this.setState({ error: true, loaded: true })
+        console.error(error)
+      },
+    )
   }
 
   render() {

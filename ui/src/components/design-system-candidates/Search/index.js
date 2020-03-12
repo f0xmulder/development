@@ -1,8 +1,8 @@
 import React from 'react'
 import { object, func, oneOfType, node, element } from 'prop-types'
-import { StyledSearch, StyledInput, StyledSearchIcon } from './index.styles'
 import { ThemeProvider } from 'styled-components/macro'
 import theme from '../../../theme'
+import { StyledSearch, StyledInput, StyledSearchIcon } from './index.styles'
 
 const Search = ({ inputProps, onQueryChanged, children, ...props }) => (
   <ThemeProvider theme={theme}>

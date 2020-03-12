@@ -31,7 +31,7 @@ const multipleEnvironments = [
   },
 ]
 
-it('should render single environment', () => {
+test('should render single environment', () => {
   const wrapper = shallow(
     <APIEnvironments apiId="single-env" environments={[singleEnvironment]} />,
   )
@@ -41,7 +41,7 @@ it('should render single environment', () => {
   expect(wrapper.find('[data-test="api-documentation-url"]')).toHaveLength(1)
 })
 
-it('should render a disabled button when specification url is not provided', () => {
+test('should render a disabled button when specification url is not provided', () => {
   const environment = { ...singleEnvironment }
   delete environment.specificationUrl
 
@@ -57,7 +57,7 @@ it('should render a disabled button when specification url is not provided', () 
   ).toBe(false)
 })
 
-it('should render a disabled button when documentation url is not provided', () => {
+test('should render a disabled button when documentation url is not provided', () => {
   const environment = { ...singleEnvironment }
   delete environment.documentationUrl
 
@@ -73,7 +73,7 @@ it('should render a disabled button when documentation url is not provided', () 
   ).toBe(false)
 })
 
-it('should render multiple environments', () => {
+test('should render multiple environments', () => {
   const wrapper = shallow(
     <APIEnvironments
       apiId="multiple-env"

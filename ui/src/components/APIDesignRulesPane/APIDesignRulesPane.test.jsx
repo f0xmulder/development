@@ -4,7 +4,7 @@ import { StaticRouter as Router, Route } from 'react-router-dom'
 
 import APIDesignRulesPane from './APIDesignRulesPane'
 
-it('should render the API Design Rules Pane and fetch the api details', async () => {
+test('should render the API Design Rules Pane and fetch the api details', async () => {
   const getApiDetailsByIdSpy = jest.fn().mockResolvedValue({})
 
   render(

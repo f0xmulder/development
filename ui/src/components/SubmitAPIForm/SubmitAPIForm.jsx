@@ -4,15 +4,6 @@ import { array, object } from 'prop-types'
 
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
 import {
-  StyledFormGroupColumn,
-  StyledFormGroupColumnContainer,
-  StyledFormGroup,
-  StyledFormSetting,
-  HelperMessage,
-  ErrorMessage,
-} from './SubmitAPIForm.styles'
-
-import {
   Fieldset,
   Legend,
   Label,
@@ -22,8 +13,17 @@ import {
   RadioOptionGroup,
   RadioOptionWrapper,
 } from '../Form/Form'
-import PercentageInput from './PercentageInput'
 import Button from '../Button/Button'
+import {
+  StyledFormGroupColumn,
+  StyledFormGroupColumnContainer,
+  StyledFormGroup,
+  StyledFormSetting,
+  HelperMessage,
+  ErrorMessage,
+} from './SubmitAPIForm.styles'
+
+import PercentageInput from './PercentageInput'
 
 const SubmitAPIForm = ({
   apis,

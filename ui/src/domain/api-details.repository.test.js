@@ -1,5 +1,5 @@
-import APIDetailsRepository from './api-details-repository'
 import { goApiMock, apiMock } from '../models/api.mock'
+import APIDetailsRepository from './api-details-repository'
 
 describe('the API Details Repository', () => {
   describe('getting API Details by id', () => {

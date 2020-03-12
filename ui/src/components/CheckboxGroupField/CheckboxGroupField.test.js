@@ -1,9 +1,9 @@
 import { mount } from 'enzyme/build'
 import { Formik, useFormikContext } from 'formik'
-import CheckboxGroupField from './CheckboxGroupField'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../theme'
+import CheckboxGroupField from './CheckboxGroupField'
 
 const options = [
   { value: '41', label: '41', count: 1 },

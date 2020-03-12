@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import LinkToAPIContainer from './LinkToAPIContainer'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
+import LinkToAPIContainer from './LinkToAPIContainer'
 
 /* eslint-disable camelcase */
 const apiFromAPIResponse = {}

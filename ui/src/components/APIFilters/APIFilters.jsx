@@ -3,10 +3,10 @@ import { Formik } from 'formik'
 import PropTypes from 'prop-types'
 
 import { breakpoints } from '../../theme'
-import { StyledFilterButton, StyledAPIFilters } from './APIFilters.styles'
 import APIFilter from '../APIFilter/APIFilter'
 
 import { ReactComponent as FilterIcon } from '../Icons/filter-icon.svg'
+import { StyledFilterButton, StyledAPIFilters } from './APIFilters.styles'
 
 const filters = [
   { key: 'api_type', label: 'API type' },

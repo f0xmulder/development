@@ -1,6 +1,6 @@
 import React from 'react'
-import Expandable from './Expandable'
 import { shallow } from 'enzyme'
+import Expandable from './Expandable'
 
 describe('Expandable', () => {
   it('should contain its children', () => {

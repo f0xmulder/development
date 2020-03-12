@@ -1,6 +1,6 @@
 import React from 'react'
-import APIFilter from './APIFilter'
 import { shallow } from 'enzyme/build'
+import APIFilter from './APIFilter'
 
 const generateOptions = (values) =>
   values.map((value) => ({

@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import APIDetailsHeader from './APIDetailsHeader'
 import { H1, H2 } from '../Headings/Headings'
+import APIDetailsHeader from './APIDetailsHeader'
 import { BackButton } from './APIDetailsHeader.styles'
 
 const details = {

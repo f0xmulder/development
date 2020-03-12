@@ -3,14 +3,14 @@ import { shallow } from 'enzyme'
 import { Formik } from 'formik'
 
 import { goApiMock } from '../../models/api.mock'
+import { flushPromises } from '../../test-helpers'
+import { modelFromAPIResponse } from '../../models/api'
 import { formDataMock, submitDataMock } from './formData.mock'
 
 import SubmitAPI, {
   createRelation,
   convertFormDataToRequestBody,
 } from './SubmitAPIForm'
-import { flushPromises } from '../../test-helpers'
-import { modelFromAPIResponse } from '../../models/api'
 
 describe('createRelation', () => {
   it('should not create a relation object when it is not based on a reference implementation', () => {

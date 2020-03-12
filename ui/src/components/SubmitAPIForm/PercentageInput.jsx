@@ -1,8 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
 
-import { Field } from '../Form/Form'
 import styled from 'styled-components'
+import { Field } from '../Form/Form'
 
 const Box = styled.div`
   display: flex;

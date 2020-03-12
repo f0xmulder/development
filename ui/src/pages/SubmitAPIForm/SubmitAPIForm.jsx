@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Formik } from 'formik'
 
-import { schema } from './validationSchema'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
 import { modelFromAPIResponse } from '../../models/api'
+import { schema } from './validationSchema'
 
 const initialValues = {
   description: '',
@@ -137,6 +137,35 @@ class SubmitAPIFormPage extends Component {
     this.submitToApi = this.submitToApi.bind(this)
   }
 
+  componentDidMount() {
+    this.fetchApiList()
+      .then((response) =>
+        Object.assign({}, response, {
+          apis: response.apis.map((api) => modelFromAPIResponse(api)),
+        }),
+      )
+      .then(
+        (result) => {
+          this.setState({ result, apisLoaded: true })
+        },
+        (error) => {
+          this.setState({ apisError: true, apisLoaded: true })
+          console.error(error)
+        },
+      )
+
+    window && window.addEventListener('beforeunload', this.handleReset)
+  }
+
+  componentWillUnmount() {
+    sessionStorage.setItem(
+      'storedFormValues',
+      JSON.stringify(this.state.storedFormValues),
+    )
+
+    window && window.removeEventListener('beforeunload', this.handleReset)
+  }
+
   handleSubmit(values, actions) {
     const formData = schema.cast(values)
     const submitData = convertFormDataToRequestBody(formData)
@@ -195,35 +224,6 @@ class SubmitAPIFormPage extends Component {
         )
       }
     })
-  }
-
-  componentDidMount() {
-    this.fetchApiList()
-      .then((response) =>
-        Object.assign({}, response, {
-          apis: response.apis.map((api) => modelFromAPIResponse(api)),
-        }),
-      )
-      .then(
-        (result) => {
-          this.setState({ result, apisLoaded: true })
-        },
-        (error) => {
-          this.setState({ apisError: true, apisLoaded: true })
-          console.error(error)
-        },
-      )
-
-    window && window.addEventListener('beforeunload', this.handleReset)
-  }
-
-  componentWillUnmount() {
-    sessionStorage.setItem(
-      'storedFormValues',
-      JSON.stringify(this.state.storedFormValues),
-    )
-
-    window && window.removeEventListener('beforeunload', this.handleReset)
   }
 
   render() {

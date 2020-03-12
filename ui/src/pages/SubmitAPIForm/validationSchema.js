@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+import { convertEmptyValueTo } from '../../components/Form/yup-transforms'
 import {
   array,
   boolean,
@@ -8,7 +9,6 @@ import {
   object,
   string,
 } from './yup-translations'
-import { convertEmptyValueTo } from '../../components/Form/yup-transforms'
 
 Yup.setLocale({
   mixed,

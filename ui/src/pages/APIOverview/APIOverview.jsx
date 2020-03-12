@@ -24,6 +24,19 @@ class APIOverview extends Component {
     loaded: false,
   }
 
+  componentDidMount() {
+    this.loadAPIList()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.location &&
+      prevProps.location.search !== this.props.location.search
+    ) {
+      this.loadAPIList()
+    }
+  }
+
   loadAPIList() {
     return this.fetchApiList()
       .then((response) =>
@@ -40,19 +53,6 @@ class APIOverview extends Component {
           console.error(error)
         },
       )
-  }
-
-  componentDidMount() {
-    this.loadAPIList()
-  }
-
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.location &&
-      prevProps.location.search !== this.props.location.search
-    ) {
-      this.loadAPIList()
-    }
   }
 
   handleSearchSubmitHandler(query) {
