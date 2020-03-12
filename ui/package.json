@@ -20,6 +20,7 @@
     "yup": "0.27.0"
   },
   "devDependencies": {
+    "@commonground/eslint-config-cra-standard-prettier": "0.0.4",
     "@testing-library/jest-dom": "5.0.2",
     "@testing-library/react": "9.4.0",
     "enzyme": "3.10.0",
@@ -51,5 +52,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "eslintConfig": {
+    "extends": "@commonground/eslint-config-cra-standard-prettier",
+    "rules": {
+      "camelcase": "off"
+    }
+  }
 }
