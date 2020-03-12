@@ -66,7 +66,9 @@ class APISearchView(GenericAPIView):
         apis = API.objects.annotate(searchable=APISearchView.search_vector)
 
         # Results
-        results = apis.filter(api_type_filter, organization_filter, search_filter)
+        results = apis \
+            .filter(api_type_filter, organization_filter, search_filter) \
+            .order_by('api_id')
 
         # Facets
         api_type_terms = apis \
