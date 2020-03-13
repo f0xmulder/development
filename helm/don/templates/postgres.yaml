@@ -7,7 +7,6 @@ spec:
   storageType: {{ .Values.storageType }}
   {{ if eq .Values.storageType "Durable" }}
   storage:
-    storageClassName: standard
     accessModes:
     - ReadWriteOnce
     resources:
