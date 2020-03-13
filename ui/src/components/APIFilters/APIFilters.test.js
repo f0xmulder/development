@@ -28,11 +28,13 @@ describe('check if facets contains terms for a filter', () => {
   it('should return a boolean', () => {
     const testCases = [
       {
+        // eslint-disable-next-line camelcase
         facets: { organization_name: { terms: [] } },
         filter: 'organization_name',
         expected: false,
       },
       {
+        // eslint-disable-next-line camelcase
         facets: { organization_name: { terms: [{ term: 'foo', count: 1 }] } },
         filter: 'organization_name',
         expected: true,

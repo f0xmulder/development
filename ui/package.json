@@ -54,9 +54,6 @@
   ],
   "proxy": "http://localhost:8080",
   "eslintConfig": {
-    "extends": "@commonground/eslint-config-cra-standard-prettier",
-    "rules": {
-      "camelcase": "off"
-    }
+    "extends": "@commonground/eslint-config-cra-standard-prettier"
   }
 }

@@ -1,5 +1,7 @@
 import objectKeysToCamelCase from './objectKeysToCamelCase'
 
+/* eslint camelcase: 0 */
+
 describe('objectKeysToCamelCase', () => {
   it('should convert a flat object', () => {
     const obj = {
