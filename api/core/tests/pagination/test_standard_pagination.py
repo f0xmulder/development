@@ -10,7 +10,7 @@ from core.models import API
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
 
-API_PATH = '/api/apis/search'
+API_PATH = '/api/apis'
 ROWS_PER_PAGE_DEFAULT = 10
 
 

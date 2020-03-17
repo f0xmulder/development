@@ -74,6 +74,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
+# Application behaviour
+APPEND_SLASH = False
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

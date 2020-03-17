@@ -2,36 +2,22 @@ from functools import reduce
 
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Q, Count, F
-from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import RetrieveModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import GenericViewSet
 
 from core.models import API, Relation
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
 
 
-class APIViewSet(ReadOnlyModelViewSet):
-    queryset = API.objects.all().order_by('api_id')
-    serializer_class = APISerializer
-    lookup_field = 'api_id'
-
-
-class APIImplementedByView(APIView):
-    def get(self, request, api_id):
-        apis = API.objects \
-            .filter(relations_from__to_api=api_id,
-                    relations_from__name=Relation.TYPE_REFERENCE_IMPLEMENTATION) \
-            .order_by('api_id')
-
-        serializer = APISerializer(apis, many=True)
-        return Response(serializer.data)
-
-
-class APISearchView(GenericAPIView):
+class APIViewSet(RetrieveModelMixin,
+                 GenericViewSet):
+    queryset = API.objects.all()
     serializer_class = APISerializer
     pagination_class = StandardResultsSetPagination
+    lookup_field = 'api_id'
 
     search_vector = (
         SearchVector('service_name', config='dutch') +
@@ -40,11 +26,14 @@ class APISearchView(GenericAPIView):
         SearchVector('api_type', config='dutch')
     )
 
-    def get(self, request):
+    def list(self, request):
+        queryset = self.filter_queryset(self.get_queryset()) \
+            .annotate(searchable=APIViewSet.search_vector)
+
         # Input
-        selected_organizations = request.GET.getlist('organization_name')
-        selected_api_types = request.GET.getlist('api_type')
-        search_text = request.GET.get('q', '')
+        selected_organizations = request.query_params.getlist('organization_name')
+        selected_api_types = request.query_params.getlist('api_type')
+        search_text = request.query_params.get('q', '')
 
         # Filters
         organization_filter = reduce(lambda acc, val: acc | Q(organization_name=val),
@@ -57,18 +46,16 @@ class APISearchView(GenericAPIView):
         if search_text:
             search_filter = Q(searchable=SearchQuery(search_text, config='dutch'))
 
-        apis = API.objects.annotate(searchable=APISearchView.search_vector)
-
         # Results
-        results = apis \
+        results = queryset \
             .filter(api_type_filter, organization_filter, search_filter) \
             .order_by('api_id')
 
         # Facets
-        api_type_terms = apis \
+        api_type_terms = queryset \
             .values(term=F('api_type')) \
             .annotate(count=Count('id', filter=organization_filter & search_filter))
-        organization_terms = apis \
+        organization_terms = queryset \
             .values(term=F('organization_name')) \
             .annotate(count=Count('id', filter=api_type_filter & search_filter))
         facets = {
@@ -84,3 +71,14 @@ class APISearchView(GenericAPIView):
         response_data['facets'] = facets
 
         return Response(response_data)
+
+
+class APIImplementedByView(APIView):
+    def get(self, request, api_id):
+        apis = API.objects \
+            .filter(relations_from__to_api=api_id,
+                    relations_from__name=Relation.TYPE_REFERENCE_IMPLEMENTATION) \
+            .order_by('api_id')
+
+        serializer = APISerializer(apis, many=True)
+        return Response(serializer.data)

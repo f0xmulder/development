@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from core.models import API
 from core.serializers import APISerializer
 
-API_PATH = '/api/apis/search'
+API_PATH = '/api/apis'
 
 
 class APISearchTest(TestCase):
@@ -80,7 +80,7 @@ class APISearchTest(TestCase):
 
         return response_data
 
-    @patch('core.views.APISearchView.pagination_class')
+    @patch('core.views.APIViewSet.pagination_class')
     def test_pagination(self, mock_pagination_class):
         mock_results = [self.api1, self.api2, self.api3]
         serialized_mock_results = APISerializer(mock_results, many=True).data
@@ -121,7 +121,7 @@ class APISearchTest(TestCase):
                 'response_data.{0} does not equal mock_response_dict.{0}'.format(k)
             )
 
-    @patch('core.views.APISearchView.pagination_class')
+    @patch('core.views.APIViewSet.pagination_class')
     def test_pagination_invalid_page(self, mock_pagination_class):
         def raise_not_found(*args, **kwargs):
             raise NotFound('test msg')

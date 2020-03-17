@@ -6,7 +6,7 @@ from core.models import API
 from core.serializers import APISerializer
 
 
-API_PATH = '/api/apis/'
+API_PATH = '/api/apis'
 
 
 class APIViewTest(TestCase):
@@ -36,7 +36,7 @@ class APIViewTest(TestCase):
         self.maxDiff = None
 
     def test_get_single(self):
-        response = self.client.get(API_PATH + 'api2/')
+        response = self.client.get(API_PATH + '/api2')
 
         self.assertEqual(response.status_code, 200)
 
@@ -50,16 +50,16 @@ class APIViewTest(TestCase):
         self.assertEqual(response.status_code, 405)
 
     def test_put_not_allowed(self):
-        response = self.client.put(API_PATH + 'api3/')
+        response = self.client.put(API_PATH + '/api3')
 
         self.assertEqual(response.status_code, 405)
 
     def test_patch_not_allowed(self):
-        response = self.client.patch(API_PATH + 'api3/')
+        response = self.client.patch(API_PATH + '/api3')
 
         self.assertEqual(response.status_code, 405)
 
     def test_delete_not_allowed(self):
-        response = self.client.delete(API_PATH + 'api3/')
+        response = self.client.delete(API_PATH + '/api3')
 
         self.assertEqual(response.status_code, 405)
