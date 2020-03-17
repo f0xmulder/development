@@ -2,7 +2,6 @@ from functools import reduce
 
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.models import Q, Count, F
-from django.shortcuts import HttpResponse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -11,11 +10,6 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from core.models import API, Relation
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
-
-
-# Create your views here.
-def index(request):
-    return HttpResponse('WIP Core Index')
 
 
 class APIViewSet(ReadOnlyModelViewSet):
