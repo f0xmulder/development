@@ -25,51 +25,65 @@ class APIViewSet(RetrieveModelMixin,
         SearchVector('organization_name', config='dutch') +
         SearchVector('api_type', config='dutch')
     )
+    supported_facets = ['organization_name', 'api_type']
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset()) \
-            .annotate(searchable=APIViewSet.search_vector)
+            .annotate(searchable=self.search_vector)
 
-        # Input
-        selected_organizations = request.query_params.getlist('organization_name')
-        selected_api_types = request.query_params.getlist('api_type')
+        facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
         search_text = request.query_params.get('q', '')
 
-        # Filters
-        organization_filter = reduce(lambda acc, val: acc | Q(organization_name=val),
-                                     selected_organizations,
-                                     Q())
-        api_type_filter = reduce(lambda acc, val: acc | Q(api_type=val),
-                                 selected_api_types,
-                                 Q())
+        facet_filters = self.get_facet_filters(facet_inputs)
+        search_filter = self.get_search_filter(search_text)
+
+        results = queryset \
+            .filter(*facet_filters.values(), search_filter) \
+            .order_by('api_id')
+        facets = self.get_facets(queryset, facet_filters, search_filter)
+
+        return self.get_response(results, facets)
+
+    @staticmethod
+    def get_facet_filters(facet_inputs):
+        facet_filters = {}
+        for facet, selected_values in facet_inputs.items():
+            facet_filters[facet] = reduce(lambda query, val, f=facet: query | Q(**{f: val}),
+                                          selected_values,
+                                          Q())
+        return facet_filters
+
+    @staticmethod
+    def get_search_filter(search_text):
         search_filter = Q()
         if search_text:
             search_filter = Q(searchable=SearchQuery(search_text, config='dutch'))
 
-        # Results
-        results = queryset \
-            .filter(api_type_filter, organization_filter, search_filter) \
-            .order_by('api_id')
+        return search_filter
 
-        # Facets
-        api_type_terms = queryset \
-            .values(term=F('api_type')) \
-            .annotate(count=Count('id', filter=organization_filter & search_filter))
-        organization_terms = queryset \
-            .values(term=F('organization_name')) \
-            .annotate(count=Count('id', filter=api_type_filter & search_filter))
-        facets = {
-            'api_type': {'terms': list(api_type_terms)},
-            'organization_name': {'terms': list(organization_terms)},
-        }
+    @staticmethod
+    def get_facets(queryset, facet_filters, search_filter):
+        facets = {}
+        for facet in facet_filters.keys():
+            other_facet_filters = [v for k, v in facet_filters.items() if k != facet]
+            combined_filter = reduce(lambda query, val: query & Q(val),
+                                     other_facet_filters,
+                                     Q())
+            term_counts = queryset \
+                .values(term=F(facet)) \
+                .annotate(count=Count('id', filter=combined_filter & search_filter))
 
-        # Response
-        page = self.paginate_queryset(results)
+            facets[facet] = {'terms': list(term_counts)}
+
+        return facets
+
+    def get_response(self, results_queryset, facets):
+        page = self.paginate_queryset(results_queryset)
         serializer = self.get_serializer(page, many=True)
         paginated_response = self.get_paginated_response(serializer.data)
+
         response_data = paginated_response.data.copy()
         response_data['facets'] = facets
-
         return Response(response_data)
 
 
