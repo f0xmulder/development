@@ -17,16 +17,6 @@ SECRET_KEY = os.getenv('SECRET_KEY', SECRET_KEY_DEFAULT)
 
 USE_X_FORWARDED_PORT = os.getenv('USE_X_FORWARDED_PORT', USE_X_FORWARDED_PORT_DEFAULT)
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0)l39j8gmr17ygx@7oia_x#x$o@t4qh&dx^$o4j+fjfi-3-0=7'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 if os.getenv('ALLOWED_HOST'):
     ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST')]
 
