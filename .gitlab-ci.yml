@@ -123,6 +123,8 @@ Release Docs:
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
+  variables:
+    KUBECONFIG: /secrets/kubeconfig/review.conf
   script:
     - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
@@ -143,8 +145,8 @@ Deploy Review App:
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
-    - review
-    - kubernetes
+    - cg
+    - docker
   only:
     - branches@commonground/developer.overheid.nl
   except:
@@ -158,6 +160,7 @@ Remove Review App:
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   variables:
     GIT_STRATEGY: none
+    KUBECONFIG: /secrets/kubeconfig/review.conf
   script:
     - helm delete --purge $REVIEW_NAMESPACE
     - kubectl delete namespace $REVIEW_NAMESPACE
@@ -167,8 +170,8 @@ Remove Review App:
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
-    - review
-    - kubernetes
+    - cg
+    - docker
   only:
     - branches@commonground/developer.overheid.nl
   except:
@@ -201,8 +204,9 @@ Remove Review App:
 ## Depoyment ##
 Deploy production:
   stage: deploy
-  before_script:
-    - kubectl config use-context $KUBECTL_CONTEXT
+  image: registry.gitlab.com/commonground/core/review-app-deployer:latest
+  variables:
+    KUBECONFIG: /secrets/kubeconfig/delta.conf
   script:
     - |
         helm upgrade --install don-prod ./helm/don \
@@ -219,7 +223,7 @@ Deploy production:
     name: prod
     url: https://$DOMAIN
   tags:
-    - nlx-privileged
-    - shell
+    - cg-privileged
+    - docker
   only:
     - master@commonground/developer.overheid.nl
