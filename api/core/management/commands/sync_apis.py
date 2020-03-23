@@ -4,8 +4,8 @@ from django.core.management.base import BaseCommand
 from core.management.create_fixtures import create_fixtures
 from core.models import API, Environment, Relation
 
-CRED = '\033[91m'
-CEND = '\033[0m'
+COLOR_RED = '\033[91m'
+COLOR_END = '\033[0m'
 
 
 class Command(BaseCommand):
@@ -27,16 +27,16 @@ class Command(BaseCommand):
 
         if apis.count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all APIs were deleted\nPlease delete all APIs before syncing'
-                + CEND)
+                COLOR_RED + 'Error: Not all APIs were deleted\nPlease delete all APIs before syncing'
+                + COLOR_END)
         if Environment.objects.all().count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all Environments were deleted\n'
-                + 'Please delete all Environments before syncing' + CEND)
+                COLOR_RED + 'Error: Not all Environments were deleted\n'
+                + 'Please delete all Environments before syncing' + COLOR_END)
         if Relation.objects.all().count() > 0:
             raise SystemExit(
-                CRED + 'Error: Not all Relations were deleted\n'
-                + 'Please delete all Relations before syncing' + CEND)
+                COLOR_RED + 'Error: Not all Relations were deleted\n'
+                + 'Please delete all Relations before syncing' + COLOR_END)
 
         create_fixtures(options['api_dir'], options['fixtures_dir'])
 
