@@ -33,9 +33,6 @@ def transform_to_fixtures(api_dir, file_name, pk):
     if 'is_reference_implementation' in data:
         fields['is_reference_implementation'] = data['is_reference_implementation']
 
-    if 'tags' in data:
-        fields['tags'] = data['tags']
-
     if 'contact' in data:
         contact = data['contact']
         if 'email' in contact:
