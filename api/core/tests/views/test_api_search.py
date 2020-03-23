@@ -59,7 +59,7 @@ class APISearchTest(TestCase):
         try:
             response_data = json.loads(response.content)
         except json.JSONDecodeError:
-            self.fail('response.content is not valid JSON: {}'.format(response.content))
+            self.fail(f'response.content is not valid JSON: {response.content}')
 
         expected_results = APISerializer(expected_apis, many=True).data
         # Convert results from OrderedDict to dict
@@ -118,7 +118,7 @@ class APISearchTest(TestCase):
             self.assertEqual(
                 response_data[k],
                 v,
-                'response_data.{0} does not equal mock_response_dict.{0}'.format(k)
+                f'response_data.{k} does not equal mock_response_dict.{k}'
             )
 
     @patch('core.views.APIViewSet.pagination_class')

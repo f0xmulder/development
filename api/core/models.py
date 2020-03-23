@@ -117,7 +117,7 @@ class Relation(models.Model):
     )
 
     def __str__(self):
-        return self.from_api_id + ' ' + self.name + ' ' + self.to_api_id
+        return f'{self.from_api_id} {self.name} {self.to_api_id}'
 
 
 class Badge(models.Model):
@@ -137,4 +137,4 @@ class APIBadge(models.Model):
     badge = models.ForeignKey(Badge, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.api_id + ' <-> ' + str(self.badge)
+        return f'{self.api_id} <-> {self.badge}'
