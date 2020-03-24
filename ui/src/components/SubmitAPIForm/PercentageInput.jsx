@@ -19,9 +19,9 @@ const Pct = styled.div`
   height: 48px;
   line-height: 45px;
   text-align: center;
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorBorderInput};
+  border: 1px solid ${(p) => p.theme.colorBorderInput};
   border-left: none;
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray200};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray200};
 `
 
 const PercentageInput = ({ field, form, meta, ...inputProps }) => {

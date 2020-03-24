@@ -9,7 +9,7 @@ import { ReactComponent as GitlabIcon } from '../Icons/gitlab-white-icon.svg'
 export const HeaderArea = styled.header`
   margin-bottom: ${(p) => p.theme.tokens.spacing09};
   overflow: hidden;
-  background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+  background-color: ${(p) => p.theme.tokens.colorBrand3};
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.24),
     0px 5px 10px 0px rgba(0, 0, 0, 0.24);
 
@@ -23,7 +23,7 @@ export const TopNavigationArea = styled.nav`
 `
 
 export const TopNavigationContainer = styled(Container)`
-  height: ${(p) => p.theme.tokens.headerTopNavigationHeight};
+  height: ${(p) => p.theme.headerTopNavigationHeight};
 `
 
 export const HeaderContainer = styled(Container)`
@@ -59,7 +59,7 @@ export const StyledTopNavigationLink = styled(Link)`
   padding: 0 20px;
   display: flex;
   align-items: center;
-  color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+  color: ${(p) => p.theme.colorTextInverse};
   text-decoration: none;
 
   &:hover {
@@ -73,11 +73,12 @@ export const StyledTopNavigationAnchor = styled.a`
   padding: 0 20px;
   display: flex;
   align-items: center;
-  color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+  color: ${(p) => p.theme.colorTextInverse};
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
+    color: ${(p) => p.theme.colorTextInverse};
     background-color: rgba(0, 0, 0, 0.2);
   }
 `
@@ -91,7 +92,7 @@ export const StyledGitlabIcon = styled(GitlabIcon)`
 export const StyledTitle = styled.h2`
   margin-top: 0;
   margin-bottom: ${(p) => p.theme.tokens.spacing03};
-  color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+  color: ${(p) => p.theme.colorTextInverse};
   font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
 
@@ -101,7 +102,7 @@ export const StyledTitle = styled.h2`
 `
 
 export const StyledText = styled.p`
-  color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+  color: ${(p) => p.theme.colorTextInverse};
   font-size: ${(p) => p.theme.tokens.fontSizeLarge};
 `
 
@@ -110,7 +111,7 @@ export const StyledBottomNavigationLink = styled(NavLink)`
   padding: 0 20px;
   display: flex;
   align-items: center;
-  color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+  color: ${(p) => p.theme.colorTextInverse};
   font-size: ${(p) => p.theme.tokens.fontSizeLarge};
   font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   text-decoration: none;
@@ -137,14 +138,14 @@ export const StyledPrimaryNavigation = styled(PrimaryNavigation)`
       font-size: ${(p) => p.theme.tokens.fontSizeLarge};
 
       a {
-        color: ${(p) => p.theme.tokens.colors.colorTextWhite};
+        color: ${(p) => p.theme.colorTextInverse};
 
         &:active,
         &.active {
           padding-bottom: calc(${(p) => p.theme.tokens.spacing05} - 4px);
           border-bottom: 4px solid white;
-          color: ${(p) => p.theme.tokens.colors.colorTextWhite};
-          background: ${(p) => p.theme.tokens.colors.brandPrimary1};
+          color: ${(p) => p.theme.colorTextInverse};
+          background: ${(p) => p.theme.tokens.colorBrand3};
         }
 
         &:hover,

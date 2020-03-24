@@ -5,11 +5,11 @@ import styled from 'styled-components'
 const StyledErrorMessage = styled.span`
   color: ${(p) => {
     switch (p.level) {
-      case 'notify':
-        return p.theme.color.notify
+      case 'warning':
+        return p.theme.tokens.colorAlertWarning
       case 'error':
       default:
-        return p.theme.color.error
+        return p.theme.tokens.colorAlertError
     }
   }};
 `

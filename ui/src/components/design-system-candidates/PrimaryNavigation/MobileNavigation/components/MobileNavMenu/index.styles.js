@@ -12,7 +12,7 @@ export const MobileNavWrapper = styled.nav`
   align-items: stretch;
   width: 100%;
   height: ${mobileNavigationHeight};
-  border-top: 1px solid ${(p) => p.theme.tokens.colors.colorBackground};
-  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
-  box-shadow: 0 0 10px 2px ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+  border-top: 1px solid ${(p) => p.theme.tokens.colorBackground};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
+  box-shadow: 0 0 10px 2px ${(p) => p.theme.tokens.colorPaletteGray400};
 `

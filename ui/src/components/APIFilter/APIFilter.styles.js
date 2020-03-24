@@ -9,7 +9,7 @@ export const StyledAPIFilter = styled.div`
     margin: 0 0 ${(p) => p.theme.tokens.spacing05};
     font-size: ${(p) => p.theme.tokens.fontSizeMedium};
     line-height: ${(p) => p.theme.tokens.lineHeightText};
-    color: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
-    font-weight: ${(p) => p.theme.font.weight.semibold};
+    color: ${(p) => p.theme.tokens.colorPaletteGray900};
+    font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   }
 `

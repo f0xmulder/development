@@ -1,24 +1,23 @@
 import React from 'react'
 import { bool } from 'prop-types'
 import { Link } from 'react-router-dom'
-
-import { StyledButton } from './Button.styles'
+import { Button } from '@commonground/design-system'
 
 const ButtonLink = (props) => (
-  <StyledButton {...props} as={props.disabled ? null : Link} />
+  <Button {...props} as={props.disabled ? null : Link} />
 )
 
 const ButtonA = (props) => (
-  <StyledButton {...props} as={props.disabled ? null : 'a'} />
+  <Button {...props} as={props.disabled ? null : 'a'} />
 )
 
 const propTypes = {
   disabled: bool,
 }
 
-StyledButton.propTypes = propTypes
+Button.propTypes = propTypes
 ButtonLink.propTypes = propTypes
 ButtonA.propTypes = propTypes
 
-export default StyledButton
+export default Button
 export { ButtonLink, ButtonA }

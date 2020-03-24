@@ -6,10 +6,10 @@ export const StyledPre = styled.pre`
   padding: 9px 48px 9px 14px;
   display: flex;
   white-space: pre-wrap;
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray300};
+  border: 1px solid ${(p) => p.theme.tokens.colorPaletteGray300};
   border-radius: ${(p) => p.theme.tokens.spacing02};
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
 `
 
 export const StyledCopyButton = styled.button`
@@ -20,14 +20,14 @@ export const StyledCopyButton = styled.button`
   display: flex;
   align-items: center;
   border: none;
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
   cursor: pointer;
 `
 
 export const StyledFeedback = styled.div`
   margin-right: ${(p) => p.theme.tokens.spacing02};
   padding: 0 ${(p) => p.theme.tokens.spacing02};
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
   font-family: 'Source Sans Pro', sans-serif;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   font-weight: ${(p) => p.theme.tokens.fontWeightBold};

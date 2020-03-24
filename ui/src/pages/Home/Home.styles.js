@@ -34,11 +34,11 @@ export const StyledIconButton = styled(Link)`
   align-items: center;
   border: none;
   border-radius: 4px;
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   text-decoration: none;
-  background-color: ${(p) => p.theme.tokens.colors.colorButtonPrimary};
+  background-color: ${(p) => p.theme.colorBackgroundButtonPrimary};
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
 
   &:hover {

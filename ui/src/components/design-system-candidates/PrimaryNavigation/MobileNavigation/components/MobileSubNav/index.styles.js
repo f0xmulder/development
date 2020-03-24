@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   left: 0;
   z-index: 2;
   width: 100%;
-  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
 
   transform: translate(0, 100%);
   transition: transform 120ms ease-out;
@@ -38,7 +38,7 @@ const StyledCloseButton = styled.button`
   border: none;
   margin: 0.5rem 1rem;
   line-height: 0;
-  color: ${(p) => p.theme.tokens.colors.colorPaletteGray600};
+  color: ${(p) => p.theme.tokens.colorPaletteGray600};
   background: none;
 
   &::before {
@@ -65,7 +65,7 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.li`
-  border-top: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray300};
+  border-top: 1px solid ${(p) => p.theme.tokens.colorPaletteGray300};
 `
 
 export const StyledLink = styled(NavLink)`
@@ -73,11 +73,11 @@ export const StyledLink = styled(NavLink)`
   display: block;
   padding: 0.75rem 1rem;
   text-decoration: none;
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
 
   &.active {
     font-weight: bold;
-    color: ${(p) => p.theme.tokens.colors.colorPaletteBlue800};
+    color: ${(p) => p.theme.tokens.colorBrand1};
   }
 
   svg {
@@ -87,7 +87,7 @@ export const StyledLink = styled(NavLink)`
     margin-top: -6px;
 
     path {
-      fill: ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+      fill: ${(p) => p.theme.tokens.colorPaletteGray400};
     }
   }
 `

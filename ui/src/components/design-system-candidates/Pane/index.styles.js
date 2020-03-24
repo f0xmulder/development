@@ -1,8 +1,8 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 // import mediaQueries from '../../../theme/mediaQueries'
 
 export const StyledBackground = styled.div`
-  background: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
+  background: ${(p) => p.theme.tokens.colorPaletteGray900};
   position: absolute;
   left: 0;
   right: 0;
@@ -21,11 +21,11 @@ export const StyledContainer = styled.div`
   z-index: 10;
   position: fixed;
   top: 0;
-  right 0;
+  right: 0;
   bottom: 0;
   left: 0;
   display: flex;
-  
+
   .slide-in-enter-active {
     transition: transform 250ms ease-out;
     transform: translateX(0);
@@ -37,7 +37,7 @@ export const StyledContainer = styled.div`
     transform: translateX(552px);
     transition: transform 150ms ease-in;
   }
-  
+
   .slide-in-enter-done {
     transform: translateX(0);
   }
@@ -68,8 +68,8 @@ export const StyledCloseButton = styled.button`
   border: 0 none;
   cursor: pointer;
   display: block;
-  color: ${(p) => p.theme.tokens.colors.colorPaletteGray600};
-  border-left: 1px dotted ${(p) => p.theme.tokens.colors.colorPaletteGray600};
+  color: ${(p) => p.theme.tokens.colorPaletteGray600};
+  border-left: 1px dotted ${(p) => p.theme.tokens.colorPaletteGray600};
   float: right;
   text-transform: uppercase;
   text-decoration: none;

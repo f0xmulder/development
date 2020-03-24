@@ -28,8 +28,7 @@ export const Term = styled.div`
 export const Key = styled.div`
   width: 50%;
   margin-bottom: 4px;
-  line-height: ${(p) => p.theme.font.lineHeight.small};
-  color: ${(p) => p.theme.color.text.light};
+  color: ${(p) => p.theme.colorTextLight};
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
 
   ${mq.smUp`
@@ -40,7 +39,6 @@ export const Key = styled.div`
 export const Value = styled.div`
   width: 50%;
   margin-bottom: 4px;
-  line-height: ${(p) => p.theme.font.lineHeight.small};
 
   ${mq.smUp`
     width: 100%;

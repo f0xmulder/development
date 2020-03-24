@@ -1,11 +1,11 @@
 // Box uses `themes.breakpoints` for the `width={[1, 1/2]}` array
 import { Flex, Box } from 'reflexbox/styled-components'
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  max-width: ${(p) => p.theme.tokens.containerWidth};
-  padding: 0 ${(p) => p.theme.tokens.containerPadding};
+  max-width: ${(p) => p.theme.containerWidth};
+  padding: 0 ${(p) => p.theme.containerPadding};
   margin: 0 auto;
 `
 

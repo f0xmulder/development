@@ -36,8 +36,8 @@ const Field = styled(FormikFieldWithFilteredProp)`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-family: 'Source Sans Pro', sans-serif;
   padding: ${(p) => p.theme.tokens.spacing04};
-  color: ${(p) => p.theme.tokens.colors.colorText};
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray500};
+  color: ${(p) => p.theme.colorText};
+  border: 1px solid ${(p) => p.theme.tokens.colorPaletteGray500};
   outline: none;
   line-height: ${(p) => p.theme.tokens.lineHeightText};
 
@@ -50,16 +50,16 @@ const Field = styled(FormikFieldWithFilteredProp)`
 
   &:focus {
     padding: calc(${(p) => p.theme.tokens.spacing04} - 1px);
-    border: 2px solid ${(p) => p.theme.tokens.colors.colorPaletteBlue700};
+    border: 2px solid ${(p) => p.theme.tokens.colorPaletteBlue700};
   }
 
   &:placeholder {
-    color: ${(p) => p.theme.tokens.colors.colorPaletteGray600};
+    color: ${(p) => p.theme.tokens.colorPaletteGray600};
   }
 
   &.invalid {
     padding: calc(${(p) => p.theme.tokens.spacing04} - 1px);
-    border: 2px solid ${(p) => p.theme.tokens.colors.colorAlertError};
+    border: 2px solid ${(p) => p.theme.tokens.colorAlertError};
   }
 `
 

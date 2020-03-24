@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components'
 import { CSSTransition } from 'react-transition-group'
 
 import theme from '../../../theme'

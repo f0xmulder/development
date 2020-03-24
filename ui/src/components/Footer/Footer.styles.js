@@ -7,11 +7,11 @@ export const FooterArea = styled.footer`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: ${(p) => p.theme.tokens.footerHeight};
-  background-color: ${(p) => p.theme.tokens.colors.footerBackgroundColor};
+  height: ${(p) => p.theme.footerHeight};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray800};
 
   ${mq.xs`
-    height: ${(p) => p.theme.tokens.footerHeightMobile};
+    height: ${(p) => p.theme.footerHeightMobile};
   `}
 `
 

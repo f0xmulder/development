@@ -17,7 +17,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 
   &:hover {
-    background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+    background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
   }
 
   ${mq.smUp`
@@ -34,7 +34,7 @@ export const StyledServiceName = styled.div`
   margin-bottom: ${(p) => p.theme.tokens.spacing02};
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightBold};
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
 `
 
 export const StyledOrganizationName = styled.div`
@@ -42,7 +42,7 @@ export const StyledOrganizationName = styled.div`
   margin-bottom: ${(p) => p.theme.tokens.spacing03};
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colors.colorPaletteGray700};
+  color: ${(p) => p.theme.tokens.colorPaletteGray700};
 
   ${mq.smUp`
     margin-bottom: 0;

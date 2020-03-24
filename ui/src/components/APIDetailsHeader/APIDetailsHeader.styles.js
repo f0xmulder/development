@@ -13,7 +13,7 @@ const ButtonStyling = css`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
   background: transparent;
-  color: ${(p) => p.theme.tokens.colors.colorTextLink};
+  color: ${(p) => p.theme.colorTextLink};
   cursor: pointer;
 `
 

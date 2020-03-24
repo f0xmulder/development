@@ -1,4 +1,4 @@
-import { css } from 'styled-components/macro'
+import { css } from 'styled-components'
 
 import { breakpoints } from './index'
 
@@ -82,7 +82,7 @@ for (let i = 0, l = keys.length; i < l; i++) {
 /**
  * Use like this:
  *
- * import styled from 'styled-components/macro'
+ * import styled from 'styled-components'
  * import { media } from 'theme/mediaQueries'
  * const MediaTest = styled.div`
  *     // default style

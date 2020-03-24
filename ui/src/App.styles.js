@@ -8,9 +8,9 @@ export const AppContainer = styled.div`
 `
 
 export const ContentWrap = styled.div`
-  padding-bottom: ${(p) => p.theme.tokens.footerHeight};
+  padding-bottom: ${(p) => p.theme.footerHeight};
 
   ${mq.xs`
-    padding-bottom: ${(p) => p.theme.tokens.footerHeightMobile};
+    padding-bottom: ${(p) => p.theme.footerHeightMobile};
   `}
 `

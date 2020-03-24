@@ -7,7 +7,7 @@ export const H1 = styled.h1`
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
   font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
   font-weight: ${(p) => p.theme.tokens.fontWeightBold};
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
 
   ${mq.smUp`
     font-size: ${(p) => p.theme.tokens.fontSizeXXLarge};
@@ -19,7 +19,7 @@ export const H2 = styled.h2`
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
   font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
 
   ${mq.smUp`
     margin: ${(p) =>

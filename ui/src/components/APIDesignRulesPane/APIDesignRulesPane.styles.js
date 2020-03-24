@@ -34,6 +34,5 @@ export const StyledDesignRulesTitle = styled.h4`
 `
 
 export const StyledLink = styled.a`
-  color: ${(p) => p.theme.color.primary.normal};
   text-decoration: none;
 `

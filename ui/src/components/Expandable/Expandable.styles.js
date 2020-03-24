@@ -10,8 +10,7 @@ export const StyledToggleButton = styled.button`
   border: none;
   background-color: transparent;
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
-  color: ${(p) => p.theme.tokens.colors.colorTextLink};
-  font-weight: ${(p) => p.theme.font.weight.normal};
+  color: ${(p) => p.theme.colorTextLink};
   text-align: left;
   cursor: pointer;
 `

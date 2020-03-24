@@ -14,22 +14,22 @@ export const StyledNavLink = styled(NavLink)`
   font-family: 'Source Sans Pro', sans-serif;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   font-weight: 500;
-  color: ${(p) => p.theme.tokens.colors.colorText};
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+  color: ${(p) => p.theme.colorText};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
 
   &:focus,
   &:hover,
   &:active {
-    color: ${(p) => p.theme.tokens.colors.colorText};
+    color: ${(p) => p.theme.colorText};
     outline: 0;
   }
 
   &.active {
-    color: ${(p) => p.theme.tokens.colors.colorPaletteBlue800};
-    background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+    color: ${(p) => p.theme.colorTextLink};
+    background-color: ${(p) => p.theme.tokens.colorBackground};
 
     svg path {
-      fill: ${(p) => p.theme.tokens.colors.colorPaletteBlue800};
+      fill: ${(p) => p.theme.colorTextLink};
     }
   }
 `

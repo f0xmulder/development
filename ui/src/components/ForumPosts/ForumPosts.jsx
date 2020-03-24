@@ -30,7 +30,7 @@ const ForumPosts = ({ forum }) => {
     <>
       <h3>Laatste forum onderwerpen</h3>
       {error && (
-        <ErrorMessage level="notify">
+        <ErrorMessage level="warning">
           Fout bij het ophalen van forumcontent
         </ErrorMessage>
       )}

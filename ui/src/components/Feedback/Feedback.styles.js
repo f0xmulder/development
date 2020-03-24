@@ -6,7 +6,7 @@ import gitlabIcon from '../Icons/gitlab-black-icon.svg'
 import externalIcon from '../Icons/external-icon.svg'
 
 export const FeedbackArea = styled.div`
-  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
 `
 
 export const FeedbackContainer = styled(Container)`
@@ -39,11 +39,11 @@ export const StyledIconButton = styled.a`
   align-items: center;
   border: none;
   border-radius: 4px;
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   text-decoration: none;
-  background-color: ${(p) => p.theme.tokens.colors.colorButtonSecondary};
+  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
 
   &:hover {

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@commonground/design-system": "9.1.2",
     "change-case": "4.1.1",
     "core-js": "3.3.2",
     "debounce": "1.2.0",

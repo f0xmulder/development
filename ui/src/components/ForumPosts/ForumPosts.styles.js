@@ -8,13 +8,13 @@ export const PostList = styled.ul`
 export const Post = styled.li`
   margin-bottom: 8px;
   &:hover {
-    background-color: ${(p) => p.theme.color.tagBackground};
+    background-color: ${(p) => p.theme.colorBackgroundTag};
   }
 `
 
 export const PostInfo = styled.span`
   font-size: 0.8rem;
-  color: ${(p) => p.theme.color.text.light};
+  color: ${(p) => p.theme.colorTextLight};
 `
 
 export const ForumLinkSection = styled.section`

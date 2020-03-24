@@ -9,9 +9,9 @@ import addIcon from '../../components/Icons/add_icon.svg'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
-  max-width: ${(p) => p.theme.tokens.containerWidth};
+  max-width: ${(p) => p.theme.containerWidth};
   margin: 0 auto;
-  padding: 0 ${(p) => p.theme.tokens.containerPadding};
+  padding: 0 ${(p) => p.theme.containerPadding};
   flex-wrap: wrap;
 `
 
@@ -41,11 +41,11 @@ export const StyledIconButton = styled(Link)`
   white-space: nowrap;
   border: none;
   border-radius: 4px;
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   text-decoration: none;
-  background-color: ${(p) => p.theme.tokens.colors.colorButtonSecondary};
+  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
 
   ${mq.smDown`

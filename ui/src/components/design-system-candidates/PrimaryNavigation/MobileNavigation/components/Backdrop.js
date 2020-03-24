@@ -11,7 +11,7 @@ const StyledBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
+  background-color: ${(p) => p.theme.tokens.colorPaletteGray900};
   opacity: 0;
 
   transition: opacity ${TRANSITION_TIME}ms, transform 0ms;

@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 import mq from '../../theme/mediaQueries'
 
@@ -14,13 +14,13 @@ export const StyledBorder = styled.div`
       transparent 50%,
       ${(p) =>
           p.grade <= 5
-            ? p.theme.tokens.colors.colorPaletteGray300
+            ? p.theme.tokens.colorPaletteGray300
             : gradeToColor(p.grade)}
         50%
     ),
     linear-gradient(
       90deg,
-      ${(p) => p.theme.tokens.colors.colorPaletteGray300} 50%,
+      ${(p) => p.theme.tokens.colorPaletteGray300} 50%,
       transparent 50%
     );
 
@@ -43,11 +43,11 @@ export const StyledCircle = styled.div`
   top: 3px;
   left: 3px;
   border-radius: 50%;
-  background-color: ${(p) => p.theme.color.siteBackground};
+  background-color: ${(p) => p.theme.colorBackgroundSite};
 
   font-size: 13px;
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colors.colorPaletteGray700};
+  color: ${(p) => p.theme.tokens.colorPaletteGray700};
 
   ${(p) =>
     p.largeAtMediaQuery

@@ -41,11 +41,10 @@ export const HelperMessage = styled.small`
   margin-bottom: ${(p) => p.theme.tokens.spacing02};
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
-  color: ${(p) => p.theme.tokens.colors.colorTextLabel};
+  color: ${(p) => p.theme.colorTextLabel};
 `
 
 export const ErrorMessage = styled.small`
-  font-size: ${(p) => p.theme.font.size.small};
-  line-height: ${(p) => p.theme.font.lineHeight.small};
-  color: ${(p) => p.theme.color.error};
+  font-size: ${(p) => p.theme.fontSizeSmall};
+  color: ${(p) => p.theme.tokens.colorAlertError};
 `

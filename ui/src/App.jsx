@@ -1,8 +1,9 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import theme from './theme'
+import { GlobalStyles as DSGlobalStyles } from '@commonground/design-system'
 
+import theme from './theme'
 import Home from './pages/Home/Home'
 import SubmitAPI from './pages/SubmitAPI/SubmitAPI'
 import About from './pages/About/About'
@@ -24,7 +25,9 @@ const APISpecification = lazy(() =>
 const App = () => (
   <ThemeProvider theme={theme}>
     <AppContainer className="App">
+      <DSGlobalStyles />
       <GlobalStyles />
+
       <ContentWrap>
         <Router>
           <Header />

@@ -52,7 +52,7 @@ export const StyledList = styled.ul`
 
 export const StyledListItem = styled.li`
   &:not(:first-child) {
-    border-top: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray100};
+    border-top: 1px solid ${(p) => p.theme.tokens.colorPaletteGray100};
   }
 
   &:first-child a {
@@ -72,5 +72,5 @@ export const StyledPill = styled.span`
   border-radius: 25px;
   text-align: center;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
-  background-color: ${(p) => p.theme.tokens.colors.colorButtonSecondary};
+  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
 `

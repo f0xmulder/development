@@ -6,6 +6,6 @@ export default styled.span`
   text-align: center;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colors.colorText};
-  background-color: ${(p) => p.theme.tokens.colors.colorButtonSecondary};
+  color: ${(p) => p.theme.colorText};
+  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
 `

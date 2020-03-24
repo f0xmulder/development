@@ -1,5 +1,11 @@
 import media, { down, up, only } from './mediaQueries'
 
+jest.mock('@commonground/design-system', () => ({
+  defaultTheme: {
+    tokens: {},
+  },
+}))
+
 jest.mock('styled-components', () => ({
   // For the template literal functions, css`` is called twice, we receive a nested array like:
   // [[<handles>], <media query>, [[<passed css>]]]

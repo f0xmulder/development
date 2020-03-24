@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, func, oneOfType, node, element } from 'prop-types'
-import { ThemeProvider } from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components'
 import theme from '../../../theme'
 import { StyledSearch, StyledInput, StyledSearchIcon } from './index.styles'
 

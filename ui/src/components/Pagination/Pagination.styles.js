@@ -11,14 +11,9 @@ export const StyledPageButton = styled.button`
   height: 40px;
   margin-right: ${(p) => p.theme.tokens.spacing01};
   border: none;
-  color: ${(p) =>
-    p.current
-      ? p.theme.tokens.colors.colorTextWhite
-      : p.theme.tokens.colors.colorText};
+  color: ${(p) => (p.current ? p.theme.colorTextInverse : p.theme.colorText)};
   background-color: ${(p) =>
-    p.current
-      ? p.theme.tokens.colors.colorPaletteBlue800
-      : p.theme.tokens.colors.colorButtonSecondary};
+    p.current ? p.theme.tokens.colorBrand3 : p.theme.tokens.colorBrand2};
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   cursor: ${(p) => (p.current ? 'default' : 'pointer')};
   user-select: none;
@@ -36,14 +31,10 @@ export const StyledPageButton = styled.button`
 
 export const StyledArrowButton = styled(StyledPageButton)`
   &:disabled {
-    color: ${(p) => p.theme.tokens.colors.colorPaletteGray500};
-    background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray200};
+    color: ${(p) => p.theme.tokens.colorPaletteGray500};
+    background-color: ${(p) => p.theme.tokens.colorPaletteGray200};
     filter: brightness(100%);
     cursor: default;
-
-    ${mq.smUp`
-      display: none;
-    `}
   }
 
   ${mq.xs`

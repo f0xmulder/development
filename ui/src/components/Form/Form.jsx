@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Field as FormikField } from 'formik'
 import mq from '../../theme/mediaQueries'
 import ExtendedFormikField from '../design-system-candidates/Field'
@@ -16,7 +16,7 @@ export const Legend = styled.legend`
   font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
   margin-bottom: ${(p) => p.theme.tokens.spacing06};
   padding: 0;
 `
@@ -24,14 +24,14 @@ export const Legend = styled.legend`
 export const Label = styled.label`
   display: block;
   margin-bottom: ${(p) => p.theme.tokens.spacing02};
-  color: ${(p) => p.theme.tokens.colors.colorTextInputLabel};
+  color: ${(p) => p.theme.colorTextInputLabel};
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
 `
 
 export const Field = styled(ExtendedFormikField)`
   height: 48px;
   border-radius: 0;
-  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
 
   ${mq.xs`
     max-width: 100%;
@@ -44,7 +44,7 @@ export const SelectField = styled(ExtendedFormikField)`
   height: 48px;
   border-radius: 0;
   background: url(${arrowDownSolidIcon}) right center no-repeat;
-  background-color: ${(p) => p.theme.tokens.colors.colorBackground};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
 
   ${mq.xs`
     max-width: 100%;
@@ -59,7 +59,7 @@ export const CheckboxField = styled(FormikField)`
   margin-right: ${(p) => p.theme.tokens.spacing05};
   padding: 0;
   position: relative;
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorBorderInput};
+  border: 1px solid ${(p) => p.theme.colorBorderInput};
   background: #ffffff;
   border-radius: 2px;
 
@@ -68,7 +68,7 @@ export const CheckboxField = styled(FormikField)`
   }
 
   &:checked {
-    background: ${(p) => p.theme.tokens.colors.brandPrimary1};
+    background: ${(p) => p.theme.tokens.colorBrand3};
     border: 0 none;
 
     &::after {
@@ -86,7 +86,7 @@ export const RadioOptionGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: fit-content;
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+  border: 1px solid ${(p) => p.theme.tokens.colorPaletteGray400};
 
   ${mq.xs`
     width: 100%;
@@ -95,11 +95,11 @@ export const RadioOptionGroup = styled.div`
 
 export const RadioOptionWrapper = styled.div`
   position: relative;
-  color: ${(p) => p.theme.tokens.colors.colorText};
+  color: ${(p) => p.theme.colorText};
   font-weight: ${(p) => p.theme.tokens.fontWeightBold};
 
   &:not(:last-child) {
-    border-right: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray400};
+    border-right: 1px solid ${(p) => p.theme.tokens.colorPaletteGray400};
   }
 
   ${mq.xs`
@@ -109,10 +109,10 @@ export const RadioOptionWrapper = styled.div`
 
   label {
     margin: 0;
-    padding: ${(p) => p.theme.tokens.spacing04}
-      ${(p) => p.theme.tokens.spacing06};
+    padding: ${(p) =>
+      `${p.theme.tokens.spacing04} ${p.theme.tokens.spacing06}`};
     white-space: nowrap;
-    background-color: ${(p) => p.theme.tokens.colors.colorPaletteGray300};
+    background-color: ${(p) => p.theme.tokens.colorPaletteGray300};
     font-weight: ${(p) => p.theme.tokens.fontWeightBold};
     box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16);
   }
@@ -124,37 +124,13 @@ export const RadioOptionWrapper = styled.div`
 
     &:checked + label {
       color: white;
-      background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+      background-color: ${(p) => p.theme.tokens.colorBrand3};
       box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.16);
     }
 
     &:focus + label {
       color: white;
-      background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+      background-color: ${(p) => p.theme.tokens.colorBrand3};
     }
   }
-`
-
-export const Button = styled.button`
-  text-align: center;
-  height: 40px;
-  line-height: ${(p) => p.theme.font.lineHeight.normal};
-  padding: 0 20px;
-  border: 0 none;
-  border-radius: 5px;
-  background-color: ${(p) => p.theme.color.primary.normal};
-  color: #ffffff;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: ${(p) => p.theme.font.size.normal};
-  font-weight: ${(p) => p.theme.font.weight.semibold};
-
-  ${(p) =>
-    p.variant === 'secondary'
-      ? css`
-          background-color: #ffffff;
-          color: ${p.theme.color.primary.normal};
-          border: 1px solid ${p.theme.color.primary.normal};
-        `
-      : ''}
 `

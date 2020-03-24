@@ -31,12 +31,12 @@ export const StyledCheckboxGroupField = styled.div`
   label {
     font-size: ${(p) => p.theme.tokens.fontSizeMedium};
     line-height: ${(p) => p.theme.tokens.lineHeightText};
-    color: ${(p) => p.theme.tokens.colors.colorPaletteGray900};
+    color: ${(p) => p.theme.tokens.colorPaletteGray900};
   }
 
   .count {
     margin-left: ${(p) => p.theme.tokens.spacing03};
-    color: ${(p) => p.theme.color.text.light};
+    color: ${(p) => p.theme.colorTextLight};
     font-size: ${(p) => p.theme.tokens.fontSizeSmall};
     line-height: ${(p) => p.theme.tokens.lineHeightText};
   }

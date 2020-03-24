@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 export const StyledSearch = styled.div`
   position: relative;
@@ -31,8 +31,8 @@ export const StyledInput = styled.input`
   padding-top: ${(p) => p.theme.tokens.spacing04};
   padding-bottom: ${(p) => p.theme.tokens.spacing04};
   padding-right: ${(p) => p.theme.tokens.spacing04};
-  color: ${(p) => p.theme.tokens.colors.colorText};
-  border: 1px solid ${(p) => p.theme.tokens.colors.colorPaletteGray500};
+  color: ${(p) => p.theme.colorText};
+  border: 1px solid ${(p) => p.theme.tokens.colorPaletteGray500};
   outline: none;
   line-height: ${(p) => p.theme.tokens.lineHeightText};
 
@@ -41,10 +41,10 @@ export const StyledInput = styled.input`
     padding-top: calc(${(p) => p.theme.tokens.spacing04} - 1px);
     padding-bottom: calc(${(p) => p.theme.tokens.spacing04} - 1px);
     padding-right: calc(${(p) => p.theme.tokens.spacing04} - 1px);
-    border: 2px solid ${(p) => p.theme.tokens.colors.colorPaletteBlue700};
+    border: 2px solid ${(p) => p.theme.tokens.colorPaletteBlue700};
   }
 
   &:placeholder {
-    color: ${(p) => p.theme.tokens.colors.colorPaletteGray600};
+    color: ${(p) => p.theme.tokens.colorPaletteGray600};
   }
 `

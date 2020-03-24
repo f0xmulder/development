@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, wait } from '@testing-library/react'
 import { MemoryRouter as Router } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components'
 
 import theme from '../../../theme'
 import PrimaryNavigation from './index'

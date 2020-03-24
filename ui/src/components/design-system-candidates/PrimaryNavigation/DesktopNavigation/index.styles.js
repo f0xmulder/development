@@ -5,7 +5,7 @@ import mq from '../../../../theme/mediaQueries'
 import { Container as GridContainer } from '../../Grid'
 
 export const Wrapper = styled.div`
-  background-color: ${(p) => p.theme.tokens.colors.brandPrimary1};
+  background-color: ${(p) => p.theme.tokens.colorBrand3};
 `
 
 export const Container = styled(GridContainer)`
@@ -27,15 +27,15 @@ export const ListItem = styled.li`
   a {
     padding: ${(p) =>
       `${p.theme.tokens.spacing05} ${p.theme.tokens.spacing06}`};
-    color: ${(p) => p.theme.tokens.colors.colorText};
+    color: ${(p) => p.theme.colorText};
     font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
     text-decoration: none;
 
     &:active,
     &.active {
-      color: ${(p) => p.theme.tokens.colors.colorText};
+      color: ${(p) => p.theme.colorText};
       background: ${(p) =>
-        Color(p.theme.tokens.colors.colorBackground)
+        Color(p.theme.tokens.colorBackground)
           .alpha(0.5)
           .hsl()
           .string()};
