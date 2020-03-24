@@ -128,6 +128,7 @@ Deploy Review App:
   script:
     - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
+        kubectl create namespace $REVIEW_NAMESPACE || true
         helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
         --namespace $REVIEW_NAMESPACE \
         --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
@@ -162,7 +163,7 @@ Remove Review App:
     GIT_STRATEGY: none
     KUBECONFIG: /secrets/kubeconfig/review.conf
   script:
-    - helm delete --purge $REVIEW_NAMESPACE
+    - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
     - kubectl delete namespace $REVIEW_NAMESPACE
   when: manual
   environment:
