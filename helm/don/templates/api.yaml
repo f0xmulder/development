@@ -77,7 +77,7 @@ kind: Secret
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
 type: Opaque
 data:
-  gitlabUrl: {{.Values.gitlabUrl | b64enc}}
-  gitlabAccessToken: {{.Values.gitlabAccessToken | b64enc}}
-  gitlabProjectId: {{.Values.gitlabProjectId | b64enc}}
+  gitlabUrl: {{.Values.gitlabUrl | b64enc | quote}}
+  gitlabAccessToken: {{.Values.gitlabAccessToken | b64enc | quote}}
+  gitlabProjectId: {{.Values.gitlabProjectId | b64enc | quote}}
 {{ end }}
