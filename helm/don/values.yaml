@@ -7,8 +7,6 @@ apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api:master
 uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui:master
 docsImage: registry.gitlab.com/commonground/developer.overheid.nl/docs:master
 
-secretKey: supersecretkey
-
 gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
 gitlabProjectId: "0"
