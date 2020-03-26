@@ -1,0 +1,37 @@
+{
+    "description": "Test Description",
+    "organization_name": "Test Organization Name",
+    "service_name": "Test Service Name",
+    "api_type": "REST/JSON",
+    "api_authentication": "API Key",
+    "environments": [{
+        "name": "Productie",
+        "api_url": "Test API URL",
+        "specification_url": "Test Specification URL",
+        "documentation_url": "Test Documentation URL"
+    }, {
+        "name": "Acceptatie",
+        "api_url": "Test Acceptance API URL",
+        "specification_url": "Test Acceptance Specification URL",
+        "documentation_url": "Test Acceptance Documentation URL"
+    }],
+    "forum": {
+        "vendor": "discourse",
+        "url": "https://forum.test.org"
+    },
+    "contact": {
+        "email": "name@example.nl",
+        "phone": "0031612345678",
+        "fax": "0031687654321",
+        "chat": "https://nl-x.slack.com"
+    },
+    "relations": {
+        "company-service": ["reference-implementation"]
+    },
+    "terms_of_use": {
+        "government_only": true,
+        "pay_per_use": false,
+        "uptime_guarantee": 99.9,
+        "support_response_time": "2 days"
+    }
+}

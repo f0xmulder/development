@@ -20,8 +20,6 @@ ENV PATH="/app/venv/bin:${PATH}"
 
 COPY ./api/api /app/api
 COPY ./api/core /app/core
-# APIs fixture will be generated on the fly
-RUN rm -f /app/core/fixtures/apis.json
 COPY ./api/manage.py /app
 COPY ./data /app/data
 
@@ -29,7 +27,6 @@ COPY ./api/docker/start.sh /
 RUN chmod +x /start.sh
 
 RUN mkdir -p /app/static && chown www-data:www-data /app/static
-RUN mkdir -p /app/core/fixtures && chown www-data:www-data /app/core/fixtures
 
 ENV PYTHONUNBUFFERED 1
 ENV DON_ENVIRONMENT production
