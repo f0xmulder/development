@@ -5,7 +5,6 @@ import Card from '../Card/Card'
 import {
   APIListHeader,
   TotalAPIs,
-  StyledIconLink,
   StyledCard,
   StyledList,
   StyledListItem,
@@ -18,7 +17,6 @@ const APIList = ({ total, apis }) => (
       <TotalAPIs>
         <span data-test="total">{total}</span> API&#39;s
       </TotalAPIs>
-      <StyledIconLink to="apis/toevoegen">API toevoegen</StyledIconLink>
     </APIListHeader>
 
     <StyledCard>

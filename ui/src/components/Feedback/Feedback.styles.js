@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Button } from '@commonground/design-system'
 
 import mq from '../../theme/mediaQueries'
 import { Container } from '../design-system-candidates/Grid'
@@ -30,34 +31,15 @@ export const StyledText = styled.p`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
 `
 
-export const StyledIconButton = styled.a`
-  width: auto;
-  height: 40px;
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-  padding: 0 20px;
-  display: inline-flex;
-  align-items: center;
-  border: none;
-  border-radius: 4px;
-  color: ${(p) => p.theme.colorText};
-  font-size: ${(p) => p.theme.tokens.fontSizeMedium};
-  font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
-  text-decoration: none;
-  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
-
-  &:hover {
-    filter: brightness(90%);
-  }
-
+export const StyledIconButton = styled(Button)`
   &:before {
-    height: 20px;
+    height: 1rem;
     margin-right: ${(p) => p.theme.tokens.spacing06};
     content: url(${gitlabIcon});
   }
 
   &:after {
-    height: 20px;
+    height: 1rem;
     margin-left: ${(p) => p.theme.tokens.spacing06};
     content: url(${externalIcon});
   }

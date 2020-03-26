@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Button } from '@commonground/design-system'
 
 import mq from '../../theme/mediaQueries'
 import { Container } from '../../components/design-system-candidates/Grid'
@@ -24,27 +24,7 @@ export const StyledCard = styled(Card)`
   max-width: 471px;
 `
 
-export const StyledIconButton = styled(Link)`
-  width: auto;
-  height: 40px;
-  padding-left: ${(p) => p.theme.tokens.spacing06};
-  padding-right: ${(p) => p.theme.tokens.spacing03};
-  align-self: flex-end;
-  display: inline-flex;
-  align-items: center;
-  border: none;
-  border-radius: 4px;
-  color: ${(p) => p.theme.colorText};
-  font-size: ${(p) => p.theme.tokens.fontSizeMedium};
-  font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
-  text-decoration: none;
-  background-color: ${(p) => p.theme.colorBackgroundButtonPrimary};
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
-
-  &:hover {
-    filter: brightness(90%);
-  }
-
+export const StyledIconButton = styled(Button)`
   &:after {
     height: 20px;
     margin-left: ${(p) => p.theme.tokens.spacing04};

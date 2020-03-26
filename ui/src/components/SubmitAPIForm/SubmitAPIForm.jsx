@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { array, object } from 'prop-types'
+import { Button } from '@commonground/design-system'
 
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
 import {
@@ -13,7 +14,6 @@ import {
   RadioOptionGroup,
   RadioOptionWrapper,
 } from '../Form/Form'
-import Button from '../Button/Button'
 import {
   StyledFormGroupColumn,
   StyledFormGroupColumnContainer,

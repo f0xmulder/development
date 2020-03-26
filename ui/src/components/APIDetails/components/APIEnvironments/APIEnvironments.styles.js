@@ -23,8 +23,7 @@ export const Buttons = styled.div`
   flex-wrap: wrap;
 
   & > :first-child {
-    margin: ${(p) =>
-      `0 ${p.theme.tokens.spacing05} ${p.theme.tokens.spacing05} 0`};
+    margin-right: ${(p) => p.theme.tokens.spacing05};
   }
 `
 
@@ -34,7 +33,7 @@ export const EnvUri = styled(CodeBlock)`
   margin-bottom: ${(p) => p.theme.tokens.spacing05};
 
   ${mq.mdUp`
-    flex: 1 0 auto;
+    flex: 1 0 0;
     margin-right: ${(p) => p.theme.tokens.spacing05};
   `}
 `

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { object } from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import APIList from '../../components/APIList/APIList'
 import Pagination from '../../components/Pagination/Pagination'
@@ -155,8 +156,11 @@ class APIOverview extends Component {
               </label>
             </form>
           </div>
-          <StyledIconButton to="apis/toevoegen">API toevoegen</StyledIconButton>
+          <StyledIconButton as={Link} to="apis/toevoegen" variant="secondary">
+            API toevoegen
+          </StyledIconButton>
         </StyledOverviewHeader>
+
         {!loaded ? null : error ? (
           <p data-test="error-message">
             Er ging iets fout tijdens het ophalen van de API&#39;s.

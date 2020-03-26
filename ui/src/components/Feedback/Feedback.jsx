@@ -21,9 +21,11 @@ const Feedback = () => {
           worden.
         </StyledText>
         <StyledIconButton
+          as="a"
           href="https://gitlab.com/commonground/developer.overheid.nl/issues"
           target="_blank"
           rel="noopener noreferrer"
+          variant="secondary"
         >
           Melding maken op Gitlab
         </StyledIconButton>

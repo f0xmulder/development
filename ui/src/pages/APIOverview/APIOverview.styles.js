@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Button } from '@commonground/design-system'
 import Search from '../../components/design-system-candidates/Search'
 
 import mq from '../../theme/mediaQueries'
@@ -31,30 +31,8 @@ export const StyledSearch = styled(Search)`
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 `
 
-export const StyledIconButton = styled(Link)`
-  height: 40px;
-  margin-left: ${(p) => p.theme.tokens.spacing03};
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  border: none;
-  border-radius: 4px;
-  color: ${(p) => p.theme.colorText};
-  font-size: ${(p) => p.theme.tokens.fontSizeMedium};
-  font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
-  text-decoration: none;
-  background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
-  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.32);
-
-  ${mq.smDown`
-    display: none;
-  `}
-
-  &:hover {
-    filter: brightness(90%);
-  }
+export const StyledIconButton = styled(Button)`
+  align-self: flex-start;
 
   &:before {
     height: 16px;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { H1, H2 } from '../../components/Headings/Headings'
 import {
@@ -31,7 +32,9 @@ const Home = () => (
           Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
           Nederland aanbieden.
         </p>
-        <StyledIconButton to="/apis">API overzicht</StyledIconButton>
+        <StyledIconButton as={Link} to="/apis">
+          API overzicht
+        </StyledIconButton>
       </StyledCard.Body>
     </StyledCard>
   </StyledHomePage>

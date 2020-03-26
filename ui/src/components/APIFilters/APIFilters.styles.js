@@ -1,8 +1,7 @@
 import styled from 'styled-components'
+import { Button } from '@commonground/design-system'
 
 import mq from '../../theme/mediaQueries'
-
-import Button from '../Button/Button'
 
 export const StyledFilterButton = styled(Button)`
   width: 100%;

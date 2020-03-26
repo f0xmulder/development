@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
+import { Button } from '@commonground/design-system'
 import { H2, H3 } from '../../../Headings/Headings'
-import { ButtonLink, ButtonA } from '../../../Button/Button'
 
 import {
   Wrapper,
@@ -27,7 +28,9 @@ const APIEnvironments = ({ environments, apiId }) => (
             <EnvUri data-test="apiUrl">{env.apiUrl}</EnvUri>
 
             <Buttons>
-              <ButtonLink
+              <Button
+                as={hasSpecification ? Link : null}
+                variant="secondary"
                 to={
                   hasSpecification
                     ? `/detail/${apiId}/${env.name.toLowerCase()}/specificatie`
@@ -37,9 +40,11 @@ const APIEnvironments = ({ environments, apiId }) => (
                 data-test="api-specification-url"
               >
                 Specificatie
-              </ButtonLink>
+              </Button>
 
-              <ButtonA
+              <Button
+                as={env.documentationUrl ? 'a' : null}
+                variant="secondary"
                 href={env.documentationUrl || null}
                 disabled={!env.documentationUrl}
                 target="_blank"
@@ -47,7 +52,7 @@ const APIEnvironments = ({ environments, apiId }) => (
                 data-test="api-documentation-url"
               >
                 Documentatie <ExternalIcon />
-              </ButtonA>
+              </Button>
             </Buttons>
           </EnvData>
         </Environment>
