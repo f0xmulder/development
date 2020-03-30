@@ -17,7 +17,6 @@
     "redoc": "2.0.0-rc.20",
     "reflexbox": "4.0.6",
     "styled-components": "4.4.0",
-    "typeface-source-sans-pro": "0.0.75",
     "yup": "0.27.0"
   },
   "devDependencies": {

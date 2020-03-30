@@ -41,7 +41,7 @@ export const StyledInput = styled.input`
     padding-top: calc(${(p) => p.theme.tokens.spacing04} - 1px);
     padding-bottom: calc(${(p) => p.theme.tokens.spacing04} - 1px);
     padding-right: calc(${(p) => p.theme.tokens.spacing04} - 1px);
-    border: 2px solid ${(p) => p.theme.tokens.colorPaletteBlue700};
+    border: 2px solid ${(p) => p.theme.tokens.colorFocus};
   }
 
   &:placeholder {
