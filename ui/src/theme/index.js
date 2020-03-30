@@ -51,4 +51,7 @@ theme.colorTextInactive = '#a3a3a3'
 // Input
 theme.colorBorderInput = tokens.colorPaletteGray500
 
+// Override default breakpoints which is an object. Reflexbox requires an array
+theme.breakpoints = Object.values(breakpoints).splice(0, 1)
+
 export default theme
