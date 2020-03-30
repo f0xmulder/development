@@ -43,7 +43,7 @@ Validate API definitions:
     - go run ./cmd/don-validate/main.go
 
 Lint and test API:
-  image: python:3.7
+  image: python:3.8
   stage: test
   services:
     - postgres:11.6-alpine
