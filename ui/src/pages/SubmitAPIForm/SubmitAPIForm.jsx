@@ -142,11 +142,11 @@ class SubmitAPIFormPage extends Component {
 
   componentDidMount() {
     this.fetchApiList()
-      .then((response) =>
-        Object.assign({}, response, {
-          apis: response.apis.map((api) => modelFromAPIResponse(api)),
-        }),
-      )
+      .then((response) => {
+        return {
+          apis: response.results.map((api) => modelFromAPIResponse(api)),
+        }
+      })
       .then(
         (result) => {
           this.setState({ result, apisLoaded: true })

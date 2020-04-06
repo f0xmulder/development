@@ -51,10 +51,11 @@ describe('SubmitAPI', () => {
   })
 
   describe('loading the available APIs', () => {
-    it('should store the available apis as state', () => {
+    it('should store (only) the available apis as state', () => {
       const apiPromise = Promise.resolve({
         total: 1,
-        apis: [goApiMock],
+        page: 1,
+        results: [goApiMock],
       })
       SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
 
@@ -62,7 +63,6 @@ describe('SubmitAPI', () => {
 
       return flushPromises().then(() => {
         expect(wrapper.state('result')).toEqual({
-          total: 1,
           apis: [modelFromAPIResponse(goApiMock)],
         })
       })
