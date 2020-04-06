@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import * as Yup from 'yup'
 import { convertEmptyValueTo } from '../../components/Form/yup-transforms'
 import {

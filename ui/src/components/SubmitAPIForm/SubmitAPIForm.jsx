@@ -1,6 +1,8 @@
-/* eslint-disable react/prop-types */
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
-import { array, object } from 'prop-types'
+import { array, object, func, bool } from 'prop-types'
 import { Button } from '@commonground/design-system'
 
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
@@ -421,6 +423,12 @@ SubmitAPIForm.propTypes = {
   apis: array.isRequired,
   errors: object,
   values: object,
+
+  status: object,
+  touched: object,
+  handleReset: func,
+  handleSubmit: func,
+  isSubmitting: bool,
 }
 
 SubmitAPIForm.defaultProps = {

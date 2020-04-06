@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React, { useEffect, useState } from 'react'
 import { func, string } from 'prop-types'
 import { useParams } from 'react-router-dom'

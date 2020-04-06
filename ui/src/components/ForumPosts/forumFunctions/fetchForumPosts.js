@@ -1,6 +1,9 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import objectKeysToCamelCase from '../../../utils/objectKeysToCamelCase'
 
-export default async function(vendor, apiId) {
+export default async function (vendor, apiId) {
   if (vendor !== 'discourse') {
     console.error('Forum vendor is not discourse.')
     return null

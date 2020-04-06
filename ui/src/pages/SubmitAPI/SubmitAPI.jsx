@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 import { shape, string } from 'prop-types'
 import { NavLink, Route, Redirect } from 'react-router-dom'

@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { camelCase } from 'change-case'
 
 function objectKeysToCamelCase(obj) {

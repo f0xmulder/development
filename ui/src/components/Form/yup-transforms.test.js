@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import * as Yup from 'yup'
 
 import { convertEmptyValueTo } from './yup-transforms'
@@ -5,9 +8,7 @@ import { convertEmptyValueTo } from './yup-transforms'
 describe('yup-utils', () => {
   describe('convertEmptyValueTo', () => {
     it('should return null if empty string given', () => {
-      const num = Yup.number()
-        .nullable()
-        .transform(convertEmptyValueTo())
+      const num = Yup.number().nullable().transform(convertEmptyValueTo())
       expect(num.validateSync('')).toBeNull()
     })
 

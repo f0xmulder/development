@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 import { string, arrayOf, shape, func, bool, number } from 'prop-types'
 import { FieldArray } from 'formik'

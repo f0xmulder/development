@@ -1,6 +1,9 @@
-// based on https://github.com/jquense/yup/blob/master/src/locale.js
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 
 /* eslint-disable no-template-curly-in-string */
+
 export const mixed = {
   default: '${path} is ongeldig',
   required: '${path} is verplicht',

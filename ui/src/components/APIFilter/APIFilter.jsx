@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 import { string, arrayOf, shape, number, bool, func } from 'prop-types'
 import CheckboxGroupField from '../CheckboxGroupField/CheckboxGroupField'

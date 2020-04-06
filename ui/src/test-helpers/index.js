@@ -1,4 +1,5 @@
-// helper function, because Jest does not take care of chained promises.
-// see https://github.com/facebook/jest/issues/2157#issuecomment-279171856
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 export const flushPromises = () =>
   new Promise((resolve) => setImmediate(resolve))

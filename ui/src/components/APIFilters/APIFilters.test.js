@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { formatOptions, facetsContainTermsForFilterByKey } from './APIFilters'
 
 describe('formatting API terms to options', () => {
@@ -9,7 +12,10 @@ describe('formatting API terms to options', () => {
         expected: [{ value: '42', label: '42', count: 5, disabled: false }],
       },
       {
-        terms: [{ term: 'gRPC', count: 5 }, { term: 'GraphQL', count: 0 }],
+        terms: [
+          { term: 'gRPC', count: 5 },
+          { term: 'GraphQL', count: 0 },
+        ],
         expected: [
           { value: 'gRPC', label: 'gRPC', count: 5, disabled: false },
           { value: 'GraphQL', label: 'GraphQL', count: 0, disabled: true },

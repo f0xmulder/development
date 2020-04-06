@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { shallow } from 'enzyme/build'
 import React from 'react'
 import APIList from './APIList'

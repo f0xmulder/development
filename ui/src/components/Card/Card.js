@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { StyledCard, Body, Footer, Title } from './Card.styles'
 
 const Card = StyledCard

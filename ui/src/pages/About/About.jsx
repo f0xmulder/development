@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 
 import { Container } from '../../components/design-system-candidates/Grid'

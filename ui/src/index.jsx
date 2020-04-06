@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import 'core-js/web/url-search-params'
 import 'core-js/es/object/values'
 import 'core-js/es/array/includes'

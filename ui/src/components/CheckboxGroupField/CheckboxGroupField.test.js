@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { mount } from 'enzyme/build'
 import { Formik, useFormikContext } from 'formik'
 import React from 'react'

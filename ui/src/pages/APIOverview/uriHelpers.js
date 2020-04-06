@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 export function generateQueryParams(params) {
   const urlParams = new URLSearchParams()
 

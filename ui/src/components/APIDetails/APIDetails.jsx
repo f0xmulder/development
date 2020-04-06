@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 import { Link, Route } from 'react-router-dom'
 import { useRouteMatch } from 'react-router'

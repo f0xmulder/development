@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React, { useState, useEffect } from 'react'
 import { bool } from 'prop-types'
 import styled from 'styled-components'

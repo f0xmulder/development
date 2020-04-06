@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 

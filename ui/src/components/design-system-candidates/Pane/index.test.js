@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'

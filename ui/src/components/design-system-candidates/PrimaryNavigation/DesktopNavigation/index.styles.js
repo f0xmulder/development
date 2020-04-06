@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import styled from 'styled-components'
 import Color from 'color'
 
@@ -35,10 +38,7 @@ export const ListItem = styled.li`
     &.active {
       color: ${(p) => p.theme.colorText};
       background: ${(p) =>
-        Color(p.theme.tokens.colorBackground)
-          .alpha(0.5)
-          .hsl()
-          .string()};
+        Color(p.theme.tokens.colorBackground).alpha(0.5).hsl().string()};
     }
   }
 

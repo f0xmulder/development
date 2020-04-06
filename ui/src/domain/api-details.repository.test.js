@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 import { goApiMock, apiMock } from '../models/api.mock'
 import APIDetailsRepository from './api-details-repository'
 

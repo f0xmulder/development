@@ -1,3 +1,6 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
 export const formDataMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
