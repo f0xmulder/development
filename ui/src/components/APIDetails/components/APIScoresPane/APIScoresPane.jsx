@@ -3,8 +3,9 @@
 //
 import React from 'react'
 import { shape, bool, string } from 'prop-types'
+import { useHistory } from 'react-router-dom'
+import { Drawer } from '@commonground/design-system'
 
-import Pane from '../../../design-system-candidates/Pane'
 import { StyledScoresUl, StyledScoresLi } from '../../APIDetails.styles'
 import Grade from '../../../Grade/Grade'
 
@@ -17,10 +18,13 @@ const APIScoresPane = ({ scores, parentUrl }) => {
     hasContactDetails,
     providesSla,
   } = scores
+  const history = useHistory()
+
+  const close = () => history.push(parentUrl)
 
   return (
-    <Pane parentUrl={parentUrl}>
-      <h2>Opbouw API score</h2>
+    <Drawer closeHandler={close}>
+      <h1>Opbouw API score</h1>
       <p>Deze score geeft de kwaliteit van de API weer.</p>
 
       <GradeSection>
@@ -41,7 +45,7 @@ const APIScoresPane = ({ scores, parentUrl }) => {
           SLA {!providesSla ? 'niet' : ''} aanwezig
         </StyledScoresLi>
       </StyledScoresUl>
-    </Pane>
+    </Drawer>
   )
 }
 

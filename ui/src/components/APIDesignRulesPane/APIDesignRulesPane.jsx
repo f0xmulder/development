@@ -3,10 +3,10 @@
 //
 import React, { useEffect, useState } from 'react'
 import { func, string } from 'prop-types'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
+import { Drawer } from '@commonground/design-system'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
-import Pane from '../design-system-candidates/Pane'
 import External from '../Icons/External'
 import {
   StyledDesignRulesUl,
@@ -18,6 +18,7 @@ import {
 const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
   const { id } = useParams()
   const [apiDetails, setApiDetails] = useState(null)
+  const history = useHistory()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,8 +30,10 @@ const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
+  const close = () => history.push(parentUrl)
+
   return (
-    <Pane parentUrl={parentUrl}>
+    <Drawer closeHandler={close}>
       <h2>API Design Rules</h2>
       <p>
         Van de volgende{' '}
@@ -61,7 +64,7 @@ const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
           ))}
         </StyledDesignRulesUl>
       )}
-    </Pane>
+    </Drawer>
   )
 }
 

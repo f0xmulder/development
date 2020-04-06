@@ -24,22 +24,11 @@ Yup.setLocale({
 })
 
 const validationSchemaConfiguration = {
-  serviceName: Yup.string()
-    .required()
-    .label('API naam'),
-  organizationName: Yup.string()
-    .required()
-    .label('Organisatienaam'),
-  description: Yup.string()
-    .trim()
-    .required()
-    .label('API Omschrijving'),
-  apiType: Yup.string()
-    .required()
-    .label('API type'),
-  apiAuthentication: Yup.string()
-    .required()
-    .label('API Authenticatie'),
+  serviceName: Yup.string().required().label('API naam'),
+  organizationName: Yup.string().required().label('Organisatienaam'),
+  description: Yup.string().trim().required().label('API Omschrijving'),
+  apiType: Yup.string().required().label('API type'),
+  apiAuthentication: Yup.string().required().label('API Authenticatie'),
 
   productionApiUrl: Yup.string()
     .url()
@@ -57,9 +46,7 @@ const validationSchemaConfiguration = {
     .url()
     .when('hasAcceptanceEnvironment', {
       is: true,
-      then: Yup.string()
-        .url()
-        .required(),
+      then: Yup.string().url().required(),
       otherwise: Yup.string().url(),
     })
     .label('URL'),
@@ -71,9 +58,7 @@ const validationSchemaConfiguration = {
     .url()
     .when('hasDemoEnvironment', {
       is: true,
-      then: Yup.string()
-        .url()
-        .required(),
+      then: Yup.string().url().required(),
       otherwise: Yup.string().url(),
     })
     .label('URL'),

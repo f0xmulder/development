@@ -2,6 +2,8 @@
 // Licensed under the EUPL
 //
 
+// based on https://github.com/jquense/yup/blob/master/src/locale.js
+
 /* eslint-disable no-template-curly-in-string */
 
 export const mixed = {

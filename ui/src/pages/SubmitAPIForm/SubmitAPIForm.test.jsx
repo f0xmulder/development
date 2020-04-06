@@ -119,7 +119,10 @@ describe('SubmitAPI', () => {
 
     describe('when handleSubmit is called', () => {
       it('should call the submitToApi method', () => {
-        wrapper.instance().handleSubmit(formDataMock, jest.fn())
+        wrapper.instance().handleSubmit(formDataMock, {
+          setSubmitting: jest.fn(),
+          setStatus: jest.fn(),
+        })
         expect(submitToApiSpy).toHaveBeenCalled()
       })
 
@@ -129,9 +132,10 @@ describe('SubmitAPI', () => {
           SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
 
           const wrapper = shallow(<SubmitAPI />)
-          wrapper
-            .instance()
-            .handleSubmit(formDataMock, { setSubmitting: jest.fn() })
+          wrapper.instance().handleSubmit(formDataMock, {
+            setSubmitting: jest.fn(),
+            setStatus: jest.fn(),
+          })
 
           return apiPromise.then(() => {
             expect(wrapper.state('submitted')).toEqual(true)

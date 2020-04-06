@@ -1,6 +1,8 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+
+// Box uses `themes.breakpoints` for the `width={[1, 1/2]}` array
 import { Flex, Box } from 'reflexbox/styled-components'
 import styled from 'styled-components'
 
