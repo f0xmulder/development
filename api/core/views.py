@@ -1,7 +1,11 @@
 from functools import reduce
+import requests
 
 from django.contrib.postgres.search import SearchVector, SearchQuery
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, Count, F
+from requests import RequestException
+from rest_framework.exceptions import NotFound, APIException
 from rest_framework.mixins import RetrieveModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,6 +14,9 @@ from rest_framework.viewsets import GenericViewSet
 from core.models import API, Relation
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
+
+
+REQUEST_TIMEOUT_SECONDS = 10
 
 
 class APIViewSet(RetrieveModelMixin,
@@ -96,3 +103,25 @@ class APIImplementedByView(APIView):
 
         serializer = APISerializer(apis, many=True)
         return Response(serializer.data)
+
+
+class APIForumPostsView(APIView):
+    def get(self, request, api_id):
+        try:
+            api = API.objects.get(api_id=api_id)
+        except ObjectDoesNotExist as e:
+            raise NotFound(detail='API not found') from e
+
+        if api.forum_url == '':
+            raise NotFound(detail='Forum integration not found')
+
+        url = f'{api.forum_url}.json'
+
+        try:
+            response = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
+            response.raise_for_status()
+            json_data = response.json()
+        except (RequestException, ValueError) as e:
+            raise APIException(detail='Failed to get forum posts from URL') from e
+
+        return Response(json_data)

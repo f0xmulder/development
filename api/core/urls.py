@@ -3,6 +3,7 @@ from rest_framework import routers
 from . import views
 
 urlpatterns = [
+    path('api/apis/<api_id>/forum-posts', views.APIForumPostsView.as_view()),
     path('api/apis/<api_id>/implemented-by', views.APIImplementedByView.as_view()),
 ]
 
