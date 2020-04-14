@@ -5,11 +5,13 @@ In this application we use the [Go programming language](https://golang.org) for
 First make sure the following tools are available on your computer:
 
 * [Git](https://git-scm.com/)
-* [Go](https://golang.org/doc/install)
-* [Node.js](https://nodejs.org/) (with NPM)
+* [Go (v1.13+)](https://golang.org/doc/install)
+* [Node.js (v 12)](https://nodejs.org/) (with NPM)
 * [Modd](https://github.com/cortesi/modd)
 * [Docker](https://docker.com), including [docker-compose](https://docs.docker.com/compose/)
 * [Python (v3.8)](https://www.python.org)
+
+> On Ubuntu 18.04, most of these can be installed through the `apt` package manager. The `golang` version in `apt` is too old, so you will need to install that manually. For Node.js, you can install the correct version using the `nvm` script or as a snap (the snaps have a channel for each major release), as the version in apt is too old. Modd also needs to be installed manually, or through `go get`, see the install instructions on the Modd github readme. For Python you will need to make sure to install the right version from apt, which is not the default version in Ubuntu 18.04. Be sure to also include the `python3.8-dev` and `python3.8-venv` packages.
 
 Then clone this repository:
 
