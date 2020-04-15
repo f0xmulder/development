@@ -13,8 +13,8 @@ import {
 import {
   StyledFormGroup,
   HelperMessage,
-  ErrorMessage,
 } from '../SubmitAPIForm/SubmitAPIForm.styles'
+import { ErrorMessage } from '../SubmitAPIForm/SubmitAPIForm'
 import {
   StyledEnvironmentFormInputs,
   StyledEnvironmentHeading,

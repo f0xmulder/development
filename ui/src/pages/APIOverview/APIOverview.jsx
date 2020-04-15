@@ -3,8 +3,8 @@
 //
 import React, { Component } from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
 
+import { Button } from '@commonground/design-system'
 import APIList from '../../components/APIList/APIList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
@@ -18,7 +18,8 @@ import {
   StyledResultsContainer,
   StyledSubtitle,
   StyledSearch,
-  StyledIconButton,
+  StyledAddLink,
+  StyledAddIcon,
 } from './APIOverview.styles'
 
 class APIOverview extends Component {
@@ -159,9 +160,10 @@ class APIOverview extends Component {
               </label>
             </form>
           </div>
-          <StyledIconButton as={Link} to="apis/toevoegen" variant="secondary">
+          <Button as={StyledAddLink} to="apis/toevoegen" variant="secondary">
+            <StyledAddIcon />
             API toevoegen
-          </StyledIconButton>
+          </Button>
         </StyledOverviewHeader>
 
         {!loaded ? null : error ? (

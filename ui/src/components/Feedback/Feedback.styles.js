@@ -2,12 +2,11 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
-import { Button } from '@commonground/design-system'
 
 import mq from '../../theme/mediaQueries'
 import { Container } from '../design-system-candidates/Grid'
-import gitlabIcon from '../Icons/gitlab-black-icon.svg'
-import externalIcon from '../Icons/external-icon.svg'
+import { ReactComponent as GitlabIcon } from '../Icons/gitlab-black-icon.svg'
+import { ReactComponent as ExternalIcon } from '../Icons/external-icon.svg'
 
 export const FeedbackArea = styled.div`
   background-color: ${(p) => p.theme.tokens.colorBackground};
@@ -34,16 +33,12 @@ export const StyledText = styled.p`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
 `
 
-export const StyledIconButton = styled(Button)`
-  &:before {
-    height: 1rem;
-    margin-right: ${(p) => p.theme.tokens.spacing06};
-    content: url(${gitlabIcon});
-  }
+export const StyledGitlabIcon = styled(GitlabIcon)`
+  height: 1rem;
+  margin-right: ${(p) => p.theme.tokens.spacing06};
+`
 
-  &:after {
-    height: 1rem;
-    margin-left: ${(p) => p.theme.tokens.spacing06};
-    content: url(${externalIcon});
-  }
+export const StyledExternalIcon = styled(ExternalIcon)`
+  height: 1rem;
+  margin-left: ${(p) => p.theme.tokens.spacing06};
 `

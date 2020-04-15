@@ -4,12 +4,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Button } from '@commonground/design-system'
 import { H1, H2 } from '../../components/Headings/Headings'
 import {
   StyledHomePage,
   StyledHeading,
   StyledCard,
-  StyledIconButton,
+  StyledExternalIcon,
 } from './Home.styles'
 
 const Home = () => (
@@ -35,9 +36,9 @@ const Home = () => (
           Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
           Nederland aanbieden.
         </p>
-        <StyledIconButton as={Link} to="/apis">
-          API overzicht
-        </StyledIconButton>
+        <Button variant="primary" as={Link} to="/apis">
+          API overzicht <StyledExternalIcon />
+        </Button>
       </StyledCard.Body>
     </StyledCard>
   </StyledHomePage>

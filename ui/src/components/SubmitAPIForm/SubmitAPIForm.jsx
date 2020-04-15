@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { array, object, func, bool } from 'prop-types'
+import { array, object, func, bool, node } from 'prop-types'
 import { Button } from '@commonground/design-system'
 
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
@@ -22,10 +22,19 @@ import {
   StyledFormGroup,
   StyledFormSetting,
   HelperMessage,
-  ErrorMessage,
+  StyledErrorMessage,
+  StyledExclamationMark,
 } from './SubmitAPIForm.styles'
 
 import PercentageInput from './PercentageInput'
+
+export const ErrorMessage = ({ children, ...props }) => (
+  <StyledErrorMessage {...props}>
+    <StyledExclamationMark />
+    {children}
+  </StyledErrorMessage>
+)
+ErrorMessage.propTypes = { children: node }
 
 const SubmitAPIForm = ({
   apis,

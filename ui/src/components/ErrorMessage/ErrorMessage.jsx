@@ -9,10 +9,10 @@ const StyledErrorMessage = styled.span`
   color: ${(p) => {
     switch (p.level) {
       case 'warning':
-        return p.theme.tokens.colorAlertWarning
+        return p.theme.colorAlertWarning
       case 'error':
       default:
-        return p.theme.tokens.colorAlertError
+        return p.theme.colorAlertError
     }
   }};
 `
@@ -22,7 +22,7 @@ const ErrorMessage = (props) =>
 
 ErrorMessage.propTypes = {
   children: PropTypes.string,
-  level: PropTypes.oneOf(['error', 'notify']),
+  level: PropTypes.oneOf(['error', 'warning']),
 }
 
 ErrorMessage.defaultProps = {

@@ -2,13 +2,13 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
-import { Button } from '@commonground/design-system'
+import { Link } from 'react-router-dom'
 import Search from '../../components/design-system-candidates/Search'
 
 import mq from '../../theme/mediaQueries'
 
 import APIFilters from '../../components/APIFilters/APIFilters'
-import addIcon from '../../components/Icons/add_icon.svg'
+import { ReactComponent as AddIcon } from '../../components/Icons/add_icon.svg'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
@@ -34,14 +34,13 @@ export const StyledSearch = styled(Search)`
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 `
 
-export const StyledIconButton = styled(Button)`
+export const StyledAddLink = styled(Link)`
   align-self: flex-start;
+`
 
-  &:before {
-    height: 16px;
-    margin-right: ${(p) => p.theme.tokens.spacing04};
-    content: url(${addIcon});
-  }
+export const StyledAddIcon = styled(AddIcon)`
+  height: ${(p) => p.theme.tokens.spacing05};
+  margin-right: ${(p) => p.theme.tokens.spacing04};
 `
 
 export const StyledAPIListContainer = styled.div`

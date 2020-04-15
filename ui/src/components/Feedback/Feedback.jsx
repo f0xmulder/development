@@ -2,13 +2,15 @@
 // Licensed under the EUPL
 //
 import React from 'react'
+import { Button } from '@commonground/design-system'
 
 import {
   FeedbackArea,
   FeedbackContainer,
   StyledTitle,
   StyledText,
-  StyledIconButton,
+  StyledGitlabIcon,
+  StyledExternalIcon,
 } from './Feedback.styles'
 
 const Feedback = () => {
@@ -23,15 +25,17 @@ const Feedback = () => {
           Wensen en opmerkingen kunnen via een melding op Gitlab doorgegeven
           worden.
         </StyledText>
-        <StyledIconButton
+        <Button
           as="a"
           href="https://gitlab.com/commonground/developer.overheid.nl/issues"
           target="_blank"
           rel="noopener noreferrer"
           variant="secondary"
         >
+          <StyledGitlabIcon />
           Melding maken op Gitlab
-        </StyledIconButton>
+          <StyledExternalIcon />
+        </Button>
       </FeedbackContainer>
     </FeedbackArea>
   )
