@@ -217,15 +217,17 @@ class SubmitAPIFormPage extends Component {
   }
 
   fetchApiList() {
-    return fetch('/api/apis').then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
-        )
-      }
-    })
+    return fetch(`/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}`).then(
+      (response) => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error(
+            `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
+          )
+        }
+      },
+    )
   }
 
   render() {
