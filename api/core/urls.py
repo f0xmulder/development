@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     path('api/apis/<api_id>/forum-posts', views.APIForumPostsView.as_view()),
     path('api/apis/<api_id>/implemented-by', views.APIImplementedByView.as_view()),
-    path('api/apis/<api_id>/<environment>/specification', views.APISpecificationView.as_view())
+    path('api/apis/<api_id>/<environment>/specification', views.APISpecificationView.as_view()),
+    path('api/submit-api', views.SubmitAPIView.as_view()),
 ]
 
 apiRouter = routers.DefaultRouter(trailing_slash=False)

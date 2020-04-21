@@ -1,4 +1,6 @@
+import json
 import logging
+import os
 from functools import reduce
 
 import requests
@@ -168,3 +170,58 @@ def proxy_url(url, name):
     # Our current uses don't depend on the content type header, so sending nosniff unconditionally
     # is the simplest/safest option.
     return HttpResponse(response.content, content_type=response.headers.get('Content-Type'))
+
+
+class SubmitAPIView(APIView):
+    gitlab_access_token = os.environ.get('GITLAB_ACCESS_TOKEN')
+    gitlab_project_id = os.environ.get('GITLAB_PROJECT_ID')
+    gitlab_url = os.environ.get('GITLAB_URL')
+
+    def post(self, request):
+        # TODO Check env vars
+
+        api_data = request.data
+
+        serializer = APISerializer(data=api_data)
+        serializer.is_valid(raise_exception=True)
+
+        url = f'{self.gitlab_url}/api/v4/projects/{self.gitlab_project_id}/issues'
+        body = self.create_issue_body(api_data)
+        result = requests.post(
+            url,
+            json=body,
+            headers={
+                'Content-Type': 'application/json',
+                'PRIVATE-TOKEN': self.gitlab_access_token,
+            },
+        )
+
+        if result.status_code != requests.codes.created:
+            raise APIException(detail='Something went wrong while posting to the GitLab API')
+
+        return Response()
+
+    @staticmethod
+    def create_issue_body(api_data):
+        organization = api_data['organization_name']
+        service = api_data['service_name']
+        title = f'Add a new API: {organization} {service}'
+
+        json_string = json.dumps(api_data, indent=4)
+        description = f"""
+We would like to add the following API:
+
+```json
+{json_string}
+```
+
+Thanks a lot!
+
+The web form
+"""
+
+        return {
+            'title': title,
+            'description': description,
+            'labels': 'New API'
+        }
