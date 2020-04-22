@@ -178,7 +178,10 @@ class SubmitAPIView(APIView):
     gitlab_url = os.environ.get('GITLAB_URL')
 
     def post(self, request):
-        # TODO Check env vars
+        if (self.gitlab_access_token is None
+                or self.gitlab_project_id is None
+                or self.gitlab_url is None):
+            raise APIException(detail='The Gitlab API is not properly configured')
 
         api_data = request.data
 

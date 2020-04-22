@@ -1,5 +1,4 @@
 import json
-from http.client import HTTPException
 from unittest.mock import patch
 
 import requests
@@ -89,6 +88,17 @@ The web form
         mock_post.assert_called_with(expected_url,
                                      json=expected_json,
                                      headers=expected_headers)
+
+    def test_submit_missing_var(self):
+        with patch('core.views.SubmitAPIView.gitlab_project_id', None):
+            response = self.client.post(SUBMIT_API_PATH,
+                                        data=json.dumps(self.valid_api_data),
+                                        content_type='application/json')
+
+        self.assertEqual(response.status_code, 500)
+
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data, {'detail': 'The Gitlab API is not properly configured'})
 
     def test_submit_invalid_api(self):
         response = self.client.post(SUBMIT_API_PATH,
