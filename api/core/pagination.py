@@ -11,7 +11,7 @@ class StandardResultsSetPagination(PageNumberPagination):
     def paginate_queryset(self, queryset, request, view=None):
         page_results = super().paginate_queryset(queryset, request, view=view)
 
-        self.total_results = len(queryset)
+        self.total_results = queryset.count()
 
         return page_results
 
