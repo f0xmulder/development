@@ -5,9 +5,8 @@ from core.models import API, Environment, Badge
 
 class NonNullModelSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
-        result = super(NonNullModelSerializer,
-                       self).to_representation(instance)
-        return OrderedDict([(key, result[key]) for key in result if result[key] is not None])
+        result = super().to_representation(instance)
+        return OrderedDict(tup for tup in result.items() if tup[1] is not None)
 
 
 class EnvironmentSerializer(serializers.ModelSerializer):
