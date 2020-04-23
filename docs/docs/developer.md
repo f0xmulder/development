@@ -37,8 +37,10 @@ First, set up a python virtual environment with python 3.8 and activate it.
 Then install the python dependencies:
 
 ```bash
-cd api && pip install -r requirements.txt
+cd api && pip install -r requirements-dev.txt
 ```
+
+> __*Note*__: If you already have `pip-tools` installed, or you have already installed a previous version of `requirements-dev.txt`, you can run `pip-sync requirements-dev.txt` instead of `pip install ...` to update your environment. This will also delete unneeded packages.
 
 Run the migrations:
 ```bash
@@ -68,10 +70,6 @@ If you want to run the python linter:
 ```bash
 prospector
 ```
-
-If you want to add a python dependency:
-1. `pip install some-library`
-1. `pip freeze > requirements.txt`
 
 
 ### Go Validator
@@ -132,3 +130,40 @@ helm upgrade --install don-dev ./helm/don --namespace don-dev --values helm/don/
 ```
 
 You can see your changes at: http://don.minikube:30080/
+
+## Adding/updating dependencies
+
+### Python
+
+First, make sure your virtual environment is active. 
+
+#### New dependency
+
+To include a new module dependency, add the module name to `requirements.in` (for production dependencies) or `requirements-dev.in` (for development and testing dependencies). Then update your dependencies.
+
+#### Update dependencies
+
+To update all dependencies to their newest versions, run
+
+```bash
+pip-compile requirements.in --generate-hashes
+pip-compile requirements-dev.in --generate-hashes
+pip-sync requirements-dev.txt
+```
+
+__*NB:*__ The order of the `pip-compile`'s is important!
+
+If you updated your git repository and the new version has changes in the requirements files, also run the `pip-sync` command to synchronize your environment with the requirements files.
+
+> __*Note*__: `pip-sync` will synchronize your environment with the requirements files, that means it will also delete any modules that are not listed in the requirements files. If you do not want that, run `pip install -r requirements.txt -r requirements-dev.txt` instead of `pip-sync`.
+
+#### Dependency problems
+
+When you update dependencies, it may happen that there is an unsolved bug in a new dependency version or that some required modules do not work together well. In that case you have a few options: 
+- Abort the upgrade and try again later. Often problems will be resolved by the package maintainers in short time.
+- Add explicit constraints to `requirements*.in` to exclude the problematic versions.
+- Modify the `requirements*.txt` files manually to select working versions. Note that you need to provide hashes for all packages.
+
+### Javascript/Go
+
+Todo

@@ -59,7 +59,7 @@ Lint and test API:
       - $CI_PROJECT_DIR/.cache/pip
   before_script:
     - cd api/
-    - pip3 install -r requirements.txt
+    - pip3 install -r requirements-dev.txt
   script:
     - python3 -m prospector
     - python3 -m coverage run --source='.' manage.py test core
