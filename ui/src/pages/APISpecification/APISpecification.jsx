@@ -30,15 +30,11 @@ class APISpecification extends Component {
   }
 
   getSpecificationUrl() {
-    const { details } = this.state
-    const environmentName = this.props.match.params.environment
-    if (details.environments && details.environments.length > 0) {
-      const environment = details.environments.find(
-        (env) => environmentName === (env.name && env.name.toLowerCase()),
-      )
-      return environment ? environment.specificationUrl : undefined
+    const { id, environment } = this.props.match.params
+    if (!id || !environment) {
+      return undefined
     }
-    return undefined
+    return `/api/apis/${id}/${environment}/specification`
   }
 
   loadDetailsForApi(id) {

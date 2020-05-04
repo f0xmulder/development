@@ -61,14 +61,14 @@ describe('APISpecification', () => {
       const wrapper = shallow(
         <APISpecification
           match={{
-            params: { id: 'organization-service', environment: 'productie' },
+            params: { id: 'organization-service', environment: 'production' },
           }}
           getApiDetailsById={getApiDetailsByIdMock}
         />,
       )
       return apiPromise.then(() => {
         expect(wrapper.find(RedocStandalone).prop('specUrl')).toEqual(
-          apiResponseObject.environments[0].specificationUrl,
+          '/api/apis/organization-service/production/specification',
         )
       })
     })

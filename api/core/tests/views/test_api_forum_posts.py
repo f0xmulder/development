@@ -2,15 +2,16 @@ import json
 from unittest.mock import patch
 
 from django.test import TestCase
-from requests import HTTPError
 
 from core.models import API
 from core.tests.mocking import mock_response
+
 
 API_PATH = '/api/apis/'
 
 
 class APIForumPostsViewTest(TestCase):
+
     def setUp(self):
         self.api1 = API.objects.create(
             api_id='api1',
@@ -22,20 +23,24 @@ class APIForumPostsViewTest(TestCase):
             api_id='api2',
             description='API without forum',
         )
+        self.api3 = API.objects.create(
+            api_id='api3',
+            description='API with empty forum url',
+            forum_vendor='discourse',
+            forum_url='',
+        )
 
         # Display whole JSON diffs
         self.maxDiff = None
 
     @patch('requests.get')
     def test_forum_posts(self, mock_get):
-        mock_get.return_value = mock_response(200, json_data={'some': 'json'})
+        mock_get.return_value = mock_response(200, data="some data")
 
         response = self.client.get(API_PATH + 'api1/forum-posts')
         self.assertEqual(response.status_code, 200)
 
-        json_response = json.loads(response.content)
-        expected = {'some': 'json'}
-        self.assertEqual(json_response, expected)
+        self.assertEqual(response.content, b"some data")
 
     def test_api_not_found(self):
         response = self.client.get(API_PATH + 'api999/forum-posts')
@@ -44,29 +49,18 @@ class APIForumPostsViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data, {'detail': 'API not found'})
 
+    def test_empty_forum_url(self):
+        response = self.client.get(API_PATH + 'api3/forum-posts')
+        self.assertEqual(response.status_code, 404)
+
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data,
+                         {'detail': 'API api3 does not have forum integration configured'})
+
     def test_no_forum(self):
         response = self.client.get(API_PATH + 'api2/forum-posts')
         self.assertEqual(response.status_code, 404)
 
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, {'detail': 'Forum integration not found'})
-
-    @patch('requests.get')
-    def test_http_error(self, mock_get):
-        mock_get.return_value = mock_response(404, status_exception=HTTPError('404, oops'))
-
-        response = self.client.get(API_PATH + 'api1/forum-posts')
-        self.assertEqual(response.status_code, 500)
-
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, {'detail': 'Failed to get forum posts from URL'})
-
-    @patch('requests.get')
-    def test_invalid_json_returned(self, mock_get):
-        mock_get.return_value = mock_response(200, json_data=None)
-
-        response = self.client.get(API_PATH + 'api1/forum-posts')
-        self.assertEqual(response.status_code, 500)
-
-        response_data = json.loads(response.content)
-        self.assertEqual(response_data, {'detail': 'Failed to get forum posts from URL'})
+        self.assertEqual(response_data,
+                         {'detail': 'API api2 does not have forum integration configured'})

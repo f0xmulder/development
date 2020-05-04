@@ -1,22 +1,32 @@
+import logging
 from functools import reduce
-import requests
 
+import requests
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, Count, F
-from requests import RequestException
+from django.http import HttpResponse
+from requests import RequestException, Timeout
+from rest_framework import status
 from rest_framework.exceptions import NotFound, APIException
 from rest_framework.mixins import RetrieveModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
-from core.models import API, Relation
+from core.models import API, Relation, Environment
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
 
-
 REQUEST_TIMEOUT_SECONDS = 10
+
+logger = logging.getLogger(__name__)
+
+
+class APIProxyException(APIException):
+    def __init__(self, detail, status_code):
+        self.status_code = status_code
+        super().__init__(detail=detail)
 
 
 class APIViewSet(RetrieveModelMixin,
@@ -112,16 +122,51 @@ class APIForumPostsView(APIView):
         except ObjectDoesNotExist as e:
             raise NotFound(detail='API not found') from e
 
-        if api.forum_url == '':
-            raise NotFound(detail='Forum integration not found')
+        if not api.forum_url:
+            raise NotFound(detail=f'API {api_id} does not have forum integration configured')
+        return proxy_url(api.forum_url + '.json', 'forum integration')
 
-        url = f'{api.forum_url}.json'
 
+class APISpecificationView(APIView):
+    def get(self, request, api_id, environment):
         try:
-            response = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
-            response.raise_for_status()
-            json_data = response.json()
-        except (RequestException, ValueError) as e:
-            raise APIException(detail='Failed to get forum posts from URL') from e
+            # FIXME #214: Use EnvironmentType value instead of label once database has been fixed.
+            #          becomes Environment.EnvironmentType(environment)
+            env_type = [e for e in Environment.EnvironmentType if e.label == environment][0]
+            env = Environment.objects.filter(name=env_type.label, api_id=api_id).get()
+        except IndexError as e:  # Becomes ValueError
+            raise NotFound(detail='Invalid environment type: ' + environment) from e
+        except ObjectDoesNotExist as e:
+            raise NotFound(detail=f'No environment "{environment}" for api {api_id}') from e
 
-        return Response(json_data)
+        if not env.specification_url:
+            raise NotFound(detail=f'API {api_id} does not have a {environment} specification')
+        return proxy_url(env.specification_url, 'specification')
+
+
+def proxy_url(url, name):
+    # pylint complains about the empty `except ValueError`
+    # pylint:disable=try-except-raise
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
+        if response.status_code != status.HTTP_200_OK:
+            raise APIProxyException(
+                detail=f'Failed to retrieve {name} URL at {url} (response code is not 200 OK): '
+                       f'{response.status_code}: {response.text}',
+                status_code=status.HTTP_502_BAD_GATEWAY)
+    except Timeout as e:
+        raise APIProxyException(
+            detail=f'Failed to retrieve {name} URL at {url} due to timeout',
+            status_code=status.HTTP_504_GATEWAY_TIMEOUT) from e
+    except ValueError:
+        # ValueError indicates an invalid url or invalid arguments, that's a local/server error
+        raise
+    except RequestException as e:
+        # A different RequestException indicates an error at the remote end
+        raise APIProxyException(detail=f'Failed to retrieve {name} URL: {e}',
+                                status_code=status.HTTP_502_BAD_GATEWAY) from e
+
+    # Note: Our security middleware inserts X-Content-Type-Options=nosniff here.
+    # Our current uses don't depend on the content type header, so sending nosniff unconditionally
+    # is the simplest/safest option.
+    return HttpResponse(response.content, content_type=response.headers.get('Content-Type'))
