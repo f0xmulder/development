@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from decimal import Decimal
 
 from django.test import TestCase
 
@@ -53,29 +54,29 @@ class APISerializerTest(TestCase):
             'badges': [],
             'referenced_apis': [],
             'environments': [],
-            'contact': {
+            'contact': OrderedDict({
                 'email': 'contact@api1.com',
                 'phone': '0612345678',
                 'fax': '123124142131',
                 'chat': 'mychat.com',
                 'url': 'mywebsite.com',
-            },
-            'terms_of_use': {
+            }),
+            'terms_of_use': OrderedDict({
                 'government_only': False,
                 'pay_per_use': True,
-                'uptime_guarantee': 1.0,
+                'uptime_guarantee': '1.000000',
                 'support_response_time': '2d',
-            },
-            'forum': {
+            }),
+            'forum': OrderedDict({
                 'vendor': 'discourse',
                 'url': 'mydiscourse.com',
-            },
-            'scores': {
-                'has_contact_details': True,
+            }),
+            'scores': OrderedDict({
                 'has_documentation': False,
                 'has_specification': False,
+                'has_contact_details': True,
                 'provides_sla': True,
-            },
+            }),
         }
 
         self.assertDictEqual(actual, expected)
@@ -84,7 +85,7 @@ class APISerializerTest(TestCase):
         api = API.objects.create()
 
         actual = APISerializer(api).data
-        expected = {
+        expected_api = {
             'id': '',
             'description': '',
             'organization_name': '',
@@ -95,28 +96,33 @@ class APISerializerTest(TestCase):
             'badges': [],
             'referenced_apis': [],
             'environments': [],
-            'contact': {
+            # TODO remove forum (empty forum shouldn't be serialized)
+            'forum': OrderedDict({
+                'vendor': '',
+                'url': '',
+            }),
+            'contact': OrderedDict({
                 'email': '',
                 'phone': '',
                 'fax': '',
                 'chat': '',
                 'url': '',
-            },
-            'terms_of_use': {
+            }),
+            'terms_of_use': OrderedDict({
                 'government_only': None,
                 'pay_per_use': None,
                 'uptime_guarantee': None,
                 'support_response_time': '',
-            },
-            'scores': {
-                'has_contact_details': False,
+            }),
+            'scores': OrderedDict({
                 'has_documentation': False,
                 'has_specification': False,
+                'has_contact_details': False,
                 'provides_sla': False,
-            },
+            }),
         }
 
-        self.assertDictEqual(actual, expected)
+        self.assertDictEqual(actual, expected_api)
 
     def test_serialize_badges(self):
         badge1 = Badge.objects.create(name='Golden API 2019')
@@ -251,3 +257,96 @@ class APISerializerTest(TestCase):
         expected_scores = dict(DEFAULT_SCORES, provides_sla=True)
 
         self.assertDictEqual(actual_scores, expected_scores)
+
+    def test_deserialize_own_fields(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'api_type': 'rest_json',
+            'api_authentication': 'api_key',
+            'is_reference_implementation': False,
+            'badges': [],
+            'referenced_apis': [],
+            'environments': [],
+            'contact': {
+                'email': 'contact@api1.com',
+                'phone': '0612345678',
+                'fax': '123124142131',
+                'chat': 'mychat.com',
+                'url': 'mywebsite.com',
+            },
+            'terms_of_use': {
+                'government_only': False,
+                'pay_per_use': True,
+                'uptime_guarantee': 1.0,
+                'support_response_time': '2d',
+            },
+            'forum': {
+                'vendor': 'discourse',
+                'url': 'http://mydiscourse.com',
+            },
+        }
+
+        serializer = APISerializer(data=input_data)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+
+        expected = OrderedDict(
+            api_id='api1',
+            description='First API',
+            organization_name='Test Organization',
+            service_name='First Service',
+            api_type='rest_json',
+            api_authentication='api_key',
+            badges=[],
+            environments=[],
+            forum_vendor='discourse',
+            forum_url='http://mydiscourse.com',
+            contact_email='contact@api1.com',
+            contact_phone='0612345678',
+            contact_fax='123124142131',
+            contact_chat='mychat.com',
+            contact_url='mywebsite.com',
+            is_reference_implementation=False,
+            terms_government_only=False,
+            terms_pay_per_use=True,
+            terms_uptime_guarantee=Decimal('1.000000'),
+            terms_support_response_time='2d',
+        )
+
+        self.assertDictEqual(serializer.validated_data, expected)
+
+    def test_deserialize_minimal_input(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+
+        serializer = APISerializer(data=input_data)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+
+        expected = OrderedDict(
+            api_id='api1',
+            description='First API',
+            organization_name='Test Organization',
+            service_name='First Service',
+            environments=[
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        )
+
+        self.assertDictEqual(serializer.validated_data, expected)

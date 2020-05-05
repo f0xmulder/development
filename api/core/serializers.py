@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from rest_framework import serializers
-from core.models import API, Environment, Badge
+from core.models import API, Environment, Badge, MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
 
 
 class NonNullModelSerializer(serializers.ModelSerializer):
@@ -24,13 +24,70 @@ class BadgeSerializer(serializers.ModelSerializer):
         return instance.name
 
 
+class ForumSerializer(serializers.Serializer):
+    vendor = serializers.CharField(
+        source='forum_vendor',
+        max_length=MAX_ENUM_LENGTH,
+        allow_blank=True
+    )
+    url = serializers.URLField(
+        source='forum_url',
+        max_length=MAX_URL_LENGTH,
+        allow_blank=True
+    )
+
+
+class ContactSerializer(serializers.Serializer):
+    email = serializers.CharField(
+        source='contact_email',
+        max_length=MAX_TEXT_LENGTH,
+        allow_blank=True
+    )
+    phone = serializers.CharField(
+        source='contact_phone',
+        max_length=MAX_TEXT_LENGTH,
+        allow_blank=True
+    )
+    fax = serializers.CharField(
+        source='contact_fax',
+        max_length=MAX_TEXT_LENGTH,
+        allow_blank=True
+    )
+    chat = serializers.CharField(
+        source='contact_chat',
+        max_length=MAX_TEXT_LENGTH,
+        allow_blank=True
+    )
+    url = serializers.CharField(
+        source='contact_url',
+        max_length=MAX_URL_LENGTH,
+        allow_blank=True
+    )
+
+
+class TermsOfUseSerializer(serializers.Serializer):
+    government_only = serializers.BooleanField(source='terms_government_only', allow_null=True)
+    pay_per_use = serializers.BooleanField(source='terms_pay_per_use', allow_null=True)
+    uptime_guarantee = serializers.DecimalField(
+        source='terms_uptime_guarantee',
+        allow_null=True,
+        decimal_places=6,
+        max_digits=8,
+    )
+    support_response_time = serializers.CharField(
+        source='terms_support_response_time',
+        max_length=MAX_TEXT_LENGTH,
+        allow_blank=True
+    )
+
+
 class APISerializer(NonNullModelSerializer):
     id = serializers.CharField(source='api_id')
     environments = EnvironmentSerializer(many=True)
-    badges = BadgeSerializer(many=True)
-    forum = serializers.SerializerMethodField('get_forum', required=False)
-    contact = serializers.SerializerMethodField('get_contact')
-    terms_of_use = serializers.SerializerMethodField('get_terms_of_use')
+    badges = BadgeSerializer(many=True, required=False)
+    forum = ForumSerializer(source='*', required=False)
+    contact = ContactSerializer(source='*', required=False)
+    terms_of_use = TermsOfUseSerializer(source='*', required=False)
     scores = serializers.SerializerMethodField('get_scores')
 
     class Meta:
@@ -51,32 +108,6 @@ class APISerializer(NonNullModelSerializer):
             'terms_of_use',
             'scores'
         ]
-
-    def get_contact(self, obj):
-        return {
-            'email': obj.contact_email,
-            'phone': obj.contact_phone,
-            'fax': obj.contact_fax,
-            'chat': obj.contact_chat,
-            'url': obj.contact_url
-        }
-
-    def get_forum(self, obj):
-        if not obj.forum_url and not obj.forum_vendor:
-            return None
-
-        return {
-            'url': obj.forum_url,
-            'vendor': obj.forum_vendor
-        }
-
-    def get_terms_of_use(self, obj):
-        return {
-            'government_only': obj.terms_government_only,
-            'pay_per_use': obj.terms_pay_per_use,
-            'uptime_guarantee': obj.terms_uptime_guarantee,
-            'support_response_time': obj.terms_support_response_time
-        }
 
     def get_scores(self, obj):
         def has_documentation(api):
@@ -107,9 +138,9 @@ class APISerializer(NonNullModelSerializer):
         def provides_sla(api):
             return api.terms_support_response_time != '' and api.terms_uptime_guarantee >= 0.9
 
-        return {
+        return OrderedDict({
             'has_documentation': has_documentation(obj),
             'has_specification': has_specification(obj),
             'has_contact_details': has_contact_details(obj),
             'provides_sla': provides_sla(obj)
-        }
+        })
