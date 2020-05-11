@@ -36,6 +36,14 @@ class ForumSerializer(serializers.Serializer):
         allow_blank=True
     )
 
+    def to_representation(self, instance):
+        result = super().to_representation(instance)
+
+        if not result.get('vendor', '') and not result.get('url', ''):
+            return None
+
+        return result
+
 
 class ContactSerializer(serializers.Serializer):
     email = serializers.CharField(

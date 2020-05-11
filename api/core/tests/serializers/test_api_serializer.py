@@ -112,11 +112,6 @@ class APISerializerTest(TestCase):
             'badges': [],
             'referenced_apis': [],
             'environments': [],
-            # TODO remove forum (empty forum shouldn't be serialized)
-            'forum': OrderedDict({
-                'vendor': '',
-                'url': '',
-            }),
             'contact': OrderedDict({
                 'email': '',
                 'phone': '',
