@@ -16,27 +16,41 @@ DEFAULT_SCORES = {
     'provides_sla': False,
 }
 
+REQUIRED_ERROR = 'required'
+BLANK_ERROR = 'blank'
+INVALID_ERROR = 'invalid'
+
+
+def replace_errors_with_codes(obj):
+    if isinstance(obj, dict):
+        return {k: replace_errors_with_codes(v) for k, v in obj.items()}
+
+    if isinstance(obj, list):
+        return [replace_errors_with_codes(v) for v in obj]
+
+    if isinstance(obj, ErrorDetail):
+        return obj.code
+
+    return obj
+
 
 class APISerializerTest(TestCase):
     def setUp(self):
-        self.requiredError = ErrorDetail(string='Dit veld is vereist.', code='required')
-        self.blankError = ErrorDetail(string='Dit veld mag niet leeg zijn.', code='blank')
-        self.invalidError = ErrorDetail(string='Only "discourse" is a valid vendor',
-                                        code='invalid')
-
         # Display whole diffs
         self.maxDiff = None
 
-    def assert_serializer_has_errors(self, serializer, expected_errors):
+    def assert_serializer_has_errors(self, serializer, expected_error_codes):
         def format_obj(obj):
             return json.dumps(obj, indent=4)
 
         self.assertFalse(
             serializer.is_valid(),
-            f'Expected errors: {format_obj(expected_errors)};\n'
+            f'Expected errors: {format_obj(expected_error_codes)};\n'
             f'Instead got validated_data: {format_obj(serializer.validated_data)}'
         )
-        self.assertDictEqual(serializer.errors, expected_errors)
+
+        actual_error_codes = replace_errors_with_codes(serializer.errors)
+        self.assertDictEqual(actual_error_codes, expected_error_codes)
 
     def test_serialize_own_fields(self):
         api = API.objects.create(
@@ -378,7 +392,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'id': [self.requiredError],
+            'id': [REQUIRED_ERROR],
         })
 
     def test_deserialize_missing_description(self):
@@ -397,7 +411,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'description': [self.requiredError],
+            'description': [REQUIRED_ERROR],
         })
 
     def test_deserialize_missing_organization_name(self):
@@ -416,7 +430,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'organization_name': [self.requiredError],
+            'organization_name': [REQUIRED_ERROR],
         })
 
     def test_deserialize_missing_service_name(self):
@@ -435,7 +449,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'service_name': [self.requiredError],
+            'service_name': [REQUIRED_ERROR],
         })
 
     def test_deserialize_missing_environments(self):
@@ -448,7 +462,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'environments': [self.requiredError],
+            'environments': [REQUIRED_ERROR],
         })
 
     # Because badges are read-only
@@ -512,7 +526,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'forum': {'vendor': [self.invalidError]},
+            'forum': {'vendor': [INVALID_ERROR]},
         })
 
     def test_deserialize_forum_missing_url(self):
@@ -535,7 +549,7 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'forum': {'url': [self.requiredError]},
+            'forum': {'url': [REQUIRED_ERROR]},
         })
 
     def test_deserialize_forum_blank_url(self):
@@ -559,5 +573,5 @@ class APISerializerTest(TestCase):
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'forum': {'url': [self.blankError]},
+            'forum': {'url': [BLANK_ERROR]},
         })
