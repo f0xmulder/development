@@ -84,7 +84,7 @@ class TermsOfUseSerializer(serializers.Serializer):
 class APISerializer(NonNullModelSerializer):
     id = serializers.CharField(source='api_id')
     environments = EnvironmentSerializer(many=True)
-    badges = BadgeSerializer(many=True, required=False)
+    badges = BadgeSerializer(many=True, read_only=True)
     forum = ForumSerializer(source='*', required=False)
     contact = ContactSerializer(source='*', required=False)
     terms_of_use = TermsOfUseSerializer(source='*', required=False)

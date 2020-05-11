@@ -283,7 +283,6 @@ class APISerializerTest(TestCase):
             'api_type': 'rest_json',
             'api_authentication': 'api_key',
             'is_reference_implementation': False,
-            'badges': [],
             'referenced_apis': [],
             'environments': [],
             'contact': {
@@ -315,7 +314,6 @@ class APISerializerTest(TestCase):
             service_name='First Service',
             api_type='rest_json',
             api_authentication='api_key',
-            badges=[],
             environments=[],
             forum_vendor='discourse',
             forum_url='http://mydiscourse.com',
@@ -455,3 +453,43 @@ class APISerializerTest(TestCase):
         self.assert_serializer_has_errors(serializer, {
             'environments': [self.requiredError],
         })
+
+    # Because badges are read-only
+    def test_deserialize_ignore_badges(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'badges': [
+                OrderedDict({
+                    'name': 'Golden Test',
+                })
+            ],
+        }
+
+        serializer = APISerializer(data=input_data)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+
+        expected = OrderedDict(
+            api_id='api1',
+            description='First API',
+            organization_name='Test Organization',
+            service_name='First Service',
+            environments=[
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        )
+
+        self.assertDictEqual(serializer.validated_data, expected)
