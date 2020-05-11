@@ -1,7 +1,9 @@
+import json
 from collections import OrderedDict
 from decimal import Decimal
 
 from django.test import TestCase
+from rest_framework.exceptions import ErrorDetail
 
 from core.models import API, Badge, Environment
 from core.serializers import APISerializer
@@ -17,8 +19,22 @@ DEFAULT_SCORES = {
 
 class APISerializerTest(TestCase):
     def setUp(self):
+        self.requiredError = ErrorDetail(string='Dit veld is vereist.', code='required')
+        self.blankError = ErrorDetail(string='Dit veld mag niet leeg zijn.', code='blank')
+
         # Display whole diffs
         self.maxDiff = None
+
+    def assert_serializer_has_errors(self, serializer, expected_errors):
+        def format_obj(obj):
+            return json.dumps(obj, indent=4)
+
+        self.assertFalse(
+            serializer.is_valid(),
+            f'Expected errors: {format_obj(expected_errors)};\n'
+            f'Instead got validated_data: {format_obj(serializer.validated_data)}'
+        )
+        self.assertDictEqual(serializer.errors, expected_errors)
 
     def test_serialize_own_fields(self):
         api = API.objects.create(
@@ -350,3 +366,92 @@ class APISerializerTest(TestCase):
         )
 
         self.assertDictEqual(serializer.validated_data, expected)
+
+    def test_deserialize_missing_id(self):
+        input_data = {
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'id': [self.requiredError],
+        })
+
+    def test_deserialize_missing_description(self):
+        input_data = {
+            'id': 'api1',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'description': [self.requiredError],
+        })
+
+    def test_deserialize_missing_organization_name(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'organization_name': [self.requiredError],
+        })
+
+    def test_deserialize_missing_service_name(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'service_name': [self.requiredError],
+        })
+
+    def test_deserialize_missing_environments(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'environments': [self.requiredError],
+        })
