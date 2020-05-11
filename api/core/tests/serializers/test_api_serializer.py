@@ -488,3 +488,50 @@ class APISerializerTest(TestCase):
         )
 
         self.assertDictEqual(serializer.validated_data, expected)
+
+    def test_deserialize_forum_missing_url(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'forum': {
+                'vendor': 'discourse',
+            },
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'forum': {'url': [self.requiredError]},
+        })
+
+    def test_deserialize_forum_blank_url(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'forum': {
+                'vendor': 'discourse',
+                'url': '',
+            },
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'forum': {'url': [self.blankError]},
+        })

@@ -28,12 +28,10 @@ class ForumSerializer(serializers.Serializer):
     vendor = serializers.CharField(
         source='forum_vendor',
         max_length=MAX_ENUM_LENGTH,
-        allow_blank=True
     )
     url = serializers.URLField(
         source='forum_url',
         max_length=MAX_URL_LENGTH,
-        allow_blank=True
     )
 
     def to_representation(self, instance):
