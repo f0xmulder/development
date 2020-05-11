@@ -1,5 +1,7 @@
 from collections import OrderedDict
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
 from core.models import API, Environment, Badge, MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
 
 
@@ -33,6 +35,12 @@ class ForumSerializer(serializers.Serializer):
         source='forum_url',
         max_length=MAX_URL_LENGTH,
     )
+
+    def validate_vendor(self, value):
+        if value != 'discourse':
+            raise ValidationError('Only "discourse" is a valid vendor')
+
+        return value
 
     def to_representation(self, instance):
         result = super().to_representation(instance)

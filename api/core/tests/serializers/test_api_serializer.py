@@ -21,6 +21,8 @@ class APISerializerTest(TestCase):
     def setUp(self):
         self.requiredError = ErrorDetail(string='Dit veld is vereist.', code='required')
         self.blankError = ErrorDetail(string='Dit veld mag niet leeg zijn.', code='blank')
+        self.invalidError = ErrorDetail(string='Only "discourse" is a valid vendor',
+                                        code='invalid')
 
         # Display whole diffs
         self.maxDiff = None
@@ -488,6 +490,30 @@ class APISerializerTest(TestCase):
         )
 
         self.assertDictEqual(serializer.validated_data, expected)
+
+    def test_deserialize_forum_invalid_vendor(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'forum': {
+                'vendor': 'SomethingUnknown',
+                'url': 'http://mydiscourse.com',
+            },
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'forum': {'vendor': [self.invalidError]},
+        })
 
     def test_deserialize_forum_missing_url(self):
         input_data = {
