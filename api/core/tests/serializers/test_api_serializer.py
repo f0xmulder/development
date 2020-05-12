@@ -19,6 +19,7 @@ DEFAULT_SCORES = {
 REQUIRED_ERROR = 'required'
 BLANK_ERROR = 'blank'
 INVALID_ERROR = 'invalid'
+INVALID_CHOICE_ERROR = 'invalid_choice'
 
 
 def replace_errors_with_codes(obj):
@@ -574,4 +575,43 @@ class APISerializerTest(TestCase):
 
         self.assert_serializer_has_errors(serializer, {
             'forum': {'url': [BLANK_ERROR]},
+        })
+
+    def test_deserialize_environments_invalid_name(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'INVALID NAME',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'environments': [{'name': [INVALID_CHOICE_ERROR]}],
+        })
+
+    def test_deserialize_environments_missing_name(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'environments': [{'name': [REQUIRED_ERROR]}],
         })
