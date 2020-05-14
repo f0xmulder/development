@@ -296,7 +296,13 @@ class APISerializerTest(TestCase):
             'api_authentication': 'api_key',
             'is_reference_implementation': False,
             'referenced_apis': [],
-            'environments': [],
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
             'contact': {
                 'email': 'contact@api1.com',
                 'phone': '0612345678',
@@ -326,7 +332,13 @@ class APISerializerTest(TestCase):
             service_name='First Service',
             api_type='rest_json',
             api_authentication='api_key',
-            environments=[],
+            environments=[
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
             forum_vendor='discourse',
             forum_url='http://mydiscourse.com',
             contact_email='contact@api1.com',
@@ -614,4 +626,49 @@ class APISerializerTest(TestCase):
 
         self.assert_serializer_has_errors(serializer, {
             'environments': [{'name': [REQUIRED_ERROR]}],
+        })
+
+    def test_deserialize_environments_no_production(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'demo',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'environments': [INVALID_ERROR],
+        })
+
+    def test_deserialize_environments_duplicate_name(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl/1',
+                    'documentation_url': 'http://docs.production.nl/1',
+                }),
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl/2',
+                    'documentation_url': 'http://docs.production.nl/2',
+                })
+            ],
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'environments': [INVALID_ERROR],
         })

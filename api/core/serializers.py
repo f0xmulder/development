@@ -123,6 +123,18 @@ class APISerializer(NonNullModelSerializer):
             'scores'
         ]
 
+    def validate_environments(self, environments):
+        names = [env['name'] for env in environments]
+
+        # TODO get production from EnvTypes
+        if not any(name == 'production' for name in names):
+            raise ValidationError('The API is missing a production environment')
+
+        if len(set(names)) != len(names):
+            raise ValidationError('Environment names are not unique')
+
+        return environments
+
     def get_scores(self, obj):
         def has_documentation(api):
             production_environment = api.environments.filter(
