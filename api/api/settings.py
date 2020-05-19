@@ -119,7 +119,7 @@ LOGGING = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'nl-nl'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'Europe/Amsterdam'
 
