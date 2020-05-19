@@ -55,43 +55,58 @@ class ContactSerializer(serializers.Serializer):
     email = serializers.CharField(
         source='contact_email',
         max_length=MAX_TEXT_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
     phone = serializers.CharField(
         source='contact_phone',
         max_length=MAX_TEXT_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
     fax = serializers.CharField(
         source='contact_fax',
         max_length=MAX_TEXT_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
     chat = serializers.CharField(
         source='contact_chat',
         max_length=MAX_TEXT_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
     url = serializers.CharField(
         source='contact_url',
         max_length=MAX_URL_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
 
 
 class TermsOfUseSerializer(serializers.Serializer):
-    government_only = serializers.BooleanField(source='terms_government_only', allow_null=True)
-    pay_per_use = serializers.BooleanField(source='terms_pay_per_use', allow_null=True)
+    government_only = serializers.BooleanField(
+        source='terms_government_only',
+        allow_null=True,
+        required=False,
+    )
+    pay_per_use = serializers.BooleanField(
+        source='terms_pay_per_use',
+        allow_null=True,
+        required=False,
+    )
     uptime_guarantee = serializers.DecimalField(
         source='terms_uptime_guarantee',
-        allow_null=True,
         decimal_places=6,
         max_digits=8,
+        allow_null=True,
+        required=False,
     )
     support_response_time = serializers.CharField(
         source='terms_support_response_time',
         max_length=MAX_TEXT_LENGTH,
-        allow_blank=True
+        allow_blank=True,
+        required=False,
     )
 
 

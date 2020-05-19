@@ -389,6 +389,98 @@ class APISerializerTest(TestCase):
 
         self.assertDictEqual(serializer.validated_data, expected)
 
+    def test_deserialize_empty_subobjects(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'contact': {},
+            'terms_of_use': {},
+        }
+
+        serializer = APISerializer(data=input_data)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+
+        expected = OrderedDict(
+            api_id='api1',
+            description='First API',
+            organization_name='Test Organization',
+            service_name='First Service',
+            environments=[
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+        )
+
+        self.assertDictEqual(serializer.validated_data, expected)
+
+    def test_deserialize_blank_subobjects(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            'contact': {
+                'email': '',
+                'phone': '',
+                'fax': '',
+                'chat': '',
+                'url': '',
+            },
+            'terms_of_use': {
+                'government_only': None,
+                'pay_per_use': None,
+                'uptime_guarantee': None,
+                'support_response_time': '',
+            },
+        }
+
+        serializer = APISerializer(data=input_data)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+
+        expected = OrderedDict(
+            api_id='api1',
+            description='First API',
+            organization_name='Test Organization',
+            service_name='First Service',
+            environments=[
+                OrderedDict({
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                    'documentation_url': 'http://docs.production.nl',
+                }),
+            ],
+            contact_email='',
+            contact_phone='',
+            contact_fax='',
+            contact_chat='',
+            contact_url='',
+            terms_government_only=None,
+            terms_pay_per_use=None,
+            terms_uptime_guarantee=None,
+            terms_support_response_time='',
+        )
+
+        self.assertDictEqual(serializer.validated_data, expected)
+
     def test_deserialize_missing_id(self):
         input_data = {
             'description': 'First API',
