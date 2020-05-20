@@ -22,7 +22,6 @@ GITLAB_URL = 'https://testurl.com'
 class SubmitAPIViewTest(TestCase):
     def setUp(self):
         self.valid_api_data = {
-            'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
             'service_name': 'First Service',

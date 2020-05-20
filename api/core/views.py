@@ -184,8 +184,9 @@ class SubmitAPIView(APIView):
             raise APIException(detail='The Gitlab API is not properly configured')
 
         api_data = request.data
-
-        serializer = APISerializer(data=api_data)
+        # The input has no id, which it needs to be a valid API
+        data_to_validate = dict(**api_data, id='temporary-id')
+        serializer = APISerializer(data=data_to_validate)
         serializer.is_valid(raise_exception=True)
 
         url = f'{self.gitlab_url}/api/v4/projects/{self.gitlab_project_id}/issues'
