@@ -2,11 +2,11 @@
     "description": "Alle niet-gevoelige gegevens van het wagenpark.",
     "organization_name": "RDW",
     "service_name": "Gekentekende voertuigen",
-    "api_type": "Onbekend",
-    "api_authentication": "Onbekend",
+    "api_type": "unknown",
+    "api_authentication": "unknown",
     "tags": ["basisregistratie", "rdw", "brv"],
     "environments": [{
-        "name": "Productie",
+        "name": "production",
         "api_url": "https://opendata.rdw.nl",
         "specification_url": "",
         "documentation_url": "https://dev.socrata.com/foundry/opendata.rdw.nl/m9d7-ebf2"

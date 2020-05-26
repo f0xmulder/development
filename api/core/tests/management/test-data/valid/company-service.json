@@ -5,12 +5,12 @@
     "api_type": "REST/JSON",
     "api_authentication": "API Key",
     "environments": [{
-        "name": "Productie",
+        "name": "production",
         "api_url": "Test API URL",
         "specification_url": "Test Specification URL",
         "documentation_url": "Test Documentation URL"
     }, {
-        "name": "Acceptatie",
+        "name": "acceptance",
         "api_url": "Test Acceptance API URL",
         "specification_url": "Test Acceptance Specification URL",
         "documentation_url": "Test Acceptance Documentation URL"

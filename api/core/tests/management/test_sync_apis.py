@@ -46,7 +46,7 @@ class SyncAPIsTest(TestCase):
             {
                 'id': 1,
                 'api_id': 'company-service',
-                'name': 'Productie',
+                'name': 'production',
                 'api_url': 'Test API URL',
                 'specification_url': 'Test Specification URL',
                 'documentation_url': 'Test Documentation URL',
@@ -54,7 +54,7 @@ class SyncAPIsTest(TestCase):
             {
                 'id': 2,
                 'api_id': 'company-service',
-                'name': 'Acceptatie',
+                'name': 'acceptance',
                 'api_url': 'Test Acceptance API URL',
                 'specification_url': 'Test Acceptance Specification URL',
                 'documentation_url': 'Test Acceptance Documentation URL',

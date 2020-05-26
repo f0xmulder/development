@@ -2,11 +2,11 @@
     "description": "Met behulp van de CBS OData API kan je Articles, Pages, Figures, Events en Flash data van de CBS website ophalen.",
     "organization_name": "Centraal Bureau voor de Statistiek (CBS)",
     "service_name": "CBS OData",
-    "api_type": "REST/JSON",
-    "api_authentication": "Onbekend",
+    "api_type": "rest_json",
+    "api_authentication": "unknown",
     "tags": [],
     "environments": [{
-        "name": "Productie",
+        "name": "production",
         "api_url": "https://www.cbs.nl/odata/v1/",
         "specification_url": "",
         "documentation_url": "https://www.cbs.nl/nl-nl/onze-diensten/open-data/website-open-data"
