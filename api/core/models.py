@@ -1,6 +1,4 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
 
 MAX_URL_LENGTH = 2000
 MAX_TEXT_LENGTH = 255
@@ -9,22 +7,22 @@ MAX_ENUM_LENGTH = 31
 
 class API(models.Model):
     class APIType(models.TextChoices):
-        UNKNOWN = 'unknown', _('Onbekend')
-        REST_JSON = 'rest_json', _('Rest/JSON')
-        REST_XML = 'rest_xml', _('Rest/XML')
-        SOAP_XML = 'soap_xml', _('SOAP/XML')
-        GRPC = 'grpc', _('gRPC')
-        GRAPHQL = 'graphql', _('GraphQL')
-        SPARQL = 'sparql', _('SPARQL')
-        WFS = 'wfs', _('WFS')
-        WMS = 'wms', _('WMS')
+        UNKNOWN = 'unknown'
+        REST_JSON = 'rest_json'
+        REST_XML = 'rest_xml'
+        SOAP_XML = 'soap_xml'
+        GRPC = 'grpc'
+        GRAPHQL = 'graphql'
+        SPARQL = 'sparql'
+        WFS = 'wfs'
+        WMS = 'wms'
 
     class APIAuthentication(models.TextChoices):
-        UNKNOWN = 'unknown', _('Onbekend')
-        NONE = 'none', _('Geen')
-        MUTUAL_TLS = 'mutual_tls', _('Mutual TLS')
-        API_KEY = 'api_key', _('API Key')
-        IP_WHITELIST = 'ip_whitelist', _('IP Whitelist')
+        UNKNOWN = 'unknown'
+        NONE = 'none'
+        MUTUAL_TLS = 'mutual_tls'
+        API_KEY = 'api_key'
+        IP_WHITELIST = 'ip_whitelist'
 
     api_id = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
     description = models.TextField()
@@ -78,9 +76,9 @@ class API(models.Model):
 
 class Environment(models.Model):
     class EnvironmentType(models.TextChoices):
-        PRODUCTION = 'production', _('Productie')
-        ACCEPTANCE = 'acceptance', _('Acceptatie')
-        DEMO = 'demo', _('Demo')
+        PRODUCTION = 'production'
+        ACCEPTANCE = 'acceptance'
+        DEMO = 'demo'
 
     name = models.CharField(max_length=MAX_ENUM_LENGTH, choices=EnvironmentType.choices)
     api_url = models.URLField(max_length=MAX_URL_LENGTH)
