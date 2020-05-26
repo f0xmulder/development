@@ -5,13 +5,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
+import { goApiMock } from '../../models/api.mock'
 import ImplementedByListContainer from './ImplementedByListContainer'
 
 /* eslint-disable camelcase */
-const apiFromAPIResponse = {}
-apiFromAPIResponse.id = '1'
-apiFromAPIResponse.service_name = 'service'
-apiFromAPIResponse.organization_name = 'organization'
+const apiFromAPIResponse = {
+  ...goApiMock,
+  id: '1',
+  service_name: 'service',
+  organization_name: 'organization',
+}
 /* eslint-enable camelcase */
 
 describe('ImplementedByListContainer', () => {

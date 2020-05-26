@@ -5,13 +5,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { modelFromAPIResponse } from '../../models/api'
 import { flushPromises } from '../../test-helpers'
+import { goApiMock } from '../../models/api.mock'
 import LinkToAPIContainer from './LinkToAPIContainer'
 
 /* eslint-disable camelcase */
-const apiFromAPIResponse = {}
-apiFromAPIResponse.id = '42'
-apiFromAPIResponse.service_name = 'Service'
-apiFromAPIResponse.organization_name = 'Organization'
+const apiFromAPIResponse = {
+  ...goApiMock,
+  id: '42',
+  service_name: 'Service',
+  organization_name: 'Organization',
+}
 /* eslint-enable camelcase */
 
 describe('LinkToAPIContainer', () => {

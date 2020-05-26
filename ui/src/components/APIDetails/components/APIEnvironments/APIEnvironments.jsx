@@ -25,8 +25,8 @@ const APIEnvironments = ({ environments, apiId }) => (
       const hasSpecification = env.specificationUrl && env.name
 
       return (
-        <Environment key={env.name}>
-          <H3>{env.name}</H3>
+        <Environment key={env.name.value}>
+          <H3>{env.name.label}</H3>
           <EnvData>
             <EnvUri data-test="apiUrl">{env.apiUrl}</EnvUri>
 
@@ -36,7 +36,7 @@ const APIEnvironments = ({ environments, apiId }) => (
                 variant="secondary"
                 to={
                   hasSpecification
-                    ? `/detail/${apiId}/${env.name}/specificatie`
+                    ? `/detail/${apiId}/${env.name.value}/specificatie`
                     : null
                 }
                 disabled={!hasSpecification}

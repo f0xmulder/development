@@ -8,13 +8,14 @@ import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
 import { modelFromAPIResponse } from '../../models/api'
+import { EnvironmentType } from '../../models/enums'
 import { schema } from './validationSchema'
 
 const initialValues = {
   description: '',
   organizationName: '',
   serviceName: '',
-  apiType: 'Onbekend',
+  apiType: 'unknown',
   apiAuthentication: '',
 
   productionApiUrl: '',
@@ -74,7 +75,7 @@ export const convertFormDataToRequestBody = (formData) => {
 
   requestBody.environments = [
     {
-      name: 'Productie',
+      name: EnvironmentType.PRODUCTION.value,
       api_url: formData.productionApiUrl,
       specification_url: formData.productionSpecificationUrl,
       documentation_url: formData.productionDocumentationUrl,
@@ -83,7 +84,7 @@ export const convertFormDataToRequestBody = (formData) => {
 
   if (formData.hasAcceptanceEnvironment) {
     requestBody.environments.push({
-      name: 'Acceptance',
+      name: EnvironmentType.ACCEPTANCE.value,
       api_url: formData.acceptanceApiUrl,
       specification_url: formData.acceptanceSpecificationUrl,
       documentation_url: formData.acceptanceDocumentationUrl,
@@ -92,7 +93,7 @@ export const convertFormDataToRequestBody = (formData) => {
 
   if (formData.hasDemoEnvironment) {
     requestBody.environments.push({
-      name: 'Demo',
+      name: EnvironmentType.DEMO.value,
       api_url: formData.demoApiUrl,
       specification_url: formData.demoSpecificationUrl,
       documentation_url: formData.demoDocumentationUrl,

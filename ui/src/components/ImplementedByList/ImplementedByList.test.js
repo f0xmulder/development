@@ -3,6 +3,7 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme/build'
+import { APIType } from '../../models/enums'
 import ImplementedByList from './ImplementedByList'
 
 describe('ImplementedByList', () => {
@@ -14,7 +15,7 @@ describe('ImplementedByList', () => {
         id: '42',
         serviceName: 'Service',
         organizationName: 'Organization',
-        apiType: 'json',
+        apiType: APIType.REST_JSON,
         scores: {
           hasDocumentation: true,
           hasSpecification: true,

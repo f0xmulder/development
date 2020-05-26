@@ -7,7 +7,7 @@ import { shallow } from 'enzyme'
 import APIEnvironments from './APIEnvironments'
 
 const singleEnvironment = {
-  name: 'Productie',
+  name: 'production',
   apiUrl: 'API URL',
   specificationUrl: 'Specification URL',
   documentationUrl: 'Documentation URL',
@@ -15,19 +15,19 @@ const singleEnvironment = {
 
 const multipleEnvironments = [
   {
-    name: 'Productie',
+    name: 'production',
     apiUrl: 'API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
   },
   {
-    name: 'Acceptance',
+    name: 'acceptance',
     apiUrl: 'API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
   },
   {
-    name: 'Demo',
+    name: 'demo',
     apiUrl: 'API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',

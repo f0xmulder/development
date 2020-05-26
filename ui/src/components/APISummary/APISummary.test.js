@@ -3,6 +3,7 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme/build'
+import { APIType } from '../../models/enums'
 import APISummary from './APISummary'
 import { StyledLink } from './APISummary.styles'
 
@@ -15,7 +16,7 @@ describe('APISummary', () => {
         id="test-api.json"
         organizationName="Organization"
         serviceName="Service"
-        apiType="json"
+        apiType={APIType.REST_JSON}
         scores={{
           hasDocumentation: true,
           hasSpecification: true,

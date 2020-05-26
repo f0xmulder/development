@@ -9,19 +9,28 @@ import { breakpoints } from '../../theme'
 import APIFilter from '../APIFilter/APIFilter'
 
 import { ReactComponent as FilterIcon } from '../Icons/filter-icon.svg'
+import { APIType } from '../../models/enums'
 import { StyledFilterButton, StyledAPIFilters } from './APIFilters.styles'
 
-const filters = [
-  { key: 'api_type', label: 'API type' },
-  { key: 'organization_name', label: 'Organisatie' },
+export const filters = [
+  {
+    key: 'api_type',
+    label: 'API type',
+    getLabel: (term) => APIType.valueOf(term).label,
+  },
+  {
+    key: 'organization_name',
+    label: 'Organisatie',
+    getLabel: (term) => term,
+  },
 ]
 
-export const formatOptions = (terms) =>
-  terms.map((term) => ({
-    value: term.term,
-    label: `${term.term}`,
-    count: term.count,
-    disabled: term.count === 0,
+export const formatOptions = (facets, filter) =>
+  facets[filter.key].terms.map((termData) => ({
+    value: termData.term,
+    label: filter.getLabel(termData.term),
+    count: termData.count,
+    disabled: termData.count === 0,
   }))
 
 export const facetsContainTermsForFilterByKey = (facets, filterKey) =>
@@ -60,7 +69,7 @@ const APIFilters = ({ initialValues, facets, onSubmit, ...props }) => {
                         key={i}
                         title={filter.label}
                         name={filter.key}
-                        options={formatOptions(facets[filter.key].terms)}
+                        options={formatOptions(facets, filter)}
                         value={values[filter.key] || []}
                         onChangeHandler={handleSubmit}
                       />

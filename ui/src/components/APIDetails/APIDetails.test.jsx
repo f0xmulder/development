@@ -7,6 +7,7 @@ import { StaticRouter as Router } from 'react-router'
 import { ThemeProvider } from 'styled-components/macro'
 
 import theme from '../../theme'
+import { APIType, APIAuthentication, EnvironmentType } from '../../models/enums'
 import APIDetails, { referenceImplementationsFromRelations } from './APIDetails'
 
 const details = {
@@ -14,12 +15,12 @@ const details = {
   description: 'Description',
   organizationName: 'Organization Name',
   serviceName: 'Service Name',
-  apiType: 'API Type',
-  apiAuthentication: 'API Authentication',
+  apiType: APIType.SOAP_XML,
+  apiAuthentication: APIAuthentication.MUTUAL_TLS,
   badges: ['Golden API', 'Well-written docs'],
   environments: [
     {
-      name: 'Productie',
+      name: EnvironmentType.PRODUCTION,
       apiUrl: 'API URL',
       specificationUrl: 'Specification URL',
       documentationUrl: 'Documentation URL',
@@ -85,8 +86,8 @@ describe('APIDetails', () => {
   it('should render expected info', () => {
     expect(wrapper.text()).toContain('Organization Name')
     expect(wrapper.text()).toContain('Description')
-    expect(wrapper.text()).toContain('API Type')
-    expect(wrapper.text()).toContain('API Authentication')
+    expect(wrapper.text()).toContain('SOAP/XML')
+    expect(wrapper.text()).toContain('Mutual TLS')
   })
 
   describe('environments information', () => {

@@ -11,23 +11,23 @@ const exampleJSON = `{
   "service_name": "Voorbeeld van een API naam",
   "description": "Voorbeeld van een omschrijving",
   "organization_name": "Voorbeeld van een organisatie naam",
-  "api_type": "REST/JSON",
-  "api_authentication": "API Key",
+  "api_type": "rest_json",
+  "api_authentication": "api_key",
   "environments": [
     {
-      "name": "Productie"
+      "name": "production"
       "api_url": "https://api.example.com/service/",
       "specification_url": "https://api.example.com/service/swagger/?format=openapi",
       "documentation_url": "https://api.example.com/service/",
     },
     {
-      "name": "Acceptatie"
+      "name": "acceptance"
       "api_url": "https://acpt.api.example.com/service/",
       "specification_url": "https://acpt.api.example.com/service/swagger/?format=openapi",
       "documentation_url": "https://acpt.api.example.com/service/",
     },
     {
-      "name": "Demo"
+      "name": "demo"
       "api_url": "https://demo.api.example.com/service/",
       "specification_url": "https://demo.api.example.com/service/swagger/?format=openapi",
       "documentation_url": "https://demo.api.example.com/service/",

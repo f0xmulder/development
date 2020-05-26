@@ -16,6 +16,7 @@ import {
   RadioOptionGroup,
   RadioOptionWrapper,
 } from '../Form/Form'
+import { APIType, APIAuthentication, EnvironmentType } from '../../models/enums'
 import {
   StyledFormGroupColumn,
   StyledFormGroupColumnContainer,
@@ -98,15 +99,11 @@ const SubmitAPIForm = ({
               name="apiType"
               maxWidth="small"
             >
-              <option value="Onbekend">Onbekend</option>
-              <option value="REST/JSON">REST/JSON</option>
-              <option value="REST/XML">REST/XML</option>
-              <option value="SOAP/XML">SOAP/XML</option>
-              <option value="gRPC">gRPC</option>
-              <option value="GraphQL">GraphQL</option>
-              <option value="SPARQL">SPARQL</option>
-              <option value="WFS">WFS</option>
-              <option value="WMS">WMS</option>
+              {APIType.entries().map((apiType) => (
+                <option key={apiType.value} value={apiType.value}>
+                  {apiType.label}
+                </option>
+              ))}
             </SelectField>
             {errors.apiType && touched.apiType && (
               <ErrorMessage>{errors.apiType}</ErrorMessage>
@@ -116,47 +113,21 @@ const SubmitAPIForm = ({
           <StyledFormGroup>
             <Label>API authenticatie</Label>
             <RadioOptionGroup>
-              <RadioOptionWrapper>
-                <Field
-                  id="apiAuthenticationNone"
-                  name="apiAuthentication"
-                  type="radio"
-                  value="Geen"
-                />
-                <Label htmlFor="apiAuthenticationNone">Geen</Label>
-              </RadioOptionWrapper>
+              {APIAuthentication.entries().map((apiAuth) => {
+                const fieldId = `apiAuthentication-${apiAuth.value}`
 
-              <RadioOptionWrapper>
-                <Field
-                  id="apiAuthenticationMutualTLS"
-                  name="apiAuthentication"
-                  type="radio"
-                  value="Mutual TLS"
-                />
-                <Label htmlFor="apiAuthenticationMutualTLS">Mutual TLS</Label>
-              </RadioOptionWrapper>
-
-              <RadioOptionWrapper>
-                <Field
-                  id="apiAuthenticationAPIKey"
-                  name="apiAuthentication"
-                  type="radio"
-                  value="API Key"
-                />
-                <Label htmlFor="apiAuthenticationAPIKey">API Key</Label>
-              </RadioOptionWrapper>
-
-              <RadioOptionWrapper>
-                <Field
-                  id="apiAuthenticationIPWhitelist"
-                  name="apiAuthentication"
-                  type="radio"
-                  value="IP Whitelist"
-                />
-                <Label htmlFor="apiAuthenticationIPWhitelist">
-                  IP Whitelist
-                </Label>
-              </RadioOptionWrapper>
+                return (
+                  <RadioOptionWrapper key={apiAuth.value}>
+                    <Field
+                      id={fieldId}
+                      name="apiAuthentication"
+                      type="radio"
+                      value={apiAuth.value}
+                    />
+                    <Label htmlFor={fieldId}>{apiAuth.label}</Label>
+                  </RadioOptionWrapper>
+                )
+              })}
             </RadioOptionGroup>
             {errors.apiAuthentication && touched.apiAuthentication && (
               <ErrorMessage>{errors.apiAuthentication}</ErrorMessage>
@@ -171,31 +142,17 @@ const SubmitAPIForm = ({
 
       <StyledFormGroupColumnContainer>
         <StyledFormGroupColumn>
-          <EnvironmentFormInputs
-            title="Productie"
-            environment="production"
-            values={values}
-            touched={touched}
-            errors={errors}
-          />
-
-          <EnvironmentFormInputs
-            title="Acceptatie"
-            environment="acceptance"
-            optional
-            values={values}
-            touched={touched}
-            errors={errors}
-          />
-
-          <EnvironmentFormInputs
-            title="Demo"
-            environment="demo"
-            optional
-            values={values}
-            touched={touched}
-            errors={errors}
-          />
+          {EnvironmentType.entries().map((envType) => (
+            <EnvironmentFormInputs
+              key={envType.value}
+              title={envType.label}
+              environment={envType.value}
+              optional={envType.value !== EnvironmentType.PRODUCTION.value}
+              values={values}
+              touched={touched}
+              errors={errors}
+            />
+          ))}
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
     </Fieldset>

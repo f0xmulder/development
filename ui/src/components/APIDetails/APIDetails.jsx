@@ -7,6 +7,7 @@ import { useRouteMatch } from 'react-router'
 import PropTypes from 'prop-types'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
+import { APIType, APIAuthentication } from '../../models/enums'
 
 import { Container, Row, Col } from '../design-system-candidates/Grid'
 import APIDetailsHeader from '../APIDetailsHeader/APIDetailsHeader'
@@ -159,8 +160,8 @@ APIDetails.propTypes = {
   serviceName: PropTypes.string.isRequired,
   organizationName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  apiType: PropTypes.string.isRequired,
-  apiAuthentication: PropTypes.string.isRequired,
+  apiType: PropTypes.instanceOf(APIType).isRequired,
+  apiAuthentication: PropTypes.instanceOf(APIAuthentication).isRequired,
   environments: PropTypes.arrayOf(PropTypes.object),
   forum: PropTypes.object,
   isReferenceImplementation: PropTypes.bool,

@@ -14,7 +14,7 @@ apiResponseObject.description = 'Description'
 apiResponseObject.organizationName = 'Organization Name'
 apiResponseObject.serviceName = 'Service Name'
 apiResponseObject.apiUrl = 'API URL'
-apiResponseObject.apiType = 'API Type'
+apiResponseObject.apiType = 'rest_json'
 apiResponseObject.specificationUrl = 'Specification URL'
 apiResponseObject.documentationUrl = 'Documentation URL'
 /* eslint-enable camelcase */

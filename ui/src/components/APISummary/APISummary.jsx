@@ -2,10 +2,11 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { string, object } from 'prop-types'
+import { string, object, instanceOf } from 'prop-types'
 
 import PillBadge from '../PillBadge/PillBadge'
 
+import { APIType } from '../../models/enums'
 import {
   StyledLink,
   StyledServiceName,
@@ -26,7 +27,7 @@ const APISummary = ({
     <StyledServiceName>{serviceName}</StyledServiceName>
     <StyledOrganizationName>{organizationName}</StyledOrganizationName>
     <PillContainer>
-      <PillBadge>{apiType}</PillBadge>
+      <PillBadge>{apiType.label}</PillBadge>
     </PillContainer>
     <StyledGrade scores={scores} />
   </StyledLink>
@@ -36,7 +37,7 @@ APISummary.propTypes = {
   id: string.isRequired,
   serviceName: string.isRequired,
   organizationName: string.isRequired,
-  apiType: string.isRequired,
+  apiType: instanceOf(APIType).isRequired,
   scores: object.isRequired,
 }
 

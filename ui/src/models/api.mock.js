@@ -1,18 +1,21 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+
+import { EnvironmentType, APIType, APIAuthentication } from './enums'
+
 export const goApiMock = {
   /* eslint-disable camelcase */
   id: 'id',
   service_name: 'service name',
   organization_name: 'organization name',
   description: 'description',
-  api_type: 'api type',
-  api_authentication: 'api authentication',
+  api_type: 'rest_json',
+  api_authentication: 'api_key',
   badges: [],
   environments: [
     {
-      name: 'Production',
+      name: 'production',
       api_url: 'api url',
       specification_url: 'specification_url',
       documentation_url: 'documentation_url',
@@ -55,12 +58,12 @@ export const apiMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
   description: 'description',
-  apiType: 'api type',
-  apiAuthentication: 'api authentication',
+  apiType: APIType.REST_JSON,
+  apiAuthentication: APIAuthentication.API_KEY,
   badges: [],
   environments: [
     {
-      name: 'Production',
+      name: EnvironmentType.PRODUCTION,
       apiUrl: 'api url',
       specificationUrl: 'specification_url',
       documentationUrl: 'documentation_url',

@@ -1,30 +1,60 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import { formatOptions, facetsContainTermsForFilterByKey } from './APIFilters'
+import {
+  filters,
+  formatOptions,
+  facetsContainTermsForFilterByKey,
+} from './APIFilters'
 
 describe('formatting API terms to options', () => {
   it('should format terms to options', () => {
+    const apiTypeFilter = filters.find((filter) => filter.key === 'api_type')
+    const organizationFilter = filters.find(
+      (filter) => filter.key === 'organization_name',
+    )
+    /* eslint-disable camelcase */
     const testCases = [
-      { terms: [], expected: [] },
       {
-        terms: [{ term: '42', count: 5 }],
-        expected: [{ value: '42', label: '42', count: 5, disabled: false }],
+        facets: {
+          organization_name: {
+            terms: [],
+          },
+        },
+        filter: organizationFilter,
+        expected: [],
       },
       {
-        terms: [
-          { term: 'gRPC', count: 5 },
-          { term: 'GraphQL', count: 0 },
-        ],
+        facets: {
+          organization_name: {
+            terms: [{ term: 'MijnBV', count: 5 }],
+          },
+        },
+        filter: organizationFilter,
         expected: [
-          { value: 'gRPC', label: 'gRPC', count: 5, disabled: false },
-          { value: 'GraphQL', label: 'GraphQL', count: 0, disabled: true },
+          { value: 'MijnBV', label: 'MijnBV', count: 5, disabled: false },
+        ],
+      },
+      {
+        facets: {
+          api_type: {
+            terms: [
+              { term: 'grpc', count: 5 },
+              { term: 'graphql', count: 0 },
+            ],
+          },
+        },
+        filter: apiTypeFilter,
+        expected: [
+          { value: 'grpc', label: 'gRPC', count: 5, disabled: false },
+          { value: 'graphql', label: 'GraphQL', count: 0, disabled: true },
         ],
       },
     ]
+    /* eslint-enable camelcase */
 
     testCases.forEach((testCase) => {
-      const actual = formatOptions(testCase.terms)
+      const actual = formatOptions(testCase.facets, testCase.filter)
       expect(actual).toEqual(testCase.expected)
     })
   })

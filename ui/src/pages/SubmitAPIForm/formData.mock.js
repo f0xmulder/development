@@ -5,8 +5,8 @@ export const formDataMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
   description: 'description',
-  apiType: 'api type',
-  apiAuthentication: 'api authentication',
+  apiType: 'rest_json',
+  apiAuthentication: 'none',
   isBasedOnReferenceImplementation: false,
   referenceImplementation: '',
 
@@ -42,11 +42,11 @@ export const submitDataMock = {
   service_name: 'service name',
   organization_name: 'organization name',
   description: 'description',
-  api_type: 'api type',
-  api_authentication: 'api authentication',
+  api_type: 'rest_json',
+  api_authentication: 'none',
   environments: [
     {
-      name: 'Productie',
+      name: 'production',
       api_url: 'api url',
       specification_url: 'specification url',
       documentation_url: 'documentation url',

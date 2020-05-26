@@ -14,10 +14,10 @@ const apiResponseObject = {}
 apiResponseObject.description = 'Description'
 apiResponseObject.organizationName = 'Organization Name'
 apiResponseObject.serviceName = 'Service Name'
-apiResponseObject.apiType = 'API Type'
+apiResponseObject.apiType = 'rest_json'
 apiResponseObject.environments = [
   {
-    name: 'Productie',
+    name: 'production',
     apiUrl: 'API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
@@ -44,7 +44,7 @@ describe('APISpecification', () => {
       const wrapper = shallow(
         <APISpecification
           match={{
-            params: { id: 'organization-service', environment: 'productie' },
+            params: { id: 'organization-service', environment: 'production' },
           }}
           getApiDetailsById={getApiDetailsByIdMock}
         />,
@@ -84,7 +84,7 @@ describe('APISpecification', () => {
       const wrapper = shallow(
         <APISpecification
           match={{
-            params: { id: 'organization-service', environment: 'productie' },
+            params: { id: 'organization-service', environment: 'production' },
           }}
           getApiDetailsById={getApiDetailsByIdErrorMock}
         />,

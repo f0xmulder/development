@@ -1,10 +1,13 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+
+import { APIType, APIAuthentication, EnvironmentType } from './enums'
+
 const mapEnvironments = (environments) =>
   environments.map((env) => {
     return {
-      name: env.name,
+      name: EnvironmentType.valueOf(env.name),
       apiUrl: env.api_url,
       specificationUrl: env.specification_url,
       documentationUrl: env.documentation_url,
@@ -35,8 +38,8 @@ export const modelFromAPIResponse = (api) => ({
   serviceName: api.service_name,
   organizationName: api.organization_name,
   description: api.description,
-  apiType: api.api_type,
-  apiAuthentication: api.api_authentication,
+  apiType: APIType.valueOf(api.api_type),
+  apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
   environments: mapEnvironments(api.environments || []),
   forum: api.forum,
   badges: api.badges,

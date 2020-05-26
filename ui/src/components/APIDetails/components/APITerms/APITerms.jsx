@@ -4,13 +4,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { APIAuthentication } from '../../../../models/enums'
 import { Wrapper, Term, Key, Value } from './APITerms.styles'
 
 const APITerms = ({ apiAuthentication, termsOfUse }) => (
   <Wrapper>
     <Term>
       <Key>API Authenticatie</Key>
-      <Value data-test="api-authentication">{apiAuthentication}</Value>
+      <Value data-test="api-authentication">{apiAuthentication.label}</Value>
     </Term>
 
     <Term>
@@ -44,7 +45,7 @@ const APITerms = ({ apiAuthentication, termsOfUse }) => (
 )
 
 APITerms.propTypes = {
-  apiAuthentication: PropTypes.string.isRequired,
+  apiAuthentication: PropTypes.instanceOf(APIAuthentication).isRequired,
   termsOfUse: PropTypes.shape({
     governmentOnly: PropTypes.bool,
     payPerUse: PropTypes.bool,
