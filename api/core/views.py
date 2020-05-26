@@ -130,11 +130,9 @@ class APIForumPostsView(APIView):
 class APISpecificationView(APIView):
     def get(self, request, api_id, environment):
         try:
-            # FIXME #214: Use EnvironmentType value instead of label once database has been fixed.
-            #          becomes Environment.EnvironmentType(environment)
-            env_type = [e for e in Environment.EnvironmentType if e.label == environment][0]
-            env = Environment.objects.filter(name=env_type.label, api_id=api_id).get()
-        except IndexError as e:  # Becomes ValueError
+            env_type = Environment.EnvironmentType(environment)
+            env = Environment.objects.filter(name=env_type.value, api_id=api_id).get()
+        except ValueError as e:
             raise NotFound(detail='Invalid environment type: ' + environment) from e
         except ObjectDoesNotExist as e:
             raise NotFound(detail=f'No environment "{environment}" for api {api_id}') from e

@@ -18,12 +18,12 @@ class APISpecificationViewTest(TestCase):
         )
         Environment.objects.create(
             api=self.api1,
-            name='Productie',
+            name='production',
             specification_url='https://api.kadaster.nl/tms/v1/terugmeldingen-apidoc'
         )
         Environment.objects.create(
             api=self.api1,
-            name='Demo',
+            name='demo',
             specification_url='https://api.kadaster.nl/tms/v1/terugmeldingen-apidoc'
         )
 
@@ -33,7 +33,7 @@ class APISpecificationViewTest(TestCase):
         )
         Environment.objects.create(
             api=self.api2,
-            name='Productie',
+            name='production',
             specification_url=''
         )
 
@@ -44,7 +44,7 @@ class APISpecificationViewTest(TestCase):
     def test_production(self, mock_get):
         mock_get.return_value = mock_response(200, data="some data")
 
-        response = self.client.get(API_PATH + 'api1/Productie/specification')
+        response = self.client.get(API_PATH + 'api1/production/specification')
         self.assertEqual(response.status_code, 200)
 
         self.assertEqual(response.content, b"some data")
@@ -53,7 +53,7 @@ class APISpecificationViewTest(TestCase):
     def test_demo(self, mock_get):
         mock_get.return_value = mock_response(200, data="some data")
 
-        response = self.client.get(API_PATH + 'api1/Demo/specification')
+        response = self.client.get(API_PATH + 'api1/demo/specification')
         self.assertEqual(response.status_code, 200)
 
         self.assertEqual(response.content, b"some data")
@@ -66,23 +66,23 @@ class APISpecificationViewTest(TestCase):
         self.assertEqual(response_data, {'detail': 'Invalid environment type: Foobar'})
 
     def test_api_not_found(self):
-        response = self.client.get(API_PATH + 'api999/Productie/specification')
+        response = self.client.get(API_PATH + 'api999/production/specification')
         self.assertEqual(response.status_code, 404)
 
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, {'detail': 'No environment "Productie" for api api999'})
+        self.assertEqual(response_data, {'detail': 'No environment "production" for api api999'})
 
     def test_environment_not_found(self):
-        response = self.client.get(API_PATH + 'api1/Acceptatie/specification')
+        response = self.client.get(API_PATH + 'api1/acceptance/specification')
         self.assertEqual(response.status_code, 404)
 
         response_data = json.loads(response.content)
-        self.assertEqual(response_data, {'detail': 'No environment "Acceptatie" for api api1'})
+        self.assertEqual(response_data, {'detail': 'No environment "acceptance" for api api1'})
 
     def test_empty_specification_url(self):
-        response = self.client.get(API_PATH + 'api2/Productie/specification')
+        response = self.client.get(API_PATH + 'api2/production/specification')
         self.assertEqual(response.status_code, 404)
 
         response_data = json.loads(response.content)
         self.assertEqual(response_data,
-                         {'detail': 'API api2 does not have a Productie specification'})
+                         {'detail': 'API api2 does not have a production specification'})

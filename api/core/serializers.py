@@ -81,7 +81,7 @@ class APISerializer(NonNullModelSerializer):
     def get_scores(self, obj):
         def has_documentation(api):
             production_environment = api.environments.filter(
-                name='Productie').first()
+                name='production').first()
 
             if production_environment is None:
                 return False
@@ -90,7 +90,7 @@ class APISerializer(NonNullModelSerializer):
 
         def has_specification(api):
             production_environment = api.environments.filter(
-                name='Productie').first()
+                name='production').first()
 
             if production_environment is None:
                 return False

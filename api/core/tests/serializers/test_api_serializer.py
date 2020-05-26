@@ -218,7 +218,7 @@ class APISerializerTest(TestCase):
     def test_scores_documentation(self):
         api = API.objects.create(api_id='api1')
         Environment.objects.create(
-            name='Productie',
+            name='production',
             documentation_url='https://mysite.com/docs',
             api=api,
         )
@@ -231,7 +231,7 @@ class APISerializerTest(TestCase):
     def test_scores_specification(self):
         api = API.objects.create(api_id='api1')
         Environment.objects.create(
-            name='Productie',
+            name='production',
             specification_url='https://mysite.com/spec',
             api=api,
         )
