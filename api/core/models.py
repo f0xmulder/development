@@ -79,7 +79,7 @@ class API(models.Model):
 class Environment(models.Model):
     class EnvironmentType(models.TextChoices):
         PRODUCTION = 'production', _('Productie')
-        ACCEPTATION = 'acceptation', _('Acceptatie')
+        ACCEPTANCE = 'acceptance', _('Acceptatie')
         DEMO = 'demo', _('Demo')
 
     name = models.CharField(max_length=MAX_ENUM_LENGTH, choices=EnvironmentType.choices)
