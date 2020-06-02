@@ -7,19 +7,19 @@ export const formDataMock = {
   description: 'description',
   apiType: 'rest_json',
   apiAuthentication: 'none',
-  isBasedOnReferenceImplementation: false,
+  isBasedOnReferenceImplementation: 'false',
   referenceImplementation: '',
 
   productionApiUrl: 'api url',
   productionSpecificationUrl: 'specification url',
   productionDocumentationUrl: 'documentation url',
 
-  hasAcceptanceEnvironment: false,
+  hasAcceptanceEnvironment: 'false',
   acceptanceApiUrl: '',
   acceptanceDocumentationUrl: '',
   acceptanceSpecificationUrl: '',
 
-  hasDemoEnvironment: false,
+  hasDemoEnvironment: 'false',
   demoApiUrl: '',
   demoDocumentationUrl: '',
   demoSpecificationUrl: '',

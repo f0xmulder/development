@@ -51,7 +51,7 @@ export const createRelation = (
   isBasedOnReferenceImplementation,
   referenceImplementation,
 ) => {
-  return isBasedOnReferenceImplementation
+  return isBasedOnReferenceImplementation === 'true'
     ? {
         [referenceImplementation]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION],
       }
@@ -82,7 +82,7 @@ export const convertFormDataToRequestBody = (formData) => {
     },
   ]
 
-  if (formData.hasAcceptanceEnvironment) {
+  if (formData.hasAcceptanceEnvironment === 'true') {
     requestBody.environments.push({
       name: EnvironmentType.ACCEPTANCE.value,
       api_url: formData.acceptanceApiUrl,
@@ -91,7 +91,7 @@ export const convertFormDataToRequestBody = (formData) => {
     })
   }
 
-  if (formData.hasDemoEnvironment) {
+  if (formData.hasDemoEnvironment === 'true') {
     requestBody.environments.push({
       name: EnvironmentType.DEMO.value,
       api_url: formData.demoApiUrl,
