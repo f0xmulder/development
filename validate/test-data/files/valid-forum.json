@@ -2,10 +2,10 @@
     "description": "Test Description",
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
-    "api_type": "REST/JSON",
-    "api_authentication": "API Key",
+    "api_type": "rest_json",
+    "api_authentication": "api_key",
     "environments": [{
-        "name": "Productie",
+        "name": "production",
         "api_url": "Test API URL",
         "specification_url": "Test Specification URL",
         "documentation_url": "Test Documentation URL"

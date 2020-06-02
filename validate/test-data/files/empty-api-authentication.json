@@ -3,7 +3,7 @@
     "organization_name": "Test Organization Name",
     "service_name": "Test Service Name",
     "api_url": "Test API URL",
-    "api_type": "REST/JSON",
+    "api_type": "rest_json",
     "api_authentication": "",
     "specification_url": "Test Specification URL",
     "documentation_url": "Test Documentation URL",

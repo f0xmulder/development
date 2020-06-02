@@ -21,8 +21,8 @@ func TestFile(t *testing.T) {
 				Description:       "Test Description",
 				OrganizationName:  "Test Organization Name",
 				ServiceName:       "Test Service Name",
-				APIType:           "REST/JSON",
-				APIAuthentication: "API Key",
+				APIType:           "rest_json",
+				APIAuthentication: "api_key",
 				Tags:              []models.Tag{"test tag"},
 				Environments: []models.APIEnvironment{
 					{
@@ -61,8 +61,8 @@ func TestFile(t *testing.T) {
 				Description:       "Some other API",
 				OrganizationName:  "Test Organization Name",
 				ServiceName:       "Test Service Name",
-				APIType:           "REST/JSON",
-				APIAuthentication: "API Key",
+				APIType:           "rest_json",
+				APIAuthentication: "api_key",
 				Tags:              []models.Tag{"test tag"},
 				Environments: []models.APIEnvironment{
 					{
@@ -72,16 +72,16 @@ func TestFile(t *testing.T) {
 						DocumentationURL: "Test Documentation URL",
 					},
 					{
-						Name:             "Acceptatie",
-						APIURL:           "Test Acceptatie API URL",
-						SpecificationURL: "Test Acceptatie Specification URL",
-						DocumentationURL: "Test Acceptatie Documentation URL",
+						Name:             "acceptance",
+						APIURL:           "Test acceptance API URL",
+						SpecificationURL: "Test acceptance Specification URL",
+						DocumentationURL: "Test acceptance Documentation URL",
 					},
 					{
-						Name:             "Demo",
-						APIURL:           "Test Demo API URL",
-						SpecificationURL: "Test Demo Specification URL",
-						DocumentationURL: "Test Demo Documentation URL",
+						Name:             "demo",
+						APIURL:           "Test demo API URL",
+						SpecificationURL: "Test demo Specification URL",
+						DocumentationURL: "Test demo Documentation URL",
 					},
 				},
 				Contact: models.APIContactDetails{

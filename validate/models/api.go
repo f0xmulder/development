@@ -66,26 +66,26 @@ type APIScores struct {
 type APIType string
 
 const (
-	API_TYPE_UNKNOWN   APIType = "Onbekend"
-	API_TYPE_REST_JSON APIType = "REST/JSON"
-	API_TYPE_REST_XML  APIType = "REST/XML"
-	API_TYPE_SOAP_XML  APIType = "SOAP/XML"
-	API_TYPE_GRPC      APIType = "gRPC"
-	API_TYPE_GRAPHQL   APIType = "GraphQL"
-	API_TYPE_SPARQL    APIType = "SPARQL"
-	API_TYPE_WFS       APIType = "WFS"
-	API_TYPE_WMS       APIType = "WMS"
+	API_TYPE_UNKNOWN   APIType = "unknown"
+	API_TYPE_REST_JSON APIType = "rest_json"
+	API_TYPE_REST_XML  APIType = "rest_xml"
+	API_TYPE_SOAP_XML  APIType = "soap_xml"
+	API_TYPE_GRPC      APIType = "grpc"
+	API_TYPE_GRAPHQL   APIType = "graphql"
+	API_TYPE_SPARQL    APIType = "sparql"
+	API_TYPE_WFS       APIType = "wfs"
+	API_TYPE_WMS       APIType = "wms"
 )
 
 // APIAuthentication enum
 type APIAuthentication string
 
 const (
-	API_AUTHENTICATION_UNKNOWN      APIAuthentication = "Onbekend"
-	API_AUTHENTICATION_NONE         APIAuthentication = "Geen"
-	API_AUTHENTICATION_MUTUAL_TLS   APIAuthentication = "Mutual TLS"
-	API_AUTHENTICATION_API_KEY      APIAuthentication = "API Key"
-	API_AUTHENTICATION_IP_WHITELIST APIAuthentication = "IP Whitelist"
+	API_AUTHENTICATION_UNKNOWN      APIAuthentication = "unknown"
+	API_AUTHENTICATION_NONE         APIAuthentication = "none"
+	API_AUTHENTICATION_MUTUAL_TLS   APIAuthentication = "mutual_tls"
+	API_AUTHENTICATION_API_KEY      APIAuthentication = "api_key"
+	API_AUTHENTICATION_IP_WHITELIST APIAuthentication = "ip_whitelist"
 )
 
 // API functions
@@ -135,14 +135,14 @@ func (result *API) UnmarshalJSON(data []byte) error {
 }
 
 // Every API must have an APIEnvironment with this name
-const ProductionEnvironment string = "Productie"
+const ProductionEnvironment string = "production"
 
 func IsValidEnvironmentName(envName string) bool {
 	switch envName {
 	case
 		ProductionEnvironment,
-		"Acceptatie",
-		"Demo":
+		"acceptance",
+		"demo":
 		return true
 	}
 
