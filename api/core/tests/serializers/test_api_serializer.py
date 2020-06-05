@@ -481,92 +481,15 @@ class APISerializerTest(TestCase):
 
         self.assertDictEqual(serializer.validated_data, expected)
 
-    def test_deserialize_missing_id(self):
-        input_data = {
-            'description': 'First API',
-            'organization_name': 'Test Organization',
-            'service_name': 'First Service',
-            'environments': [
-                OrderedDict({
-                    'name': 'production',
-                    'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
-                }),
-            ],
-        }
+    def test_deserialize_missing_fields(self):
+        input_data = {}
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
             'id': [REQUIRED_ERROR],
-        })
-
-    def test_deserialize_missing_description(self):
-        input_data = {
-            'id': 'api1',
-            'organization_name': 'Test Organization',
-            'service_name': 'First Service',
-            'environments': [
-                OrderedDict({
-                    'name': 'production',
-                    'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
-                }),
-            ],
-        }
-        serializer = APISerializer(data=input_data)
-
-        self.assert_serializer_has_errors(serializer, {
             'description': [REQUIRED_ERROR],
-        })
-
-    def test_deserialize_missing_organization_name(self):
-        input_data = {
-            'id': 'api1',
-            'description': 'First API',
-            'service_name': 'First Service',
-            'environments': [
-                OrderedDict({
-                    'name': 'production',
-                    'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
-                }),
-            ],
-        }
-        serializer = APISerializer(data=input_data)
-
-        self.assert_serializer_has_errors(serializer, {
             'organization_name': [REQUIRED_ERROR],
-        })
-
-    def test_deserialize_missing_service_name(self):
-        input_data = {
-            'id': 'api1',
-            'description': 'First API',
-            'organization_name': 'Test Organization',
-            'environments': [
-                OrderedDict({
-                    'name': 'production',
-                    'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
-                }),
-            ],
-        }
-        serializer = APISerializer(data=input_data)
-
-        self.assert_serializer_has_errors(serializer, {
             'service_name': [REQUIRED_ERROR],
-        })
-
-    def test_deserialize_missing_environments(self):
-        input_data = {
-            'id': 'api1',
-            'description': 'First API',
-            'organization_name': 'Test Organization',
-            'service_name': 'First Service',
-        }
-        serializer = APISerializer(data=input_data)
-
-        self.assert_serializer_has_errors(serializer, {
             'environments': [REQUIRED_ERROR],
         })
 
@@ -634,7 +557,7 @@ class APISerializerTest(TestCase):
             'forum': {'vendor': [INVALID_ERROR]},
         })
 
-    def test_deserialize_forum_missing_url(self):
+    def test_deserialize_forum_missing_fields(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
@@ -647,14 +570,15 @@ class APISerializerTest(TestCase):
                     'documentation_url': 'http://docs.production.nl',
                 }),
             ],
-            'forum': {
-                'vendor': 'discourse',
-            },
+            'forum': {},
         }
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'forum': {'url': [REQUIRED_ERROR]},
+            'forum': {
+                'vendor': [REQUIRED_ERROR],
+                'url': [REQUIRED_ERROR],
+            },
         })
 
     def test_deserialize_forum_blank_url(self):
