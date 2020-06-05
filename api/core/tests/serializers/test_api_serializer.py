@@ -297,11 +297,11 @@ class APISerializerTest(TestCase):
             'is_reference_implementation': False,
             'referenced_apis': [],
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'contact': {
                 'email': 'contact@api1.com',
@@ -362,11 +362,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
         }
 
@@ -396,11 +396,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'contact': {},
             'terms_of_use': {},
@@ -432,11 +432,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'contact': {
                 'email': '',
@@ -501,11 +501,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'badges': [
                 OrderedDict({
@@ -540,11 +540,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'forum': {
                 'vendor': 'SomethingUnknown',
@@ -564,11 +564,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'forum': {},
         }
@@ -588,11 +588,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
             'forum': {
                 'vendor': 'discourse',
@@ -612,11 +612,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'INVALID NAME',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
         }
         serializer = APISerializer(data=input_data)
@@ -632,10 +632,10 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
         }
         serializer = APISerializer(data=input_data)
@@ -651,11 +651,11 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'demo',
                     'api_url': 'http://production.nl',
                     'documentation_url': 'http://docs.production.nl',
-                }),
+                },
             ],
         }
         serializer = APISerializer(data=input_data)
@@ -671,16 +671,16 @@ class APISerializerTest(TestCase):
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
             'environments': [
-                OrderedDict({
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl/1',
                     'documentation_url': 'http://docs.production.nl/1',
-                }),
-                OrderedDict({
+                },
+                {
                     'name': 'production',
                     'api_url': 'http://production.nl/2',
                     'documentation_url': 'http://docs.production.nl/2',
-                })
+                },
             ],
         }
         serializer = APISerializer(data=input_data)
