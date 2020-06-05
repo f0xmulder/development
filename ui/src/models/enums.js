@@ -14,15 +14,21 @@ class Enum {
     throw new Error(`Invalid enum value "${stringValue}"`)
   }
 
-  // Abstract method
   // Return all instances of this enum
   static entries() {
-    throw new Error('Please implement this method in your base class')
+    return [...this.registeredEntries]
   }
 
   constructor(value, label) {
     this.value = value
     this.label = label
+
+    // Access the static property registeredEntries on the subclass being created
+    if (!this.constructor.registeredEntries) {
+      this.constructor.registeredEntries = []
+    }
+
+    this.constructor.registeredEntries.push(this)
   }
 }
 
@@ -37,20 +43,6 @@ export class APIType extends Enum {
   static WFS = new APIType('wfs', 'WFS')
   static WMS = new APIType('wms', 'WMS')
 
-  static entries() {
-    return [
-      this.UNKNOWN,
-      this.REST_JSON,
-      this.REST_XML,
-      this.SOAP_XML,
-      this.GRPC,
-      this.GRAPHQL,
-      this.SPARQL,
-      this.WFS,
-      this.WMS,
-    ]
-  }
-
   toString() {
     return `APIType(${this.value})`
   }
@@ -63,16 +55,6 @@ export class APIAuthentication extends Enum {
   static API_KEY = new APIAuthentication('api_key', 'API Key')
   static IP_WHITELIST = new APIAuthentication('ip_whitelist', 'IP Whitelist')
 
-  static entries() {
-    return [
-      this.UNKNOWN,
-      this.NONE,
-      this.MUTUAL_TLS,
-      this.API_KEY,
-      this.IP_WHITELIST,
-    ]
-  }
-
   toString() {
     return `APIAuthentication(${this.value})`
   }
@@ -82,10 +64,6 @@ export class EnvironmentType extends Enum {
   static PRODUCTION = new EnvironmentType('production', 'Productie')
   static ACCEPTANCE = new EnvironmentType('acceptance', 'Acceptatie')
   static DEMO = new EnvironmentType('demo', 'Demo')
-
-  static entries() {
-    return [this.PRODUCTION, this.ACCEPTANCE, this.DEMO]
-  }
 
   toString() {
     return `EnvironmentType(${this.value})`
