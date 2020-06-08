@@ -625,23 +625,22 @@ class APISerializerTest(TestCase):
             'environments': [{'name': [INVALID_CHOICE_ERROR]}],
         })
 
-    def test_deserialize_environments_missing_name(self):
+    def test_deserialize_environments_missing_fields(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
-            'environments': [
-                {
-                    'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
-                },
-            ],
+            'environments': [{}],
         }
         serializer = APISerializer(data=input_data)
 
         self.assert_serializer_has_errors(serializer, {
-            'environments': [{'name': [REQUIRED_ERROR]}],
+            'environments': [{
+                'name': [REQUIRED_ERROR],
+                'api_url': [REQUIRED_ERROR],
+                'documentation_url': [REQUIRED_ERROR],
+            }],
         })
 
     def test_deserialize_environments_no_production(self):
