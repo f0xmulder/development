@@ -300,7 +300,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'contact': {
@@ -336,7 +335,6 @@ class APISerializerTest(TestCase):
                 OrderedDict({
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 }),
             ],
             forum_vendor='discourse',
@@ -365,7 +363,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
         }
@@ -382,7 +379,6 @@ class APISerializerTest(TestCase):
                 OrderedDict({
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 }),
             ],
         )
@@ -399,7 +395,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'contact': {},
@@ -418,7 +413,6 @@ class APISerializerTest(TestCase):
                 OrderedDict({
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 }),
             ],
         )
@@ -435,7 +429,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'contact': {
@@ -465,7 +458,6 @@ class APISerializerTest(TestCase):
                 OrderedDict({
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 }),
             ],
             contact_email='',
@@ -504,7 +496,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'badges': [
@@ -526,7 +517,6 @@ class APISerializerTest(TestCase):
                 OrderedDict({
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 }),
             ],
         )
@@ -543,7 +533,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'forum': {
@@ -567,7 +556,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'forum': {},
@@ -591,7 +579,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
             'forum': {
@@ -615,7 +602,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'INVALID NAME',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
         }
@@ -639,7 +625,6 @@ class APISerializerTest(TestCase):
             'environments': [{
                 'name': [REQUIRED_ERROR],
                 'api_url': [REQUIRED_ERROR],
-                'documentation_url': [REQUIRED_ERROR],
             }],
         })
 
@@ -653,7 +638,6 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'demo',
                     'api_url': 'http://production.nl',
-                    'documentation_url': 'http://docs.production.nl',
                 },
             ],
         }
@@ -673,12 +657,10 @@ class APISerializerTest(TestCase):
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl/1',
-                    'documentation_url': 'http://docs.production.nl/1',
                 },
                 {
                     'name': 'production',
                     'api_url': 'http://production.nl/2',
-                    'documentation_url': 'http://docs.production.nl/2',
                 },
             ],
         }

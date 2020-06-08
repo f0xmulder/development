@@ -83,7 +83,7 @@ class Environment(models.Model):
     name = models.CharField(max_length=MAX_ENUM_LENGTH, choices=EnvironmentType.choices)
     api_url = models.URLField(max_length=MAX_URL_LENGTH)
     specification_url = models.URLField(max_length=MAX_URL_LENGTH, blank=True)
-    documentation_url = models.URLField(max_length=MAX_URL_LENGTH)
+    documentation_url = models.URLField(max_length=MAX_URL_LENGTH, blank=True)
 
     api = models.ForeignKey(
         API,
