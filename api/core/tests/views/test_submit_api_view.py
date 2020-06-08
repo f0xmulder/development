@@ -68,8 +68,10 @@ The web form
     @patch('core.views.SubmitAPIView.create_issue_body')
     @patch('requests.post')
     def test_submit_api(self, mock_post, mock_create_body):
+        mock_issue_details = {'mock': 'issue details'}
         mock_post.return_value = mock_response(requests.codes.created,
-                                               data=json.dumps({'some': 'json'}))
+                                               data=json.dumps(mock_issue_details),
+                                               content_type='application/json')
         mock_body = {'mock': 'body'}
         mock_create_body.return_value = mock_body
 
@@ -77,6 +79,7 @@ The web form
                                     data=json.dumps(self.valid_api_data),
                                     content_type='application/json')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content), mock_issue_details)
 
         expected_url = f'{GITLAB_URL}/api/v4/projects/{GITLAB_PROJECT_ID}/issues'
         expected_json = mock_body

@@ -203,7 +203,8 @@ class SubmitAPIView(APIView):
         if result.status_code != requests.codes.created:
             raise APIException(detail='Something went wrong while posting to the GitLab API')
 
-        return Response()
+        issue_details = json.loads(result.content)
+        return Response(issue_details)
 
     @staticmethod
     def create_issue_body(api_data):
