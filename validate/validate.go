@@ -101,14 +101,6 @@ func File(filePath string) ValidationFeedback {
 				fmt.Sprintf("the field api_url is missing for environment %s", env.Name),
 			}
 		}
-
-		if len(env.DocumentationURL) < 1 {
-			return ValidationFeedback{
-				false,
-				fmt.Sprintf("the field documentation_url is missing for environment %s", env.Name),
-			}
-		}
-
 	}
 
 	if newAPI.Forum != nil {

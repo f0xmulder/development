@@ -37,7 +37,7 @@ func TestFile(t *testing.T) {
 		{"duplicate-env.json", false, "", "duplicate environment name found: production"},
 		{"invalid-env-name.json", false, "", "Invalid Name is not a valid environment name"},
 		{"missing-api-url.json", false, "", "the field api_url is missing for environment acceptance"},
-		{"missing-documentation-url.json", false, "", "the field documentation_url is missing for environment production"},
+		{"missing-documentation-url.json", true, "", ""},
 		{"missing-specification-url.json", true, "", ""},
 		{"invalid-forum-vendor.json", false, "", "Only \"discourse\" is a valid vendor"},
 		{"invalid-forum-url.json", false, "", "Invalid forum url given"},
