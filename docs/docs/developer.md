@@ -1,5 +1,5 @@
 # Developer documentation
-In this application we use the [Go programming language](https://golang.org) for the backend systems and [React](https://reactjs.org/) for the frontend.
+In this application we use the [Python Django framework](https://www.djangoproject.com/) and the [Go programming language](https://golang.org) for the backend systems, and [React](https://reactjs.org/) for the frontend.
 
 ## Setup your development environment
 First make sure the following tools are available on your computer:
