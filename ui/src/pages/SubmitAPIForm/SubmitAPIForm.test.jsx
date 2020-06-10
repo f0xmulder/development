@@ -8,7 +8,11 @@ import { Formik } from 'formik'
 import { goApiMock } from '../../models/api.mock'
 import { flushPromises } from '../../test-helpers'
 import { modelFromAPIResponse } from '../../models/api'
-import { formDataMock, submitDataMock } from './formData.mock'
+import {
+  rawFormDataMock,
+  parsedFormDataMock,
+  submitDataMock,
+} from './formData.mock'
 
 import SubmitAPI, {
   createRelation,
@@ -17,12 +21,12 @@ import SubmitAPI, {
 
 describe('createRelation', () => {
   it('should not create a relation object when it is not based on a reference implementation', () => {
-    const result = createRelation('false', undefined)
+    const result = createRelation(false, undefined)
     expect(result).toBeUndefined()
   })
 
   it('should create a relation object when this has a link to a referenceImplementation', () => {
-    const result = createRelation('true', 'dummy-api-id')
+    const result = createRelation(true, 'dummy-api-id')
     expect(result).toEqual({
       'dummy-api-id': ['reference-implementation'],
     })
@@ -34,7 +38,7 @@ describe('map form values to API request body for submitting an API', () => {
     const submitData = JSON.parse(JSON.stringify(submitDataMock))
     delete submitData.id
 
-    expect(convertFormDataToRequestBody(formDataMock)).toEqual(submitData)
+    expect(convertFormDataToRequestBody(parsedFormDataMock)).toEqual(submitData)
   })
 })
 
@@ -119,7 +123,7 @@ describe('SubmitAPI', () => {
 
     describe('when handleSubmit is called', () => {
       it('should call the submitToApi method', () => {
-        wrapper.instance().handleSubmit(formDataMock, {
+        wrapper.instance().handleSubmit(rawFormDataMock, {
           setSubmitting: jest.fn(),
           setStatus: jest.fn(),
         })
@@ -132,7 +136,7 @@ describe('SubmitAPI', () => {
           SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
 
           const wrapper = shallow(<SubmitAPI />)
-          wrapper.instance().handleSubmit(formDataMock, {
+          wrapper.instance().handleSubmit(rawFormDataMock, {
             setSubmitting: jest.fn(),
             setStatus: jest.fn(),
           })
@@ -163,7 +167,7 @@ describe('SubmitAPI', () => {
 
           return wrapper
             .instance()
-            .handleSubmit(formDataMock, actions)
+            .handleSubmit(rawFormDataMock, actions)
             .then(() => {
               expect(actions.setStatus).toHaveBeenCalled()
             })

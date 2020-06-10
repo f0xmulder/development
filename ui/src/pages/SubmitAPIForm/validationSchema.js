@@ -23,6 +23,9 @@ Yup.setLocale({
   number,
 })
 
+const booleanFromString = () =>
+  Yup.boolean().transform((value) => value === 'true')
+
 const validationSchemaConfiguration = {
   serviceName: Yup.string().required().label('API naam'),
   organizationName: Yup.string().required().label('Organisatienaam'),
@@ -41,7 +44,7 @@ const validationSchemaConfiguration = {
     .url()
     .label('Documentatie URL voor productie'),
 
-  hasAcceptanceEnvironment: Yup.boolean(),
+  hasAcceptanceEnvironment: booleanFromString(),
   acceptanceApiUrl: Yup.string()
     .url()
     .when('hasAcceptanceEnvironment', {
@@ -53,7 +56,7 @@ const validationSchemaConfiguration = {
   acceptanceSpecificationUrl: Yup.string().url(),
   acceptanceDocumentationUrl: Yup.string().url(),
 
-  hasDemoEnvironment: Yup.boolean(),
+  hasDemoEnvironment: booleanFromString(),
   demoApiUrl: Yup.string()
     .url()
     .when('hasDemoEnvironment', {
@@ -71,7 +74,7 @@ const validationSchemaConfiguration = {
     url: Yup.string().url(),
   }),
 
-  isBasedOnReferenceImplementation: Yup.boolean(),
+  isBasedOnReferenceImplementation: booleanFromString(),
   referenceImplementation: Yup.string(),
 
   termsOfUse: Yup.object().shape({

@@ -51,7 +51,7 @@ export const createRelation = (
   isBasedOnReferenceImplementation,
   referenceImplementation,
 ) => {
-  return isBasedOnReferenceImplementation === 'true'
+  return isBasedOnReferenceImplementation
     ? {
         [referenceImplementation]: [RELATION_TYPE_REFERENCE_IMPLEMENTATION],
       }
@@ -82,7 +82,7 @@ export const convertFormDataToRequestBody = (formData) => {
     },
   ]
 
-  if (formData.hasAcceptanceEnvironment === 'true') {
+  if (formData.hasAcceptanceEnvironment) {
     requestBody.environments.push({
       name: EnvironmentType.ACCEPTANCE.value,
       api_url: formData.acceptanceApiUrl,
@@ -91,7 +91,7 @@ export const convertFormDataToRequestBody = (formData) => {
     })
   }
 
-  if (formData.hasDemoEnvironment === 'true') {
+  if (formData.hasDemoEnvironment) {
     requestBody.environments.push({
       name: EnvironmentType.DEMO.value,
       api_url: formData.demoApiUrl,
@@ -171,7 +171,11 @@ class SubmitAPIFormPage extends Component {
   }
 
   handleSubmit(values, actions) {
-    const submitData = convertFormDataToRequestBody(values)
+    // The form has already passed validation,
+    // this call serves only to apply Yup type coercion and transforms.
+    const parsedFormData = schema.validateSync(values)
+    const submitData = convertFormDataToRequestBody(parsedFormData)
+
     return this.submitToApi(submitData)
       .then((responseData) => {
         actions.setSubmitting(false)

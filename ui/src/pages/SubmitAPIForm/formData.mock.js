@@ -1,18 +1,18 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-export const formDataMock = {
+export const rawFormDataMock = {
   serviceName: 'service name',
   organizationName: 'organization name',
-  description: 'description',
+  description: ' description ',
   apiType: 'rest_json',
   apiAuthentication: 'none',
   isBasedOnReferenceImplementation: 'false',
   referenceImplementation: '',
 
-  productionApiUrl: 'api url',
-  productionSpecificationUrl: 'specification url',
-  productionDocumentationUrl: 'documentation url',
+  productionApiUrl: 'http://api.url',
+  productionSpecificationUrl: 'http://specification.url',
+  productionDocumentationUrl: 'http://documentation.url',
 
   hasAcceptanceEnvironment: 'false',
   acceptanceApiUrl: '',
@@ -37,6 +37,14 @@ export const formDataMock = {
   },
 }
 
+export const parsedFormDataMock = {
+  ...rawFormDataMock,
+  description: 'description',
+  isBasedOnReferenceImplementation: false,
+  hasAcceptanceEnvironment: false,
+  hasDemoEnvironment: false,
+}
+
 export const submitDataMock = {
   /* eslint-disable camelcase */
   service_name: 'service name',
@@ -47,9 +55,9 @@ export const submitDataMock = {
   environments: [
     {
       name: 'production',
-      api_url: 'api url',
-      specification_url: 'specification url',
-      documentation_url: 'documentation url',
+      api_url: 'http://api.url',
+      specification_url: 'http://specification.url',
+      documentation_url: 'http://documentation.url',
     },
   ],
   terms_of_use: {
