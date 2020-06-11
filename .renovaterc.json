@@ -11,8 +11,5 @@
   "separateMultipleMajor": true,
   "major": {
     "masterIssueApproval": true
-  },
-  "js": {
-    "stabilityDays": 3
   }
 }
