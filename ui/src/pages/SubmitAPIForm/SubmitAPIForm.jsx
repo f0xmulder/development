@@ -260,7 +260,6 @@ class SubmitAPIFormPage extends Component {
         ) : (
           <Formik
             initialValues={storedFormValues || initialValues}
-            enableReinitialize
             onSubmit={this.handleSubmit}
             onReset={this.handleReset}
             validationSchema={schema}
