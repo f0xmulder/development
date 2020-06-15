@@ -9,7 +9,7 @@
     "environments": [{
         "name": "production",
         "api_url": "https://ref.tst.vng.cloud/ztc/api/v1/",
-        "specification_url": "https://ref.tst.vng.cloud/ztc/api/v1/schema/",
+        "specification_url": "https://ref.tst.vng.cloud/ztc/api/v1/schema/openapi.json",
         "documentation_url": "https://ref.tst.vng.cloud/ztc/"
     }],
     "contact": {
