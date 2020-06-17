@@ -170,6 +170,8 @@ Deploy Review App:
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
         --set "storageType=Ephemeral" \
+        --set "loadTestData=true" \
+        --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
         --set "replicas=1"
   environment:
     name: $CI_COMMIT_REF_NAME

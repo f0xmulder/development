@@ -16,5 +16,8 @@ postgresDb: don
 postgresPvcName: postgres-data-volume
 
 storageType: Durable
+loadTestData: false
+testAdminUsername: "admin"
+testAdminEmail: "admin@example.com"
 
 replicas: 3

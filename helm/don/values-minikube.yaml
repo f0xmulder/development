@@ -9,5 +9,7 @@ docsImage: don/docs
 secretKey: veryverysecretkey
 
 storageType: "Ephemeral"
+loadTestData: true
+testAdminPassword: "admin"
 
 replicas: 2
