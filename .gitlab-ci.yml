@@ -6,7 +6,7 @@ stages:
   - release
   - review
   - deploy
-  # - e2e-tests
+  - e2e-tests
 
 variables:
   IMAGE_PREFIX: $CI_REGISTRY_IMAGE
@@ -210,29 +210,29 @@ Remove Review App:
   except:
     - master
 
-## E2E Tests
-# E2E tests:
-#   stage: e2e-tests
-#   before_script:
-#     - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$DOMAIN")
-#     - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
-#   script:
-#     - |
-#       docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-#       -f e2e-tests/Dockerfile . && \
-#       docker run --rm --cap-add=SYS_ADMIN \
-#       -e URL=${URL} \
-#       $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-#       /bin/sh -c "./wait-for-http.sh $URL && npm test"
-#   tags:
-#     - docker
-#     - linux
-#   only:
-#     - branches@commonground/developer.overheid.nl
-#   variables:
-#     DOCKER_TLS_CERTDIR: "/certs"
-#   services:
-#     - docker:19.03.1-dind
+## E2E Tests ##
+E2E tests:
+  stage: e2e-tests
+  before_script:
+    - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$DOMAIN")
+    - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
+  script:
+    - |
+      docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      -f e2e-tests/Dockerfile . && \
+      docker run --rm --cap-add=SYS_ADMIN \
+      -e URL=${URL} \
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      /bin/sh -c "./wait-for-http.sh $URL && npm test"
+  tags:
+    - docker
+    - linux
+  only:
+    - branches@commonground/developer.overheid.nl
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.1-dind
 
 ## Depoyment ##
 Deploy production:
