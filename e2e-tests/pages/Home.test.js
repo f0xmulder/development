@@ -12,7 +12,7 @@ describe('Home', () => {
     it('should show the page title', async () => {
         const html = await page.$eval('main h1', e => e.innerHTML)
         await page.screenshot({ path: 'screenshots/home.page-title.png' });
-        expect(html).toBe('developer.overheid.nl')
+        expect(html).toBe('Eén centrale plek voor de developer die voor of met de overheid ontwikkelt')
     })
 
     it('should not have accessibility issues', async () => {

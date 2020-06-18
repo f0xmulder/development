@@ -5,7 +5,7 @@ describe('Submit API', () => {
     beforeAll(async () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
-        await page.goto(`${baseUrl}/api-toevoegen`, { waitUntil: 'load' });
+        await page.goto(`${baseUrl}/add-api`, { waitUntil: 'load' });
     })
 
     it('should show the page title', async () => {

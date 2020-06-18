@@ -5,7 +5,7 @@ describe('API Detail', () => {
     beforeAll(async () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
-        await page.goto(`${baseUrl}/overzicht`, { waitUntil: 'load' });
+        await page.goto(`${baseUrl}/apis`, { waitUntil: 'load' });
     })
 
     describe('navigating to the first API Detail page', () => {
