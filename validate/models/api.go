@@ -41,8 +41,6 @@ type Forum struct {
 type APIContactDetails struct {
 	Email string `json:"email"`
 	Phone string `json:"phone"`
-	Fax   string `json:"fax"`
-	Chat  string `json:"chat"`
 	URL   string `json:"url"`
 }
 

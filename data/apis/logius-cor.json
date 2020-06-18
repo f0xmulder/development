@@ -19,8 +19,6 @@
     "contact": {
         "email": "servicecentrum@logius.nl",
         "phone": "0900-5554555",
-        "fax": "",
-        "chat": "",
         "url": "https://www.logius.nl/contact"
     },
     "is_reference_implementation": false,

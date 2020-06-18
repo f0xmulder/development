@@ -33,8 +33,6 @@ func TestDirectory(t *testing.T) {
 			Contact: models.APIContactDetails{
 				Email: "name@example.nl",
 				Phone: "0031612345678",
-				Fax:   "0031687654321",
-				Chat:  "https://nl-x.slack.com",
 			},
 			IsReferenceImplementation: false,
 			Relations: map[string][]string{
@@ -79,8 +77,6 @@ func TestDirectory(t *testing.T) {
 			Contact: models.APIContactDetails{
 				Email: "name@example.nl",
 				Phone: "0031612345678",
-				Fax:   "0031687654321",
-				Chat:  "https://nl-x.slack.com",
 			},
 			Relations: map[string][]string{
 				"api-id": {"reference-implementation"},

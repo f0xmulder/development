@@ -19,8 +19,6 @@
     "contact": {
         "email": "",
         "phone": "",
-        "fax": "",
-        "chat": "",
         "url": "https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen"
     },
     "is_reference_implementation": true,

@@ -64,8 +64,6 @@ class APISerializerTest(TestCase):
             is_reference_implementation=False,
             contact_email='contact@api1.com',
             contact_phone='0612345678',
-            contact_fax='123124142131',
-            contact_chat='mychat.com',
             contact_url='mywebsite.com',
             terms_government_only=False,
             terms_pay_per_use=True,
@@ -90,8 +88,6 @@ class APISerializerTest(TestCase):
             'contact': OrderedDict({
                 'email': 'contact@api1.com',
                 'phone': '0612345678',
-                'fax': '123124142131',
-                'chat': 'mychat.com',
                 'url': 'mywebsite.com',
             }),
             'terms_of_use': OrderedDict({
@@ -132,8 +128,6 @@ class APISerializerTest(TestCase):
             'contact': OrderedDict({
                 'email': '',
                 'phone': '',
-                'fax': '',
-                'chat': '',
                 'url': '',
             }),
             'terms_of_use': OrderedDict({
@@ -225,22 +219,6 @@ class APISerializerTest(TestCase):
 
         self.assertDictEqual(actual_scores, expected_scores)
 
-    def test_scores_fax(self):
-        api = API.objects.create(contact_fax='1234567890')
-
-        actual_scores = APISerializer(api).data['scores']
-        expected_scores = dict(DEFAULT_SCORES, has_contact_details=True)
-
-        self.assertDictEqual(actual_scores, expected_scores)
-
-    def test_scores_chat(self):
-        api = API.objects.create(contact_chat='mychat.com')
-
-        actual_scores = APISerializer(api).data['scores']
-        expected_scores = dict(DEFAULT_SCORES, has_contact_details=True)
-
-        self.assertDictEqual(actual_scores, expected_scores)
-
     def test_scores_site(self):
         api = API.objects.create(contact_url='mysite.com')
 
@@ -305,8 +283,6 @@ class APISerializerTest(TestCase):
             'contact': {
                 'email': 'contact@api1.com',
                 'phone': '0612345678',
-                'fax': '123124142131',
-                'chat': 'mychat.com',
                 'url': 'mywebsite.com',
             },
             'terms_of_use': {
@@ -341,8 +317,6 @@ class APISerializerTest(TestCase):
             forum_url='http://mydiscourse.com',
             contact_email='contact@api1.com',
             contact_phone='0612345678',
-            contact_fax='123124142131',
-            contact_chat='mychat.com',
             contact_url='mywebsite.com',
             is_reference_implementation=False,
             terms_government_only=False,
@@ -434,8 +408,6 @@ class APISerializerTest(TestCase):
             'contact': {
                 'email': '',
                 'phone': '',
-                'fax': '',
-                'chat': '',
                 'url': '',
             },
             'terms_of_use': {
@@ -462,8 +434,6 @@ class APISerializerTest(TestCase):
             ],
             contact_email='',
             contact_phone='',
-            contact_fax='',
-            contact_chat='',
             contact_url='',
             terms_government_only=None,
             terms_pay_per_use=None,

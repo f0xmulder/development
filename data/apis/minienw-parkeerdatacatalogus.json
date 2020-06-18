@@ -16,8 +16,6 @@
     "contact": {
         "email": "ron.peerenboom@rapptrans.nl",
         "phone": "0621235207",
-        "fax": "",
-        "chat": "",
         "url": "https://openparking.nl"
     },
     "is_reference_implementation": false,

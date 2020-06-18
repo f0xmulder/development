@@ -64,18 +64,6 @@ class ContactSerializer(serializers.Serializer):
         allow_blank=True,
         required=False,
     )
-    fax = serializers.CharField(
-        source='contact_fax',
-        max_length=MAX_TEXT_LENGTH,
-        allow_blank=True,
-        required=False,
-    )
-    chat = serializers.CharField(
-        source='contact_chat',
-        max_length=MAX_TEXT_LENGTH,
-        allow_blank=True,
-        required=False,
-    )
     url = serializers.CharField(
         source='contact_url',
         max_length=MAX_URL_LENGTH,
@@ -172,8 +160,6 @@ class APISerializer(NonNullModelSerializer):
         def has_contact_details(api):
             return (api.contact_email != '' or
                     api.contact_phone != '' or
-                    api.contact_fax != '' or
-                    api.contact_chat != '' or
                     api.contact_url != '')
 
         def provides_sla(api):

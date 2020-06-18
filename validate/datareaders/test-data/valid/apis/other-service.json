@@ -23,9 +23,7 @@
     }],
     "contact": {
         "email": "name@example.nl",
-        "phone": "0031612345678",
-        "fax": "0031687654321",
-        "chat": "https://nl-x.slack.com"
+        "phone": "0031612345678"
     },
     "relations": {
         "api-id": ["reference-implementation"]

@@ -42,8 +42,6 @@ class API(models.Model):
 
     contact_email = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
     contact_phone = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
-    contact_fax = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
-    contact_chat = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
     contact_url = models.URLField(max_length=MAX_URL_LENGTH, blank=True)
 
     terms_government_only = models.BooleanField(null=True)

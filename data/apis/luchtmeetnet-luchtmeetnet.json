@@ -16,8 +16,6 @@
     "contact": {
         "email": "",
         "phone": "",
-        "fax": "",
-        "chat": "",
         "url": "https://www.luchtmeetnet.nl/contact"
     },
     "is_reference_implementation": false,

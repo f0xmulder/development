@@ -30,8 +30,6 @@ class SyncAPIsTest(TestCase):
                 'forum_url': 'https://forum.test.org',
                 'contact_email': 'name@example.nl',
                 'contact_phone': '0031612345678',
-                'contact_fax': '0031687654321',
-                'contact_chat': 'https://nl-x.slack.com',
                 'contact_url': '',
                 'terms_government_only': True,
                 'terms_pay_per_use': False,

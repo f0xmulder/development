@@ -20,8 +20,6 @@
     "contact": {
         "email": "terugmeldingapi@kadaster.nl",
         "phone": "088-1834600",
-        "fax": "",
-        "chat": "https://geoforum.nl/c/applicaties-en-diensten/terugmeldvoorzieningen",
         "url": "https://zakelijk.kadaster.nl/klantenservice-verbeter-de-kaart"
     },
     "is_reference_implementation": false,

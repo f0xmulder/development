@@ -82,10 +82,6 @@ def parse_api(api_id, json_data):
             api.contact_email = contact['email']
         if 'phone' in contact:
             api.contact_phone = contact['phone']
-        if 'fax' in contact:
-            api.contact_fax = contact['fax']
-        if 'chat' in contact:
-            api.contact_chat = contact['chat']
         if 'url' in contact:
             api.contact_url = contact['url']
 
