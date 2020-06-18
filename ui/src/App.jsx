@@ -40,14 +40,14 @@ const App = () => (
                 <Route path="/" exact component={Home} />
                 <Route path="/detail/:id" exact component={APIDetail} />
                 <Route
-                  path="/detail/:id/:environment/specificatie"
+                  path="/detail/:id/:environment/specification"
                   component={APISpecification}
                 />
                 <Route path="/apis" exact component={APIOverview} />
-                <Route path="/apis/toevoegen" component={SubmitAPI} />
+                <Route path="/apis/add" component={SubmitAPI} />
                 <Route path="/apis/:id" component={APIDetail} />
-                <Route path="/api-toevoegen" component={SubmitAPI} />
-                <Route path="/over" component={About} />
+                <Route path="/add-api" component={SubmitAPI} />
+                <Route path="/about" component={About} />
               </Switch>
               <Feedback />
             </main>

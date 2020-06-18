@@ -160,7 +160,7 @@ class APIOverview extends Component {
               </label>
             </form>
           </div>
-          <Button as={StyledAddLink} to="apis/toevoegen" variant="secondary">
+          <Button as={StyledAddLink} to="apis/add" variant="secondary">
             <StyledAddIcon />
             API toevoegen
           </Button>

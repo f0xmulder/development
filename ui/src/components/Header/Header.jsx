@@ -39,7 +39,7 @@ const Header = () => {
     {
       name: 'Over',
       Icon: IconInfo,
-      to: '/over',
+      to: '/about',
       'data-testid': 'nav-about',
     },
   ]

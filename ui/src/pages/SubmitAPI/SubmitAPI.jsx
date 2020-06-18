@@ -20,7 +20,7 @@ const SubmitAPI = ({ match: { url } }) => (
     </p>
 
     <StyledTabs>
-      <NavLink to={`${url}/formulier`}>Toevoegen via formulier</NavLink>
+      <NavLink to={`${url}/form`}>Toevoegen via formulier</NavLink>
       <NavLink to={`${url}/merge-request`}>Via merge Request</NavLink>
     </StyledTabs>
 
@@ -29,9 +29,9 @@ const SubmitAPI = ({ match: { url } }) => (
         <Route
           path={url}
           exact
-          render={() => <Redirect to={`${url}/formulier`} />}
+          render={() => <Redirect to={`${url}/form`} />}
         />
-        <Route path={`${url}/formulier`} component={SubmitAPIForm} />
+        <Route path={`${url}/form`} component={SubmitAPIForm} />
         <Route
           path={`${url}/merge-request`}
           component={SubmitAPIMergeRequest}
@@ -49,7 +49,7 @@ SubmitAPI.propTypes = {
 
 SubmitAPI.defaultProps = {
   match: {
-    url: 'api-toevoegen',
+    url: 'add-api',
   },
 }
 

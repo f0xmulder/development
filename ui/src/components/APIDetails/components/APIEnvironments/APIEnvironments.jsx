@@ -36,7 +36,7 @@ const APIEnvironments = ({ environments, apiId }) => (
                 variant="secondary"
                 to={
                   hasSpecification
-                    ? `/detail/${apiId}/${env.name.value}/specificatie`
+                    ? `/detail/${apiId}/${env.name.value}/specification`
                     : null
                 }
                 disabled={!hasSpecification}
