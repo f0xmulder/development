@@ -11,7 +11,6 @@ stages:
 variables:
   IMAGE_PREFIX: $CI_REGISTRY_IMAGE
   DOMAIN: developer.overheid.nl
-  KUBECTL_CONTEXT: delta.k8s.nlx.io
   REVIEW_BASE_DOMAIN: nlx.reviews
   REVIEW_NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
 
@@ -239,7 +238,7 @@ Deploy production:
   stage: deploy
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   variables:
-    KUBECONFIG: /secrets/kubeconfig/delta.conf
+    KUBECONFIG: /secrets/kubeconfig/dv-core-prod.conf
   script:
     - |
         helm upgrade --install don-prod ./helm/don \
