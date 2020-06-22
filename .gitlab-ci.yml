@@ -170,8 +170,7 @@ Deploy Review App:
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
         --set "storageType=Ephemeral" \
-        --set "replicas=1" \
-        --set "ingressClass=traefik"
+        --set "replicas=1"
   environment:
     name: $CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
@@ -250,8 +249,7 @@ Deploy production:
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
-        --set "domain=$DOMAIN" \
-        --set "ingressClass=traefik"
+        --set "domain=$DOMAIN"
   environment:
     name: prod
     url: https://$DOMAIN

@@ -55,30 +55,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata: {{ include "don.common.metadata" . | nindent 2 }}
   annotations:
-    kubernetes.io/ingress.class: {{ .Values.ingressClass }}
-{{ if eq .Values.ingressClass "nginx" }}
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "X-Frame-Options: deny";
-      more_set_headers "X-Content-Type-Options: nosniff";
-      more_set_headers "X-XSS-Protection: 1; mode=block";
-      more_set_headers "Content-Security-Policy: default-src 'self'; connect-src https:; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; worker-src 'self' blob:; child-src 'self' blob:;";
-      more_set_headers "Referrer-Policy: same-origin";
-{{ else }}
+    # Traefik is the default ingress provider in our setup
     ingress.kubernetes.io/frame-deny: "true"
     ingress.kubernetes.io/content-type-nosniff: "true"
     ingress.kubernetes.io/browser-xss-filter: "true"
     ingress.kubernetes.io/referrer-policy: "same-origin"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'; connect-src https:; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; worker-src 'self' blob:; child-src 'self' blob:;"
     ingress.kubernetes.io/hsts-max-age: "315360000"
-{{ end }}
 spec:
-{{ if eq .Values.ingressClass "nginx" }}
-  tls:
-    - secretName: ui-tls
-      hosts:
-        - {{.Values.domain}}
-{{ end }}
   rules:
     - host: {{.Values.domain}}
       http:

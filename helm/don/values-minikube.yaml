@@ -1,5 +1,4 @@
 imagePullPolicy: IfNotPresent
-ingressClass: traefik
 
 domain: don.minikube
 

@@ -1,5 +1,4 @@
 imagePullPolicy: Always
-ingressClass: nginx
 
 domain: don.minikube
 
