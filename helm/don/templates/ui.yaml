@@ -62,7 +62,12 @@ metadata: {{ include "don.common.metadata" . | nindent 2 }}
     ingress.kubernetes.io/referrer-policy: "same-origin"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'; connect-src https:; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; worker-src 'self' blob:; child-src 'self' blob:;"
     ingress.kubernetes.io/hsts-max-age: "315360000"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+    - secretName: ingress-tls
+      hosts:
+        - {{.Values.domain}}
   rules:
     - host: {{.Values.domain}}
       http:
