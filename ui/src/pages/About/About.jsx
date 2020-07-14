@@ -56,7 +56,7 @@ const About = () => (
           altijd aan de redactionele vereisten voldoet. Verbeterpunten kunnen
           worden doorgegeven via{' '}
           <a
-            href="https://gitlab.com/commonground/developer.overheid.nl/"
+            href="https://gitlab.com/commonground/developer.overheid.nl"
             target="_blank"
             rel="noopener noreferrer"
           >
