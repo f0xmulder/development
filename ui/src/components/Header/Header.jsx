@@ -46,7 +46,7 @@ const Header = () => {
 
   return (
     <HeaderArea>
-      <TopNavigationArea>
+      <TopNavigationArea aria-label="Gerelateerde websites">
         <TopNavigationContainer>
           <StyledNavigationList>
             {/* <StyledNavigationListItem>
@@ -67,7 +67,10 @@ const Header = () => {
         <StyledText>Ontwikkelen voor de overheid doen we samen</StyledText>
       </HeaderContainer>
 
-      <StyledPrimaryNavigation items={navItems} />
+      <StyledPrimaryNavigation
+        items={navItems}
+        aria-label="Website navigatie"
+      />
     </HeaderArea>
   )
 }
