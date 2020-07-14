@@ -17,6 +17,7 @@ const CodeBlock = ({ children, ...props }) => {
       <StyledCopyButton
         onClick={() => copy(children, setFeedback)}
         data-test="copy-button"
+        aria-label="Kopiëren"
       >
         {feedback && <StyledFeedback>{feedback}</StyledFeedback>}
         <ClipboardIcon />
