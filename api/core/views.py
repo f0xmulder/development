@@ -7,7 +7,7 @@ import requests
 from django.utils import timezone
 from django.urls import reverse
 from django.template.loader import render_to_string
-from django.contrib.postgres.search import SearchVector, SearchQuery
+from django.contrib.postgres.search import SearchVector
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.db.models import Q, Count, F
 from django.http import HttpResponse
@@ -21,6 +21,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from core.models import API, Relation, Environment, Event
 from core.pagination import StandardResultsSetPagination
+from core.search import PrefixedPhraseQuery
 from core.serializers import APISerializer, EventSerializer
 from core.gitlab import create_issue
 
@@ -80,7 +81,7 @@ class APIViewSet(RetrieveModelMixin,
     def get_search_filter(search_text):
         search_filter = Q()
         if search_text:
-            search_filter = Q(searchable=SearchQuery(search_text, config='dutch'))
+            search_filter = Q(searchable=PrefixedPhraseQuery(search_text, config='dutch'))
 
         return search_filter
 

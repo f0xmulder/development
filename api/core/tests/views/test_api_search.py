@@ -178,6 +178,48 @@ class APISearchTest(TestCase):
             }
         )
 
+    def test_search_name_punctuation(self):
+        self.run_search_test(
+            'q=!@#$%^&*()~`:;:\'"<,>.?/|\\{[]}_-+=',
+            [],
+            {
+                'graphql': 0,
+                'rest_json': 0,
+            },
+            {
+                'De staat': 0,
+                'Het bureau': 0,
+            }
+        )
+
+    def test_search_name_partial(self):
+        self.run_search_test(
+            'q=Twe',
+            [self.api2],
+            {
+                'graphql': 1,
+                'rest_json': 0,
+            },
+            {
+                'De staat': 1,
+                'Het bureau': 0,
+            }
+        )
+
+    def test_search_name_two_partial_terms_in_wrong_order(self):
+        self.run_search_test(
+            'q=AP+vuil',
+            [self.api3],
+            {
+                'graphql': 0,
+                'rest_json': 1,
+            },
+            {
+                'De staat': 1,
+                'Het bureau': 0,
+            }
+        )
+
     def test_search_description(self):
         self.run_search_test(
             'q=Originele',
@@ -189,6 +231,34 @@ class APISearchTest(TestCase):
             {
                 'De staat': 0,
                 'Het bureau': 1,
+            }
+        )
+
+    def test_search_description_partial(self):
+        self.run_search_test(
+            'q=Origi',
+            [self.api1],
+            {
+                'graphql': 0,
+                'rest_json': 1,
+            },
+            {
+                'De staat': 0,
+                'Het bureau': 1,
+            }
+        )
+
+    def test_search_description_two_partial_terms_in_wrong_order(self):
+        self.run_search_test(
+            'q=sta+bak',
+            [self.api3],
+            {
+                'graphql': 0,
+                'rest_json': 1,
+            },
+            {
+                'De staat': 1,
+                'Het bureau': 0,
             }
         )
 
