@@ -5,7 +5,7 @@ In this application we use the [Python Django framework](https://www.djangoproje
 First make sure the following tools are available on your computer:
 
 * [Git](https://git-scm.com/)
-* [Go (v1.13+)](https://golang.org/doc/install)
+* [Go (v1.14+)](https://golang.org/doc/install)
 * [Node.js (v 12)](https://nodejs.org/) (with NPM)
 * [Modd](https://github.com/cortesi/modd)
 * [Docker](https://docker.com), including [docker-compose](https://docs.docker.com/compose/)

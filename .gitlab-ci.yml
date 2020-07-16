@@ -15,7 +15,7 @@ variables:
   REVIEW_NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
 
 .validate:
-  image: golang:1.13.5
+  image: golang:1.14.1
   before_script:
     - cd validate
   tags:
