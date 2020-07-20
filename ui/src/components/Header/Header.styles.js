@@ -30,6 +30,10 @@ export const TopNavigationContainer = styled(Container)`
 `
 
 export const HeaderContainer = styled(Container)`
+  padding: 0
+    calc(
+      ${(p) => p.theme.containerPadding} + ${(p) => p.theme.tokens.spacing06}
+    );
   margin-top: ${(p) => p.theme.tokens.spacing07};
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 
@@ -133,10 +137,6 @@ export const StyledBottomNavigationLink = styled(NavLink)`
 
 export const StyledPrimaryNavigation = styled(PrimaryNavigation)`
   &[data-primary-nav-type='desktop'] {
-    nav {
-      margin-left: -${(p) => p.theme.tokens.spacing06};
-    }
-
     li {
       font-size: ${(p) => p.theme.tokens.fontSizeLarge};
 
