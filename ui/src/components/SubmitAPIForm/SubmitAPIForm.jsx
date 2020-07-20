@@ -246,7 +246,7 @@ const SubmitAPIForm = ({
                   type="radio"
                   value="false"
                 />
-                <Label htmlFor="isBasedOnReferenceImplementation">Nee</Label>
+                <Label htmlFor="isNotBasedOnReferenceImplementation">Nee</Label>
               </RadioOptionWrapper>
             </RadioOptionGroup>
           </StyledFormGroup>
