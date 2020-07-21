@@ -6,19 +6,17 @@ import { string, bool, object } from 'prop-types'
 
 import {
   Label,
+  Legend,
   Field,
   RadioOptionGroup,
   RadioOptionWrapper,
+  SubFieldset,
 } from '../Form/Form'
 import {
   StyledFormGroup,
   HelperMessage,
 } from '../SubmitAPIForm/SubmitAPIForm.styles'
 import { ErrorMessage } from '../SubmitAPIForm/SubmitAPIForm'
-import {
-  StyledEnvironmentFormInputs,
-  StyledEnvironmentHeading,
-} from './EnvironmentFormInputs.styles'
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return ''
@@ -39,8 +37,8 @@ const EnvironmentFormInputs = ({
   touched,
   errors,
 }) => (
-  <StyledEnvironmentFormInputs>
-    <StyledEnvironmentHeading>{title}</StyledEnvironmentHeading>
+  <SubFieldset>
+    <Legend>{title}</Legend>
     {optional && (
       <StyledFormGroup>
         <Label>Heb je een {title.toLowerCase()}-omgeving?</Label>
@@ -132,7 +130,7 @@ const EnvironmentFormInputs = ({
         </StyledFormGroup>
       </>
     )}
-  </StyledEnvironmentFormInputs>
+  </SubFieldset>
 )
 
 EnvironmentFormInputs.propTypes = {

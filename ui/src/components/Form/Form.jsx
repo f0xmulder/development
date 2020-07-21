@@ -14,6 +14,15 @@ export const Fieldset = styled.fieldset`
   padding: 0;
   margin: 0 0 ${(p) => p.theme.tokens.spacing08} 0;
 `
+// To be used as a fieldset nested in another fieldset
+export const SubFieldset = styled(Fieldset)`
+  margin-bottom: ${(p) => p.theme.tokens.spacing06};
+
+  legend {
+    font-size: ${(p) => p.theme.tokens.fontSizeLarge};
+    font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+  }
+`
 
 export const Legend = styled.legend`
   font-size: ${(p) => p.theme.tokens.fontSizeXLarge};
