@@ -41,7 +41,10 @@ export const Field = styled(ExtendedFormikField)`
   `}
 `
 
-export const SelectField = styled(ExtendedFormikField)`
+export const SelectField = styled(ExtendedFormikField).attrs({
+  // Axe can't analyse the contrast of elements with background images
+  className: 'axe-ignore',
+})`
   -webkit-appearance: none;
   appearance: none;
   height: 48px;

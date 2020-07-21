@@ -10,6 +10,13 @@ const appDirectory = realpathSync(process.cwd());
 const resolvePath = relativePath => resolve(appDirectory, relativePath);
 
 exports.analyzeAccessibility = async (page, screenshotPath, options = {}) => {
+const defaultAxeOptions = {
+    // Exclude elements with the axe-ignore class (and their children) from the axe tests.
+    exclude: ['.axe-ignore'],
+};
+
+    const finalAxeOptions = { ...defaultAxeOptions, ...options };
+
     // Inject the axe script in our page
     await page.addScriptTag({ path: resolvePath(PATH_TO_AXE) });
     // we make sure that axe is executed in the next tick after
@@ -19,7 +26,7 @@ exports.analyzeAccessibility = async (page, screenshotPath, options = {}) => {
         return new Promise(resolve => {
             setTimeout(resolve, 0);
         }).then(() => axe.run(axeOptions));
-    }, options);
+    }, finalAxeOptions);
 
     if (
         screenshotPath &&
