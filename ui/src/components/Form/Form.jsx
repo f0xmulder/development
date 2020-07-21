@@ -12,7 +12,7 @@ import arrowDownSolidIcon from '../Icons/arrow-down-solid-icon.svg'
 export const Fieldset = styled.fieldset`
   border: none;
   padding: 0;
-  margin: 0 0 40px 0;
+  margin: 0 0 ${(p) => p.theme.tokens.spacing08} 0;
 `
 
 export const Legend = styled.legend`
