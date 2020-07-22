@@ -34,7 +34,7 @@ class SyncAPIsTest(TestCase):
                 'terms_government_only': True,
                 'terms_pay_per_use': False,
                 'terms_uptime_guarantee': Decimal('99.9'),
-                'terms_support_response_time': '2 days',
+                'terms_support_response_time': 2,
             },
         ]
         self.assertEqual(actual_apis, expected_apis)

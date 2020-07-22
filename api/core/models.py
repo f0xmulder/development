@@ -51,7 +51,10 @@ class API(models.Model):
         decimal_places=6,
         max_digits=8,
     )
-    terms_support_response_time = models.CharField(max_length=MAX_TEXT_LENGTH, blank=True)
+    terms_support_response_time = models.PositiveIntegerField(
+        help_text='Measured in number of workdays',
+        null=True,
+    )
 
     forum_vendor = models.CharField(max_length=MAX_ENUM_LENGTH, blank=True)
     forum_url = models.URLField(max_length=MAX_URL_LENGTH, blank=True)

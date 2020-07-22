@@ -1,4 +1,5 @@
 from collections import OrderedDict
+
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -90,10 +91,10 @@ class TermsOfUseSerializer(serializers.Serializer):
         allow_null=True,
         required=False,
     )
-    support_response_time = serializers.CharField(
+    support_response_time = serializers.IntegerField(
         source='terms_support_response_time',
-        max_length=MAX_TEXT_LENGTH,
-        allow_blank=True,
+        min_value=1,
+        allow_null=True,
         required=False,
     )
 
@@ -163,7 +164,8 @@ class APISerializer(NonNullModelSerializer):
                     api.contact_url != '')
 
         def provides_sla(api):
-            return api.terms_support_response_time != '' and api.terms_uptime_guarantee >= 0.9
+            return (api.terms_support_response_time is not None and
+                    api.terms_uptime_guarantee >= 0.9)
 
         return OrderedDict({
             'has_documentation': has_documentation(obj),

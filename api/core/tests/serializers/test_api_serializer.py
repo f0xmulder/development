@@ -20,6 +20,7 @@ REQUIRED_ERROR = 'required'
 BLANK_ERROR = 'blank'
 INVALID_ERROR = 'invalid'
 INVALID_CHOICE_ERROR = 'invalid_choice'
+MIN_VALUE_ERROR = 'min_value'
 
 
 def replace_errors_with_codes(obj):
@@ -68,7 +69,7 @@ class APISerializerTest(TestCase):
             terms_government_only=False,
             terms_pay_per_use=True,
             terms_uptime_guarantee=1.0,
-            terms_support_response_time='2d',
+            terms_support_response_time=2,
             forum_vendor='discourse',
             forum_url='mydiscourse.com',
         )
@@ -94,7 +95,7 @@ class APISerializerTest(TestCase):
                 'government_only': False,
                 'pay_per_use': True,
                 'uptime_guarantee': '1.000000',
-                'support_response_time': '2d',
+                'support_response_time': 2,
             }),
             'forum': OrderedDict({
                 'vendor': 'discourse',
@@ -134,7 +135,7 @@ class APISerializerTest(TestCase):
                 'government_only': None,
                 'pay_per_use': None,
                 'uptime_guarantee': None,
-                'support_response_time': '',
+                'support_response_time': None,
             }),
             'scores': OrderedDict({
                 'has_documentation': False,
@@ -255,7 +256,7 @@ class APISerializerTest(TestCase):
 
     def test_scores_sla(self):
         api = API.objects.create(
-            terms_support_response_time='1w',
+            terms_support_response_time=7,
             terms_uptime_guarantee=0.99,
         )
 
@@ -289,7 +290,7 @@ class APISerializerTest(TestCase):
                 'government_only': False,
                 'pay_per_use': True,
                 'uptime_guarantee': 1.0,
-                'support_response_time': '2d',
+                'support_response_time': 2,
             },
             'forum': {
                 'vendor': 'discourse',
@@ -322,7 +323,7 @@ class APISerializerTest(TestCase):
             terms_government_only=False,
             terms_pay_per_use=True,
             terms_uptime_guarantee=Decimal('1.000000'),
-            terms_support_response_time='2d',
+            terms_support_response_time=2,
         )
 
         self.assertDictEqual(serializer.validated_data, expected)
@@ -414,7 +415,7 @@ class APISerializerTest(TestCase):
                 'government_only': None,
                 'pay_per_use': None,
                 'uptime_guarantee': None,
-                'support_response_time': '',
+                'support_response_time': None,
             },
         }
 
@@ -438,7 +439,7 @@ class APISerializerTest(TestCase):
             terms_government_only=None,
             terms_pay_per_use=None,
             terms_uptime_guarantee=None,
-            terms_support_response_time='',
+            terms_support_response_time=None,
         )
 
         self.assertDictEqual(serializer.validated_data, expected)
@@ -638,4 +639,28 @@ class APISerializerTest(TestCase):
 
         self.assert_serializer_has_errors(serializer, {
             'environments': [INVALID_ERROR],
+        })
+
+    def test_deserialize_support_response_time_negative(self):
+        input_data = {
+            'id': 'api1',
+            'description': 'First API',
+            'organization_name': 'Test Organization',
+            'service_name': 'First Service',
+            'environments': [
+                {
+                    'name': 'production',
+                    'api_url': 'http://production.nl',
+                },
+            ],
+            'terms_of_use': {
+                'support_response_time': -1,
+            },
+        }
+        serializer = APISerializer(data=input_data)
+
+        self.assert_serializer_has_errors(serializer, {
+            'terms_of_use': {
+                'support_response_time': [MIN_VALUE_ERROR],
+            },
         })

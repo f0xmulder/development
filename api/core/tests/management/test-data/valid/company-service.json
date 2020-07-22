@@ -30,6 +30,6 @@
         "government_only": true,
         "pay_per_use": false,
         "uptime_guarantee": 99.9,
-        "support_response_time": "2 days"
+        "support_response_time": 2
     }
 }

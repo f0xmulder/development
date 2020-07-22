@@ -25,6 +25,6 @@
         "government_only": true,
         "pay_per_use": false,
         "uptime_guarantee": 99.5,
-        "support_response_time": "1 werkdag"
+        "support_response_time": 1
     }
 }
