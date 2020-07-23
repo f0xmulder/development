@@ -103,8 +103,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -145,8 +145,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -229,8 +229,8 @@ class APISearchTest(TestCase):
                 'rest_json': 1,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             })
 
     def test_organization_multiple(self):
@@ -242,8 +242,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -256,8 +256,8 @@ class APISearchTest(TestCase):
                 'rest_json': 0,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -270,8 +270,8 @@ class APISearchTest(TestCase):
                 'rest_json': 0,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -284,8 +284,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 1,
                 'De staat': 1,
+                'Het bureau': 1,
             }
         )
 
@@ -298,8 +298,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 1,
                 'De staat': 2,
+                'Het bureau': 1,
             }
         )
 
@@ -312,8 +312,8 @@ class APISearchTest(TestCase):
                 'rest_json': 2,
             },
             {
-                'Het bureau': 0,
                 'De staat': 0,
+                'Het bureau': 0,
             }
         )
 
@@ -340,8 +340,8 @@ class APISearchTest(TestCase):
                 'rest_json': 1,
             },
             {
-                'Het bureau': 1,
                 'De staat': 1,
+                'Het bureau': 1,
             }
         )
 

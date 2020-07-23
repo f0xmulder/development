@@ -90,7 +90,8 @@ class APIViewSet(RetrieveModelMixin,
                                      Q())
             term_counts = queryset \
                 .values(term=F(facet)) \
-                .annotate(count=Count('id', filter=combined_filter & search_filter))
+                .annotate(count=Count('id', filter=combined_filter & search_filter)) \
+                .order_by('term')
 
             facets[facet] = {'terms': list(term_counts)}
 
