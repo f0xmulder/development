@@ -4,28 +4,19 @@
     "service_name": "Test Service Name",
     "api_type": "rest_json",
     "api_authentication": "api_key",
-    "tags": ["test tag"],
+    "tags": ["test-tag"],
     "environments": [{
         "name": "production",
         "api_url": "Test API URL",
         "specification_url": "Test Specification URL",
         "documentation_url": "Test Documentation URL"
     }],
-    "forum": {
-        "vendor": "discourse",
-        "url": "https://forum.test.org"
-    },
     "contact": {
         "email": "name@example.nl",
+        "url": "https://github.com/VNG-Realisatie/nlx",
         "phone": "0031612345678"
     },
-    "relations": {
-        "api-id": ["reference-implementation"]
-    },
     "terms_of_use": {
-        "government_only": true,
-        "pay_per_use": false,
-        "uptime_guarantee": 99.9,
-        "support_response_time": 2
+        "support_response_time": -1
     }
 }

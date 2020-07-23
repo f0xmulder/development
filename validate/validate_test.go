@@ -41,6 +41,7 @@ func TestFile(t *testing.T) {
 		{"missing-specification-url.json", true, "", ""},
 		{"invalid-forum-vendor.json", false, "", "Only \"discourse\" is a valid vendor"},
 		{"invalid-forum-url.json", false, "", "Invalid forum url given"},
+		{"negative-support-response-time.json", false, "", "Support response time can't be less than 1"},
 		{"superfluous-props.json", true, "", ""},
 		{"valid.json", true, "", ""},
 		{"valid-forum.json", true, "", ""},

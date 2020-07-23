@@ -9,6 +9,8 @@ import (
 )
 
 func TestFile(t *testing.T) {
+	someInt := 2
+
 	testCases := []struct {
 		filePath      string
 		expectedModel models.API
@@ -47,7 +49,7 @@ func TestFile(t *testing.T) {
 					GovernmentOnly:      true,
 					PayPerUse:           false,
 					UptimeGuarantee:     99.9,
-					SupportResponseTime: "2 days",
+					SupportResponseTime: &someInt,
 				},
 			},
 			false,
@@ -93,7 +95,7 @@ func TestFile(t *testing.T) {
 					GovernmentOnly:      true,
 					PayPerUse:           false,
 					UptimeGuarantee:     99.9,
-					SupportResponseTime: "2 days",
+					SupportResponseTime: nil,
 				},
 			},
 			false,

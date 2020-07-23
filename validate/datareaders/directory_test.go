@@ -9,6 +9,8 @@ import (
 )
 
 func TestDirectory(t *testing.T) {
+	someInt := 2
+
 	expected := []models.API{
 		{
 			ID:                "company-service",
@@ -42,7 +44,7 @@ func TestDirectory(t *testing.T) {
 				GovernmentOnly:      true,
 				PayPerUse:           false,
 				UptimeGuarantee:     99.9,
-				SupportResponseTime: "2 days",
+				SupportResponseTime: &someInt,
 			},
 			Scores: nil,
 		},
@@ -85,7 +87,7 @@ func TestDirectory(t *testing.T) {
 				GovernmentOnly:      true,
 				PayPerUse:           false,
 				UptimeGuarantee:     99.9,
-				SupportResponseTime: "2 days",
+				SupportResponseTime: nil,
 			},
 		},
 	}

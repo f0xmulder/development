@@ -119,6 +119,14 @@ func File(filePath string) ValidationFeedback {
 		}
 	}
 
+	if newAPI.TermsOfUse.SupportResponseTime != nil &&
+		*newAPI.TermsOfUse.SupportResponseTime < 1 {
+		return ValidationFeedback{
+			false,
+			"Support response time can't be less than 1",
+		}
+	}
+
 	return ValidationFeedback{
 		Valid: true,
 	}

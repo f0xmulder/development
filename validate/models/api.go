@@ -1,8 +1,10 @@
 package models
 
-import "encoding/json"
-import "errors"
-import "fmt"
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+)
 
 // API model
 type API struct {
@@ -49,7 +51,7 @@ type APITermsOfUse struct {
 	GovernmentOnly      bool    `json:"government_only"`
 	PayPerUse           bool    `json:"pay_per_use"`
 	UptimeGuarantee     float64 `json:"uptime_guarantee"`
-	SupportResponseTime string  `json:"support_response_time"`
+	SupportResponseTime *int    `json:"support_response_time"`
 }
 
 // APIScores model
