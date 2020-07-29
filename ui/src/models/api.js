@@ -28,10 +28,13 @@ const mapTermsOfUse = (termsOfUse) => {
   return {
     governmentOnly: termsOfUse.government_only,
     payPerUse: termsOfUse.pay_per_use,
-    supportResponseTime: termsOfUse.support_response_time || '',
     uptimeGuarantee: isNaN(parseFloat(termsOfUse.uptime_guarantee))
       ? 0
       : parseFloat(termsOfUse.uptime_guarantee),
+    supportResponseTime:
+      typeof termsOfUse.support_response_time === 'number'
+        ? termsOfUse.support_response_time
+        : null,
   }
 }
 

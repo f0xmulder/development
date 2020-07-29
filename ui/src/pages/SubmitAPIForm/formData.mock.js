@@ -28,7 +28,7 @@ export const rawFormDataMock = {
     governmentOnly: false,
     payPerUse: false,
     uptimeGuarantee: 99.9,
-    supportResponseTime: 'asap',
+    supportResponseTime: 1,
   },
   contact: {
     email: '',
@@ -64,7 +64,7 @@ export const submitDataMock = {
     government_only: false,
     pay_per_use: false,
     uptime_guarantee: 99.9,
-    support_response_time: 'asap',
+    support_response_time: 1,
   },
   contact: {
     email: '',

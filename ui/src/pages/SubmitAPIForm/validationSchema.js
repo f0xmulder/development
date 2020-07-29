@@ -78,7 +78,12 @@ const validationSchemaConfiguration = {
     governmentOnly: Yup.boolean(),
     payPerUse: Yup.boolean(),
     uptimeGuarantee: Yup.number().transform(convertEmptyValueTo(0)),
-    supportResponseTime: Yup.string(),
+    supportResponseTime: Yup.number()
+      .nullable()
+      .integer()
+      .moreThan(0)
+      .label('Helpdesk responstijd')
+      .transform(convertEmptyValueTo(null)),
   }),
 }
 

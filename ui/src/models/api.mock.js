@@ -33,7 +33,7 @@ export const goApiMock = {
     government_only: false,
     pay_per_use: false,
     uptime_guarantee: 99.9,
-    support_response_time: 'asap',
+    support_response_time: 1,
   },
   scores: {
     has_documentation: false,
@@ -81,7 +81,7 @@ export const apiMock = {
     governmentOnly: false,
     payPerUse: false,
     uptimeGuarantee: 99.9,
-    supportResponseTime: 'asap',
+    supportResponseTime: 1,
   },
   scores: {
     hasDocumentation: false,

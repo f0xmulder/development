@@ -170,7 +170,7 @@ APIDetails.propTypes = {
     governmentOnly: PropTypes.bool,
     payPerUse: PropTypes.bool,
     uptimeGuarantee: PropTypes.number,
-    supportResponseTime: PropTypes.string,
+    supportResponseTime: PropTypes.number,
   }),
   scores: PropTypes.shape({
     hasDocumentation: PropTypes.bool,

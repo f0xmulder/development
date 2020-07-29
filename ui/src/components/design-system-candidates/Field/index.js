@@ -9,6 +9,8 @@ import { WIDTH } from './const'
 
 const getMaxWidth = (maxWidth) => {
   switch (maxWidth) {
+    case WIDTH.EXTRA_SMALL:
+      return '7.5rem'
     case WIDTH.SMALL:
       return '15rem'
     case WIDTH.MEDIUM:
@@ -28,7 +30,7 @@ const FormikFieldWithFilteredProp = (props) => {
 }
 
 FormikFieldWithFilteredProp.propTypes = {
-  maxWidth: oneOf([WIDTH.SMALL, WIDTH.MEDIUM, WIDTH.LARGE]),
+  maxWidth: oneOf([WIDTH.EXTRA_SMALL, WIDTH.SMALL, WIDTH.MEDIUM, WIDTH.LARGE]),
   children: node,
 }
 

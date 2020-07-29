@@ -7,6 +7,16 @@ import PropTypes from 'prop-types'
 import { APIAuthentication } from '../../../../models/enums'
 import { Wrapper, Term, Key, Value } from './APITerms.styles'
 
+const supportResponseTimeString = (supportResponseTime) => {
+  if (supportResponseTime === null) {
+    return 'Geen'
+  }
+  if (supportResponseTime <= 1) {
+    return `${supportResponseTime} werkdag`
+  }
+  return `${supportResponseTime} werkdagen`
+}
+
 const APITerms = ({ apiAuthentication, termsOfUse }) => (
   <Wrapper>
     <Term>
@@ -35,11 +45,7 @@ const APITerms = ({ apiAuthentication, termsOfUse }) => (
 
     <Term>
       <Key>Helpdesk response</Key>
-      <Value>
-        {termsOfUse.supportResponseTime
-          ? `${termsOfUse.supportResponseTime}`
-          : 'Geen'}
-      </Value>
+      <Value>{supportResponseTimeString(termsOfUse.supportResponseTime)}</Value>
     </Term>
   </Wrapper>
 )
@@ -50,7 +56,7 @@ APITerms.propTypes = {
     governmentOnly: PropTypes.bool,
     payPerUse: PropTypes.bool,
     uptimeGuarantee: PropTypes.number,
-    supportResponseTime: PropTypes.string,
+    supportResponseTime: PropTypes.number,
   }),
 }
 

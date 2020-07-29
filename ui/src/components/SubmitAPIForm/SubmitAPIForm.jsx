@@ -353,17 +353,19 @@ const SubmitAPIForm = ({
               )}
           </StyledFormGroup>
 
-          {/* <StyledFormGroup>
+          <StyledFormGroup>
             <Label htmlFor="termsOfUse.supportResponseTime">
-              Reactietijd van de helpdesk
+              Binnen hoeveel werkdagen reageert de helpdesk doorgaans?
+              (optioneel)
             </Label>
             <Field
-              
-              type="text"
+              type="number"
+              min="1"
+              step="1"
               id="termsOfUse.supportResponseTime"
               name="termsOfUse.supportResponseTime"
+              maxWidth="extraSmall"
             />
-            <HelperMessage>Bijv. 2 werkdagen</HelperMessage>
             {errors.termsOfUse &&
               errors.termsOfUse.supportResponseTime &&
               touched.termsOfUse &&
@@ -372,7 +374,7 @@ const SubmitAPIForm = ({
                   {errors.termsOfUse.supportResponseTime}
                 </ErrorMessage>
               )}
-          </StyledFormGroup> */}
+          </StyledFormGroup>
         </StyledFormGroupColumn>
       </StyledFormGroupColumnContainer>
     </Fieldset>

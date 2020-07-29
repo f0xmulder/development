@@ -30,7 +30,7 @@ const details = {
     governmentOnly: true,
     payPerUse: false,
     uptimeGuarantee: 99.9,
-    supportResponseTime: '2 days',
+    supportResponseTime: 2,
   },
   scores: {
     hasDocumentation: true,
