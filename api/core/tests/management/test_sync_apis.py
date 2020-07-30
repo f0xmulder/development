@@ -1,6 +1,7 @@
 from decimal import Decimal
 from json import JSONDecodeError
 
+from django.core.management import call_command
 from django.test import TestCase
 
 from core.management.commands.sync_apis import sync_apis
@@ -13,7 +14,7 @@ class SyncAPIsTest(TestCase):
         self.maxDiff = None
 
     def test_sync_apis_valid(self):
-        sync_apis('core/tests/management/test-data/valid')
+        call_command('sync_apis', '--api-dir', 'core/tests/management/test-data/valid')
 
         actual_apis = list(API.objects.values())
         expected_apis = [
