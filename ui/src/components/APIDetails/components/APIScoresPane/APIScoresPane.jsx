@@ -24,27 +24,29 @@ const APIScoresPane = ({ scores, parentUrl }) => {
 
   return (
     <Drawer closeHandler={close}>
-      <h1>Opbouw API score</h1>
-      <p>Deze score geeft de kwaliteit van de API weer.</p>
+      <Drawer.Header title="Opbouw API Score" closeButtonLabel="Sluit" />
+      <Drawer.Content>
+        <p>Deze score geeft de kwaliteit van de API weer.</p>
 
-      <GradeSection>
-        <Grade scores={scores} largeAtMediaQuery="xsUp" />
-      </GradeSection>
+        <GradeSection>
+          <Grade scores={scores} largeAtMediaQuery="xsUp" />
+        </GradeSection>
 
-      <StyledScoresUl>
-        <StyledScoresLi available={!!hasDocumentation}>
-          Documentatie {!hasDocumentation ? 'niet' : ''} aanwezig
-        </StyledScoresLi>
-        <StyledScoresLi available={!!hasSpecification}>
-          Specificatie {!hasSpecification ? 'niet' : ''} aanwezig
-        </StyledScoresLi>
-        <StyledScoresLi available={!!hasContactDetails}>
-          Contactgegevens {!hasContactDetails ? 'niet' : ''} aanwezig
-        </StyledScoresLi>
-        <StyledScoresLi available={!!providesSla}>
-          SLA {!providesSla ? 'niet' : ''} aanwezig
-        </StyledScoresLi>
-      </StyledScoresUl>
+        <StyledScoresUl>
+          <StyledScoresLi available={!!hasDocumentation}>
+            Documentatie {!hasDocumentation ? 'niet' : ''} aanwezig
+          </StyledScoresLi>
+          <StyledScoresLi available={!!hasSpecification}>
+            Specificatie {!hasSpecification ? 'niet' : ''} aanwezig
+          </StyledScoresLi>
+          <StyledScoresLi available={!!hasContactDetails}>
+            Contactgegevens {!hasContactDetails ? 'niet' : ''} aanwezig
+          </StyledScoresLi>
+          <StyledScoresLi available={!!providesSla}>
+            SLA {!providesSla ? 'niet' : ''} aanwezig
+          </StyledScoresLi>
+        </StyledScoresUl>
+      </Drawer.Content>
     </Drawer>
   )
 }

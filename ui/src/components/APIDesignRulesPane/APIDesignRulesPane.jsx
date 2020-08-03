@@ -34,36 +34,38 @@ const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
 
   return (
     <Drawer closeHandler={close}>
-      <h2>API Design Rules</h2>
-      <p>
-        Van de volgende{' '}
-        <StyledLink
-          href="https://docs.geostandaarden.nl/api/API-Designrules/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          API Design Rules
-        </StyledLink>{' '}
-        wordt automatisch gecontroleerd of de API eraan voldoet:
-      </p>
-      {apiDetails && apiDetails.apiDesignRules && (
-        <StyledDesignRulesUl>
-          {apiDetails.apiDesignRules.map((rule) => (
-            <StyledDesignRulesLi available={rule.compliant} key={rule.title}>
-              <StyledDesignRulesTitle>
-                <StyledLink
-                  href={rule.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {rule.title} <External />
-                </StyledLink>
-              </StyledDesignRulesTitle>
-              <p>{rule.description}</p>
-            </StyledDesignRulesLi>
-          ))}
-        </StyledDesignRulesUl>
-      )}
+      <Drawer.Header title="API Design Rules" closeButtonLabel="Sluit" />
+      <Drawer.Content>
+        <p>
+          Van de volgende{' '}
+          <StyledLink
+            href="https://docs.geostandaarden.nl/api/API-Designrules/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            API Design Rules
+          </StyledLink>{' '}
+          wordt automatisch gecontroleerd of de API eraan voldoet:
+        </p>
+        {apiDetails && apiDetails.apiDesignRules && (
+          <StyledDesignRulesUl>
+            {apiDetails.apiDesignRules.map((rule) => (
+              <StyledDesignRulesLi available={rule.compliant} key={rule.title}>
+                <StyledDesignRulesTitle>
+                  <StyledLink
+                    href={rule.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {rule.title} <External />
+                  </StyledLink>
+                </StyledDesignRulesTitle>
+                <p>{rule.description}</p>
+              </StyledDesignRulesLi>
+            ))}
+          </StyledDesignRulesUl>
+        )}
+      </Drawer.Content>
     </Drawer>
   )
 }
