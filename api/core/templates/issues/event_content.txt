@@ -1,0 +1,12 @@
+We would like to add the following event:
+
+- Title: {{ event.title }}
+- Start date: {{ event.start_date }}
+- Location: {{ event.location }}
+- Registration URL: {{ event.registration_url }}
+
+{{ manage_url }}
+
+Thanks a lot!
+
+The web form

@@ -9,8 +9,10 @@ import { GlobalStyles as DSGlobalStyles } from '@commonground/design-system'
 import theme from './theme'
 import Home from './pages/Home/Home'
 import SubmitAPI from './pages/SubmitAPI/SubmitAPI'
+import SubmitEvent from './pages/SubmitEvent/SubmitEvent'
 import About from './pages/About/About'
 import APIDetail from './pages/APIDetail/APIDetail'
+import EventOverview from './pages/EventOverview/EventOverview'
 import APIOverview from './pages/APIOverview/APIOverview'
 import Header from './components/Header/Header'
 import Feedback from './components/Feedback/Feedback'
@@ -47,6 +49,8 @@ const App = () => (
                 <Route path="/apis/add" component={SubmitAPI} />
                 <Route path="/apis/:id" component={APIDetail} />
                 <Route path="/add-api" component={SubmitAPI} />
+                <Route path="/events" exact component={EventOverview} />
+                <Route path="/events/add" component={SubmitEvent} />
                 <Route path="/about" component={About} />
               </Switch>
               <Feedback />

@@ -21,7 +21,7 @@ const SubmitAPI = ({ match: { url } }) => (
 
     <StyledTabs>
       <NavLink to={`${url}/form`}>Toevoegen via formulier</NavLink>
-      <NavLink to={`${url}/merge-request`}>Via merge Request</NavLink>
+      <NavLink to={`${url}/merge-request`}>Via Merge Request</NavLink>
     </StyledTabs>
 
     <PageContentCard>

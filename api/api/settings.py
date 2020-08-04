@@ -20,6 +20,11 @@ USE_X_FORWARDED_PORT = os.getenv('USE_X_FORWARDED_PORT', USE_X_FORWARDED_PORT_DE
 if os.getenv('ALLOWED_HOST'):
     ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST')]
 
+GITLAB = {
+    'ACCESS_TOKEN': os.environ.get('GITLAB_ACCESS_TOKEN'),
+    'PROJECT_ID': os.environ.get('GITLAB_PROJECT_ID'),
+    'URL': os.environ.get('GITLAB_URL'),
+}
 
 # Application definition
 

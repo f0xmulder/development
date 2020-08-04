@@ -3,7 +3,8 @@ from collections import OrderedDict
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from core.models import API, Environment, Badge, MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
+from core.models import API, Environment, Badge, Event, \
+    MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
 
 
 class NonNullModelSerializer(serializers.ModelSerializer):
@@ -173,3 +174,9 @@ class APISerializer(NonNullModelSerializer):
             'has_contact_details': has_contact_details(obj),
             'provides_sla': provides_sla(obj)
         })
+
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['id', 'title', 'start_date', 'location', 'registration_url']

@@ -5,6 +5,7 @@ import React from 'react'
 
 import IconHome from './assets/IconHome'
 import IconPresent from './assets/IconPresent'
+import IconEvents from './assets/IconEvents'
 import IconInfo from './assets/IconInfo'
 import {
   HeaderArea,
@@ -35,6 +36,12 @@ const Header = () => {
       Icon: IconPresent,
       to: '/apis',
       'data-testid': 'nav-apis',
+    },
+    {
+      name: 'Events',
+      Icon: IconEvents,
+      to: '/events',
+      'data-testid': 'nav-events',
     },
     {
       name: 'Over',

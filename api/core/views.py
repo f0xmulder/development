@@ -1,24 +1,28 @@
-import json
 import logging
-import os
+import json
 from functools import reduce
+import datetime
 
 import requests
+from django.utils import timezone
+from django.urls import reverse
+from django.template.loader import render_to_string
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.db.models import Q, Count, F
 from django.http import HttpResponse
 from requests import RequestException, Timeout
 from rest_framework import status
 from rest_framework.exceptions import NotFound, APIException
-from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
-from core.models import API, Relation, Environment
+from core.models import API, Relation, Environment, Event
 from core.pagination import StandardResultsSetPagination
-from core.serializers import APISerializer
+from core.serializers import APISerializer, EventSerializer
+from core.gitlab import create_issue
 
 REQUEST_TIMEOUT_SECONDS = 10
 
@@ -174,60 +178,66 @@ def proxy_url(url, name):
 
 
 class SubmitAPIView(APIView):
-    gitlab_access_token = os.environ.get('GITLAB_ACCESS_TOKEN')
-    gitlab_project_id = os.environ.get('GITLAB_PROJECT_ID')
-    gitlab_url = os.environ.get('GITLAB_URL')
-
     def post(self, request):
-        if (self.gitlab_access_token is None
-                or self.gitlab_project_id is None
-                or self.gitlab_url is None):
-            raise APIException(detail='The Gitlab API is not properly configured')
 
-        api_data = request.data
         # The input has no id, which it needs to be a valid API
-        data_to_validate = dict(**api_data, id='temporary-id')
+        data_to_validate = dict(**request.data, id='temporary-id')
         serializer = APISerializer(data=data_to_validate)
         serializer.is_valid(raise_exception=True)
 
-        url = f'{self.gitlab_url}/api/v4/projects/{self.gitlab_project_id}/issues'
-        body = self.create_issue_body(api_data)
-        result = requests.post(
-            url,
-            json=body,
-            headers={
-                'Content-Type': 'application/json',
-                'PRIVATE-TOKEN': self.gitlab_access_token,
-            },
-        )
+        context = {
+            'data': request.data,
+            'json_string': json.dumps(request.data, indent=4)
+        }
 
-        if result.status_code != requests.codes.created:
+        title = render_to_string('issues/api_title.txt', context)
+        content = render_to_string('issues/api_content.txt', context)
+
+        try:
+            result = create_issue(title, content, 'New API')
+        except ImproperlyConfigured as e:
+            logger.error(e)
+            raise APIException(detail='The Gitlab API is not properly configured')
+        except Exception as e:
+            logger.error(e)
             raise APIException(detail='Something went wrong while posting to the GitLab API')
 
-        issue_details = json.loads(result.content)
-        return Response(issue_details)
+        return Response(result)
 
-    @staticmethod
-    def create_issue_body(api_data):
-        organization = api_data['organization_name']
-        service = api_data['service_name']
-        title = f'Add a new API: {organization} {service}'
 
-        json_string = json.dumps(api_data, indent=4)
-        description = f"""
-We would like to add the following API:
+class EventViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
+    serializer_class = EventSerializer
+    pagination_class = StandardResultsSetPagination
 
-```json
-{json_string}
-```
+    def get_queryset(self):
+        twentyfour_hours_ago = timezone.now() - datetime.timedelta(hours=24)
+        return Event.objects.filter(start_date__gt=twentyfour_hours_ago, is_published=True)
 
-Thanks a lot!
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
 
-The web form
-"""
+        headers = self.get_success_headers(serializer.data)
+        event = serializer.data
 
-        return {
-            'title': title,
-            'description': description,
-            'labels': 'New API'
+        context = {
+            'event': event,
+            'manage_url': self.request.build_absolute_uri(
+                reverse('admin:core_event_change', args=[event.get('id')])
+            )
         }
+
+        title = render_to_string('issues/event_title.txt', context)
+        content = render_to_string('issues/event_content.txt', context)
+
+        try:
+            result = create_issue(title, content, 'New Event')
+        except ImproperlyConfigured as e:
+            logger.error(e)
+            raise APIException(detail='The Gitlab API is not properly configured')
+        except Exception as e:
+            logger.error(e)
+            raise APIException(detail='Something went wrong while posting to the GitLab API')
+
+        return Response(result, status=status.HTTP_201_CREATED, headers=headers)

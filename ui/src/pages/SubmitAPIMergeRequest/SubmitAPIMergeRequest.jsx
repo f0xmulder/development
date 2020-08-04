@@ -6,7 +6,7 @@ import React from 'react'
 import CodeBlock from '../../components/CodeBlock/CodeBlock'
 
 const branchName = `data/{organization}-{api}`
-const fileName = `data/{organization}-{api}.json`
+const fileName = `data/apis/{organization}-{api}.json`
 const exampleJSON = `{
   "service_name": "Voorbeeld van een API naam",
   "description": "Voorbeeld van een omschrijving",

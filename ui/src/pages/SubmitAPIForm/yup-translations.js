@@ -11,6 +11,7 @@ export const mixed = {
   required: '${path} is verplicht',
   oneOf: '${path} moet een van deze waarden zijn: ${values}',
   notOneOf: '${path} mag niet een van de deze waarden zijn: ${values}',
+  notType: ({ path, type }) => `${path} moet van het type "${type}" zijn`,
 }
 
 export const string = {

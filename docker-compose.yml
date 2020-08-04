@@ -27,6 +27,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=appstore
-      - POSTGRES_PASSWORD=appstore
-      - POSTGRES_DB=appstore
+      - POSTGRES_USER=don
+      - POSTGRES_PASSWORD=don
+      - POSTGRES_DB=don

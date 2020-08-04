@@ -137,3 +137,18 @@ class APIBadge(models.Model):
 
     def __str__(self):
         return f'{self.api_id} <-> {self.badge}'
+
+
+class Event(models.Model):
+    title = models.TextField(max_length=MAX_TEXT_LENGTH)
+    start_date = models.DateTimeField(db_index=True)
+    location = models.TextField(max_length=MAX_TEXT_LENGTH)
+    registration_url = models.URLField(max_length=MAX_URL_LENGTH)
+
+    is_published = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['start_date']
