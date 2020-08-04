@@ -44,7 +44,7 @@ const APITerms = ({ apiAuthentication, termsOfUse }) => (
     </Term>
 
     <Term>
-      <Key>Helpdesk response</Key>
+      <Key>Helpdesk respons</Key>
       <Value>{supportResponseTimeString(termsOfUse.supportResponseTime)}</Value>
     </Term>
   </Wrapper>
