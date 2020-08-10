@@ -21,10 +21,10 @@ module.exports = {
         src: 'img/logo_don.png',
       },
       items: [
-        {href: 'https://developer.overheid.nl/overzicht', label: 'Overzicht', position: 'right'},
+        {href: 'https://developer.overheid.nl/apis', label: 'API\'s', position: 'right'},
         {to: 'developer', label: 'Docs', position: 'right'},
-        {href: 'https://developer.overheid.nl/api-toevoegen', label: 'API toevoegen', position: 'right'},
-        {href: 'https://developer.overheid.nl/over', label: 'Over', position: 'right'},
+        {href: 'https://developer.overheid.nl/apis/add/form', label: 'API toevoegen', position: 'right'},
+        {href: 'https://developer.overheid.nl/about', label: 'Over', position: 'right'},
       ],
     },
     footer: {
