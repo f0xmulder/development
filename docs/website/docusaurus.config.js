@@ -20,7 +20,7 @@ module.exports = {
         alt: 'developer.overheid.nl logo',
         src: 'img/logo_don.png',
       },
-      links: [
+      items: [
         {href: 'https://developer.overheid.nl/overzicht', label: 'Overzicht', position: 'right'},
         {to: 'developer', label: 'Docs', position: 'right'},
         {href: 'https://developer.overheid.nl/api-toevoegen', label: 'API toevoegen', position: 'right'},
