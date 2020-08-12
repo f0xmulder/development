@@ -30,6 +30,14 @@ class Enum {
 
     this.constructor.registeredEntries.push(this)
   }
+
+  equals(other) {
+    if (!(other instanceof Enum)) {
+      return false
+    }
+
+    return this.value === other.value
+  }
 }
 
 export class APIType extends Enum {

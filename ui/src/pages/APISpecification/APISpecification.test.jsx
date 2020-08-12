@@ -8,6 +8,8 @@ import { RedocStandalone } from 'redoc'
 
 import { flushPromises } from '../../test-helpers'
 
+import APIDetailsHeader from '../../components/APIDetailsHeader/APIDetailsHeader'
+import { EnvironmentType } from '../../models/enums'
 import APISpecification from './APISpecification'
 
 const apiResponseObject = {}
@@ -17,7 +19,7 @@ apiResponseObject.serviceName = 'Service Name'
 apiResponseObject.apiType = 'rest_json'
 apiResponseObject.environments = [
   {
-    name: 'production',
+    name: EnvironmentType.PRODUCTION,
     apiUrl: 'API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
@@ -70,6 +72,25 @@ describe('APISpecification', () => {
         expect(wrapper.find(RedocStandalone).prop('specUrl')).toEqual(
           '/api/apis/organization-service/production/specification',
         )
+      })
+    })
+
+    it('should render the APIDetailsHeader with the correct external spec url', () => {
+      const apiPromise = Promise.resolve(apiResponseObject)
+      const getApiDetailsByIdMock = jest.fn(() => apiPromise)
+
+      const wrapper = shallow(
+        <APISpecification
+          match={{
+            params: { id: 'organization-service', environment: 'production' },
+          }}
+          getApiDetailsById={getApiDetailsByIdMock}
+        />,
+      )
+      return apiPromise.then(() => {
+        expect(
+          wrapper.find(APIDetailsHeader).prop('externalSpecificationUrl'),
+        ).toEqual('Specification URL')
       })
     })
 

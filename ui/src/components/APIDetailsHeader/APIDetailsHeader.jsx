@@ -10,17 +10,36 @@ import { H1, H2 } from '../Headings/Headings'
 import PillBadge from '../PillBadge/PillBadge'
 import {
   StyledArrowIcon,
+  StyledExternalIcon,
   BackButton,
   BackLink,
+  SpecLink,
+  HeaderContainer,
 } from './APIDetailsHeader.styles'
 
-const APIDetailsHeader = ({
+export const getExternalSpecificationDescription = (url) => {
+  const text = 'Originele specificatie'
+
+  if (url.substring(url.length - 5).toLowerCase() === '.json') {
+    return text + ' (JSON)'
+  } else if (
+    url.substring(url.length - 4).toLowerCase() === '.yml' ||
+    url.substring(url.length - 5).toLowerCase() === '.yaml'
+  ) {
+    return text + ' (YAML)'
+  }
+
+  return text
+}
+
+export const APIDetailsHeader = ({
   previousName,
   serviceName,
   organizationName,
   apiType,
   history,
   backLink,
+  externalSpecificationUrl,
 }) => (
   <>
     {backLink ? (
@@ -33,7 +52,19 @@ const APIDetailsHeader = ({
       </BackButton>
     )}
 
-    <H1>{serviceName}</H1>
+    {externalSpecificationUrl ? (
+      <HeaderContainer>
+        <H1>{serviceName}</H1>
+        <SpecLink href={externalSpecificationUrl}>
+          <span>
+            {getExternalSpecificationDescription(externalSpecificationUrl)}
+          </span>
+          <StyledExternalIcon />
+        </SpecLink>
+      </HeaderContainer>
+    ) : (
+      <H1>{serviceName}</H1>
+    )}
     <H2>{organizationName}</H2>
     {apiType && <PillBadge>{apiType.label}</PillBadge>}
   </>
@@ -46,6 +77,7 @@ APIDetailsHeader.propTypes = {
   apiType: PropTypes.instanceOf(APIType),
   history: PropTypes.object,
   backLink: PropTypes.string,
+  externalSpecificationUrl: PropTypes.string,
 }
 
 export default withRouter(APIDetailsHeader)

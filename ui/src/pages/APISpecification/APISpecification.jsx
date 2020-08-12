@@ -37,6 +37,26 @@ class APISpecification extends Component {
     return `/api/apis/${id}/${environment}/specification`
   }
 
+  getExternalSpecificationUrl() {
+    const { environment } = this.props.match.params
+    if (!environment) {
+      return undefined
+    }
+
+    if (!this.state.loaded || this.state.error) {
+      return undefined
+    }
+
+    const environmentData = this.state.details.environments.find(
+      (env) => env.name.value === environment,
+    )
+    if (!environmentData) {
+      return undefined
+    }
+
+    return environmentData.specificationUrl
+  }
+
   loadDetailsForApi(id) {
     return this.props.getApiDetailsById(id).then(
       (details) => {
@@ -52,6 +72,7 @@ class APISpecification extends Component {
   render() {
     const { details, error, loaded } = this.state
     const specificationUrl = this.getSpecificationUrl()
+    const externalSpecUrl = this.getExternalSpecificationUrl()
 
     return (
       <Container>
@@ -66,6 +87,7 @@ class APISpecification extends Component {
                 previousName="API details"
                 serviceName={details.serviceName}
                 organizationName={details.organizationName}
+                externalSpecificationUrl={externalSpecUrl}
               />
               {specificationUrl && (
                 <RedocStandalone specUrl={specificationUrl} />

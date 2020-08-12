@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import ArrowLeftIcon from '../Icons/ArrowLeft'
+import { ReactComponent as ExternalIcon } from '../Icons/external-icon.svg'
 
 const ButtonStyling = css`
   display: flex;
@@ -30,4 +31,27 @@ export const BackLink = styled(Link)`
 
 export const StyledArrowIcon = styled(ArrowLeftIcon)`
   margin-right: 3px;
+`
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const SpecLink = styled.a`
+  text-decoration: none;
+  font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+
+  display: inline-flex;
+  align-items: center;
+  margin: ${(p) => `${p.theme.tokens.spacing07} 0 ${p.theme.tokens.spacing05}`};
+
+  & span {
+    line-height: 1 rem;
+  }
+`
+
+export const StyledExternalIcon = styled(ExternalIcon)`
+  height: 1rem;
+  margin-left: ${(p) => p.theme.tokens.spacing02};
 `
