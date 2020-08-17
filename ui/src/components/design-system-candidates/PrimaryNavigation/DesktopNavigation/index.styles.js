@@ -17,7 +17,9 @@ export const Container = styled(GridContainer)`
   `}
 `
 
-export const Nav = styled.nav``
+export const Nav = styled.nav`
+  margin-left: -${(p) => p.theme.tokens.spacing06};
+`
 
 export const List = styled.ul`
   display: flex;
@@ -26,7 +28,12 @@ export const List = styled.ul`
   list-style-type: none;
 `
 
-export const ListItem = styled.li`
+export const ListItem = styled.li.attrs({
+  // Axe complains that it can't analyse the contrast:
+  // "Element's background color could not be determined because
+  // it's partially obscured by another element"
+  className: 'axe-ignore',
+})`
   a {
     padding: ${(p) =>
       `${p.theme.tokens.spacing05} ${p.theme.tokens.spacing06}`};

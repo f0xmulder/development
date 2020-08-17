@@ -30,10 +30,6 @@ export const TopNavigationContainer = styled(Container)`
 `
 
 export const HeaderContainer = styled(Container)`
-  padding: 0
-    calc(
-      ${(p) => p.theme.containerPadding} + ${(p) => p.theme.tokens.spacing06}
-    );
   margin-top: ${(p) => p.theme.tokens.spacing07};
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 
