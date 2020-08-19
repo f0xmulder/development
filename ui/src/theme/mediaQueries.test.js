@@ -6,6 +6,12 @@ import media, { down, up, only } from './mediaQueries'
 jest.mock('@commonground/design-system', () => ({
   defaultTheme: {
     tokens: {},
+    breakpoints: {
+      xs: 0,
+      sm: 576,
+      md: 768,
+      lg: 992,
+    },
   },
 }))
 
