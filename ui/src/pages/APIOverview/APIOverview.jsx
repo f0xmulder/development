@@ -60,7 +60,7 @@ class APIOverview extends Component {
       )
   }
 
-  handleSearchChangeHandler(query) {
+  handleSearchHandler(query) {
     const { history } = this.props
 
     const urlParams = new URLSearchParams()
@@ -68,11 +68,18 @@ class APIOverview extends Component {
     history.push(`/apis?${urlParams}`)
   }
 
+  formSubmitHandler(event) {
+    event.preventDefault()
+
+    const input = event.target.query
+    this.handleSearchHandler(input.value)
+  }
+
   formChangeHandler(event) {
     event.preventDefault()
 
     const input = event.target.value
-    this.handleSearchChangeHandler(input)
+    this.handleSearchHandler(input)
   }
 
   fetchApiList() {
@@ -147,7 +154,10 @@ class APIOverview extends Component {
               Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
               Nederland aanbieden.
             </StyledSubtitle>
-            <form onChange={(event) => this.formChangeHandler(event)}>
+            <form
+              onSubmit={(event) => this.formSubmitHandler(event)}
+              onChange={(event) => this.formChangeHandler(event)}
+            >
               <label htmlFor="search-api" aria-label="Zoekterm">
                 <StyledSearch
                   inputProps={{
