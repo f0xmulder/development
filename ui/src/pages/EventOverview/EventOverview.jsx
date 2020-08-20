@@ -9,14 +9,27 @@ import Pagination from '../../components/Pagination/Pagination'
 import EventList from '../../components/EventList/EventList'
 import { modelFromAPIResponse } from '../../models/event'
 import { generateQueryParams } from '../../utils/uriHelpers'
+import { StyledErrorMessage } from '../APIOverview/APIOverview.styles'
+import { ResultsHeader } from '../../components/Overview/Overview'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
   StyledResultsContainer,
   StyledSubtitle,
-  StyledAddLink,
+  StyledAddLinkDesktop,
   StyledAddIcon,
 } from './EventOverview.styles'
+
+/* eslint-disable react/prop-types */
+const EventResultsHeader = ({ result }) => (
+  <ResultsHeader
+    totalResults={result && result.events && result.events.length}
+    objectName="Event"
+    objectNamePlural="Events"
+    addLinkTarget="events/add"
+  />
+)
+/* eslint-enable react/prop-types */
 
 class EventOverview extends Component {
   state = {
@@ -102,21 +115,25 @@ class EventOverview extends Component {
               Overheidsgerelateerde events voor developers.
             </StyledSubtitle>
           </div>
-          <Button as={StyledAddLink} to="events/add" variant="secondary">
+          <Button as={StyledAddLinkDesktop} to="events/add" variant="secondary">
             <StyledAddIcon />
             Event toevoegen
           </Button>
         </StyledOverviewHeader>
 
         {!loaded ? null : error ? (
-          <p data-test="error-message">
-            Er ging iets fout tijdens het ophalen van de events.
-          </p>
+          <>
+            <EventResultsHeader result={null} />
+            <StyledErrorMessage>
+              Er ging iets fout tijdens het ophalen van de events.
+            </StyledErrorMessage>
+          </>
         ) : (
           <StyledResultsContainer>
+            <EventResultsHeader result={result} />
             {result && result.events && result.events.length > 0 ? (
               <>
-                <EventList total={result.totalResults} events={result.events} />
+                <EventList events={result.events} />
                 <Pagination
                   currentPage={parseInt(page, 10)}
                   totalRows={result.totalResults}
@@ -125,9 +142,9 @@ class EventOverview extends Component {
                 />
               </>
             ) : (
-              <p data-test="no-events-available-message">
+              <StyledErrorMessage>
                 Er zijn (nog) geen events beschikbaar.
-              </p>
+              </StyledErrorMessage>
             )}
           </StyledResultsContainer>
         )}

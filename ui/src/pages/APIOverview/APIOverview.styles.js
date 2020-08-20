@@ -8,7 +8,7 @@ import Search from '../../components/design-system-candidates/Search'
 import mq from '../../theme/mediaQueries'
 
 import APIFilters from '../../components/APIFilters/APIFilters'
-import { ReactComponent as AddIcon } from '../../components/Icons/add_icon.svg'
+import AddIcon from '../../components/Icons/AddIcon'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
@@ -34,8 +34,12 @@ export const StyledSearch = styled(Search)`
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 `
 
-export const StyledAddLink = styled(Link)`
+export const StyledAddLinkDesktop = styled(Link)`
   align-self: flex-start;
+
+  ${mq.smDown`
+    display: none;
+  `}
 `
 
 export const StyledAddIcon = styled(AddIcon)`
@@ -65,4 +69,8 @@ export const StyledResultsContainer = styled.div`
   ${mq.smDown`
     margin-left: 0;
   `}
+`
+
+export const StyledErrorMessage = styled.p`
+  margin-top: ${(p) => p.theme.tokens.spacing05};
 `

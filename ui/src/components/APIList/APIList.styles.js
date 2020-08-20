@@ -6,13 +6,6 @@ import styled from 'styled-components'
 import Card from '../Card/Card'
 import APISummary from '../APISummary/APISummary'
 
-export const APIListHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-`
-
-export const TotalAPIs = styled.span``
-
 export const StyledCard = styled(Card)`
   margin-top: 1rem;
 `

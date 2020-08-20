@@ -5,24 +5,16 @@ import React from 'react'
 import { arrayOf, shape, string, number, instanceOf } from 'prop-types'
 import EventSummary from '../EventSummary/EventSummary'
 
-import { EventListHeader, StyledList, StyledListItem } from './EventList.styles'
+import { StyledList, StyledListItem } from './EventList.styles'
 
-const EventList = ({ total, events }) => (
-  <>
-    <EventListHeader>
-      <span data-test="total">
-        {total} {total === 1 ? 'Event' : 'Events'}
-      </span>
-    </EventListHeader>
-
-    <StyledList>
-      {events.map((event) => (
-        <StyledListItem key={event.id}>
-          <EventSummary {...event} />
-        </StyledListItem>
-      ))}
-    </StyledList>
-  </>
+const EventList = ({ events }) => (
+  <StyledList>
+    {events.map((event) => (
+      <StyledListItem key={event.id}>
+        <EventSummary {...event} />
+      </StyledListItem>
+    ))}
+  </StyledList>
 )
 
 EventList.propTypes = {
@@ -35,7 +27,6 @@ EventList.propTypes = {
       registrationUrl: string.isRequired,
     }),
   ),
-  total: number.isRequired,
 }
 
 export default EventList

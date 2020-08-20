@@ -8,8 +8,9 @@ import { Button } from '@commonground/design-system'
 import APIList from '../../components/APIList/APIList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
-
 import { generateQueryParams } from '../../utils/uriHelpers'
+import { ResultsHeader } from '../../components/Overview/Overview'
+
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -18,9 +19,21 @@ import {
   StyledResultsContainer,
   StyledSubtitle,
   StyledSearch,
-  StyledAddLink,
+  StyledAddLinkDesktop,
   StyledAddIcon,
+  StyledErrorMessage,
 } from './APIOverview.styles'
+
+/* eslint-disable react/prop-types */
+const APIResultsHeader = ({ result }) => (
+  <ResultsHeader
+    totalResults={result && result.apis && result.apis.length}
+    objectName="API"
+    objectNamePlural="API&#39;s"
+    addLinkTarget="apis/add"
+  />
+)
+/* eslint-enable react/prop-types */
 
 class APIOverview extends Component {
   state = {
@@ -170,16 +183,19 @@ class APIOverview extends Component {
               </label>
             </form>
           </div>
-          <Button as={StyledAddLink} to="apis/add" variant="secondary">
+          <Button as={StyledAddLinkDesktop} to="apis/add" variant="secondary">
             <StyledAddIcon />
             API toevoegen
           </Button>
         </StyledOverviewHeader>
 
         {!loaded ? null : error ? (
-          <p data-test="error-message">
-            Er ging iets fout tijdens het ophalen van de API&#39;s.
-          </p>
+          <StyledOverviewBody>
+            <APIResultsHeader result={null} />
+            <StyledErrorMessage>
+              Er ging iets fout tijdens het ophalen van de API&#39;s.
+            </StyledErrorMessage>
+          </StyledOverviewBody>
         ) : (
           <StyledOverviewBody>
             <StyledAPIFilters
@@ -188,9 +204,10 @@ class APIOverview extends Component {
               onSubmit={this.handleFilterChange}
             />
             <StyledResultsContainer>
+              <APIResultsHeader result={result} />
               {result && result.apis && result.apis.length > 0 ? (
                 <>
-                  <APIList total={result.totalResults} apis={result.apis} />
+                  <APIList apis={result.apis} />
                   <Pagination
                     currentPage={parseInt(page, 10)}
                     totalRows={result.totalResults}
@@ -199,9 +216,9 @@ class APIOverview extends Component {
                   />
                 </>
               ) : (
-                <p data-test="no-apis-available-message">
+                <StyledErrorMessage>
                   Er zijn (nog) geen API&#39;s beschikbaar.
-                </p>
+                </StyledErrorMessage>
               )}
             </StyledResultsContainer>
           </StyledOverviewBody>

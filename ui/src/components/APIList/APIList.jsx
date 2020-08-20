@@ -2,44 +2,34 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { arrayOf, shape, string, number } from 'prop-types'
+import { arrayOf, shape, string } from 'prop-types'
 
 import Card from '../Card/Card'
 import {
-  APIListHeader,
-  TotalAPIs,
   StyledCard,
   StyledList,
   StyledListItem,
   StyledAPISummary,
 } from './APIList.styles'
 
-const APIList = ({ total, apis }) => (
-  <>
-    <APIListHeader>
-      <TotalAPIs>
-        <span data-test="total">{total}</span> API&#39;s
-      </TotalAPIs>
-    </APIListHeader>
-
-    <StyledCard>
-      <Card.Body>
-        <StyledList>
-          {apis.map((api) => (
-            <StyledListItem key={api.id}>
-              <StyledAPISummary
-                id={api.id}
-                serviceName={api.serviceName}
-                organizationName={api.organizationName}
-                apiType={api.apiType}
-                scores={api.scores}
-              />
-            </StyledListItem>
-          ))}
-        </StyledList>
-      </Card.Body>
-    </StyledCard>
-  </>
+const APIList = ({ apis }) => (
+  <StyledCard>
+    <Card.Body>
+      <StyledList>
+        {apis.map((api) => (
+          <StyledListItem key={api.id}>
+            <StyledAPISummary
+              id={api.id}
+              serviceName={api.serviceName}
+              organizationName={api.organizationName}
+              apiType={api.apiType}
+              scores={api.scores}
+            />
+          </StyledListItem>
+        ))}
+      </StyledList>
+    </Card.Body>
+  </StyledCard>
 )
 
 APIList.propTypes = {
@@ -50,7 +40,6 @@ APIList.propTypes = {
       organizationName: string.isRequired,
     }),
   ),
-  total: number.isRequired,
 }
 
 export default APIList

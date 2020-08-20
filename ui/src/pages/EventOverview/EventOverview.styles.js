@@ -3,8 +3,9 @@
 //
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import mq from '../../theme/mediaQueries'
 
-import { ReactComponent as AddIcon } from '../../components/Icons/add_icon.svg'
+import AddIcon from '../../components/Icons/AddIcon'
 
 export const StyledOverviewPage = styled.div`
   display: flex;
@@ -14,19 +15,17 @@ export const StyledOverviewPage = styled.div`
   flex-wrap: wrap;
 `
 
-export const StyledOverviewHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
-
 export const StyledSubtitle = styled.p`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 `
 
-export const StyledAddLink = styled(Link)`
+export const StyledAddLinkDesktop = styled(Link)`
   align-self: flex-start;
+
+  ${mq.smDown`
+    display: none;
+  `}
 `
 
 export const StyledAddIcon = styled(AddIcon)`
@@ -37,4 +36,8 @@ export const StyledAddIcon = styled(AddIcon)`
 export const StyledResultsContainer = styled.div`
   flex: 1;
   margin-bottom: ${(p) => p.theme.tokens.spacing12};
+`
+
+export const StyledErrorMessage = styled.p`
+  margin-top: ${(p) => p.theme.tokens.spacing05};
 `
