@@ -45,6 +45,7 @@ const APIFilters = ({ initialValues, facets, onSubmit, ...props }) => {
   return (
     <>
       <StyledFilterButton
+        variant="secondary"
         onClick={() => setShowFilters(!showFilters)}
         showFilters={showFilters}
       >

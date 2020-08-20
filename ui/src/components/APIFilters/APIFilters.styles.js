@@ -16,6 +16,8 @@ export const StyledFilterButton = styled(Button)`
   `}
 
   & svg {
+    width: 16px;
+    height: 16px;
     margin-right: ${(p) => p.theme.tokens.spacing04};
   }
 `
