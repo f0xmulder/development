@@ -17,11 +17,6 @@ MobileNavigationItem.propTypes = {
   name: string.isRequired,
   Icon: elementType,
   testid: string,
-  type: string,
-}
-
-MobileNavigationItem.defaultProps = {
-  type: 'button',
 }
 
 export default MobileNavigationItem
