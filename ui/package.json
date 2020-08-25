@@ -9,13 +9,13 @@
     "debounce": "1.2.0",
     "formik": "2.1.5",
     "js-cookie": "2.2.1",
-    "mobx": "4.15.4",
+    "mobx": "4.15.6",
     "react": "16.13.1",
     "react-app-polyfill": "1.0.6",
     "react-dom": "16.13.1",
     "react-router-dom": "5.2.0",
     "react-transition-group": "4.4.1",
-    "redoc": "2.0.0-rc.36",
+    "redoc": "2.0.0-rc.40",
     "reflexbox": "4.0.6",
     "styled-components": "5.1.1",
     "yup": "0.29.3"
@@ -26,7 +26,7 @@
     "@testing-library/jest-dom": "5.10.1",
     "@testing-library/react": "10.2.1",
     "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.2",
+    "enzyme-adapter-react-16": "1.15.3",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-react": "1.1.7",
     "eslint-config-standard": "14.1.1",
@@ -37,10 +37,10 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-react": "7.20.5",
+    "eslint-plugin-react": "7.20.6",
     "eslint-plugin-standard": "4.0.1",
-    "prettier": "2.0.5",
-    "react-scripts": "3.4.1"
+    "prettier": "2.1.0",
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
