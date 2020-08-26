@@ -18,9 +18,6 @@ variables:
   image: golang:1.14.1
   before_script:
     - cd validate
-  tags:
-    - docker
-    - linux
 
 Test validate:
   extends: .validate
@@ -68,18 +65,12 @@ Lint and test API:
     expire_in: 1 month
     paths:
       - api/htmlcov
-  tags:
-    - docker
-    - linux
 
 ## UI ##
 .ui:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export UI_IMAGE=${IMAGE_PREFIX}/ui
-  tags:
-    - docker
-    - linux
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -103,9 +94,6 @@ Test and release UI:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export API_IMAGE=${IMAGE_PREFIX}/api
-  tags:
-    - docker
-    - linux
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -129,9 +117,6 @@ Release API:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
-  tags:
-    - docker
-    - linux
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -224,9 +209,6 @@ E2E tests:
       -e URL=${URL} \
       $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
       /bin/sh -c "./wait-for-http.sh $URL && npm test"
-  tags:
-    - docker
-    - linux
   only:
     - branches@commonground/developer.overheid.nl
   variables:
