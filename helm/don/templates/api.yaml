@@ -38,6 +38,8 @@ spec:
           envFrom:
             - secretRef:
                 name: {{.component}}
+            - secretRef:
+                name: gitlab-creds
           env:
             - name: ALLOWED_HOST
               value: "{{.Values.domain}}"
@@ -55,6 +57,8 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: DB_NAME
               value: "{{ .Values.postgresDb }}"
+            - name: LINKCHECKER_ENABLED_DEFAULT
+              value: "{{.Values.linkcheckerEnabledDefault}}"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -73,7 +77,4 @@ metadata: {{ include "don.common.metadata" . | nindent 2 }}
 type: Opaque
 data:
   SECRET_KEY: {{.Values.secretKey | b64enc | quote}}
-  GITLAB_URL: {{.Values.gitlabUrl | b64enc | quote}}
-  GITLAB_ACCESS_TOKEN: {{.Values.gitlabAccessToken | b64enc | quote}}
-  GITLAB_PROJECT_ID: {{.Values.gitlabProjectId | b64enc | quote}}
 {{ end }}

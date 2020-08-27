@@ -83,6 +83,12 @@ DATABASES = {
         'USER': os.getenv('DB_USER', 'don'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'don'),
         'NAME': os.getenv('DB_NAME', 'don'),
+    },
+    # Used only to dump migrations
+    # see linkchecker/testdata/generate_test_sql.sh
+    'sqlite3-empty': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
     }
 }
 
@@ -117,7 +123,7 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-        }
+        },
     }
 }
 

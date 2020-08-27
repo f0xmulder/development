@@ -1,0 +1,36 @@
+{{ with set . "component" "linkchecker" }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+spec:
+  schedule: {{.Values.linkcheckerSchedule | quote}}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels: {{ include "don.common.metadata-labels" . | nindent 12 }}
+        spec:
+          containers:
+          - name: linkchecker
+            image: {{.Values.linkcheckerImage | quote}}
+            imagePullPolicy: {{.Values.imagePullPolicy}}
+            envFrom:
+              - secretRef:
+                  name: gitlab-creds
+            env:
+              - name: DB_HOST
+                value: postgres
+              - name: DB_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-auth
+                    key: POSTGRES_USER
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-auth
+                    key: POSTGRES_PASSWORD
+              - name: DB_NAME
+                value: "{{ .Values.postgresDb }}"
+          restartPolicy: OnFailure
+{{ end }}

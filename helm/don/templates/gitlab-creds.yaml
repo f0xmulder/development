@@ -1,0 +1,10 @@
+{{ with set . "component" "gitlab-creds" }}
+apiVersion: v1
+kind: Secret
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+type: Opaque
+data:
+  GITLAB_URL: {{.Values.gitlabUrl | b64enc | quote}}
+  GITLAB_ACCESS_TOKEN: {{.Values.gitlabAccessToken | b64enc | quote}}
+  GITLAB_PROJECT_ID: {{.Values.gitlabProjectId | b64enc | quote}}
+{{ end }}

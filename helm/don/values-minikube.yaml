@@ -5,11 +5,13 @@ domain: don.minikube
 apiImage: don/api
 uiImage: don/ui
 docsImage: don/docs
+linkcheckerImage: don/linkchecker
 
 secretKey: veryverysecretkey
 
 storageType: "Ephemeral"
 loadTestData: true
+linkcheckerEnabledDefault: false
 testAdminPassword: "admin"
 
 replicas: 2

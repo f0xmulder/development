@@ -5,6 +5,7 @@ domain: don.minikube
 apiImage: registry.gitlab.com/commonground/developer.overheid.nl/api:master
 uiImage: registry.gitlab.com/commonground/developer.overheid.nl/ui:master
 docsImage: registry.gitlab.com/commonground/developer.overheid.nl/docs:master
+linkcheckerImage: registry.gitlab.com/commonground/developer.overheid.nl/linkchecker:master
 
 gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
@@ -17,6 +18,8 @@ postgresPvcName: postgres-data-volume
 
 storageType: Durable
 loadTestData: false
+linkcheckerEnabledDefault: true
+linkcheckerSchedule: "10 * * * *"
 testAdminUsername: "admin"
 testAdminEmail: "admin@example.com"
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 
 MAX_URL_LENGTH = 2000
 MAX_TEXT_LENGTH = 255
@@ -152,3 +153,105 @@ class Event(models.Model):
 
     class Meta:
         ordering = ['start_date']
+
+
+class URL(models.Model):
+    _last_probe = None
+
+    url = models.CharField(max_length=MAX_URL_LENGTH, unique=True)
+    # Todo: I expect that the number of uptime probes will become large, so we may want to cache
+    #  some statistics about each url so we don't have to scan all uptime probes for a page load.
+    #  However that can only be implemented once we know how we want to use the uptimes.
+
+    def last_probe(self):
+        if self._last_probe is None:
+            self._last_probe = self.urlprobe_set.order_by('-timestamp').first()
+        return self._last_probe
+
+    def last_ok(self):
+        last_probe = self.last_probe()
+
+        if last_probe is None:
+            return None
+        return last_probe.ok()
+    last_ok.boolean = True
+
+    def last_error(self):
+        last_probe = self.last_probe()
+
+        if last_probe is None:
+            return None
+        return last_probe.errmsg()
+
+    def used_in_api(self):
+        return format_html(';<br>\n'.join(
+            format_html('{} url for {}', link.field, link.api.api_id)
+            for link in self.api_links.all()
+        ))
+    used_in_api.admin_order_field = 'api_links__api__api_id'
+
+    def __str__(self):
+        return self.url
+
+
+class URLProbe(models.Model):
+    # Factor the url to a separate table to save space
+    url = models.ForeignKey(URL, on_delete=models.PROTECT)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    status_code = models.SmallIntegerField(null=True, blank=True)
+    error = models.TextField(blank=True)
+
+    def ok(self):
+        return self.status_code == 200
+    ok.boolean = True
+
+    def errmsg(self):
+        if self.ok():
+            return None
+        if self.status_code is not None:
+            return f'Error: HTTP status {self.status_code}'
+        return self.error
+
+    def used_in_api(self):
+        return format_html(';<br>\n'.join(
+            format_html('{} url for {}', link.field, link.api.api_id)
+            for link in self.url.api_links.all()
+        ))
+    used_in_api.admin_order_field = 'url__api_links__api__api_id'
+
+    def __str__(self):
+        status = 'ok' if self.ok() else self.errmsg()
+        return f'{self.url.url}: {status}'
+
+    class Meta:
+        indexes = [models.Index(fields=['url', '-timestamp'])]
+
+
+class URLApiLink(models.Model):
+    class FieldReference(models.TextChoices):
+        FORUM = 'forum'
+        CONTACT = 'contact'
+        PRODUCTION_API = 'production_api'
+        PRODUCTION_SPEC = 'production_spec'
+        PRODUCTION_DOC = 'production_doc'
+        ACCEPTANCE_API = 'acceptance_api'
+        ACCEPTANCE_SPEC = 'acceptance_spec'
+        ACCEPTANCE_DOC = 'acceptance_doc'
+        DEMO_API = 'demo_api'
+        DEMO_SPEC = 'demo_spec'
+        DEMO_DOC = 'demo_doc'
+
+    url = models.ForeignKey(URL, on_delete=models.CASCADE, related_name='api_links')
+    api = models.ForeignKey(API, on_delete=models.CASCADE, related_name='url_links')
+    field = models.CharField(max_length=MAX_ENUM_LENGTH, choices=FieldReference.choices)
+
+    def __str__(self):
+        return f'{self.field} url for {self.api}'
+
+
+class Config(models.Model):
+    variable = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
+    enabled = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.variable}: {"enabled" if self.enabled else "disabled"}'

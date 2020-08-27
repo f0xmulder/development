@@ -65,6 +65,22 @@ Lint and test API:
     paths:
       - api/htmlcov
 
+Verify test schema:
+  image: python:3.8
+  stage: test
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    TESTDATA: "../linkchecker/testdata"
+  cache:
+    paths:
+      - $CI_PROJECT_DIR/.cache/pip
+  before_script:
+    - cd api/
+    - pip3 install -r requirements-dev.txt
+  script:
+    - sh $TESTDATA/generate_test_sql.sh > current_testschema.sql
+    - diff -q $TESTDATA/testschema.sql current_testschema.sql
+
 ## UI ##
 .ui:
   before_script:
@@ -111,6 +127,45 @@ Release API:
         docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
 
+## Linkchecker ##
+.linkchecker:
+  before_script:
+    - cd linkchecker
+
+Test linkchecker:
+  extends: .linkchecker
+  image: golang:1.14.1
+  stage: test
+  script:
+    - go test ./... -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o coverage.html
+    - go tool cover -func=coverage.out
+  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - linkchecker/coverage.html
+
+Release Linkchecker:
+  extends: .linkchecker
+  stage: release
+  before_script:
+    - cd linkchecker
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export LINKCHECKER_IMAGE=${IMAGE_PREFIX}/linkchecker
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.1-dind
+  script:
+    - |
+        docker build \
+        --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
+        --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
+        . && \
+        docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
+        docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
+
 ## Docs ##
 .docs:
   before_script:
@@ -152,9 +207,11 @@ Deploy Review App:
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+        --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
         --set "storageType=Ephemeral" \
         --set "loadTestData=true" \
+        --set "linkcheckerEnabledDefault=false" \
         --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
         --set "replicas=1"
   environment:
@@ -232,6 +289,8 @@ Deploy production:
         --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
         --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+        --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
+        --set "linkcheckerEnabledDefault=true" \
         --set "domain=$DOMAIN"
   environment:
     name: prod
