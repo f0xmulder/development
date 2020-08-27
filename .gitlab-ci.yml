@@ -1,7 +1,6 @@
 image: docker:19.03.1
 
 stages:
-  - validate
   - test
   - release
   - review
@@ -34,7 +33,7 @@ Test validate:
 
 Validate API definitions:
   extends: .validate
-  stage: validate
+  stage: test
   script:
     - go run ./cmd/don-validate/main.go
 
