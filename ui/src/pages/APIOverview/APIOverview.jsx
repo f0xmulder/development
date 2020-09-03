@@ -13,7 +13,7 @@ import { generateQueryParams } from '../../utils/uriHelpers'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
-  StyledAPIListContainer,
+  StyledOverviewBody,
   StyledAPIFilters,
   StyledResultsContainer,
   StyledSubtitle,
@@ -181,7 +181,7 @@ class APIOverview extends Component {
             Er ging iets fout tijdens het ophalen van de API&#39;s.
           </p>
         ) : (
-          <StyledAPIListContainer>
+          <StyledOverviewBody>
             <StyledAPIFilters
               initialValues={queryParams}
               facets={result.facets}
@@ -204,7 +204,7 @@ class APIOverview extends Component {
                 </p>
               )}
             </StyledResultsContainer>
-          </StyledAPIListContainer>
+          </StyledOverviewBody>
         )}
       </StyledOverviewPage>
     )

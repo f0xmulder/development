@@ -43,7 +43,7 @@ export const StyledAddIcon = styled(AddIcon)`
   margin-right: ${(p) => p.theme.tokens.spacing04};
 `
 
-export const StyledAPIListContainer = styled.div`
+export const StyledOverviewBody = styled.div`
   display: flex;
   width: 100%;
 
