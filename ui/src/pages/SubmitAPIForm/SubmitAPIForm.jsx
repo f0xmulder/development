@@ -247,15 +247,6 @@ class SubmitAPIFormPage extends Component {
         {this.state.submitted ? (
           <p data-test="api-submitted-message">
             De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.
-            Blijf op de hoogte door het issue op GitLab in de gaten te houden.{' '}
-            <a
-              href={this.state.responseData.web_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {this.state.responseData.web_url}
-            </a>
-            .
           </p>
         ) : (
           <Formik

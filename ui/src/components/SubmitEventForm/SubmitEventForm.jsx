@@ -52,14 +52,6 @@ const SubmitEventForm = () => {
     return (
       <p data-test="event-submitted-message">
         Het event is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.
-        Blijf op de hoogte door het issue op GitLab in de gaten te houden.{' '}
-        <a
-          href={responseData.web_url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {responseData.web_url}
-        </a>
       </p>
     )
   }

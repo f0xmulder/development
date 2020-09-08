@@ -97,7 +97,6 @@ describe('SubmitAPI', () => {
         const responseData = {}
         /* eslint-disable camelcase */
         responseData.id = 1
-        responseData.web_url = 'http://gitlab.com/issues/1'
         /* eslint-enable camelcase */
 
         wrapper.setState({
@@ -109,13 +108,6 @@ describe('SubmitAPI', () => {
       it('should display the success message', () => {
         const apiSubmittedMessage = wrapper.find(
           '[data-test="api-submitted-message"]',
-        )
-        expect(apiSubmittedMessage.exists()).toBe(true)
-      })
-
-      it('should show the link to the issue', () => {
-        const apiSubmittedMessage = wrapper.find(
-          'a[href="http://gitlab.com/issues/1"]',
         )
         expect(apiSubmittedMessage.exists()).toBe(true)
       })
