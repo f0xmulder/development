@@ -14,6 +14,11 @@ export const StyledOverviewPage = styled.div`
   padding: 0 ${(p) => p.theme.containerPadding};
   flex-wrap: wrap;
 `
+export const StyledOverviewHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
 
 export const StyledSubtitle = styled.p`
   font-size: ${(p) => p.theme.tokens.fontSizeMedium};

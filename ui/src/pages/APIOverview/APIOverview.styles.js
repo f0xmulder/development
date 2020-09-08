@@ -59,11 +59,11 @@ export const StyledOverviewBody = styled.div`
 export const StyledAPIFilters = styled(APIFilters)`
   flex: 0 0 250px;
   margin-top: ${(p) => p.theme.tokens.spacing08};
+  margin-right: ${(p) => p.theme.tokens.spacing10};
 `
 
 export const StyledResultsContainer = styled.div`
   flex: 1;
-  margin-left: ${(p) => p.theme.tokens.spacing10};
   margin-bottom: ${(p) => p.theme.tokens.spacing12};
 
   ${mq.smDown`

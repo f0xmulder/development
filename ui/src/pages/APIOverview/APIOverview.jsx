@@ -10,7 +10,6 @@ import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
-
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -23,17 +22,6 @@ import {
   StyledAddIcon,
   StyledErrorMessage,
 } from './APIOverview.styles'
-
-/* eslint-disable react/prop-types */
-const APIResultsHeader = ({ result }) => (
-  <ResultsHeader
-    totalResults={result && result.apis && result.apis.length}
-    objectName="API"
-    objectNamePlural="API&#39;s"
-    addLinkTarget="apis/add"
-  />
-)
-/* eslint-enable react/prop-types */
 
 class APIOverview extends Component {
   state = {
@@ -158,6 +146,9 @@ class APIOverview extends Component {
     const queryParams = this.getQueryParams()
     const { page } = queryParams
 
+    const totalResults =
+      loaded && !error && result && result.apis ? result.apis.length : null
+
     return (
       <StyledOverviewPage>
         <StyledOverviewHeader>
@@ -189,40 +180,42 @@ class APIOverview extends Component {
           </Button>
         </StyledOverviewHeader>
 
-        {!loaded ? null : error ? (
-          <StyledOverviewBody>
-            <APIResultsHeader result={null} />
-            <StyledErrorMessage>
-              Er ging iets fout tijdens het ophalen van de API&#39;s.
-            </StyledErrorMessage>
-          </StyledOverviewBody>
-        ) : (
-          <StyledOverviewBody>
+        <StyledOverviewBody>
+          {!loaded || error ? null : (
             <StyledAPIFilters
               initialValues={queryParams}
               facets={result.facets}
               onSubmit={this.handleFilterChange}
             />
-            <StyledResultsContainer>
-              <APIResultsHeader result={result} />
-              {result && result.apis && result.apis.length > 0 ? (
-                <>
-                  <APIList apis={result.apis} />
-                  <Pagination
-                    currentPage={parseInt(page, 10)}
-                    totalRows={result.totalResults}
-                    rowsPerPage={result.rowsPerPage}
-                    onPageChangedHandler={this.handlePageChange}
-                  />
-                </>
-              ) : (
-                <StyledErrorMessage>
-                  Er zijn (nog) geen API&#39;s beschikbaar.
-                </StyledErrorMessage>
-              )}
-            </StyledResultsContainer>
-          </StyledOverviewBody>
-        )}
+          )}
+          <StyledResultsContainer>
+            <ResultsHeader
+              totalResults={totalResults}
+              objectName="API"
+              objectNamePlural="API&#39;s"
+              addLinkTarget="apis/add"
+            />
+            {!loaded ? null : error ? (
+              <StyledErrorMessage>
+                Er ging iets fout tijdens het ophalen van de API&#39;s.
+              </StyledErrorMessage>
+            ) : !result || !result.apis || result.apis.length === 0 ? (
+              <StyledErrorMessage>
+                Er zijn (nog) geen API&#39;s beschikbaar.
+              </StyledErrorMessage>
+            ) : (
+              <>
+                <APIList apis={result.apis} />
+                <Pagination
+                  currentPage={parseInt(page, 10)}
+                  totalRows={result.totalResults}
+                  rowsPerPage={result.rowsPerPage}
+                  onPageChangedHandler={this.handlePageChange}
+                />
+              </>
+            )}
+          </StyledResultsContainer>
+        </StyledOverviewBody>
       </StyledOverviewPage>
     )
   }

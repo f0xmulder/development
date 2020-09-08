@@ -9,7 +9,6 @@ import Pagination from '../../components/Pagination/Pagination'
 import EventList from '../../components/EventList/EventList'
 import { modelFromAPIResponse } from '../../models/event'
 import { generateQueryParams } from '../../utils/uriHelpers'
-import { StyledErrorMessage } from '../APIOverview/APIOverview.styles'
 import { ResultsHeader } from '../../components/Overview/Overview'
 import {
   StyledOverviewPage,
@@ -18,18 +17,8 @@ import {
   StyledSubtitle,
   StyledAddLinkDesktop,
   StyledAddIcon,
+  StyledErrorMessage,
 } from './EventOverview.styles'
-
-/* eslint-disable react/prop-types */
-const EventResultsHeader = ({ result }) => (
-  <ResultsHeader
-    totalResults={result && result.events && result.events.length}
-    objectName="Event"
-    objectNamePlural="Events"
-    addLinkTarget="events/add"
-  />
-)
-/* eslint-enable react/prop-types */
 
 class EventOverview extends Component {
   state = {
@@ -106,6 +95,9 @@ class EventOverview extends Component {
     const queryParams = this.getQueryParams()
     const { page } = queryParams
 
+    const totalResults =
+      loaded && !error && result && result.events ? result.events.length : null
+
     return (
       <StyledOverviewPage>
         <StyledOverviewHeader>
@@ -121,33 +113,33 @@ class EventOverview extends Component {
           </Button>
         </StyledOverviewHeader>
 
-        {!loaded ? null : error ? (
-          <>
-            <EventResultsHeader result={null} />
+        <StyledResultsContainer>
+          <ResultsHeader
+            totalResults={totalResults}
+            objectName="Event"
+            objectNamePlural="Events"
+            addLinkTarget="events/add"
+          />
+          {!loaded ? null : error ? (
             <StyledErrorMessage>
               Er ging iets fout tijdens het ophalen van de events.
             </StyledErrorMessage>
-          </>
-        ) : (
-          <StyledResultsContainer>
-            <EventResultsHeader result={result} />
-            {result && result.events && result.events.length > 0 ? (
-              <>
-                <EventList events={result.events} />
-                <Pagination
-                  currentPage={parseInt(page, 10)}
-                  totalRows={result.totalResults}
-                  rowsPerPage={result.rowsPerPage}
-                  onPageChangedHandler={this.handlePageChange}
-                />
-              </>
-            ) : (
-              <StyledErrorMessage>
-                Er zijn (nog) geen events beschikbaar.
-              </StyledErrorMessage>
-            )}
-          </StyledResultsContainer>
-        )}
+          ) : !result || !result.events || result.events.length === 0 ? (
+            <StyledErrorMessage>
+              Er zijn (nog) geen events beschikbaar.
+            </StyledErrorMessage>
+          ) : (
+            <>
+              <EventList events={result.events} />
+              <Pagination
+                currentPage={parseInt(page, 10)}
+                totalRows={result.totalResults}
+                rowsPerPage={result.rowsPerPage}
+                onPageChangedHandler={this.handlePageChange}
+              />
+            </>
+          )}
+        </StyledResultsContainer>
       </StyledOverviewPage>
     )
   }
