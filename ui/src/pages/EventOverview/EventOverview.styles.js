@@ -4,7 +4,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import mq from '../../theme/mediaQueries'
 import { ReactComponent as AddIcon } from '../../components/Icons/add_icon.svg'
 
 export const StyledOverviewPage = styled.div`
@@ -35,20 +34,7 @@ export const StyledAddIcon = styled(AddIcon)`
   margin-right: ${(p) => p.theme.tokens.spacing04};
 `
 
-export const StyledAPIListContainer = styled.div`
-  display: flex;
-  width: 100%;
-
-  ${mq.smDown`
-    flex-direction: column;
-  `}
-`
-
 export const StyledResultsContainer = styled.div`
   flex: 1;
   margin-bottom: ${(p) => p.theme.tokens.spacing12};
-
-  ${mq.smDown`
-    margin-left: 0;
-  `}
 `
