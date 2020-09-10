@@ -3,6 +3,7 @@
 //
 import React, { Component } from 'react'
 import { Formik } from 'formik'
+import Cookies from 'js-cookie'
 
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
@@ -202,6 +203,7 @@ class SubmitAPIFormPage extends Component {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
       },
     }).then((response) => {
       if (response.ok) {
