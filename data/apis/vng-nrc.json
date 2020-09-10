@@ -8,9 +8,9 @@
     "is_reference_implementation": true,
     "environments": [{
         "name": "production",
-        "api_url": "https://ref.tst.vng.cloud/nrc/api/v1/",
-        "specification_url": "https://ref.tst.vng.cloud/nrc/api/v1/schema/openapi.json",
-        "documentation_url": "https://ref.tst.vng.cloud/nrc/"
+        "api_url": "https://notificaties-api.vng.cloud/api/v1/",
+        "specification_url": "https://notificaties-api.vng.cloud/api/v1/schema/openapi.json",
+        "documentation_url": "https://notificaties-api.vng.cloud/"
     }],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
