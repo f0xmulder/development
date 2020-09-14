@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Subquery, OuterRef, Case, When, BooleanField, Value, CharField
+from django.db.models.functions import Concat
 from django.utils.html import format_html
 
 MAX_URL_LENGTH = 2000
@@ -163,25 +165,28 @@ class URL(models.Model):
     #  some statistics about each url so we don't have to scan all uptime probes for a page load.
     #  However that can only be implemented once we know how we want to use the uptimes.
 
+    class _DummyProbe:
+        timestamp = None
+        def ok(self): return None  # noqa
+        def errmsg(self): return None  # noqa
+
     def last_probe(self):
         if self._last_probe is None:
-            self._last_probe = self.urlprobe_set.order_by('-timestamp').first()
+            self._last_probe = self.urlprobe_set.order_by('-timestamp').first() \
+                or self._DummyProbe()
         return self._last_probe
 
-    def last_ok(self):
-        last_probe = self.last_probe()
+    def last_timestamp(self):
+        return self.last_probe().timestamp
+    last_timestamp.short_description = "Last probe timestamp"
 
-        if last_probe is None:
-            return None
-        return last_probe.ok()
+    def last_ok(self):
+        return self.last_probe().ok()
     last_ok.boolean = True
 
-    def last_error(self):
-        last_probe = self.last_probe()
-
-        if last_probe is None:
-            return None
-        return last_probe.errmsg()
+    def last_errmsg(self):
+        return self.last_probe().errmsg()
+    last_errmsg.short_description = "Last error message"
 
     def used_in_api(self):
         return format_html(';<br>\n'.join(
@@ -192,6 +197,20 @@ class URL(models.Model):
 
     def __str__(self):
         return self.url
+
+    # Called from apps.CoreConfig.ready()
+    # We cannot create querysets while models are being initialized, so these need to be set lazily
+    @staticmethod
+    def ready_hook():
+        last_probe_query = URLProbe.objects.filter(url=OuterRef('id')).order_by('-timestamp')[:1]
+
+        URL.last_timestamp.admin_order_field = Subquery(last_probe_query.values('timestamp'))
+
+        URL.last_ok.admin_order_field = Subquery(
+            last_probe_query.annotate(ok=URLProbe.ok.admin_order_field).values('ok'))
+
+        URL.last_errmsg.admin_order_field = Subquery(
+            last_probe_query.annotate(errmsg=URLProbe.errmsg.admin_order_field).values('errmsg'))
 
 
 class URLProbe(models.Model):
@@ -204,13 +223,25 @@ class URLProbe(models.Model):
     def ok(self):
         return self.status_code == 200
     ok.boolean = True
+    ok.admin_order_field = Case(
+        When(status_code__exact=200, then=True),
+        default=False,
+        output_field=BooleanField()
+    )
 
     def errmsg(self):
         if self.ok():
-            return None
+            return ''
         if self.status_code is not None:
             return f'Error: HTTP status {self.status_code}'
         return self.error
+    errmsg.admin_order_field = Case(
+        When(status_code__exact=200, then=Value('')),
+        When(status_code__isnull=False,
+             then=Concat(Value('Error: HTTP status '), 'status_code')),
+        default='error',
+        output_field=CharField()
+    )
 
     def used_in_api(self):
         return format_html(';<br>\n'.join(

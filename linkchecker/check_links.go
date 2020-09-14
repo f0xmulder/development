@@ -340,10 +340,10 @@ const newBrokenLinksQuery = `
 	GROUP BY url
 	HAVING count(*) >= ?
 		-- sqlite compat: "sum(cast(foo as integer)) = count(*)" is just "every(foo)" in standard sql
-		AND sum(cast(
+		AND sum(CAST(
 			-- if A then B === not(A) or B  -- SQL does not support a logical if/else, so I use 'not A or B' instead.
 			-- The last 24 probes failed
-			(not(rownum <= ?) OR NOT ok)
+			(NOT(rownum <= ?) OR NOT ok)
 			-- but the 25th succeeded (if it exist)
 			AND (NOT(rownum = ? + 1) OR ok)
 		AS INTEGER)) = count(*)

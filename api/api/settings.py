@@ -124,6 +124,10 @@ LOGGING = {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
         },
+        # Uncomment to log database queries:
+        # 'django.db.backends': {
+        #     'level': 'DEBUG',
+        # },
     }
 }
 

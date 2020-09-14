@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.db.models import BooleanField, Subquery, OuterRef, Case, When
+from django.db.models import Subquery, OuterRef, Count
 
 from .models import Badge, APIBadge, Event, URL, URLProbe, URLApiLink, Config
 
@@ -33,9 +33,7 @@ class URLLastOkFilter(admin.SimpleListFilter):
     _last_probe_ok = (URLProbe.objects
                       .filter(url=OuterRef('id'))
                       .order_by('-timestamp')[:1]
-                      .annotate(ok=Case(When(status_code__exact=200, then=True),
-                                        default=False,
-                                        output_field=BooleanField()))
+                      .annotate(ok=URLProbe.ok.admin_order_field)
                       .values('ok'))
 
     def queryset(self, request, queryset):
@@ -48,14 +46,41 @@ class URLLastOkFilter(admin.SimpleListFilter):
         return None  # required by pylint
 
     def lookups(self, request, model_admin):
-        return (('ok', 'ok'), ('error', 'error'), ('none', 'none'))
+        return (('ok', 'Ok'), ('error', 'Error'), ('none', 'No probes'))
+
+
+class URLInUseFilter(admin.SimpleListFilter):
+    title = "URL in use"
+    parameter_name = 'in_use'
+
+    def lookups(self, request, model_admin):
+        return (('all', 'All'), (None, 'In use'), ('unused', 'Unused'))
+
+    # Override to suppress the default 'All' option
+    def choices(self, changelist):
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == lookup,
+                'query_string': changelist.get_query_string({self.parameter_name: lookup}),
+                'display': title,
+            }
+
+    def queryset(self, request, queryset):
+        if self.value() == 'all':
+            return queryset
+        if self.value() is None:
+            return queryset.annotate(Count('api_links')).filter(api_links__count__gt=0)
+        if self.value() == 'unused':
+            return queryset.annotate(Count('api_links')).filter(api_links__count__exact=0)
+        return None  # required by pylint
 
 
 @admin.register(URL)
 class URLAdmin(admin.ModelAdmin):
-    # The last_ok and last_error cause one query per displayed url, so those are relatively slow
-    list_display = ['url', 'used_in_api', 'last_ok', 'last_error']
-    list_filter = [URLLastOkFilter, 'api_links__field', 'api_links__api__api_id', 'url']
+    # The last_ok and last_errmsg cause one query per displayed url, so those are relatively slow
+    list_display = ['url', 'used_in_api', 'last_timestamp', 'last_ok', 'last_errmsg']
+    list_filter = [URLLastOkFilter, URLInUseFilter, 'api_links__field', 'api_links__api__api_id',
+                   'url']
     inlines = [URLProbeInline]
 
     # An optimization for the admin list page. The prefetch doesn't help for the probe_set used in
@@ -69,7 +94,7 @@ class URLProbeOkFilter(admin.SimpleListFilter):
     parameter_name = 'ok'
 
     def lookups(self, request, model_admin):
-        return (('ok', 'ok'), ('error', 'error'))
+        return (('ok', 'Ok'), ('error', 'Error'))
 
     def queryset(self, request, queryset):
         if self.value() == 'ok':

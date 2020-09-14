@@ -136,8 +136,9 @@ You can see your changes at: http://don.minikube:30080/
 The linkchecker uses a mock database for its tests. If you make changes to the data model (using django migrations) you should also update the test schema:
 1. Make sure your python virtual environment is active
 1. Run `linkchecker/testdata/generate_test_sql.sh > linkchecker/testdata/testschema.sql`
+1. Commit the updated `testschema.sql`
 
-Don't worry: if you forget to do this, the pipeline fill fail as a friendly reminder :)
+Don't worry: if you forget to do this, the pipeline will fail as a friendly reminder :)
 
 ## Adding/updating dependencies
 
