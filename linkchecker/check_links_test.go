@@ -8,19 +8,18 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 const projectId = "18975726"
 
 func TestHTTPDisabled(t *testing.T) {
 	db := getTestDb(t)
-	defer db.Close()
+	defer clearDb(db, t)
 
 	_, err := db.Exec(`
-		INSERT INTO core_config VALUES (1, 'linkchecker', 0);
+		INSERT INTO core_config VALUES (1, 'linkchecker', false);
 		-- Drop table so we can detect if checkLinks tries to continue
-		DROP TABLE core_url
+		DROP TABLE core_url CASCADE
 	`)
 	failErrSql(t, err)
 
@@ -36,7 +35,8 @@ func TestHTTPDisabled(t *testing.T) {
 
 func TestHTTP(t *testing.T) {
 	db := getTestDb(t)
-	t.Log("running with sqlite version", sqliteVersion(db, t))
+	defer clearDb(db, t)
+	t.Log("running on database", dbVersion(db, t))
 
 	server := runTestServer(nullLogger{})
 	defer server.Close()
@@ -79,7 +79,7 @@ func setTestGitlabUrl(t *testing.T, url string) {
 }
 
 func loadHttpTestData(db *sqlx.DB, t *testing.T, server testServer) {
-	_, err := db.Exec(db.Rebind(`
+	_, err := db.Exec(`
 		INSERT INTO  core_api (api_id, api_authentication, api_type,
 		                       contact_email, contact_phone, contact_url,
 		                       description,
@@ -91,18 +91,18 @@ func loadHttpTestData(db *sqlx.DB, t *testing.T, server testServer) {
 		        'Test api',
 		        '', '',
 		        false,
-		        'DON developers', 'Linkchecker test api');
+		        'DON developers', 'Linkchecker test api')
+	`)
+	failErrSql(t, err)
 
-		INSERT INTO core_url (url)
-		VALUES (?);
-	`), getUnusedUrl(server))
+	_, err = db.Exec(db.Rebind(`INSERT INTO core_url (url) VALUES (?)`), getUnusedUrl(server))
 	failErrSql(t, err)
 
 	for _, path := range getTestUrls(server) {
-		_, err := db.Exec(`
+		_, err := db.Exec(db.Rebind(`
 			INSERT INTO core_environment (name, api_url, specification_url, documentation_url, api_id)
 			VALUES ('demo', ?, '', '', 'test-api')
-		`, path)
+		`), path)
 		failErrSql(t, err)
 		t.Log(path)
 	}

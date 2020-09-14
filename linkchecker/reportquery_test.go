@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"testing"
-
 	"github.com/jmoiron/sqlx"
+	"testing"
 )
 
 func loadLinkReportTestData(db *sqlx.DB, t *testing.T) {
@@ -39,34 +38,34 @@ func loadLinkReportTestData(db *sqlx.DB, t *testing.T) {
 		INSERT INTO core_url VALUES
 			(9, 'http://unused');
 
-        -- in sqlite a numeric value can be used as timestamp, it will be interpreted as a unix time
-        -- These are the oldest probes, with timestamp = 0
         INSERT INTO core_urlprobe VALUES
-            (0, 0, 400, '', 1), -- allfail
-            (1, 0, 200, '', 2), -- allok
-            (2, 0, 200, '', 3), -- startfail
-            (3, 0, 400, '', 4), -- endfail
+            (0, '2020-1-1', 400, '', 1), -- allfail
+            (1, '2020-1-1', 200, '', 2), -- allok
+            (2, '2020-1-1', 200, '', 3), -- startfail
+            (3, '2020-1-1', 400, '', 4), -- endfail
             -- no entries for firstfail/firstok
-            (4, 0, 400, '', 7), -- singlefail
-            (5, 0, 200, '', 8)  -- singleok
+            (4, '2020-1-1', 400, '', 7), -- singlefail
+            (5, '2020-1-1', 200, '', 8); -- singleok
         `)
 	failErrSql(t, err)
 	for i := 1; i <= FAILED_PROBES_TO_REPORT; i++ {
-		_, err = db.Exec(`
+		date := "2020-1-" + fmt.Sprint(i+1)
+		_, err = db.Exec(db.Rebind(`
             INSERT INTO core_urlprobe VALUES
                 (?, ?, 400, '', 1), -- allfail
                 (?, ?, 200, '', 2), -- allok
                 (?, ?, 400, '', 3), -- startfail
                 (?, ?, 200, '', 4), -- endfail
                 (?, ?, 400, '', 5), -- firstfail
-                (?, ?, 200, '', 6); -- firstok
-                `,
-			6*i, i,
-			6*i+1, i,
-			6*i+2, i,
-			6*i+3, i,
-			6*i+4, i,
-			6*i+5, i)
+                (?, ?, 200, '', 6) -- firstok
+                `),
+			6*i, date,
+			6*i+1, date,
+			6*i+2, date,
+			6*i+3, date,
+			6*i+4, date,
+			6*i+5, date,
+		)
 		failErrSql(t, err)
 	}
 }
@@ -109,13 +108,14 @@ func printTestData(db *sqlx.DB, t *testing.T) {
 
 func TestNewBrokenLinksQuery(t *testing.T) {
 	db := getTestDb(t)
+	defer clearDb(db, t)
 
-	t.Log("Sqlite version:", sqliteVersion(db, t))
+	t.Log("database:", dbVersion(db, t))
 	loadLinkReportTestData(db, t)
 	printTestData(db, t)
 
 	rows, err := db.Queryx(
-		rebind(db, newBrokenLinksQuery),
+		db.Rebind(newBrokenLinksQuery),
 		FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT,
 	)
 	failErrSql(t, err)

@@ -68,7 +68,13 @@ Lint and test API:
 Verify test schema:
   image: python:3.8
   stage: test
+  services:
+    - postgres:11.6-alpine
   variables:
+    DB_HOST: postgres
+    DB_USER: postgres
+    DB_PASSWORD: postgres
+    DB_NAME: postgres
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     TESTDATA: "../linkchecker/testdata"
   cache:
@@ -79,7 +85,12 @@ Verify test schema:
     - pip3 install -r requirements-dev.txt
   script:
     - sh $TESTDATA/generate_test_sql.sh > current_testschema.sql
-    - diff -q $TESTDATA/testschema.sql current_testschema.sql
+    - |
+      if ! diff -q $TESTDATA/testschema.sql current_testschema.sql
+      then
+        echo -e "\e[31mError: Non-matching test database schema! Update the test schema using linkchecker/testdata/generate_test_sql.sh\e[0m"
+        exit 1
+      fi
 
 ## UI ##
 .ui:
@@ -136,6 +147,15 @@ Test linkchecker:
   extends: .linkchecker
   image: golang:1.14.1
   stage: test
+  services:
+    - postgres:11.6-alpine
+  variables:
+    DB_HOST: postgres
+    DB_USER: postgres
+    DB_PASSWORD: postgres
+    DB_NAME: postgres
+    DB_TEST_NAME: postgres
+    SECRET_KEY: somethingverysecret
   script:
     - go test ./... -coverprofile coverage.out
     - go tool cover -html=coverage.out -o coverage.html

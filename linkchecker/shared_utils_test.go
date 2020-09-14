@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/jmoiron/sqlx"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 // args[0] or args[1] is expected to be an error. If it is nil, do nothing. If not, fail the test and include a
@@ -32,8 +31,21 @@ func isString(arg interface{}) bool {
 }
 
 func getTestDb(t *testing.T) *sqlx.DB {
-	db, err := sqlx.Connect("sqlite3", ":memory:")
-	failErr(t, err)
+	defer func() {
+		if err := recover(); err != nil {
+			t.Log("Unable to connect to test database, did you run create_test_db.sh?\nOriginal error:")
+			panic(err)
+		}
+	}()
+
+	DB_NAME = "don-test"
+	if dbName, ok := os.LookupEnv("DB_TEST_NAME"); ok {
+		os.Setenv("DB_NAME", dbName)
+	} else {
+		os.Unsetenv("DB_NAME")
+	}
+
+	db := getDb()
 
 	schemafile, err := os.Open("testdata/testschema.sql")
 	failErr(t, err)
@@ -47,8 +59,21 @@ func getTestDb(t *testing.T) *sqlx.DB {
 	return db
 }
 
-func sqliteVersion(db *sqlx.DB, t *testing.T) (sqliteversion string) {
-	err := db.Get(&sqliteversion, `SELECT sqlite_version()`)
+func clearDb(db *sqlx.DB, t *testing.T) {
+	sqlfile, err := os.Open("testdata/flush.sql")
+	failErr(t, err)
+	flushcmd, err := ioutil.ReadAll(sqlfile)
+	failErr(t, err)
+	sqlfile.Close()
+
+	_, err = db.Exec(string(flushcmd))
+	failErrSql(t, err)
+
+	db.Close()
+}
+
+func dbVersion(db *sqlx.DB, t *testing.T) (version string) {
+	err := db.Get(&version, `SELECT version()`)
 	failErrSql(t, err)
 	return
 }

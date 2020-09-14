@@ -106,13 +106,6 @@ func getDb() *sqlx.DB {
 	return db
 }
 
-func rebind(db *sqlx.DB, query string) string {
-	if db.DriverName() == "sqlite3" {
-		query = strings.ReplaceAll(query, "string_agg", "group_concat")
-	}
-	return db.Rebind(query)
-}
-
 func main() {
 	db := getDb()
 	defer db.Close()
@@ -297,7 +290,7 @@ func saveResults(db *sqlx.DB, total int, results <-chan result) {
 	fmt.Println("...Done")
 
 	// Remove trailing comma and translate to current DB
-	query := rebind(db, string(queryslice[:len(queryslice)-2]))
+	query := db.Rebind(string(queryslice[:len(queryslice)-2]))
 
 	if count == 0 {
 		log.Println("No urlprobes to save")
@@ -359,14 +352,13 @@ const newBrokenLinksQuery = `
 	WHERE rownum <= ? + 1
 	GROUP BY url
 	HAVING count(*) >= ?
-		-- sqlite compat: "sum(cast(foo as integer)) = count(*)" is just "every(foo)" in standard sql
-		AND sum(CAST(
+		AND every(
 			-- if A then B === not(A) or B  -- SQL does not support a logical if/else, so I use 'not A or B' instead.
 			-- The last 24 probes failed
 			(NOT(rownum <= ?) OR NOT ok)
 			-- but the 25th succeeded (if it exist)
 			AND (NOT(rownum = ? + 1) OR ok)
-		AS INTEGER)) = count(*)
+		)
 	`
 
 func reportNewBrokenLinks(db *sqlx.DB) {
@@ -375,7 +367,7 @@ func reportNewBrokenLinks(db *sqlx.DB) {
 		Errmsg    string
 		Link_info string
 	}
-	err := db.Select(&errorUrls, rebind(db, newBrokenLinksQuery),
+	err := db.Select(&errorUrls, db.Rebind(newBrokenLinksQuery),
 		FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT, FAILED_PROBES_TO_REPORT)
 	panicOnErr(err)
 
