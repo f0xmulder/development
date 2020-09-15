@@ -21,10 +21,9 @@ export const ResultsHeader = ({
   <StyledHeader>
     <TotalResults>
       {totalResults ? (
-        <>
-          <span data-test="total">{totalResults}</span>{' '}
-          {totalResults > 1 ? objectNamePlural : objectName}
-        </>
+        <span data-test="total">
+          {totalResults} {totalResults > 1 ? objectNamePlural : objectName}
+        </span>
       ) : null}
     </TotalResults>
     <StyledAddLinkMobile to={addLinkTarget}>
