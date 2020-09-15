@@ -86,7 +86,7 @@ func newTcpServer(logger testLogger, requestHandler func(c net.Conn)) *tcpServer
 			if err != nil {
 				if errors.Unwrap(err) != nil &&
 					errors.Unwrap(err).Error() == "use of closed network connection" {
-					// Server was closed
+					// Server was closed. There is apparently no other way to check this condition
 					return
 				}
 				logger.Log(err)
@@ -127,6 +127,10 @@ func (s testServer) getGitlabSubmissions() (submissions []string) {
 	submissions = handler.gitlabPosts
 	handler.gitlabPosts = []string{}
 	return
+}
+
+func (s testServer) accessCount(path string) int {
+	return s.httpServer.Config.Handler.(*handler).accessCount(path)
 }
 
 func runTestServer(logger testLogger) testServer {
@@ -231,6 +235,9 @@ func getHandlers(resp rw, req rq, handler *handler) map[string]func() {
 			} else {
 				Writefln(handler.logger, resp, "ok")
 			}
+		},
+		"/unused": func() {
+			Writefln(handler.logger, resp, "Error: this url should not be called")
 		},
 	}
 }

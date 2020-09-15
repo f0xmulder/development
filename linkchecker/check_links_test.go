@@ -67,6 +67,9 @@ func TestHTTP(t *testing.T) {
 	if probesCount != expectedProbesCount {
 		t.Errorf("Unexpected number of probes found, expected %d, found %d", expectedProbesCount, probesCount)
 	}
+	if ac := server.accessCount("/unused"); ac != 0 {
+		t.Errorf("Unused path was requested %d times", ac)
+	}
 }
 
 func setTestGitlabUrl(t *testing.T, url string) {
@@ -76,7 +79,7 @@ func setTestGitlabUrl(t *testing.T, url string) {
 }
 
 func loadHttpTestData(db *sqlx.DB, t *testing.T, server testServer) {
-	_, err := db.Exec(`
+	_, err := db.Exec(db.Rebind(`
 		INSERT INTO  core_api (api_id, api_authentication, api_type,
 		                       contact_email, contact_phone, contact_url,
 		                       description,
@@ -88,8 +91,11 @@ func loadHttpTestData(db *sqlx.DB, t *testing.T, server testServer) {
 		        'Test api',
 		        '', '',
 		        false,
-		        'DON developers', 'Linkchecker test api')
-	`)
+		        'DON developers', 'Linkchecker test api');
+
+		INSERT INTO core_url (url)
+		VALUES (?);
+	`), getUnusedUrl(server))
 	failErrSql(t, err)
 
 	for _, path := range getTestUrls(server) {
@@ -110,9 +116,16 @@ func getTestUrls(s testServer) []string {
 		strings.ReplaceAll(s.httpServer.URL, "http", "https") + "/invalidHttps"}
 
 	for path, _ := range getHandlers(nil, nil, &handler{}) {
+		if strings.HasSuffix(path, "/unused") {
+			continue
+		}
 		paths = append(paths, s.httpServer.URL+path)
 	}
 	return paths
+}
+
+func getUnusedUrl(s testServer) string {
+	return s.httpServer.URL + "/unused"
 }
 
 func alwaysFailingUrls(s testServer) []string {

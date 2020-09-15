@@ -186,10 +186,22 @@ func findUrls(db *sqlx.DB) {
 
 func checkAndSaveUrls(db *sqlx.DB) {
 	var urlcount int
-	err := db.Get(&urlcount, `SELECT COUNT(url) FROM core_url`)
+	err := db.Get(&urlcount, `
+		SELECT count(url)
+		FROM core_url
+		LEFT JOIN core_urlapilink link ON core_url.id = link.url_id
+		GROUP BY url
+		HAVING count(link.id) > 0
+	`)
 	panicOnErr(err)
 
-	rows, err := db.Queryx(`SELECT id, url FROM core_url`)
+	rows, err := db.Queryx(`
+		SELECT core_url.id, url
+		FROM core_url
+		LEFT JOIN core_urlapilink link ON core_url.id = link.url_id
+		GROUP BY core_url.id, url
+		HAVING count(link.id) > 0
+	`)
 	panicOnErr(err)
 
 	urls := make(chan dbUrl, QUERY_BUFFER)
@@ -305,7 +317,7 @@ const newBrokenLinksQuery = `
 				url.url,
 				string_agg(link.field || ' url for ' || api.api_id, '; ') link_info
 			FROM core_url url
-			LEFT JOIN core_urlapilink link ON url.id = link.url_id
+			INNER JOIN core_urlapilink link ON url.id = link.url_id
 			INNER JOIN core_api api ON link.api_id = api.id
 			GROUP BY url.id, url.url),
 

@@ -36,6 +36,9 @@ func loadLinkReportTestData(db *sqlx.DB, t *testing.T) {
 			SELECT 1, 'test_field', id
 			  FROM core_url;
 
+		INSERT INTO core_url VALUES
+			(9, 'http://unused');
+
         -- in sqlite a numeric value can be used as timestamp, it will be interpreted as a unix time
         -- These are the oldest probes, with timestamp = 0
         INSERT INTO core_urlprobe VALUES
@@ -88,7 +91,7 @@ func printTestData(db *sqlx.DB, t *testing.T) {
 	}
 	err = db.Select(&probes, `
         SELECT url, timestamp, status_code, error
-        FROM core_url LEFT JOIN core_urlprobe
+        FROM core_url INNER JOIN core_urlprobe
         ON core_url.id = core_urlprobe.url_id
         `)
 	failErrSql(t, err)
