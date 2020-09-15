@@ -233,12 +233,12 @@ class URLProbe(models.Model):
         if self.ok():
             return ''
         if self.status_code is not None:
-            return f'Error: HTTP status {self.status_code}'
+            return f'HTTP status {self.status_code}'
         return self.error
     errmsg.admin_order_field = Case(
         When(status_code__exact=200, then=Value('')),
         When(status_code__isnull=False,
-             then=Concat(Value('Error: HTTP status '), 'status_code')),
+             then=Concat(Value('HTTP status '), 'status_code')),
         default='error',
         output_field=CharField()
     )

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"sync"
@@ -187,11 +188,14 @@ func findUrls(db *sqlx.DB) {
 func checkAndSaveUrls(db *sqlx.DB) {
 	var urlcount int
 	err := db.Get(&urlcount, `
-		SELECT count(url)
-		FROM core_url
-		LEFT JOIN core_urlapilink link ON core_url.id = link.url_id
-		GROUP BY url
-		HAVING count(link.id) > 0
+		SELECT count(*)
+		FROM (
+			SELECT url
+			FROM core_url
+			LEFT JOIN core_urlapilink link ON core_url.id = link.url_id
+			GROUP BY url
+			HAVING count(link.id) > 0
+		) urls
 	`)
 	panicOnErr(err)
 
@@ -241,17 +245,21 @@ func checkUrls(urls <-chan dbUrl) <-chan result {
 func probeUrls(urls <-chan dbUrl, results chan<- result, waitgroup *sync.WaitGroup) {
 	defer waitgroup.Done()
 	httpClient := http.Client{Timeout: HTTP_TIMEOUT}
-	for url := range urls {
+	for u := range urls {
 		timestamp := time.Now()
-		resp, err := httpClient.Get(url.Url)
+		resp, err := httpClient.Get(u.Url)
 		if err != nil {
-			results <- result{url, timestamp, sql.NullInt32{}, &err}
+			unwrapped := err
+			if urlerr, ok := err.(*url.Error); ok {
+				unwrapped = urlerr.Err
+			}
+			results <- result{u, timestamp, sql.NullInt32{}, &unwrapped}
 			continue
 		}
 		resp.Body.Close()
 
 		results <- result{
-			url, timestamp, sql.NullInt32{Int32: int32(resp.StatusCode), Valid: true}, nil}
+			u, timestamp, sql.NullInt32{Int32: int32(resp.StatusCode), Valid: true}, nil}
 	}
 }
 
@@ -280,7 +288,7 @@ func saveResults(db *sqlx.DB, total int, results <-chan result) {
 			if result.status.Valid {
 				log.Println("Error: Get", result.url.Url, "returned status code", result.status.Int32)
 			} else {
-				log.Println("Error retrieving url:", (*result.err).Error())
+				log.Printf("Error retrieving %s: %s", result.url.Url, (*result.err).Error())
 			}
 		}
 
