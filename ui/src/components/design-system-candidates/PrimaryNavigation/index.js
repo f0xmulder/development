@@ -24,6 +24,10 @@ class PrimaryNavigation extends Component {
     this.handleWindowResize()
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.debouncedWindowResize)
+  }
+
   handleWindowResize = () => {
     this.setState({ isMobile: window.innerWidth < breakpoints.md })
   }
