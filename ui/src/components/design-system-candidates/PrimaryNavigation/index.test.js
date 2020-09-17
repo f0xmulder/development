@@ -2,12 +2,12 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { render, wait } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import theme from '../../../theme'
-import PrimaryNavigation from './index'
+import PrimaryNavigation, { DEBOUNCE_MILLIS } from './index'
 
 const navItems = [
   {
@@ -36,9 +36,6 @@ const navItems = [
 jest.mock('./MobileNavigation', () => () => <nav data-testid="mobile-nav" />)
 jest.mock('./DesktopNavigation', () => () => <nav data-testid="desktop-nav" />)
 
-// Because of the debounce
-jest.useFakeTimers()
-
 const defaultWindowSize = {
   x: global.innerWidth,
   y: global.innerHeight,
@@ -59,27 +56,51 @@ const createInstance = () =>
     </ThemeProvider>,
   )
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const waitForDebounce = () => sleep(DEBOUNCE_MILLIS + 1)
+
 describe('PrimaryNavigation', () => {
   afterEach(() => {
     global.innerWidth = defaultWindowSize.x
     global.innerHeight = defaultWindowSize.y
   })
 
-  it('should show mobile navigation on small screens', () => {
-    const { getByTestId } = createInstance()
+  it('should show mobile navigation if the screen is small', async () => {
     resizeWindow(360, 500)
 
-    wait(() => {
-      expect(getByTestId('mobile-nav')).toBeTruthy()
-    })
+    const { findByTestId } = createInstance()
+
+    const element = await findByTestId('mobile-nav')
+    expect(element).toBeTruthy()
   })
 
-  it('should show wide navigation on larger screens', () => {
-    const { getByTestId } = createInstance()
+  it('should show mobile navigation if the screen becomes small', async () => {
+    const { findByTestId } = createInstance()
+
+    resizeWindow(360, 500)
+    await waitForDebounce()
+
+    const element = await findByTestId('mobile-nav')
+    expect(element).toBeTruthy()
+  })
+
+  it('should desktop navigation if the screen is large', async () => {
     resizeWindow(1200, 800)
 
-    wait(() => {
-      expect(getByTestId('primary-nav')).toBeTruthy()
-    })
+    const { findByTestId } = createInstance()
+
+    const element = await findByTestId('desktop-nav')
+    expect(element).toBeTruthy()
+  })
+
+  it('should show desktop navigation if the screen becomes large', async () => {
+    const { findByTestId } = createInstance()
+
+    resizeWindow(1200, 800)
+    await waitForDebounce()
+
+    const element = await findByTestId('desktop-nav')
+    expect(element).toBeTruthy()
   })
 })

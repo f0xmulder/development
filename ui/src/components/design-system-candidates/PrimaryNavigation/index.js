@@ -9,6 +9,8 @@ import primaryNavigationTypes from './primaryNavigationTypes'
 import DesktopNavigation from './DesktopNavigation'
 import MobileNavigation from './MobileNavigation'
 
+export const DEBOUNCE_MILLIS = 150
+
 class PrimaryNavigation extends Component {
   state = {
     isMobile: true,
@@ -26,7 +28,7 @@ class PrimaryNavigation extends Component {
     this.setState({ isMobile: window.innerWidth < breakpoints.md })
   }
 
-  debouncedWindowResize = debounce(this.handleWindowResize, 150)
+  debouncedWindowResize = debounce(this.handleWindowResize, DEBOUNCE_MILLIS)
 
   render() {
     const { isMobile } = this.state
