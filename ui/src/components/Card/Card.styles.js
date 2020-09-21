@@ -20,10 +20,6 @@ export const StyledCard = styled.div`
 
 export const Body = styled.div`
   padding: ${(p) => p.theme.tokens.spacing06};
-
-  @media screen and (min-width: 768px) {
-    padding: ${(p) => p.theme.tokens.spacing06};
-  }
 `
 
 export const Footer = styled(Body)`
