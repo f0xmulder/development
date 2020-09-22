@@ -20,7 +20,9 @@ export const StyledHeader = styled.header`
   `}
 `
 
-export const TotalResults = styled.span``
+export const TotalResults = styled.span`
+  color: ${(p) => p.theme.tokens.colorPaletteGray700};
+`
 
 export const StyledAddLinkMobile = styled(Link)`
   display: inline-flex;
