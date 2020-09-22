@@ -4,9 +4,9 @@
 import React from 'react'
 import { arrayOf, shape, string } from 'prop-types'
 
-import Card from '../Card/Card'
 import {
   StyledCard,
+  StyledCardBody,
   StyledList,
   StyledListItem,
   StyledAPISummary,
@@ -14,7 +14,7 @@ import {
 
 const APIList = ({ apis }) => (
   <StyledCard>
-    <Card.Body>
+    <StyledCardBody>
       <StyledList>
         {apis.map((api) => (
           <StyledListItem key={api.id}>
@@ -28,7 +28,7 @@ const APIList = ({ apis }) => (
           </StyledListItem>
         ))}
       </StyledList>
-    </Card.Body>
+    </StyledCardBody>
   </StyledCard>
 )
 

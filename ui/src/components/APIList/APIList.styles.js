@@ -10,8 +10,12 @@ export const StyledCard = styled(Card)`
   margin-top: 1rem;
 `
 
+export const StyledCardBody = styled(Card.Body)`
+  padding: 0;
+`
+
 export const StyledList = styled.ul`
-  margin: 0 -${(p) => p.theme.tokens.spacing06};
+  margin: 0;
   padding: 0;
   list-style: none;
 `
@@ -20,11 +24,6 @@ export const StyledListItem = styled.li`
   &:not(:first-child) {
     border-top: 1px solid ${(p) => p.theme.tokens.colorPaletteGray100};
   }
-
-  &:first-child a {
-    padding-top: 0;
-  }
-`
 
 export const StyledAPISummary = styled(APISummary)`
   padding: ${(p) => p.theme.tokens.spacing06};
