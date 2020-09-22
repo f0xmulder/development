@@ -31,7 +31,11 @@ export const StyledSubtitle = styled.p`
 
 export const StyledSearch = styled(Search)`
   max-width: 495px;
-  margin-bottom: ${(p) => p.theme.tokens.spacing07};
+  margin-bottom: ${(p) => p.theme.tokens.spacing09};
+
+  ${mq.smDown`
+    margin-bottom: ${(p) => p.theme.tokens.spacing05};
+  `}
 `
 
 export const StyledAddLinkDesktop = styled(Link)`
