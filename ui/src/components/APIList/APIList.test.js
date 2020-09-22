@@ -19,7 +19,7 @@ describe('APIList', () => {
     ]
 
     wrapper = shallow(<APIList apis={apis} />)
-    apiElements = wrapper.find('Styled(APISummary)')
+    apiElements = wrapper.find('APISummary')
   })
 
   it('should show all available APIs', () => {
@@ -27,7 +27,7 @@ describe('APIList', () => {
   })
 
   it('should link to the API', () => {
-    const link = apiElements.find('Styled(APISummary)')
+    const link = apiElements.find('APISummary')
     expect(link.exists()).toBe(true)
   })
 })

@@ -14,6 +14,10 @@ export const StyledHeader = styled.header`
   ${mq.smDown`
     width: 100%;
   `}
+
+  ${mq.smUp`
+    padding-left: ${(p) => p.theme.tokens.spacing05};
+  `}
 `
 
 export const TotalResults = styled.span``

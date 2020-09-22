@@ -4,12 +4,12 @@
 import React from 'react'
 import { arrayOf, shape, string } from 'prop-types'
 
+import APISummary from '../APISummary/APISummary'
 import {
   StyledCard,
   StyledCardBody,
   StyledList,
   StyledListItem,
-  StyledAPISummary,
 } from './APIList.styles'
 
 const APIList = ({ apis }) => (
@@ -18,7 +18,7 @@ const APIList = ({ apis }) => (
       <StyledList>
         {apis.map((api) => (
           <StyledListItem key={api.id}>
-            <StyledAPISummary
+            <APISummary
               id={api.id}
               serviceName={api.serviceName}
               organizationName={api.organizationName}

@@ -16,7 +16,7 @@ export const StyledLink = styled(Link)`
     'service service service'
     'organisation organisation organisation'
     'pill pill grade';
-  padding: ${(p) => p.theme.tokens.spacing06};
+  padding: ${(p) => p.theme.tokens.spacing05};
   text-decoration: none;
 
   &:hover {

@@ -4,7 +4,6 @@
 import styled from 'styled-components'
 
 import Card from '../Card/Card'
-import APISummary from '../APISummary/APISummary'
 
 export const StyledCard = styled(Card)`
   margin-top: 1rem;
@@ -24,7 +23,4 @@ export const StyledListItem = styled.li`
   &:not(:first-child) {
     border-top: 1px solid ${(p) => p.theme.tokens.colorPaletteGray100};
   }
-
-export const StyledAPISummary = styled(APISummary)`
-  padding: ${(p) => p.theme.tokens.spacing06};
 `
