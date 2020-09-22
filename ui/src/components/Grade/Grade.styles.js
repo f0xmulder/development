@@ -46,7 +46,7 @@ export const StyledCircle = styled.div`
   top: 3px;
   left: 3px;
   border-radius: 50%;
-  background-color: ${(p) => p.theme.colorBackgroundSite};
+  background-color: ${(p) => p.theme.tokens.colorBackground};
 
   font-size: 13px;
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
