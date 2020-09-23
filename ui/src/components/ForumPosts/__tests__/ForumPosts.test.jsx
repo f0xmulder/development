@@ -5,7 +5,9 @@ import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { mount } from 'enzyme'
 import { act } from 'react-dom/test-utils'
+import { ThemeProvider } from 'styled-components'
 
+import theme from '../../../theme'
 import * as forumFunctions from '../forumFunctions/fetchForumPosts'
 import ForumPosts from '../ForumPosts'
 
@@ -32,7 +34,9 @@ describe('ForumPosts', () => {
     await act(() =>
       mount(
         <MemoryRouter>
-          <ForumPosts forum={forum} />
+          <ThemeProvider theme={theme}>
+            <ForumPosts forum={forum} />
+          </ThemeProvider>
         </MemoryRouter>,
       ),
     )

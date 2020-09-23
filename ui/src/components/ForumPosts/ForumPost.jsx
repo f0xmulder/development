@@ -5,8 +5,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ExternalIcon from '../Icons/External'
-import PostLink from './PostLink'
-import { Post, PostInfo } from './ForumPosts.styles'
+import { Post, PostInfo, StyledPostLink, LinkText } from './ForumPosts.styles'
 
 const showDate = (timestamp) => {
   const date = new Date(timestamp)
@@ -17,13 +16,13 @@ const ForumPost = ({ url, title, lastPostedAt, postsCount, slug }) => {
   const baseUrl = url.substring(0, url.indexOf('/c/'))
   return (
     <Post>
-      <PostLink
+      <StyledPostLink
         href={`${baseUrl}/t/${slug}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {title} <ExternalIcon />
-      </PostLink>
+        <LinkText>{title}</LinkText> <ExternalIcon />
+      </StyledPostLink>
       <PostInfo>
         {postsCount} {`bericht${postsCount > 1 ? 'en' : ''}`} - laatste bericht:{' '}
         {showDate(lastPostedAt)}

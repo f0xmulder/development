@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router'
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import { H2 } from '../Headings/Headings'
 import fetchForumPosts from './forumFunctions/fetchForumPosts'
 import ForumPostsView from './ForumPostsView'
 
@@ -31,7 +32,7 @@ const ForumPosts = ({ forum }) => {
 
   return (
     <>
-      <h3>Laatste forum onderwerpen</h3>
+      <H2>Forum</H2>
       {error && (
         <ErrorMessage level="warning">
           Fout bij het ophalen van forumcontent

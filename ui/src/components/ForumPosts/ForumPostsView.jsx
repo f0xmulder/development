@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import ExternalIcon from '../Icons/External'
 import ForumPost from './ForumPost'
-import { PostList, ForumLinkSection } from './ForumPosts.styles'
+import { PostList, ForumLinkSection, LinkText } from './ForumPosts.styles'
 
 const ForumPostsList = ({ url, posts }) => (
   <>
@@ -18,7 +18,7 @@ const ForumPostsList = ({ url, posts }) => (
 
     <ForumLinkSection>
       <a href={url} target="_blank" rel="noopener noreferrer">
-        Naar het forum <ExternalIcon />
+        <LinkText>Naar het forum</LinkText> <ExternalIcon />
       </a>
     </ForumLinkSection>
   </>
