@@ -8,6 +8,7 @@
     "core-js": "3.6.5",
     "debounce": "1.2.0",
     "formik": "2.1.5",
+    "javascript-time-ago": "2.0.13",
     "js-cookie": "2.2.1",
     "mobx": "4.15.6",
     "react": "16.13.1",

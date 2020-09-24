@@ -5,11 +5,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ExternalIcon from '../Icons/External'
+import { formatAsTimeAgo } from '../../utils/timeAgo'
 import { Post, PostInfo, StyledPostLink, LinkText } from './ForumPosts.styles'
 
 const showDate = (timestamp) => {
   const date = new Date(timestamp)
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  return formatAsTimeAgo(date)
 }
 
 const ForumPost = ({ url, title, lastPostedAt, postsCount, slug }) => {
