@@ -4,13 +4,13 @@
 import TimeAgo from 'javascript-time-ago'
 import nl from 'javascript-time-ago/locale/nl'
 
-TimeAgo.addLocale(nl)
-
 class TimeAgoFormatter {
   static instance = null
 
+  // Lazy-load the TimeAgo instance
   static getInstance() {
     if (this.instance === null) {
+      TimeAgo.addLocale(nl)
       this.instance = new TimeAgo('nl-NL')
     }
 
