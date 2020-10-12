@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import mq from '../../theme/mediaQueries'
 import { Container } from '../design-system-candidates/Grid'
 import { ReactComponent as GitlabIcon } from '../Icons/gitlab-black-icon.svg'
-import { ReactComponent as ExternalIcon } from '../Icons/external-icon.svg'
+import ExternalIcon from '../Icons/External'
 
 export const FeedbackArea = styled.div`
   background-color: ${(p) => p.theme.tokens.colorBackground};

@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import ArrowLeftIcon from '../Icons/ArrowLeft'
-import { ReactComponent as ExternalIcon } from '../Icons/external-icon.svg'
+import ExternalIcon from '../Icons/External'
 
 const ButtonStyling = css`
   display: flex;

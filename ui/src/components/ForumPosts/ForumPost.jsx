@@ -4,9 +4,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ExternalIcon from '../Icons/ExternalOld'
 import { formatAsTimeAgo } from '../../utils/timeAgo'
-import { Post, PostInfo, StyledPostLink, LinkText } from './ForumPosts.styles'
+import {
+  Post,
+  PostInfo,
+  StyledExternalIcon,
+  PostTitle,
+  PostBody,
+  StyledMessageIcon,
+  PostsCount,
+  LatestMessage,
+} from './ForumPosts.styles'
 
 const showDate = (timestamp) => {
   const date = new Date(timestamp)
@@ -16,18 +24,22 @@ const showDate = (timestamp) => {
 const ForumPost = ({ url, title, lastPostedAt, postsCount, slug }) => {
   const baseUrl = url.substring(0, url.indexOf('/c/'))
   return (
-    <Post>
-      <StyledPostLink
-        href={`${baseUrl}/t/${slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <LinkText>{title}</LinkText> <ExternalIcon />
-      </StyledPostLink>
-      <PostInfo>
-        {postsCount} {`bericht${postsCount > 1 ? 'en' : ''}`} - laatste bericht:{' '}
-        {showDate(lastPostedAt)}
-      </PostInfo>
+    <Post
+      href={`${baseUrl}/t/${slug}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <PostBody>
+        <PostTitle>{title}</PostTitle>
+        <PostInfo>
+          <StyledMessageIcon />
+          <PostsCount>{postsCount}</PostsCount>
+          <LatestMessage>
+            Laatste bericht: {showDate(lastPostedAt)}
+          </LatestMessage>
+        </PostInfo>
+      </PostBody>
+      <StyledExternalIcon />
     </Post>
   )
 }
