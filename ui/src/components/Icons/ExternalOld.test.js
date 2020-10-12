@@ -3,7 +3,7 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme'
-import External from './External'
+import External from './ExternalOld'
 
 test('exists', () => {
   const wrapper = shallow(<External />)

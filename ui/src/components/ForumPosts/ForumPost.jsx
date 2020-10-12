@@ -4,7 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ExternalIcon from '../Icons/External'
+import ExternalIcon from '../Icons/ExternalOld'
 import { formatAsTimeAgo } from '../../utils/timeAgo'
 import { Post, PostInfo, StyledPostLink, LinkText } from './ForumPosts.styles'
 

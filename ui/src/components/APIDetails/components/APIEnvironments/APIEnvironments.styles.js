@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import mq from '../../../../theme/mediaQueries'
 import CodeBlock from '../../../CodeBlock/CodeBlock'
-import External from '../../../Icons/External'
+import External from '../../../Icons/ExternalOld'
 
 export const Wrapper = styled.section``
 

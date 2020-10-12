@@ -7,7 +7,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
-import External from '../Icons/External'
+import External from '../Icons/ExternalOld'
 import {
   StyledDesignRulesUl,
   StyledDesignRulesLi,
