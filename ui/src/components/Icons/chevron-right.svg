@@ -1,9 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
-    <title>Artboard</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Path" fill="#212121" fill-rule="nonzero" points="13.6 12.4853333 7 5.88533333 8.88533333 4 17.3706667 12.4853333 8.88533333 20.9706667 7 19.0853333"></polygon>
-    </g>
-</svg>
+<!-- From the Remix Icon library: arrow-right-s-line -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>

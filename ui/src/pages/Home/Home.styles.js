@@ -27,6 +27,5 @@ export const StyledCard = styled(Card)`
 `
 
 export const StyledExternalIcon = styled(ExternalIcon)`
-  height: 20px;
   margin-left: ${(p) => p.theme.tokens.spacing04};
 `
