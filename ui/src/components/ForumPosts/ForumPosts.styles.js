@@ -19,8 +19,7 @@ export const PostListItem = styled.li`
 export const Post = styled.a`
   display: flex;
   align-items: center;
-  padding: ${(p) => p.theme.tokens.spacing06} ${(p) => p.theme.tokens.spacing02}
-    ${(p) => p.theme.tokens.spacing06} ${(p) => p.theme.tokens.spacing03};
+  padding: ${(p) => p.theme.tokens.spacing06} ${(p) => p.theme.tokens.spacing03};
   text-decoration: none;
   color: ${(p) => p.theme.colorText};
 
