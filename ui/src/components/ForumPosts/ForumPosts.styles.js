@@ -72,7 +72,7 @@ export const LatestMessage = styled.small`
 
 export const StyledExternalIcon = styled(ExternalIcon)`
   flex-shrink: 0;
-  margin: 0 ${(p) => p.theme.tokens.spacing05};
+  margin-left: ${(p) => p.theme.tokens.spacing05};
 `
 
 export const ForumLinkSection = styled.section`
