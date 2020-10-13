@@ -25,7 +25,7 @@ export const Post = styled.a`
   color: ${(p) => p.theme.colorText};
 
   &:hover {
-    background-color: ${(p) => p.theme.tokens.colorPaletteGray300};
+    background-color: ${(p) => p.theme.tokens.colorPaletteGray100};
   }
 
   &:hover,
