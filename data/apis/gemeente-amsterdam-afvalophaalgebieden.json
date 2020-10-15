@@ -1,4 +1,3 @@
-json
 {
     "description": "Vind de afval ophaaldagen voor de opgegeven locatie (x/y of lat/lon) in Amsterdam.",
     "organization_name": "Gemeente Amsterdam",
