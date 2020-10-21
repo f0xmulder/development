@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import mq from '../../../../theme/mediaQueries'
 import CodeBlock from '../../../CodeBlock/CodeBlock'
-import External from '../../../Icons/ExternalOld'
+import External from '../../../Icons/External'
 
 export const Wrapper = styled.section``
 
@@ -42,5 +42,5 @@ export const EnvUri = styled(CodeBlock)`
 `
 
 export const ExternalIcon = styled(External)`
-  margin-left: ${(p) => p.theme.tokens.spacing05};
+  margin-left: ${(p) => p.theme.tokens.spacing03};
 `

@@ -11,7 +11,7 @@ import {
 } from '../../utils/prettyDateTimes'
 import IconTime from '../Icons/Time'
 import IconPin from '../Icons/Pin'
-import ExternalIcon from '../Icons/ExternalOld'
+import ExternalIcon from '../Icons/External'
 import { StyledCard, StyledLink } from './EventSummary.styles'
 
 const EventSummary = ({ title, startDate, location, registrationUrl }) => (

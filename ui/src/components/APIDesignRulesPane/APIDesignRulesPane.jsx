@@ -7,12 +7,12 @@ import { useParams, useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
-import External from '../Icons/ExternalOld'
 import {
   StyledDesignRulesUl,
   StyledDesignRulesLi,
   StyledDesignRulesTitle,
   StyledLink,
+  ExternalIcon,
 } from './APIDesignRulesPane.styles'
 
 const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
@@ -57,7 +57,7 @@ const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {rule.title} <External />
+                    {rule.title} <ExternalIcon />
                   </StyledLink>
                 </StyledDesignRulesTitle>
                 <p>{rule.description}</p>

@@ -3,6 +3,7 @@
 //
 import styled from 'styled-components'
 
+import External from '../Icons/External'
 import availableIcon from './icons/available.svg'
 import unavailableIcon from './icons/unavailable.svg'
 
@@ -38,4 +39,8 @@ export const StyledDesignRulesTitle = styled.h4`
 
 export const StyledLink = styled.a`
   text-decoration: none;
+`
+
+export const ExternalIcon = styled(External)`
+  margin-left: ${(p) => p.theme.tokens.spacing03};
 `
