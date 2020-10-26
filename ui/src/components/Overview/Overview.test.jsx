@@ -6,7 +6,7 @@ import React from 'react'
 import { ResultsHeader } from './Overview'
 
 const TOTAL_SELECTOR = '[data-test="total"]'
-const LINK_SELECTOR = 'Styled(Link)'
+const LINK_SELECTOR = 'Styled(Button)'
 
 describe('ResultsHeader', () => {
   let wrapper
@@ -33,7 +33,7 @@ describe('ResultsHeader', () => {
     expect(wrapper.find(LINK_SELECTOR).exists()).toBe(true)
   })
 
-  it('should show the total with the singual name for a single result', () => {
+  it('should show the total with the single name for a single result', () => {
     wrapper.setProps({ totalResults: 1 })
     expect(wrapper.find(TOTAL_SELECTOR).text()).toEqual('1 Cactus')
   })

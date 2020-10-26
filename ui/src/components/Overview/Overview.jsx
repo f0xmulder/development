@@ -3,6 +3,7 @@
 //
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import theme from '../../theme'
 import {
@@ -26,7 +27,9 @@ export const ResultsHeader = ({
         </span>
       ) : null}
     </TotalResults>
-    <StyledAddLinkMobile to={addLinkTarget}>
+    {/* We should replace "forwardedAs" with "as" when this issue has been fixed:
+        https://gitlab.com/commonground/core/design-system/-/issues/29 */}
+    <StyledAddLinkMobile forwardedAs={Link} to={addLinkTarget} variant="link">
       <StyledAddIcon color={theme.colorTextLink} />
       {objectName} toevoegen
     </StyledAddLinkMobile>
