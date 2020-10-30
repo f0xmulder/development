@@ -53,7 +53,7 @@ To sync the API JSON files to your database, run:
 python manage.py sync_apis
 ```
 
-You can now start the Django API (develpoment version) with:
+You can now start the Django API (development version) with:
 
 ```bash
 python manage.py runserver

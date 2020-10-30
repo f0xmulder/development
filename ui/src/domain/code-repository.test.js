@@ -1,0 +1,86 @@
+// Copyright © VNG Realisatie 2020
+// Licensed under the EUPL
+//
+import CodeRepository from './code-repository'
+
+const codeMock = {
+  url: 'https://gitlab.com/commonground/developer.overheid.nl',
+}
+
+const codeListMock = {
+  results: [codeMock, codeMock],
+}
+
+describe('Code repository', () => {
+  describe('Getting a list of all code', () => {
+    beforeEach(() => {
+      jest.spyOn(global, 'fetch').mockImplementation(() =>
+        Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve(codeListMock),
+        }),
+      )
+    })
+
+    afterEach(() => global.fetch.mockRestore())
+
+    it('should return a list of code', async () => {
+      const result = await CodeRepository.getAll('1')
+      expect(result).toEqual(codeListMock)
+      expect(global.fetch).toHaveBeenCalledWith('/api/code?page=1')
+    })
+  })
+
+  describe('Creating a code project', () => {
+    beforeEach(() => {
+      jest.spyOn(global, 'fetch').mockImplementation(() =>
+        Promise.resolve({
+          ok: true,
+          status: 201,
+          json: () => Promise.resolve(codeMock),
+        }),
+      )
+    })
+
+    afterEach(() => global.fetch.mockRestore())
+
+    it('should create a code project', async () => {
+      const result = await CodeRepository.create(codeMock)
+      expect(result).toEqual(codeMock)
+      expect(global.fetch).toHaveBeenCalledWith('/api/code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': undefined,
+        },
+        body: JSON.stringify(codeMock),
+      })
+    })
+  })
+
+  describe('Error while creating a code project', () => {
+    beforeEach(() => {
+      jest.spyOn(global, 'fetch').mockImplementation(() =>
+        Promise.resolve({
+          ok: false,
+          status: 500,
+        }),
+      )
+    })
+
+    afterEach(() => global.fetch.mockRestore())
+
+    it('should throw an error', async () => {
+      let error
+
+      try {
+        await CodeRepository.create(codeMock)
+      } catch (e) {
+        error = e
+      }
+
+      expect(error).toEqual(new Error(''))
+    })
+  })
+})

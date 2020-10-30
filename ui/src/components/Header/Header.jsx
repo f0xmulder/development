@@ -5,6 +5,7 @@ import React from 'react'
 
 import IconHome from './assets/IconHome'
 import IconPresent from './assets/IconPresent'
+import IconCode from './assets/IconCode'
 import IconEvents from './assets/IconEvents'
 import IconInfo from './assets/IconInfo'
 import {
@@ -38,6 +39,12 @@ const Header = () => {
       'data-testid': 'nav-apis',
     },
     {
+      name: 'Code',
+      Icon: IconCode,
+      to: '/code',
+      'data-testid': 'nav-code',
+    },
+    {
       name: 'Events',
       Icon: IconEvents,
       to: '/events',
@@ -62,7 +69,7 @@ const Header = () => {
             <StyledNavigationListItem>
               <StyledTopNavigationAnchor href="https://gitlab.com/commonground/developer.overheid.nl">
                 <StyledGitlabIcon />
-                Gitlab
+                GitLab
               </StyledTopNavigationAnchor>
             </StyledNavigationListItem>
           </StyledNavigationList>

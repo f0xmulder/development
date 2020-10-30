@@ -78,6 +78,46 @@ class API(models.Model):
         return self.api_id
 
 
+class Code(models.Model):
+    class Source(models.TextChoices):
+        GITLAB = 'GitLab repository'
+        GITHUB = 'GitHub repository'
+        GITLAB_SNIPPET = 'GitLab snippet'
+        GITHUB_GIST = 'GitHub gist'
+
+    source = models.CharField(
+        max_length=MAX_ENUM_LENGTH,
+        choices=Source.choices
+    )
+    owner_name = models.CharField(max_length=MAX_TEXT_LENGTH)
+    name = models.CharField(max_length=MAX_TEXT_LENGTH)
+    url = models.URLField(max_length=MAX_URL_LENGTH, unique=True)
+    description = models.TextField()
+    last_change = models.DateTimeField(db_index=True)
+    stars = models.IntegerField(null=True)
+
+    programming_languages = models.ManyToManyField(
+        'ProgrammingLanguage',
+        related_name='code',
+    )
+
+    related_apis = models.ManyToManyField(
+        'API',
+        through='CodeAPI',
+        related_name='related_code',
+    )
+
+    def __str__(self):
+        return f'{self.owner_name}/{self.name}'
+
+
+class ProgrammingLanguage(models.Model):
+    name = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Environment(models.Model):
     class EnvironmentType(models.TextChoices):
         PRODUCTION = 'production'
@@ -140,6 +180,18 @@ class APIBadge(models.Model):
 
     def __str__(self):
         return f'{self.api_id} <-> {self.badge}'
+
+
+class CodeAPI(models.Model):
+    code = models.ForeignKey(Code, on_delete=models.CASCADE)
+    api = models.ForeignKey(
+        API,
+        to_field='api_id',
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return f'{self.api.api_id} <-> {self.code.owner_name}/{self.code.name}'
 
 
 class Event(models.Model):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Subquery, OuterRef, Count
 
-from .models import Badge, APIBadge, Event, URL, URLProbe, URLApiLink, Config
+from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config
 
 
 @admin.register(Badge)
@@ -17,6 +17,12 @@ class APIBadgeAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ['start_date', 'title', 'is_published']
+
+
+@admin.register(Code)
+class CodeAdmin(admin.ModelAdmin):
+    list_display_links = ['name']
+    list_display = ['source', 'owner_name', 'name', 'url']
 
 
 class URLProbeInline(admin.TabularInline):

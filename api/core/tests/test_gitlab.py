@@ -28,8 +28,11 @@ class Gitlab(TestCase):
     @patch('requests.post')
     @override_settings(GITLAB=SETTINGS)
     def test_create_issue(self, mock_post):
-        mock_post.return_value = mock_response(200, data='some data',
-                                               content_type='application/json')
+        mock_post.return_value = mock_response(
+            200,
+            data='["some data"]',
+            content_type='application/json'
+        )
 
-        response = create_issue('title', 'body', 'label')
-        self.assertEqual(response.content, b'some data')
+        response_json = create_issue('title', 'body', 'label')
+        self.assertEqual(response_json, ["some data"])

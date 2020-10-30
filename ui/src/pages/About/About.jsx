@@ -25,7 +25,7 @@ const About = () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            melding op Gitlab
+            melding op GitLab
           </a>{' '}
           doorgegeven worden.
         </p>
@@ -60,7 +60,7 @@ const About = () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            Gitlab
+            GitLab
           </a>
           .
         </p>

@@ -53,7 +53,7 @@ const SubmitAPIMergeRequest = () => (
   <div>
     <p>
       Maak op{' '}
-      <a href="https://gitlab.com/commonground/developer.overheid.nl">Gitlab</a>{' '}
+      <a href="https://gitlab.com/commonground/developer.overheid.nl">GitLab</a>{' '}
       een fork van de repository onder een eigen account en maak een nieuwe
       branch aan met de naam:
     </p>

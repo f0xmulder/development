@@ -19,21 +19,17 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
-from core.models import API, Relation, Environment, Event
+from core.code import parse_code
+from core.exceptions import APIStatusCodeException
+from core.models import API, Relation, Environment, Event, Code, ProgrammingLanguage
 from core.pagination import StandardResultsSetPagination
-from core.search import PrefixedPhraseQuery
-from core.serializers import APISerializer, EventSerializer
+from core.search import get_facet_filters, get_search_filter
+from core.serializers import APISerializer, EventSerializer, CodeSerializer, CodeSubmitSerializer
 from core.gitlab import create_issue
 
 REQUEST_TIMEOUT_SECONDS = 10
 
 logger = logging.getLogger(__name__)
-
-
-class APIProxyException(APIException):
-    def __init__(self, detail, status_code):
-        self.status_code = status_code
-        super().__init__(detail=detail)
 
 
 class APIViewSet(RetrieveModelMixin,
@@ -43,11 +39,12 @@ class APIViewSet(RetrieveModelMixin,
     pagination_class = StandardResultsSetPagination
     lookup_field = 'api_id'
 
-    search_vector = (
-        SearchVector('service_name', config='dutch') +
-        SearchVector('description', config='dutch') +
-        SearchVector('organization_name', config='dutch') +
-        SearchVector('api_type', config='dutch')
+    search_vector = SearchVector(
+        'service_name',
+        'description',
+        'organization_name',
+        'api_type',
+        config='dutch'
     )
     supported_facets = ['organization_name', 'api_type']
 
@@ -58,8 +55,8 @@ class APIViewSet(RetrieveModelMixin,
         facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
         search_text = request.query_params.get('q', '')
 
-        facet_filters = self.get_facet_filters(facet_inputs)
-        search_filter = self.get_search_filter(search_text)
+        facet_filters = get_facet_filters(facet_inputs)
+        search_filter = get_search_filter(search_text)
 
         results = queryset \
             .filter(*facet_filters.values(), search_filter) \
@@ -67,23 +64,6 @@ class APIViewSet(RetrieveModelMixin,
         facets = self.get_facets(queryset, facet_filters, search_filter)
 
         return self.get_response(results, facets)
-
-    @staticmethod
-    def get_facet_filters(facet_inputs):
-        facet_filters = {}
-        for facet, selected_values in facet_inputs.items():
-            facet_filters[facet] = reduce(lambda query, val, f=facet: query | Q(**{f: val}),
-                                          selected_values,
-                                          Q())
-        return facet_filters
-
-    @staticmethod
-    def get_search_filter(search_text):
-        search_filter = Q()
-        if search_text:
-            search_filter = Q(searchable=PrefixedPhraseQuery(search_text, config='dutch'))
-
-        return search_filter
 
     @staticmethod
     def get_facets(queryset, facet_filters, search_filter):
@@ -156,12 +136,12 @@ def proxy_url(url, name):
     try:
         response = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
         if response.status_code != status.HTTP_200_OK:
-            raise APIProxyException(
+            raise APIStatusCodeException(
                 detail=f'Failed to retrieve {name} URL at {url} (response code is not 200 OK): '
                        f'{response.status_code}: {response.text}',
                 status_code=status.HTTP_502_BAD_GATEWAY)
     except Timeout as e:
-        raise APIProxyException(
+        raise APIStatusCodeException(
             detail=f'Failed to retrieve {name} URL at {url} due to timeout',
             status_code=status.HTTP_504_GATEWAY_TIMEOUT) from e
     except ValueError:
@@ -169,8 +149,8 @@ def proxy_url(url, name):
         raise
     except RequestException as e:
         # A different RequestException indicates an error at the remote end
-        raise APIProxyException(detail=f'Failed to retrieve {name} URL: {e}',
-                                status_code=status.HTTP_502_BAD_GATEWAY) from e
+        raise APIStatusCodeException(detail=f'Failed to retrieve {name} URL: {e}',
+                                     status_code=status.HTTP_502_BAD_GATEWAY) from e
 
     # Note: Our security middleware inserts X-Content-Type-Options=nosniff here.
     # Our current uses don't depend on the content type header, so sending nosniff unconditionally
@@ -242,3 +222,58 @@ class EventViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
             raise APIException(detail='Something went wrong while posting to the GitLab API')
 
         return Response(result, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class CodeViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
+    serializer_class = CodeSerializer
+    pagination_class = StandardResultsSetPagination
+    lookup_field = 'url'
+
+    search_vector = SearchVector('owner_name', 'name', config='dutch')
+
+    supported_facets = ['programming_languages']
+
+    def get_queryset(self):
+        return Code.objects.all().order_by(F('stars').desc(nulls_last=True))
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset()) \
+            .annotate(searchable=self.search_vector)
+
+        facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
+        search_text = self.request.query_params.get('q', '')
+
+        facet_filters = get_facet_filters(facet_inputs)
+        search_filter = get_search_filter(search_text)
+
+        results = queryset \
+            .filter(*facet_filters.values(), search_filter).distinct()
+
+        return self.get_response(results)
+
+    def get_response(self, results_queryset):
+        page = self.paginate_queryset(results_queryset)
+        serializer = self.get_serializer(page, many=True)
+        paginated_response = self.get_paginated_response(serializer.data)
+
+        response_data = paginated_response.data.copy()
+        response_data['programmingLanguages'] = [
+            {'id': x.id, 'name': x.name} for x in ProgrammingLanguage.objects.all().order_by(
+                'name'
+            )
+        ]
+        return Response(response_data)
+
+    def create(self, request, *args, **kwargs):
+        request.data['related_apis'] = [
+            {'api_id': x['value']} for x in request.data['related_apis']
+        ]
+        serializer = CodeSubmitSerializer(data=request.data)
+        if not serializer.is_valid():
+            # The exact URL is already in the database
+            raise APIStatusCodeException("de URL is eerder toegevoegd",
+                                         status_code=status.HTTP_409_CONFLICT)
+
+        parse_code(serializer.validated_data)
+
+        return Response('Code toegevoegd', status=status.HTTP_201_CREATED)

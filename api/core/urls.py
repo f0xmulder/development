@@ -12,5 +12,6 @@ urlpatterns = [
 apiRouter = routers.DefaultRouter(trailing_slash=False)
 apiRouter.register(r'api/apis', views.APIViewSet, basename='apis')
 apiRouter.register(r'api/events', views.EventViewSet, basename='events')
+apiRouter.register(r'api/code', views.CodeViewSet, basename='code')
 
 urlpatterns += apiRouter.urls

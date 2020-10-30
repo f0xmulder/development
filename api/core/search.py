@@ -1,4 +1,6 @@
+from functools import reduce
 from django.contrib.postgres.search import SearchQuery
+from django.db.models import Q
 
 
 # Based on https://www.thetopsites.net/article/50571311.shtml
@@ -29,3 +31,20 @@ class PrefixedPhraseQuery(SearchQuery):
             template = '!!({})'.format(template)
 
         return template, params
+
+
+def get_facet_filters(facet_inputs):
+    facet_filters = {}
+    for facet, selected_values in facet_inputs.items():
+        facet_filters[facet] = reduce(lambda query, val, f=facet: query | Q(**{f: val}),
+                                      selected_values,
+                                      Q())
+    return facet_filters
+
+
+def get_search_filter(search_text):
+    search_filter = Q()
+    if search_text:
+        search_filter = Q(searchable=PrefixedPhraseQuery(search_text, config='dutch'))
+
+    return search_filter

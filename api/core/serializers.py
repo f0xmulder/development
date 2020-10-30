@@ -3,7 +3,7 @@ from collections import OrderedDict
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from core.models import API, Environment, Badge, Event, \
+from core.models import API, Environment, Badge, Event, Code, ProgrammingLanguage, \
     MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
 
 
@@ -180,3 +180,60 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ['id', 'title', 'start_date', 'location', 'registration_url']
+
+
+class ProgrammingLanguagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgrammingLanguage
+        fields = ['name']
+
+    def to_representation(self, instance):
+        return instance.name
+
+
+class RelatedApisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = API
+        fields = ['service_name', 'organization_name', 'api_id']
+
+
+class CodeSerializer(serializers.ModelSerializer):
+    programming_languages = ProgrammingLanguagesSerializer(many=True)
+    related_apis = RelatedApisSerializer(many=True)
+
+    class Meta:
+        model = Code
+        fields = [
+            'id',
+            'owner_name',
+            'name',
+            'url',
+            'last_change',
+            'stars',
+            'source',
+            'programming_languages',
+            'related_apis'
+        ]
+
+
+class RelatedApisSubmitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = API
+        fields = ['api_id']
+        # Don't validate api_id as it will fail stating that it is not
+        # unique. We are only deserializing and not saving a new API though,
+        # so this validation is not relevant.
+        extra_kwargs = {
+            'api_id': {'validators': []},
+        }
+
+    def to_representation(self, instance):
+        return instance.api_id
+
+
+class CodeSubmitSerializer(serializers.ModelSerializer):
+    related_apis = RelatedApisSubmitSerializer(many=True)
+
+    class Meta:
+        model = Code
+        fields = ['url', 'related_apis']

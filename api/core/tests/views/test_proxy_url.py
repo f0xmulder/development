@@ -5,7 +5,8 @@ from requests import RequestException, Timeout
 from rest_framework import status
 
 from core.tests.mocking import mock_response
-from core.views import proxy_url, APIProxyException
+from core.views import proxy_url
+from core.exceptions import APIStatusCodeException
 
 
 class ProxyUrlTest(TestCase):
@@ -17,7 +18,7 @@ class ProxyUrlTest(TestCase):
     def test_http_error(self, mock_get):
         mock_get.return_value = mock_response(500, data='oops')
 
-        with self.assertRaises(APIProxyException) as r:
+        with self.assertRaises(APIStatusCodeException) as r:
             proxy_url('https://geoforum.nl/c/datasets/bag.json', 'forum integration')
         self.assertEqual(r.exception.status_code, status.HTTP_502_BAD_GATEWAY)
         self.assertEqual(r.exception.detail, 'Failed to retrieve forum integration URL at '
@@ -28,7 +29,7 @@ class ProxyUrlTest(TestCase):
     def test_unexpected_status_code(self, mock_get):
         mock_get.return_value = mock_response(201, data='Created!')
 
-        with self.assertRaises(APIProxyException) as r:
+        with self.assertRaises(APIStatusCodeException) as r:
             proxy_url('https://geoforum.nl/c/datasets/bag.json', 'forum integration')
         self.assertEqual(r.exception.status_code, status.HTTP_502_BAD_GATEWAY)
         self.assertEqual(r.exception.detail, 'Failed to retrieve forum integration URL at '
@@ -39,7 +40,7 @@ class ProxyUrlTest(TestCase):
     def test_timeout(self, mock_get):
         mock_get.side_effect = Timeout("Timeout!")
 
-        with self.assertRaises(APIProxyException) as r:
+        with self.assertRaises(APIStatusCodeException) as r:
             proxy_url('https://geoforum.nl/c/datasets/bag.json', 'forum integration')
         self.assertEqual(r.exception.status_code, status.HTTP_504_GATEWAY_TIMEOUT)
         self.assertEqual(r.exception.detail, 'Failed to retrieve forum integration URL at '
@@ -54,6 +55,6 @@ class ProxyUrlTest(TestCase):
     def test_request_exception(self, mock_get):
         mock_get.side_effect = RequestException("Help! An Error!")
 
-        with self.assertRaises(APIProxyException) as r:
+        with self.assertRaises(APIStatusCodeException) as r:
             proxy_url('https://geoforum.nl/c/datasets/bag.json', 'forum integration')
         self.assertEqual(r.exception.status_code, status.HTTP_502_BAD_GATEWAY)

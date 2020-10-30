@@ -144,3 +144,37 @@ ALTER TABLE "core_urlapilink" ADD CONSTRAINT "core_urlapilink_url_id_732f9a3b_fk
 CREATE INDEX "core_urlapilink_api_id_65a7bea9" ON "core_urlapilink" ("api_id");
 CREATE INDEX "core_urlapilink_url_id_732f9a3b" ON "core_urlapilink" ("url_id");
 COMMIT;
+BEGIN;
+--
+-- Create model Code
+--
+CREATE TABLE "core_code" ("id" serial NOT NULL PRIMARY KEY, "source" varchar(31) NOT NULL, "owner_name" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "url" varchar(2000) NOT NULL UNIQUE, "description" text NOT NULL, "last_change" timestamp with time zone NOT NULL, "stars" integer NULL);
+--
+-- Create model ProgrammingLanguage
+--
+CREATE TABLE "core_programminglanguage" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(255) NOT NULL UNIQUE);
+--
+-- Create model CodeAPI
+--
+CREATE TABLE "core_codeapi" ("id" serial NOT NULL PRIMARY KEY, "api_id" varchar(255) NOT NULL, "code_id" integer NOT NULL);
+--
+-- Add field programming_languages to code
+--
+CREATE TABLE "core_code_programming_languages" ("id" serial NOT NULL PRIMARY KEY, "code_id" integer NOT NULL, "programminglanguage_id" integer NOT NULL);
+--
+-- Add field related_apis to code
+--
+CREATE INDEX "core_code_url_015bc1dd_like" ON "core_code" ("url" varchar_pattern_ops);
+CREATE INDEX "core_code_last_change_bf026719" ON "core_code" ("last_change");
+CREATE INDEX "core_programminglanguage_name_6bd382a4_like" ON "core_programminglanguage" ("name" varchar_pattern_ops);
+ALTER TABLE "core_codeapi" ADD CONSTRAINT "core_codeapi_api_id_255daaa7_fk_core_api_api_id" FOREIGN KEY ("api_id") REFERENCES "core_api" ("api_id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "core_codeapi" ADD CONSTRAINT "core_codeapi_code_id_93a40ac2_fk_core_code_id" FOREIGN KEY ("code_id") REFERENCES "core_code" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "core_codeapi_api_id_255daaa7" ON "core_codeapi" ("api_id");
+CREATE INDEX "core_codeapi_api_id_255daaa7_like" ON "core_codeapi" ("api_id" varchar_pattern_ops);
+CREATE INDEX "core_codeapi_code_id_93a40ac2" ON "core_codeapi" ("code_id");
+ALTER TABLE "core_code_programming_languages" ADD CONSTRAINT "core_code_programming_la_code_id_programminglangu_142fb019_uniq" UNIQUE ("code_id", "programminglanguage_id");
+ALTER TABLE "core_code_programming_languages" ADD CONSTRAINT "core_code_programmin_code_id_42f55771_fk_core_code" FOREIGN KEY ("code_id") REFERENCES "core_code" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "core_code_programming_languages" ADD CONSTRAINT "core_code_programmin_programminglanguage__afd45b15_fk_core_prog" FOREIGN KEY ("programminglanguage_id") REFERENCES "core_programminglanguage" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "core_code_programming_languages_code_id_42f55771" ON "core_code_programming_languages" ("code_id");
+CREATE INDEX "core_code_programming_languages_programminglanguage_id_afd45b15" ON "core_code_programming_languages" ("programminglanguage_id");
+COMMIT;

@@ -22,7 +22,7 @@ const Feedback = () => {
           Deze website is ‘permanent beta’ en zal worden aangepast naar de
           behoeften van gebruikers.
           <br />
-          Wensen en opmerkingen kunnen via een melding op Gitlab doorgegeven
+          Wensen en opmerkingen kunnen via een melding op GitLab doorgegeven
           worden.
         </StyledText>
         <Button
@@ -33,7 +33,7 @@ const Feedback = () => {
           variant="secondary"
         >
           <StyledGitlabIcon />
-          Melding maken op Gitlab
+          Melding maken op GitLab
           <StyledExternalIcon />
         </Button>
       </FeedbackContainer>

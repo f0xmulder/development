@@ -1,4 +1,5 @@
 from unittest.mock import Mock, MagicMock, PropertyMock
+import json
 
 
 def mock_response(status_code,
@@ -13,8 +14,7 @@ def mock_response(status_code,
 
     bdata = bytes(str(data), 'UTF-8')
 
-    class MockResponse (MagicMock):
-
+    class MockResponse(MagicMock):
         headers = Mock()
         headers.get = Mock(side_effect={'Content-Type': content_type}.__getitem__)
 
@@ -22,5 +22,8 @@ def mock_response(status_code,
         ok = PropertyMock(return_value=_status_code < 400)
         content = PropertyMock(return_value=bdata)
         text = PropertyMock(return_value=data)
+
+        def json(self):
+            return json.loads(self.text)
 
     return MockResponse()

@@ -78,14 +78,41 @@ describe('PrimaryNavigation', () => {
   it('should show mobile navigation if the screen becomes small', async () => {
     const { findByTestId } = createInstance()
 
-    resizeWindow(360, 500)
+    resizeWindow(360, defaultWindowSize.y)
     await waitForDebounce()
 
     const element = await findByTestId('mobile-nav')
     expect(element).toBeTruthy()
   })
 
-  it('should desktop navigation if the screen is large', async () => {
+  it('should hide nav bar in mobile navigation if screen height is resized more than 15% and show it again when resized to less than 15% from the original height', async () => {
+    resizeWindow(360, 1000)
+
+    const { queryByTestId } = createInstance()
+
+    resizeWindow(360, 800)
+
+    const element = queryByTestId('mobile-nav')
+    expect(element).toBeNull()
+
+    resizeWindow(360, 1000)
+
+    const element2 = queryByTestId('mobile-nav')
+    expect(element2).toBeTruthy()
+  })
+
+  it('should not hide nav bar in mobile navigation if screen height is resized less than 15%', async () => {
+    resizeWindow(360, 1000)
+
+    const { findByTestId } = createInstance()
+
+    resizeWindow(360, 900)
+
+    const element = findByTestId('mobile-nav')
+    expect(element).toBeTruthy()
+  })
+
+  it('should show desktop navigation if the screen is large', async () => {
     resizeWindow(1200, 800)
 
     const { findByTestId } = createInstance()
