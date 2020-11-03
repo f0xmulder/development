@@ -24,20 +24,15 @@ export default class CodeRepository {
       body: JSON.stringify(code),
     })
 
-    var resultJSON = ''
-    try {
-      resultJSON = await result.json()
-    } catch (e) {}
+    var resultJSON = await result.json()
 
     if (!result.ok) {
-      if (resultJSON.detail) {
-        throw new Error(
-          'Er ging iets fout tijdens het toevoegen van de code: ' +
-            resultJSON.detail,
-        )
-      } else {
-        throw new Error()
-      }
+      throw new Error(
+        'Er ging iets fout tijdens het toevoegen van de code' +
+        resultJSON.detail
+          ? ': ' + resultJSON.detail
+          : '',
+      )
     }
 
     return resultJSON

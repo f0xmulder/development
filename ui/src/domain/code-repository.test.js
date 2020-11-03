@@ -65,6 +65,7 @@ describe('Code repository', () => {
         Promise.resolve({
           ok: false,
           status: 500,
+          json: () => Promise.reject(Error('invalid json')),
         }),
       )
     })
@@ -72,15 +73,12 @@ describe('Code repository', () => {
     afterEach(() => global.fetch.mockRestore())
 
     it('should throw an error', async () => {
-      let error
-
       try {
         await CodeRepository.create(codeMock)
+        throw Error('expected to be unreachable')
       } catch (e) {
-        error = e
+        expect(e).toEqual(new Error('invalid json'))
       }
-
-      expect(error).toEqual(new Error(''))
     })
   })
 })
