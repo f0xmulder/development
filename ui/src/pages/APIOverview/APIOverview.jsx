@@ -146,8 +146,7 @@ class APIOverview extends Component {
     const queryParams = this.getQueryParams()
     const { page } = queryParams
 
-    const totalResults =
-      loaded && !error && result && result.apis ? result.apis.length : null
+    const totalResults = loaded && !error && result ? result.totalResults : null
 
     return (
       <StyledOverviewPage>
