@@ -18,25 +18,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        apis = API.objects.all()
-        apis.delete()
-
-        if apis.count() > 0:
-            raise SystemExit(
-                f'{COLOR_RED}Error: Not all APIs were deleted\n'
-                f'Please delete all APIs before syncing{COLOR_END}'
-            )
-        if Environment.objects.all().count() > 0:
-            raise SystemExit(
-                f'{COLOR_RED}Error: Not all Environments were deleted\n'
-                f'Please delete all Environments before syncing{COLOR_END}'
-            )
-        if Relation.objects.all().count() > 0:
-            raise SystemExit(
-                f'{COLOR_RED}Error: Not all Relations were deleted\n'
-                f'Please delete all Relations before syncing{COLOR_END}'
-            )
-
         sync_apis(options['api_dir'])
 
 
@@ -56,17 +37,18 @@ def sync_apis(api_dir):
         environments += api_environments
         relations += api_relations
 
-    API.objects.bulk_create(apis)
-    Environment.objects.bulk_create(environments)
-    Relation.objects.bulk_create(relations)
+    Environment.objects.exclude(id__in=(e.id for e in environments)).delete()
+    Relation.objects.exclude(id__in=(r.id for r in relations)).delete()
+    API.objects.exclude(id__in=(a.id for a in apis)).delete()
+    for obj in apis + environments + relations:
+        obj.save()
 
 
 def parse_api(api_id, json_data):
-    api = API()
+    api, _created = API.objects.get_or_create(api_id=api_id)
     environments = []
     relations = []
 
-    api.api_id = api_id
     api.description = json_data['description']
     api.organization_name = json_data['organization_name']
     api.service_name = json_data['service_name']
@@ -107,9 +89,9 @@ def parse_api(api_id, json_data):
         environments_data = json_data['environments']
 
         for env_data in environments_data:
-            environment = Environment(api_id=api_id)
-            if 'name' in env_data:
-                environment.name = env_data['name']
+            name = env_data['name']
+            environment, _created = Environment.objects \
+                .get_or_create(api_id=api_id, name=name)
             if 'api_url' in env_data:
                 environment.api_url = env_data['api_url']
             if 'specification_url' in env_data:
@@ -123,7 +105,7 @@ def parse_api(api_id, json_data):
 
         for relation_api_id, relation_types in relations_data.items():
             for relation_type in relation_types:
-                relation = Relation(
+                relation, _created = Relation.objects.get_or_create(
                     name=relation_type,
                     from_api_id=api_id,
                     to_api_id=relation_api_id,

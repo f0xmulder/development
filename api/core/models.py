@@ -179,8 +179,7 @@ class Relation(models.Model):
     to_api = models.ForeignKey(
         API,
         to_field='api_id',
-        db_constraint=False,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         related_name='relations_to',
     )
 
@@ -199,8 +198,7 @@ class APIBadge(models.Model):
     api = models.ForeignKey(
         API,
         to_field='api_id',
-        db_constraint=False,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
     )
     badge = models.ForeignKey(Badge, on_delete=models.CASCADE)
 
@@ -213,8 +211,7 @@ class CodeAPI(models.Model):
     api = models.ForeignKey(
         API,
         to_field='api_id',
-        db_constraint=False,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
     )
 
     def __str__(self):
@@ -352,8 +349,7 @@ class URLApiLink(models.Model):
         DEMO_DOC = 'demo_doc'
 
     url = models.ForeignKey(URL, on_delete=models.CASCADE, related_name='api_links')
-    api = models.ForeignKey(
-        API, db_constraint=False, on_delete=models.DO_NOTHING, related_name='url_links')
+    api = models.ForeignKey(API, on_delete=models.CASCADE, related_name='url_links')
     field = models.CharField(max_length=MAX_ENUM_LENGTH, choices=FieldReference.choices)
 
     def __str__(self):
