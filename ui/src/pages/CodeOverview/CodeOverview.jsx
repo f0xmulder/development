@@ -132,8 +132,7 @@ class CodeOverview extends Component {
     const queryParams = this.getQueryParams()
     const { page } = queryParams
 
-    const totalResults =
-      loaded && !error && result && result.code ? result.code.length : null
+    const totalResults = loaded && !error && result ? result.totalResults : null
 
     return (
       <StyledOverviewPage>

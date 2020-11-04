@@ -95,8 +95,7 @@ class EventOverview extends Component {
     const queryParams = this.getQueryParams()
     const { page } = queryParams
 
-    const totalResults =
-      loaded && !error && result && result.events ? result.events.length : null
+    const totalResults = loaded && !error && result ? result.totalResults : null
 
     return (
       <StyledOverviewPage>
