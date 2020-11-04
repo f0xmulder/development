@@ -178,3 +178,18 @@ ALTER TABLE "core_code_programming_languages" ADD CONSTRAINT "core_code_programm
 CREATE INDEX "core_code_programming_languages_code_id_42f55771" ON "core_code_programming_languages" ("code_id");
 CREATE INDEX "core_code_programming_languages_programminglanguage_id_afd45b15" ON "core_code_programming_languages" ("programminglanguage_id");
 COMMIT;
+BEGIN;
+--
+-- Alter field source on code
+--
+COMMIT;
+BEGIN;
+--
+-- Alter field api on codeapi
+--
+SET CONSTRAINTS "core_codeapi_api_id_255daaa7_fk_core_api_api_id" IMMEDIATE; ALTER TABLE "core_codeapi" DROP CONSTRAINT "core_codeapi_api_id_255daaa7_fk_core_api_api_id";
+--
+-- Alter field api on urlapilink
+--
+SET CONSTRAINTS "core_urlapilink_api_id_65a7bea9_fk_core_api_id" IMMEDIATE; ALTER TABLE "core_urlapilink" DROP CONSTRAINT "core_urlapilink_api_id_65a7bea9_fk_core_api_id";
+COMMIT;

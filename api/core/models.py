@@ -187,7 +187,8 @@ class CodeAPI(models.Model):
     api = models.ForeignKey(
         API,
         to_field='api_id',
-        on_delete=models.CASCADE,
+        db_constraint=False,
+        on_delete=models.DO_NOTHING,
     )
 
     def __str__(self):
@@ -325,7 +326,8 @@ class URLApiLink(models.Model):
         DEMO_DOC = 'demo_doc'
 
     url = models.ForeignKey(URL, on_delete=models.CASCADE, related_name='api_links')
-    api = models.ForeignKey(API, on_delete=models.CASCADE, related_name='url_links')
+    api = models.ForeignKey(
+        API, db_constraint=False, on_delete=models.DO_NOTHING, related_name='url_links')
     field = models.CharField(max_length=MAX_ENUM_LENGTH, choices=FieldReference.choices)
 
     def __str__(self):
