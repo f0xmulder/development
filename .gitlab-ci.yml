@@ -84,13 +84,20 @@ Verify test schema:
     - cd api/
     - pip3 install -r requirements-dev.txt
   script:
-    - sh $TESTDATA/generate_test_sql.sh > current_testschema.sql
+    - ls core/migrations | grep -v __ | cut -f1 -d.
+    - sh $TESTDATA/generate_test_sql.sh --apply-migrations > current_testschema.sql
+    - ls -l current_testschema.sql
     - |
-      if ! diff -q $TESTDATA/testschema.sql current_testschema.sql
+      if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
       then
         echo -e "\e[31mError: Non-matching test database schema! Update the test schema using linkchecker/testdata/generate_test_sql.sh\e[0m"
         exit 1
       fi
+  artifacts:
+    expire_in: 1 month
+    when: always
+    paths:
+      - api/current_testschema.sql
 
 ## UI ##
 .ui:
