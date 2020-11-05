@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Subquery, OuterRef, Count
 
-from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config
+from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config, CodeAPI
 
 
 @admin.register(Badge)
@@ -19,10 +19,24 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ['start_date', 'title', 'is_published']
 
 
+class CodeAPIInline(admin.StackedInline):
+    model = CodeAPI
+    extra = 0
+
+
 @admin.register(Code)
 class CodeAdmin(admin.ModelAdmin):
     list_display_links = ['name']
-    list_display = ['source', 'owner_name', 'name', 'url']
+    list_display = ['source', 'owner_name', 'name', 'url', 'programming_languages_string',
+                    'related_apis_string']
+    list_filter = ['source', 'owner_name', 'programming_languages', 'related_apis']
+    inlines = [CodeAPIInline]
+
+
+@admin.register(CodeAPI)
+class CodeAPIAdmin(admin.ModelAdmin):
+    list_display = ['code', 'api']
+    list_filter = list_display
 
 
 class URLProbeInline(admin.TabularInline):

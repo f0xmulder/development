@@ -107,6 +107,14 @@ class Code(models.Model):
         related_name='related_code',
     )
 
+    def programming_languages_string(self):
+        return ', '.join(p.name for p in self.programming_languages.order_by('name').all())
+    programming_languages_string.short_description = 'programming languages'
+
+    def related_apis_string(self):
+        return ', '.join(a.api_id for a in self.related_apis.order_by('api_id').all())
+    related_apis_string.short_description = 'related apis'
+
     def __str__(self):
         return f'{self.owner_name}/{self.name}'
 
