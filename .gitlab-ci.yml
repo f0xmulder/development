@@ -81,16 +81,24 @@ Verify test schema:
     paths:
       - $CI_PROJECT_DIR/.cache/pip
   before_script:
+    - apt-get update
+    - apt-get install -qy postgresql-client-11
     - cd api/
     - pip3 install -r requirements-dev.txt
   script:
-    - ls core/migrations | grep -v __ | cut -f1 -d.
-    - sh $TESTDATA/generate_test_sql.sh --apply-migrations > current_testschema.sql
+    - python manage.py migrate
+    - >
+      PGPASSWORD="$DB_PASSWORD"
+      pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME"
+      --no-owner --schema-only
+      --schema=public --table=core_\*
+      | sed '/-- Dumped by /d'
+      > current_testschema.sql
     - ls -l current_testschema.sql
     - |
       if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
       then
-        echo -e "\e[31mError: Non-matching test database schema! Update the test schema using linkchecker/testdata/generate_test_sql.sh\e[0m"
+        echo -e "\e[31mError: Non-matching test database schema! See docs/docs/developer.md#Data model changes on how to update it.\e[0m"
         exit 1
       fi
   artifacts:

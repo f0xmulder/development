@@ -133,10 +133,18 @@ You can see your changes at: http://don.minikube:30080/
 
 ## Data model changes
 
-The linkchecker uses a mock database for its tests. If you make changes to the data model (using django migrations) you should also update the test schema:
-1. Make sure your python virtual environment is active
-1. Run `linkchecker/testdata/generate_test_sql.sh > linkchecker/testdata/testschema.sql`
-1. Commit the updated `testschema.sql`
+The linkchecker uses a mock database for its tests. If you make changes to the data model (using django migrations) you should also update the test schema by running `pg_dump`:
+
+    pg_dump -h localhost -U don don --no-owner --schema-only --schema=public --table=core_\* \
+    | sed '/-- Dumped by /d' > linkchecker/testdata/testschema.sql
+
+You may need to adjust the command to your local development setup. If you use the docker dev database you can run the `pg_dump` in the container with
+
+    docker exec developeroverheidnl_database_1 pg_dump -U don don \
+    --no-owner --schema-only --schema=public --table=core_\* \
+    | sed '/-- Dumped by /d' > linkchecker/testdata/testschema.sql
+
+then you can be sure you have a `pg_dump` version matching the database. After dumping the database schema, commit the updated `linkchecker/testdata/testschema.sql`.
 
 Don't worry: if you forget to do this, the pipeline will fail as a friendly reminder :)
 
@@ -164,7 +172,7 @@ __*NB:*__ The order of the `pip-compile`'s is important!
 
 If you updated your git repository and the new version has changes in the requirements files, also run the `pip-sync` command to synchronize your environment with the requirements files.
 
-> __*Note*__: `pip-sync` will synchronize your environment with the requirements files, that means it will also delete any modules that are not listed in the requirements files. If you do not want that, run `pip install -r requirements.txt -r requirements-dev.txt` instead of `pip-sync`.
+> __*Note*__: `pip-sync` will synchronize your environment with the requirements files, that means it will also delete any modules that are not listed in the requirements files. If you do not want that, run `pip install -r requirements-dev.txt` instead of `pip-sync`.
 
 #### Dependency problems
 

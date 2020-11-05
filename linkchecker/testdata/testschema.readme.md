@@ -1,0 +1,1 @@
+testschema.sql contains a schema dump of the database which is used to run linkchecker tests. If the database schema changes, this dump should also be updated. See `docs/docs/developer.md#data model changes` for details.

@@ -53,7 +53,9 @@ func getTestDb(t *testing.T) *sqlx.DB {
 	failErr(t, err)
 	schemafile.Close()
 
-	_, err = db.Exec(string(schema))
+	_, err = db.Exec(string(schema) +
+		// The schema dump from pg_dump clears the schema search_path for the session, restore it
+		"\nSET search_path=public;\n")
 	failErrSql(t, err)
 
 	return db
