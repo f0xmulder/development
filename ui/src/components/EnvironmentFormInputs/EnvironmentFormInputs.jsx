@@ -3,6 +3,7 @@
 //
 import React from 'react'
 import { string, bool, object } from 'prop-types'
+import { ErrorMessage } from '@commonground/design-system'
 
 import {
   Label,
@@ -16,7 +17,6 @@ import {
   StyledFormGroup,
   HelperMessage,
 } from '../SubmitAPIForm/SubmitAPIForm.styles'
-import { ErrorMessage } from '../SubmitAPIForm/SubmitAPIForm'
 
 const capitalize = (s) => {
   if (typeof s !== 'string') return ''

@@ -2,7 +2,6 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
-import { ReactComponent as ExclamationMark } from '../Icons/exclamationmark.svg'
 
 export const StyledFormGroupColumnContainer = styled.div`
   display: flex;
@@ -46,15 +45,4 @@ export const HelperMessage = styled.small`
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
   color: ${(p) => p.theme.colorTextLabel};
-`
-
-export const StyledExclamationMark = styled(ExclamationMark)`
-  vertical-align: text-top;
-  margin-right: ${(p) => p.theme.tokens.spacing03};
-`
-
-export const StyledErrorMessage = styled.small`
-  font-size: ${(p) => p.theme.tokens.fontSizeSmall};
-  font-weight: bold;
-  color: ${(p) => p.theme.colorAlertError};
 `
