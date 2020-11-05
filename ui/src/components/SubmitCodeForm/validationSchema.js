@@ -5,7 +5,10 @@ import * as Yup from 'yup'
 
 const validationSchema = Yup.object().shape({
   url: Yup.string().url().required().label('URL naar code'),
-  relatedApis: Yup.array().required().label('Gerelateerde API(s)'),
+  relatedApis: Yup.array()
+    .transform((value) => value || [])
+    .required()
+    .label("Gerelateerde API('s)"),
 })
 
 export default validationSchema

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { array, bool, string, oneOf } from 'prop-types'
 import Select from 'react-select'
 import { Formik } from 'formik'
-import { TextInput, Button } from '@commonground/design-system'
+import { TextInput, Button, ErrorMessage } from '@commonground/design-system'
 
 import CodeRepository from '../../domain/code-repository'
 import objectKeysToSnakeCase from '../../utils/objectKeysToSnakeCase'
@@ -14,7 +14,7 @@ import {
   StyledFieldset,
   HelperMessage,
   StyledAlert,
-  ReactSelectStyle,
+  getReactSelectStyle,
   Label,
   Spacing,
 } from './SubmitCodeForm.styles'
@@ -112,7 +112,7 @@ const SubmitCodeForm = () => {
       onSubmit={submitCode}
       data-test="form"
     >
-      {({ handleSubmit, setFieldValue }) => (
+      {({ errors, touched, handleSubmit, setFieldValue, setFieldTouched }) => (
         <form onSubmit={handleSubmit}>
           <StyledFieldset>
             <StyledAlert variant="info">
@@ -150,13 +150,19 @@ const SubmitCodeForm = () => {
                 isMulti="true"
                 placeholder="Selecteer één of meerdere API's"
                 onChange={(value) => setFieldValue('relatedApis', value)}
-                styles={ReactSelectStyle}
+                onBlur={() => setFieldTouched('relatedApis')}
+                styles={getReactSelectStyle({
+                  hasError: !!errors.relatedApis && !!touched.relatedApis,
+                })}
                 options={apis.map((api) => ({
                   value: api.id,
                   label: api.organizationName + ' - ' + api.serviceName,
                 }))}
               />
             </Spacing>
+            {errors.relatedApis && touched.relatedApis && (
+              <ErrorMessage>{errors.relatedApis}</ErrorMessage>
+            )}
           </StyledFieldset>
 
           {error && <div data-test="error-message">{error}</div>}
