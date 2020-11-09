@@ -43,22 +43,17 @@ class APIOverview extends Component {
     }
   }
 
-  loadAPIList() {
-    return this.fetchApiList()
-      .then((response) =>
-        Object.assign({}, response, {
-          apis: response.results.map((api) => modelFromAPIResponse(api)),
-        }),
-      )
-      .then(
-        (result) => {
-          this.setState({ result, loaded: true })
-        },
-        (error) => {
-          this.setState({ error: true, loaded: true })
-          console.error(error)
-        },
-      )
+  async loadAPIList() {
+    try {
+      const response = await this.fetchApiList()
+      const result = Object.assign({}, response, {
+        apis: response.results.map((api) => modelFromAPIResponse(api)),
+      })
+      this.setState({ result, loaded: true })
+    } catch (error) {
+      this.setState({ error: true, loaded: true })
+      console.error(error)
+    }
   }
 
   handleSearchHandler(query) {
@@ -83,18 +78,15 @@ class APIOverview extends Component {
     this.handleSearchHandler(input)
   }
 
-  fetchApiList() {
-    const fetched = fetch(
+  async fetchApiList() {
+    const response = await fetch(
       `/api/apis?${generateQueryParams(this.getQueryParams())}`,
     )
-
-    return fetched.then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-      }
-    })
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
+    }
   }
 
   handleFilterChange = (newFilters) => {

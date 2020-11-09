@@ -57,16 +57,14 @@ class APISpecification extends Component {
     return environmentData.specificationUrl
   }
 
-  loadDetailsForApi(id) {
-    return this.props.getApiDetailsById(id).then(
-      (details) => {
-        this.setState({ details, loaded: true })
-      },
-      (error) => {
-        this.setState({ error: true, loaded: true })
-        console.error(error)
-      },
-    )
+  async loadDetailsForApi(id) {
+    try {
+      const details = await this.props.getApiDetailsById(id)
+      this.setState({ details, loaded: true })
+    } catch (error) {
+      this.setState({ error: true, loaded: true })
+      console.error(error)
+    }
   }
 
   render() {

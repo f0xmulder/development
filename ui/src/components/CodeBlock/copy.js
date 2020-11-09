@@ -3,17 +3,15 @@
 //
 import showFeedback from './showFeedback'
 
-export default (content, setFeedback) => {
+export default async (content, setFeedback) => {
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(content).then(
-      () => {
-        showFeedback('Gekopieerd', setFeedback)
-      },
-      (error) => {
-        showFeedback('Niet gelukt', setFeedback)
-        console.error('Unable to copy using clipboard', error)
-      },
-    )
+    try {
+      await navigator.clipboard.writeText(content)
+      showFeedback('Gekopieerd', setFeedback)
+    } catch (error) {
+      showFeedback('Niet gelukt', setFeedback)
+      console.error('Unable to copy using clipboard', error)
+    }
   } else {
     const textField = document.createElement('textarea')
     textField.innerText = content

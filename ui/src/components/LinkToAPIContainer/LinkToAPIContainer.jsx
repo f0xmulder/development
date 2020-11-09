@@ -33,30 +33,26 @@ class LinkToAPIContainer extends Component {
     this.loadDetailsForApi(id)
   }
 
-  fetchAPIDetails(id) {
-    return fetch(`/api/apis/${id}`).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout bij het ophalen voor de API met ID '${id}'`,
-        )
-      }
-    })
+  async fetchAPIDetails(id) {
+    const response = await fetch(`/api/apis/${id}`)
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(
+        `Er ging iets fout bij het ophalen voor de API met ID '${id}'`,
+      )
+    }
   }
 
-  loadDetailsForApi(id) {
-    return this.fetchAPIDetails(id)
-      .then((response) => modelFromAPIResponse(response))
-      .then(
-        (details) => {
-          this.setState({ details, loaded: true })
-        },
-        (error) => {
-          this.setState({ error: true, loaded: true })
-          console.error(error)
-        },
-      )
+  async loadDetailsForApi(id) {
+    try {
+      const response = await this.fetchAPIDetails(id)
+      const details = modelFromAPIResponse(response)
+      this.setState({ details, loaded: true })
+    } catch (error) {
+      this.setState({ error: true, loaded: true })
+      console.error(error)
+    }
   }
 
   render() {

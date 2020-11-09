@@ -28,7 +28,7 @@ describe('ImplementedByListContainer', () => {
   })
 
   describe('loading the APIs', () => {
-    it("should store the implemented by API's as state", () => {
+    it("should store the implemented by API's as state", async () => {
       const apiPromise = Promise.resolve([apiFromAPIResponse])
       ImplementedByListContainer.prototype.fetchImplementedByInfo = jest.fn(
         () => apiPromise,
@@ -36,11 +36,10 @@ describe('ImplementedByListContainer', () => {
 
       const wrapper = shallow(<ImplementedByListContainer id="42" />)
 
-      return flushPromises().then(() => {
-        expect(wrapper.state('apis')).toEqual([
-          modelFromAPIResponse(apiFromAPIResponse),
-        ])
-      })
+      await flushPromises()
+      expect(wrapper.state('apis')).toEqual([
+        modelFromAPIResponse(apiFromAPIResponse),
+      ])
     })
   })
 
@@ -72,7 +71,7 @@ describe('ImplementedByListContainer', () => {
   })
 
   describe("when an error occurred while fetching the API's", () => {
-    it('should set the error state', () => {
+    it('should set the error state', async () => {
       const thePromise = Promise.reject(
         new Error('arbitrary reject reason coming from tests'),
       )
@@ -82,9 +81,8 @@ describe('ImplementedByListContainer', () => {
 
       const wrapper = shallow(<ImplementedByListContainer id="42" />)
 
-      return flushPromises().then(() => {
-        expect(wrapper.state().error).toBe(true)
-      })
+      await flushPromises()
+      expect(wrapper.state().error).toBe(true)
     })
   })
 

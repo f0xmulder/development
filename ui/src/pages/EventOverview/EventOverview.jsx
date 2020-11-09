@@ -40,36 +40,28 @@ class EventOverview extends Component {
     }
   }
 
-  loadEventList() {
-    return this.fetchEventList()
-      .then((response) =>
-        Object.assign({}, response, {
-          events: response.results.map((event) => modelFromAPIResponse(event)),
-        }),
-      )
-      .then(
-        (result) => {
-          this.setState({ result, loaded: true })
-        },
-        (error) => {
-          this.setState({ error: true, loaded: true })
-          console.error(error)
-        },
-      )
+  async loadEventList() {
+    try {
+      const response = await this.fetchEventList()
+      const result = Object.assign({}, response, {
+        events: response.results.map((event) => modelFromAPIResponse(event)),
+      })
+      this.setState({ result, loaded: true })
+    } catch (error) {
+      this.setState({ error: true, loaded: true })
+      console.error(error)
+    }
   }
 
-  fetchEventList() {
-    const fetched = fetch(
+  async fetchEventList() {
+    const response = await fetch(
       `/api/events?${generateQueryParams(this.getQueryParams())}`,
     )
-
-    return fetched.then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(`Er ging iets fout tijdens het ophalen van de events`)
-      }
-    })
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(`Er ging iets fout tijdens het ophalen van de events`)
+    }
   }
 
   handlePageChange = (page) => {

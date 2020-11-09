@@ -59,16 +59,15 @@ describe('APIDetail', () => {
   })
 
   describe('loading the API details', () => {
-    it('should store the API model as state', () => {
+    it('should store the API model as state', async () => {
       const apiPromise = Promise.resolve(apiResponseObject)
       const getApiDetailsByIdMock = jest.fn(() => apiPromise)
 
       const wrapper = shallow(
         <APIDetail getApiDetailsById={getApiDetailsByIdMock} />,
       )
-      return apiPromise.then(() => {
-        expect(wrapper.state('details')).toEqual(apiResponseObject)
-      })
+      await apiPromise
+      expect(wrapper.state('details')).toEqual(apiResponseObject)
     })
   })
 

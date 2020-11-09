@@ -39,7 +39,7 @@ describe('APISpecification', () => {
   })
 
   describe('loading the API details', () => {
-    it('should store the API model as state', () => {
+    it('should store the API model as state', async () => {
       const apiPromise = Promise.resolve(apiResponseObject)
       const getApiDetailsByIdMock = jest.fn(() => apiPromise)
 
@@ -51,12 +51,11 @@ describe('APISpecification', () => {
           getApiDetailsById={getApiDetailsByIdMock}
         />,
       )
-      return apiPromise.then(() => {
-        expect(wrapper.state('details')).toEqual(apiResponseObject)
-      })
+      await apiPromise
+      expect(wrapper.state('details')).toEqual(apiResponseObject)
     })
 
-    it('should render the Redoc standalone component with the correct url', () => {
+    it('should render the Redoc standalone component with the correct url', async () => {
       const apiPromise = Promise.resolve(apiResponseObject)
       const getApiDetailsByIdMock = jest.fn(() => apiPromise)
 
@@ -68,14 +67,13 @@ describe('APISpecification', () => {
           getApiDetailsById={getApiDetailsByIdMock}
         />,
       )
-      return apiPromise.then(() => {
-        expect(wrapper.find(RedocStandalone).prop('specUrl')).toEqual(
-          '/api/apis/organization-service/production/specification',
-        )
-      })
+      await apiPromise
+      expect(wrapper.find(RedocStandalone).prop('specUrl')).toEqual(
+        '/api/apis/organization-service/production/specification',
+      )
     })
 
-    it('should render the APIDetailsHeader with the correct external spec url', () => {
+    it('should render the APIDetailsHeader with the correct external spec url', async () => {
       const apiPromise = Promise.resolve(apiResponseObject)
       const getApiDetailsByIdMock = jest.fn(() => apiPromise)
 
@@ -87,14 +85,13 @@ describe('APISpecification', () => {
           getApiDetailsById={getApiDetailsByIdMock}
         />,
       )
-      return apiPromise.then(() => {
-        expect(
-          wrapper.find(APIDetailsHeader).prop('externalSpecificationUrl'),
-        ).toEqual('Specification URL')
-      })
+      await apiPromise
+      expect(
+        wrapper.find(APIDetailsHeader).prop('externalSpecificationUrl'),
+      ).toEqual('Specification URL')
     })
 
-    it('should show an error message if loading failed', () => {
+    it('should show an error message if loading failed', async () => {
       console.error = jest.fn()
 
       const apiErrorPromise = Promise.reject(
@@ -111,11 +108,8 @@ describe('APISpecification', () => {
         />,
       )
 
-      return flushPromises().then(() => {
-        expect(wrapper.find('[data-test="error-message"]').exists()).toEqual(
-          true,
-        )
-      })
+      await flushPromises()
+      expect(wrapper.find('[data-test="error-message"]').exists()).toEqual(true)
     })
   })
 })

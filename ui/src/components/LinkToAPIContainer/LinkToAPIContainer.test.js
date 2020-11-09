@@ -28,17 +28,16 @@ describe('LinkToAPIContainer', () => {
   })
 
   describe('loading the API', () => {
-    it('should store the details as state', () => {
+    it('should store the details as state', async () => {
       const apiPromise = Promise.resolve(apiFromAPIResponse)
       LinkToAPIContainer.prototype.fetchAPIDetails = jest.fn(() => apiPromise)
 
       const wrapper = shallow(<LinkToAPIContainer id="42" />)
 
-      return flushPromises().then(() => {
-        expect(wrapper.state('details')).toEqual(
-          modelFromAPIResponse(apiFromAPIResponse),
-        )
-      })
+      await flushPromises()
+      expect(wrapper.state('details')).toEqual(
+        modelFromAPIResponse(apiFromAPIResponse),
+      )
     })
   })
 
@@ -59,7 +58,7 @@ describe('LinkToAPIContainer', () => {
   })
 
   describe('when an error occurred while fetching the API', () => {
-    it('should set the error state', () => {
+    it('should set the error state', async () => {
       const thePromise = Promise.reject(
         new Error('arbitrary reject reason coming from tests'),
       )
@@ -67,9 +66,8 @@ describe('LinkToAPIContainer', () => {
 
       const wrapper = shallow(<LinkToAPIContainer id="42" />)
 
-      return flushPromises().then(() => {
-        expect(wrapper.state().error).toBe(true)
-      })
+      await flushPromises()
+      expect(wrapper.state().error).toBe(true)
     })
   })
 

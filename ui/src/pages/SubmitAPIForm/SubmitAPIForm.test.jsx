@@ -55,7 +55,7 @@ describe('SubmitAPI', () => {
   })
 
   describe('loading the available APIs', () => {
-    it('should store (only) the available apis as state', () => {
+    it('should store (only) the available apis as state', async () => {
       const apiPromise = Promise.resolve({
         total: 1,
         page: 1,
@@ -65,10 +65,9 @@ describe('SubmitAPI', () => {
 
       const wrapper = shallow(<SubmitAPI />)
 
-      return flushPromises().then(() => {
-        expect(wrapper.state('result')).toEqual({
-          apis: [modelFromAPIResponse(goApiMock)],
-        })
+      await flushPromises()
+      expect(wrapper.state('result')).toEqual({
+        apis: [modelFromAPIResponse(goApiMock)],
       })
     })
   })
@@ -123,7 +122,7 @@ describe('SubmitAPI', () => {
       })
 
       describe('submitToApi is succesful', () => {
-        it('should set submitted to true', () => {
+        it('should set submitted to true', async () => {
           const apiPromise = Promise.resolve({ id: 42 })
           SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
 
@@ -133,15 +132,14 @@ describe('SubmitAPI', () => {
             setStatus: jest.fn(),
           })
 
-          return apiPromise.then(() => {
-            expect(wrapper.state('submitted')).toEqual(true)
-            expect(wrapper.state('responseData')).toEqual({ id: 42 })
-          })
+          await apiPromise
+          expect(wrapper.state('submitted')).toEqual(true)
+          expect(wrapper.state('responseData')).toEqual({ id: 42 })
         })
       })
 
       describe('submitToApi is unsuccessful', () => {
-        it('should call the setStatus action', () => {
+        it('should call the setStatus action', async () => {
           // Suppress error in test console
           global.console.error = jest.fn()
 
@@ -157,12 +155,8 @@ describe('SubmitAPI', () => {
             setStatus: jest.fn(),
           }
 
-          return wrapper
-            .instance()
-            .handleSubmit(rawFormDataMock, actions)
-            .then(() => {
-              expect(actions.setStatus).toHaveBeenCalled()
-            })
+          await wrapper.instance().handleSubmit(rawFormDataMock, actions)
+          expect(actions.setStatus).toHaveBeenCalled()
         })
       })
     })

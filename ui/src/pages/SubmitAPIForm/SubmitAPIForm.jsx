@@ -142,22 +142,17 @@ class SubmitAPIFormPage extends Component {
     this.submitToApi = this.submitToApi.bind(this)
   }
 
-  componentDidMount() {
-    this.fetchApiList()
-      .then((response) => {
-        return {
-          apis: response.results.map((api) => modelFromAPIResponse(api)),
-        }
-      })
-      .then(
-        (result) => {
-          this.setState({ result, apisLoaded: true })
-        },
-        (error) => {
-          this.setState({ apisError: true, apisLoaded: true })
-          console.error(error)
-        },
-      )
+  async componentDidMount() {
+    try {
+      const response = await this.fetchApiList()
+      const result = {
+        apis: response.results.map((api) => modelFromAPIResponse(api)),
+      }
+      this.setState({ result, apisLoaded: true })
+    } catch (error) {
+      this.setState({ apisError: true, apisLoaded: true })
+      console.error(error)
+    }
 
     window && window.addEventListener('beforeunload', this.handleReset)
   }
@@ -171,47 +166,45 @@ class SubmitAPIFormPage extends Component {
     window && window.removeEventListener('beforeunload', this.handleReset)
   }
 
-  handleSubmit(values, actions) {
+  async handleSubmit(values, actions) {
     // The form has already passed validation,
     // this call serves only to apply Yup type coercion and transforms.
     const parsedFormData = schema.validateSync(values)
     const submitData = convertFormDataToRequestBody(parsedFormData)
 
-    return this.submitToApi(submitData)
-      .then((responseData) => {
-        actions.setSubmitting(false)
-        this.setState({
-          submitted: true,
-          responseData,
-          storedFormValues: null,
-        })
-        this.handleReset()
+    try {
+      const responseData = await this.submitToApi(submitData)
+      actions.setSubmitting(false)
+      this.setState({
+        submitted: true,
+        responseData,
+        storedFormValues: null,
       })
-      .catch((error) => {
-        actions.setSubmitting(false)
-        actions.setStatus({
-          msg:
-            'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.',
-        })
-        console.error(error)
+      this.handleReset()
+    } catch (error) {
+      actions.setSubmitting(false)
+      actions.setStatus({
+        msg:
+          'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.',
       })
+      console.error(error)
+    }
   }
 
-  submitToApi(data) {
-    return fetch('/api/submit-api', {
+  async submitToApi(data) {
+    const response = await fetch('/api/submit-api', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
-    }).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Er ging iets fout tijdens het toevoegen van de API.')
-      }
     })
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Er ging iets fout tijdens het toevoegen van de API.')
+    }
   }
 
   formikValueChange = (values) => {
@@ -223,18 +216,17 @@ class SubmitAPIFormPage extends Component {
     this.setState({ storedFormValues: null })
   }
 
-  fetchApiList() {
-    return fetch(`/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}`).then(
-      (response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error(
-            `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
-          )
-        }
-      },
+  async fetchApiList() {
+    const response = await fetch(
+      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}`,
     )
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(
+        `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
+      )
+    }
   }
 
   render() {

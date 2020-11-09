@@ -33,30 +33,26 @@ class ImplementedByListContainer extends Component {
     this.loadDetailsForAPI(id)
   }
 
-  fetchImplementedByInfo(id) {
-    return fetch(`/api/apis/${id}/implemented-by`).then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error(
-          `Er ging iets fout bij het ophalen van de referentie implementaties voor API met ID '${id}'`,
-        )
-      }
-    })
+  async fetchImplementedByInfo(id) {
+    const response = await fetch(`/api/apis/${id}/implemented-by`)
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(
+        `Er ging iets fout bij het ophalen van de referentie implementaties voor API met ID '${id}'`,
+      )
+    }
   }
 
-  loadDetailsForAPI(id) {
-    return this.fetchImplementedByInfo(id)
-      .then((response) => response.map((api) => modelFromAPIResponse(api)))
-      .then(
-        (apis) => {
-          this.setState({ apis: apis, loaded: true })
-        },
-        (error) => {
-          this.setState({ error: true, loaded: true })
-          console.error(error)
-        },
-      )
+  async loadDetailsForAPI(id) {
+    try {
+      const response = await this.fetchImplementedByInfo(id)
+      const apis = response.map((api) => modelFromAPIResponse(api))
+      this.setState({ apis: apis, loaded: true })
+    } catch (error) {
+      this.setState({ error: true, loaded: true })
+      console.error(error)
+    }
   }
 
   render() {
