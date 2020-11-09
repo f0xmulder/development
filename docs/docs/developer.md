@@ -176,3 +176,35 @@ When you update dependencies, it may happen that there is an unsolved bug in a n
 ### Javascript/Go
 
 Todo
+
+## Conventions for commit messages
+
+### Conventional commits
+We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. This convention requires you to add a type and an optional scope to your commit message. The scope is based on the applications in the repository. If you are not sure which scope to use please leave the scope blank.
+
+The type must be one of the following:
+
+* **build**: Changes that affect the build system or external dependencies
+* **ci**: Changes to our CI configuration files and scripts
+* **data**: Changes to data files (for this repo, mostly API's stored in JSON files)
+* **docs**: Documentation only changes
+* **feat**: A new feature
+* **fix**: A bug fix
+* **perf**: A code change that improves performance
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **revert**: Changes that revert other changes
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+* **test**: Adding missing tests or correcting existing tests
+
+The available scopes are:
+
+* api
+* ui
+* helm
+* linkchecker
+* validator
+
+### Issue number prefix
+For branches that are linked to a Gitlab issue, the commit message should also be prefixed by the issue number.  The issue number comes after the conventional commit part.
+
+Example: `feat(ui): #235 replace add buttons with links on small devices`
