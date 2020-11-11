@@ -59,6 +59,8 @@ spec:
               value: "{{ .Values.postgresDb }}"
             - name: LINKCHECKER_ENABLED_DEFAULT
               value: "{{.Values.linkcheckerEnabledDefault}}"
+            - name: API_TEST_BASE_URL
+              value: "{{.Values.apiTestBaseUrl}}"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -77,4 +79,5 @@ metadata: {{ include "don.common.metadata" . | nindent 2 }}
 type: Opaque
 data:
   SECRET_KEY: {{.Values.secretKey | b64enc | quote}}
+  API_TEST_TOKEN: {{.Values.apiTestToken | b64enc | quote}}
 {{ end }}

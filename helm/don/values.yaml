@@ -11,6 +11,9 @@ gitlabUrl: https://gitlab.com
 gitlabAccessToken: secret
 gitlabProjectId: "0"
 
+apiTestBaseUrl: "https://staging.api-test.nl/"
+apiTestToken: secret
+
 postgresUser: don
 postgresPassword: don
 postgresDb: don

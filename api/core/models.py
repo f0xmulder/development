@@ -1,3 +1,5 @@
+from django.contrib.postgres.fields import ArrayField
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Subquery, OuterRef, Case, When, BooleanField, Value, CharField
 from django.db.models.functions import Concat
@@ -6,6 +8,10 @@ from django.utils.html import format_html
 MAX_URL_LENGTH = 2000
 MAX_TEXT_LENGTH = 255
 MAX_ENUM_LENGTH = 31
+
+TEST_VERSION_LENGTH = 200
+RULE_TYPE_LENGTH = 250
+ERROR_CHARFIELD_LENGTH = 500
 
 
 class API(models.Model):
@@ -77,6 +83,18 @@ class API(models.Model):
     def __str__(self):
         return self.api_id
 
+    def get_production_environment(self):
+        return self.environments.filter(name=Environment.EnvironmentType.PRODUCTION).first()
+
+    def last_design_rule_session(self):
+        try:
+            return self.test_suite.sessions.order_by('-started_at').first()
+        except ObjectDoesNotExist:
+            return None
+
+    def is_rest(self):
+        return self.api_type in [self.APIType.REST_JSON, self.APIType.REST_XML]
+
 
 class Code(models.Model):
     class Source(models.TextChoices):
@@ -145,7 +163,7 @@ class Environment(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.api_url}"
 
 
 class Relation(models.Model):
@@ -348,3 +366,43 @@ class Config(models.Model):
 
     def __str__(self):
         return f'{self.variable}: {"enabled" if self.enabled else "disabled"}'
+
+
+class APIDesignRuleTestSuite(models.Model):
+    api = models.OneToOneField(
+        "core.API",
+        to_field="api_id",
+        db_constraint=False,
+        on_delete=models.DO_NOTHING,
+        related_name="test_suite"
+    )
+    uuid = models.UUIDField(null=True)
+    api_endpoint = models.URLField(null=True)
+
+    def __str__(self):
+        return f"{self.api.api_id} - {self.uuid}"
+
+
+class DesignRuleSession(models.Model):
+    test_suite = models.ForeignKey(
+        APIDesignRuleTestSuite, on_delete=models.CASCADE, related_name="sessions"
+    )
+    started_at = models.DateTimeField()
+    percentage_score = models.DecimalField(default=0, decimal_places=2, max_digits=5)
+    test_version = models.CharField(default="", max_length=TEST_VERSION_LENGTH)
+
+    class Meta:
+        ordering = ("-started_at", )
+
+
+class DesignRuleResult(models.Model):
+    session = models.ForeignKey(
+        DesignRuleSession, on_delete=models.CASCADE, related_name="results"
+    )
+    rule_type_url = models.URLField()
+    rule_type_name = models.CharField(max_length=RULE_TYPE_LENGTH, default="")
+    rule_type_description = models.TextField(default="")
+    success = models.BooleanField(default=False, blank=True)
+    errors = ArrayField(
+        models.CharField(max_length=ERROR_CHARFIELD_LENGTH), null=True
+    )

@@ -3,8 +3,10 @@ from collections import OrderedDict
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from core.models import API, Environment, Badge, Event, Code, ProgrammingLanguage, \
+from core.models import (
+    API, Environment, Badge, Event, Code, ProgrammingLanguage, DesignRuleSession, DesignRuleResult,
     MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
+)
 
 
 class NonNullModelSerializer(serializers.ModelSerializer):
@@ -100,6 +102,31 @@ class TermsOfUseSerializer(serializers.Serializer):
     )
 
 
+class DesignRuleResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DesignRuleResult
+        fields = [
+            'rule_type_url',
+            'rule_type_name',
+            'rule_type_description',
+            'success',
+            'errors',
+        ]
+
+
+class DesignRuleSessionSerializer(serializers.ModelSerializer):
+    results = DesignRuleResultSerializer(many=True)
+
+    class Meta:
+        model = DesignRuleSession
+        fields = [
+            'started_at',
+            'percentage_score',
+            'test_version',
+            'results',
+        ]
+
+
 class APISerializer(NonNullModelSerializer):
     id = serializers.CharField(source='api_id')
     environments = EnvironmentSerializer(many=True)
@@ -108,6 +135,10 @@ class APISerializer(NonNullModelSerializer):
     contact = ContactSerializer(source='*', required=False)
     terms_of_use = TermsOfUseSerializer(source='*', required=False)
     scores = serializers.SerializerMethodField('get_scores')
+    design_rule_scores = DesignRuleSessionSerializer(
+        source='last_design_rule_session',
+        read_only=True
+    )
 
     class Meta:
         model = API
@@ -125,7 +156,8 @@ class APISerializer(NonNullModelSerializer):
             'is_reference_implementation',
             'referenced_apis',
             'terms_of_use',
-            'scores'
+            'scores',
+            'design_rule_scores',
         ]
 
     def validate_environments(self, environments):

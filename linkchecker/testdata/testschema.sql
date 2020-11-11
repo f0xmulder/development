@@ -97,6 +97,38 @@ ALTER SEQUENCE public.core_apibadge_id_seq OWNED BY public.core_apibadge.id;
 
 
 --
+-- Name: core_apidesignruletestsuite; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_apidesignruletestsuite (
+    id integer NOT NULL,
+    uuid uuid,
+    api_endpoint character varying(200),
+    api_id character varying(255) NOT NULL
+);
+
+
+--
+-- Name: core_apidesignruletestsuite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.core_apidesignruletestsuite_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: core_apidesignruletestsuite_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.core_apidesignruletestsuite_id_seq OWNED BY public.core_apidesignruletestsuite.id;
+
+
+--
 -- Name: core_badge; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -253,6 +285,74 @@ CREATE SEQUENCE public.core_config_id_seq
 --
 
 ALTER SEQUENCE public.core_config_id_seq OWNED BY public.core_config.id;
+
+
+--
+-- Name: core_designruleresult; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_designruleresult (
+    id integer NOT NULL,
+    rule_type_url character varying(200) NOT NULL,
+    rule_type_name character varying(250) NOT NULL,
+    rule_type_description text NOT NULL,
+    success boolean NOT NULL,
+    errors character varying(500)[],
+    session_id integer NOT NULL
+);
+
+
+--
+-- Name: core_designruleresult_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.core_designruleresult_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: core_designruleresult_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.core_designruleresult_id_seq OWNED BY public.core_designruleresult.id;
+
+
+--
+-- Name: core_designrulesession; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_designrulesession (
+    id integer NOT NULL,
+    started_at timestamp with time zone NOT NULL,
+    percentage_score numeric(5,2) NOT NULL,
+    test_version character varying(200) NOT NULL,
+    test_suite_id integer NOT NULL
+);
+
+
+--
+-- Name: core_designrulesession_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.core_designrulesession_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: core_designrulesession_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.core_designrulesession_id_seq OWNED BY public.core_designrulesession.id;
 
 
 --
@@ -495,6 +595,13 @@ ALTER TABLE ONLY public.core_apibadge ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: core_apidesignruletestsuite id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_apidesignruletestsuite ALTER COLUMN id SET DEFAULT nextval('public.core_apidesignruletestsuite_id_seq'::regclass);
+
+
+--
 -- Name: core_badge id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -527,6 +634,20 @@ ALTER TABLE ONLY public.core_codeapi ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.core_config ALTER COLUMN id SET DEFAULT nextval('public.core_config_id_seq'::regclass);
+
+
+--
+-- Name: core_designruleresult id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designruleresult ALTER COLUMN id SET DEFAULT nextval('public.core_designruleresult_id_seq'::regclass);
+
+
+--
+-- Name: core_designrulesession id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designrulesession ALTER COLUMN id SET DEFAULT nextval('public.core_designrulesession_id_seq'::regclass);
 
 
 --
@@ -603,6 +724,22 @@ ALTER TABLE ONLY public.core_apibadge
 
 
 --
+-- Name: core_apidesignruletestsuite core_apidesignruletestsuite_api_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_apidesignruletestsuite
+    ADD CONSTRAINT core_apidesignruletestsuite_api_id_key UNIQUE (api_id);
+
+
+--
+-- Name: core_apidesignruletestsuite core_apidesignruletestsuite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_apidesignruletestsuite
+    ADD CONSTRAINT core_apidesignruletestsuite_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: core_badge core_badge_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -664,6 +801,22 @@ ALTER TABLE ONLY public.core_config
 
 ALTER TABLE ONLY public.core_config
     ADD CONSTRAINT core_config_variable_key UNIQUE (variable);
+
+
+--
+-- Name: core_designruleresult core_designruleresult_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designruleresult
+    ADD CONSTRAINT core_designruleresult_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: core_designrulesession core_designrulesession_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designrulesession
+    ADD CONSTRAINT core_designrulesession_pkey PRIMARY KEY (id);
 
 
 --
@@ -767,6 +920,13 @@ CREATE INDEX core_apibadge_badge_id_ff11a4e8 ON public.core_apibadge USING btree
 
 
 --
+-- Name: core_apidesignruletestsuite_api_id_2e3dc731_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_apidesignruletestsuite_api_id_2e3dc731_like ON public.core_apidesignruletestsuite USING btree (api_id varchar_pattern_ops);
+
+
+--
 -- Name: core_code_last_change_bf026719; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -820,6 +980,20 @@ CREATE INDEX core_codeapi_code_id_93a40ac2 ON public.core_codeapi USING btree (c
 --
 
 CREATE INDEX core_config_variable_2f56a937_like ON public.core_config USING btree (variable varchar_pattern_ops);
+
+
+--
+-- Name: core_designruleresult_session_id_e82fe12d; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_designruleresult_session_id_e82fe12d ON public.core_designruleresult USING btree (session_id);
+
+
+--
+-- Name: core_designrulesession_test_suite_id_45ebc41c; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_designrulesession_test_suite_id_45ebc41c ON public.core_designrulesession USING btree (test_suite_id);
 
 
 --
@@ -943,6 +1117,22 @@ ALTER TABLE ONLY public.core_code_programming_languages
 
 ALTER TABLE ONLY public.core_codeapi
     ADD CONSTRAINT core_codeapi_code_id_93a40ac2_fk_core_code_id FOREIGN KEY (code_id) REFERENCES public.core_code(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: core_designruleresult core_designruleresul_session_id_e82fe12d_fk_core_desi; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designruleresult
+    ADD CONSTRAINT core_designruleresul_session_id_e82fe12d_fk_core_desi FOREIGN KEY (session_id) REFERENCES public.core_designrulesession(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: core_designrulesession core_designrulesessi_test_suite_id_45ebc41c_fk_core_apid; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_designrulesession
+    ADD CONSTRAINT core_designrulesessi_test_suite_id_45ebc41c_fk_core_apid FOREIGN KEY (test_suite_id) REFERENCES public.core_apidesignruletestsuite(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

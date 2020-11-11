@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'solo',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,10 @@ USE_TZ = True
 
 STATIC_URL = '/admin/static/'
 STATIC_ROOT = '/app/static'
+
+# Design Rule settings
+API_TEST_BASE_URL_DEFAULT = "https://staging.api-test.nl/"
+
+API_TEST_BASE_URL = os.getenv('API_TEST_BASE_URL', API_TEST_BASE_URL_DEFAULT)
+API_TEST_TOKEN = os.getenv('API_TEST_TOKEN')
+API_TEST_DEFAULT_VERSION = os.getenv('API_TEST_DEFAULT_VERSION', "2")

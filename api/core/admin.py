@@ -1,7 +1,15 @@
 from django.contrib import admin
 from django.db.models import Subquery, OuterRef, Count
 
-from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config, CodeAPI
+from .models import (
+    Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config, CodeAPI,
+    APIDesignRuleTestSuite
+)
+
+
+@admin.register(APIDesignRuleTestSuite)
+class APIDesignRuleTestSuiteAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Badge)
