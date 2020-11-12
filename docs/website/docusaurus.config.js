@@ -43,7 +43,7 @@ module.exports = {
       {
         docs: {
           path: '../docs',
-          routeBasePath: '',
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://gitlab.com/commonground/developer.overheid.nl/tree/master/docs/docs',
         },
