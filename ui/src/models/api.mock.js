@@ -4,7 +4,7 @@
 
 import { EnvironmentType, APIType, APIAuthentication } from './enums'
 
-export const goApiMock = {
+export const backendApiMock = {
   /* eslint-disable camelcase */
   id: 'id',
   service_name: 'service name',
@@ -41,16 +41,55 @@ export const goApiMock = {
     has_contact_details: false,
     provides_sla: false,
   },
-  api_design_rules: [
+  design_rule_scores: {
+    results: [
+      {
+        rule_type_name: 'API-16: Use OAS 3.0 for documentation',
+        rule_type_description:
+          'Use Open API Specification (OAS) 3.0 or higher.',
+        rule_type_url:
+          'https://docs.geostandaarden.nl/api/API-Designrules/#api-16-use-oas-3-0-for-documentation',
+        success: true,
+        errors: null,
+      },
+      {
+        rule_type_name: 'API-48: Leave off trailing slashes from API endpoints',
+        rule_type_description: "URIs don't include a trailing slash.",
+        rule_type_url:
+          'https://docs.geostandaarden.nl/api/API-Designrules/#api-48-leave-off-trailing-slashes-from-api-endpoints',
+        success: false,
+        errors: [
+          'Path: /provider-latest-badge-1/{uuid}/ ends with a slash',
+          'Path: /provider-latest-badge-2/{uuid}/ ends with a slash',
+        ],
+      },
+    ],
+  },
+  /* eslint-enable camelcase */
+}
+
+export const designRuleScoresMock = {
+  results: [
     {
-      id: 'API-01',
-      title: 'API-01: First API Design Rule',
-      description: 'Description of first API Design Rule',
-      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-01',
-      compliant: true,
+      name: 'API-16: Use OAS 3.0 for documentation',
+      description: 'Use Open API Specification (OAS) 3.0 or higher.',
+      url:
+        'https://docs.geostandaarden.nl/api/API-Designrules/#api-16-use-oas-3-0-for-documentation',
+      success: true,
+      errors: [],
+    },
+    {
+      name: 'API-48: Leave off trailing slashes from API endpoints',
+      description: "URIs don't include a trailing slash.",
+      url:
+        'https://docs.geostandaarden.nl/api/API-Designrules/#api-48-leave-off-trailing-slashes-from-api-endpoints',
+      success: false,
+      errors: [
+        'Path: /provider-latest-badge-1/{uuid}/ ends with a slash',
+        'Path: /provider-latest-badge-2/{uuid}/ ends with a slash',
+      ],
     },
   ],
-  /* eslint-enable camelcase */
 }
 
 export const apiMock = {
@@ -89,13 +128,9 @@ export const apiMock = {
     hasContactDetails: false,
     providesSla: false,
   },
-  apiDesignRules: [
-    {
-      id: 'API-01',
-      title: 'API-01: First API Design Rule',
-      description: 'Description of first API Design Rule',
-      link: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-01',
-      compliant: true,
-    },
-  ],
+  designRuleScores: designRuleScoresMock,
+  totalScore: {
+    points: 1,
+    maxPoints: 2,
+  },
 }

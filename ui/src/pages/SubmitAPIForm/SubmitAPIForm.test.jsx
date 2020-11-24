@@ -5,7 +5,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Formik } from 'formik'
 
-import { goApiMock } from '../../models/api.mock'
+import { backendApiMock } from '../../models/api.mock'
 import { flushPromises } from '../../test-helpers'
 import { modelFromAPIResponse } from '../../models/api'
 import {
@@ -59,7 +59,7 @@ describe('SubmitAPI', () => {
       const apiPromise = Promise.resolve({
         total: 1,
         page: 1,
-        results: [goApiMock],
+        results: [backendApiMock],
       })
       SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
 
@@ -67,7 +67,7 @@ describe('SubmitAPI', () => {
 
       await flushPromises()
       expect(wrapper.state('result')).toEqual({
-        apis: [modelFromAPIResponse(goApiMock)],
+        apis: [modelFromAPIResponse(backendApiMock)],
       })
     })
   })

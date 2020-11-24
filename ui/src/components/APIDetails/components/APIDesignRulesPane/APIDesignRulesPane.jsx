@@ -1,82 +1,132 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import React, { useEffect, useState } from 'react'
-import { func, string } from 'prop-types'
-import { useParams, useHistory } from 'react-router-dom'
+import React from 'react'
+import { string, number, shape } from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
-import APIDetailsRepository from '../../domain/api-details-repository'
+import Grade from '../../../Grade/Grade'
+import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
+import CrossCircle from '../../../Icons/Circles/CrossCircle'
+import { IconList } from '../../APIDetails.styles'
+import { designRuleScores } from '../../../../models/propTypes'
 import {
-  StyledDesignRulesUl,
-  StyledDesignRulesLi,
-  StyledDesignRulesTitle,
+  GradeSection,
+  IntroSection,
   StyledLink,
   ExternalIcon,
+  StyledIconListItem,
+  DesignRuleTitle,
+  DesignRuleDescription,
+  CollapsibleContainer,
+  ErrorsCollapsible,
+  ErrorList,
+  Error,
+  StyledExclamationMark,
+  StyledErrorsTitle,
+  DesignRuleLinkContainer,
 } from './APIDesignRulesPane.styles'
 
-const APIDesignRulesPane = ({ getApiDetailsById, parentUrl }) => {
-  const { id } = useParams()
-  const [apiDetails, setApiDetails] = useState(null)
+const ErrorsTitle = ({ titleText }) => (
+  <StyledErrorsTitle>
+    <StyledExclamationMark />
+    {titleText}
+  </StyledErrorsTitle>
+)
+ErrorsTitle.propTypes = {
+  titleText: string,
+}
+
+const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
   const history = useHistory()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const apiDetails = await getApiDetailsById(id)
-      setApiDetails(apiDetails)
-    }
-
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
 
   const close = () => history.push(parentUrl)
 
   return (
-    <Drawer closeHandler={close}>
-      <Drawer.Header title="API Design Rules" closeButtonLabel="Sluit" />
+    <Drawer closeHandler={close} data-testid="design-rules-pane">
+      <Drawer.Header title="Opbouw API Score" closeButtonLabel="Sluit" />
       <Drawer.Content>
-        <p>
-          Van de volgende{' '}
+        <p>Deze score geeft de kwaliteit van de API weer.</p>
+
+        <GradeSection>
+          <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
+        </GradeSection>
+
+        <IntroSection>
+          De score geeft weer hoe compliant deze API is met de{' '}
           <StyledLink
             href="https://docs.geostandaarden.nl/api/API-Designrules/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            API Design Rules
-          </StyledLink>{' '}
-          wordt automatisch gecontroleerd of de API eraan voldoet:
-        </p>
-        {apiDetails && apiDetails.apiDesignRules && (
-          <StyledDesignRulesUl>
-            {apiDetails.apiDesignRules.map((rule) => (
-              <StyledDesignRulesLi available={rule.compliant} key={rule.title}>
-                <StyledDesignRulesTitle>
+            API design rules
+          </StyledLink>
+          . Dit zijn de afspraken die we gemaakt hebben over API design. Een
+          aantal design rules controleren we automatisch:
+        </IntroSection>
+
+        <IconList>
+          {designRuleScores.results.map((rule, index) => {
+            const hasErrors = rule.errors.length > 0
+            const errorText = hasErrors
+              ? `${rule.errors.length} bevinding${
+                  rule.errors.length > 1 ? 'en' : ''
+                } bij automatische test`
+              : ''
+            return (
+              <StyledIconListItem key={index}>
+                <IconList.ListItem.Icon>
+                  {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
+                </IconList.ListItem.Icon>
+                <IconList.ListItem.Content>
+                  <DesignRuleTitle>{rule.name}</DesignRuleTitle>
+                  <DesignRuleDescription>
+                    {rule.description}
+                  </DesignRuleDescription>
                   <StyledLink
-                    href={rule.link}
+                    href={rule.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Ga naar Design Rule ${rule.name}`}
                   >
-                    {rule.title} <ExternalIcon />
+                    <DesignRuleLinkContainer>
+                      <span>Ga naar Design Rule</span>
+                      <ExternalIcon />
+                    </DesignRuleLinkContainer>
                   </StyledLink>
-                </StyledDesignRulesTitle>
-                <p>{rule.description}</p>
-              </StyledDesignRulesLi>
-            ))}
-          </StyledDesignRulesUl>
-        )}
+
+                  {hasErrors ? (
+                    <CollapsibleContainer>
+                      <ErrorsCollapsible
+                        title={<ErrorsTitle titleText={errorText} />}
+                        ariaLabel={errorText}
+                      >
+                        <ErrorList>
+                          {rule.errors.map((error, index) => (
+                            <Error key={index}>{error}</Error>
+                          ))}
+                        </ErrorList>
+                      </ErrorsCollapsible>
+                    </CollapsibleContainer>
+                  ) : null}
+                </IconList.ListItem.Content>
+              </StyledIconListItem>
+            )
+          })}
+        </IconList>
       </Drawer.Content>
     </Drawer>
   )
 }
 
 APIDesignRulesPane.propTypes = {
-  getApiDetailsById: func.isRequired,
+  designRuleScores: designRuleScores.isRequired,
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
   parentUrl: string.isRequired,
-}
-
-APIDesignRulesPane.defaultProps = {
-  getApiDetailsById: APIDetailsRepository.getById,
 }
 
 export default APIDesignRulesPane

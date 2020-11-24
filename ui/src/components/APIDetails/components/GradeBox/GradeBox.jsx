@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { string, shape, bool } from 'prop-types'
+import { string, shape, bool, number } from 'prop-types'
 
 import {
   GradeContainer,
@@ -12,25 +12,31 @@ import {
   StyledLinkMobile,
 } from './GradeBox.styles'
 
-const GradeBox = ({ scores, apiId }) => (
-  <GradeContainer>
-    <GradeHeader>API score</GradeHeader>
-    <StyledGrade scores={scores} largeAtMediaQuery="smUp" />
-    <StyledLinkMobile to={`${apiId}/score-detail`}>
-      Toon API score opbouw
-    </StyledLinkMobile>
-    <StyledLink to={`${apiId}/score-detail`}>Toon opbouw</StyledLink>
-  </GradeContainer>
-)
+const GradeBox = ({ apiId, totalScore, isDesignRulesScore }) => {
+  const scoreDescription = isDesignRulesScore
+    ? 'Design Rule score'
+    : 'API score'
+  const linkTarget = `${apiId}/score-detail`
+
+  return (
+    <GradeContainer>
+      <GradeHeader>{scoreDescription}</GradeHeader>
+      <StyledGrade totalScore={totalScore} largeAtMediaQuery="smUp" />
+      <StyledLinkMobile to={linkTarget}>
+        Toon {scoreDescription} opbouw
+      </StyledLinkMobile>
+      <StyledLink to={linkTarget}>Toon opbouw</StyledLink>
+    </GradeContainer>
+  )
+}
 
 GradeBox.propTypes = {
-  scores: shape({
-    hasDocumentation: bool,
-    hasSpecification: bool,
-    hasContactDetails: bool,
-    providesSla: bool,
-  }),
   apiId: string,
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
+  isDesignRulesScore: bool,
 }
 
 export default GradeBox

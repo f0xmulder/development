@@ -2,9 +2,10 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { arrayOf, shape, string } from 'prop-types'
+import { arrayOf, shape, string, number, instanceOf } from 'prop-types'
 
 import APISummary from '../APISummary/APISummary'
+import { APIType } from '../../models/enums'
 import {
   StyledCard,
   StyledCardBody,
@@ -23,7 +24,7 @@ const APIList = ({ apis }) => (
               serviceName={api.serviceName}
               organizationName={api.organizationName}
               apiType={api.apiType}
-              scores={api.scores}
+              totalScore={api.totalScore}
             />
           </StyledListItem>
         ))}
@@ -38,6 +39,11 @@ APIList.propTypes = {
       id: string.isRequired,
       serviceName: string.isRequired,
       organizationName: string.isRequired,
+      apiType: instanceOf(APIType).isRequired,
+      totalScore: shape({
+        points: number.isRequired,
+        maxPoints: number.isRequired,
+      }).isRequired,
     }),
   ),
 }

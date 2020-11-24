@@ -38,20 +38,48 @@ const mapTermsOfUse = (termsOfUse) => {
   }
 }
 
-export const modelFromAPIResponse = (api) => ({
-  id: api.id,
-  serviceName: api.service_name,
-  organizationName: api.organization_name,
-  description: api.description,
-  apiType: APIType.valueOf(api.api_type),
-  apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
-  environments: mapEnvironments(api.environments || []),
-  forum: api.forum,
-  badges: api.badges,
-  isReferenceImplementation: api.is_reference_implementation,
-  relations: api.relations,
-  termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
-  scores: mapScores(api.scores),
-  apiDesignRules: api.api_design_rules,
-  relatedCode: api.related_code,
+const mapDesignRuleScores = (designRuleScores) => ({
+  results: designRuleScores.results.map((result) => ({
+    name: result.rule_type_name,
+    description: result.rule_type_description,
+    url: result.rule_type_url,
+    success: result.success,
+    errors: result.errors || [],
+  })),
 })
+
+export const modelFromAPIResponse = (api) => {
+  const apiType = APIType.valueOf(api.api_type)
+  const scores = mapScores(api.scores)
+  const designRuleScores = api.design_rule_scores
+    ? mapDesignRuleScores(api.design_rule_scores)
+    : null
+
+  const totalScore = {
+    points: designRuleScores
+      ? designRuleScores.results.filter((result) => result.success).length
+      : Object.values(scores).filter((value) => value).length,
+    maxPoints: designRuleScores
+      ? designRuleScores.results.length
+      : Object.values(scores).length,
+  }
+
+  return {
+    id: api.id,
+    serviceName: api.service_name,
+    organizationName: api.organization_name,
+    description: api.description,
+    apiType,
+    apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
+    environments: mapEnvironments(api.environments || []),
+    forum: api.forum,
+    badges: api.badges,
+    isReferenceImplementation: api.is_reference_implementation,
+    relations: api.relations,
+    termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
+    scores,
+    designRuleScores,
+    totalScore,
+    relatedCode: api.related_code,
+  }
+}

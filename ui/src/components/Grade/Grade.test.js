@@ -3,36 +3,17 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme/build'
-import Grade, { calculateGrade } from './Grade'
+import Grade from './Grade'
 import { gradeToColor } from './Grade.styles'
 
 describe('Grade', () => {
   it('should display the calculated score', () => {
-    const scores = {
-      hasDocumentation: true,
-      hasSpecification: true,
-      hasContactDetails: true,
-      providesSla: true,
+    const totalScore = {
+      points: 5,
+      maxPoints: 7,
     }
-    const wrapper = shallow(<Grade scores={scores} />)
-    expect(wrapper.text()).toBe('10/10')
-  })
-})
-
-describe('calculating the grade from scores', () => {
-  it('should equal the amount of scores with value true on the total amount of scores', () => {
-    const testCases = [
-      { scores: { foo: true }, grade: 10 },
-      { scores: { foo: true, bar: false }, grade: 5 },
-      {
-        scores: { foo: true, bar: false, baz: false, foobar: false },
-        grade: 2.5,
-      },
-    ]
-
-    testCases.forEach(({ scores, grade }) => {
-      expect(calculateGrade(scores)).toBe(grade)
-    })
+    const wrapper = shallow(<Grade totalScore={totalScore} />)
+    expect(wrapper.text()).toBe('5/7')
   })
 })
 

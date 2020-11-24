@@ -2,23 +2,21 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { shape, bool, string } from 'prop-types'
+import { number, string, shape } from 'prop-types'
 import {
   StyledBorder,
   StyledCircle,
   StyledScoreSubscript,
 } from './Grade.styles'
 
-export const calculateGrade = (scores) => {
-  const values = Object.values(scores)
-  const percentage =
-    values.reduce((total, value) => (value ? total + 1 : total), 0) /
-    values.length
+export const calculateGrade = (points, maxPoints) => {
+  const percentage = points / maxPoints
   return Math.round(percentage * 10 * 10) / 10
 }
 
-const Grade = ({ scores, largeAtMediaQuery, ...props }) => {
-  const grade = calculateGrade(scores)
+const Grade = ({ totalScore, largeAtMediaQuery, ...props }) => {
+  const { points, maxPoints } = totalScore
+  const grade = calculateGrade(points, maxPoints)
 
   return (
     <StyledBorder
@@ -27,9 +25,9 @@ const Grade = ({ scores, largeAtMediaQuery, ...props }) => {
       {...props}
     >
       <StyledCircle largeAtMediaQuery={largeAtMediaQuery}>
-        {grade}
+        {points}
         <StyledScoreSubscript largeAtMediaQuery={largeAtMediaQuery}>
-          /10
+          /{maxPoints}
         </StyledScoreSubscript>
       </StyledCircle>
     </StyledBorder>
@@ -37,12 +35,10 @@ const Grade = ({ scores, largeAtMediaQuery, ...props }) => {
 }
 
 Grade.propTypes = {
-  scores: shape({
-    hasDocumentation: bool,
-    hasSpecification: bool,
-    hasContactDetails: bool,
-    providesSla: bool,
-  }),
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
   // Use function names from `theme/mediaQueries`
   largeAtMediaQuery: string,
 }

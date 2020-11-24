@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { useRouteMatch } from 'react-router'
 import PropTypes from 'prop-types'
 
@@ -15,17 +15,14 @@ import ImplementedByListContainer from '../ImplementedByListContainer/Implemente
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
 import Card from '../Card/Card'
 import ForumPosts from '../ForumPosts/ForumPosts'
-import APIDesignRulesPane from '../APIDesignRulesPane/APIDesignRulesPane'
+import { designRuleScores } from '../../models/propTypes'
+import APIDesignRulesPane from './components/APIDesignRulesPane/APIDesignRulesPane'
 import APIEnvironments from './components/APIEnvironments/APIEnvironments'
 import APITerms from './components/APITerms/APITerms'
 import GradeBox from './components/GradeBox/GradeBox'
 import APIScoresPane from './components/APIScoresPane/APIScoresPane'
 
-import {
-  Description,
-  StyledScoresUl,
-  StyledScoresLi,
-} from './APIDetails.styles'
+import { Description } from './APIDetails.styles'
 
 export const referenceImplementationsFromRelations = (relations = {}) =>
   Object.keys(relations).filter((apiId) =>
@@ -45,9 +42,12 @@ const APIDetails = ({
   relations,
   termsOfUse,
   scores,
-  apiDesignRules,
+  designRuleScores,
+  totalScore,
 }) => {
   const match = useRouteMatch('/apis')
+  const showDesignRuleScores = !!designRuleScores
+
   return (
     <Container>
       <APIDetailsHeader
@@ -63,7 +63,11 @@ const APIDetails = ({
           <Description>{description}</Description>
         </Col>
         <Col width={[1, 1 / 4]}>
-          <GradeBox scores={scores} apiId={id} />
+          <GradeBox
+            apiId={id}
+            totalScore={totalScore}
+            isDesignRulesScore={showDesignRuleScores}
+          />
         </Col>
       </Row>
 
@@ -83,30 +87,6 @@ const APIDetails = ({
           </Card.Body>
         </Card>
       ) : null}
-
-      {/* 
-      2020-02-27 See mock data: 
-      https://gitlab.com/commonground/developer.overheid.nl/-/merge_requests/1204/diffs#diff-content-879c24a0e37eb0a4feb366194c3b5c91d45512d5
-      */}
-      {apiDesignRules && apiDesignRules.length && (
-        <Card data-test="api-design-rules">
-          <Card.Body>
-            <Card.Title>API Design Rules</Card.Title>
-            <StyledScoresUl data-test="api-design-rules-list">
-              {apiDesignRules.map((rule) => (
-                <StyledScoresLi
-                  title={rule.title}
-                  available={rule.compliant}
-                  key={rule.title}
-                >
-                  {rule.id}
-                </StyledScoresLi>
-              ))}
-            </StyledScoresUl>
-            <Link to={`${id}/api-design-rules`}>Meer informatie</Link>
-          </Card.Body>
-        </Card>
-      )}
 
       {forum && forum.url && (
         <Card>
@@ -140,16 +120,21 @@ const APIDetails = ({
       <Route
         exact
         path={`${match.url}/:id/score-detail`}
-        render={() => (
-          <APIScoresPane parentUrl={`/apis/${id}`} scores={scores} />
-        )}
-      />
-
-      {/* Below might not be required after redesign. May be better to merge design rules and score in same pane. */}
-      <Route
-        exact
-        path="/apis/:id/api-design-rules"
-        render={() => <APIDesignRulesPane parentUrl={`/apis/${id}`} />}
+        render={() => {
+          return showDesignRuleScores ? (
+            <APIDesignRulesPane
+              parentUrl={`/apis/${id}`}
+              designRuleScores={designRuleScores}
+              totalScore={totalScore}
+            />
+          ) : (
+            <APIScoresPane
+              parentUrl={`/apis/${id}`}
+              scores={scores}
+              totalScore={totalScore}
+            />
+          )
+        }}
       />
     </Container>
   )
@@ -178,7 +163,11 @@ APIDetails.propTypes = {
     hasContactDetails: PropTypes.bool,
     providesSla: PropTypes.bool,
   }),
-  apiDesignRules: PropTypes.array,
+  designRuleScores: designRuleScores,
+  totalScore: PropTypes.shape({
+    points: PropTypes.number.isRequired,
+    maxPoints: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export default APIDetails

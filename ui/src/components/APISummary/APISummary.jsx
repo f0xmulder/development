@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { string, object, instanceOf } from 'prop-types'
+import { string, shape, number, instanceOf } from 'prop-types'
 
 import PillBadge from '../PillBadge/PillBadge'
 
@@ -20,7 +20,7 @@ const APISummary = ({
   serviceName,
   organizationName,
   apiType,
-  scores,
+  totalScore,
   ...props
 }) => (
   <StyledLink to={`/apis/${id}`} data-test="link" {...props}>
@@ -29,7 +29,7 @@ const APISummary = ({
     <PillContainer>
       <PillBadge>{apiType.label}</PillBadge>
     </PillContainer>
-    <StyledGrade scores={scores} />
+    <StyledGrade totalScore={totalScore} />
   </StyledLink>
 )
 
@@ -38,7 +38,10 @@ APISummary.propTypes = {
   serviceName: string.isRequired,
   organizationName: string.isRequired,
   apiType: instanceOf(APIType).isRequired,
-  scores: object.isRequired,
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
 }
 
 export default APISummary
