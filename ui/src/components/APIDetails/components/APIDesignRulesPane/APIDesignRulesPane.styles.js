@@ -4,8 +4,8 @@
 import styled from 'styled-components'
 
 import External from '../Icons/External'
-import availableIcon from './icons/available.svg'
-import unavailableIcon from './icons/unavailable.svg'
+import availableIcon from '../icons/available.svg'
+import unavailableIcon from '../icons/unavailable.svg'
 
 export const StyledDesignRulesUl = styled.ul`
   list-style-position: inside;
