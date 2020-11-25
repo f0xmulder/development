@@ -2,7 +2,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from core.models import API
-from design_rules.tasks import create_test_suite, start_design_rule_session, APIPlatformException
+from design_rules.tasks import (
+    create_test_suite, start_design_rule_session, APIPlatformException
+)
 from design_rules.models import APIDesignRuleTestSuite
 
 

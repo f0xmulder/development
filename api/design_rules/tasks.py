@@ -9,10 +9,12 @@ class APIPlatformException(Exception):
 def create_test_suite(api_design_rule_test_suite):
     config = DesignRulesConfiguration.get_solo()
     url = "{}api/v1/designrule-testsuite".format(config.base_url)
+    spec_url = api_design_rule_test_suite.api.get_production_environment().get_specification_url()
     data = {
-        "api_endpoint": api_design_rule_test_suite.api.get_production_environment().get_specification_url()
+        "api_endpoint": spec_url
     }
-    response = requests.post(url, data=data, headers={'Authorization': 'Token {}'.format(config.token)})
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.post(url, data=data, headers=headers)
     if response.ok:
         api_design_rule_test_suite.uuid = response.json().get('uuid')
         api_design_rule_test_suite.save()
@@ -22,8 +24,11 @@ def create_test_suite(api_design_rule_test_suite):
 
 def get_all_sessions_urls(api_design_rule_test_suite):
     config = DesignRulesConfiguration.get_solo()
-    url = "{}api/v1/designrule-testsuite/{}".format(config.base_url, str(api_design_rule_test_suite.uuid))
-    response = requests.get(url, headers={'Authorization': 'Token {}'.format(config.token)})
+    url = "{}api/v1/designrule-testsuite/{}".format(
+        config.base_url, str(api_design_rule_test_suite.uuid)
+    )
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.get(url, headers=headers)
     if response.ok:
         return response.json().get('sessions')
     raise APIPlatformException(response.json())
@@ -31,15 +36,16 @@ def get_all_sessions_urls(api_design_rule_test_suite):
 
 def start_design_rule_session(api_design_rule_test_suite, version=None):
     config = DesignRulesConfiguration.get_solo()
-    url = "{}api/v1/designrule-testsuite/{}/start_session".format(config.base_url, str(api_design_rule_test_suite.uuid))
+    url = "{}api/v1/designrule-testsuite/{}/start_session".format(
+        config.base_url, str(api_design_rule_test_suite.uuid)
+    )
 
     if not version:
         version = config.default_version
 
-    data = {
-        "test_version": version
-    }
-    response = requests.post(url, data=data, headers={'Authorization': 'Token {}'.format(config.token)})
+    data = {"test_version": version}
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.post(url, data=data, headers=headers)
     if response.ok:
         response_dict = response.json()
         session = DesignRuleSession.objects.create(
@@ -65,7 +71,8 @@ def start_design_rule_session(api_design_rule_test_suite, version=None):
 
 def get_session(session_url):
     config = DesignRulesConfiguration.get_solo()
-    response = requests.get(session_url, headers={'Authorization': 'Token {}'.format(config.token)})
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.get(session_url, headers=headers)
 
     if response.ok:
         return response.json()
