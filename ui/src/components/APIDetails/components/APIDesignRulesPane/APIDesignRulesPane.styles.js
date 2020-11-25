@@ -2,18 +2,31 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
+import { Collapsible } from '@commonground/design-system'
 
-import External from '../Icons/External'
-import availableIcon from '../icons/available.svg'
-import unavailableIcon from '../icons/unavailable.svg'
+import External from '../../../Icons/External'
+import availableIcon from '../../icons/available.svg'
+import unavailableIcon from '../../icons/unavailable.svg'
 
-export const StyledDesignRulesUl = styled.ul`
+export const GradeSection = styled.div``
+
+export const IntroSection = styled.p``
+
+export const StyledLink = styled.a`
+  text-decoration: none;
+`
+
+export const ExternalIcon = styled(External)`
+  margin-left: ${(p) => p.theme.tokens.spacing03};
+`
+
+export const DesignRulesList = styled.ul`
   list-style-position: inside;
   padding-left: 0;
   list-style-type: none;
 `
 
-export const StyledDesignRulesLi = styled.li`
+export const DesignRule = styled.li`
   padding-left: 30px;
   position: relative;
 
@@ -24,7 +37,7 @@ export const StyledDesignRulesLi = styled.li`
     left: 0;
     position: absolute;
     ${(p) =>
-      p.available
+      p.success
         ? `background-image: url(${availableIcon});`
         : `background-image: url(${unavailableIcon});`}
     background-size: 18px;
@@ -33,14 +46,18 @@ export const StyledDesignRulesLi = styled.li`
   }
 `
 
+export const DesignRuleTitle = styled.div``
+
+export const DesignRuleDescription = styled.div``
+
 export const StyledDesignRulesTitle = styled.h4`
   margin: 20px 0 5px 0;
 `
 
-export const StyledLink = styled.a`
-  text-decoration: none;
-`
+export const ErrorsCollapsible = styled(Collapsible)``
 
-export const ExternalIcon = styled(External)`
-  margin-left: ${(p) => p.theme.tokens.spacing03};
+export const ErrorList = styled.ul``
+
+export const Error = styled.li`
+  list-style-type: none;
 `
