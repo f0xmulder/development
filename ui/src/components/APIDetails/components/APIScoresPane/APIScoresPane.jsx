@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { shape, bool, string } from 'prop-types'
+import { shape, bool, string, number } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
@@ -11,7 +11,7 @@ import Grade from '../../../Grade/Grade'
 
 import { GradeSection } from './APIScoresPane.styles'
 
-const APIScoresPane = ({ scores, parentUrl }) => {
+const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
   const {
     hasDocumentation,
     hasSpecification,
@@ -29,7 +29,7 @@ const APIScoresPane = ({ scores, parentUrl }) => {
         <p>Deze score geeft de kwaliteit van de API weer.</p>
 
         <GradeSection>
-          <Grade scores={scores} largeAtMediaQuery="xsUp" />
+          <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
         </GradeSection>
 
         <StyledScoresUl>
@@ -58,6 +58,10 @@ APIScoresPane.propTypes = {
     hasContactDetails: bool,
     providesSla: bool,
   }),
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
   parentUrl: string,
 }
 

@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import PropTypes, { string, shape, bool } from 'prop-types'
+import { string, shape, bool, number } from 'prop-types'
 
 import {
   GradeContainer,
@@ -12,37 +12,19 @@ import {
   StyledLinkMobile,
 } from './GradeBox.styles'
 
-const getDesignRuleScoreText = (designRuleScores) => {
-  const successes = designRuleScores.results.reduce(
-    (total, current) => (current.success ? total + 1 : total),
-    0,
-  )
-  const total = designRuleScores.results.length
-
-  return `${successes}/${total}`
-}
-
-const GradeBox = ({ apiId, scores, designRuleScores }) => {
-  // For now, this is how we differentiate between score types
-  const isDesignRulesScore = !!designRuleScores
+const GradeBox = ({ apiId, totalScore, isDesignRulesScore }) => {
   const scoreDescription = isDesignRulesScore
-    ? 'API score'
-    : 'Design Rule score'
-  // const linkTarget = isDesignRulesScore ? `${apiId}/api-design-rules` : `${apiId}/score-detail`
+    ? 'Design Rule score'
+    : 'API score'
   const linkTarget = `${apiId}/score-detail`
 
   return (
     <GradeContainer>
       <GradeHeader>{scoreDescription}</GradeHeader>
-
-      {isDesignRulesScore ? (
-        <div>{getDesignRuleScoreText(designRuleScores)}</div>
-      ) : (
-        <StyledGrade scores={scores} largeAtMediaQuery="smUp" />
-      )}
+      <StyledGrade totalScore={totalScore} largeAtMediaQuery="smUp" />
 
       {
-        /* Remove this check to re-enable the normal score drawer */
+        /* Only used for the MVP, to disable the normal score drawer */
         isDesignRulesScore && (
           <>
             <StyledLinkMobile to={linkTarget}>
@@ -58,14 +40,11 @@ const GradeBox = ({ apiId, scores, designRuleScores }) => {
 
 GradeBox.propTypes = {
   apiId: string,
-  scores: shape({
-    hasDocumentation: bool,
-    hasSpecification: bool,
-    hasContactDetails: bool,
-    providesSla: bool,
-  }),
-  // TODO refine
-  designRuleScores: PropTypes.object,
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
+  isDesignRulesScore: bool,
 }
 
 export default GradeBox

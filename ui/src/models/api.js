@@ -86,20 +86,42 @@ const mockDesignRuleScores = () => {
   }
 }
 
-export const modelFromAPIResponse = (api) => ({
-  id: api.id,
-  serviceName: api.service_name,
-  organizationName: api.organization_name,
-  description: api.description,
-  apiType: APIType.valueOf(api.api_type),
-  apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
-  environments: mapEnvironments(api.environments || []),
-  forum: api.forum,
-  badges: api.badges,
-  isReferenceImplementation: api.is_reference_implementation,
-  relations: api.relations,
-  termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
-  scores: mapScores(api.scores),
-  designRuleScores: mockDesignRuleScores(),
-  relatedCode: api.related_code,
-})
+export const modelFromAPIResponse = (api) => {
+  const apiType = APIType.valueOf(api.api_type)
+  const scores = mapScores(api.scores)
+  const designRuleScores = mockDesignRuleScores()
+
+  const totalScore = {
+    points: apiType.isREST()
+      ? designRuleScores.results.reduce(
+          (total, current) => (current.success ? total + 1 : total),
+          0,
+        )
+      : Object.values(scores).reduce(
+          (total, value) => (value ? total + 1 : total),
+          0,
+        ),
+    maxPoints: apiType.isREST()
+      ? designRuleScores.results.length
+      : Object.values(scores).length,
+  }
+
+  return {
+    id: api.id,
+    serviceName: api.service_name,
+    organizationName: api.organization_name,
+    description: api.description,
+    apiType,
+    apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
+    environments: mapEnvironments(api.environments || []),
+    forum: api.forum,
+    badges: api.badges,
+    isReferenceImplementation: api.is_reference_implementation,
+    relations: api.relations,
+    termsOfUse: mapTermsOfUse(api.terms_of_use || {}),
+    scores,
+    designRuleScores,
+    totalScore,
+    relatedCode: api.related_code,
+  }
+}

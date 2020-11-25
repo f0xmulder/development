@@ -2,10 +2,11 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import PropTypes from 'prop-types'
+import { string, number, object, shape } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
+import Grade from '../../../Grade/Grade'
 import {
   GradeSection,
   IntroSection,
@@ -20,17 +21,7 @@ import {
   Error,
 } from './APIDesignRulesPane.styles'
 
-const getDesignRuleScoreText = (designRuleScores) => {
-  const successes = designRuleScores.results.reduce(
-    (total, current) => (current.success ? total + 1 : total),
-    0,
-  )
-  const total = designRuleScores.results.length
-
-  return `${successes}/${total}`
-}
-
-const APIDesignRulesPane = ({ designRuleScores, parentUrl }) => {
+const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
   const history = useHistory()
 
   const close = () => history.push(parentUrl)
@@ -42,7 +33,7 @@ const APIDesignRulesPane = ({ designRuleScores, parentUrl }) => {
         <p>Deze score geeft de kwaliteit van de API weer.</p>
 
         <GradeSection>
-          {getDesignRuleScoreText(designRuleScores)}
+          <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
         </GradeSection>
 
         <IntroSection>
@@ -91,8 +82,12 @@ const APIDesignRulesPane = ({ designRuleScores, parentUrl }) => {
 
 APIDesignRulesPane.propTypes = {
   // TODO refine
-  designRuleScores: PropTypes.object,
-  parentUrl: PropTypes.string.isRequired,
+  designRuleScores: object,
+  totalScore: shape({
+    points: number.isRequired,
+    maxPoints: number.isRequired,
+  }).isRequired,
+  parentUrl: string.isRequired,
 }
 
 export default APIDesignRulesPane

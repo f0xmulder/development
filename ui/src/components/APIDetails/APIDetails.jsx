@@ -42,6 +42,7 @@ const APIDetails = ({
   termsOfUse,
   scores,
   designRuleScores,
+  totalScore,
 }) => {
   const match = useRouteMatch('/apis')
   const showDesignRuleScores = apiType.isREST()
@@ -61,11 +62,11 @@ const APIDetails = ({
           <Description>{description}</Description>
         </Col>
         <Col width={[1, 1 / 4]}>
-          {showDesignRuleScores ? (
-            <GradeBox apiId={id} designRuleScores={designRuleScores} />
-          ) : (
-            <GradeBox apiId={id} scores={scores} />
-          )}
+          <GradeBox
+            apiId={id}
+            totalScore={totalScore}
+            isDesignRulesScore={showDesignRuleScores}
+          />
         </Col>
       </Row>
 
@@ -123,9 +124,14 @@ const APIDetails = ({
             <APIDesignRulesPane
               parentUrl={`/apis/${id}`}
               designRuleScores={designRuleScores}
+              totalScore={totalScore}
             />
           ) : (
-            <APIScoresPane parentUrl={`/apis/${id}`} scores={scores} />
+            <APIScoresPane
+              parentUrl={`/apis/${id}`}
+              scores={scores}
+              totalScore={totalScore}
+            />
           )
         }}
       />
@@ -158,6 +164,10 @@ APIDetails.propTypes = {
   }),
   // TODO refine
   designRuleScores: PropTypes.object,
+  totalScore: PropTypes.shape({
+    points: PropTypes.number.isRequired,
+    maxPoints: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export default APIDetails
