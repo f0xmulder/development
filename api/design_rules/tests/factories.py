@@ -27,7 +27,7 @@ class EnvironmentFactory(factory.django.DjangoModelFactory):
 
 
 class APIDesignRuleTestSuiteFactory(factory.django.DjangoModelFactory):
-    environment = factory.SubFactory(EnvironmentFactory)
+    api = factory.SubFactory(APIFactory)
     uuid = "61f4e5e7-0b22-456f-9596-951e0365bb10"
 
     class Meta:

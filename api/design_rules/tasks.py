@@ -1,6 +1,6 @@
 import requests
 
-from design_rules.models import DesignRulesConfiguration
+from design_rules.models import DesignRulesConfiguration, DesignRuleSession, DesignRuleResult
 
 class APIPlatformException(Exception):
     pass
@@ -10,7 +10,7 @@ def create_test_suite(api_design_rule_test_suite):
     config = DesignRulesConfiguration.get_solo()
     url = "{}api/v1/designrule-testsuite".format(config.base_url)
     data = {
-        "api_endpoint": api_design_rule_test_suite.environment.get_specification_url()
+        "api_endpoint": api_design_rule_test_suite.api.get_production_environment().get_specification_url()
     }
     response = requests.post(url, data=data, headers={'Authorization': 'Token {}'.format(config.token)})
     if response.ok:
@@ -41,7 +41,25 @@ def start_design_rule_session(api_design_rule_test_suite, version=None):
     }
     response = requests.post(url, data=data, headers={'Authorization': 'Token {}'.format(config.token)})
     if response.ok:
-        return response.json()
+        response_dict = response.json()
+        session = DesignRuleSession.objects.create(
+            test_suite=api_design_rule_test_suite,
+            started_at=response_dict.get("started_at"),
+            percentage_score=response_dict.get("percentage_score"),
+            test_version=response_dict.get("test_version", ""),
+        )
+
+        results = response_dict.get("results")
+        for result in results:
+            DesignRuleResult.objects.create(
+                session=session,
+                rule_type_url=result.get("url"),
+                rule_type_name=result.get("rule_type"),
+                rule_type_description=result.get("description"),
+                success=result.get("success"),
+                errors=result.get("errors"),
+            )
+        return session
     raise APIPlatformException(response.json())
 
 

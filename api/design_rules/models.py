@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from solo.models import SingletonModel
@@ -16,8 +17,8 @@ class DesignRulesConfiguration(SingletonModel):
 
 
 class APIDesignRuleTestSuite(models.Model):
-    environment = models.ForeignKey(
-        "core.Environment",
+    api = models.OneToOneField(
+        "core.API",
         db_constraint=False,
         on_delete=models.CASCADE,
         null=True
@@ -25,24 +26,24 @@ class APIDesignRuleTestSuite(models.Model):
     uuid = models.UUIDField(null=True)
 
     def __str__(self):
-        return "{} - {}".format(self.environment.api_url, self.uuid)
+        return "{} - {}".format(self.api.api_id, self.uuid)
 
 
 class DesignRuleSession(models.Model):
-    # foreign_key
-    # started_at
+    test_suite = models.ForeignKey(APIDesignRuleTestSuite, on_delete=models.CASCADE, related_name="sessions")
+    started_at = models.DateTimeField()
     percentage_score = models.DecimalField(default=0, decimal_places=2, max_digits=5)
-    test_version = models.ForeignKey(DesignRuleTestVersion, null=True, on_delete=models.CASCADE)
+    test_version = models.CharField(default="", max_length=200)
 
     class Meta:
         ordering = ("-started_at", )
 
 
 class DesignRuleResult(models.Model):
-    design_rule = models.ForeignKey(DesignRuleSession, on_delete=models.CASCADE, related_name="results")
-    # url
-    # rule_type_name
-    # Rule_type_description
+    session = models.ForeignKey(DesignRuleSession, on_delete=models.CASCADE, related_name="results")
+    rule_type_url = models.URLField()
+    rule_type_name = models.CharField(max_length=250, default="")
+    rule_type_description = models.TextField(default="")
     success = models.BooleanField(default=False, blank=True)
     errors = ArrayField(
         models.CharField(max_length=500, blank=True), null=True, blank=True

@@ -77,6 +77,12 @@ class API(models.Model):
     def __str__(self):
         return self.api_id
 
+    def get_production_environment(self):
+        env_query = self.environments.filter(name=Environment.EnvironmentType.PRODUCTION)
+        if env_query.exists():
+            return env_query.first()
+        return None
+
 
 class Code(models.Model):
     class Source(models.TextChoices):
