@@ -145,7 +145,12 @@ class Environment(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return "{} - {}".format(self.name, self.api_url)
+
+    def get_specification_url(self):
+        if self.specification_url:
+            return self.specification_url
+        return self.api_url
 
 
 class Relation(models.Model):

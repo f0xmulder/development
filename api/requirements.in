@@ -3,6 +3,7 @@ djangorestframework
 psycopg2-binary
 requests
 python-dateutil
+django-solo
 
 # For docker deployment
 uWSGI

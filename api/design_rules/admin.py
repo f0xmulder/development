@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import APIDesignRuleTestSuite
+from solo.admin import SingletonModelAdmin
+
+from .models import APIDesignRuleTestSuite, DesignRulesConfiguration
+
+
+admin.site.register(DesignRulesConfiguration, SingletonModelAdmin)
 
 
 @admin.register(APIDesignRuleTestSuite)

@@ -1,0 +1,1 @@
+[{"id": 1, "version": "17 januari 2020", "name": "Base design rules test version", "test_rules": [{"rule_type": "api_20"}, {"rule_type": "api_51"}, {"rule_type": "api_16"}, {"rule_type": "api_03"}, {"rule_type": "api_48"}, {"rule_type": "api_09"}]}]
