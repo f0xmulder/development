@@ -2,3 +2,5 @@
 prospector
 coverage
 pip-tools
+factory-boy
+requests-mock

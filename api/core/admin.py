@@ -1,7 +1,13 @@
 from django.contrib import admin
 from django.db.models import Subquery, OuterRef, Count
 
-from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config, CodeAPI, API
+from .models import Badge, APIBadge, Event, Code, URL, URLProbe, URLApiLink, Config, CodeAPI, API, Environment
+
+
+@admin.register(Environment)
+class EnvironmentAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(API)
 class APIAdmin(admin.ModelAdmin):
