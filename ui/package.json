@@ -5,7 +5,7 @@
   "dependencies": {
     "@commonground/design-system": "16.1.1",
     "change-case": "4.1.1",
-    "core-js": "3.7.0",
+    "core-js": "3.8.0",
     "debounce": "1.2.0",
     "formik": "2.2.5",
     "javascript-time-ago": "2.3.3",
@@ -15,17 +15,17 @@
     "react-app-polyfill": "1.0.6",
     "react-dom": "16.14.0",
     "react-router-dom": "5.2.0",
-    "react-select": "3.1.0",
+    "react-select": "3.1.1",
     "react-transition-group": "4.4.1",
-    "redoc": "2.0.0-rc.40",
+    "redoc": "2.0.0-rc.47",
     "reflexbox": "4.0.6",
     "styled-components": "5.2.1",
-    "yup": "0.29.3"
+    "yup": "0.31.0"
   },
   "devDependencies": {
     "@commonground/eslint-config-cra-standard-prettier": "2.1.1",
     "@sheerun/mutationobserver-shim": "0.3.3",
-    "@testing-library/jest-dom": "5.11.5",
+    "@testing-library/jest-dom": "5.11.6",
     "@testing-library/react": "10.4.9",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
@@ -41,7 +41,7 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-standard": "4.1.0",
-    "prettier": "2.1.2",
+    "prettier": "2.2.0",
     "react-scripts": "3.4.4"
   },
   "scripts": {
