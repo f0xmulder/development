@@ -56,7 +56,7 @@ export const modelFromAPIResponse = (api) => {
     : null
 
   const totalScore = {
-    points: apiType.isREST()
+    points: designRuleScores
       ? designRuleScores.results.reduce(
           (total, current) => (current.success ? total + 1 : total),
           0,
@@ -65,7 +65,7 @@ export const modelFromAPIResponse = (api) => {
           (total, value) => (value ? total + 1 : total),
           0,
         ),
-    maxPoints: apiType.isREST()
+    maxPoints: designRuleScores
       ? designRuleScores.results.length
       : Object.values(scores).length,
   }

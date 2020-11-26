@@ -45,7 +45,7 @@ const APIDetails = ({
   totalScore,
 }) => {
   const match = useRouteMatch('/apis')
-  const showDesignRuleScores = apiType.isREST()
+  const showDesignRuleScores = !!designRuleScores
 
   return (
     <Container>

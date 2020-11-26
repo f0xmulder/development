@@ -54,10 +54,6 @@ export class APIType extends Enum {
   toString() {
     return `APIType(${this.value})`
   }
-
-  isREST() {
-    return this.equals(APIType.REST_JSON) || this.equals(APIType.REST_XML)
-  }
 }
 
 export class APIAuthentication extends Enum {
