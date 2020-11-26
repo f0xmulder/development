@@ -1,7 +1,7 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import { goApiMock, apiMock } from '../models/api.mock'
+import { backendApiMock, apiMock } from '../models/api.mock'
 import APIDetailsRepository from './api-details-repository'
 
 describe('the API Details Repository', () => {
@@ -12,7 +12,7 @@ describe('the API Details Repository', () => {
           Promise.resolve({
             ok: true,
             status: 200,
-            json: () => Promise.resolve(goApiMock),
+            json: () => Promise.resolve(backendApiMock),
           }),
         )
       })
