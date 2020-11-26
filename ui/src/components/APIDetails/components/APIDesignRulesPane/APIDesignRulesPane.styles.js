@@ -16,11 +16,9 @@ export const GradeSection = styled.div`
   background-color: ${(p) => p.theme.colorBackgroundSite};
 `
 
-export const IntroSection = styled.p``
+export const IntroSection = styled.div``
 
-export const StyledLink = styled.a`
-  text-decoration: none;
-`
+export const StyledLink = styled.a``
 
 export const ExternalIcon = styled(External)`
   margin-left: ${(p) => p.theme.tokens.spacing03};
@@ -33,6 +31,7 @@ export const DesignRulesList = styled.ul`
 `
 
 export const DesignRule = styled.li`
+  margin-top: ${(p) => p.theme.tokens.spacing07};
   padding-left: 30px;
   position: relative;
 

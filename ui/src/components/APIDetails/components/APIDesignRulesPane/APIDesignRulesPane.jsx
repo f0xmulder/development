@@ -16,6 +16,7 @@ import {
   DesignRule,
   DesignRuleTitle,
   DesignRuleDescription,
+  CollapsibleContainer,
   ErrorsCollapsible,
   ErrorList,
   Error,
@@ -37,7 +38,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
         </GradeSection>
 
         <IntroSection>
-          De score geeft weer hoe compliant deze API is met de
+          De score geeft weer hoe compliant deze API is met de{' '}
           <StyledLink
             href="https://docs.geostandaarden.nl/api/API-Designrules/"
             target="_blank"
@@ -45,7 +46,8 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
           >
             API design rules
           </StyledLink>
-          . Een aantal design rules controleren we automatisch:
+          . Dit zijn de afspraken die we gemaakt hebben over API design. Een
+          aantal design rules controleren we automatisch:
         </IntroSection>
 
         <DesignRulesList>
@@ -54,23 +56,28 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
               <DesignRuleTitle>{rule.name}</DesignRuleTitle>
               <DesignRuleDescription>{rule.description}</DesignRuleDescription>
               <StyledLink
-                href={rule.link}
+                href={rule.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Ga naar Design Rule <ExternalIcon />
+                Ga naar Design Rule
+                <ExternalIcon />
               </StyledLink>
 
               {rule.errors && rule.errors.length ? (
-                <ErrorsCollapsible
-                  title={`${rule.errors.length} bevindingen bij automatische test`}
-                >
-                  <ErrorList>
-                    {rule.errors.map((error, index) => (
-                      <Error key={index}>{error}</Error>
-                    ))}
-                  </ErrorList>
-                </ErrorsCollapsible>
+                <CollapsibleContainer>
+                  <ErrorsCollapsible
+                    title={`${rule.errors.length} bevinding${
+                      rule.errors.length > 1 ? 'en' : ''
+                    } bij automatische test`}
+                  >
+                    <ErrorList>
+                      {rule.errors.map((error, index) => (
+                        <Error key={index}>{error}</Error>
+                      ))}
+                    </ErrorList>
+                  </ErrorsCollapsible>
+                </CollapsibleContainer>
               ) : null}
             </DesignRule>
           ))}
