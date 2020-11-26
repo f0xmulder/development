@@ -51,18 +51,29 @@ export const DesignRule = styled.li`
   }
 `
 
-export const DesignRuleTitle = styled.div``
+export const DesignRuleTitle = styled.div`
+  font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+`
 
-export const DesignRuleDescription = styled.div``
-
-export const StyledDesignRulesTitle = styled.h4`
-  margin: 20px 0 5px 0;
+export const DesignRuleDescription = styled.div`
+  margin: ${(p) => p.theme.tokens.spacing03} 0px;
+`
+export const CollapsibleContainer = styled.div`
+  border: solid ${(p) => p.theme.tokens.colorPaletteGray400};
+  border-width: 1px 0px;
+  padding: ${(p) => p.theme.tokens.spacing04} 0px;
+  margin-top: ${(p) => p.theme.tokens.spacing06};
 `
 
 export const ErrorsCollapsible = styled(Collapsible)``
 
-export const ErrorList = styled.ul``
+export const ErrorList = styled.ul`
+  margin-top: ${(p) => p.theme.tokens.spacing05};
+`
 
 export const Error = styled.li`
   list-style-type: none;
+  color: ${(p) => p.theme.colorAlertError};
+  font-weight: ${(p) => p.theme.tokens.fontWeightBold};
+  margin-bottom: ${(p) => p.theme.tokens.spacing03};
 `
