@@ -2,6 +2,7 @@ import requests
 
 from design_rules.models import DesignRulesConfiguration, DesignRuleSession, DesignRuleResult
 
+
 class APIPlatformException(Exception):
     pass
 

@@ -20,7 +20,7 @@ class TaskTests(TransactionTestCase):
     @factory.django.mute_signals(post_save)
     def test_create_test_suite(self):
         test_suite = APIDesignRuleTestSuiteFactory(uuid=None)
-        environment = EnvironmentFactory(api=test_suite.api)
+        EnvironmentFactory(api=test_suite.api)
 
         with requests_mock.Mocker() as mock:
             dir_path = os.path.dirname(os.path.realpath(__file__))

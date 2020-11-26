@@ -35,8 +35,7 @@ class APIDesignRuleTestSuite(models.Model):
     def __str__(self):
         if self.api:
             return "{} - {}".format(self.api.api_id, self.uuid)
-        else:
-            return str(self.uuid)
+        return str(self.uuid)
 
 
 class DesignRuleSession(models.Model):
