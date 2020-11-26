@@ -24,14 +24,19 @@ class DesignRulesConfiguration(SingletonModel):
 class APIDesignRuleTestSuite(models.Model):
     api = models.OneToOneField(
         "core.API",
+        to_field="api_id",
         db_constraint=False,
-        on_delete=models.CASCADE,
-        null=True
+        on_delete=models.DO_NOTHING,
+        null=True,
+        related_name="test_suite"
     )
     uuid = models.UUIDField(null=True)
 
     def __str__(self):
-        return "{} - {}".format(self.api.api_id, self.uuid)
+        if self.api:
+            return "{} - {}".format(self.api.api_id, self.uuid)
+        else:
+            return str(self.uuid)
 
 
 class DesignRuleSession(models.Model):

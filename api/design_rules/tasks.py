@@ -9,6 +9,8 @@ class APIPlatformException(Exception):
 def create_test_suite(api_design_rule_test_suite):
     config = DesignRulesConfiguration.get_solo()
     url = "{}api/v1/designrule-testsuite".format(config.base_url)
+    if not api_design_rule_test_suite.api.get_production_environment():
+        raise APIPlatformException("No production environment found")
     spec_url = api_design_rule_test_suite.api.get_production_environment().get_specification_url()
     data = {
         "api_endpoint": spec_url
