@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+from datetime import datetime
 from decimal import Decimal
 
 from django.test import TestCase
@@ -7,7 +8,7 @@ from rest_framework.exceptions import ErrorDetail
 
 from core.models import API, Badge, Environment
 from core.serializers import APISerializer
-
+from design_rules.models import DesignRuleSession, APIDesignRuleTestSuite, DesignRuleResult
 
 DEFAULT_SCORES = {
     'has_contact_details': False,
@@ -195,6 +196,79 @@ class APISerializerTest(TestCase):
         self.assertEqual(len(actual_environments), len(expected_environments))
         # TODO make comparison independent of the order of the list
         self.assertListEqual(actual_environments, expected_environments)
+
+    def test_serialize_design_rule_scores(self):
+        api = API.objects.create(api_id='api1')
+        suite = APIDesignRuleTestSuite.objects.create(api=api)
+        # Older session, should be ignored
+        DesignRuleSession.objects.create(
+            test_suite=suite,
+            started_at=datetime(2019, 1, 1),
+            percentage_score=0,
+            test_version="one",
+        )
+        newer_session = DesignRuleSession.objects.create(
+            test_suite=suite,
+            started_at=datetime(2020, 1, 1),
+            percentage_score=0.5,
+            test_version="one",
+        )
+        DesignRuleResult.objects.create(
+            session=newer_session,
+            rule_type_url='https://www.example.com',
+            rule_type_name='Rule 1',
+            rule_type_description='Make a good API',
+            success=True,
+        )
+        DesignRuleResult.objects.create(
+            session=newer_session,
+            rule_type_url='https://www.example.com',
+            rule_type_name='Rule 2',
+            rule_type_description='Make a beautiful API',
+            success=False,
+            errors=[
+                'Mistake 1',
+                'Mistake 2',
+            ],
+        )
+
+        actual_scores = APISerializer(api).data['design_rule_scores']
+        expected_scores = OrderedDict([
+            ('started_at', '2020-01-01T00:00:00+01:00'),
+            ('percentage_score', '0.50'),
+            ('test_version', 'one'),
+            ('results', [
+                OrderedDict([
+                    ('rule_type_url', 'https://www.example.com'),
+                    ('rule_type_name', 'Rule 2'),
+                    ('rule_type_description', 'Make a beautiful API'),
+                    ('success', False),
+                    ('errors', ['Mistake 1', 'Mistake 2'])
+                ]),
+                OrderedDict([
+                    ('rule_type_url', 'https://www.example.com'),
+                    ('rule_type_name', 'Rule 1'),
+                    ('rule_type_description', 'Make a good API'),
+                    ('success', True),
+                    ('errors', None)
+                ]),
+            ]),
+        ])
+
+        self.assertDictEqual(actual_scores, expected_scores)
+
+    def test_serialize_design_rule_scores_no_suite(self):
+        api = API.objects.create(api_id='api1')
+
+        actual_scores = APISerializer(api).data.get('design_rule_scores', None)
+        self.assertEqual(actual_scores, None)
+
+    def test_serialize_design_rule_scores_no_sessions(self):
+        api = API.objects.create(api_id='api1')
+        APIDesignRuleTestSuite.objects.create(api=api)
+
+        actual_scores = APISerializer(api).data.get('design_rule_scores', None)
+        self.assertEqual(actual_scores, None)
 
     def test_scores_empty(self):
         api = API.objects.create(api_id='api1')

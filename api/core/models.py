@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Subquery, OuterRef, Case, When, BooleanField, Value, CharField
 from django.db.models.functions import Concat
@@ -82,6 +83,14 @@ class API(models.Model):
         if env_query.exists():
             return env_query.first()
         return None
+
+    def last_design_rule_session(self):
+        try:
+            suite = self.test_suite
+        except ObjectDoesNotExist:
+            return None
+
+        return suite.sessions.order_by('-started_at').first()
 
 
 class Code(models.Model):

@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 
 from core.models import API, Environment, Badge, Event, Code, ProgrammingLanguage, \
     MAX_TEXT_LENGTH, MAX_URL_LENGTH, MAX_ENUM_LENGTH
+from design_rules.serializers import DesignRuleSessionSerializer
 
 
 class NonNullModelSerializer(serializers.ModelSerializer):
@@ -108,6 +109,10 @@ class APISerializer(NonNullModelSerializer):
     contact = ContactSerializer(source='*', required=False)
     terms_of_use = TermsOfUseSerializer(source='*', required=False)
     scores = serializers.SerializerMethodField('get_scores')
+    design_rule_scores = DesignRuleSessionSerializer(
+        source='last_design_rule_session',
+        read_only=True
+    )
 
     class Meta:
         model = API
@@ -125,7 +130,8 @@ class APISerializer(NonNullModelSerializer):
             'is_reference_implementation',
             'referenced_apis',
             'terms_of_use',
-            'scores'
+            'scores',
+            'design_rule_scores',
         ]
 
     def validate_environments(self, environments):
