@@ -20,6 +20,7 @@ ENV PATH="/app/venv/bin:${PATH}"
 
 COPY ./api/api /app/api
 COPY ./api/core /app/core
+COPY ./api/design_rules /app/core/design_rules
 COPY ./api/manage.py /app
 COPY ./data /app/data
 
