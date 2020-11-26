@@ -92,6 +92,9 @@ class API(models.Model):
 
         return suite.sessions.order_by('-started_at').first()
 
+    def is_rest(self):
+        return self.api_type in [self.APIType.REST_JSON]
+
 
 class Code(models.Model):
     class Source(models.TextChoices):

@@ -17,22 +17,23 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     def handle(self, *args, **options):
         for api in API.objects.all():
-            try:
-                test_suite = api.test_suite
-                if not test_suite.uuid:
+            if api.is_rest():
+                try:
+                    test_suite = api.test_suite
+                    if not test_suite.uuid:
+                        try:
+                            test_suite = create_test_suite(test_suite)
+                        except APIPlatformException as e:
+                            logger.exception(e)
+                            continue
+                except ObjectDoesNotExist:
+                    test_suite = APIDesignRuleTestSuite.objects.create(api=api)
                     try:
                         test_suite = create_test_suite(test_suite)
                     except APIPlatformException as e:
                         logger.exception(e)
                         continue
-            except ObjectDoesNotExist:
-                test_suite = APIDesignRuleTestSuite.objects.create(api=api)
                 try:
-                    test_suite = create_test_suite(test_suite)
+                    start_design_rule_session(test_suite)
                 except APIPlatformException as e:
                     logger.exception(e)
-                    continue
-            try:
-                start_design_rule_session(test_suite)
-            except APIPlatformException as e:
-                logger.exception(e)
