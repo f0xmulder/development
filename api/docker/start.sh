@@ -11,7 +11,7 @@ python /app/manage.py migrate
 python /app/manage.py sync_apis --api-dir /app/data/apis
 
 # Check design rules for all relevant APIs
-# Ignore errors (TODO: perhaps remove when command is finished)
+# Ignore errors (TODO: perhaps remove when command has been thoroughly tested)
 python /app/manage.py start_new_sessions || true
 
 # Configure linkchecker
