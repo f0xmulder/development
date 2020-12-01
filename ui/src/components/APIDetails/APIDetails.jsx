@@ -162,7 +162,6 @@ APIDetails.propTypes = {
     hasContactDetails: PropTypes.bool,
     providesSla: PropTypes.bool,
   }),
-  // TODO refine
   designRuleScores: PropTypes.object,
   totalScore: PropTypes.shape({
     points: PropTypes.number.isRequired,

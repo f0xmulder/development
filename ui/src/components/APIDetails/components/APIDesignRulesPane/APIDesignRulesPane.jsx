@@ -88,8 +88,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
 }
 
 APIDesignRulesPane.propTypes = {
-  // TODO refine
-  designRuleScores: object,
+  designRuleScores: object.isRequired,
   totalScore: shape({
     points: number.isRequired,
     maxPoints: number.isRequired,
