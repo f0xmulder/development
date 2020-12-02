@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
 import Grade from '../../../Grade/Grade'
+import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
+import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import {
   GradeSection,
   IntroSection,
@@ -20,6 +22,8 @@ import {
   ErrorsCollapsible,
   ErrorList,
   Error,
+  ListItem,
+  ListIcon,
 } from './APIDesignRulesPane.styles'
 
 const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
@@ -52,34 +56,41 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
 
         <DesignRulesList>
           {designRuleScores.results.map((rule, index) => (
-            <DesignRule key={index} success={rule.success}>
-              <DesignRuleTitle>{rule.name}</DesignRuleTitle>
-              <DesignRuleDescription>{rule.description}</DesignRuleDescription>
-              <StyledLink
-                href={rule.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ga naar Design Rule
-                <ExternalIcon />
-              </StyledLink>
+            <ListItem>
+              <ListIcon>
+                {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
+              </ListIcon>
+              <DesignRule key={index}>
+                <DesignRuleTitle>{rule.name}</DesignRuleTitle>
+                <DesignRuleDescription>
+                  {rule.description}
+                </DesignRuleDescription>
+                <StyledLink
+                  href={rule.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ga naar Design Rule
+                  <ExternalIcon />
+                </StyledLink>
 
-              {rule.errors && rule.errors.length ? (
-                <CollapsibleContainer>
-                  <ErrorsCollapsible
-                    title={`${rule.errors.length} bevinding${
-                      rule.errors.length > 1 ? 'en' : ''
-                    } bij automatische test`}
-                  >
-                    <ErrorList>
-                      {rule.errors.map((error, index) => (
-                        <Error key={index}>{error}</Error>
-                      ))}
-                    </ErrorList>
-                  </ErrorsCollapsible>
-                </CollapsibleContainer>
-              ) : null}
-            </DesignRule>
+                {rule.errors && rule.errors.length ? (
+                  <CollapsibleContainer>
+                    <ErrorsCollapsible
+                      title={`${rule.errors.length} bevinding${
+                        rule.errors.length > 1 ? 'en' : ''
+                      } bij automatische test`}
+                    >
+                      <ErrorList>
+                        {rule.errors.map((error, index) => (
+                          <Error key={index}>{error}</Error>
+                        ))}
+                      </ErrorList>
+                    </ErrorsCollapsible>
+                  </CollapsibleContainer>
+                ) : null}
+              </DesignRule>
+            </ListItem>
           ))}
         </DesignRulesList>
       </Drawer.Content>

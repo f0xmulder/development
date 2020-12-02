@@ -5,8 +5,6 @@ import styled from 'styled-components'
 import { Collapsible } from '@commonground/design-system'
 
 import External from '../../../Icons/External'
-import availableIcon from '../../icons/available.svg'
-import unavailableIcon from '../../icons/unavailable.svg'
 
 export const GradeSection = styled.div`
   display: flex;
@@ -30,25 +28,19 @@ export const DesignRulesList = styled.ul`
   list-style-type: none;
 `
 
-export const DesignRule = styled.li`
+export const ListItem = styled.li`
+  display: flex;
+  align-items: flex-start;
   margin-top: ${(p) => p.theme.tokens.spacing07};
-  padding-left: 30px;
-  position: relative;
+`
 
-  &:before {
-    content: '';
-    width: 18px;
-    height: 24px;
-    left: 0;
-    position: absolute;
-    ${(p) =>
-      p.success
-        ? `background-image: url(${availableIcon});`
-        : `background-image: url(${unavailableIcon});`}
-    background-size: 18px;
-    background-position: left center;
-    background-repeat: no-repeat;
-  }
+export const ListIcon = styled.div`
+  flex-shrink: 0;
+  margin-right: ${(p) => p.theme.tokens.spacing03};
+`
+
+export const DesignRule = styled.div`
+  padding-top: 3px;
 `
 
 export const DesignRuleTitle = styled.div`
