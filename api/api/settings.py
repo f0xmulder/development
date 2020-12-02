@@ -30,7 +30,7 @@ GITLAB = {
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
-    'design_rules',
+    'design_rules.apps.DesignRulesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -20,6 +20,32 @@ def create_test_suite(api_design_rule_test_suite):
     response = requests.post(url, data=data, headers=headers)
     if response.ok:
         api_design_rule_test_suite.uuid = response.json().get('uuid')
+        api_design_rule_test_suite.api_endpoint = response.json().get('api_endpoint')
+        api_design_rule_test_suite.save()
+        return api_design_rule_test_suite
+    raise APIPlatformException(response.json())
+
+
+def get_test_suite(api_design_rule_test_suite):
+    config = DesignRulesConfiguration.get_solo()
+    url = "{}api/v1/designrule-testsuite/{}".format(config.base_url, api_design_rule_test_suite.uuid)
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.get(url, headers=headers)
+    if response.ok:
+        return response.json()
+    raise APIPlatformException(response.json())
+
+
+def update_api_endpoint(api_design_rule_test_suite, api_endpoint):
+    config = DesignRulesConfiguration.get_solo()
+    url = "{}api/v1/designrule-testsuite/{}".format(config.base_url, api_design_rule_test_suite.uuid)
+    data = {
+        "api_endpoint": api_endpoint
+    }
+    headers = {'Authorization': 'Token {}'.format(config.token)}
+    response = requests.put(url, data=data, headers=headers)
+    if response.ok:
+        api_design_rule_test_suite.api_endpoint = response.json().get('api_endpoint')
         api_design_rule_test_suite.save()
         return api_design_rule_test_suite
     raise APIPlatformException(response.json())

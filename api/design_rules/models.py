@@ -31,6 +31,7 @@ class APIDesignRuleTestSuite(models.Model):
         related_name="test_suite"
     )
     uuid = models.UUIDField(null=True)
+    api_endpoint = models.URLField(null=True)
 
     def __str__(self):
         if self.api:
