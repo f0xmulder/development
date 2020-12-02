@@ -28,7 +28,9 @@ def create_test_suite(api_design_rule_test_suite):
 
 def get_test_suite(api_design_rule_test_suite):
     config = DesignRulesConfiguration.get_solo()
-    url = "{}api/v1/designrule-testsuite/{}".format(config.base_url, api_design_rule_test_suite.uuid)
+    url = "{}api/v1/designrule-testsuite/{}".format(
+        config.base_url, api_design_rule_test_suite.uuid
+    )
     headers = {'Authorization': 'Token {}'.format(config.token)}
     response = requests.get(url, headers=headers)
     if response.ok:
@@ -38,7 +40,9 @@ def get_test_suite(api_design_rule_test_suite):
 
 def update_api_endpoint(api_design_rule_test_suite, api_endpoint):
     config = DesignRulesConfiguration.get_solo()
-    url = "{}api/v1/designrule-testsuite/{}".format(config.base_url, api_design_rule_test_suite.uuid)
+    url = "{}api/v1/designrule-testsuite/{}".format(
+        config.base_url, api_design_rule_test_suite.uuid
+    )
     data = {
         "api_endpoint": api_endpoint
     }
