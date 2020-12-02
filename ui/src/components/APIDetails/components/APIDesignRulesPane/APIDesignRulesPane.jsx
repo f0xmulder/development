@@ -56,11 +56,11 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
 
         <DesignRulesList>
           {designRuleScores.results.map((rule, index) => (
-            <ListItem>
+            <ListItem key={index}>
               <ListIcon>
                 {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
               </ListIcon>
-              <DesignRule key={index}>
+              <DesignRule>
                 <DesignRuleTitle>{rule.name}</DesignRuleTitle>
                 <DesignRuleDescription>
                   {rule.description}
