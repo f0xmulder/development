@@ -15,6 +15,7 @@ import ImplementedByListContainer from '../ImplementedByListContainer/Implemente
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
 import Card from '../Card/Card'
 import ForumPosts from '../ForumPosts/ForumPosts'
+import { designRuleScores } from '../../models/propTypes'
 import APIDesignRulesPane from './components/APIDesignRulesPane/APIDesignRulesPane'
 import APIEnvironments from './components/APIEnvironments/APIEnvironments'
 import APITerms from './components/APITerms/APITerms'
@@ -162,7 +163,7 @@ APIDetails.propTypes = {
     hasContactDetails: PropTypes.bool,
     providesSla: PropTypes.bool,
   }),
-  designRuleScores: PropTypes.object,
+  designRuleScores: designRuleScores,
   totalScore: PropTypes.shape({
     points: PropTypes.number.isRequired,
     maxPoints: PropTypes.number.isRequired,

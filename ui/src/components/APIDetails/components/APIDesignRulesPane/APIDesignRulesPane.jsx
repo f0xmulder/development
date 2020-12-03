@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { string, number, object, shape } from 'prop-types'
+import { string, number, shape } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
@@ -14,6 +14,7 @@ import {
   CustomListContent,
   CustomListIcon,
 } from '../../APIDetails.styles'
+import { designRuleScores } from '../../../../models/propTypes'
 import {
   GradeSection,
   IntroSection,
@@ -121,7 +122,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
 }
 
 APIDesignRulesPane.propTypes = {
-  designRuleScores: object.isRequired,
+  designRuleScores: designRuleScores.isRequired,
   totalScore: shape({
     points: number.isRequired,
     maxPoints: number.isRequired,
