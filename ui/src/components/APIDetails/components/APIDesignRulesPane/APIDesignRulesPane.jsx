@@ -10,12 +10,15 @@ import Grade from '../../../Grade/Grade'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import {
+  CustomList,
+  CustomListContent,
+  CustomListIcon,
+} from '../../APIDetails.styles'
+import {
   GradeSection,
   IntroSection,
   StyledLink,
   ExternalIcon,
-  DesignRulesList,
-  DesignRule,
   DesignRuleTitle,
   DesignRuleDescription,
   CollapsibleContainer,
@@ -23,7 +26,6 @@ import {
   ErrorList,
   Error,
   ListItem,
-  ListIcon,
 } from './APIDesignRulesPane.styles'
 
 const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
@@ -54,13 +56,13 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
           aantal design rules controleren we automatisch:
         </IntroSection>
 
-        <DesignRulesList>
+        <CustomList>
           {designRuleScores.results.map((rule, index) => (
             <ListItem key={index}>
-              <ListIcon>
+              <CustomListIcon>
                 {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
-              </ListIcon>
-              <DesignRule>
+              </CustomListIcon>
+              <CustomListContent>
                 <DesignRuleTitle>{rule.name}</DesignRuleTitle>
                 <DesignRuleDescription>
                   {rule.description}
@@ -89,10 +91,10 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
                     </ErrorsCollapsible>
                   </CollapsibleContainer>
                 ) : null}
-              </DesignRule>
+              </CustomListContent>
             </ListItem>
           ))}
-        </DesignRulesList>
+        </CustomList>
       </Drawer.Content>
     </Drawer>
   )

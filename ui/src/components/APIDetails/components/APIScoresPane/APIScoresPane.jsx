@@ -6,18 +6,37 @@ import { shape, bool, string, number } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
-import { StyledScoresUl, StyledScoresLi } from '../../APIDetails.styles'
+import {
+  CustomList,
+  CustomListItem,
+  CustomListIcon,
+  CustomListContent,
+} from '../../APIDetails.styles'
 import Grade from '../../../Grade/Grade'
-
+import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
+import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import { GradeSection } from './APIScoresPane.styles'
 
+const listItems = [
+  {
+    name: 'Documentatie',
+    scoresProp: 'hasDocumentation',
+  },
+  {
+    name: 'Specificatie',
+    scoresProp: 'hasSpecification',
+  },
+  {
+    name: 'Contactgegevens',
+    scoresProp: 'hasContactDetails',
+  },
+  {
+    name: 'SLA',
+    scoresProp: 'providesSla',
+  },
+]
+
 const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
-  const {
-    hasDocumentation,
-    hasSpecification,
-    hasContactDetails,
-    providesSla,
-  } = scores
   const history = useHistory()
 
   const close = () => history.push(parentUrl)
@@ -32,20 +51,18 @@ const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
           <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
         </GradeSection>
 
-        <StyledScoresUl>
-          <StyledScoresLi available={!!hasDocumentation}>
-            Documentatie {!hasDocumentation ? 'niet' : ''} aanwezig
-          </StyledScoresLi>
-          <StyledScoresLi available={!!hasSpecification}>
-            Specificatie {!hasSpecification ? 'niet' : ''} aanwezig
-          </StyledScoresLi>
-          <StyledScoresLi available={!!hasContactDetails}>
-            Contactgegevens {!hasContactDetails ? 'niet' : ''} aanwezig
-          </StyledScoresLi>
-          <StyledScoresLi available={!!providesSla}>
-            SLA {!providesSla ? 'niet' : ''} aanwezig
-          </StyledScoresLi>
-        </StyledScoresUl>
+        <CustomList>
+          {listItems.map(({ name, scoresProp }) => (
+            <CustomListItem key={scoresProp}>
+              <CustomListIcon>
+                {scores[scoresProp] ? <CheckmarkCircle /> : <CrossCircle />}
+              </CustomListIcon>
+              <CustomListContent>
+                {name} {!scores[scoresProp] ? 'niet' : ''} aanwezig
+              </CustomListContent>
+            </CustomListItem>
+          ))}
+        </CustomList>
       </Drawer.Content>
     </Drawer>
   )

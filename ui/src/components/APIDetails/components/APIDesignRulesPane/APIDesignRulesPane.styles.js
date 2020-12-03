@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Collapsible } from '@commonground/design-system'
 
 import External from '../../../Icons/External'
+import { CustomListItem } from '../../APIDetails.styles'
 
 export const GradeSection = styled.div`
   display: flex;
@@ -22,25 +23,8 @@ export const ExternalIcon = styled(External)`
   margin-left: ${(p) => p.theme.tokens.spacing03};
 `
 
-export const DesignRulesList = styled.ul`
-  list-style-position: inside;
-  padding-left: 0;
-  list-style-type: none;
-`
-
-export const ListItem = styled.li`
-  display: flex;
-  align-items: flex-start;
+export const ListItem = styled(CustomListItem)`
   margin-top: ${(p) => p.theme.tokens.spacing07};
-`
-
-export const ListIcon = styled.div`
-  flex-shrink: 0;
-  margin-right: ${(p) => p.theme.tokens.spacing03};
-`
-
-export const DesignRule = styled.div`
-  padding-top: 3px;
 `
 
 export const DesignRuleTitle = styled.div`
