@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Collapsible } from '@commonground/design-system'
 
 import External from '../../../Icons/External'
+import { ReactComponent as ExclamationMark } from '../../../Icons/exclamationmark.svg'
 import { CustomListItem } from '../../APIDetails.styles'
 
 export const GradeSection = styled.div`
@@ -42,6 +43,15 @@ export const CollapsibleContainer = styled.div`
 `
 
 export const ErrorsCollapsible = styled(Collapsible)``
+
+export const StyledErrorsTitle = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const StyledExclamationMark = styled(ExclamationMark)`
+  margin-right: ${(p) => p.theme.tokens.spacing03};
+`
 
 export const ErrorList = styled.ul`
   margin-top: ${(p) => p.theme.tokens.spacing05};

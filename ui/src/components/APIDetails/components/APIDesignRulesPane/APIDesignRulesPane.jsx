@@ -26,7 +26,21 @@ import {
   ErrorList,
   Error,
   ListItem,
+  StyledExclamationMark,
+  StyledErrorsTitle,
 } from './APIDesignRulesPane.styles'
+
+const ErrorsTitle = ({ errorCount }) => (
+  <StyledErrorsTitle>
+    <StyledExclamationMark />
+    {`${errorCount} bevinding${
+      errorCount > 1 ? 'en' : ''
+    } bij automatische test`}
+  </StyledErrorsTitle>
+)
+ErrorsTitle.propTypes = {
+  errorCount: number,
+}
 
 const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
   const history = useHistory()
@@ -79,9 +93,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
                 {rule.errors && rule.errors.length ? (
                   <CollapsibleContainer>
                     <ErrorsCollapsible
-                      title={`${rule.errors.length} bevinding${
-                        rule.errors.length > 1 ? 'en' : ''
-                      } bij automatische test`}
+                      title={<ErrorsTitle errorCount={rule.errors.length} />}
                     >
                       <ErrorList>
                         {rule.errors.map((error, index) => (
