@@ -30,16 +30,14 @@ import {
   StyledErrorsTitle,
 } from './APIDesignRulesPane.styles'
 
-const ErrorsTitle = ({ errorCount }) => (
+const ErrorsTitle = ({ titleText }) => (
   <StyledErrorsTitle>
     <StyledExclamationMark />
-    {`${errorCount} bevinding${
-      errorCount > 1 ? 'en' : ''
-    } bij automatische test`}
+    {titleText}
   </StyledErrorsTitle>
 )
 ErrorsTitle.propTypes = {
-  errorCount: number,
+  titleText: string,
 }
 
 const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
@@ -71,41 +69,51 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
         </IntroSection>
 
         <CustomList>
-          {designRuleScores.results.map((rule, index) => (
-            <ListItem key={index}>
-              <CustomListIcon>
-                {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
-              </CustomListIcon>
-              <CustomListContent>
-                <DesignRuleTitle>{rule.name}</DesignRuleTitle>
-                <DesignRuleDescription>
-                  {rule.description}
-                </DesignRuleDescription>
-                <StyledLink
-                  href={rule.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Ga naar Design Rule
-                  <ExternalIcon />
-                </StyledLink>
+          {designRuleScores.results.map((rule, index) => {
+            const hasErrors = rule.errors.length > 0
+            const errorText = hasErrors
+              ? `${rule.errors.length} bevinding${
+                  rule.errors.length > 1 ? 'en' : ''
+                } bij automatische test`
+              : ''
 
-                {rule.errors && rule.errors.length ? (
-                  <CollapsibleContainer>
-                    <ErrorsCollapsible
-                      title={<ErrorsTitle errorCount={rule.errors.length} />}
-                    >
-                      <ErrorList>
-                        {rule.errors.map((error, index) => (
-                          <Error key={index}>{error}</Error>
-                        ))}
-                      </ErrorList>
-                    </ErrorsCollapsible>
-                  </CollapsibleContainer>
-                ) : null}
-              </CustomListContent>
-            </ListItem>
-          ))}
+            return (
+              <ListItem key={index}>
+                <CustomListIcon>
+                  {rule.success ? <CheckmarkCircle /> : <CrossCircle />}
+                </CustomListIcon>
+                <CustomListContent>
+                  <DesignRuleTitle>{rule.name}</DesignRuleTitle>
+                  <DesignRuleDescription>
+                    {rule.description}
+                  </DesignRuleDescription>
+                  <StyledLink
+                    href={rule.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ga naar Design Rule
+                    <ExternalIcon />
+                  </StyledLink>
+
+                  {hasErrors ? (
+                    <CollapsibleContainer>
+                      <ErrorsCollapsible
+                        title={<ErrorsTitle titleText={errorText} />}
+                        ariaLabel={errorText}
+                      >
+                        <ErrorList>
+                          {rule.errors.map((error, index) => (
+                            <Error key={index}>{error}</Error>
+                          ))}
+                        </ErrorList>
+                      </ErrorsCollapsible>
+                    </CollapsibleContainer>
+                  ) : null}
+                </CustomListContent>
+              </ListItem>
+            )
+          })}
         </CustomList>
       </Drawer.Content>
     </Drawer>
