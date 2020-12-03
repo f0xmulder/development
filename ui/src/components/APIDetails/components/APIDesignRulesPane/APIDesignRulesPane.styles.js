@@ -45,11 +45,16 @@ export const ErrorsCollapsible = styled(Collapsible)``
 
 export const ErrorList = styled.ul`
   margin-top: ${(p) => p.theme.tokens.spacing05};
+  margin-bottom: ${(p) => p.theme.tokens.spacing02};
+  padding-left: ${(p) => p.theme.tokens.spacing06};
 `
 
 export const Error = styled.li`
   list-style-type: none;
   color: ${(p) => p.theme.colorAlertError};
   font-weight: ${(p) => p.theme.tokens.fontWeightBold};
-  margin-bottom: ${(p) => p.theme.tokens.spacing03};
+
+  &:not(:last-child) {
+    margin-bottom: ${(p) => p.theme.tokens.spacing03};
+  }
 `
