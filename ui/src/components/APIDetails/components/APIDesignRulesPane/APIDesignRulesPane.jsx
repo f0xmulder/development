@@ -47,7 +47,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
   const close = () => history.push(parentUrl)
 
   return (
-    <Drawer closeHandler={close}>
+    <Drawer closeHandler={close} data-testid="design-rules-pane">
       <Drawer.Header title="Opbouw API Score" closeButtonLabel="Sluit" />
       <Drawer.Content>
         <p>Deze score geeft de kwaliteit van de API weer.</p>
