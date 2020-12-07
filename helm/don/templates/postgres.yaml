@@ -11,7 +11,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 100Mi
     terminationPolicy: {{ .Values.dbTerminationPolicy | default "WipeOut" }}
   {{ end }}
   init:
