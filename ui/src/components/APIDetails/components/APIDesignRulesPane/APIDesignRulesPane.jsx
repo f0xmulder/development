@@ -92,6 +92,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
                     href={rule.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Ga naar Design Rule ${rule.name}`}
                   >
                     Ga naar Design Rule
                     <ExternalIcon />
