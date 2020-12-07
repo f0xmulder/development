@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components/macro'
 import theme from '../../theme'
 import { APIType, APIAuthentication, EnvironmentType } from '../../models/enums'
 import { renderWithProviders, screen } from '../../test-helpers'
+import { designRuleScoresMock } from '../../models/api.mock'
 import APIDetails, { referenceImplementationsFromRelations } from './APIDetails'
 
 const details = {
@@ -39,26 +40,7 @@ const details = {
     hasContactDetails: false,
     providesSla: false,
   },
-  designRuleScores: {
-    results: [
-      {
-        name: 'API-16: Use OAS 3.0 for documentation',
-        description:
-          'Publish specifications (documentation) as Open API Specification (OAS) 3.0 or higher.',
-        url: 'http://example.com/rule1',
-        success: false,
-        errors: ['There is no openapi version found'],
-      },
-      {
-        name: 'API-20: Include the major version number only in the URI',
-        description:
-          'The URI of an API should include the major version number only. The minor and patch version numbers are in the response header of the message. Minor and patch versions have no impact on existing code, but major version do.',
-        url: 'http://example.com/rule2',
-        success: true,
-        errors: [],
-      },
-    ],
-  },
+  designRuleScores: designRuleScoresMock,
   totalScore: {
     points: 1,
     maxPoints: 4,
