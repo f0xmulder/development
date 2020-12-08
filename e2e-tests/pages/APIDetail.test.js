@@ -36,12 +36,15 @@ describe('API Detail', () => {
             expect(accessibilityReport).toHaveNoAccessibilityIssues();
         })
 
-        describe('opening the score details drawer', async () => {
+        describe('opening the score details drawer', () => {
             beforeAll(async () => {
                 await Promise.all([
                     page.waitForNavigation(),
                     page.click('[data-testid="score-detail-link-desktop"]')
                 ]);
+
+                // Wait for drawer opening animation
+                await page.waitFor(2000)
             })
 
             it('should show the page title', async () => {
