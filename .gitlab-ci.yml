@@ -244,6 +244,7 @@ Deploy Review App:
         --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
         --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
         --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
+        --set "storageType=Ephemeral" \
         --set "loadTestData=true" \
         --set "linkcheckerEnabledDefault=false" \
         --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
