@@ -40,7 +40,7 @@ describe('API Detail', () => {
             beforeAll(async () => {
                 await Promise.all([
                     page.waitForNavigation(),
-                    page.click('[data-test="score-detail-link"]')
+                    page.click('[data-testid="score-detail-link-desktop"]')
                 ]);
             })
 
