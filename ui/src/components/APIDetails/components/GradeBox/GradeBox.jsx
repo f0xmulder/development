@@ -22,18 +22,10 @@ const GradeBox = ({ apiId, totalScore, isDesignRulesScore }) => {
     <GradeContainer>
       <GradeHeader>{scoreDescription}</GradeHeader>
       <StyledGrade totalScore={totalScore} largeAtMediaQuery="smUp" />
-
-      {
-        /* Only used for the MVP, to disable the normal score drawer */
-        isDesignRulesScore && (
-          <>
-            <StyledLinkMobile to={linkTarget}>
-              Toon {scoreDescription} opbouw
-            </StyledLinkMobile>
-            <StyledLink to={linkTarget}>Toon opbouw</StyledLink>
-          </>
-        )
-      }
+      <StyledLinkMobile to={linkTarget}>
+        Toon {scoreDescription} opbouw
+      </StyledLinkMobile>
+      <StyledLink to={linkTarget}>Toon opbouw</StyledLink>
     </GradeContainer>
   )
 }
