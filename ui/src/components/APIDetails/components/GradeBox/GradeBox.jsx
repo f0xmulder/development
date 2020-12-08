@@ -16,16 +16,19 @@ const GradeBox = ({ apiId, totalScore, isDesignRulesScore }) => {
   const scoreDescription = isDesignRulesScore
     ? 'Design Rule score'
     : 'API score'
-  const linkTarget = `${apiId}/score-detail`
+  const linkProps = {
+    to: `${apiId}/score-detail`,
+    'data-testid': 'score-detail-link',
+  }
 
   return (
     <GradeContainer>
       <GradeHeader>{scoreDescription}</GradeHeader>
       <StyledGrade totalScore={totalScore} largeAtMediaQuery="smUp" />
-      <StyledLinkMobile to={linkTarget}>
+      <StyledLinkMobile {...linkProps}>
         Toon {scoreDescription} opbouw
       </StyledLinkMobile>
-      <StyledLink to={linkTarget}>Toon opbouw</StyledLink>
+      <StyledLink {...linkProps}>Toon opbouw</StyledLink>
     </GradeContainer>
   )
 }

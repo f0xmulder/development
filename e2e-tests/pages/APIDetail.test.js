@@ -35,5 +35,26 @@ describe('API Detail', () => {
             const accessibilityReport = await analyzeAccessibility(page, `api-detail.accessibility.png`)
             expect(accessibilityReport).toHaveNoAccessibilityIssues();
         })
+
+        describe('opening the score details drawer', async () => {
+            beforeAll(async () => {
+                await Promise.all([
+                    page.waitForNavigation(),
+                    page.click('[data-test="score-detail-link"]')
+                ]);
+            })
+
+            it('should show the page title', async () => {
+                // Grab the h1 inside the drawer
+                const html = await page.$eval('[data-testid="content"] h1', e => e.innerHTML)
+                await page.screenshot({ path: 'screenshots/api-score-detail.page-title.png' });
+                expect(html).toBe('Opbouw API Score')
+            })
+
+            it('should not have accessibility issues', async () => {
+                const accessibilityReport = await analyzeAccessibility(page, `api-score-detail.accessibility.png`)
+                expect(accessibilityReport).toHaveNoAccessibilityIssues();
+            })
+        })
     })
 })
