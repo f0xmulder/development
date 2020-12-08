@@ -1,6 +1,21 @@
 const { analyzeAccessibility } = require('../accessibility')
 const { getBaseUrl, isDebugging } = require('../environment')
 
+const navigateToFirstApi = async () => {
+    await page.setViewport({
+        width: 1024,
+        height: 768,
+        deviceScaleFactor: 1,
+    });
+
+    await page.waitForSelector('[data-test="link"]')
+
+    await Promise.all([
+        page.waitForNavigation(),
+        page.click('[data-test="link"]')
+    ]);
+}
+
 describe('API Detail', () => {
     beforeAll(async () => {
         const baseUrl = getBaseUrl(isDebugging());
@@ -9,20 +24,7 @@ describe('API Detail', () => {
     })
 
     describe('navigating to the first API Detail page', () => {
-        beforeAll(async () => {
-            await page.setViewport({
-                width: 1024,
-                height: 768,
-                deviceScaleFactor: 1,
-            });
-
-            await page.waitForSelector('[data-test="link"]')
-
-            await Promise.all([
-                page.waitForNavigation(),
-                page.click('[data-test="link"]')
-            ]);
-        })
+        beforeAll(navigateToFirstApi)
 
         it('should contain a link to the API specification', async () => {
             await page.waitForSelector('[data-test="api-specification-url"]')
@@ -52,6 +54,18 @@ const NON_REST_TYPES = [
     'wms',
 ]
 
+const openScoreDrawer = async () => {
+    await page.waitForSelector('[data-testid="score-detail-link-desktop"]')
+
+    await Promise.all([
+        page.waitForNavigation(),
+        page.click('[data-testid="score-detail-link-desktop"]')
+    ]);
+
+    // Wait for drawer opening animation
+    await page.waitFor(2000)
+}
+
 describe('API Detail for REST API', () => {
     beforeAll(async () => {
         // Search for REST API's
@@ -61,33 +75,11 @@ describe('API Detail for REST API', () => {
         await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/apis?${queryString}`, { waitUntil: 'load' });
 
-        // Navigate to the first API Detail page
-        await page.setViewport({
-            width: 1024,
-            height: 768,
-            deviceScaleFactor: 1,
-        });
-
-        await page.waitForSelector('[data-test="link"]')
-
-        await Promise.all([
-            page.waitForNavigation(),
-            page.click('[data-test="link"]')
-        ]);
+        await navigateToFirstApi()
     })
 
     describe('opening the Design Rules score drawer', () => {
-        beforeAll(async () => {
-            await page.waitForSelector('[data-testid="score-detail-link-desktop"]')
-
-            await Promise.all([
-                page.waitForNavigation(),
-                page.click('[data-testid="score-detail-link-desktop"]')
-            ]);
-
-            // Wait for drawer opening animation
-            await page.waitFor(2000)
-        })
+        beforeAll(openScoreDrawer)
 
         it('should show the page title', async () => {
             // Grab the h1 inside the drawer
@@ -112,33 +104,11 @@ describe('API Detail for non-REST API', () => {
         await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/apis?${queryString}`, { waitUntil: 'load' });
 
-        // Navigate to the first API Detail page
-        await page.setViewport({
-            width: 1024,
-            height: 768,
-            deviceScaleFactor: 1,
-        });
-
-        await page.waitForSelector('[data-test="link"]')
-
-        await Promise.all([
-            page.waitForNavigation(),
-            page.click('[data-test="link"]')
-        ]);
+        await navigateToFirstApi()
     })
 
     describe('opening the API score drawer', () => {
-        beforeAll(async () => {
-            await page.waitForSelector('[data-testid="score-detail-link-desktop"]')
-
-            await Promise.all([
-                page.waitForNavigation(),
-                page.click('[data-testid="score-detail-link-desktop"]')
-            ]);
-
-            // Wait for drawer opening animation
-            await page.waitFor(2000)
-        })
+        beforeAll(openScoreDrawer)
 
         it('should show the page title', async () => {
             // Grab the h1 inside the drawer
