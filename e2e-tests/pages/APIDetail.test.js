@@ -38,6 +38,8 @@ describe('API Detail', () => {
 
         describe('opening the score details drawer', () => {
             beforeAll(async () => {
+                await page.waitForSelector('[data-testid="score-detail-link-desktop"]')
+
                 await Promise.all([
                     page.waitForNavigation(),
                     page.click('[data-testid="score-detail-link-desktop"]')
