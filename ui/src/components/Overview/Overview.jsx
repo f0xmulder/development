@@ -27,9 +27,7 @@ export const ResultsHeader = ({
         </span>
       ) : null}
     </TotalResults>
-    {/* We should replace "forwardedAs" with "as" when this issue has been fixed:
-        https://gitlab.com/commonground/core/design-system/-/issues/29 */}
-    <StyledAddLinkMobile forwardedAs={Link} to={addLinkTarget} variant="link">
+    <StyledAddLinkMobile as={Link} to={addLinkTarget} variant="link">
       <StyledAddIcon color={theme.colorTextLink} />
       {objectName} toevoegen
     </StyledAddLinkMobile>
