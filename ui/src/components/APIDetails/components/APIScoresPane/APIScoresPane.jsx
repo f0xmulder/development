@@ -6,11 +6,10 @@ import { shape, bool, string, number } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
-import Grade from '../../../Grade/Grade'
 import { IconList, StyledDrawer } from '../../APIDetails.styles'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
-import { GradeSection } from './APIScoresPane.styles'
+import GradeBanner from '../GradeBanner/GradeBanner'
 import { ScoreExplanation } from './APIScoresPane.styles'
 
 const listItems = [
@@ -43,9 +42,7 @@ const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
       <Drawer.Content>
         <p>Deze score geeft de kwaliteit van de API weer.</p>
 
-        <GradeSection>
-          <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
-        </GradeSection>
+        <GradeBanner totalScore={totalScore} />
 
         <ScoreExplanation>
           De score is tot stand gekomen door de volgende onderdelen:

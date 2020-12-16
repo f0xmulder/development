@@ -6,13 +6,12 @@ import { string, number, shape } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
-import Grade from '../../../Grade/Grade'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import { IconList, StyledDrawer } from '../../APIDetails.styles'
 import { designRuleScores } from '../../../../models/propTypes'
+import GradeBanner from '../GradeBanner/GradeBanner'
 import {
-  GradeSection,
   IntroSection,
   StyledLink,
   ExternalIcon,
@@ -49,9 +48,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
       <Drawer.Content>
         <p>Deze score geeft de kwaliteit van de API weer.</p>
 
-        <GradeSection>
-          <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
-        </GradeSection>
+        <GradeBanner totalScore={totalScore} />
 
         <IntroSection>
           De score geeft weer hoe compliant deze API is met de{' '}

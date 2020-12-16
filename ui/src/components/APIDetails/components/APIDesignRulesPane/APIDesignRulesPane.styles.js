@@ -8,14 +8,6 @@ import External from '../../../Icons/External'
 import { ReactComponent as ExclamationMark } from '../../../Icons/exclamationmark.svg'
 import { IconList } from '../../APIDetails.styles'
 
-export const GradeSection = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: ${(p) => p.theme.tokens.spacing06} 0;
-  margin: ${(p) => `${p.theme.tokens.spacing06} -${p.theme.tokens.spacing08}`};
-  background-color: ${(p) => p.theme.colorBackgroundSite};
-`
-
 export const IntroSection = styled.div``
 
 export const StyledLink = styled.a``
