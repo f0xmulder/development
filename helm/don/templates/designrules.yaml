@@ -1,0 +1,59 @@
+{{ define "designrulesContainer" }}
+  name: "designrules"
+  image: {{.Values.apiImage | quote}}
+  imagePullPolicy: {{.Values.imagePullPolicy}}
+  command: [
+    "python",
+    "manage.py",
+    "start_apitest_sessions",
+  ]
+  envFrom:
+    - secretRef:
+        name: api
+  env:
+    - name: DB_HOST
+      value: postgres
+    - name: DB_USER
+      valueFrom:
+        secretKeyRef:
+          name: postgres-auth
+          key: POSTGRES_USER
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: postgres-auth
+          key: POSTGRES_PASSWORD
+    - name: DB_NAME
+      value: "{{ .Values.postgresDb }}"
+    - name: API_TEST_BASE_URL
+      value: "{{.Values.apiTestBaseUrl}}"
+{{ end }}
+
+{{ with set . "component" "designrules" }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata: {{ include "don.common.metadata" . | nindent 2 }}
+spec:
+  schedule: {{.Values.designRulesSchedule | quote}}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels: {{ include "don.common.metadata-labels" . | nindent 12 }}
+        spec:
+          containers:
+            - {{ include "designrulesContainer" . | nindent 12 }}
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .component }}-{{ randAlphaNum 5 | lower }}"
+  labels: {{ include "don.common.metadata-labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      containers:
+        - {{ include "designrulesContainer" . | nindent 8 }}
+      restartPolicy: OnFailure
+{{ end }}

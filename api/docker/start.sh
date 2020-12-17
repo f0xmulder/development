@@ -10,11 +10,8 @@ python /app/manage.py migrate
 # Sync API JSONs to the database
 python /app/manage.py sync_apis --api-dir /app/data/apis
 
-# Check design rules for all relevant APIs, ignore errors
-python /app/manage.py start_apitest_sessions || true
-
 # Configure linkchecker
-if [ "x$LINKCHECKER_ENABLED_DEFAULT" != x ]
+if [ "$LINKCHECKER_ENABLED_DEFAULT" != "" ]
 then
   python /app/manage.py set_option linkchecker "$LINKCHECKER_ENABLED_DEFAULT" --ifnotset
 fi

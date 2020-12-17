@@ -24,6 +24,7 @@ dbTerminationPolicy: Pause
 loadTestData: false
 linkcheckerEnabledDefault: true
 linkcheckerSchedule: "10 * * * *"
+designRulesSchedule: "20 04 * * *"
 testAdminUsername: "admin"
 testAdminEmail: "admin@example.com"
 
