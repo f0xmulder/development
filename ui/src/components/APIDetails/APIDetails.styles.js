@@ -2,6 +2,7 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
+import { Drawer } from '@commonground/design-system'
 
 import mq from '../../theme/mediaQueries'
 
@@ -32,4 +33,10 @@ IconList.ListItem.Icon = styled.div`
 
 IconList.ListItem.Content = styled.div`
   padding-top: 3px;
+`
+
+// Quickfix the problem of other (relative/absolute) items overlapping the drawer,
+// see https://gitlab.com/commonground/core/design-system/-/issues/33
+export const StyledDrawer = styled(Drawer)`
+  position: relative;
 `

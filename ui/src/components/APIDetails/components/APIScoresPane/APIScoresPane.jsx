@@ -6,8 +6,8 @@ import { shape, bool, string, number } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Drawer } from '@commonground/design-system'
 
-import { IconList } from '../../APIDetails.styles'
 import Grade from '../../../Grade/Grade'
+import { IconList, StyledDrawer } from '../../APIDetails.styles'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import { GradeSection } from './APIScoresPane.styles'
@@ -38,7 +38,7 @@ const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
   const close = () => history.push(parentUrl)
 
   return (
-    <Drawer closeHandler={close} data-testid="scores-pane">
+    <StyledDrawer closeHandler={close} data-testid="scores-pane">
       <Drawer.Header title="Opbouw API Score" closeButtonLabel="Sluit" />
       <Drawer.Content>
         <p>Deze score geeft de kwaliteit van de API weer.</p>
@@ -64,7 +64,7 @@ const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
           ))}
         </IconList>
       </Drawer.Content>
-    </Drawer>
+    </StyledDrawer>
   )
 }
 

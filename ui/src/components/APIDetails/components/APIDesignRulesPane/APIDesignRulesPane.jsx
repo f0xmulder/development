@@ -9,7 +9,7 @@ import { Drawer } from '@commonground/design-system'
 import Grade from '../../../Grade/Grade'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
-import { IconList } from '../../APIDetails.styles'
+import { IconList, StyledDrawer } from '../../APIDetails.styles'
 import { designRuleScores } from '../../../../models/propTypes'
 import {
   GradeSection,
@@ -44,7 +44,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
   const close = () => history.push(parentUrl)
 
   return (
-    <Drawer closeHandler={close} data-testid="design-rules-pane">
+    <StyledDrawer closeHandler={close} data-testid="design-rules-pane">
       <Drawer.Header title="Opbouw API Score" closeButtonLabel="Sluit" />
       <Drawer.Content>
         <p>Deze score geeft de kwaliteit van de API weer.</p>
@@ -116,7 +116,7 @@ const APIDesignRulesPane = ({ designRuleScores, totalScore, parentUrl }) => {
           })}
         </IconList>
       </Drawer.Content>
-    </Drawer>
+    </StyledDrawer>
   )
 }
 
