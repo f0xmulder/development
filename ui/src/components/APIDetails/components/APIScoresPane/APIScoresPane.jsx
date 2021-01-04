@@ -11,6 +11,7 @@ import Grade from '../../../Grade/Grade'
 import CheckmarkCircle from '../../../Icons/Circles/CheckmarkCircle'
 import CrossCircle from '../../../Icons/Circles/CrossCircle'
 import { GradeSection } from './APIScoresPane.styles'
+import { ScoreExplanation } from './APIScoresPane.styles'
 
 const listItems = [
   {
@@ -45,6 +46,10 @@ const APIScoresPane = ({ scores, totalScore, parentUrl }) => {
         <GradeSection>
           <Grade totalScore={totalScore} largeAtMediaQuery="xsUp" />
         </GradeSection>
+
+        <ScoreExplanation>
+          De score is tot stand gekomen door de volgende onderdelen:
+        </ScoreExplanation>
 
         <IconList>
           {listItems.map(({ name, scoresProp }) => (
