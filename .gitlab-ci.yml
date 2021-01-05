@@ -308,8 +308,6 @@ E2E tests:
 Deploy production:
   stage: deploy
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
-  variables:
-    KUBECONFIG: /secrets/kubeconfig/dv-core-prod.conf
   script:
     - |
         helm upgrade --install don-prod ./helm/don \
