@@ -227,8 +227,6 @@ Release Docs:
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
-  variables:
-    KUBECONFIG: /secrets/kubeconfig/review.conf
   script:
     - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
     - |
@@ -250,7 +248,7 @@ Deploy Review App:
         --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
         --set "replicas=1"
   environment:
-    name: $CI_COMMIT_REF_NAME
+    name: review/$CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
@@ -269,13 +267,12 @@ Remove Review App:
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   variables:
     GIT_STRATEGY: none
-    KUBECONFIG: /secrets/kubeconfig/review.conf
   script:
     - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
     - kubectl delete namespace $REVIEW_NAMESPACE
   when: manual
   environment:
-    name: $CI_COMMIT_REF_NAME
+    name: review/$CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
