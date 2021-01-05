@@ -5,7 +5,11 @@ import styled from 'styled-components'
 
 import mq from '../../theme/mediaQueries'
 
-export const StyledCircle = styled.div`
+export const StyledCircle = styled.div.attrs({
+  // Axe complains that it can't analyse the contrast because:
+  // "Element content is too short to determine if it is actual text content"
+  className: 'axe-ignore',
+})`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +37,12 @@ export const StyledCircle = styled.div`
       : ''}
 `
 
-export const StyledScoreSubscript = styled.span`
+export const StyledScoreSubscript = styled.span.attrs({
+  // Axe complains that it can't analyse the contrast:
+  // "Element's background color could not be determined because
+  // it's partially obscured by another element"
+  className: 'axe-ignore',
+})`
   padding-top: 4px;
   font-size: 9px;
 
