@@ -12,8 +12,8 @@
     ],
     "environments": [{
         "name": "production",
-        "api_url": "https://portaal.digikoppeling.nl/registers/api/",
-        "specification_url": "https://portaal.digikoppeling.nl/registers/api/",
+        "api_url": "https://portaal.digikoppeling.nl/registers/api/v1/",
+        "specification_url": "https://portaal.digikoppeling.nl/registers/api/v1/",
         "documentation_url": "https://portaal.digikoppeling.nl/registers/corApi/index"
     }],
     "contact": {
