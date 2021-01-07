@@ -30,17 +30,15 @@ export const percentageToBackgroundColor = (percentage) =>
 export const percentageToTextColor = (percentage) =>
   percentage === 0 ? '#F02B41' : theme.colorText
 
-const SVGCircle = ({
-  circleProps,
-  largeAtMediaQuery,
-  largeCircleProps,
-  color,
-  className,
-}) => (
+const SVGCircle = ({ circleProps, largeAtMediaQuery, color, className }) => (
   <circle
     cx={0.5}
     cy={0.5}
+    r={circleProps.radius}
     stroke={color}
+    strokeWidth={circleProps.strokeWidth}
+    strokeDasharray={`${circleProps.circumference} ${circleProps.circumference}`}
+    strokeDashoffset={circleProps.dashOffset}
     fillOpacity={0}
     transform="rotate(-90 0.5 0.5)"
     className={className}
@@ -57,29 +55,9 @@ const circlePropTypes = shape({
 SVGCircle.propTypes = {
   circleProps: circlePropTypes.isRequired,
   largeAtMediaQuery: string,
-  largeCircleProps: circlePropTypes,
   color: string.isRequired,
   className: string,
 }
-
-const StyledSVGCircle = styled(SVGCircle)`
-  r: ${(p) => p.circleProps.radius};
-  stroke-width: ${(p) => p.circleProps.strokeWidth};
-  stroke-dasharray: ${(p) =>
-    `${p.circleProps.circumference} ${p.circleProps.circumference}`};
-  stroke-dashoffset: ${(p) => p.circleProps.dashOffset};
-
-  ${(p) =>
-    p.largeAtMediaQuery
-      ? mq[p.largeAtMediaQuery]`
-        r: ${(p) => p.largeCircleProps.radius};
-        stroke-width: ${(p) => p.largeCircleProps.strokeWidth};
-        stroke-dasharray: ${(p) =>
-          `${p.largeCircleProps.circumference} ${p.largeCircleProps.circumference}`};
-        stroke-dashoffset: ${(p) => p.largeCircleProps.dashOffset};
-      `
-      : ''}
-`
 
 // Map all measurements to [0, 1] space
 const scaleMeasurements = ({ size, ...otherMeasurements }) => {
@@ -115,24 +93,18 @@ const Ring = ({
   strokeWidth,
   largeAtMediaQuery,
   largeSize,
-  largeStrokeWidth,
   ...props
 }) => {
   const measurements = scaleMeasurements({
     size,
     strokeWidth,
   })
-  const largeMeasurements = scaleMeasurements({
-    size: largeSize,
-    strokeWidth: largeStrokeWidth,
-  })
 
   return (
     <svg viewBox="0 0 1 1" {...props}>
-      <StyledSVGCircle
+      <SVGCircle
         largeAtMediaQuery={largeAtMediaQuery}
         circleProps={getCircleProps(percentage, measurements)}
-        largeCircleProps={getCircleProps(percentage, largeMeasurements)}
         color={color}
       />
     </svg>
@@ -146,7 +118,6 @@ Ring.propTypes = {
   strokeWidth: number,
   largeAtMediaQuery: string,
   largeSize: number,
-  largeStrokeWidth: number,
 }
 
 const StyledRing = styled(Ring)`
@@ -190,7 +161,6 @@ const Grade = ({
   strokeWidth,
   largeAtMediaQuery,
   largeSize,
-  largeStrokeWidth,
   staticBackgroundColor,
   withText,
   ...props
@@ -204,8 +174,10 @@ const Grade = ({
   const radius = 0.5 * size - 0.5 * strokeWidth
   // Draw the circle so that it overlaps the inner half of the ring
   const circleOffset = 0.5 * strokeWidth
-  const largeRadius = 0.5 * largeSize - 0.5 * largeStrokeWidth
-  const largeCircleOffset = 0.5 * largeStrokeWidth
+
+  const scaleFactor = largeSize / size
+  const largeRadius = scaleFactor * radius
+  const largeCircleOffset = scaleFactor * circleOffset
 
   return (
     <StyledPercentageRing
@@ -215,7 +187,6 @@ const Grade = ({
       color={percentageToRingColor(percentage)}
       largeAtMediaQuery={largeAtMediaQuery}
       largeSize={largeSize}
-      largeStrokeWidth={largeStrokeWidth}
       {...props}
     >
       <StyledCircle
@@ -251,7 +222,6 @@ Grade.propTypes = {
   // Use function names from `theme/mediaQueries`
   largeAtMediaQuery: string,
   largeSize: number,
-  largeStrokeWidth: number,
   withText: bool,
   // If truthy, always use this background color regardless of score
   staticBackgroundColor: string,
@@ -261,7 +231,6 @@ Grade.defaultProps = {
   size: 35,
   strokeWidth: 4,
   largeSize: 110,
-  largeStrokeWidth: 8,
   withText: true,
 }
 
