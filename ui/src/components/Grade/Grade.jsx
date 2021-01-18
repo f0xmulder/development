@@ -230,7 +230,7 @@ Grade.propTypes = {
 Grade.defaultProps = {
   size: 35,
   strokeWidth: 4,
-  largeSize: 110,
+  largeSize: 80,
   withText: true,
 }
 
