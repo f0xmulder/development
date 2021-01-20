@@ -1,0 +1,25 @@
+{
+  "description": "Deze API is onderdeel van de Signalen Informatievoorziening Amsterdam (SIA) applicatie. Burgers en andere geïnteresseerde partijen kunnen SIA gebruiken om de gemeente Amsterdam te informeren over problemen in de publieke ruimte (bijvoorbeeld geluidsoverlast, kapotte lantaarnpalen, etc.) Deze signalen worden opgepakt door de verantwoordelijke gemeentelijke diensten.",
+  "organization_name": "Gemeente Amsterdam",
+  "service_name": "Signalen",
+  "api_type": "rest_json",
+  "api_authentication": "none",
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://api.data.amsterdam.nl/signals/",
+      "specification_url": "https://api.data.amsterdam.nl/signals/swagger/openapi.yaml",
+      "documentation_url": "https://api.data.amsterdam.nl/api/swagger/?url=/signals/swagger/openapi.yaml"
+    }
+  ],
+  "contact": {
+    "email": "datapunt@amsterdam.nl",
+    "url": "https://github.com/Amsterdam/signals"
+  },
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false,
+    "uptime_guarantee": 0,
+    "support_response_time": null
+  }
+}

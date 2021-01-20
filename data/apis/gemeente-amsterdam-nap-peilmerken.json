@@ -1,0 +1,25 @@
+{
+  "description": "Het Normaal Amsterdams Peil (meestal afgekort tot NAP) is de referentiehoogte waaraan hoogtemetingen in Nederland worden gerelateerd. Het NAP-net bestaat uit ongeveer 50.000 zichtbare peilmerken en 250 ondergrondse peilmerken in Nederland, waarvan ongeveer 1000 in Amsterdam.",
+  "organization_name": "Gemeente Amsterdam",
+  "service_name": "NAP Peilmerken",
+  "api_type": "rest_json",
+  "api_authentication": "none",
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://api.data.amsterdam.nl/nap/",
+      "specification_url": "https://api.data.amsterdam.nl/meetbouten/docs/api-docs/nap?format=openapi",
+      "documentation_url": "https://api.data.amsterdam.nl/api/swagger/?url=/meetbouten/docs/api-docs/nap%3Fformat%3Dopenapi"
+    }
+  ],
+  "contact": {
+    "email": "datapunt@amsterdam.nl",
+    "url": "https://github.com/Amsterdam/nap_meetbouten"
+  },
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false,
+    "uptime_guarantee": 0,
+    "support_response_time": null
+  }
+}
