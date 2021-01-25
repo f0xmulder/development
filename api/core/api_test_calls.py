@@ -52,10 +52,15 @@ def get_all_sessions_urls(test_suite):
     return _get(url).get('sessions')
 
 
-def start_design_rule_session(test_suite, version=settings.API_TEST_DEFAULT_VERSION):
+def start_design_rule_session(test_suite,
+                              specification_url,
+                              version=settings.API_TEST_DEFAULT_VERSION):
     url = f"{settings.API_TEST_BASE_URL}api/v1/designrule-testsuite"
     url += f"/{str(test_suite.uuid)}/start_session"
     data = {"test_version": version}
+    if specification_url:
+        data["specification_url"] = specification_url
+
     response = _post(url, data)
     session = DesignRuleSession.objects.create(
         test_suite=test_suite,

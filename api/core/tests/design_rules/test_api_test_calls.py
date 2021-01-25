@@ -62,7 +62,7 @@ class ApiTestCallsTests(TransactionTestCase):
 
         test_suite = APIDesignRuleTestSuiteFactory()
 
-        response = start_design_rule_session(test_suite)
+        response = start_design_rule_session(test_suite, "http://specification.example.com")
         test_suite.refresh_from_db()
         self.assertEqual(response, test_suite.sessions.first())
         self.assertEqual(DesignRuleResult.objects.count(), 6)

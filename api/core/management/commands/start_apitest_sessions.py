@@ -48,7 +48,8 @@ class Command(BaseCommand):
                 # Update the endpoint in the test_suite
                 self.check_url_change(test_suite, api)
                 # Start a new session
-                start_design_rule_session(test_suite)
+                specification_url = api.get_production_environment().specification_url
+                start_design_rule_session(test_suite, specification_url)
             except (APIPlatformException, HTTPError) as e:
                 had_errors = True
                 logger.exception(e)
