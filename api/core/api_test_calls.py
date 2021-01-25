@@ -27,18 +27,14 @@ def _post(url, data):
     return response.json()
 
 
-def _put(url, data):
-    response = requests.put(url, data=data, headers=AUTH_HEADERS)
-    response.raise_for_status()
-    return response.json()
-
-
-def create_test_suite(test_suite):
+def get_or_create_test_suite(test_suite):
     if not test_suite.api.get_production_environment():
         raise APIPlatformException("No production environment found")
 
     url = f"{settings.API_TEST_BASE_URL}api/v1/designrule-testsuite"
     data = {"api_endpoint": test_suite.api.get_production_environment().api_url}
+    # On the api-test side, there can only be one (immutable) TestSuite for each api_endpoint.
+    # This POST endpoint is implemented as a get-or-create.
     response = _post(url, data)
     test_suite.uuid = response.get('uuid')
     test_suite.api_endpoint = response.get('api_endpoint')
@@ -49,15 +45,6 @@ def create_test_suite(test_suite):
 def get_test_suite(test_suite):
     url = f"{settings.API_TEST_BASE_URL}api/v1/designrule-testsuite/{test_suite.uuid}"
     return _get(url)
-
-
-def update_api_endpoint(test_suite, api_endpoint):
-    url = f"{settings.API_TEST_BASE_URL}api/v1/designrule-testsuite/{test_suite.uuid}"
-    data = {"api_endpoint": api_endpoint}
-    response = _put(url, data)
-    test_suite.api_endpoint = response.get('api_endpoint')
-    test_suite.save()
-    return test_suite
 
 
 def get_all_sessions_urls(test_suite):

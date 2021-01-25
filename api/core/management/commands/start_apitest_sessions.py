@@ -7,8 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 from requests import HTTPError
 
 from core.api_test_calls import (
-    start_design_rule_session, create_test_suite, APIPlatformException,
-    update_api_endpoint
+    start_design_rule_session, get_or_create_test_suite, APIPlatformException,
 )
 from core.models import API, APIDesignRuleTestSuite
 
@@ -26,16 +25,19 @@ class Command(BaseCommand):
             test_suite = api.test_suite
             if test_suite.uuid:
                 return test_suite
-            return create_test_suite(test_suite)
+            return get_or_create_test_suite(test_suite)
         except ObjectDoesNotExist:
             test_suite = APIDesignRuleTestSuite.objects.create(api=api)
-            return create_test_suite(test_suite)
+            return get_or_create_test_suite(test_suite)
 
     def check_url_change(self, test_suite, api):
-        # Check if the api endpoint is updated
+        # Check if the api endpoint was changed
         api_endpoint = api.get_production_environment().api_url
         if test_suite.api_endpoint != api_endpoint:
-            update_api_endpoint(test_suite, api_endpoint)
+            # Find a suitable test suite for the new endpoint.
+            # We overwrite the existing test suite instead of deleting it,
+            # to keep the linked history of test sessions.
+            get_or_create_test_suite(test_suite)
 
     def handle(self, *args, **options):
         had_errors = False

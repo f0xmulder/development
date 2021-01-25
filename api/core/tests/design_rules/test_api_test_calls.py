@@ -8,7 +8,7 @@ import factory
 import requests_mock
 
 from core.api_test_calls import (
-    create_test_suite, get_versions, get_session, start_design_rule_session,
+    get_or_create_test_suite, get_versions, get_session, start_design_rule_session,
     get_all_sessions_urls
 )
 from core.models import DesignRuleResult
@@ -25,16 +25,16 @@ def mockdata(resultfile):
 @requests_mock.Mocker()
 class ApiTestCallsTests(TransactionTestCase):
     @factory.django.mute_signals(post_save)
-    def test_create_test_suite(self, mock):
+    def test_get_or_create_test_suite(self, mock):
         mock.post(
             'https://staging.api-test.nl/api/v1/designrule-testsuite',
-            text=mockdata("create_test_suite.json")
+            text=mockdata("get_or_create_test_suite.json")
         )
 
         test_suite = APIDesignRuleTestSuiteFactory(uuid=None)
         EnvironmentFactory(api=test_suite.api)
 
-        create_test_suite(test_suite)
+        get_or_create_test_suite(test_suite)
         test_suite.refresh_from_db()
         self.assertIsNotNone(test_suite.uuid)
 
