@@ -23,12 +23,14 @@ class Command(BaseCommand):
     def get_or_create_test_suite(self, api):
         try:
             test_suite = api.test_suite
-            if test_suite.uuid:
-                return test_suite
-            return get_or_create_test_suite(test_suite)
         except ObjectDoesNotExist:
+            # Don't create the test suite object here to avoid unintentional chaining of exceptions
+            test_suite = None
+        if test_suite is None:
             test_suite = APIDesignRuleTestSuite.objects.create(api=api)
-            return get_or_create_test_suite(test_suite)
+        if test_suite.uuid:
+            return test_suite
+        return get_or_create_test_suite(test_suite)
 
     def check_url_change(self, test_suite, api):
         # Check if the api endpoint was changed
