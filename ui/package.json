@@ -10,7 +10,7 @@
     "formik": "2.2.5",
     "javascript-time-ago": "2.3.3",
     "js-cookie": "2.2.1",
-    "mobx": "4.15.7",
+    "mobx": "6.1.0",
     "react": "16.14.0",
     "react-app-polyfill": "1.0.6",
     "react-dom": "16.14.0",
