@@ -184,11 +184,11 @@ class APISerializerTest(TestCase):
             e["name"]: e for e in APISerializer(api).data['environments']}
         expected_environments = {
             "demo": OrderedDict([
-                    ('name', 'demo'),
-                    ('api_url', 'https://demo.mysite.com/api'),
-                    ('specification_url', ''),
-                    ('documentation_url', ''),
-                ]),
+                ('name', 'demo'),
+                ('api_url', 'https://demo.mysite.com/api'),
+                ('specification_url', ''),
+                ('documentation_url', ''),
+            ]),
             "production": OrderedDict([
                 ('name', 'production'),
                 ('api_url', 'https://mysite.com/api'),
