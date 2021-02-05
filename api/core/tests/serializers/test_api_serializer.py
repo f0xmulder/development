@@ -2,6 +2,7 @@ import json
 from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
+from operator import itemgetter
 import pytz
 
 from django.test import TestCase
@@ -179,25 +180,25 @@ class APISerializerTest(TestCase):
             api=api,
         )
 
-        actual_environments = APISerializer(api).data['environments']
-        expected_environments = [
-            OrderedDict([
-                ('name', 'demo'),
-                ('api_url', 'https://demo.mysite.com/api'),
-                ('specification_url', ''),
-                ('documentation_url', ''),
-            ]),
-            OrderedDict([
+        actual_environments = {
+            e["name"]: e for e in APISerializer(api).data['environments']}
+        expected_environments = {
+            "demo": OrderedDict([
+                    ('name', 'demo'),
+                    ('api_url', 'https://demo.mysite.com/api'),
+                    ('specification_url', ''),
+                    ('documentation_url', ''),
+                ]),
+            "production": OrderedDict([
                 ('name', 'production'),
                 ('api_url', 'https://mysite.com/api'),
                 ('specification_url', 'https://mysite.com/spec'),
                 ('documentation_url', 'https://mysite.com/docs'),
             ]),
-        ]
+        }
 
         self.assertEqual(len(actual_environments), len(expected_environments))
-        # TODO make comparison independent of the order of the list
-        self.assertListEqual(actual_environments, expected_environments)
+        self.assertDictEqual(actual_environments, expected_environments)
 
     def test_serialize_design_rule_scores(self):
         api = API.objects.create(api_id='api1')
@@ -258,7 +259,13 @@ class APISerializerTest(TestCase):
             ]),
         ])
 
-        self.assertDictEqual(actual_scores, expected_scores)
+        def order_results(score):
+            # utility function to normalize items for comparison
+            score["results"].sort(key=itemgetter("rule_type_name"))
+            return score
+
+        self.assertDictEqual(
+            order_results(actual_scores), order_results(expected_scores))
 
     def test_serialize_design_rule_scores_no_suite(self):
         api = API.objects.create(api_id='api1')
@@ -674,18 +681,13 @@ class APISerializerTest(TestCase):
             }],
         })
 
-    def test_deserialize_environments_no_production(self):
+    def test_deserialize_environments_no_environments(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
             'service_name': 'First Service',
-            'environments': [
-                {
-                    'name': 'demo',
-                    'api_url': 'http://production.nl',
-                },
-            ],
+            'environments': [],
         }
         serializer = APISerializer(data=input_data)
 
