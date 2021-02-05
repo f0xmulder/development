@@ -161,12 +161,10 @@ class APISerializer(NonNullModelSerializer):
         ]
 
     def validate_environments(self, environments):
+        if len(environments) == 0:
+            raise ValidationError('The API is missing environments')
+
         names = [env['name'] for env in environments]
-
-        # TODO get production from EnvTypes
-        if not any(name == 'production' for name in names):
-            raise ValidationError('The API is missing a production environment')
-
         if len(set(names)) != len(names):
             raise ValidationError('Environment names are not unique')
 

@@ -1,3 +1,4 @@
+from copy import deepcopy
 import json
 from unittest.mock import patch
 
@@ -62,3 +63,16 @@ class SubmitAPIViewTest(TestCase):
         self.assertEqual(response.data, {'detail': ErrorDetail(
             string='The Gitlab API is not properly configured', code='error')}
         )
+
+    @patch('core.views.create_issue')
+    def test_submit_without_prod(self, mock_create_issue):
+        mock_create_issue.return_value = {'id': 42}
+
+        data = deepcopy(self.valid_api_data)
+        data["environments"][0]["name"] = "demo"
+
+        response = self.client.post(SUBMIT_API_PATH,
+                                    data=json.dumps(data),
+                                    content_type='application/json')
+
+        self.assertEqual(response.data, {'id': 42})
