@@ -369,7 +369,7 @@ class APIDesignRuleTestSuite(models.Model):
         "core.API",
         to_field="api_id",
         db_constraint=False,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         related_name="test_suite"
     )
     uuid = models.UUIDField(null=True)
