@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0012_api_links_noconstraint'),
+        ('core', '0013_apidesignruletestsuite_designruleresult_designrulesession'),
     ]
 
     operations = [
