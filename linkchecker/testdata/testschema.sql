@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.6
+-- Dumped from database version 11.10 (Ubuntu 11.10-1.pgdg20.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,8 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
-
-SET default_with_oids = false;
 
 --
 -- Name: core_api; Type: TABLE; Schema: public; Owner: -
@@ -1088,6 +1086,14 @@ CREATE INDEX core_urlprobe_url_id_b650da51 ON public.core_urlprobe USING btree (
 
 
 --
+-- Name: core_apibadge core_apibadge_api_id_d68f8ec2_fk_core_api_api_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_apibadge
+    ADD CONSTRAINT core_apibadge_api_id_d68f8ec2_fk_core_api_api_id FOREIGN KEY (api_id) REFERENCES public.core_api(api_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: core_apibadge core_apibadge_badge_id_ff11a4e8_fk_core_badge_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1109,6 +1115,14 @@ ALTER TABLE ONLY public.core_code_programming_languages
 
 ALTER TABLE ONLY public.core_code_programming_languages
     ADD CONSTRAINT core_code_programmin_programminglanguage__afd45b15_fk_core_prog FOREIGN KEY (programminglanguage_id) REFERENCES public.core_programminglanguage(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: core_codeapi core_codeapi_api_id_255daaa7_fk_core_api_api_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_codeapi
+    ADD CONSTRAINT core_codeapi_api_id_255daaa7_fk_core_api_api_id FOREIGN KEY (api_id) REFERENCES public.core_api(api_id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -1149,6 +1163,22 @@ ALTER TABLE ONLY public.core_environment
 
 ALTER TABLE ONLY public.core_relation
     ADD CONSTRAINT core_relation_from_api_id_5c5360dc_fk_core_api_api_id FOREIGN KEY (from_api_id) REFERENCES public.core_api(api_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: core_relation core_relation_to_api_id_cc214e96_fk_core_api_api_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_relation
+    ADD CONSTRAINT core_relation_to_api_id_cc214e96_fk_core_api_api_id FOREIGN KEY (to_api_id) REFERENCES public.core_api(api_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: core_urlapilink core_urlapilink_api_id_65a7bea9_fk_core_api_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_urlapilink
+    ADD CONSTRAINT core_urlapilink_api_id_65a7bea9_fk_core_api_id FOREIGN KEY (api_id) REFERENCES public.core_api(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

@@ -1,14 +1,23 @@
+from copy import deepcopy
 from decimal import Decimal
-from json import JSONDecodeError
+from json import JSONDecodeError, load as json_load
+from pathlib import Path
 
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TransactionTestCase
 
-from core.management.commands.sync_apis import sync_apis
+from core.management.commands.sync_apis import sync_apis, parse_api
 from core.models import API, Environment, Relation
 
 
-class SyncAPIsTest(TestCase):
+class SyncAPIsTest(TransactionTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        with open(Path(__file__).resolve().parent
+                  / "test-data" / "valid" / "company-service.json") as f:
+            cls.valid_data = json_load(f)
+
     def setUp(self):
         # Display whole diffs
         self.maxDiff = None
@@ -16,10 +25,8 @@ class SyncAPIsTest(TestCase):
     def test_sync_apis_valid(self):
         call_command('sync_apis', '--api-dir', 'core/tests/management/test-data/valid')
 
-        actual_apis = list(API.objects.values())
         expected_apis = [
             {
-                'id': 1,
                 'api_id': 'company-service',
                 'description': 'Test Description',
                 'organization_name': 'Test Organization Name',
@@ -38,12 +45,12 @@ class SyncAPIsTest(TestCase):
                 'terms_support_response_time': 2,
             },
         ]
+        actual_apis = list(API.objects.values(*(k for k in expected_apis[0])))
+
         self.assertEqual(actual_apis, expected_apis)
 
-        actual_environments = list(Environment.objects.values())
         expected_environments = [
             {
-                'id': 1,
                 'api_id': 'company-service',
                 'name': 'production',
                 'api_url': 'Test API URL',
@@ -51,7 +58,6 @@ class SyncAPIsTest(TestCase):
                 'documentation_url': 'Test Documentation URL',
             },
             {
-                'id': 2,
                 'api_id': 'company-service',
                 'name': 'acceptance',
                 'api_url': 'Test Acceptance API URL',
@@ -59,19 +65,38 @@ class SyncAPIsTest(TestCase):
                 'documentation_url': 'Test Acceptance Documentation URL',
             },
         ]
+        actual_environments = list(Environment.objects.values(
+            *(k for k in expected_environments[0])))
         self.assertEqual(actual_environments, expected_environments)
 
-        actual_relations = list(Relation.objects.values())
         expected_relations = [
             {
-                'id': 1,
                 'name': 'reference-implementation',
                 'from_api_id': 'company-service',
                 'to_api_id': 'company-service',
             },
         ]
+        actual_relations = list(Relation.objects.values(
+            *(k for k in expected_relations[0])))
         self.assertEqual(actual_relations, expected_relations)
 
     def test_sync_apis_invalid_json(self):
         with self.assertRaises(JSONDecodeError):
             sync_apis('core/tests/management/test-data/invalid')
+
+    def test_reference_impl(self):
+        json_data = deepcopy(self.valid_data)
+        json_data["is_reference_implementation"] = True
+        parse_api("file_name", "company-service", json_data)
+        self.assertIs(API.objects.get().is_reference_implementation, True)
+
+    def test_unknown_keys(self):
+        test_json = deepcopy(self.valid_data)
+        test_json["nonsense"] = "nonsense"
+        with self.assertRaises(ValueError):
+            parse_api("file_name", "company-service", test_json)
+
+        test_json = deepcopy(self.valid_data)
+        test_json["terms_of_use"]["nonsense"] = "nonsense"
+        with self.assertRaises(ValueError):
+            parse_api("file_name", "company-service", test_json)
