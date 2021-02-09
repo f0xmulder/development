@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.10 (Ubuntu 11.10-1.pgdg20.04+1)
+-- Dumped from database version 11.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
