@@ -6,6 +6,8 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { render } from '@testing-library/react'
 import { node } from 'prop-types'
+import { BrowserRouter as Router } from 'react-router-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 import theme from '../theme'
 
@@ -16,7 +18,11 @@ export const flushPromises = () =>
 
 // based on https://testing-library.com/docs/react-testing-library/setup#custom-render
 const AllTheProviders = ({ children }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  return (
+    <Router>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </Router>
+  )
 }
 AllTheProviders.propTypes = {
   children: node,
