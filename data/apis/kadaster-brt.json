@@ -8,7 +8,7 @@
     "environments": [{
         "name": "production",
         "api_url": "https://brt.basisregistraties.overheid.nl/api/v2",
-        "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/brt/oas.v2.yaml",
+        "specification_url": "https://brt.basisregistraties.overheid.nl/api/v2",
         "documentation_url": "https://brt.basisregistraties.overheid.nl"
     }],
     "forum": {
