@@ -7,7 +7,7 @@
     "environments": [{
         "name": "production",
         "api_url": "https://bag.basisregistraties.overheid.nl/api/v1/",
-        "specification_url": "https://rawgit.com/PDOK/open-api-specs/master/bag/oas.v1.yaml",
+        "specification_url": "https://bag.basisregistraties.overheid.nl/api/v1",
         "documentation_url": "https://bag.basisregistraties.overheid.nl"
     }],
     "forum": {
