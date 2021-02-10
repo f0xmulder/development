@@ -67,6 +67,11 @@ const Header = () => {
               <StyledTopNavigationLink to="/docs">Docs</StyledTopNavigationLink>
             </StyledNavigationListItem> */}
             <StyledNavigationListItem>
+              <StyledTopNavigationAnchor href="https://forum.developer.overheid.nl">
+                Forum
+              </StyledTopNavigationAnchor>
+            </StyledNavigationListItem>
+            <StyledNavigationListItem>
               <StyledTopNavigationAnchor href="https://gitlab.com/commonground/developer.overheid.nl">
                 <StyledGitlabIcon />
                 GitLab
