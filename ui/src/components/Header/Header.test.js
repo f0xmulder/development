@@ -27,4 +27,3 @@ describe('Header', () => {
     )
   })
 })
-import '@testing-library/jest-dom/extend-expect'
