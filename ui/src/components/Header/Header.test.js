@@ -3,16 +3,28 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme'
+import { screen } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { renderWithProviders } from '../../test-helpers'
 import Header from './Header'
-import { StyledTopNavigationAnchor } from './Header.styles'
 
 describe('Header', () => {
   it('should exist', () => {
     const wrapper = shallow(<Header />)
     expect(wrapper.exists()).toBe(true)
   })
+
   it('should have a forum link', () => {
-    const wrapper = shallow(<Header />)
-    expect(wrapper.find(StyledTopNavigationAnchor).at(0).props().href).toBe("https://forum.developer.overheid.nl")
+    renderWithProviders(
+      <Router>
+        <Header />
+      </Router>,
+    )
+    expect(screen.getByRole('link', { name: /Forum/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Forum/ })).toHaveAttribute(
+      'href',
+      'https://forum.developer.overheid.nl',
+    )
   })
 })
+import '@testing-library/jest-dom/extend-expect'
