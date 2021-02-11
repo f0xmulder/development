@@ -1,11 +1,11 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import { GITLAB_REPO_ISSUES_URL } from '../constants'
+import { GITLAB_REPO_URL } from '../constants'
 import CodeRepository from './code-repository'
 
 const codeMock = {
-  url: GITLAB_REPO_ISSUES_URL,
+  url: GITLAB_REPO_URL,
 }
 
 const codeListMock = {
