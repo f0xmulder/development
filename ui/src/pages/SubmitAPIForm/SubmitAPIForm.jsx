@@ -132,7 +132,9 @@ class SubmitAPIFormPage extends Component {
     this.state = {
       submitted: false,
       responseData: {},
-      result: {},
+      result: {
+        apis: [],
+      },
       apisLoaded: false,
       apisError: false,
       storedFormValues, // Only use this to save values when unmounting
@@ -143,17 +145,6 @@ class SubmitAPIFormPage extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const response = await this.fetchApiList()
-      const result = {
-        apis: response.results.map((api) => modelFromAPIResponse(api)),
-      }
-      this.setState({ result, apisLoaded: true })
-    } catch (error) {
-      this.setState({ apisError: true, apisLoaded: true })
-      console.error(error)
-    }
-
     window && window.addEventListener('beforeunload', this.handleReset)
   }
 
@@ -208,6 +199,12 @@ class SubmitAPIFormPage extends Component {
   }
 
   formikValueChange = (values) => {
+    const { isBasedOnReferenceImplementation } = values
+
+    if (isBasedOnReferenceImplementation === 'true') {
+      this.callAPIAndModelResponse()
+    }
+
     this.setState({ storedFormValues: values })
   }
 
@@ -229,14 +226,28 @@ class SubmitAPIFormPage extends Component {
     }
   }
 
+  async callAPIAndModelResponse() {
+    try {
+      const response = await this.fetchApiList()
+      const result = {
+        apis: response.results.map((api) => modelFromAPIResponse(api)),
+      }
+      this.setState({ result, apisLoaded: true })
+    } catch (error) {
+      this.setState({ apisError: true, apisLoaded: true })
+      console.error(error)
+    }
+  }
+
   render() {
     const {
       storedFormValues,
       result: { apis },
       apisLoaded,
+      apisError,
     } = this.state
 
-    return apisLoaded ? (
+    return (
       <div>
         {this.state.submitted ? (
           <p data-test="api-submitted-message">
@@ -252,13 +263,16 @@ class SubmitAPIFormPage extends Component {
             {(props) => (
               <>
                 <OnFormikValueChange handle={this.formikValueChange} />
-                <SubmitAPIForm {...props} apis={apis} />
+                <SubmitAPIForm
+                  {...props}
+                  apis={{ data: apis, loaded: apisLoaded, error: apisError }}
+                />
               </>
             )}
           </Formik>
         )}
       </div>
-    ) : null
+    )
   }
 }
 

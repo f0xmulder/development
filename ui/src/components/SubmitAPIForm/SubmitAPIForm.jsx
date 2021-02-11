@@ -2,9 +2,9 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { array, object, func, bool } from 'prop-types'
+import { array, object, func, bool, shape } from 'prop-types'
 import { Button, ErrorMessage } from '@commonground/design-system'
-
+import Spinner from '@commonground/design-system/dist/components/Spinner'
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
 import {
   Fieldset,
@@ -244,21 +244,30 @@ const SubmitAPIForm = ({
               <Label htmlFor="referenceImplementation">
                 Gebaseerd op (referentie implementatie)
               </Label>
-              <SelectField
-                component="select"
-                id="referenceImplementation"
-                name="referenceImplementation"
-                maxWidth="large"
-              >
-                <option value="">Geen</option>
-                {apis
-                  .filter((api) => api.isReferenceImplementation)
-                  .map((api) => (
-                    <option value={api.id} key={api.id}>
-                      {api.serviceName} {api.organizationName}
-                    </option>
-                  ))}
-              </SelectField>
+              {apis.loaded ? (
+                <SelectField
+                  component="select"
+                  id="referenceImplementation"
+                  name="referenceImplementation"
+                  maxWidth="large"
+                >
+                  <option value="">Geen</option>
+                  {apis.data
+                    .filter((api) => api.isReferenceImplementation)
+                    .map((api) => (
+                      <option value={api.id} key={api.id}>
+                        {api.serviceName} {api.organizationName}
+                      </option>
+                    ))}
+                </SelectField>
+              ) : (
+                <Spinner />
+              )}
+              {apis.error && (
+                <ErrorMessage>
+                  Er ging iets fout tijdens het ophalen van de beschikbare API's
+                </ErrorMessage>
+              )}
               {errors.apiType && touched.apiType && (
                 <ErrorMessage>{errors.apiType}</ErrorMessage>
               )}
@@ -377,7 +386,11 @@ const SubmitAPIForm = ({
 )
 
 SubmitAPIForm.propTypes = {
-  apis: array.isRequired,
+  apis: shape({
+    data: array.isRequired,
+    error: bool,
+    loaded: bool,
+  }),
   errors: object,
   values: object,
 

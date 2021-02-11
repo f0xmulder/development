@@ -45,34 +45,7 @@ describe('map form values to API request body for submitting an API', () => {
 describe('SubmitAPI', () => {
   afterEach(() => jest.clearAllMocks())
 
-  describe('on initialization', () => {
-    it('should fetch the available apis', () => {
-      jest.spyOn(SubmitAPI.prototype, 'fetchApiList')
-
-      const wrapper = shallow(<SubmitAPI />)
-      expect(wrapper.instance().fetchApiList).toHaveBeenCalled()
-    })
-  })
-
-  describe('loading the available APIs', () => {
-    it('should store (only) the available apis as state', async () => {
-      const apiPromise = Promise.resolve({
-        total: 1,
-        page: 1,
-        results: [backendApiMock],
-      })
-      SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
-
-      const wrapper = shallow(<SubmitAPI />)
-
-      await flushPromises()
-      expect(wrapper.state('result')).toEqual({
-        apis: [modelFromAPIResponse(backendApiMock)],
-      })
-    })
-  })
-
-  describe("when the API's are loaded", () => {
+  describe('when rendered', () => {
     let wrapper
     let submitToApiSpy
 
@@ -85,6 +58,37 @@ describe('SubmitAPI', () => {
     it('contains a form', () => {
       const form = wrapper.find(Formik)
       expect(form.exists()).toBe(true)
+    })
+
+    describe('on selecting reference implementation', () => {
+      it('should fetch the available apis', () => {
+        jest.spyOn(SubmitAPI.prototype, 'fetchApiList')
+
+        const wrapper = shallow(<SubmitAPI />)
+        wrapper.instance().formikValueChange({
+          ...rawFormDataMock,
+          isBasedOnReferenceImplementation: 'true',
+        })
+        expect(wrapper.instance().fetchApiList).toHaveBeenCalled()
+      })
+      it('should store (only) the available apis as state', async () => {
+        const apiPromise = Promise.resolve({
+          total: 1,
+          page: 1,
+          results: [backendApiMock],
+        })
+        SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
+
+        const wrapper = shallow(<SubmitAPI />)
+        wrapper.instance().formikValueChange({
+          ...rawFormDataMock,
+          isBasedOnReferenceImplementation: 'true',
+        })
+        await flushPromises()
+        expect(wrapper.state('result')).toEqual({
+          apis: [modelFromAPIResponse(backendApiMock)],
+        })
+      })
     })
 
     it('has a non-submitted state when loaded', () => {
