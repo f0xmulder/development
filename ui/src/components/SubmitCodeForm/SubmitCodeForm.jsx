@@ -10,6 +10,7 @@ import { TextInput, Button, ErrorMessage } from '@commonground/design-system'
 import CodeRepository from '../../domain/code-repository'
 import objectKeysToSnakeCase from '../../utils/objectKeysToSnakeCase'
 import { modelFromAPIResponse } from '../../models/api'
+import { GITLAB_REPO_URL } from '../../constants'
 import {
   StyledFieldset,
   HelperMessage,
@@ -125,7 +126,7 @@ const SubmitCodeForm = () => {
               <br />
               <br />
               <a
-                href="https://gitlab.com/commonground/developer.overheid.nl/-/issues"
+                href={`${GITLAB_REPO_URL}/issues`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

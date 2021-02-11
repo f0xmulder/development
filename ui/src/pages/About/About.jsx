@@ -4,6 +4,7 @@
 import React from 'react'
 
 import { Container } from '../../components/design-system-candidates/Grid'
+import { GITLAB_REPO_ISSUES_URL, GITLAB_REPO_URL } from '../../constants'
 import { StyledPageTitle, StyledPageContentCard } from './About.styles'
 
 const About = () => (
@@ -21,7 +22,7 @@ const About = () => (
           Deze website is ‘permanent beta’, en zal worden aangepast naar de
           behoeften van gebruikers. Wensen en opmerkingen kunnen via een{' '}
           <a
-            href="https://gitlab.com/commonground/developer.overheid.nl/issues"
+            href={GITLAB_REPO_ISSUES_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -55,22 +56,14 @@ const About = () => (
           API’s een open systeem is, kunnen we niet garanderen dat de site
           altijd aan de redactionele vereisten voldoet. Verbeterpunten kunnen
           worden doorgegeven via{' '}
-          <a
-            href="https://gitlab.com/commonground/developer.overheid.nl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={GITLAB_REPO_URL} target="_blank" rel="noopener noreferrer">
             GitLab
           </a>
           .
         </p>
         <p>
           De broncode van deze website is te vinden op{' '}
-          <a
-            href="https://gitlab.com/commonground/developer.overheid.nl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={GITLAB_REPO_URL} target="_blank" rel="noopener noreferrer">
             GitLab
           </a>
           .

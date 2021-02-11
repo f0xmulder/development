@@ -4,6 +4,7 @@
 import React from 'react'
 import { Button } from '@commonground/design-system'
 
+import { GITLAB_REPO_URL } from '../../constants'
 import {
   FeedbackArea,
   FeedbackContainer,
@@ -27,7 +28,7 @@ const Feedback = () => {
         </StyledText>
         <Button
           as="a"
-          href="https://gitlab.com/commonground/developer.overheid.nl/issues"
+          href={`${GITLAB_REPO_URL}/issues`}
           target="_blank"
           rel="noopener noreferrer"
           variant="secondary"

@@ -22,6 +22,7 @@ import {
   StyledText,
   StyledPrimaryNavigation,
 } from './Header.styles'
+import { GITLAB_REPO_URL } from '../../constants'
 
 const Header = () => {
   const navItems = [
@@ -72,7 +73,7 @@ const Header = () => {
               </StyledTopNavigationAnchor>
             </StyledNavigationListItem>
             <StyledNavigationListItem>
-              <StyledTopNavigationAnchor href="https://gitlab.com/commonground/developer.overheid.nl">
+              <StyledTopNavigationAnchor href={GITLAB_REPO_URL}>
                 <StyledGitlabIcon />
                 GitLab
               </StyledTopNavigationAnchor>

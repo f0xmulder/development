@@ -1,10 +1,11 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+import { GITLAB_REPO_ISSUES_URL } from '../constants'
 import CodeRepository from './code-repository'
 
 const codeMock = {
-  url: 'https://gitlab.com/commonground/developer.overheid.nl',
+  url: GITLAB_REPO_ISSUES_URL,
 }
 
 const codeListMock = {

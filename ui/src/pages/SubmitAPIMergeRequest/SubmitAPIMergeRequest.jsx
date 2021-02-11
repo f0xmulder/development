@@ -4,6 +4,7 @@
 import React from 'react'
 
 import CodeBlock from '../../components/CodeBlock/CodeBlock'
+import { GITLAB_REPO_URL } from '../../constants'
 
 const branchName = `data/{organization}-{api}`
 const fileName = `data/apis/{organization}-{api}.json`
@@ -52,10 +53,8 @@ const exampleJSON = `{
 const SubmitAPIMergeRequest = () => (
   <div>
     <p>
-      Maak op{' '}
-      <a href="https://gitlab.com/commonground/developer.overheid.nl">GitLab</a>{' '}
-      een fork van de repository onder een eigen account en maak een nieuwe
-      branch aan met de naam:
+      Maak op <a href={GITLAB_REPO_URL}>GitLab</a> een fork van de repository
+      onder een eigen account en maak een nieuwe branch aan met de naam:
     </p>
     <CodeBlock>{branchName}</CodeBlock>
 
@@ -70,10 +69,8 @@ const SubmitAPIMergeRequest = () => (
     </p>
     <p>
       Maak vervolgens een Merge Request aan van{' '}
-      <a href="https://gitlab.com/commonground/developer.overheid.nl/-/forks">
-        jouw geforkte repository
-      </a>{' '}
-      naar de officiële repository om jouw toevoeging in te dienen.
+      <a href={`${GITLAB_REPO_URL}/-/forks`}>jouw geforkte repository</a> naar
+      de officiële repository om jouw toevoeging in te dienen.
     </p>
   </div>
 )
