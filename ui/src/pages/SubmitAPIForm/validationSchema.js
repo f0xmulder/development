@@ -32,7 +32,12 @@ const validationSchemaConfiguration = {
 
   productionApiUrl: Yup.string()
     .url()
-    .required()
+    .when(['hasAcceptanceEnvironment', 'hasDemoEnvironment'], {
+      is: (hasAcceptanceEnvironment, hasDemoEnvironment) =>
+        hasAcceptanceEnvironment || hasDemoEnvironment,
+      then: Yup.string().url(),
+      otherwise: Yup.string().required(),
+    })
     .label('API URL voor productie'),
   productionSpecificationUrl: Yup.string()
     .url()
