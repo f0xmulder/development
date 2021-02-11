@@ -173,9 +173,14 @@ class APISerializer(NonNullModelSerializer):
         return environments
 
     def get_scores(self, obj):
+
+        def get_prod_env(api):
+            prod_env = [
+                e for e in api.environments.all() if e.name == 'production']
+            return prod_env[0] if prod_env else None
+
         def has_documentation(api):
-            production_environment = api.environments.filter(
-                name='production').first()
+            production_environment = get_prod_env(api)
 
             if production_environment is None:
                 return False
@@ -183,8 +188,7 @@ class APISerializer(NonNullModelSerializer):
             return production_environment.documentation_url != ''
 
         def has_specification(api):
-            production_environment = api.environments.filter(
-                name='production').first()
+            production_environment = get_prod_env(api)
 
             if production_environment is None:
                 return False

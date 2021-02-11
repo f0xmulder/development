@@ -34,7 +34,8 @@ logger = logging.getLogger(__name__)
 
 class APIViewSet(RetrieveModelMixin,
                  GenericViewSet):
-    queryset = API.objects.all()
+    queryset = API.objects.all().select_related("test_suite").prefetch_related(
+        "badges", "environments", "referenced_apis")
     serializer_class = APISerializer
     pagination_class = StandardResultsSetPagination
     lookup_field = 'api_id'
