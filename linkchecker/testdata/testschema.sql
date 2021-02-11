@@ -1104,6 +1104,14 @@ ALTER TABLE ONLY public.core_apibadge
 
 
 --
+-- Name: core_apidesignruletestsuite core_apidesignruletestsuite_api_id_2e3dc731_fk_core_api_api_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_apidesignruletestsuite
+    ADD CONSTRAINT core_apidesignruletestsuite_api_id_2e3dc731_fk_core_api_api_id FOREIGN KEY (api_id) REFERENCES public.core_api(api_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: core_code_programming_languages core_code_programmin_code_id_42f55771_fk_core_code; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 

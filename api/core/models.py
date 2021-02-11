@@ -368,7 +368,6 @@ class APIDesignRuleTestSuite(models.Model):
     api = models.OneToOneField(
         "core.API",
         to_field="api_id",
-        db_constraint=False,
         on_delete=models.PROTECT,
         related_name="test_suite"
     )
