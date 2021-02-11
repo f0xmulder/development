@@ -46,3 +46,16 @@ export const HelperMessage = styled.small`
   line-height: ${(p) => p.theme.tokens.lineHeightHeading};
   color: ${(p) => p.theme.colorTextLabel};
 `
+
+export const SelectFieldLoading = styled.div`
+  background-color: ${(p) => `1px solid ${p.theme.colorBackgroundInput}`};
+  background: url(/static/media/arrow-down-solid-icon.cc2fbbbb.svg) right center
+    no-repeat;
+  border-radius: 0;
+  border: ${(p) => `1px solid ${p.theme.colorBorderChoice}`};
+  display: block;
+  height: 48px;
+  max-width: 45rem;
+  outline: none;
+  padding: ${(p) => p.theme.tokens.spacing04};
+`

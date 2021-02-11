@@ -23,6 +23,7 @@ import {
   StyledFormGroup,
   StyledFormSetting,
   HelperMessage,
+  SelectFieldLoading,
 } from './SubmitAPIForm.styles'
 import PercentageInput from './PercentageInput'
 
@@ -261,7 +262,9 @@ const SubmitAPIForm = ({
                     ))}
                 </SelectField>
               ) : (
-                <Spinner />
+                <SelectFieldLoading>
+                  <Spinner />
+                </SelectFieldLoading>
               )}
               {apis.error && (
                 <ErrorMessage>
