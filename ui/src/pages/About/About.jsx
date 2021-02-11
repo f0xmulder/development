@@ -57,7 +57,7 @@ const About = () => (
           altijd aan de redactionele vereisten voldoet. Verbeterpunten kunnen
           worden doorgegeven via{' '}
           <a
-            href="https://gitlab.com/commonground/developer.overheid.nl"
+            href={`${GITLAB_REPO_URL}/issues`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -67,11 +67,7 @@ const About = () => (
         </p>
         <p>
           De broncode van deze website is te vinden op{' '}
-          <a
-            href="https://gitlab.com/commonground/developer.overheid.nl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={GITLAB_REPO_URL} target="_blank" rel="noopener noreferrer">
             GitLab
           </a>
           .
