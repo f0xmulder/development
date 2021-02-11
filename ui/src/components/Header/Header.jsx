@@ -3,6 +3,7 @@
 //
 import React from 'react'
 
+import { GITLAB_REPO_URL } from '../../constants'
 import IconHome from './assets/IconHome'
 import IconPresent from './assets/IconPresent'
 import IconCode from './assets/IconCode'
@@ -22,7 +23,6 @@ import {
   StyledText,
   StyledPrimaryNavigation,
 } from './Header.styles'
-import { GITLAB_REPO_URL } from '../../constants'
 
 const Header = () => {
   const navItems = [
