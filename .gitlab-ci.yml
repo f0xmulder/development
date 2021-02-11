@@ -257,7 +257,7 @@ Deploy Review App:
     - cg
     - docker
   only:
-    - branches@commonground/developer.overheid.nl
+    - branches@commonground/don/developer.overheid.nl
   except:
     - master
   artifacts:
@@ -281,7 +281,7 @@ Remove Review App:
     - cg
     - docker
   only:
-    - branches@commonground/developer.overheid.nl
+    - branches@commonground/don/developer.overheid.nl
   except:
     - master
 
@@ -300,7 +300,7 @@ E2E tests:
       $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
       /bin/sh -c "./wait-for-http.sh $URL && npm test"
   only:
-    - branches@commonground/developer.overheid.nl
+    - branches@commonground/don/developer.overheid.nl
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -334,4 +334,4 @@ Deploy production:
     - cg-privileged
     - docker
   only:
-    - master@commonground/developer.overheid.nl
+    - master@commonground/don/developer.overheid.nl
