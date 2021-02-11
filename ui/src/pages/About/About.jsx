@@ -25,6 +25,7 @@ const About = () => (
             href={`${GITLAB_REPO_URL}/issues`}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Open een issue"
           >
             melding op GitLab
           </a>{' '}
@@ -60,6 +61,7 @@ const About = () => (
             href={`${GITLAB_REPO_URL}/issues`}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Open een issue"
           >
             GitLab
           </a>
@@ -67,7 +69,12 @@ const About = () => (
         </p>
         <p>
           De broncode van deze website is te vinden op{' '}
-          <a href={GITLAB_REPO_URL} target="_blank" rel="noopener noreferrer">
+          <a
+            href={GITLAB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Bekijk broncode"
+          >
             GitLab
           </a>
           .
