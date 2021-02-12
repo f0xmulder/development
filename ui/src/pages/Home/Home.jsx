@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 
 import { Button } from '@commonground/design-system'
 import { H1, H2 } from '../../components/Headings/Headings'
+import svgApi from '../../components/SVG/Spot-API.svg'
+import svgForum from '../../components/SVG/Spot-Forum.svg'
 import {
   Links,
   StyledHomePage,
@@ -13,7 +15,6 @@ import {
   StyledCard,
   StyledExternalIcon,
 } from './Home.styles'
-
 const Home = () => (
   <StyledHomePage>
     <StyledHeading>
@@ -33,7 +34,7 @@ const Home = () => (
       <StyledCard>
         <StyledCard.Header>
           <img
-            src="https://i.imgur.com/D12nNYQ.jpg"
+            src={svgApi}
             alt="API’s binnen de Nederlandse overheid"
             aria-describedby="apis"
           />
@@ -53,7 +54,7 @@ const Home = () => (
       <StyledCard>
         <StyledCard.Header>
           <img
-            src="https://i.imgur.com/D12nNYQ.jpg"
+            src={svgForum}
             alt="Forum voor developers"
             aria-describedby="forum"
           />
@@ -61,8 +62,8 @@ const Home = () => (
         <StyledCard.Body>
           <h3>Forum voor developers</h3>
           <p id="forum">
-            Omschrijving van het forum, zodat je weet wat het is. Netjes over
-            twee regels natuurlijk.
+            De centrale plek om in gesprek te gaan over digitale
+            overheidsdiensten
           </p>
           <Button variant="primary" as={Link} to="/apis">
             Ga naar forum <StyledExternalIcon />

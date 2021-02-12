@@ -46,6 +46,10 @@ export const Header = styled.div`
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     flex-shrink: 0;
-    width: 100%;
   }
+  ${mq.smDown`
+    img {
+      width: 100%;
+    }
+  `}
 `
