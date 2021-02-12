@@ -64,9 +64,7 @@ const SubmitAPIMergeRequest = () => (
     <p>En voeg de inhoud toe aan de hand van de onderstaande structuur:</p>
     <CodeBlock>{exampleJSON}</CodeBlock>
 
-    <p>
-      Een productieomgeving is verplicht, acceptatie en demo zijn optioneel.
-    </p>
+    <p>Ten minste één omgeving is verplicht.</p>
     <p>
       Maak vervolgens een Merge Request aan van{' '}
       <a href={`${GITLAB_REPO_URL}/-/forks`}>jouw geforkte repository</a> naar
