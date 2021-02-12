@@ -7,8 +7,6 @@ import mq from '../../theme/mediaQueries'
 
 export const StyledCard = styled.div`
   width: auto;
-  /* margin: ${(p) => p.theme.tokens.spacing07} -${(p) =>
-    p.theme.tokens.spacing05}; */
   border-radius: 4px;
   background-color: ${(p) => p.theme.tokens.colorBackground};
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
