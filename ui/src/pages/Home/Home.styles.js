@@ -12,8 +12,18 @@ export const StyledHomePage = styled(Container)`
   flex-direction: column;
   margin-bottom: ${(p) => p.theme.tokens.spacing09};
 
+  h2 {
+    margin-bottom: ${(p) => p.theme.tokens.spacing04};
+  }
+
   ${mq.smUp`
     margin-bottom: ${(p) => p.theme.tokens.spacing11};
+  `}
+
+  ${mq.smDown`
+    h2 {
+      margin-bottom: ${(p) => p.theme.tokens.spacing02};
+    }
   `}
 `
 
@@ -28,4 +38,20 @@ export const StyledCard = styled(Card)`
 
 export const StyledExternalIcon = styled(ExternalIcon)`
   margin-left: ${(p) => p.theme.tokens.spacing04};
+`
+
+export const Links = styled.div`
+  display: flex;
+
+  ${StyledCard}:nth-child(2) {
+    margin-left: ${(p) => p.theme.tokens.spacing09};
+  }
+
+  ${mq.smDown`
+    ${StyledCard}:nth-child(2) {
+      margin-left: 0;
+      margin-top: ${(p) => p.theme.tokens.spacing05};
+    }
+    flex-direction: column;
+  `}
 `
