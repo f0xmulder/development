@@ -30,7 +30,7 @@ const Home = () => (
 
     <H2>Direct naar</H2>
     <Links>
-      <StyledCard id="apis">
+      <StyledCard>
         <StyledCard.Header>
           <img
             src="https://i.imgur.com/D12nNYQ.jpg"
@@ -50,7 +50,7 @@ const Home = () => (
         </StyledCard.Body>
       </StyledCard>
 
-      <StyledCard id="forum">
+      <StyledCard>
         <StyledCard.Header>
           <img
             src="https://i.imgur.com/D12nNYQ.jpg"
