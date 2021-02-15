@@ -65,7 +65,11 @@ const Home = () => (
             De centrale plek om in gesprek te gaan over digitale
             overheidsdiensten
           </p>
-          <Button variant="primary" as={Link} to="/apis">
+          <Button
+            variant="primary"
+            as="a"
+            href="https://forum.developer.overheid.nl/"
+          >
             Ga naar forum <StyledExternalIcon />
           </Button>
         </StyledCard.Body>
