@@ -52,6 +52,7 @@ const SubmitCodeForm = () => {
       setApis(apis)
     } catch (e) {
       console.error(e.message)
+      setError(e.message)
     }
   }
 
@@ -114,8 +115,8 @@ const SubmitCodeForm = () => {
       data-test="form"
     >
       {({ errors, touched, handleSubmit, setFieldValue, setFieldTouched }) => (
-        <form onSubmit={handleSubmit}>
-          <StyledFieldset>
+        <form onSubmit={handleSubmit} data-testid="form">
+          <StyledFieldset disabled={loading || !!error}>
             <StyledAlert variant="info">
               Momenteel kunnen alleen projecten toegevoegd worden die een API
               gebruiken uit het API overzicht van Developer Overheid.
@@ -162,13 +163,13 @@ const SubmitCodeForm = () => {
               />
             </Spacing>
             {errors.relatedApis && touched.relatedApis && (
-              <ErrorMessage>{errors.relatedApis}</ErrorMessage>
+              <ErrorMessage data-test="error-message">
+                {errors.relatedApis}
+              </ErrorMessage>
             )}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
           </StyledFieldset>
-
-          {error && <div data-test="error-message">{error}</div>}
-
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading || !!error}>
             Project toevoegen
           </Button>
         </form>
