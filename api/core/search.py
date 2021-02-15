@@ -6,6 +6,10 @@ from django.db.models import Q
 # Allows for prefix matching and searches each word individually
 class PrefixedPhraseQuery(SearchQuery):
 
+    def __init__(self, value, *args, **kwargs):
+        super().__init__(value, *args, **kwargs)
+        self.value = value
+
     def quote_lexeme(self, value):
         # This is not sql escaping, we are quoting a lexeme which will be embedded into a string.
         # See https://www.postgresql.org/docs/current/datatype-textsearch.html#DATATYPE-TSVECTOR
