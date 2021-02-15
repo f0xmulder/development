@@ -8,18 +8,11 @@ class StandardResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'rowsPerPage'
 
-    def paginate_queryset(self, queryset, request, view=None):
-        page_results = super().paginate_queryset(queryset, request, view=view)
-
-        self.total_results = queryset.count()
-
-        return page_results
-
     def get_paginated_response(self, data):
         return Response(OrderedDict([
             ('page', self.page.number),
             ('rowsPerPage', self.get_page_size(self.request)),
-            ('totalResults', self.total_results),
+            ('totalResults', self.page.paginator.count),
             ('results', data)
         ]))
 

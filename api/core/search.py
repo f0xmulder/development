@@ -1,4 +1,3 @@
-from functools import reduce
 from django.contrib.postgres.search import SearchQuery
 from django.db.models import Q
 
@@ -34,17 +33,13 @@ class PrefixedPhraseQuery(SearchQuery):
 
 
 def get_facet_filters(facet_inputs):
-    facet_filters = {}
-    for facet, selected_values in facet_inputs.items():
-        facet_filters[facet] = reduce(lambda query, val, f=facet: query | Q(**{f: val}),
-                                      selected_values,
-                                      Q())
-    return facet_filters
+    return {
+        facet: Q(**{f'{facet}__in': selected_values}) if selected_values else None
+        for facet, selected_values in facet_inputs.items()
+    }
 
 
 def get_search_filter(search_text):
-    search_filter = Q()
     if search_text:
-        search_filter = Q(searchable=PrefixedPhraseQuery(search_text, config='dutch'))
-
-    return search_filter
+        return Q(searchable=PrefixedPhraseQuery(search_text, config='dutch'))
+    return Q()

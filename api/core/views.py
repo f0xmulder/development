@@ -1,6 +1,5 @@
 import logging
 import json
-from functools import reduce
 import datetime
 
 import requests
@@ -50,18 +49,30 @@ class APIViewSet(RetrieveModelMixin,
     supported_facets = ['organization_name', 'api_type']
 
     def list(self, request):
-        queryset = self.filter_queryset(self.get_queryset()) \
-            .annotate(searchable=self.search_vector)
+        queryset = self.filter_queryset(self.get_queryset())
+
+        list_filter = Q()
+
+        is_ref_impl_val = request.query_params.get('isReferenceImplementation')
+        if is_ref_impl_val is not None:
+            is_ref_impl_val = bool(['false', 'true'].index(is_ref_impl_val))
+            list_filter &= Q(is_reference_implementation=is_ref_impl_val)
+        search_text = request.query_params.get('q', '')
+        if search_text:
+            queryset = queryset.annotate(searchable=self.search_vector)
+            search_filter = get_search_filter(search_text)
+            list_filter &= search_filter
+        else:
+            search_filter = None
 
         facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
-        search_text = request.query_params.get('q', '')
-
         facet_filters = get_facet_filters(facet_inputs)
-        search_filter = get_search_filter(search_text)
+        list_filter &= Q(*(v for v in facet_filters.values() if v is not None))
 
-        results = queryset \
-            .filter(*facet_filters.values(), search_filter) \
-            .order_by('api_id')
+        results = queryset
+        if list_filter:
+            results = results.filter(list_filter)
+        results = results.order_by('api_id')
         facets = self.get_facets(queryset, facet_filters, search_filter)
 
         return self.get_response(results, facets)
@@ -70,13 +81,16 @@ class APIViewSet(RetrieveModelMixin,
     def get_facets(queryset, facet_filters, search_filter):
         facets = {}
         for facet in facet_filters.keys():
-            other_facet_filters = [v for k, v in facet_filters.items() if k != facet]
-            combined_filter = reduce(lambda query, val: query & Q(val),
-                                     other_facet_filters,
-                                     Q())
+            other_facet_filters = [
+                v for k, v in facet_filters.items()
+                if k != facet and v is not None]
+            combined_filter = Q(*other_facet_filters)
+            if search_filter:
+                combined_filter &= search_filter
+
             term_counts = queryset \
                 .values(term=F(facet)) \
-                .annotate(count=Count('id', filter=combined_filter & search_filter)) \
+                .annotate(count=Count('id', filter=combined_filter or None)) \
                 .order_by('term')
 
             facets[facet] = {'terms': list(term_counts)}

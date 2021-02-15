@@ -174,22 +174,19 @@ class APISerializer(NonNullModelSerializer):
 
     def get_scores(self, obj):
 
-        def get_prod_env(api):
-            prod_env = [
-                e for e in api.environments.all() if e.name == 'production']
-            return prod_env[0] if prod_env else None
+        try:
+            production_environment = next(
+                e for e in obj.environments.all() if e.name == 'production')
+        except StopIteration:
+            production_environment = None
 
-        def has_documentation(api):
-            production_environment = get_prod_env(api)
-
+        def has_documentation():
             if production_environment is None:
                 return False
 
             return production_environment.documentation_url != ''
 
-        def has_specification(api):
-            production_environment = get_prod_env(api)
-
+        def has_specification():
             if production_environment is None:
                 return False
 
@@ -205,8 +202,8 @@ class APISerializer(NonNullModelSerializer):
                     api.terms_uptime_guarantee >= 0.9)
 
         return OrderedDict({
-            'has_documentation': has_documentation(obj),
-            'has_specification': has_specification(obj),
+            'has_documentation': has_documentation(),
+            'has_specification': has_specification(),
             'has_contact_details': has_contact_details(obj),
             'provides_sla': provides_sla(obj)
         })
