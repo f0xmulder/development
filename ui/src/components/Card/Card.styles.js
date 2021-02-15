@@ -42,14 +42,11 @@ export const Header = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   img {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    flex-shrink: 0;
+    width: 100%;
   }
-  ${mq.smDown`
-    img {
-      width: 100%;
-    }
-  `}
 `

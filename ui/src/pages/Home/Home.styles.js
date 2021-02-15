@@ -41,17 +41,16 @@ export const StyledExternalIcon = styled(ExternalIcon)`
 `
 
 export const Links = styled.div`
-  display: flex;
-
-  ${StyledCard}:nth-child(2) {
-    margin-left: ${(p) => p.theme.tokens.spacing09};
-  }
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: ${(p) => p.theme.tokens.spacing06};
+  padding-right: ${(p) => p.theme.tokens.spacing06};
 
   ${mq.smDown`
     ${StyledCard}:nth-child(2) {
-      margin-left: 0;
       margin-top: ${(p) => p.theme.tokens.spacing05};
     }
-    flex-direction: column;
+    grid-template-columns: 100%;
+    padding-right: 0;
   `}
 `
