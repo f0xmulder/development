@@ -40,7 +40,7 @@ class APIViewSet(RetrieveModelMixin,
     * q=[text fragment]
     * organization_name=[organization name]
     * api_type=[api_type]
-    * isReferenceImplementation=[true|false\]
+    * isReferenceImplementation=[true|false]
 
     """
     queryset = API.objects.all().select_related("test_suite").prefetch_related(
