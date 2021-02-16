@@ -17,7 +17,7 @@ class PrefixedPhraseQuery(SearchQuery):
         return "'" + value.replace("'", "''").replace('\\', '\\\\').replace('%', '%%') + "'"
 
     # Alter the tsquery executed by SearchQuery
-    def as_sql(self, compiler, connection):
+    def as_sql(self, compiler, connection, function=None, template=None):
         params = ["{}:*".format(self.quote_lexeme(self.value))]
 
         # The to_tsquery will apply processing (split query into separate lexemes, stemming,
