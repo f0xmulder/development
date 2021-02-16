@@ -33,6 +33,16 @@ logger = logging.getLogger(__name__)
 
 class APIViewSet(RetrieveModelMixin,
                  GenericViewSet):
+    """ Provides a list of APIs and corresponding totals for facets
+
+    Results can be filtered as follows
+
+    * q=[text fragment]
+    * organization_name=[organization name]
+    * api_type=[api_type]
+    * isReferenceImplementation=[true|false\]
+
+    """
     queryset = API.objects.all().select_related("test_suite").prefetch_related(
         "badges", "environments", "referenced_apis")
     serializer_class = APISerializer

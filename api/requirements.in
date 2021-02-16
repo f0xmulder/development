@@ -4,6 +4,7 @@ psycopg2-binary
 requests
 python-dateutil
 django-solo
+markdown
 
 # For docker deployment
 uWSGI
