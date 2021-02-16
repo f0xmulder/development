@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0013_apidesignruletestsuite_designruleresult_designrulesession'),
+        ('core', '0013a_remove_orphans'),
     ]
 
     operations = [
