@@ -2,6 +2,7 @@ import json
 from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
+import pytz
 
 from django.test import TestCase
 from rest_framework.exceptions import ErrorDetail
@@ -201,16 +202,17 @@ class APISerializerTest(TestCase):
     def test_serialize_design_rule_scores(self):
         api = API.objects.create(api_id='api1')
         suite = APIDesignRuleTestSuite.objects.create(api=api)
+        ams = pytz.timezone("Europe/Amsterdam")
         # Older session, should be ignored
         DesignRuleSession.objects.create(
             test_suite=suite,
-            started_at=datetime(2019, 1, 1),
+            started_at=ams.localize(datetime(2019, 1, 1)),
             percentage_score=0,
             test_version="one",
         )
         newer_session = DesignRuleSession.objects.create(
             test_suite=suite,
-            started_at=datetime(2020, 1, 1),
+            started_at=ams.localize(datetime(2020, 1, 1)),
             percentage_score=0.5,
             test_version="one",
         )
