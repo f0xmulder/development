@@ -77,7 +77,7 @@ class APIViewSet(RetrieveModelMixin,
 
         facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
         facet_filters = get_facet_filters(facet_inputs)
-        list_filter &= Q(*(v for v in facet_filters.values() if v is not None))
+        list_filter &= Q(*facet_filters.values())
 
         results = queryset
         if list_filter:
@@ -90,7 +90,7 @@ class APIViewSet(RetrieveModelMixin,
     @staticmethod
     def get_facets(queryset, facet_filters, search_filter):
         facets = {}
-        for facet in facet_filters.keys():
+        for facet in APIViewSet.supported_facets:
             other_facet_filters = [
                 v for k, v in facet_filters.items()
                 if k != facet and v is not None]

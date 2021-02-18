@@ -34,8 +34,9 @@ class PrefixedPhraseQuery(SearchQuery):
 
 def get_facet_filters(facet_inputs):
     return {
-        facet: Q(**{f'{facet}__in': selected_values}) if selected_values else None
+        facet: Q(**{f'{facet}__in': selected_values})
         for facet, selected_values in facet_inputs.items()
+        if selected_values
     }
 
 
