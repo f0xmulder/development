@@ -126,40 +126,49 @@ describe('EventOverview', () => {
     })
   })
 
-  it('should show pagination', async () => {
-    const response = {
-      ...apiResponse,
-      page: 1,
-      rowsPerPage: 1,
-      totalResults: 2,
-    }
-    await setup({
-      customResponse: response,
-      assert: () => {
-        expect(screen.getByRole('button', { name: /1/ })).toBeInTheDocument()
-        expect(screen.getByRole('button', { name: /2/ })).toBeInTheDocument()
-      },
-      waitForLoadingToFinish: false,
+  describe('Pagination', () => {
+    const scrollTo = window.scrollTo
+    beforeEach(() => {
+      window.scrollTo = jest.fn()
     })
-  })
+    afterEach(() => {
+      window.scrollTo = scrollTo
+    })
+    it('should show pagination', async () => {
+      const response = {
+        ...apiResponse,
+        page: 1,
+        rowsPerPage: 1,
+        totalResults: 2,
+      }
+      await setup({
+        customResponse: response,
+        assert: () => {
+          expect(screen.getByRole('button', { name: /1/ })).toBeInTheDocument()
+          expect(screen.getByRole('button', { name: /2/ })).toBeInTheDocument()
+        },
+        waitForLoadingToFinish: false,
+      })
+    })
 
-  it('should handle pagination', async () => {
-    const response = {
-      ...apiResponse,
-      page: 1,
-      rowsPerPage: 1,
-      totalResults: 2,
-    }
-    await setup({
-      customResponse: response,
-      assert: ({ historyMock }) => {
-        const pageTwo = screen.getByRole('button', { name: /2/ })
-        act(() => {
-          userEvent.click(pageTwo)
-        })
-        expect(historyMock.push).toHaveBeenCalledWith('?pagina=2')
-      },
-      waitForLoadingToFinish: false,
+    it('should handle pagination', async () => {
+      const response = {
+        ...apiResponse,
+        page: 1,
+        rowsPerPage: 1,
+        totalResults: 2,
+      }
+      await setup({
+        customResponse: response,
+        assert: ({ historyMock }) => {
+          const pageTwo = screen.getByRole('button', { name: /2/ })
+          act(() => {
+            userEvent.click(pageTwo)
+          })
+          expect(historyMock.push).toHaveBeenCalledWith('?pagina=2')
+        },
+        waitForLoadingToFinish: false,
+      })
     })
   })
 })
