@@ -8,11 +8,13 @@ from rest_framework.response import Response
 
 from core.models import API
 from core.serializers import APISerializer
+from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis'
 
 
 class APISearchTest(TestCase):
+
     def setUp(self):
         self.api1 = API.objects.create(
             api_id='kad1',
@@ -121,6 +123,7 @@ class APISearchTest(TestCase):
                 f'response_data.{k} does not equal mock_response_dict.{k}'
             )
 
+    @prevent_logging
     @patch('core.views.APIViewSet.pagination_class')
     def test_pagination_invalid_page(self, mock_pagination_class):
         def raise_not_found(*args, **kwargs):

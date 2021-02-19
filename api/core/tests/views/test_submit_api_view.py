@@ -5,6 +5,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 from rest_framework.exceptions import ErrorDetail
 
+from core.tests.utils import prevent_logging
+
 SUBMIT_API_PATH = '/api/submit-api'
 
 
@@ -24,6 +26,7 @@ class SubmitAPIViewTest(TestCase):
         # Display whole JSON diffs
         self.maxDiff = None
 
+    @prevent_logging
     def test_submit_invalid_api(self):
         response = self.client.post(SUBMIT_API_PATH,
                                     data=json.dumps({'invalid': 'api data'}),
@@ -47,6 +50,7 @@ class SubmitAPIViewTest(TestCase):
         self.assertIn('"description": "First API"', create_issue_args[1])
         self.assertIn('New API', create_issue_args[2])
 
+    @prevent_logging
     @patch('core.views.create_issue')
     def test_submit_gitlab_error(self, mock_create_issue):
         mock_create_issue.side_effect = ImproperlyConfigured('Gitlab configuration error')

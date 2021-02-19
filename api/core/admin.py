@@ -120,7 +120,8 @@ class URLAdmin(admin.ModelAdmin):
     # An optimization for the admin list page. The prefetch doesn't help for the probe_set used in
     # last_ok.
     def get_queryset(self, request):
-        return super().get_queryset(request).with_last_probe().prefetch_related('api_links', 'api_links__api')
+        return super().get_queryset(request).with_last_probe().prefetch_related(
+            'api_links', 'api_links__api')
 
 
 class URLProbeOkFilter(admin.SimpleListFilter):

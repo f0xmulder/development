@@ -263,17 +263,19 @@ class CodeViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
             "programming_languages", "related_apis").order_by(F('stars').desc(nulls_last=True))
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset()) \
-            .annotate(searchable=self.search_vector)
+        queryset = self.filter_queryset(self.get_queryset())
 
         facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
-        search_text = self.request.query_params.get('q', '')
-
         facet_filters = get_facet_filters(facet_inputs)
-        search_filter = get_search_filter(search_text)
+        if facet_filters:
+            queryset = queryset.filter(*facet_filters.values())
 
-        results = queryset \
-            .filter(*facet_filters.values(), search_filter).distinct()
+        search_text = self.request.query_params.get('q', '')
+        if search_text:
+            search_filter = get_search_filter(search_text)
+            queryset = queryset.annotate(searchable=self.search_vector).filter(search_filter)
+
+        results = queryset.distinct()
 
         return self.get_response(results)
 

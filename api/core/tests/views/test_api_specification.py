@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from core.models import API, Environment
 from core.tests.mocking import mock_response
-
+from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis/'
 
@@ -58,6 +58,7 @@ class APISpecificationViewTest(TestCase):
 
         self.assertEqual(response.content, b"some data")
 
+    @prevent_logging
     def test_invalid_environment(self):
         response = self.client.get(API_PATH + 'api1/Foobar/specification')
         self.assertEqual(response.status_code, 404)
@@ -65,6 +66,7 @@ class APISpecificationViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data, {'detail': 'Invalid environment type: Foobar'})
 
+    @prevent_logging
     def test_api_not_found(self):
         response = self.client.get(API_PATH + 'api999/production/specification')
         self.assertEqual(response.status_code, 404)
@@ -72,6 +74,7 @@ class APISpecificationViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data, {'detail': 'No environment "production" for api api999'})
 
+    @prevent_logging
     def test_environment_not_found(self):
         response = self.client.get(API_PATH + 'api1/acceptance/specification')
         self.assertEqual(response.status_code, 404)
@@ -79,6 +82,7 @@ class APISpecificationViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data, {'detail': 'No environment "acceptance" for api api1'})
 
+    @prevent_logging
     def test_empty_specification_url(self):
         response = self.client.get(API_PATH + 'api2/production/specification')
         self.assertEqual(response.status_code, 404)

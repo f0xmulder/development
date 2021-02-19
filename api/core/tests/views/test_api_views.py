@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from core.models import API
 from core.serializers import APISerializer
-
+from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis'
 
@@ -44,21 +44,25 @@ class APIViewTest(TestCase):
 
         self.assertJSONEqual(response.content, expected)
 
+    @prevent_logging
     def test_post_not_allowed(self):
         response = self.client.post(API_PATH)
 
         self.assertEqual(response.status_code, 405)
 
+    @prevent_logging
     def test_put_not_allowed(self):
         response = self.client.put(API_PATH + '/api3')
 
         self.assertEqual(response.status_code, 405)
 
+    @prevent_logging
     def test_patch_not_allowed(self):
         response = self.client.patch(API_PATH + '/api3')
 
         self.assertEqual(response.status_code, 405)
 
+    @prevent_logging
     def test_delete_not_allowed(self):
         response = self.client.delete(API_PATH + '/api3')
 

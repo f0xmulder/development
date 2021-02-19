@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from core.models import API
 from core.tests.mocking import mock_response
-
+from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis/'
 
@@ -42,6 +42,7 @@ class APIForumPostsViewTest(TestCase):
 
         self.assertEqual(response.content, b"some data")
 
+    @prevent_logging
     def test_api_not_found(self):
         response = self.client.get(API_PATH + 'api999/forum-posts')
         self.assertEqual(response.status_code, 404)
@@ -49,6 +50,7 @@ class APIForumPostsViewTest(TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data, {'detail': 'API not found'})
 
+    @prevent_logging
     def test_empty_forum_url(self):
         response = self.client.get(API_PATH + 'api3/forum-posts')
         self.assertEqual(response.status_code, 404)
@@ -57,6 +59,7 @@ class APIForumPostsViewTest(TestCase):
         self.assertEqual(response_data,
                          {'detail': 'API api3 does not have forum integration configured'})
 
+    @prevent_logging
     def test_no_forum(self):
         response = self.client.get(API_PATH + 'api2/forum-posts')
         self.assertEqual(response.status_code, 404)

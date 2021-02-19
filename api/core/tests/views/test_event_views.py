@@ -8,6 +8,7 @@ from django.core.exceptions import ImproperlyConfigured
 from rest_framework.exceptions import ErrorDetail
 
 from core.models import Event
+from core.tests.utils import prevent_logging
 
 PATH = '/api/events'
 
@@ -58,6 +59,7 @@ class SubmitEventTest(TestCase):
             'is_published': True  # omit this field
         }
 
+    @prevent_logging
     def test_submit_invalid_event(self):
         response = self.client.post(PATH,
                                     data=json.dumps({'invalid': 'event data'}),
@@ -81,6 +83,7 @@ class SubmitEventTest(TestCase):
         self.assertIn('- Title: Event 1', create_issue_args[1])
         self.assertIn('New Event', create_issue_args[2])
 
+    @prevent_logging
     @patch('core.views.create_issue')
     def test_submit_gitlab_error(self, mock_create_issue):
         mock_create_issue.side_effect = ImproperlyConfigured('Gitlab configuration error')
