@@ -13,8 +13,9 @@ import {
   StyledHomePage,
   StyledHeading,
   StyledCard,
-  StyledExternalIcon,
+  StyledInternalIcon,
 } from './Home.styles'
+
 const Home = () => (
   <StyledHomePage>
     <StyledHeading>
@@ -45,8 +46,8 @@ const Home = () => (
             Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
             Nederland aanbieden.
           </p>
-          <Button variant="primary" as={Link} to="/apis">
-            Bekijk API's <StyledExternalIcon />
+          <Button variant="link" as={Link} to="/apis">
+            Bekijk API's <StyledInternalIcon />
           </Button>
         </StyledCard.Body>
       </StyledCard>
@@ -66,11 +67,11 @@ const Home = () => (
             overheidsdiensten
           </p>
           <Button
-            variant="primary"
+            variant="link"
             as="a"
             href="https://forum.developer.overheid.nl/"
           >
-            Ga naar forum <StyledExternalIcon />
+            Ga naar forum <StyledInternalIcon />
           </Button>
         </StyledCard.Body>
       </StyledCard>

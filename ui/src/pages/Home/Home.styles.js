@@ -7,6 +7,7 @@ import mq from '../../theme/mediaQueries'
 import { Container } from '../../components/design-system-candidates/Grid'
 import Card from '../../components/Card/Card'
 import { ReactComponent as ExternalIcon } from '../../components/Icons/chevron-right.svg'
+import ArrowRight from '../../components/Icons/ArrowRight'
 
 export const StyledHomePage = styled(Container)`
   flex-direction: column;
@@ -37,6 +38,10 @@ export const StyledCard = styled(Card)`
 `
 
 export const StyledExternalIcon = styled(ExternalIcon)`
+  margin-left: ${(p) => p.theme.tokens.spacing04};
+`
+
+export const StyledInternalIcon = styled(ArrowRight)`
   margin-left: ${(p) => p.theme.tokens.spacing04};
 `
 
