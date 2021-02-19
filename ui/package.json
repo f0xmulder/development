@@ -27,6 +27,7 @@
     "@sheerun/mutationobserver-shim": "0.3.3",
     "@testing-library/jest-dom": "5.11.6",
     "@testing-library/react": "10.4.9",
+    "@testing-library/user-event": "12.7.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
     "eslint": "6.8.0",
@@ -43,6 +44,7 @@
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-standard": "4.1.0",
     "jest-fetch-mock": "3.0.3",
+    "msw": "0.26.2",
     "prettier": "2.2.0",
     "react-scripts": "3.4.4"
   },
