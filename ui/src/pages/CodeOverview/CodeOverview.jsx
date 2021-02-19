@@ -6,6 +6,7 @@ import { object } from 'prop-types'
 import Select from 'react-select'
 
 import { Button } from '@commonground/design-system'
+import Spinner from '@commonground/design-system/dist/components/Spinner'
 import CodeList from '../../components/CodeList/CodeList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromCodeResponse } from '../../models/code'
@@ -23,8 +24,8 @@ import {
   StyledAddIcon,
   StyledErrorMessage,
   SearchDiv,
-  ReactSelect,
-  ReactSelectStyle,
+  StyledSelect,
+  reactSelectStyles,
 } from './CodeOverview.styles'
 
 class CodeOverview extends Component {
@@ -158,22 +159,23 @@ class CodeOverview extends Component {
               </SearchDiv>
 
               {result.programmingLanguages ? (
-                <ReactSelect>
+                <StyledSelect>
                   <Select
+                    aria-label="Programmeertalen"
                     component="select"
                     name="programmingLanguages"
                     maxWidth="large"
                     isMulti="true"
                     placeholder="Programmeertalen"
                     onChange={(event) => this.selectChangeHandler(event)}
-                    styles={ReactSelectStyle}
+                    styles={reactSelectStyles}
                     optionClassName="needsclick"
                     options={result.programmingLanguages.map((pl) => ({
                       value: pl.id,
                       label: pl.name,
                     }))}
                   />
-                </ReactSelect>
+                </StyledSelect>
               ) : null}
             </StyledForm>
           </div>
@@ -191,7 +193,9 @@ class CodeOverview extends Component {
               objectNamePlural="Projecten"
               addLinkTarget="code/add"
             />
-            {!loaded ? null : error ? (
+            {!loaded ? (
+              <Spinner data-testid="loading" />
+            ) : error ? (
               <StyledErrorMessage>
                 Er ging iets fout tijdens het ophalen van de code.
               </StyledErrorMessage>

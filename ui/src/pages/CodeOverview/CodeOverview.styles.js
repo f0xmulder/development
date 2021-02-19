@@ -93,14 +93,14 @@ export const SearchDiv = styled.div`
   `}
 `
 
-export const ReactSelect = styled.div`
+export const StyledSelect = styled.div`
   display: inline-block;
   width: 290px;
   position: relative;
   margin-bottom: ${(p) => p.theme.tokens.spacing07};
 `
 
-export const ReactSelectStyle = {
+export const reactSelectStyles = {
   control: (styles, state) => ({
     ...styles,
     borderRadius: '0px',
