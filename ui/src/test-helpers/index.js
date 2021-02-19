@@ -4,10 +4,17 @@
 
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { render } from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react'
 import { node } from 'prop-types'
 import { BrowserRouter as Router } from 'react-router-dom'
 import '@testing-library/jest-dom/extend-expect'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 
 import theme from '../theme'
 
@@ -31,8 +38,91 @@ AllTheProviders.propTypes = {
 const renderWithProviders = (ui, options) =>
   render(ui, { wrapper: AllTheProviders, ...options })
 
+const renderWithRouter = (ui, { route = '/' } = {}) => {
+  window.history.pushState({}, 'Test page', route)
+
+  return render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>, {
+    wrapper: Router,
+  })
+}
+
+class SetupTest {
+  constructor(Component, apiUrl, apiResponse) {
+    this.Component = Component
+    this.apiUrl = apiUrl
+    this.server = setupServer(
+      rest.get(apiUrl, (_, res, ctx) => {
+        return res(ctx.json(apiResponse))
+      }),
+    )
+  }
+
+  renderComponent = (route) => {
+    const historyMock = { push: jest.fn() }
+    const component = React.cloneElement(this.Component, {
+      history: historyMock,
+    })
+    const result = renderWithRouter(component, route)
+    return {
+      ...result,
+      historyMock,
+    }
+  }
+
+  setup = async ({
+    throwBackendError,
+    customResponse,
+    assert,
+    waitForLoadingToFinish = true,
+    route,
+  }) => {
+    // Filter expected errors to keep the console clean
+    const error = console.error
+
+    if (throwBackendError) {
+      console.error = jest.fn
+
+      this.server.use(
+        rest.get(this.apiUrl, (_, res, ctx) => {
+          return res.once(
+            ctx.status(500),
+            ctx.json({ message: 'Internal server error' }),
+          )
+        }),
+      )
+    }
+
+    if (customResponse) {
+      this.server.use(
+        rest.get(this.apiUrl, (_, res, ctx) => {
+          return res.once(ctx.json(customResponse))
+        }),
+      )
+    }
+
+    // Arrange
+    const render = this.renderComponent(route)
+
+    // Act
+    // Assert
+    await waitFor(async () => {
+      await assert(render)
+    })
+
+    // Allow components to gracefully unmount
+    if (waitForLoadingToFinish) {
+      await expect(
+        waitForElementToBeRemoved(() => screen.getByTestId('loading')),
+      ).resolves.not.toThrow()
+    }
+
+    // Restore error reporting
+    console.error = error
+  }
+}
+
 // re-export everything
 export * from '@testing-library/react'
 
 // override render method
-export { renderWithProviders }
+export { renderWithProviders, SetupTest }
