@@ -7,6 +7,14 @@ import Pagination, { calculatePages } from './Pagination'
 import { StyledArrowButton } from './Pagination.styles'
 
 describe('Pagination', () => {
+  const scrollTo = window.scrollTo
+  beforeEach(() => {
+    window.scrollTo = jest.fn()
+  })
+  afterEach(() => {
+    window.scrollTo = scrollTo
+  })
+
   it('should calculate the correct page buttons', () => {
     const testCases = [
       /* eslint-disable */
@@ -60,6 +68,24 @@ describe('Pagination', () => {
       const nextButton = wrapper.find(StyledArrowButton).last()
       nextButton.simulate('click')
       expect(onPageChangedHandler).toHaveBeenCalledWith(2)
+    })
+  })
+
+  it('should scroll to the top of the pages after changing pages', () => {
+    const wrapper = shallow(
+      <Pagination
+        currentPage={1}
+        totalRows={25}
+        rowsPerPage={10}
+        onPageChangedHandler={() => {}}
+      />,
+    )
+    const nextButton = wrapper.find(StyledArrowButton).last()
+    nextButton.simulate('click')
+    expect(window.scrollTo).toHaveBeenCalledWith({
+      behavior: 'smooth',
+      left: 0,
+      top: 0,
     })
   })
 })

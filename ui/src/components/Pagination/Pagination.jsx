@@ -32,6 +32,14 @@ export const calculatePages = (currentPage, totalPageCount) => {
   )
 }
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  })
+}
+
 const onPreviousPageButtonClickedHandler = (
   currentPage,
   onPageChangedHandler,
@@ -49,6 +57,11 @@ const Pagination = ({
   const totalPageCount = Math.ceil(totalRows / rowsPerPage)
   const pages = calculatePages(currentPage, totalPageCount)
 
+  const handlePageChangedHandler = (args) => {
+    onPageChangedHandler(args)
+    scrollToTop()
+  }
+
   return totalPageCount > 1 ? (
     <StyledPagination>
       <StyledArrowButton
@@ -56,7 +69,7 @@ const Pagination = ({
         onClick={() =>
           onPreviousPageButtonClickedHandler(
             currentPage,
-            onPageChangedHandler,
+            handlePageChangedHandler,
             /* eslint-disable-next-line */
           )}
         aria-label="Vorige pagina"
@@ -68,7 +81,7 @@ const Pagination = ({
           <StyledDottedButton key={index}>{ELLIPSIS}</StyledDottedButton>
         ) : (
           <StyledPageButton
-            onClick={() => onPageChangedHandler(page)}
+            onClick={() => handlePageChangedHandler(page)}
             current={page === currentPage}
             disabled={page === currentPage}
             key={index}
@@ -83,7 +96,7 @@ const Pagination = ({
         onClick={() =>
           onNextPageButtonClickedHandler(
             currentPage,
-            onPageChangedHandler,
+            handlePageChangedHandler,
             /* eslint-disable-next-line */
           )}
         aria-label="Volgende pagina"
