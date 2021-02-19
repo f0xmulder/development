@@ -86,6 +86,19 @@ export const StyledTopNavigationAnchor = styled.a`
   }
 `
 
+export const StyledTopNavigationAnchorActive = styled(
+  StyledTopNavigationAnchor,
+)`
+  border-bottom: 1px solid white;
+  font-weight: 600;
+`
+
+export const StyledVerticalDivider = styled.li`
+  border-left: ${(p) => `1px solid ${p.theme.tokens.colorBrand3}`};
+  height: 100%;
+  margin: ${(p) => `0 ${p.theme.tokens.spacing05}`};
+`
+
 export const StyledGitlabIcon = styled(GitlabIcon)`
   width: 16px;
   height: 16px;

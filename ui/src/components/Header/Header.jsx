@@ -16,12 +16,13 @@ import {
   TopNavigationContainer,
   StyledNavigationList,
   StyledNavigationListItem,
-  // StyledTopNavigationLink,
   StyledTopNavigationAnchor,
   StyledGitlabIcon,
   StyledTitle,
   StyledText,
   StyledPrimaryNavigation,
+  StyledTopNavigationAnchorActive,
+  StyledVerticalDivider,
 } from './Header.styles'
 
 const Header = () => {
@@ -64,9 +65,12 @@ const Header = () => {
       <TopNavigationArea aria-label="Gerelateerde websites">
         <TopNavigationContainer>
           <StyledNavigationList>
-            {/* <StyledNavigationListItem>
-              <StyledTopNavigationLink to="/docs">Docs</StyledTopNavigationLink>
-            </StyledNavigationListItem> */}
+            <StyledNavigationListItem>
+              <StyledTopNavigationAnchorActive href="https://developer.overheid.nl">
+                Developer
+              </StyledTopNavigationAnchorActive>
+            </StyledNavigationListItem>
+            <StyledVerticalDivider />
             <StyledNavigationListItem>
               <StyledTopNavigationAnchor href="https://forum.developer.overheid.nl">
                 Forum

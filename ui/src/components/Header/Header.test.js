@@ -26,4 +26,17 @@ describe('Header', () => {
       'https://forum.developer.overheid.nl',
     )
   })
+
+  it('should have a developer link', () => {
+    renderWithProviders(
+      <Router>
+        <Header />
+      </Router>,
+    )
+    expect(screen.getByRole('link', { name: /Developer/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Developer/ })).toHaveAttribute(
+      'href',
+      'https://developer.overheid.nl',
+    )
+  })
 })
