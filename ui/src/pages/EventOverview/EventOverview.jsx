@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 
 import { Button } from '@commonground/design-system'
+import Spinner from '@commonground/design-system/dist/components/Spinner'
 import Pagination from '../../components/Pagination/Pagination'
 import EventList from '../../components/EventList/EventList'
 import { modelFromAPIResponse } from '../../models/event'
@@ -111,7 +112,9 @@ class EventOverview extends Component {
             objectNamePlural="Events"
             addLinkTarget="events/add"
           />
-          {!loaded ? null : error ? (
+          {!loaded ? (
+            <Spinner data-testid="loading" />
+          ) : error ? (
             <StyledErrorMessage>
               Er ging iets fout tijdens het ophalen van de events.
             </StyledErrorMessage>
