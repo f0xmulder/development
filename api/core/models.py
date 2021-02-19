@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.db.models import Subquery, OuterRef, Case, When, BooleanField, Value, CharField
+from django.db.models import (
+    Subquery, OuterRef, Case, When, BooleanField, Value, CharField, Prefetch)
 from django.db.models.functions import Concat
 from django.utils.html import format_html
 
@@ -14,7 +14,27 @@ RULE_TYPE_LENGTH = 250
 ERROR_CHARFIELD_LENGTH = 500
 
 
+class APIQuerySet(models.QuerySet):
+    """ Custom model to provide handy shortcuts """
+
+    def with_last_session(self):
+        """ Adds the most recent design rule session efficiently to the queryset """
+
+        # Using postgres specific "DISTINCT ON". In combination with the order_by clause this
+        # queries for the most recent session per test suite
+        session_qs = DesignRuleSession.objects.prefetch_related("results").order_by(
+            "test_suite", "-started_at").distinct("test_suite")
+
+        # Add the most recent session to the original queryset. It will be available as
+        # '_last_session' attribute on the related test_suite object
+        pf = Prefetch('test_suite__sessions', queryset=session_qs, to_attr='_last_session')
+        return self.select_related('test_suite').prefetch_related(pf)
+
+
 class API(models.Model):
+
+    objects = APIQuerySet.as_manager()
+
     class APIType(models.TextChoices):
         UNKNOWN = 'unknown'
         REST_JSON = 'rest_json'
@@ -88,8 +108,8 @@ class API(models.Model):
 
     def last_design_rule_session(self):
         try:
-            return self.test_suite.sessions.order_by('-started_at').first()
-        except ObjectDoesNotExist:
+            return self.test_suite.last_design_rule_session()
+        except APIDesignRuleTestSuite.DoesNotExist:
             return None
 
     def is_rest(self):
@@ -126,11 +146,11 @@ class Code(models.Model):
     )
 
     def programming_languages_string(self):
-        return ', '.join(p.name for p in self.programming_languages.order_by('name').all())
+        return ', '.join(sorted(p.name for p in self.programming_languages.all()))
     programming_languages_string.short_description = 'programming languages'
 
     def related_apis_string(self):
-        return ', '.join(a.api_id for a in self.related_apis.order_by('api_id').all())
+        return ', '.join(sorted(a.api_id for a in self.related_apis.all()))
     related_apis_string.short_description = 'related apis'
 
     def __str__(self):
@@ -233,8 +253,26 @@ class Event(models.Model):
         ordering = ['start_date']
 
 
+class URLQuerySet(models.QuerySet):
+    """ Custom queryset to provide handy shortcuts """
+
+    def with_last_probe(self):
+        """ Adds the most recent design rule session efficiently to the queryset """
+
+        # Using postgres specific "DISTINCT ON". In combination with the order_by clause this
+        # queries for the most recent probe per test url
+        probe_qs = URLProbe.objects.order_by("url", "-timestamp").distinct("url")
+
+        # Add the most recent probe to the original queryset. It will be available as
+        # '_last_probe' attribute on the url object
+        pf = Prefetch('urlprobe_set', queryset=probe_qs, to_attr='_prefetched_last_probe')
+        return self.prefetch_related(pf)
+
+
 class URL(models.Model):
     _last_probe = None
+
+    objects = URLQuerySet.as_manager()
 
     url = models.CharField(max_length=MAX_URL_LENGTH, unique=True)
     # Todo: I expect that the number of uptime probes will become large, so we may want to cache
@@ -247,6 +285,10 @@ class URL(models.Model):
         def errmsg(self): return None  # noqa
 
     def last_probe(self):
+        if hasattr(self, "_prefetched_last_probe"):
+            if self._prefetched_last_probe:
+                return self._prefetched_last_probe[0]
+            return None
         if self._last_probe is None:
             self._last_probe = self.urlprobe_set.order_by('-timestamp').first() \
                 or self._DummyProbe()
@@ -330,9 +372,6 @@ class URLProbe(models.Model):
         status = 'ok' if self.ok() else self.errmsg()
         return f'{self.url.url}: {status}'
 
-    class Meta:
-        indexes = [models.Index(fields=['url', '-timestamp'])]
-
 
 class URLApiLink(models.Model):
     class FieldReference(models.TextChoices):
@@ -373,6 +412,18 @@ class APIDesignRuleTestSuite(models.Model):
     )
     uuid = models.UUIDField(null=True)
     api_endpoint = models.URLField(null=True)
+
+    def last_design_rule_session(self):
+        # first try to get the prefetched value if present, otherwise query the db
+        try:
+            last_session = self._last_session
+        except AttributeError:
+            return self.sessions.order_by("-started_at").first()
+        else:
+            # last_session is a list
+            if last_session:
+                return last_session[0]
+        return None
 
     def __str__(self):
         return f"{self.api.api_id} - {self.uuid}"

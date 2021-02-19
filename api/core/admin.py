@@ -9,7 +9,9 @@ from .models import (
 
 @admin.register(APIDesignRuleTestSuite)
 class APIDesignRuleTestSuiteAdmin(admin.ModelAdmin):
-    pass
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related("api")
 
 
 @admin.register(Badge)
@@ -39,6 +41,10 @@ class CodeAdmin(admin.ModelAdmin):
                     'related_apis_string']
     list_filter = ['source', 'owner_name', 'programming_languages', 'related_apis']
     inlines = [CodeAPIInline]
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related(
+            "programming_languages", "related_apis")
 
 
 @admin.register(CodeAPI)
@@ -114,7 +120,7 @@ class URLAdmin(admin.ModelAdmin):
     # An optimization for the admin list page. The prefetch doesn't help for the probe_set used in
     # last_ok.
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('api_links', 'api_links__api')
+        return super().get_queryset(request).with_last_probe().prefetch_related('api_links', 'api_links__api')
 
 
 class URLProbeOkFilter(admin.SimpleListFilter):

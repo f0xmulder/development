@@ -43,7 +43,7 @@ class APIViewSet(RetrieveModelMixin,
     * isReferenceImplementation=[true|false]
 
     """
-    queryset = API.objects.all().select_related("test_suite").prefetch_related(
+    queryset = API.objects.with_last_session().prefetch_related(
         "badges", "environments", "referenced_apis")
     serializer_class = APISerializer
     pagination_class = StandardResultsSetPagination
@@ -259,7 +259,8 @@ class CodeViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
     supported_facets = ['programming_languages']
 
     def get_queryset(self):
-        return Code.objects.all().order_by(F('stars').desc(nulls_last=True))
+        return Code.objects.prefetch_related(
+            "programming_languages", "related_apis").order_by(F('stars').desc(nulls_last=True))
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset()) \
