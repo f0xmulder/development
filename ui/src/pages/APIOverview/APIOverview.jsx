@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 
 import { Button } from '@commonground/design-system'
+import Spinner from '@commonground/design-system/dist/components/Spinner'
 import APIList from '../../components/APIList/APIList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
@@ -139,7 +140,6 @@ class APIOverview extends Component {
     const { page } = queryParams
 
     const totalResults = loaded && !error && result ? result.totalResults : null
-
     return (
       <StyledOverviewPage>
         <StyledOverviewHeader>
@@ -186,7 +186,9 @@ class APIOverview extends Component {
               objectNamePlural="API&#39;s"
               addLinkTarget="apis/add"
             />
-            {!loaded ? null : error ? (
+            {!loaded ? (
+              <Spinner data-testid="loading" />
+            ) : error ? (
               <StyledErrorMessage>
                 Er ging iets fout tijdens het ophalen van de API&#39;s.
               </StyledErrorMessage>
