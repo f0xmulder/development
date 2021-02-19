@@ -24,7 +24,9 @@ const renderForm = async (assertion) => {
     result = renderWithProviders(<SubmitCodeForm />)
   })
   const projectUrlInput = screen.getByRole('textbox', { name: /Project URL/ })
-  const usedApisInput = screen.getByText(/Selecteer één of meerdere API's/)
+  const usedApisInput = screen.getByRole('textbox', {
+    name: "Gebruikte API's",
+  })
   const submitButton = screen.getByRole('button', { name: /Project toevoegen/ })
 
   await assertion({ result, projectUrlInput, usedApisInput, submitButton })

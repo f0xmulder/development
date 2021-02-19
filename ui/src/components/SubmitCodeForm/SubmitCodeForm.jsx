@@ -3,22 +3,21 @@
 //
 import React, { useState, useEffect } from 'react'
 import { array, bool, string, oneOf } from 'prop-types'
-import Select from 'react-select'
-import { Formik } from 'formik'
-import { TextInput, Button, ErrorMessage } from '@commonground/design-system'
+import { Formik, Field } from 'formik'
+import {
+  Alert,
+  Label,
+  TextInput,
+  Button,
+  ErrorMessage,
+  SelectFormik,
+} from '@commonground/design-system'
 
 import CodeRepository from '../../domain/code-repository'
 import objectKeysToSnakeCase from '../../utils/objectKeysToSnakeCase'
 import { modelFromAPIResponse } from '../../models/api'
 import { GITLAB_REPO_URL } from '../../constants'
-import {
-  StyledFieldset,
-  HelperMessage,
-  StyledAlert,
-  getReactSelectStyle,
-  Label,
-  Spacing,
-} from './SubmitCodeForm.styles'
+import { StyledFieldset, HelperMessage, Spacing } from './SubmitCodeForm.styles'
 import validationSchema from './validationSchema'
 
 const initialValues = {
@@ -116,8 +115,8 @@ const SubmitCodeForm = () => {
     >
       {({ errors, touched, handleSubmit, setFieldValue, setFieldTouched }) => (
         <form onSubmit={handleSubmit} data-testid="form">
-          <StyledFieldset disabled={loading || !!error}>
-            <StyledAlert variant="info">
+          <StyledFieldset disabled={loading}>
+            <Alert variant="info">
               Momenteel kunnen alleen projecten toegevoegd worden die een API
               gebruiken uit het API overzicht van Developer Overheid.
               <br />
@@ -133,7 +132,7 @@ const SubmitCodeForm = () => {
               >
                 Melding maken op GitLab
               </a>
-            </StyledAlert>
+            </Alert>
 
             <TextInput name="url" size="l">
               Project URL
@@ -145,17 +144,17 @@ const SubmitCodeForm = () => {
 
             <Spacing>
               <Label htmlFor="relatedApis">Gebruikte API('s)</Label>
-              <Select
-                component="select"
+              <HelperMessage>
+                We ondersteunen URLs van GitLab repositories/snippets en GitHub
+                repositories/gists.
+              </HelperMessage>
+              <Field
+                aria-label="Gebruikte API's"
+                component={SelectFormik}
                 name="relatedApis"
-                maxWidth="large"
+                size="l"
                 isMulti="true"
-                placeholder="Selecteer één of meerdere API's"
-                onChange={(value) => setFieldValue('relatedApis', value)}
-                onBlur={() => setFieldTouched('relatedApis')}
-                styles={getReactSelectStyle({
-                  hasError: !!errors.relatedApis && !!touched.relatedApis,
-                })}
+                placeholder=""
                 options={apis.map((api) => ({
                   value: api.id,
                   label: api.organizationName + ' - ' + api.serviceName,
@@ -169,7 +168,7 @@ const SubmitCodeForm = () => {
             )}
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </StyledFieldset>
-          <Button type="submit" disabled={loading || !!error}>
+          <Button type="submit" disabled={loading}>
             Project toevoegen
           </Button>
         </form>

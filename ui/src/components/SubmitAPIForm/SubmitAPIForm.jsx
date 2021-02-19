@@ -3,14 +3,17 @@
 //
 import React from 'react'
 import { array, object, func, bool, shape } from 'prop-types'
-import { Button, ErrorMessage } from '@commonground/design-system'
-import Spinner from '@commonground/design-system/dist/components/Spinner'
+import {
+  Button,
+  ErrorMessage,
+  Spinner,
+  Fieldset,
+} from '@commonground/design-system'
 import EnvironmentFormInputs from '../EnvironmentFormInputs/EnvironmentFormInputs'
 import {
-  Fieldset,
+  Field,
   Legend,
   Label,
-  Field,
   SelectField,
   CheckboxField,
   RadioOptionGroup,

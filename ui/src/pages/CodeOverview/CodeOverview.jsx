@@ -3,10 +3,8 @@
 //
 import React, { Component } from 'react'
 import { object } from 'prop-types'
-import Select from 'react-select'
 
-import { Button } from '@commonground/design-system'
-import Spinner from '@commonground/design-system/dist/components/Spinner'
+import { Button, SelectComponent, Spinner } from '@commonground/design-system'
 import CodeList from '../../components/CodeList/CodeList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromCodeResponse } from '../../models/code'
@@ -22,10 +20,9 @@ import {
   StyledSearch,
   StyledAddLinkDesktop,
   StyledAddIcon,
-  StyledErrorMessage,
   SearchDiv,
-  StyledSelect,
-  reactSelectStyles,
+  SelectComponentContainer,
+  StyledErrorMessage,
 } from './CodeOverview.styles'
 
 class CodeOverview extends Component {
@@ -159,23 +156,19 @@ class CodeOverview extends Component {
               </SearchDiv>
 
               {result.programmingLanguages ? (
-                <StyledSelect>
-                  <Select
-                    aria-label="Programmeertalen"
-                    component="select"
+                <SelectComponentContainer>
+                  <SelectComponent
                     name="programmingLanguages"
-                    maxWidth="large"
+                    size="m"
                     isMulti="true"
                     placeholder="Programmeertalen"
                     onChange={(event) => this.selectChangeHandler(event)}
-                    styles={reactSelectStyles}
-                    optionClassName="needsclick"
                     options={result.programmingLanguages.map((pl) => ({
-                      value: pl.id,
+                      value: pl.id.toString(),
                       label: pl.name,
                     }))}
                   />
-                </StyledSelect>
+                </SelectComponentContainer>
               ) : null}
             </StyledForm>
           </div>

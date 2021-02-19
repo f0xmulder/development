@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 import Search from '../../components/design-system-candidates/Search'
 
 import mq from '../../theme/mediaQueries'
-import theme from '../../theme'
-
 import AddIcon from '../../components/Icons/AddIcon.jsx'
 
 export const StyledOverviewPage = styled.div`
@@ -77,10 +75,6 @@ export const StyledResultsContainer = styled.div`
   `}
 `
 
-export const StyledErrorMessage = styled.p`
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-`
-
 export const SearchDiv = styled.div`
   display: inline-block;
   width: 486px;
@@ -92,26 +86,13 @@ export const SearchDiv = styled.div`
     width: auto;
   `}
 `
-
-export const StyledSelect = styled.div`
-  display: inline-block;
-  width: 290px;
-  position: relative;
-  margin-bottom: ${(p) => p.theme.tokens.spacing07};
+export const StyledErrorMessage = styled.p`
+  margin-top: ${(p) => p.theme.tokens.spacing05};
 `
 
-export const reactSelectStyles = {
-  control: (styles, state) => ({
-    ...styles,
-    borderRadius: '0px',
-    borderWidth: state.isFocused ? '2px' : '1px',
-    borderColor: state.isFocused
-      ? theme.colorBackgroundChoiceSelected
-      : theme.tokens.colorPaletteGray500,
-    minHeight: '50px',
-    boxShadow: 'none',
-    '&:hover': {
-      boxShadow: 'none',
-    },
-  }),
-}
+export const SelectComponentContainer = styled.div`
+  width: 240px;
+  div:first-child {
+    margin-top: 0;
+  }
+`
