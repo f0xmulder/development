@@ -1074,13 +1074,6 @@ CREATE INDEX core_urlapilink_url_id_732f9a3b ON public.core_urlapilink USING btr
 
 
 --
--- Name: core_urlpro_url_id_82a002_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX core_urlpro_url_id_82a002_idx ON public.core_urlprobe USING btree (url_id, "timestamp" DESC);
-
-
---
 -- Name: core_urlprobe_url_id_b650da51; Type: INDEX; Schema: public; Owner: -
 --
 
