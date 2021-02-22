@@ -69,6 +69,7 @@ describe('Home', () => {
         assert: () => {
           expect(screen.getByText(/Bekijk API's/)).toBeInTheDocument()
         },
+        waitForLoadingToFinish: false,
       })
     })
     it('should contain a link to developer forum', async () => {
@@ -76,6 +77,7 @@ describe('Home', () => {
         assert: () => {
           expect(screen.getByText(/Ga naar forum/)).toBeInTheDocument()
         },
+        waitForLoadingToFinish: false,
       })
     })
     it('should show upcoming event', async () => {
