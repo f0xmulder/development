@@ -5,7 +5,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Button, Spinner } from '@commonground/design-system'
+import { Button } from '@commonground/design-system'
 import { H1, H2 } from '../../components/Headings/Headings'
 import svgApi from '../../components/SVG/Spot-API.svg'
 import svgForum from '../../components/SVG/Spot-Forum.svg'
@@ -18,11 +18,10 @@ import {
   StyledCard,
   StyledInternalIcon,
   Events,
-  StyledErrorMessage,
 } from './Home.styles'
 
 const Home = () => {
-  const { data, error } = useSWR('/api/events?page=1&rowsPerPage=3', (url) =>
+  const { data } = useSWR('/api/events?page=1&rowsPerPage=3', (url) =>
     fetch(url)
       .then((r) => r.json())
       .then((json) =>
@@ -93,25 +92,17 @@ const Home = () => {
         </StyledCard>
       </Links>
 
-      <H2>Aankomende events</H2>
-      <Events>
-        {!data ? (
-          <Spinner data-testid="loading" />
-        ) : error ? (
-          <StyledErrorMessage>
-            Er ging iets fout tijdens het ophalen van de events.
-          </StyledErrorMessage>
-        ) : !data || !data.events || data.events.length === 0 ? (
-          <StyledErrorMessage>
-            Er zijn (nog) geen events beschikbaar.
-          </StyledErrorMessage>
-        ) : (
-          <EventList events={data.events} />
-        )}
-        <Button variant="link" as={Link} to="/events">
-          Bekijk alle events <StyledInternalIcon />
-        </Button>
-      </Events>
+      {data?.events?.length && (
+        <>
+          <H2>Aankomende events</H2>
+          <Events>
+            <EventList events={data.events} />
+            <Button variant="link" as={Link} to="/events">
+              Bekijk alle events <StyledInternalIcon />
+            </Button>
+          </Events>
+        </>
+      )}
     </StyledHomePage>
   )
 }
