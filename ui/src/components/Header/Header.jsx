@@ -9,6 +9,7 @@ import IconPresent from './assets/IconPresent'
 import IconCode from './assets/IconCode'
 import IconEvents from './assets/IconEvents'
 import IconInfo from './assets/IconInfo'
+import IconCube from './assets/IconCube'
 import {
   HeaderArea,
   HeaderContainer,
@@ -41,6 +42,12 @@ const Header = () => {
       'data-testid': 'nav-apis',
     },
     {
+      name: 'Forum',
+      Icon: IconCube,
+      href: 'https://forum.developer.overheid.nl/',
+      'data-testid': 'nav-forum',
+    },
+    {
       name: 'Code',
       Icon: IconCode,
       to: '/code',
@@ -71,7 +78,7 @@ const Header = () => {
               </StyledTopNavigationAnchorActive>
             </StyledNavigationListItem>
             <StyledVerticalDivider />
-            <StyledNavigationListItem>
+            <StyledNavigationListItem hideOnMobile>
               <StyledTopNavigationAnchor href="https://forum.developer.overheid.nl">
                 Forum
               </StyledTopNavigationAnchor>

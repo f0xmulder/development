@@ -2,9 +2,9 @@
 // Licensed under the EUPL
 //
 import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const StyledNavLink = styled(NavLink)`
+const baseLinkStyles = css`
   flex: 1 1 0px;
   display: flex;
   flex-direction: column-reverse;
@@ -35,6 +35,14 @@ export const StyledNavLink = styled(NavLink)`
       fill: ${(p) => p.theme.colorTextLink};
     }
   }
+`
+
+export const StyledNavLink = styled(NavLink)`
+  ${baseLinkStyles}
+`
+
+export const StyledExternalLink = styled.a`
+  ${baseLinkStyles}
 `
 
 export const Name = styled.span`

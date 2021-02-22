@@ -12,11 +12,17 @@ const DesktopNavigation = ({ items, ...props }) => (
     <Container>
       <Nav data-testid="primary-nav">
         <List data-testid="primary-nav-list">
-          {items.map(({ name, to, exact, Icon, ...otherProps }) => (
+          {items.map(({ name, to, href, exact, Icon, ...otherProps }) => (
             <ListItem key={to} data-testid="primary-nav-item">
-              <NavLink to={to} exact={exact} {...otherProps}>
-                {name}
-              </NavLink>
+              {to ? (
+                <NavLink to={to} exact={exact} {...otherProps}>
+                  {name}
+                </NavLink>
+              ) : (
+                <a href={href} {...otherProps}>
+                  {name}
+                </a>
+              )}
             </ListItem>
           ))}
         </List>
