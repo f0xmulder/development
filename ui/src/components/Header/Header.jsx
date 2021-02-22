@@ -44,7 +44,7 @@ const Header = () => {
     {
       name: 'Forum',
       Icon: IconCube,
-      href: 'https://forum.developer.overheid.nl/',
+      href: 'https://forum.developer.overheid.nl',
       'data-testid': 'nav-forum',
     },
     {
