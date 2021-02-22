@@ -64,7 +64,7 @@ const Home = () => (
           <h3>Forum voor developers</h3>
           <p id="forum">
             De centrale plek om in gesprek te gaan over digitale
-            overheidsdiensten
+            overheidsdiensten.
           </p>
           <Button
             variant="link"
