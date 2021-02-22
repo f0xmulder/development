@@ -90,7 +90,7 @@ export const StyledErrorMessage = styled.p`
   margin-top: ${(p) => p.theme.tokens.spacing05};
 `
 
-export const SelectComponentContainer = styled.div`
+export const StyledSelectComponentContainer = styled.div`
   width: 240px;
   div:first-child {
     margin-top: 0;

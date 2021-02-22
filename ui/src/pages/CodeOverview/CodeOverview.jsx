@@ -3,8 +3,8 @@
 //
 import React, { Component } from 'react'
 import { object } from 'prop-types'
+import { Button, Spinner, SelectComponent } from '@commonground/design-system'
 
-import { Button, SelectComponent, Spinner } from '@commonground/design-system'
 import CodeList from '../../components/CodeList/CodeList'
 import Pagination from '../../components/Pagination/Pagination'
 import { modelFromCodeResponse } from '../../models/code'
@@ -21,8 +21,8 @@ import {
   StyledAddLinkDesktop,
   StyledAddIcon,
   SearchDiv,
-  SelectComponentContainer,
   StyledErrorMessage,
+  StyledSelectComponentContainer,
 } from './CodeOverview.styles'
 
 class CodeOverview extends Component {
@@ -156,7 +156,7 @@ class CodeOverview extends Component {
               </SearchDiv>
 
               {result.programmingLanguages ? (
-                <SelectComponentContainer>
+                <StyledSelectComponentContainer>
                   <SelectComponent
                     name="programmingLanguages"
                     size="m"
@@ -168,7 +168,7 @@ class CodeOverview extends Component {
                       label: pl.name,
                     }))}
                   />
-                </SelectComponentContainer>
+                </StyledSelectComponentContainer>
               ) : null}
             </StyledForm>
           </div>
