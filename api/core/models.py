@@ -407,7 +407,7 @@ class APIDesignRuleTestSuite(models.Model):
     api = models.OneToOneField(
         "core.API",
         to_field="api_id",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="test_suite"
     )
     uuid = models.UUIDField(null=True)
