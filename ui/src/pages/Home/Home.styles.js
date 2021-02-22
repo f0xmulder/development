@@ -73,4 +73,3 @@ export const Events = styled.div`
 export const StyledErrorMessage = styled.p`
   margin-top: ${(p) => p.theme.tokens.spacing05};
 `
-

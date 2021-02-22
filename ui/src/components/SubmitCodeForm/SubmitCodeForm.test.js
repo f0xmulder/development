@@ -214,7 +214,6 @@ describe('SubmitCodeForm', () => {
             })
 
             fireEvent.click(submitButton)
-            console.log(screen.debug())
             expect(CodeRepository.create).toHaveBeenCalledWith('')
           },
         )
