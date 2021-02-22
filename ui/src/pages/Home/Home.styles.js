@@ -50,6 +50,7 @@ export const Links = styled.div`
   grid-template-columns: 50% 50%;
   column-gap: ${(p) => p.theme.tokens.spacing06};
   padding-right: ${(p) => p.theme.tokens.spacing06};
+  margin-bottom: ${(p) => p.theme.tokens.spacing10};
 
   ${mq.smDown`
     ${StyledCard}:nth-child(2) {
@@ -59,3 +60,17 @@ export const Links = styled.div`
     padding-right: 0;
   `}
 `
+
+export const Events = styled.div`
+  display: flex;
+  flex-direction: column;
+  a:last-child {
+    margin-left: auto;
+    margin-right: ${(p) => p.theme.tokens.spacing04};
+  }
+`
+
+export const StyledErrorMessage = styled.p`
+  margin-top: ${(p) => p.theme.tokens.spacing05};
+`
+
