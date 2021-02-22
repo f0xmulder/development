@@ -10,5 +10,5 @@ export const StyledList = styled.ul`
 `
 
 export const StyledListItem = styled.li`
-  margin: 0;
+  margin: ${(p) => `0 0 ${p.theme.tokens.spacing04} 0`};
 `
