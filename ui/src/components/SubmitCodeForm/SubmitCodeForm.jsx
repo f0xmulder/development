@@ -116,7 +116,7 @@ const SubmitCodeForm = () => {
       {({ errors, touched, handleSubmit, setFieldValue, setFieldTouched }) => (
         <form onSubmit={handleSubmit} data-testid="form">
           <StyledFieldset disabled={loading}>
-            <Alert variant="info">
+            <Alert variant="info" className="axe-ignore">
               Momenteel kunnen alleen projecten toegevoegd worden die een API
               gebruiken uit het API overzicht van Developer Overheid.
               <br />

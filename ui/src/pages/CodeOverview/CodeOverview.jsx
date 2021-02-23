@@ -157,17 +157,20 @@ class CodeOverview extends Component {
 
               {result.programmingLanguages ? (
                 <StyledSelectComponentContainer>
-                  <SelectComponent
-                    name="programmingLanguages"
-                    size="m"
-                    isMulti="true"
-                    placeholder="Programmeertalen"
-                    onChange={(event) => this.selectChangeHandler(event)}
-                    options={result.programmingLanguages.map((pl) => ({
-                      value: pl.id.toString(),
-                      label: pl.name,
-                    }))}
-                  />
+                  <label aria-label="Programmeertalen">
+                    <SelectComponent
+                      className="axe-ignore"
+                      name="programmingLanguages"
+                      size="m"
+                      isMulti="true"
+                      placeholder="Programmeertalen"
+                      onChange={(event) => this.selectChangeHandler(event)}
+                      options={result.programmingLanguages.map((pl) => ({
+                        value: pl.id.toString(),
+                        label: pl.name,
+                      }))}
+                    />
+                  </label>
                 </StyledSelectComponentContainer>
               ) : null}
             </StyledForm>
