@@ -27,10 +27,6 @@ export const TopNavigationArea = styled.nav`
 
 export const TopNavigationContainer = styled(Container)`
   height: ${(p) => p.theme.headerTopNavigationHeight};
-  ${mq.smDown`
-    justify-content: space-between;
-    padding: 0;
-  `}
 `
 
 export const HeaderContainer = styled(Container)`
@@ -51,10 +47,6 @@ export const StyledNavigationList = styled.ul`
   padding: 0;
   margin: 0;
   list-style: none;
-
-  ${mq.smDown`
-    justify-content: space-between;
-  `}
 `
 
 export const StyledNavigationListItem = styled.li`
@@ -63,23 +55,6 @@ export const StyledNavigationListItem = styled.li`
   :not(:last-child) {
     margin-right: 8px;
   }
-
-  ${mq.smDown`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    :not(:last-child) {
-      margin-right: unset;
-    }
-
-    ${(p) =>
-      p.hideOnMobile &&
-      `
-      display: none;
-    `}
-  `}
 `
 
 export const StyledTopNavigationLink = styled(Link)`
@@ -116,20 +91,12 @@ export const StyledTopNavigationAnchorActive = styled(
 )`
   border-bottom: 1px solid white;
   font-weight: 600;
-
-  ${mq.smDown`
-    border-bottom: unset;
-  `}
 `
 
 export const StyledVerticalDivider = styled.li`
   border-left: ${(p) => `1px solid ${p.theme.tokens.colorBrand3}`};
   height: 100%;
   margin: ${(p) => `0 ${p.theme.tokens.spacing05}`};
-
-  ${mq.smDown`
-      margin: 0;
-  `}
 `
 
 export const StyledGitlabIcon = styled(GitlabIcon)`
