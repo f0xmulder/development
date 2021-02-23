@@ -1,0 +1,23 @@
+{
+  "description": "In de Registratie gebieden worden de Amsterdamse stadsdelen, wijk (voorheen) buurtcombinaties, buurten en bouwblokken vastgelegd. Verder bevat de registratie gegevens van de grootstedelijke gebieden binnen de gemeente, de UNESCO werelderfgoedgrens en de gebieden van gebiedsgericht werken.",
+  "organization_name": "Gemeente Amsterdam",
+  "service_name": "Basisregistratie Amsterdamse Gebieden",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://api.data.amsterdam.nl/gebieden/?format=api",
+      "documentation_url": "https://api.data.amsterdam.nl/api/swagger/?url=/bag/docs/api-docs/gebieden%3Fformat%3Dopenapi"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}

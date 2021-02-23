@@ -1,0 +1,23 @@
+{
+  "description": "De functionaliteit van de Vacature-API bestaat uit het tellen, ophalen en filteren van het vacature-aanbod, het ophalen van data met betrekking tot het gebruikte vacatureformaat en het opslaan van nieuwe vacatures van de website WerkenvoorNederland.nl, WerkenbijdeOverheid.nl en Mobiliteitsbank.nl.",
+  "organization_name": "Werkmaatschappij",
+  "service_name": "CSO Vacature API",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://[sandbox.]api.cso20.net/v1/JobAPI/getApiKey.json",
+      "documentation_url": "http://docs.api.cso20.net"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}

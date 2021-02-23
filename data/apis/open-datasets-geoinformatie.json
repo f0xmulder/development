@@ -1,0 +1,23 @@
+{
+  "description": "onduidelijk",
+  "organization_name": "Kadaster",
+  "service_name": "Open datasets geoinformatie",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://pdok-ngr.readthedocs.io/services.html",
+      "documentation_url": "https://pdok-ngr.readthedocs.io/services.html"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}

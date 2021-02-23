@@ -1,0 +1,23 @@
+{
+  "description": "Met deze REST API kunnen alle omgevingswetbesluiten (omgevingsdocumenten) worden opgevraagd die zijn gepubliceerd in de LVBB.",
+  "organization_name": "DSO",
+  "service_name": "Omgevingsdocument opvragen",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://service.pre.omgevingswet.overheid.nl/publiek/omgevingsdocumenten/api/toepasbaaropvragen/v4",
+      "documentation_url": "https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Kadaster/Omgevingsdocumenten-Opvragen/v4"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}

@@ -2,6 +2,7 @@ const csv = require('csv-parser')
 const fs = require('fs')
 const results = [];
 var slugify = require('slugify')
+const fetch = require('node-fetch');
 
 const parse = (props) => {
 
@@ -27,7 +28,7 @@ const parse = (props) => {
     "api_authentication": api_authentication,
     "tags": tags,
     "environments": [{
-        "name": "default",
+        "name": "production",
         "api_url": api_url,
         "specification_url": specification_url,
         "documentation_url": documentation_url
@@ -44,16 +45,8 @@ const parse = (props) => {
   }
 }
 
-const mapCsvKeys = {
-  Naam: "service_name",
-  Organisatie: "organization_name",
-  Beschrijving: "description",
-  URL: "environments.api_url",
-  Link: "environments.documentation_url"
-}
-
-
-
+const queryCor = async (name) => fetch(`https://portaal.digikoppeling.nl/registers/api/v1/organisaties?zoek=${name}`)
+  .then(r => r.json())
 
 const readFiles = (args) => {
   const [,,filename] = args
@@ -64,19 +57,23 @@ const readFiles = (args) => {
 
   fs.createReadStream(filename)
   .pipe(csv({ separator: ';' }))
-  .on('data', (data) => results.push(parse({
-    api_url: data["URL"],
-    description: data["Beschrijving"],
-    documentation_url: data["Link"],
-    organization_name: data["Organisatie"],
-    service_name: data["Naam"],
-    tags: ["imported"],
-  })))
+  .on('data', (data) => {
+
+    results.push(parse({
+      api_url: data["URL"],
+      description: data["Beschrijving"],
+      documentation_url: data["Link"],
+      organization_name: data["Organisatie"],
+      service_name: data["Naam"],
+      tags: ["imported"],
+    }))
+
+  })
   .on('end', () => {
     const validResults = results.filter(r => r.environments[0].api_url !== "Geen")
 
     validResults.forEach(result => {
-      const fileName = slugify(result.service_name).toLowerCase();
+      const fileName = slugify(result.organization_name + ' ' + result.service_name).toLowerCase();
       console.log(fileName)
 
       let data = JSON.stringify(result, undefined, 2);

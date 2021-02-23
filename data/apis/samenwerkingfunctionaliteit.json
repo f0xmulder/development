@@ -1,0 +1,23 @@
+{
+  "description": "Een REST API die de samenwerkfunctionaliteit (SWF) van het Digitaal stelsel Omgevingswet realiseert.",
+  "organization_name": "DSO",
+  "service_name": "Samenwerkingfunctionaliteit",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://service.pre.omgevingswet.overheid.nl/overheid/samenwerken/api/beheren/v1",
+      "documentation_url": "https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Rijkswaterstaat/Samenwerken-overheid/v1"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}

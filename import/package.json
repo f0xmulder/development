@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "csv-parser": "^3.0.0",
+    "node-fetch": "^2.6.1",
     "slugify": "^1.4.7"
   }
 }

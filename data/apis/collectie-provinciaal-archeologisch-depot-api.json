@@ -1,0 +1,23 @@
+{
+  "description": "In het Provinciaal Archeologisch Depot voor de bodemvondsten bewaart en beheert de provincie Zuid-Holland haar archeologische vondsten. ",
+  "organization_name": "Provincie Zuid-Holland",
+  "service_name": "Collectie Provinciaal Archeologisch Depot API",
+  "api_type": "rest_json",
+  "api_authentication": "unknown",
+  "tags": [
+    "imported"
+  ],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "http://62.221.199.184:5842/oai",
+      "documentation_url": "https://archeologie.zuid-holland.nl/open-data"
+    }
+  ],
+  "contact": {},
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": false
+  }
+}
