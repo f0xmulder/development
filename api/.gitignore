@@ -1,4 +1,3 @@
-core/fixtures
 .coverage
 .venv
 __pycache__
