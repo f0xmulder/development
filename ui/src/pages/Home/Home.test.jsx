@@ -80,11 +80,11 @@ describe('Home', () => {
         waitForLoadingToFinish: false,
       })
     })
-    it('should show upcoming event', async () => {
+    it('should show upcoming events', async () => {
       await setup({
         assert: () => {
           const links = screen.getAllByRole('link', {
-            name: /Naar event pagina/,
+            name: /^Ga naar de website:.*$/,
           })
           expect(links).toHaveLength(3)
           links.forEach((link, i) =>

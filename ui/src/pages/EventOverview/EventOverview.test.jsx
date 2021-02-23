@@ -118,7 +118,7 @@ describe('EventOverview', () => {
       assert: () => {
         expect(
           screen.getAllByRole('link', {
-            name: /naar event pagina/i,
+            name: /^Ga naar de website:.*$/,
           }),
         ).toHaveLength(2)
       },
