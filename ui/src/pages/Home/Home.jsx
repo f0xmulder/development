@@ -92,7 +92,7 @@ const Home = () => {
         </StyledCard>
       </Links>
 
-      {data?.events?.length && (
+      {!!data?.events?.length && (
         <>
           <H2>Aankomende events</H2>
           <Events>
