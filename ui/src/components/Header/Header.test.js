@@ -20,14 +20,11 @@ describe('Header', () => {
         <Header />
       </Router>,
     )
-    const links = screen.getAllByRole('link', { name: /Forum/ })
-    expect(links).toHaveLength(2)
 
-    links.forEach((link) =>
-      expect(link).toHaveAttribute(
-        'href',
-        'https://forum.developer.overheid.nl',
-      ),
+    expect(screen.getByRole('link', { name: /Forum/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Forum/ })).toHaveAttribute(
+      'href',
+      'https://forum.developer.overheid.nl',
     )
   })
 

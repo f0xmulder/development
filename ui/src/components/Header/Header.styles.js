@@ -47,6 +47,10 @@ export const StyledNavigationList = styled.ul`
   padding: 0;
   margin: 0;
   list-style: none;
+
+  ${mq.smDown`
+    justify-content: space-between;
+  `}
 `
 
 export const StyledNavigationListItem = styled.li`
@@ -84,6 +88,10 @@ export const StyledTopNavigationAnchor = styled.a`
     color: ${(p) => p.theme.colorTextInverse};
     background-color: rgba(0, 0, 0, 0.2);
   }
+
+  ${mq.smDown`
+    padding: 0 ${(p) => p.theme.tokens.spacing02};
+  `}
 `
 
 export const StyledTopNavigationAnchorActive = styled(
@@ -97,6 +105,10 @@ export const StyledVerticalDivider = styled.li`
   border-left: ${(p) => `1px solid ${p.theme.tokens.colorBrand3}`};
   height: 100%;
   margin: ${(p) => `0 ${p.theme.tokens.spacing05}`};
+
+  ${mq.smDown`
+    display: none;
+  `}
 `
 
 export const StyledGitlabIcon = styled(GitlabIcon)`
