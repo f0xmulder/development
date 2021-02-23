@@ -1,15 +1,15 @@
 const { analyzeAccessibility } = require('../accessibility')
 const { getBaseUrl, isDebugging } = require('../environment')
 
-describe('Overview', () => {
+describe('Code Overview', () => {
     beforeAll(async () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
-        await page.goto(`${baseUrl}/apis`, { waitUntil: 'load' });
+        await page.goto(`${baseUrl}/code`, { waitUntil: 'load' });
     })
 
     it('should not have accessibility issues', async () => {
-        const accessibilityReport = await analyzeAccessibility(page, `overview.accessibility.png`)
+        const accessibilityReport = await analyzeAccessibility(page, `code-overview.accessibility.png`)
         expect(accessibilityReport).toHaveNoAccessibilityIssues();
     })
 })
