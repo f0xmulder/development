@@ -3,3 +3,6 @@
 *.swo
 *.code-workspace
 venv*/
+import/node_modules/*
+import/json/*
+!import/json/.gitkeep
