@@ -11,18 +11,15 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: ${(p) => p.theme.tokens.spacing01};
 
   ${mq.smDown`
     width: 100%;
   `}
 
-  ${mq.smUp`
-    padding-left: ${(p) => p.theme.tokens.spacing05};
+  ${mq.mdUp`
+    display: none;
   `}
-`
-
-export const TotalResults = styled.span`
-  color: ${(p) => p.theme.tokens.colorPaletteGray700};
 `
 
 export const StyledAddLinkMobile = styled(Button)`

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import theme from '../../theme'
 import {
   StyledHeader,
-  TotalResults,
   StyledAddLinkMobile,
   StyledAddIcon,
 } from './Overview.styles'
@@ -20,13 +19,13 @@ export const ResultsHeader = ({
   addLinkTarget,
 }) => (
   <StyledHeader>
-    <TotalResults>
+    <span>
       {totalResults ? (
         <span data-test="total">
           {totalResults} {totalResults > 1 ? objectNamePlural : objectName}
         </span>
       ) : null}
-    </TotalResults>
+    </span>
     <StyledAddLinkMobile as={Link} to={addLinkTarget} variant="link">
       <StyledAddIcon color={theme.colorTextLink} />
       {objectName} toevoegen
