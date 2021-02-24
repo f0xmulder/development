@@ -78,7 +78,7 @@ StyledCard.Details = styled.div`
   color: ${(p) => p.theme.tokens.colorPaletteGray600};
 `
 
-StyledCard.Details.Item = styled.div`
+StyledCard.Details.Item = styled.small`
   display: flex;
   align-items: center;
   margin-right: 1rem;
