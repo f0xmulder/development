@@ -24,7 +24,6 @@ StyledCard.Title = styled.div`
 StyledCard.DateTime = styled.div`
   white-space: nowrap;
   color: ${(p) => p.theme.tokens.colorPaletteGray700};
-  font-weight: ${(p) => p.theme.tokens.fontWeightSemiBold};
   margin: ${(p) => p.theme.tokens.spacing06};
 
   ${mq.mdUp`
@@ -39,18 +38,18 @@ StyledCard.DateTime = styled.div`
   `}
 `
 
-StyledCard.DateTime.DayOfWeek = styled.span`
+StyledCard.DateTime.DayOfWeek = styled.small`
   ${mq.mdUp`
     font-size: ${(p) => p.theme.tokens.fontSizeSmall};
     color: ${(p) => p.theme.tokens.colorPaletteGray700};
-    margin-bottom: ${(p) => p.theme.tokens.spacing02};
+    margin-bottom: ${(p) => p.theme.tokens.spacing04};
   `}
 `
 
 StyledCard.DateTime.Day = styled.span`
   ${mq.mdUp`
-    font-size: ${(p) => p.theme.tokens.fontSizeXXLarge};
-    margin-bottom: ${(p) => p.theme.tokens.spacing02};
+    font-size: 2.5rem;
+    margin-bottom: ${(p) => p.theme.tokens.spacing04};
   `}
 `
 
