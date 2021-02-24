@@ -20,6 +20,7 @@ import Header from './components/Header/Header'
 import Feedback from './components/Feedback/Feedback'
 import Footer from './components/Footer/Footer'
 import GlobalStyles from './components/GlobalStyles/GlobalStyles'
+import '@fontsource/source-sans-pro/latin.css'
 
 import { AppContainer, ContentWrap } from './App.styles'
 

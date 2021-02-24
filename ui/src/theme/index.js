@@ -54,4 +54,5 @@ theme.breakpoints = Object.values(breakpoints)
   .splice(1)
   .map((bp) => `${bp}px`)
 
+console.log(theme)
 export default theme
