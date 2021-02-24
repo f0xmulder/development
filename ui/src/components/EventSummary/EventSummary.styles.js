@@ -8,6 +8,7 @@ import mq from '../../theme/mediaQueries'
 export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   ${mq.mdUp`
     flex-direction: row;
