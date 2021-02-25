@@ -40,16 +40,16 @@ const Header = () => {
       'data-testid': 'nav-apis',
     },
     {
-      name: 'Code',
-      Icon: IconCode,
-      to: '/code',
-      'data-testid': 'nav-code',
-    },
-    {
       name: 'Events',
       Icon: IconEvents,
       to: '/events',
       'data-testid': 'nav-events',
+    },
+    {
+      name: 'Code',
+      Icon: IconCode,
+      to: '/code',
+      'data-testid': 'nav-code',
     },
     {
       name: 'Over',
