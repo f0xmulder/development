@@ -2,13 +2,16 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { number, func } from 'prop-types'
+import { number, object, func } from 'prop-types'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   StyledPagination,
   StyledPageButton,
   StyledArrowButton,
   StyledDottedButton,
   StyledPageCount,
+  SelectField,
+  SelectFieldContainer,
 } from './Pagination.styles'
 
 const ELLIPSIS = '...'
@@ -53,6 +56,7 @@ const Pagination = ({
   totalRows,
   rowsPerPage,
   onPageChangedHandler,
+  onResultsPerPageChange,
 }) => {
   const totalPageCount = Math.ceil(totalRows / rowsPerPage)
   const pages = calculatePages(currentPage, totalPageCount)
@@ -62,7 +66,7 @@ const Pagination = ({
     scrollToTop()
   }
 
-  return totalPageCount > 1 ? (
+  return totalPageCount > 0 ? (
     <StyledPagination>
       <StyledArrowButton
         disabled={currentPage === 1}
@@ -106,8 +110,52 @@ const Pagination = ({
       <StyledPageCount>
         Pagina {currentPage} van {totalPageCount}
       </StyledPageCount>
+      <Pagination.ResultsPerPage
+        onResultsPerPageChange={onResultsPerPageChange}
+        totalRows={totalRows}
+        rowsPerPage={rowsPerPage}
+      />
     </StyledPagination>
   ) : null
+}
+
+Pagination.ResultsPerPage = (props) => {
+  const { totalRows, rowsPerPage, onResultsPerPageChange } = props
+
+  const PAGINATION_OPTIONS = [10, 25, 50, 100, 250, 500]
+
+  const Options = () => {
+    const options = PAGINATION_OPTIONS.map((option) => {
+      if (totalRows % option === totalRows) return null
+
+      return (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      )
+    }).filter((o) => o)
+
+    if (!options.length) {
+      const option = PAGINATION_OPTIONS[0]
+      return <option value={option}>{option}</option>
+    }
+
+    return options
+  }
+
+  return (
+    <SelectFieldContainer>
+      <label htmlFor="resultsPerPage">Aantal resultaten per pagina</label>
+      <SelectField
+        id="resultsPerPage"
+        onChange={(e) => onResultsPerPageChange(e.currentTarget.value)}
+        value={rowsPerPage}
+        className="axe-ignore" // Element's background color could not be determined due to a background image
+      >
+        <Options />
+      </SelectField>
+    </SelectFieldContainer>
+  )
 }
 
 Pagination.propTypes = {
@@ -115,6 +163,13 @@ Pagination.propTypes = {
   totalRows: number.isRequired,
   rowsPerPage: number.isRequired,
   onPageChangedHandler: func.isRequired,
+  onResultsPerPageChange: func.isRequired,
+}
+
+Pagination.ResultsPerPage.propTypes = {
+  onResultsPerPageChange: func.isRequired,
+  totalRows: number.isRequired,
+  rowsPerPage: number.isRequired,
 }
 
 export default Pagination

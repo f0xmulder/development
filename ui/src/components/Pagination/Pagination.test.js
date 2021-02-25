@@ -3,6 +3,8 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme/build'
+import userEvent from '@testing-library/user-event'
+import { act, screen, SetupTest } from '../../test-helpers'
 import Pagination, { calculatePages } from './Pagination'
 import { StyledArrowButton } from './Pagination.styles'
 
@@ -46,6 +48,7 @@ describe('Pagination', () => {
           totalRows={25}
           rowsPerPage={10}
           onPageChangedHandler={onPageChangedHandler}
+          onResultsPerPageChange={() => {}}
         />,
       )
       const previousButton = wrapper.find(StyledArrowButton).first()
@@ -63,6 +66,7 @@ describe('Pagination', () => {
           totalRows={25}
           rowsPerPage={10}
           onPageChangedHandler={onPageChangedHandler}
+          onResultsPerPageChange={() => {}}
         />,
       )
       const nextButton = wrapper.find(StyledArrowButton).last()
@@ -78,6 +82,7 @@ describe('Pagination', () => {
         totalRows={25}
         rowsPerPage={10}
         onPageChangedHandler={() => {}}
+        onResultsPerPageChange={() => {}}
       />,
     )
     const nextButton = wrapper.find(StyledArrowButton).last()
@@ -86,6 +91,77 @@ describe('Pagination', () => {
       behavior: 'smooth',
       left: 0,
       top: 0,
+    })
+  })
+
+  describe.only('Results per page', () => {
+    const onResultsPerPageChange = jest.fn()
+
+    const { setup } = new SetupTest(
+      (
+        <Pagination
+          currentPage={1}
+          totalRows={25}
+          rowsPerPage={10}
+          onPageChangedHandler={() => {}}
+          onResultsPerPageChange={onResultsPerPageChange}
+        />
+      ),
+    )
+
+    it('should show results per page', async () => {
+      await setup({
+        assert: () => {
+          expect(
+            screen.getByRole('combobox', {
+              name: /Aantal resultaten per pagina/,
+            }),
+          ).toBeInTheDocument()
+        },
+        waitForLoadingToFinish: false,
+      })
+    })
+
+    it('should handle results per page', async () => {
+      await setup({
+        assert: () => {
+          const resultsPerPage = screen.getByRole('combobox', {
+            name: /Aantal resultaten per pagina/,
+          })
+
+          act(() => {
+            userEvent.selectOptions(resultsPerPage, ['25'])
+          })
+          expect(onResultsPerPageChange).toHaveBeenCalledWith('25')
+          act(() => {
+            userEvent.selectOptions(resultsPerPage, ['10'])
+          })
+          expect(onResultsPerPageChange).toHaveBeenCalledWith('10')
+        },
+        waitForLoadingToFinish: false,
+      })
+    })
+
+    it('should only show the first option when there are not enough results', async () => {
+      await setup({
+        additionalProps: {
+          currentPage: 1,
+          totalRows: 1,
+          rowsPerPage: 1,
+        },
+        assert: () => {
+          const tenPerPage = screen.getByRole('option', {
+            name: /10/,
+          })
+          expect(tenPerPage).toBeInTheDocument()
+
+          const twentyFivePerPage = screen.queryByRole('option', {
+            name: /25/,
+          })
+          expect(twentyFivePerPage).not.toBeInTheDocument()
+        },
+        waitForLoadingToFinish: false,
+      })
     })
   })
 })

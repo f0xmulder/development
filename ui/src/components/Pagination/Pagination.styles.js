@@ -4,9 +4,11 @@
 import styled from 'styled-components'
 
 import mq from '../../theme/mediaQueries'
+import arrowDownSolidIcon from '../Icons/arrow-down-solid-icon.svg'
 
 export const StyledPagination = styled.div`
   margin-top: ${(p) => p.theme.tokens.spacing10};
+  display: flex;
 `
 
 export const StyledPageButton = styled.button`
@@ -54,7 +56,9 @@ export const StyledDottedButton = styled.div`
   width: 40px;
   height: 40px;
   margin-right: ${(p) => p.theme.tokens.spacing01};
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   text-align: center;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
@@ -71,5 +75,28 @@ export const StyledPageCount = styled.span`
 
   ${mq.smUp`
     display: none;
+  `}
+`
+
+export const SelectFieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  width: 214px;
+  position: relative;
+  bottom: ${(p) => p.theme.tokens.spacing07};
+`
+
+export const SelectField = styled.select`
+  -webkit-appearance: none;
+  appearance: none;
+  height: 48px;
+  border-radius: 0;
+  background: url(${arrowDownSolidIcon}) right center no-repeat;
+  background-color: ${(p) => p.theme.tokens.colorBackground};
+  margin-top: ${(p) => p.theme.tokens.spacing03};
+  padding: ${(p) => p.theme.tokens.spacing02};
+  ${mq.xs`
+    max-width: 100%;
   `}
 `

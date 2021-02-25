@@ -50,18 +50,22 @@ class SetupTest {
   constructor(Component, apiUrl, apiResponse) {
     this.Component = Component
     this.apiUrl = apiUrl
-    this.server = setupServer(
-      rest.get(apiUrl, (_, res, ctx) => {
-        return res(ctx.json(apiResponse))
-      }),
-    )
+    if (apiUrl) {
+      this.server = setupServer(
+        rest.get(apiUrl, (_, res, ctx) => {
+          return res(ctx.json(apiResponse))
+        }),
+      )
+    }
   }
 
-  renderComponent = (route) => {
+  renderComponent = (route, props) => {
     const historyMock = { push: jest.fn() }
     const component = React.cloneElement(this.Component, {
       history: historyMock,
+      ...props,
     })
+    this.Component = component
     const result = renderWithRouter(component, route)
     return {
       ...result,
@@ -75,6 +79,7 @@ class SetupTest {
     assert,
     waitForLoadingToFinish = true,
     route,
+    additionalProps,
   }) => {
     // Filter expected errors to keep the console clean
     const error = console.error
@@ -101,7 +106,7 @@ class SetupTest {
     }
 
     // Arrange
-    const render = this.renderComponent(route)
+    const render = this.renderComponent(route, additionalProps)
 
     // Act
     // Assert
