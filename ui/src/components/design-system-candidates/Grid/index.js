@@ -10,7 +10,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: ${(p) => p.theme.containerWidth};
   padding: 0 ${(p) => p.theme.containerPadding};
-  margin: 0 auto;
+  margin: ${(p) => p.theme.tokens.spacing05} auto;
 `
 
 export const Row = styled(Flex)`

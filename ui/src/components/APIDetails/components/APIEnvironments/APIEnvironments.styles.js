@@ -7,7 +7,9 @@ import mq from '../../../../theme/mediaQueries'
 import CodeBlock from '../../../CodeBlock/CodeBlock'
 import External from '../../../Icons/External'
 
-export const Wrapper = styled.section``
+export const Wrapper = styled.section`
+  padding-top: ${(p) => p.theme.tokens.spacing05};
+`
 
 export const Environment = styled.div``
 
