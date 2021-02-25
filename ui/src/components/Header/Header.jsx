@@ -22,7 +22,6 @@ import {
   StyledText,
   StyledPrimaryNavigation,
   StyledTopNavigationAnchorActive,
-  StyledVerticalDivider,
 } from './Header.styles'
 
 const Header = () => {
@@ -70,7 +69,6 @@ const Header = () => {
                 Developer
               </StyledTopNavigationAnchorActive>
             </StyledNavigationListItem>
-            <StyledVerticalDivider />
             <StyledNavigationListItem>
               <StyledTopNavigationAnchor href="https://forum.developer.overheid.nl">
                 Forum
