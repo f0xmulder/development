@@ -112,6 +112,14 @@ class CodeOverview extends Component {
     history.push(`?${values}`)
   }
 
+  handleResultsPerPageChange = (resultsPerPage) => {
+    const { history, location } = this.props
+
+    const values = new URLSearchParams(location ? location.search : {})
+    values.set('aantalPerPagina', resultsPerPage.toString())
+    history.push(`?${values}`)
+  }
+
   getQueryParams = () => {
     const { location } = this.props
     const values = new URLSearchParams(location ? location.search : {})
@@ -121,6 +129,7 @@ class CodeOverview extends Component {
       q: values.get('q') || '',
       programming_languages: values.getAll('programming_languages') || '',
       page: values.get('pagina') || '1',
+      rowsPerPage: values.get('aantalPerPagina') || '10',
     }
     /* eslint-enable camelcase */
   }
@@ -207,6 +216,7 @@ class CodeOverview extends Component {
                   totalRows={result.totalResults}
                   rowsPerPage={result.rowsPerPage}
                   onPageChangedHandler={this.handlePageChange}
+                  onResultsPerPageChange={this.handleResultsPerPageChange}
                 />
               </>
             )}
