@@ -2,8 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { number, object, func } from 'prop-types'
-import { useHistory, useLocation } from 'react-router-dom'
+import { number, func } from 'prop-types'
 import {
   StyledPagination,
   StyledPageButton,
