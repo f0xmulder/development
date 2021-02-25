@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import { APIType, APIAuthentication } from '../../models/enums'
 
-import { Container, Row, Col } from '../design-system-candidates/Grid'
+import { Row, Col } from '../design-system-candidates/Grid'
 import APIDetailsHeader from '../APIDetailsHeader/APIDetailsHeader'
 import ImplementedByListContainer from '../ImplementedByListContainer/ImplementedByListContainer'
 import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
@@ -22,7 +22,7 @@ import APITerms from './components/APITerms/APITerms'
 import GradeBox from './components/GradeBox/GradeBox'
 import APIScoresPane from './components/APIScoresPane/APIScoresPane'
 
-import { Description } from './APIDetails.styles'
+import { Description, StyledContainer } from './APIDetails.styles'
 
 export const referenceImplementationsFromRelations = (relations = {}) =>
   Object.keys(relations).filter((apiId) =>
@@ -49,7 +49,7 @@ const APIDetails = ({
   const showDesignRuleScores = !!designRuleScores
 
   return (
-    <Container>
+    <StyledContainer>
       <APIDetailsHeader
         previousName="API overzicht"
         serviceName={serviceName}
@@ -136,7 +136,7 @@ const APIDetails = ({
           )
         }}
       />
-    </Container>
+    </StyledContainer>
   )
 }
 

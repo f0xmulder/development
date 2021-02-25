@@ -3,6 +3,7 @@
 //
 import styled from 'styled-components'
 import { Drawer } from '@commonground/design-system'
+import { Container } from '../design-system-candidates/Grid'
 
 import mq from '../../theme/mediaQueries'
 
@@ -39,4 +40,8 @@ IconList.ListItem.Content = styled.div`
 // see https://gitlab.com/commonground/core/design-system/-/issues/33
 export const StyledDrawer = styled(Drawer)`
   position: relative;
+`
+
+export const StyledContainer = styled(Container)`
+  margin-bottom: ${(p) => p.theme.tokens.spacing05};
 `
