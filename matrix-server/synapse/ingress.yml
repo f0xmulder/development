@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: synapse-nginx
+  annotations:
+    #This defines the maximum uploadable filesize for Media.
+    #"max_upload_size" also needs to be adjusted inside homeserver.yaml
+    nginx.ingress.kubernetes.io/proxy-body-size: 100M
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: developer.overheid.nl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: synapse-service
+            port:
+              number: 8008
+  tls:
+  - hosts:
+    - developer.overheid.nl
+    secretName: developer.overheid.nl
