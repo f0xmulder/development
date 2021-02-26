@@ -17,4 +17,4 @@ then
 fi
 
 # Start uWSGI processes
-uwsgi --http :8000 --module api.wsgi --processes 4 --threads 2 --static-map /admin/static=/app/static
+uwsgi --http-socket :8000 --master --module api.wsgi --processes 4 --threads 2 --static-map /admin/static=/app/static
