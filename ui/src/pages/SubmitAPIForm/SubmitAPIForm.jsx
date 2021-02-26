@@ -215,7 +215,7 @@ class SubmitAPIFormPage extends Component {
 
   async fetchApiList() {
     const response = await fetch(
-      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}`,
+      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
     )
     if (response.ok) {
       return response.json()
