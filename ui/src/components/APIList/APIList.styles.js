@@ -1,12 +1,17 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+import { mediaQueries } from '@commonground/design-system'
 import styled from 'styled-components'
 
 import Card from '../Card/Card'
 
 export const StyledCard = styled(Card)`
-  margin-top: 1rem;
+  margin-top: ${(p) => p.theme.tokens.spacing03};
+
+  ${mediaQueries.smDown`
+    margin-top: -${(p) => p.theme.tokens.spacing03};
+  `}
 `
 
 export const StyledCardBody = styled(Card.Body)`

@@ -11,6 +11,7 @@ import EventList from '../../components/EventList/EventList'
 import { modelFromAPIResponse } from '../../models/event'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
+import { DONSmall } from '../../components/CustomDON'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -18,7 +19,6 @@ import {
   StyledSubtitle,
   StyledAddLinkDesktop,
   StyledAddIcon,
-  StyledErrorMessage,
 } from './EventOverview.styles'
 
 class EventOverview extends Component {
@@ -124,13 +124,11 @@ class EventOverview extends Component {
           {!loaded ? (
             <Spinner data-testid="loading" />
           ) : error ? (
-            <StyledErrorMessage>
+            <DONSmall>
               Er ging iets fout tijdens het ophalen van de events.
-            </StyledErrorMessage>
+            </DONSmall>
           ) : !result || !result.events || result.events.length === 0 ? (
-            <StyledErrorMessage>
-              Er zijn (nog) geen events beschikbaar.
-            </StyledErrorMessage>
+            <DONSmall>Er zijn (nog) geen events beschikbaar.</DONSmall>
           ) : (
             <>
               <EventList events={result.events} />

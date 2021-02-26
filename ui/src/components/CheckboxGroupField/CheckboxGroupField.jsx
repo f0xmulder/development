@@ -5,6 +5,7 @@ import React from 'react'
 import { string, arrayOf, shape, func, bool, number } from 'prop-types'
 import { FieldArray } from 'formik'
 import { CheckboxField } from '../Form/Form'
+import { DONSmall } from '../CustomDON'
 import { StyledCheckboxGroupField } from './CheckboxGroupField.styles'
 
 const CheckboxGroupField = ({ name, options, value, onChange }) => (
@@ -29,7 +30,7 @@ const CheckboxGroupField = ({ name, options, value, onChange }) => (
             />
             <label key={index} htmlFor={`${name}.${index}`}>
               {option.label}
-              <span className="count">({option.count})</span>
+              <DONSmall className="count">({option.count})</DONSmall>
             </label>
           </StyledCheckboxGroupField>
         ))}

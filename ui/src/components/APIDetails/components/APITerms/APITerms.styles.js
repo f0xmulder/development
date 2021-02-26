@@ -4,6 +4,7 @@
 import styled from 'styled-components'
 
 import mq from '../../../../theme/mediaQueries'
+import { DONSmall } from '../../../CustomDON'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -28,11 +29,9 @@ export const Term = styled.div`
   `}
 `
 
-export const Key = styled.div`
+export const Key = styled(DONSmall)`
   width: 50%;
   margin-bottom: 4px;
-  color: ${(p) => p.theme.colorTextLight};
-  font-size: ${(p) => p.theme.tokens.fontSizeSmall};
 
   ${mq.smUp`
     width: 100%;

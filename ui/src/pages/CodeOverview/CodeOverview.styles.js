@@ -86,9 +86,6 @@ export const SearchDiv = styled.div`
     width: auto;
   `}
 `
-export const StyledErrorMessage = styled.p`
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-`
 
 export const StyledSelectComponentContainer = styled.div`
   width: 240px;

@@ -74,7 +74,3 @@ export const StyledResultsContainer = styled.div`
     margin-left: 0;
   `}
 `
-
-export const StyledErrorMessage = styled.p`
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-`

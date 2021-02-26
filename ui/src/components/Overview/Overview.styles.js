@@ -11,14 +11,11 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: ${(p) => p.theme.tokens.spacing01};
+  padding-left: ${(p) => p.theme.tokens.spacing05};
+  padding-right: ${(p) => p.theme.tokens.spacing05};
 
   ${mq.smDown`
     width: 100%;
-  `}
-
-  ${mq.mdUp`
-    display: none;
   `}
 `
 

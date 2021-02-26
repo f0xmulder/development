@@ -42,7 +42,3 @@ export const StyledResultsContainer = styled.div`
   flex: 1;
   margin-bottom: ${(p) => p.theme.tokens.spacing12};
 `
-
-export const StyledErrorMessage = styled.p`
-  margin-top: ${(p) => p.theme.tokens.spacing05};
-`

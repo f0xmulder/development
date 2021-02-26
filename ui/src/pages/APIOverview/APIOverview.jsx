@@ -11,6 +11,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import { modelFromAPIResponse } from '../../models/api'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
+import { DONSmall } from '../../components/CustomDON'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -21,7 +22,6 @@ import {
   StyledSearch,
   StyledAddLinkDesktop,
   StyledAddIcon,
-  StyledErrorMessage,
 } from './APIOverview.styles'
 
 class APIOverview extends Component {
@@ -198,13 +198,11 @@ class APIOverview extends Component {
             {!loaded ? (
               <Spinner data-testid="loading" />
             ) : error ? (
-              <StyledErrorMessage>
+              <DONSmall>
                 Er ging iets fout tijdens het ophalen van de API&#39;s.
-              </StyledErrorMessage>
+              </DONSmall>
             ) : !result || !result.apis || result.apis.length === 0 ? (
-              <StyledErrorMessage>
-                Er zijn (nog) geen API&#39;s beschikbaar.
-              </StyledErrorMessage>
+              <DONSmall>Er zijn (nog) geen API&#39;s beschikbaar.</DONSmall>
             ) : (
               <>
                 <APIList apis={result.apis} />

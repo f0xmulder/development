@@ -10,6 +10,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import { modelFromCodeResponse } from '../../models/code'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
+import { DONSmall } from '../../components/CustomDON'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -21,7 +22,6 @@ import {
   StyledAddLinkDesktop,
   StyledAddIcon,
   SearchDiv,
-  StyledErrorMessage,
   StyledSelectComponentContainer,
 } from './CodeOverview.styles'
 
@@ -201,13 +201,11 @@ class CodeOverview extends Component {
             {!loaded ? (
               <Spinner data-testid="loading" />
             ) : error ? (
-              <StyledErrorMessage>
+              <DONSmall>
                 Er ging iets fout tijdens het ophalen van de code.
-              </StyledErrorMessage>
+              </DONSmall>
             ) : !result || !result.code || result.code.length === 0 ? (
-              <StyledErrorMessage>
-                Er is (nog) geen code beschikbaar.
-              </StyledErrorMessage>
+              <DONSmall>Er is (nog) geen code beschikbaar.</DONSmall>
             ) : (
               <>
                 <CodeList code={result.code} />

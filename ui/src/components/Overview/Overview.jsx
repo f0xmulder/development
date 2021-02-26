@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import theme from '../../theme'
+import { DONSmall } from '../CustomDON'
 import {
   StyledHeader,
   StyledAddLinkMobile,
@@ -19,13 +20,11 @@ export const ResultsHeader = ({
   addLinkTarget,
 }) => (
   <StyledHeader>
-    <span>
-      {totalResults ? (
-        <span data-test="total">
-          {totalResults} {totalResults > 1 ? objectNamePlural : objectName}
-        </span>
-      ) : null}
-    </span>
+    {totalResults ? (
+      <DONSmall data-test="total">
+        {totalResults} {totalResults > 1 ? objectNamePlural : objectName}
+      </DONSmall>
+    ) : null}
     <StyledAddLinkMobile as={Link} to={addLinkTarget} variant="link">
       <StyledAddIcon color={theme.colorTextLink} />
       {objectName} toevoegen

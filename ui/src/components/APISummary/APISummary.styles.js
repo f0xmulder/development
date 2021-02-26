@@ -40,12 +40,8 @@ export const StyledServiceName = styled.div`
   color: ${(p) => p.theme.colorText};
 `
 
-export const StyledOrganizationName = styled.div`
+export const StyledOrganizationName = styled.small`
   grid-area: organisation;
-  margin-bottom: ${(p) => p.theme.tokens.spacing03};
-  font-size: ${(p) => p.theme.tokens.fontSizeMedium};
-  font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
-  color: ${(p) => p.theme.tokens.colorPaletteGray700};
 
   ${mq.smUp`
     margin-bottom: 0;
