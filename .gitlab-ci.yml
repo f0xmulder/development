@@ -321,8 +321,9 @@ include:
 - template: SAST.gitlab-ci.yml
 - template: Secret-Detection.gitlab-ci.yml
 
+
 container_scanning:
-  stage: Security
+  stage: security
   variables:
     IMAGE_REPOSITORY_BASE: don
     IMAGE_SUFFIXES: >
@@ -352,24 +353,23 @@ container_scanning:
         done
     # Merge the per-image reports in to one report
     - jq -s '.[0].version as $version | [.[] | to_entries] | flatten | reduce .[] as $dot ({}; .[$dot.key] += $dot.value) | .version = $version' /reports/*/gl-container-scanning-report.json > gl-container-scanning-report.json
-  dependencies:
-    - Build acceptance
-    - Build review
+#   dependencies:
+#     - Build acceptance
+#     - Build review
   rules:
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/
 
-dependency_scanning:
-  stage: Security
 
-sast:
-  stage: Security
+
+dependency_scanning:
+  stage: security
 
 # Override the template from 'Secret-Detection.gitlab-ci.yml'
 .secret-analyzer:
-  stage: Security
+  stage: security
 
 secret_detection:
   variables:
