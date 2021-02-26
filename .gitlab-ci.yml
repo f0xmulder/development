@@ -1,48 +1,46 @@
+# You can override the included template(s) by including variable overrides
+# See https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#priority-of-environment-variables
 image: docker:19.03.1
-
 stages:
-  - test
-  - release
-  - review
-  - deploy
-  - e2e-tests
-  - security
-
+- test
+- release
+- review
+- deploy
+- e2e-tests
+- security
 variables:
-  IMAGE_PREFIX: $CI_REGISTRY_IMAGE
+  IMAGE_PREFIX: "$CI_REGISTRY_IMAGE"
   DOMAIN: developer.overheid.nl
   REVIEW_BASE_DOMAIN: nlx.reviews
-  REVIEW_NAMESPACE: "don-$CI_ENVIRONMENT_SLUG"
-
-.validate:
+  REVIEW_NAMESPACE: don-$CI_ENVIRONMENT_SLUG
+".validate":
   image: golang:1.14.1
   before_script:
-    - cd validate
-
+  - cd validate
 Test validate:
-  extends: .validate
+  extends: ".validate"
   stage: test
   script:
-    - go test ./... -coverprofile coverage.out
-    - go tool cover -html=coverage.out -o coverage.html
-    - go tool cover -func=coverage.out
-  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
+  - go test ./... -coverprofile coverage.out
+  - go tool cover -html=coverage.out -o coverage.html
+  - go tool cover -func=coverage.out
+  coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
   artifacts:
     expire_in: 1 month
     paths:
-      - validate/coverage.html
-
+    - validate/coverage.html
 Validate API definitions:
-  extends: .validate
+  extends: ".validate"
   stage: test
   script:
-    - go run ./cmd/don-validate/main.go
-
+  - go run ./cmd/don-validate/main.go
 Lint and test API:
   image: python:3.8
   stage: test
   services:
-    - postgres:11.6-alpine
+  - postgres:11.6-alpine
   variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     DB_HOST: postgres
@@ -52,25 +50,24 @@ Lint and test API:
     SECRET_KEY: somethingverysecret
   cache:
     paths:
-      - $CI_PROJECT_DIR/.cache/pip
+    - "$CI_PROJECT_DIR/.cache/pip"
   before_script:
-    - cd api/
-    - pip3 install -r requirements-dev.txt
+  - cd api/
+  - pip3 install -r requirements-dev.txt
   script:
-    - python3 -m prospector
-    - python3 -m coverage run --source='.' manage.py test core
-    - python3 -m coverage report && python -m coverage html
-  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
+  - python3 -m prospector
+  - python3 -m coverage run --source='.' manage.py test core
+  - python3 -m coverage report && python -m coverage html
+  coverage: "/TOTAL.+ ([0-9]{1,3}%)/"
   artifacts:
     expire_in: 1 month
     paths:
-      - api/htmlcov
-
+    - api/htmlcov
 Verify test schema:
   image: python:3.8
   stage: test
   services:
-    - postgres:11.6-alpine
+  - postgres:11.6-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -80,91 +77,79 @@ Verify test schema:
     TESTDATA: "../linkchecker/testdata"
   cache:
     paths:
-      - $CI_PROJECT_DIR/.cache/pip
+    - "$CI_PROJECT_DIR/.cache/pip"
   before_script:
-    - apt-get update
-    - apt-get install -qy postgresql-client-11
-    - cd api/
-    - pip3 install -r requirements-dev.txt
+  - apt-get update
+  - apt-get install -qy postgresql-client-11
+  - cd api/
+  - pip3 install -r requirements-dev.txt
   script:
-    - python manage.py migrate
-    - >
-      PGPASSWORD="$DB_PASSWORD"
-      pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME"
-      --no-owner --schema-only
-      --schema=public --table=core_\*
-      | sed '/-- Dumped by /d'
-      > current_testschema.sql
-    - ls -l current_testschema.sql
-    - |
-      if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
-      then
-        echo -e "\e[31mError: Non-matching test database schema! See docs/docs/developer.md#Data model changes on how to update it.\e[0m"
-        exit 1
-      fi
+  - python manage.py migrate
+  - 'PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME" --no-owner
+    --schema-only --schema=public --table=core_\* | sed ''/-- Dumped by /d'' > current_testschema.sql
+
+'
+  - ls -l current_testschema.sql
+  - |
+    if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
+    then
+      echo -e "\e[31mError: Non-matching test database schema! See docs/docs/developer.md#Data model changes on how to update it.\e[0m"
+      exit 1
+    fi
   artifacts:
     expire_in: 1 month
     when: always
     paths:
-      - api/current_testschema.sql
-
-## UI ##
-.ui:
+    - api/current_testschema.sql
+".ui":
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export UI_IMAGE=${IMAGE_PREFIX}/ui
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - export UI_IMAGE=${IMAGE_PREFIX}/ui
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
-
+  - docker:19.03.1-dind
 Test and release UI:
-  extends: .ui
+  extends: ".ui"
   stage: release
   script:
-    - |
-        docker build \
-        --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
-        --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
-        -f ui/Dockerfile . && \
-        docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
-        docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
-  coverage: /All\sfiles.*?\s+(\d+.\d+)/
-
-## API ##
-.api:
+  - |
+    docker build \
+    --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
+    --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
+    -f ui/Dockerfile . && \
+    docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
+    docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
+  coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
+".api":
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export API_IMAGE=${IMAGE_PREFIX}/api
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - export API_IMAGE=${IMAGE_PREFIX}/api
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
-
+  - docker:19.03.1-dind
 Release API:
-  extends: .api
+  extends: ".api"
   stage: release
   script:
-    - |
-        docker build \
-        --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
-        --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
-        -f api/Dockerfile . && \
-        docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
-        docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
-  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
-
-## Linkchecker ##
-.linkchecker:
+  - |
+    docker build \
+    --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
+    --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
+    -f api/Dockerfile . && \
+    docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
+    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
+  coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
+".linkchecker":
   before_script:
-    - cd linkchecker
-
+  - cd linkchecker
 Test linkchecker:
-  extends: .linkchecker
+  extends: ".linkchecker"
   image: golang:1.14.1
   stage: test
   services:
-    - postgres:11.6-alpine
+  - postgres:11.6-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -173,171 +158,160 @@ Test linkchecker:
     DB_TEST_NAME: postgres
     SECRET_KEY: somethingverysecret
   script:
-    - go test ./... -coverprofile coverage.out
-    - go tool cover -html=coverage.out -o coverage.html
-    - go tool cover -func=coverage.out
-  coverage: /total:\t+\(statements\)\t+([\d\.]+?%)/
+  - go test ./... -coverprofile coverage.out
+  - go tool cover -html=coverage.out -o coverage.html
+  - go tool cover -func=coverage.out
+  coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
   artifacts:
     expire_in: 1 month
     paths:
-      - linkchecker/coverage.html
-
+    - linkchecker/coverage.html
 Release Linkchecker:
-  extends: .linkchecker
+  extends: ".linkchecker"
   stage: release
   before_script:
-    - cd linkchecker
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export LINKCHECKER_IMAGE=${IMAGE_PREFIX}/linkchecker
+  - cd linkchecker
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - export LINKCHECKER_IMAGE=${IMAGE_PREFIX}/linkchecker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
+  - docker:19.03.1-dind
   script:
-    - |
-        docker build \
-        --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
-        --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
-        . && \
-        docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
-        docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
-
-## Docs ##
-.docs:
+  - |
+    docker build \
+    --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
+    --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
+    . && \
+    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
+    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
+".docs":
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
-
+  - docker:19.03.1-dind
 Release Docs:
-  extends: .docs
+  extends: ".docs"
   stage: release
   script:
-    - |
-        docker build \
-        --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
-        --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
-        -f docs/Dockerfile . && \
-        docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
-        docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
-
-## Review App ##
+  - |
+    docker build \
+    --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
+    --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
+    -f docs/Dockerfile . && \
+    docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
+    docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   script:
-    - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
-    - |
-        kubectl create namespace $REVIEW_NAMESPACE || true
-        helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
-        --namespace $REVIEW_NAMESPACE \
-        --set "secretKey=$SECRET_KEY" \
-        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
-        --set "gitlabUrl=$GITLAB_URL" \
-        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
-        --set "apiTestToken=$API_TEST_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
-        --set "dbTerminationPolicy=WipeOut" \
-        --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
-        --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
-        --set "loadTestData=true" \
-        --set "linkcheckerEnabledDefault=false" \
-        --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
-        --set "replicas=1"
+  - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
+  - |
+    kubectl create namespace $REVIEW_NAMESPACE || true
+    helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
+    --namespace $REVIEW_NAMESPACE \
+    --set "secretKey=$SECRET_KEY" \
+    --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+    --set "gitlabUrl=$GITLAB_URL" \
+    --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+    --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
+    --set "apiTestToken=$API_TEST_TOKEN" \
+    --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+    --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+    --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+    --set "dbTerminationPolicy=WipeOut" \
+    --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
+    --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
+    --set "loadTestData=true" \
+    --set "linkcheckerEnabledDefault=false" \
+    --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
+    --set "replicas=1"
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     on_stop: Remove Review App
   tags:
-    - cg
-    - docker
+  - cg
+  - docker
   only:
-    - branches@commonground/don/developer.overheid.nl
+  - branches@commonground/don/developer.overheid.nl
   except:
-    - master
+  - master
   artifacts:
     paths:
-      - ci_environment_url.txt
-
+    - ci_environment_url.txt
 Remove Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   variables:
     GIT_STRATEGY: none
   script:
-    - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
-    - kubectl delete namespace $REVIEW_NAMESPACE
+  - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
+  - kubectl delete namespace $REVIEW_NAMESPACE
   when: manual
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
     action: stop
   tags:
-    - cg
-    - docker
+  - cg
+  - docker
   only:
-    - branches@commonground/don/developer.overheid.nl
+  - branches@commonground/don/developer.overheid.nl
   except:
-    - master
-
-## E2E Tests ##
+  - master
 E2E tests:
   stage: e2e-tests
   before_script:
-    - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo "https://$DOMAIN")
-    - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
+  - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
+    "https://$DOMAIN")
+  - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
-    - |
-      docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-      -f e2e-tests/Dockerfile . && \
-      docker run --rm --cap-add=SYS_ADMIN \
-      -e URL=${URL} \
-      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-      /bin/sh -c "./wait-for-http.sh $URL && npm test"
+  - |
+    docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+    -f e2e-tests/Dockerfile . && \
+    docker run --rm --cap-add=SYS_ADMIN \
+    -e URL=${URL} \
+    $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+    /bin/sh -c "./wait-for-http.sh $URL && npm test"
   only:
-    - branches@commonground/don/developer.overheid.nl
+  - branches@commonground/don/developer.overheid.nl
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
-
-## Depoyment ##
+  - docker:19.03.1-dind
 Deploy production:
   stage: deploy
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   script:
-    - |
-        helm upgrade --install don-prod ./helm/don \
-        --namespace don-prod \
-        --set "secretKey=$SECRET_KEY" \
-        --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
-        --set "gitlabUrl=$GITLAB_URL" \
-        --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-        --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
-        --set "apiTestToken=$API_TEST_TOKEN" \
-        --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
-        --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-        --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
-        --set "dbTerminationPolicy=DoNotTerminate" \
-        --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
-        --set "linkcheckerEnabledDefault=true" \
-        --set "domain=$DOMAIN"
+  - |
+    helm upgrade --install don-prod ./helm/don \
+    --namespace don-prod \
+    --set "secretKey=$SECRET_KEY" \
+    --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+    --set "gitlabUrl=$GITLAB_URL" \
+    --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+    --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
+    --set "apiTestToken=$API_TEST_TOKEN" \
+    --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+    --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+    --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+    --set "dbTerminationPolicy=DoNotTerminate" \
+    --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
+    --set "linkcheckerEnabledDefault=true" \
+    --set "domain=$DOMAIN"
   environment:
     name: prod
     url: https://$DOMAIN
   tags:
-    - cg-privileged
-    - docker
+  - cg-privileged
+  - docker
   only:
-    - master@commonground/don/developer.overheid.nl
-
-Security:
+  - master@commonground/don/developer.overheid.nl
+sast:
   stage: security
 include:
-- "https://gitlab.com/commonground/nlx/nlx/-/blob/master/.gitlab/ci/security.yml"
+- template: Security/SAST.gitlab-ci.yml
