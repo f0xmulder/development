@@ -6,6 +6,7 @@ stages:
   - review
   - deploy
   - e2e-tests
+  - security
 
 variables:
   IMAGE_PREFIX: $CI_REGISTRY_IMAGE
@@ -335,3 +336,8 @@ Deploy production:
     - docker
   only:
     - master@commonground/don/developer.overheid.nl
+
+Security:
+  stage: security
+include:
+- "https://gitlab.com/commonground/nlx/nlx/-/blob/master/.gitlab/ci/security.yml"
