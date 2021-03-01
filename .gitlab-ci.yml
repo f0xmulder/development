@@ -337,7 +337,7 @@ container_scanning:
     - export IMAGE_REGISTRY=$(cat ci_build_image_registry.txt)
     - export CI_APPLICATION_TAG=$(cat ci_build_image_tag.txt)
   script:
-    - mkdir ${REPORTS_DIRECTORY}
+    - mkdir -p ${REPORTS_DIRECTORY}
     - |
         for IMAGE_SUFFIX in ${IMAGE_SUFFIXES}; do
           export CI_APPLICATION_REPOSITORY="${IMAGE_REGISTRY}/${IMAGE_REPOSITORY_BASE}/${IMAGE_SUFFIX}"
@@ -346,7 +346,7 @@ container_scanning:
           SECTION_NAME="section_${IMAGE_SUFFIX}"
           echo -e "start_section:$(date +%s):${SECTION_NAME}\r\e[0KScanning image: ${CI_APPLICATION_REPOSITORY}"
 
-          mkdir ${ANALYZER_ARTIFACT_DIR}
+          mkdir -p ${ANALYZER_ARTIFACT_DIR}
           /analyzer run
 
           echo -e "section_end:$(date +%s):${SECTION_NAME}\r\e[0K"
