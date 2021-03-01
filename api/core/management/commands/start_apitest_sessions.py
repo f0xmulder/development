@@ -1,6 +1,7 @@
 import logging
 import sys
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
 
@@ -43,8 +44,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         had_errors = False
-        for api in API.objects.filter(api_type__in=[API.APIType.REST_JSON, API.APIType.REST_XML]):
+        apis = API.objects.filter(api_type__in=[API.APIType.REST_JSON, API.APIType.REST_XML])
+
+        # TODO: fix dirty hack to limit requests during review deployment
+        if settings.API_TEST_BASE_URL.startswith("https://staging"):
+            apis = apis[:10]
+
+        for api in apis:
             try:
+                if not api.get_production_environment():
+                    continue
                 # GET or CREATE a test_suite
                 test_suite = self.get_or_create_test_suite(api)
                 # Update the endpoint in the test_suite

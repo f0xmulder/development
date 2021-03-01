@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
 # The same env var as used by `manage.py createsuperuser`
-PASSWORD_ENV_VAR = 'DJANGO_SUPERUSER_PASSWORD'
+PASSWORD_ENV_VAR = 'DJANGO_SUPERUSER_PASSWORD'  # noqa
 
 
 class Command(BaseCommand):

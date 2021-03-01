@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG_DEFAULT = 'True'
-SECRET_KEY_DEFAULT = '0)l39j8gmr17ygx@7oia_x#x$o@t4qh&dx^$o4j+fjfi-3-0=7'
+SECRET_KEY_DEFAULT = '0)l39j8gmr17ygx@7oia_x#x$o@t4qh&dx^$o4j+fjfi-3-0=7'  # noqa
 USE_X_FORWARDED_PORT_DEFAULT = 'True'
 
 if os.getenv('DON_ENVIRONMENT') == 'production':
