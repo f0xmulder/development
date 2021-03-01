@@ -9,9 +9,9 @@ urlpatterns = [
     path('api/submit-api', views.SubmitAPIView.as_view()),
 ]
 
-apiRouter = routers.DefaultRouter(trailing_slash=False)
-apiRouter.register(r'api/apis', views.APIViewSet, basename='apis')
-apiRouter.register(r'api/events', views.EventViewSet, basename='events')
-apiRouter.register(r'api/code', views.CodeViewSet, basename='code')
+api_router = routers.DefaultRouter(trailing_slash=False)
+api_router.register(r'api/apis', views.APIViewSet, basename='apis')
+api_router.register(r'api/events', views.EventViewSet, basename='events')
+api_router.register(r'api/code', views.CodeViewSet, basename='code')
 
-urlpatterns += apiRouter.urls
+urlpatterns += api_router.urls

@@ -5,17 +5,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG_DEFAULT = 'True'
 SECRET_KEY_DEFAULT = '0)l39j8gmr17ygx@7oia_x#x$o@t4qh&dx^$o4j+fjfi-3-0=7'
-USE_X_FORWARDED_PORT_DEFAULT = True
+USE_X_FORWARDED_PORT_DEFAULT = 'True'
 
 if os.getenv('DON_ENVIRONMENT') == 'production':
     DEBUG_DEFAULT = 'False'
     SECRET_KEY_DEFAULT = None
-    USE_X_FORWARDED_PORT_DEFAULT = False
+    USE_X_FORWARDED_PORT_DEFAULT = 'False'
 
 DEBUG = os.getenv('DEBUG', DEBUG_DEFAULT) == 'True'
 SECRET_KEY = os.getenv('SECRET_KEY', SECRET_KEY_DEFAULT)
 
-USE_X_FORWARDED_PORT = os.getenv('USE_X_FORWARDED_PORT', USE_X_FORWARDED_PORT_DEFAULT)
+USE_X_FORWARDED_PORT = os.getenv('USE_X_FORWARDED_PORT', USE_X_FORWARDED_PORT_DEFAULT) == 'True'
 
 if os.getenv('ALLOWED_HOST'):
     ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST')]
