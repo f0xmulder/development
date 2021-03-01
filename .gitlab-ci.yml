@@ -325,7 +325,7 @@ include:
 container_scanning:
   stage: security
   variables:
-    IMAGE_REPOSITORY_BASE: don
+    IMAGE_REPOSITORY_BASE: registry.gitlab.com/commonground/don
     IMAGE_SUFFIXES: >
       developer.overheid.nl/ui
       developer.overheid.nl/docs

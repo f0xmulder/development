@@ -1,7 +1,5 @@
 {
-  "eslint.workingDirectories": [
-    "./ui"
-  ],
+  "eslint.workingDirectories": ["./ui"],
   "[go]": {
     "editor.defaultFormatter": "ms-vscode.Go"
   },
@@ -9,7 +7,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "conventionalCommits.scopes": [
-    "deps"
-  ]
+  "conventionalCommits.scopes": ["deps"],
+  "workbench.colorCustomizations": {
+    "titleBar.activeForeground": "#fff",
+    "titleBar.inactiveForeground": "#ffffffCC",
+    "titleBar.activeBackground": "#008cff",
+    "titleBar.inactiveBackground": "#008cffcc"
+  }
 }
