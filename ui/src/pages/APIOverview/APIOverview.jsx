@@ -125,6 +125,7 @@ class APIOverview extends Component {
 
     const values = new URLSearchParams(location ? location.search : {})
     values.set('aantalPerPagina', resultsPerPage.toString())
+    values.set('pagina', '1')
     history.push(`?${values}`)
   }
 

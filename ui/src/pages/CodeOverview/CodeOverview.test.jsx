@@ -86,7 +86,7 @@ describe('CodeOverview', () => {
           ),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -102,7 +102,7 @@ describe('CodeOverview', () => {
           screen.getByText(/Er is \(nog\) geen code beschikbaar./),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -123,7 +123,7 @@ describe('CodeOverview', () => {
       assert: () => {
         expect(screen.getByText(/Programmeertalen/i)).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -158,7 +158,7 @@ describe('CodeOverview', () => {
       assert: () => {
         expect(screen.getByText(/2 projecten/i)).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -173,7 +173,7 @@ describe('CodeOverview', () => {
           )
         })
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -199,7 +199,7 @@ describe('CodeOverview', () => {
           expect(screen.getByRole('button', { name: /1/ })).toBeInTheDocument()
           expect(screen.getByRole('button', { name: /2/ })).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
 
@@ -219,7 +219,31 @@ describe('CodeOverview', () => {
           })
           expect(historyMock.push).toHaveBeenCalledWith('?pagina=2')
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
+      })
+    })
+
+    it('should handle results per page', async () => {
+      const response = {
+        ...apiResponse,
+        page: 1,
+        rowsPerPage: 20,
+        totalResults: 20,
+      }
+      await setup({
+        customResponse: response,
+        assert: ({ historyMock }) => {
+          const resultsPerPage = screen.getByLabelText(
+            'Aantal resultaten per pagina',
+          )
+          act(() => {
+            userEvent.selectOptions(resultsPerPage, ['10'])
+          })
+          expect(historyMock.push).toHaveBeenCalledWith(
+            '?aantalPerPagina=10&pagina=1',
+          )
+        },
+        ignoreLoadingState: false,
       })
     })
   })
@@ -258,7 +282,7 @@ describe('CodeOverview', () => {
             '/code?programming_languages=1',
           )
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
   })

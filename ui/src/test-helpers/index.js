@@ -77,7 +77,7 @@ class SetupTest {
     throwBackendError,
     customResponse,
     assert,
-    waitForLoadingToFinish = true,
+    ignoreLoadingState = true,
     route,
     additionalProps,
   }) => {
@@ -115,7 +115,7 @@ class SetupTest {
     })
 
     // Allow components to gracefully unmount
-    if (waitForLoadingToFinish) {
+    if (ignoreLoadingState) {
       await expect(
         waitForElementToBeRemoved(() => screen.getByTestId('loading')),
       ).resolves.not.toThrow()

@@ -77,7 +77,7 @@ describe('APIOverview', () => {
           ),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -93,7 +93,7 @@ describe('APIOverview', () => {
           screen.getByText(/Er zijn \(nog\) geen API's beschikbaar./),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -148,7 +148,7 @@ describe('APIOverview', () => {
             screen.getByRole('checkbox', { name: /REST\/XML/ }),
           ).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
     it('should show a filter for the organization', async () => {
@@ -161,7 +161,7 @@ describe('APIOverview', () => {
             screen.getByRole('checkbox', { name: /organization_name2/i }),
           ).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
     it('should show the total number of APIs', async () => {
@@ -169,7 +169,7 @@ describe('APIOverview', () => {
         assert: () => {
           expect(screen.getByText(/2 API's/)).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
     it('should show a list of APIs', async () => {
@@ -179,7 +179,7 @@ describe('APIOverview', () => {
             screen.getByRole('link', { name: /service name/i }),
           ).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
 
@@ -208,7 +208,7 @@ describe('APIOverview', () => {
               screen.getByRole('button', { name: /2/ }),
             ).toBeInTheDocument()
           },
-          waitForLoadingToFinish: false,
+          ignoreLoadingState: false,
         })
       })
       it('should handle pagination', async () => {
@@ -227,7 +227,30 @@ describe('APIOverview', () => {
             })
             expect(historyMock.push).toHaveBeenCalledWith('?pagina=2')
           },
-          waitForLoadingToFinish: false,
+          ignoreLoadingState: false,
+        })
+      })
+      it('should handle results per page', async () => {
+        const response = {
+          ...apiResponse,
+          page: 1,
+          rowsPerPage: 20,
+          totalResults: 20,
+        }
+        await setup({
+          customResponse: response,
+          assert: ({ historyMock }) => {
+            const resultsPerPage = screen.getByLabelText(
+              'Aantal resultaten per pagina',
+            )
+            act(() => {
+              userEvent.selectOptions(resultsPerPage, ['10'])
+            })
+            expect(historyMock.push).toHaveBeenCalledWith(
+              '?aantalPerPagina=10&pagina=1',
+            )
+          },
+          ignoreLoadingState: false,
         })
       })
     })
@@ -269,7 +292,7 @@ describe('APIOverview', () => {
             expect(checkbox).toBeChecked()
             expect(historyMock.push).toHaveBeenCalledWith('?type=rest_xml')
           },
-          waitForLoadingToFinish: false,
+          ignoreLoadingState: false,
         })
       })
       it('should filter by organization', async () => {
@@ -286,7 +309,7 @@ describe('APIOverview', () => {
               '?organisatie=organization_name2',
             )
           },
-          waitForLoadingToFinish: false,
+          ignoreLoadingState: false,
         })
       })
     })

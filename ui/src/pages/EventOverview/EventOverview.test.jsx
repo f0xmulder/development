@@ -7,26 +7,25 @@ import userEvent from '@testing-library/user-event'
 import { act, screen, SetupTest } from '../../test-helpers'
 import EventOverview from './EventOverview'
 
+const results = []
+for (let i = 1; i <= 20; i++) {
+  const startDate =
+    i < 10 ? `2021-02-0${i}T13:30:00+01:00` : `2021-02-22T${i}:30:00+01:00`
+
+  results.push({
+    id: i,
+    title: `Event ${i}`,
+    start_date: startDate,
+    location: 'Den Bosch',
+    registration_url: 'https://www.meetup.com',
+  })
+}
+
 const apiResponse = {
   page: 1,
   rowsPerPage: 10,
   totalResults: 2,
-  results: [
-    {
-      id: 1,
-      title: '1st event',
-      start_date: '2021-02-22T13:30:00+01:00',
-      location: 'Den Bosch',
-      registration_url: 'https://www.meetup.com',
-    },
-    {
-      id: 2,
-      title: '2nd event',
-      start_date: '2021-03-22T13:30:00+01:00',
-      location: 'Eindhoven',
-      registration_url: 'https://www.meetup.com',
-    },
-  ],
+  results,
 }
 
 describe('EventOverview', () => {
@@ -55,7 +54,7 @@ describe('EventOverview', () => {
           ),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -70,7 +69,7 @@ describe('EventOverview', () => {
           screen.getByText(/Er zijn \(nog\) geen events beschikbaar./),
         ).toBeInTheDocument()
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -109,7 +108,7 @@ describe('EventOverview', () => {
           ),
         ).toHaveTextContent('2 Events')
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -120,9 +119,9 @@ describe('EventOverview', () => {
           screen.getAllByRole('link', {
             name: /^Ga naar de website:.*$/,
           }),
-        ).toHaveLength(2)
+        ).toHaveLength(20)
       },
-      waitForLoadingToFinish: false,
+      ignoreLoadingState: false,
     })
   })
 
@@ -147,7 +146,7 @@ describe('EventOverview', () => {
           expect(screen.getByRole('button', { name: /1/ })).toBeInTheDocument()
           expect(screen.getByRole('button', { name: /2/ })).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
 
@@ -167,7 +166,31 @@ describe('EventOverview', () => {
           })
           expect(historyMock.push).toHaveBeenCalledWith('?pagina=2')
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
+      })
+    })
+
+    it('should handle results per page', async () => {
+      const response = {
+        ...apiResponse,
+        page: 1,
+        rowsPerPage: 20,
+        totalResults: 20,
+      }
+      await setup({
+        customResponse: response,
+        assert: ({ historyMock }) => {
+          const resultsPerPage = screen.getByLabelText(
+            'Aantal resultaten per pagina',
+          )
+          act(() => {
+            userEvent.selectOptions(resultsPerPage, ['10'])
+          })
+          expect(historyMock.push).toHaveBeenCalledWith(
+            '?aantalPerPagina=10&pagina=1',
+          )
+        },
+        ignoreLoadingState: false,
       })
     })
   })

@@ -118,7 +118,7 @@ describe('Pagination', () => {
             }),
           ).toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
 
@@ -138,7 +138,7 @@ describe('Pagination', () => {
           })
           expect(onResultsPerPageChange).toHaveBeenCalledWith('10')
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
 
@@ -160,7 +160,7 @@ describe('Pagination', () => {
           })
           expect(twentyFivePerPage).not.toBeInTheDocument()
         },
-        waitForLoadingToFinish: false,
+        ignoreLoadingState: false,
       })
     })
   })
