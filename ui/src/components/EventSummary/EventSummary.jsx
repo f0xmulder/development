@@ -55,7 +55,7 @@ const EventSummary = ({ title, startDate, location, registrationUrl }) => {
             target="_blank"
             rel="noopener noreferrer"
             href={registrationUrl}
-            aria-label={`Ga naar de website: ${title}`}
+            aria-label={`Ga naar de website: ${title} (${registrationUrl})`}
           >
             Naar event pagina
           </StyledLink>
