@@ -162,11 +162,13 @@ const SubmitCodeForm = () => {
               />
             </Spacing>
             {errors.relatedApis && touched.relatedApis && (
-              <ErrorMessage data-test="error-message">
+              <ErrorMessage data-test="error-message" className="axe-ignore">
                 {errors.relatedApis}
               </ErrorMessage>
             )}
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {error && (
+              <ErrorMessage className="axe-ignore">{error}</ErrorMessage>
+            )}
           </StyledFieldset>
           <Button type="submit" disabled={loading}>
             Project toevoegen
