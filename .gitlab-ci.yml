@@ -326,15 +326,14 @@ container_scanning:
   variables:
     IMAGE_REPOSITORY_BASE: commonground/don
     IMAGE_SUFFIXES: >
-      developer.overheid.nl/ui
-      developer.overheid.nl/docs
-      developer.overheid.nl/api
-      developer.overheid.nl/linkchecker
+      developer.overheid.nl/ui:$CI_COMMIT_SHORT_SHA
+      developer.overheid.nl/docs:$CI_COMMIT_SHORT_SHA
+      developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA
+      developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA
     REPORTS_DIRECTORY: /reports
   before_script:
     - yum install -y jq
     - export IMAGE_REGISTRY="registry.gitlab.com"
-    - export CI_APPLICATION_TAG=$CI_COMMIT_SHA
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
