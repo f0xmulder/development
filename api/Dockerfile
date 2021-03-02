@@ -1,7 +1,7 @@
 FROM python:3.8-slim AS build
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    build-essential
+    build-essential libpq-dev
 
 RUN python -m venv /app/venv && /app/venv/bin/pip install --upgrade pip
 
@@ -12,7 +12,7 @@ RUN /app/venv/bin/pip3 install -r requirements.txt
 FROM python:3.8-slim
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    mime-support \
+    mime-support libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /app/venv /app/venv
