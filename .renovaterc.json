@@ -8,7 +8,7 @@
     "group:allNonMajor"
   ],
   "enabledManagers": [
-    "npm", "nvm", "pip_requirements"
+    "npm", "nvm", "pip_requirements", "gomod"
   ],
   "draftPR": true,
   "separateMultipleMajor": true,
