@@ -336,6 +336,7 @@ container_scanning:
   before_script:
     - yum install -y jq
     - export IMAGE_REGISTRY="registry.gitlab.com"
+    - export CI_APPLICATION_TAG=$CI_COMMIT_SHORT_SHA
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
