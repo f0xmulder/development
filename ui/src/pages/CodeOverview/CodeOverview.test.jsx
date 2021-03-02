@@ -63,7 +63,7 @@ const apiResponse = {
 describe('CodeOverview', () => {
   const { server, setup } = new SetupTest(
     <CodeOverview />,
-    '/api/code?page=1',
+    '/api/code',
     apiResponse,
   )
 
