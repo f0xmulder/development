@@ -331,14 +331,10 @@ container_scanning:
       developer.overheid.nl/api
       developer.overheid.nl/linkchecker
     REPORTS_DIRECTORY: /reports
-    DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - yum install -y jq
-    - export IMAGE_REGISTRY=$(cat ci_build_image_registry.txt)
-    - export CI_APPLICATION_TAG=$(cat ci_build_image_tag.txt)
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  services:
-    - docker:19.03.1-dind
+    - export IMAGE_REGISTRY="registry.gitlab.com"
+    - export CI_APPLICATION_TAG=$CI_COMMIT_SHA
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
