@@ -321,21 +321,24 @@ include:
 - template: SAST.gitlab-ci.yml
 - template: Secret-Detection.gitlab-ci.yml
 
-
 container_scanning:
   stage: security
   variables:
-    IMAGE_REPOSITORY_BASE: registry.gitlab.com/commonground/don
+    IMAGE_REPOSITORY_BASE: commonground/don
     IMAGE_SUFFIXES: >
       developer.overheid.nl/ui
       developer.overheid.nl/docs
       developer.overheid.nl/api
       developer.overheid.nl/linkchecker
     REPORTS_DIRECTORY: /reports
+    DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - yum install -y jq
     - export IMAGE_REGISTRY=$(cat ci_build_image_registry.txt)
     - export CI_APPLICATION_TAG=$(cat ci_build_image_tag.txt)
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  services:
+    - docker:19.03.1-dind
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
@@ -361,8 +364,6 @@ container_scanning:
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/
-
-
 
 dependency_scanning:
   stage: security
