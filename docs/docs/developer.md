@@ -32,6 +32,33 @@ Tip: if you want to completely restart and reset the database, use `docker-compo
 
 ### Django API
 
+Make sure to install the postgresql client libraries when you are not on Windows
+to be able to install psycopg2.
+Depending on the environment you have to do the following.
+
+On a linux machine install postgresql client libs using the package manager. For example
+on Ubuntu/Debian execute:
+
+```bash
+sudo apt install libpq-dev
+```
+
+On Mac install postgresql, for example with Homebrew:
+
+```bash
+brew install postgresql
+```
+
+This installs the entire server on your Mac as there is no separate package for just
+the client part of PostgreSQL, but the server doesn't have to be running for this use case.
+Also note that if you installed using Homebrew, you probably need to execute the following for psycopg2 to be able to
+find all the necessary libs, see https://github.com/psycopg/psycopg2/issues/1200#issuecomment-770198398:
+
+```bash
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+```
+
 First, set up a python virtual environment with python 3.8 and activate it.
 
 Then install the python dependencies:
