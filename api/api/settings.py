@@ -84,6 +84,10 @@ DATABASES = {
         'USER': os.getenv('DB_USER', 'don'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'don'),
         'NAME': os.getenv('DB_NAME', 'don'),
+        'CONN_MAX_AGE': None,
+        'OPTIONS': {
+            'application_name': "don_api",
+        }
     }
 }
 
