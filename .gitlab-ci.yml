@@ -331,6 +331,8 @@ container_scanning:
       developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA
       developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA
     REPORTS_DIRECTORY: /reports
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
   before_script:
     - yum install -y jq
     - export IMAGE_REGISTRY="registry.gitlab.com"
