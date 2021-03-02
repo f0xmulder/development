@@ -121,8 +121,8 @@ Test and release UI:
     docker push $UI_IMAGE && \
     docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${UI_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${UI_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  - echo -n "${UI_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${UI_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
   artifacts:
     paths:
       - ci_build_image_registry.txt
@@ -150,8 +150,8 @@ Release API:
     docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${API_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${API_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  - echo -n "${API_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${API_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
   artifacts:
     paths:
       - ci_build_image_registry.txt
@@ -203,8 +203,8 @@ Release Linkchecker:
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
   - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${LINKCHECKER_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${LINKCHECKER_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
   artifacts:
     paths:
       - ci_build_image_registry.txt
@@ -230,8 +230,8 @@ Release Docs:
     docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
   - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${DOCS_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${DOCS_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  - echo -n "${DOCS_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${DOCS_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
   artifacts:
     paths:
       - ci_build_image_registry.txt
