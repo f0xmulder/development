@@ -118,9 +118,18 @@ Test and release UI:
     --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
     -f ui/Dockerfile . && \
-    docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
+    docker push $UI_IMAGE && \
     docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
+  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  - echo -n "${UI_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${UI_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  artifacts:
+    paths:
+      - ci_build_image_registry.txt
+      - ci_build_image_tag.txt
+      - ci_build_image_version.txt
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
+
 ".api":
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -140,6 +149,14 @@ Release API:
     -f api/Dockerfile . && \
     docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
+  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  - echo -n "${API_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${API_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  artifacts:
+    paths:
+      - ci_build_image_registry.txt
+      - ci_build_image_tag.txt
+      - ci_build_image_version.txt
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
 ".linkchecker":
   before_script:
@@ -185,6 +202,14 @@ Release Linkchecker:
     . && \
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
+  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  - echo -n "${LINKCHECKER_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${LINKCHECKER_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  artifacts:
+    paths:
+      - ci_build_image_registry.txt
+      - ci_build_image_tag.txt
+      - ci_build_image_version.txt
 ".docs":
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -204,6 +229,15 @@ Release Docs:
     -f docs/Dockerfile . && \
     docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
+  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  - echo -n "${DOCS_IMAGE}:${:$CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  - echo -n "${DOCS_IMAGE}:${$CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  artifacts:
+    paths:
+      - ci_build_image_registry.txt
+      - ci_build_image_tag.txt
+      - ci_build_image_version.txt
+
 Deploy Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
