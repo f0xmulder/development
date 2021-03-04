@@ -143,7 +143,7 @@ const SubmitCodeForm = () => {
             </TextInput>
 
             <Spacing>
-              <Label htmlFor="relatedApis">Gebruikte API('s)</Label>
+              <Label htmlFor="relatedApis">Gebruikte API(’s)</Label>
               <HelperMessage>
                 We ondersteunen URLs van GitLab repositories/snippets en GitHub
                 repositories/gists.

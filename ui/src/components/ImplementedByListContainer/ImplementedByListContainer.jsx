@@ -68,7 +68,7 @@ class ImplementedByListContainer extends Component {
           <ImplementedByList apis={apis} />
         ) : (
           <p data-test="no-consumers-message">
-            Er zijn momenteel geen API's die verwijzen naar deze
+            Er zijn momenteel geen API’s die verwijzen naar deze
             referentieimplementatie.
           </p>
         )}

@@ -62,7 +62,7 @@ const Home = () => {
               Nederland aanbieden.
             </p>
             <Button variant="link" as={Link} to="/apis">
-              Bekijk API's <StyledInternalIcon />
+              Bekijk API’s <StyledInternalIcon />
             </Button>
           </StyledCard.Body>
         </StyledCard>

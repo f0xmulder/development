@@ -271,7 +271,7 @@ const SubmitAPIForm = ({
               )}
               {apis.error && (
                 <ErrorMessage>
-                  Er ging iets fout tijdens het ophalen van de beschikbare API's
+                  Er ging iets fout tijdens het ophalen van de beschikbare API’s
                 </ErrorMessage>
               )}
               {errors.apiType && touched.apiType && (

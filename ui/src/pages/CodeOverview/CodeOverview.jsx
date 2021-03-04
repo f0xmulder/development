@@ -149,7 +149,7 @@ class CodeOverview extends Component {
             <h1>Code</h1>
             <StyledSubtitle>
               Open source code van projecten die gebruik maken van
-              overheids-API's.
+              overheids-API’s.
             </StyledSubtitle>
             <StyledForm onSubmit={(event) => this.formSubmitHandler(event)}>
               <SearchDiv onChange={(event) => this.formChangeHandler(event)}>

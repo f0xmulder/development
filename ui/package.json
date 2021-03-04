@@ -65,6 +65,36 @@
   ],
   "proxy": "http://localhost:8000",
   "eslintConfig": {
-    "extends": "@commonground/eslint-config-cra-standard-prettier"
+    "extends": "@commonground/eslint-config-cra-standard-prettier",
+    "rules": {
+      "react/no-unescaped-entities": [
+        "error",
+        {
+          "forbid": [
+            {
+              "char": ">",
+              "alternatives": [
+                "&gt;"
+              ]
+            },
+            {
+              "char": "}",
+              "alternatives": [
+                "&#125;"
+              ]
+            },
+            {
+              "char": "'",
+              "alternatives": [
+                "&apos;",
+                "&lsquo;",
+                "&#39;",
+                "&rsquo;"
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
 }
