@@ -52,10 +52,10 @@ class CorApiView(ProxyView):
 
     def get_query_params(self):
         params = super().get_query_params()
-        page = params.pop("page")
+        page = params.pop("page", None)
         if page:
             params["pagina"] = page
-        search = params.pop("q")
+        search = params.pop("q", None)
         if search:
             params["zoek"] = search
         return params
