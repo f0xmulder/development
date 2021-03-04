@@ -34,7 +34,7 @@ class SubmitAPIViewTest(TestCase):
                                     content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
-    @patch('core.views.create_issue')
+    @patch('core.views.views.create_issue')
     def test_submit_valid_api(self, mock_create_issue):
         mock_create_issue.return_value = {'id': 42}
 
@@ -52,7 +52,7 @@ class SubmitAPIViewTest(TestCase):
         self.assertIn('New API', create_issue_args[2])
 
     @prevent_logging
-    @patch('core.views.create_issue')
+    @patch('core.views.views.create_issue')
     def test_submit_gitlab_error(self, mock_create_issue):
         mock_create_issue.side_effect = ImproperlyConfigured('Gitlab configuration error')
 

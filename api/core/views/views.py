@@ -28,7 +28,7 @@ from core.gitlab import create_issue
 
 __all__ = [
     'APIViewSet', 'APIForumPostsView', 'APIImplementedByView', 'APISpecificationView',
-    'SubmitAPIView', 'EventViewSet', 'CodeViewSet']
+    'SubmitAPIView', 'EventViewSet', 'CodeViewSet', 'proxy_url']
 
 REQUEST_TIMEOUT_SECONDS = 10
 
