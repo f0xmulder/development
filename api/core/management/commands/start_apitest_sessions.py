@@ -52,14 +52,15 @@ class Command(BaseCommand):
 
         for api in apis:
             try:
-                if not api.get_production_environment():
+                prod_env = api.get_production_environment()
+                if not prod_env:
                     continue
                 # GET or CREATE a test_suite
                 test_suite = self.get_or_create_test_suite(api)
                 # Update the endpoint in the test_suite
                 self.check_url_change(test_suite, api)
                 # Start a new session
-                specification_url = api.get_production_environment().specification_url
+                specification_url = prod_env.specification_url
                 start_design_rule_session(test_suite, specification_url)
             except (APIPlatformException, HTTPError) as e:
                 had_errors = True
