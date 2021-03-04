@@ -31,7 +31,7 @@ class ProxyView(View):
     def get_content_type(self):
         return self.remote_response.headers.get('content-type')
 
-    def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs):  # noqa
         # prepare request and send to remote url
         remote_url = self.get_remote_url()
         headers = self.get_request_headers()
@@ -79,6 +79,7 @@ class CorApiView(ProxyView):
         if (self.remote_response.status_code // 100 == 2 and
                 content_type.startswith('application/hal+json')):
             return 'application/json'
+        return content_type
 
     def transform_content(self, content):
         if self.remote_response.status_code // 100 == 2:
