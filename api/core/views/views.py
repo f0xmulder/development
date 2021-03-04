@@ -26,6 +26,10 @@ from core.search import get_facet_filters, get_search_filter
 from core.serializers import APISerializer, EventSerializer, CodeSerializer, CodeSubmitSerializer
 from core.gitlab import create_issue
 
+__all__ = [
+    'APIViewSet', 'APIForumPostsView', 'APIImplementedByView', 'APISpecificationView',
+    'SubmitAPIView', 'EventViewSet', 'CodeViewSet']
+
 REQUEST_TIMEOUT_SECONDS = 10
 
 logger = logging.getLogger(__name__)

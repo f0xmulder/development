@@ -7,6 +7,7 @@ urlpatterns = [
     path('api/apis/<api_id>/implemented-by', views.APIImplementedByView.as_view()),
     path('api/apis/<api_id>/<environment>/specification', views.APISpecificationView.as_view()),
     path('api/submit-api', views.SubmitAPIView.as_view()),
+    path('api/cor/', views.CorApiView.as_view()),
 ]
 
 api_router = routers.DefaultRouter(trailing_slash=False)
