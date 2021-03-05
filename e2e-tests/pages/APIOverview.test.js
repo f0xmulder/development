@@ -6,7 +6,6 @@ describe('API Overview', () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/apis`, { waitUntil: 'load' });
-        await page.waitForSelector('[data-test="total"]');
     })
 
     it('should not have accessibility issues', async () => {
