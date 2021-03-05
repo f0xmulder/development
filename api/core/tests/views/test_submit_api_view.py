@@ -64,7 +64,7 @@ class SubmitAPIViewTest(TestCase):
             string='The Gitlab API is not properly configured', code='error')}
         )
 
-    @patch('core.views.create_issue')
+    @patch('core.views.views.create_issue')
     def test_submit_without_prod(self, mock_create_issue):
         mock_create_issue.return_value = {'id': 42}
 
