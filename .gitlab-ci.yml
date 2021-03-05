@@ -117,17 +117,19 @@ Test and release UI:
     docker build \
     --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
+    --tag $UI_IMAGE:latest \
     -f ui/Dockerfile . && \
     docker push $UI_IMAGE && \
-    docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
-  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${UI_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${UI_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
-  artifacts:
-    paths:
-      - ci_build_image_registry.txt
-      - ci_build_image_tag.txt
-      - ci_build_image_version.txt
+    docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG && \
+    docker push $UI_IMAGE:latest
+  # - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  # - echo -n "${UI_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  # - echo -n "${UI_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  # artifacts:
+  #   paths:
+  #     - ci_build_image_registry.txt
+  #     - ci_build_image_tag.txt
+  #     - ci_build_image_version.txt
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
 
 ".api":
@@ -146,17 +148,19 @@ Release API:
     docker build \
     --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
+    --tag $API_IMAGE:latest \
     -f api/Dockerfile . && \
     docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
-  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${API_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${API_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
-  artifacts:
-    paths:
-      - ci_build_image_registry.txt
-      - ci_build_image_tag.txt
-      - ci_build_image_version.txt
+    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG && \
+    docker push $API_IMAGE:latest
+  # - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  # - echo -n "${API_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  # - echo -n "${API_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  # artifacts:
+  #   paths:
+  #     - ci_build_image_registry.txt
+  #     - ci_build_image_tag.txt
+  #     - ci_build_image_version.txt
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
 ".linkchecker":
   before_script:
@@ -199,17 +203,19 @@ Release Linkchecker:
     docker build \
     --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
+    --tag $LINKCHECKER_IMAGE:latest \
     . && \
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
-  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
-  artifacts:
-    paths:
-      - ci_build_image_registry.txt
-      - ci_build_image_tag.txt
-      - ci_build_image_version.txt
+    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG && \
+    docker push $LINKCHECKER_IMAGE: latest
+  # - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  # - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  # - echo -n "${LINKCHECKER_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  # artifacts:
+  #   paths:
+  #     - ci_build_image_registry.txt
+  #     - ci_build_image_tag.txt
+  #     - ci_build_image_version.txt
 ".docs":
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -226,17 +232,19 @@ Release Docs:
     docker build \
     --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
+    --tag $DOCS_IMAGE:latest \
     -f docs/Dockerfile . && \
     docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
-  - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
-  - echo -n "${DOCS_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
-  - echo -n "${DOCS_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
-  artifacts:
-    paths:
-      - ci_build_image_registry.txt
-      - ci_build_image_tag.txt
-      - ci_build_image_version.txt
+    docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG && \
+    docker push $DOCS_IMAGE:latest
+  # - echo -n "${CI_REGISTRY_IMAGE}" > ci_build_image_registry.txt
+  # - echo -n "${DOCS_IMAGE}:${CI_COMMIT_SHORT_SHA}" > ci_build_image_tag.txt
+  # - echo -n "${DOCS_IMAGE}:${CI_COMMIT_REF_SLUG}" > ci_build_image_version.txt
+  # artifacts:
+  #   paths:
+  #     - ci_build_image_registry.txt
+  #     - ci_build_image_tag.txt
+  #     - ci_build_image_version.txt
 
 Deploy Review App:
   stage: review
@@ -358,19 +366,20 @@ include:
 container_scanning:
   stage: security
   variables:
-    IMAGE_REPOSITORY_BASE: commonground/don
+    IMAGE_REGISTRY: registry.gitlab.com
+    IMAGE_REPOSITORY_BASE: commonground/don/developer.overheid.nl
     IMAGE_SUFFIXES: >
-      developer.overheid.nl/ui
-      developer.overheid.nl/docs
-      developer.overheid.nl/api
-      developer.overheid.nl/linkchecker
+      ui
+      docs
+      api
+      linkchecker
     REPORTS_DIRECTORY: /reports
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   before_script:
     - yum install -y jq
-    - export IMAGE_REGISTRY=$(cat ci_build_image_registry.txt)
-    - export CI_APPLICATION_TAG=$(cat ci_build_image_tag.txt)
+    # - export IMAGE_REGISTRY=$(cat ci_build_image_registry.txt)
+    # - export CI_APPLICATION_TAG=$(cat ci_build_image_tag.txt)
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
