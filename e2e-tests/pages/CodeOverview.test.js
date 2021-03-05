@@ -6,6 +6,7 @@ describe('Code Overview', () => {
         const baseUrl = getBaseUrl(isDebugging());
         await page.setBypassCSP(true);
         await page.goto(`${baseUrl}/code`, { waitUntil: 'load' });
+        await page.waitForSelector('[data-test="total"]');
     })
 
     it('should not have accessibility issues', async () => {
