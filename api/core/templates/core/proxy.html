@@ -2,13 +2,15 @@
 <html>
   <head></head>
 <body>
-<pre>
+<p>{{ view.docs }}</p>
 <table>
 <tr>
     <th>Remote URL:</th>
     <td>{{ view.remote_url }}{% if view.remote_query_string %}?{{ view.remote_query_string }}{% endif %}</td>
 </tr>
 </table>
+<h2>Content</h2>
+<pre>
 {{ view.content }}
 </pre>
 </body>

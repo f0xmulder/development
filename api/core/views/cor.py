@@ -1,9 +1,11 @@
 import json
+import markdown
 
 import requests
 
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse, QueryDict
+from django.utils.html import SafeString
 from django.views.generic import TemplateView
 
 
@@ -14,6 +16,7 @@ class ProxyView(TemplateView):
     format_param_name = "format"
     format = None
     template_name = 'core/proxy.html'
+    docs = ""
 
     def get_remote_url(self):
         if self.remote_url is None:
@@ -82,6 +85,20 @@ class CorApiView(ProxyView):
 
     remote_url = "https://portaal.digikoppeling.nl/registers/api/v1/organisaties"
     notransform = False
+
+    docs = SafeString(markdown.markdown("""# Proxy for the COR organizations API
+
+For details see: <https://portaal.digikoppeling.nl/registers/corApi/index>
+
+It acts as a proxy and transformer of the original data.
+
+All query string parameters are passed on to the remote API except for the following:
+
+* q=[search_text] is an alias for the remote parameter "zoek"
+* page=[page_number] is an alias for the remote parameter "pagina"
+* format=json forces the output to be in JSON format even when the Accept header has preference for
+  HTML (when you look at it in a browser)
+* notransform=true prevents transforming of the original content"""))
 
     def get_query_params(self):
         params = super().get_query_params()
