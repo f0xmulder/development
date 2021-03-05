@@ -53,7 +53,7 @@ describe('Home', () => {
           <Home />
         </SWRConfig>
       ),
-      '/api/events?page=1',
+      '/api/events',
       events,
     )
 
@@ -67,7 +67,7 @@ describe('Home', () => {
     it('should contain a link to the API overview', async () => {
       await setup({
         assert: () => {
-          expect(screen.getByText(/Bekijk API's/)).toBeInTheDocument()
+          expect(screen.getByText(/Bekijk API’s/)).toBeInTheDocument()
         },
         ignoreLoadingState: false,
       })

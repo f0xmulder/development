@@ -31,7 +31,7 @@ const apiResponse = {
 describe('EventOverview', () => {
   const { server, setup } = new SetupTest(
     <EventOverview />,
-    '/api/events?page=1',
+    '/api/events',
     apiResponse,
   )
 

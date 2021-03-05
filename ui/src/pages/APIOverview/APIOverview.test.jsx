@@ -54,7 +54,7 @@ const apiResponse = {
 describe('APIOverview', () => {
   const { server, setup } = new SetupTest(
     <APIOverview />,
-    '/api/apis?page=1',
+    '/api/apis',
     apiResponse,
   )
 
