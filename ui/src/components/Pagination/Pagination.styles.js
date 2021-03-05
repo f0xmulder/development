@@ -95,7 +95,8 @@ export const SelectField = styled.select`
   background: url(${arrowDownSolidIcon}) right center no-repeat;
   background-color: ${(p) => p.theme.tokens.colorBackground};
   margin-top: ${(p) => p.theme.tokens.spacing03};
-  padding: ${(p) => p.theme.tokens.spacing02};
+  padding: 0 ${(p) => p.theme.tokens.spacing04};
+  background-origin: content-box;
   ${mq.xs`
     max-width: 100%;
   `}
