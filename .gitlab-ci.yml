@@ -338,6 +338,7 @@ container_scanning:
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   before_script:
     - yum install -y jq
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - mkdir -p ${REPORTS_DIRECTORY}
     - |
