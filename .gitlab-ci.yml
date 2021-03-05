@@ -117,11 +117,9 @@ Test and release UI:
     docker build \
     --tag $UI_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $UI_IMAGE:$CI_COMMIT_REF_SLUG \
-    --tag $UI_IMAGE:latest \
     -f ui/Dockerfile . && \
     docker push $UI_IMAGE && \
-    docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG && \
-    docker push $UI_IMAGE:latest
+    docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
 
 ".api":
@@ -140,11 +138,9 @@ Release API:
     docker build \
     --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
-    --tag $API_IMAGE:latest \
     -f api/Dockerfile . && \
     docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG && \
-    docker push $API_IMAGE:latest
+    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
 ".linkchecker":
   before_script:
@@ -187,11 +183,9 @@ Release Linkchecker:
     docker build \
     --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
-    --tag $LINKCHECKER_IMAGE:latest \
     . && \
     docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG && \
-    docker push $LINKCHECKER_IMAGE: latest
+    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
 ".docs":
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -208,11 +202,9 @@ Release Docs:
     docker build \
     --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
     --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
-    --tag $DOCS_IMAGE:latest \
     -f docs/Dockerfile . && \
     docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG && \
-    docker push $DOCS_IMAGE:latest
 
 Deploy Review App:
   stage: review
