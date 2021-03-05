@@ -192,6 +192,7 @@ class SubmitAPIView(APIView):
 
         # The input has no id, which it needs to be a valid API
         data_to_validate = dict(**request.data, id='temporary-id')
+        data_to_validate.pop("organization_oin", None)
         serializer = APISerializer(data=data_to_validate)
         serializer.is_valid(raise_exception=True)
 
