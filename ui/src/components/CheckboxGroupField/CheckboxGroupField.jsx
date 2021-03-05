@@ -30,7 +30,7 @@ const CheckboxGroupField = ({ name, options, value, onChange }) => (
             />
             <label key={index} htmlFor={`${name}.${index}`}>
               {option.label}
-              <DONSmall className="count">({option.count})</DONSmall>
+              <DONSmall className="count axe-ignore">({option.count})</DONSmall>
             </label>
           </StyledCheckboxGroupField>
         ))}
