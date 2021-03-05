@@ -3,14 +3,17 @@ import json
 import requests
 
 from django.core.exceptions import ImproperlyConfigured
-from django.http import HttpResponse
-from django.views import View
+from django.http import HttpResponse, QueryDict
+from django.views.generic import TemplateView
 
 
-class ProxyView(View):
+class ProxyView(TemplateView):
     """ Generic view to proxy a request. Only supports GET for now """
 
     remote_url = None
+    format_param_name = "format"
+    format = None
+    template_name = 'core/proxy.html'
 
     def get_remote_url(self):
         if self.remote_url is None:
@@ -20,12 +23,28 @@ class ProxyView(View):
         return self.remote_url
 
     def get_query_params(self):
-        return self.request.GET.copy()
+        params = self.request.GET.copy()
+        format_vals = params.pop(self.format_param_name, None)
+        if format_vals and format_vals[0] in ['json', 'html']:
+            self.format = format_vals[0]
+        return params
+
+    def get_format(self):
+        if self.format:
+            return self.format
+        accept_val = self.request.headers.get('Accept')
+        if accept_val:
+            for accept_type in accept_val.split(","):
+                if accept_type.startswith("text/html"):
+                    return 'html'
+                if accept_type.startswith("application/json"):
+                    return 'json'
+        return 'json'
 
     def get_request_headers(self):
         return {}
 
-    def transform_content(self, content):
+    def transform_content(self, content, pretty=False):  # noqa
         return content
 
     def get_content_type(self):
@@ -33,22 +52,36 @@ class ProxyView(View):
 
     def get(self, *args, **kwargs):  # noqa
         # prepare request and send to remote url
-        remote_url = self.get_remote_url()
+        self.remote_url = self.get_remote_url()
         headers = self.get_request_headers()
-        remote_resp = requests.get(remote_url, params=self.get_query_params(), headers=headers)
+        query_params = self.get_query_params()
+        if query_params:
+            rq = QueryDict(mutable=True)
+            rq.update(query_params)
+            self.remote_query_string = rq.urlencode()
+        else:
+            self.remote_query_string = ""
+        remote_resp = requests.get(self.remote_url, params=query_params, headers=headers)
 
         # handle remote response and wrap in returned response
         self.remote_response = remote_resp
-        content = self.transform_content(remote_resp.content)
-        content_type = self.get_content_type()
+        fmt = self.get_format()
+        self.content = self.transform_content(remote_resp.content, pretty=(fmt == 'html'))
+
+        if fmt == 'html':
+            self.content_type = 'text/html'
+            return super().get(*args, **kwargs)
+
+        self.content_type = self.get_content_type()
         return HttpResponse(
-            content=content, content_type=content_type, status=remote_resp.status_code)
+            content=self.content, content_type=self.content_type, status=remote_resp.status_code)
 
 
 class CorApiView(ProxyView):
     """ View to proxy the COR API. Because of CORS this can not be queried by the front end """
 
     remote_url = "https://portaal.digikoppeling.nl/registers/api/v1/organisaties"
+    notransform = False
 
     def get_query_params(self):
         params = super().get_query_params()
@@ -58,6 +91,9 @@ class CorApiView(ProxyView):
         search = params.pop("q", None)
         if search:
             params["zoek"] = search
+        notransform = params.pop("notransform", None)
+        if notransform and notransform[0].lower() == "true":
+            self.notransform = True
         return params
 
     def get_request_headers(self):
@@ -65,34 +101,41 @@ class CorApiView(ProxyView):
         headers["Accept"] = "application/hal+json"
         headers["Accept-Version"] = "1.1"
 
-    def header_as_int(self, header_name):
+    def header_as_int(self, header_name, default):
         value = self.remote_response.headers.get(header_name)
         if value is None:
-            return None
+            return default
         try:
             return int(value)
         except ValueError:
-            return None
+            return default
 
     def get_content_type(self):
         content_type = super().get_content_type()
         if (self.remote_response.status_code // 100 == 2 and
-                content_type.startswith('application/hal+json')):
+                content_type.startswith('application/hal+json') and not self.notransform):
             return 'application/json'
         return content_type
 
-    def transform_content(self, content):
+    def transform_content(self, content, pretty=False):
         if self.remote_response.status_code // 100 == 2:
             # succesful status code, transform document
             content = json.loads(content)
-            orgs = content.pop("organisaties", [])
-            for org in orgs:
-                del org["_links"]
+            if not self.notransform:
+                orgs = content.pop("organisaties", [])
+                for org in orgs:
+                    del org["_links"]
 
-            content = json.dumps({
-                "page": self.header_as_int("X-Pagination-Page"),
-                "rowsPerPage": self.header_as_int("X-Pagination-Limit"),
-                "totalResults": self.header_as_int("X-Total-Count"),
-                "results": orgs,
-            })
+                content = {
+                    "page": self.header_as_int("X-Pagination-Page", 1),
+                    "rowsPerPage": self.header_as_int("X-Pagination-Limit", 30),
+                    "totalResults": self.header_as_int("X-Total-Count", len(orgs)),
+                    "results": orgs,
+                }
+            if pretty:
+                dump_kwargs = {"indent": 2}
+            else:
+                dump_kwargs = {}
+            content = json.dumps(content, **dump_kwargs)
+
         return content

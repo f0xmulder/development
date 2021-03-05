@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+<body>
+<pre>
+<table>
+<tr>
+    <th>Remote URL:</th>
+    <td>{{ view.remote_url }}{% if view.remote_query_string %}?{{ view.remote_query_string }}{% endif %}</td>
+</tr>
+</table>
+{{ view.content }}
+</pre>
+</body>
+</html>
