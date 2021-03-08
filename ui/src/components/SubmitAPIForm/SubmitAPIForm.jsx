@@ -78,6 +78,8 @@ const SubmitAPIForm = ({
             <StyledFormGroup>
               <Label htmlFor="organizationName">Naam van organisatie</Label>
               <StyledField
+                aria-label="Organisatie"
+                aria-labelledby="organizationName"
                 component={SelectAsync}
                 id="organizationName"
                 name="organizationName"
