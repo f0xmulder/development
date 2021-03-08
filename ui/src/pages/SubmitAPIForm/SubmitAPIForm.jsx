@@ -15,6 +15,7 @@ import { schema } from './validationSchema'
 const initialValues = {
   description: '',
   organizationName: '',
+  organizationOin: '',
   serviceName: '',
   apiType: 'unknown',
   apiAuthentication: '',
@@ -65,6 +66,7 @@ export const convertFormDataToRequestBody = (formData) => {
   /* eslint-disable camelcase */
   requestBody.description = formData.description
   requestBody.organization_name = formData.organizationName
+  requestBody.organization_oin = formData.organizationOin
   requestBody.service_name = formData.serviceName
   requestBody.api_type = formData.apiType
   requestBody.api_authentication = formData.apiAuthentication
