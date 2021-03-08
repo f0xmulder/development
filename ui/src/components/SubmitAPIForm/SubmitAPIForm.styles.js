@@ -71,7 +71,6 @@ export const StyledField = styled(Field)`
 export const StyledReactSelectAsync = styled(ReactSelectAsync)`
   margin-top: ${(p) => p.theme.tokens.spacing01};
 
-
   .ReactSelect__control {
     width: 100%;
     border-radius: 0;
