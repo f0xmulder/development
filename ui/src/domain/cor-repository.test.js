@@ -33,7 +33,7 @@ describe('COR repository', () => {
       const result = await CorRepository.search('dso', 1)
       expect(result).toEqual(codeMock)
       expect(global.fetch).toHaveBeenCalledWith(
-        '/api/cor/?q=dso&status=Actief&fields=naam,oin&page=1',
+        '/api/cor/?q=dso&status=Actief&expand=true&fields=naam,oin,hoofdOIN&page=1',
       )
     })
   })

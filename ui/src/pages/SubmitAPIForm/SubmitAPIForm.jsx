@@ -3,6 +3,7 @@
 //
 import React, { Component } from 'react'
 import { Formik } from 'formik'
+import Cookies from 'js-cookie'
 import APIRepository from '../../domain/api-repository'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
@@ -142,6 +143,7 @@ class SubmitAPIFormPage extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.submitToApi = this.submitToApi.bind(this)
   }
 
   async componentDidMount() {
@@ -157,6 +159,10 @@ class SubmitAPIFormPage extends Component {
     window && window.removeEventListener('beforeunload', this.handleReset)
   }
 
+  async submitToApi(data) {
+    return APIRepository.create(data)
+  }
+
   async handleSubmit(values, actions) {
     // The form has already passed validation,
     // this call serves only to apply Yup type coercion and transforms.
@@ -164,7 +170,7 @@ class SubmitAPIFormPage extends Component {
     const submitData = convertFormDataToRequestBody(parsedFormData)
 
     try {
-      const responseData = await APIRepository.create(submitData)
+      const responseData = await this.submitToApi(submitData)
       actions.setSubmitting(false)
       this.setState({
         submitted: true,
