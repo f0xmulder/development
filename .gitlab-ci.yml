@@ -309,7 +309,7 @@ Deploy production:
     name: prod
     url: https://$DOMAIN
   tags:
-  - cg-privileged
+  - cg
   - docker
   only:
   - master@commonground/don/developer.overheid.nl
