@@ -53,7 +53,7 @@ class ProxyView(TemplateView):
     def get_content_type(self):
         return self.remote_response.headers.get('content-type')
 
-    def get(self, *args, **kwargs):  # noqa
+    def get_context_data(self, **kwargs):
         # prepare request and send to remote url
         self.remote_url = self.get_remote_url()
         headers = self.get_request_headers()
@@ -64,20 +64,22 @@ class ProxyView(TemplateView):
             self.remote_query_string = rq.urlencode()
         else:
             self.remote_query_string = ""
-        remote_resp = requests.get(self.remote_url, params=query_params, headers=headers)
+        self.remote_response = requests.get(self.remote_url, params=query_params, headers=headers)
+        return super().get_context_data(**kwargs)
 
-        # handle remote response and wrap in returned response
-        self.remote_response = remote_resp
+    def render_to_response(self, context, **response_kwargs):
         fmt = self.get_format()
-        self.content = self.transform_content(remote_resp.content, pretty=(fmt == 'html'))
+        self.content = self.transform_content(
+            self.remote_response.content, pretty=(fmt == 'html'))
+        status_code = self.remote_response.status_code
 
         if fmt == 'html':
             self.content_type = 'text/html'
-            return super().get(*args, **kwargs)
+            response_kwargs["status"] = status_code
+            return super().render_to_response(context, **response_kwargs)
 
-        self.content_type = self.get_content_type()
         return HttpResponse(
-            content=self.content, content_type=self.content_type, status=remote_resp.status_code)
+            content=self.content, content_type=self.content_type, status=status_code)
 
 
 class CorApiView(ProxyView):
