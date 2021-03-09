@@ -12,6 +12,7 @@ const exampleJSON = `{
   "service_name": "Voorbeeld van een API naam",
   "description": "Voorbeeld van een omschrijving",
   "organization_name": "Voorbeeld van een organisatie naam",
+  "organization_oin": "00000001234567891234",
   "api_type": "rest_json",
   "api_authentication": "api_key",
   "environments": [
@@ -65,6 +66,11 @@ const SubmitAPIMergeRequest = () => (
     <CodeBlock>{exampleJSON}</CodeBlock>
 
     <p>Ten minste één omgeving is verplicht.</p>
+    <p>
+      De organisatienaam en het OIN nummer kunnen{' '}
+      <a href="https://portaal.digikoppeling.nl/registers/">hier</a> worden
+      opgezocht.
+    </p>
     <p>
       Maak vervolgens een Merge Request aan van{' '}
       <a href={`${GITLAB_REPO_URL}/-/forks`}>jouw geforkte repository</a> naar
