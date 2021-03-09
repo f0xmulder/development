@@ -27,9 +27,7 @@ class APIRepository {
       )
     }
 
-    const apiDetails = await result.json()
-
-    return modelFromAPIResponse(apiDetails)
+    return result.json()
   }
 
   static async fetchImplementedByInfo(id) {

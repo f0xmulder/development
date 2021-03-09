@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { string } from 'prop-types'
 import ImplementedByList from '../ImplementedByList/ImplementedByList'
 import APIRepository from '../../domain/api-repository'
+import { modelFromAPIResponse } from '../../models/api'
 
 class ImplementedByListContainer extends Component {
   constructor(props) {
@@ -33,15 +34,21 @@ class ImplementedByListContainer extends Component {
     this.loadDetailsForAPI(id)
   }
 
+  async fetchImplementedByInfo(id) {
+    return APIRepository.fetchImplementedByInfo(id)
+  }
+
   async loadDetailsForAPI(id) {
     try {
-      const apis = await APIRepository.fetchImplementedByInfo(id)
+      const response = await this.fetchImplementedByInfo(id)
+      const apis = response.map((api) => modelFromAPIResponse(api))
       this.setState({ apis: apis, loaded: true })
     } catch (error) {
       this.setState({ error: true, loaded: true })
       console.error(error)
     }
   }
+
 
   render() {
     const { apis, error, loaded } = this.state
