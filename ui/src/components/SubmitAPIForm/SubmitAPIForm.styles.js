@@ -63,6 +63,7 @@ export const SelectFieldLoading = styled.div`
 export const StyledField = styled(Field)`
   display: flex;
   padding: 0;
-  width: 100%;
+  width: 100% !important;
+  max-width: 45rem;
   border: none;
 `

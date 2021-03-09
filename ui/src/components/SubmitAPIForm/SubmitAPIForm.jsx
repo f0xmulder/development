@@ -83,7 +83,6 @@ const SubmitAPIForm = ({
                 component={SelectAsync}
                 id="organizationName"
                 name="organizationName"
-                maxWidth="large"
                 placeholder=""
               />
               {errors.organizationName && touched.organizationName && (
