@@ -394,7 +394,7 @@ const SubmitAPIForm = ({
       </Fieldset>
 
       {status && status.msg && (
-        <div data-test="status-message">{status.msg}</div>
+        <ErrorMessage data-test="status-message">{status.msg}</ErrorMessage>
       )}
 
       <Button primary type="submit" disabled={isSubmitting}>
