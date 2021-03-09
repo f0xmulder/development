@@ -3,7 +3,6 @@
 //
 import React, { Component } from 'react'
 import { Formik } from 'formik'
-import Cookies from 'js-cookie'
 import APIRepository from '../../domain/api-repository'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
