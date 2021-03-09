@@ -12,6 +12,7 @@ import { modelFromAPIResponse } from '../../models/api'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
 import { DONSmall } from '../../components/CustomDON'
+import APIRepository from '../../domain/api-repository'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -46,7 +47,9 @@ class APIOverview extends Component {
 
   async loadAPIList() {
     try {
-      const response = await this.fetchApiList()
+      const response = await APIRepository.getAll(
+        generateQueryParams(this.getQueryParams()),
+      )
       const result = Object.assign({}, response, {
         apis: response.results.map((api) => modelFromAPIResponse(api)),
       })
@@ -77,17 +80,6 @@ class APIOverview extends Component {
 
     const input = event.target.value
     this.handleSearchHandler(input)
-  }
-
-  async fetchApiList() {
-    const response = await fetch(
-      `/api/apis?${generateQueryParams(this.getQueryParams())}`,
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-    }
   }
 
   handleFilterChange = (newFilters) => {

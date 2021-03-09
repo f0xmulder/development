@@ -17,6 +17,7 @@ import CodeRepository from '../../domain/code-repository'
 import objectKeysToSnakeCase from '../../utils/objectKeysToSnakeCase'
 import { modelFromAPIResponse } from '../../models/api'
 import { GITLAB_REPO_URL } from '../../constants'
+import APIRepository from '../../domain/api-repository'
 import { StyledFieldset, HelperMessage, Spacing } from './SubmitCodeForm.styles'
 import validationSchema from './validationSchema'
 
@@ -31,22 +32,9 @@ const SubmitCodeForm = () => {
   const [responseData, setResponseData] = useState(null)
   const [apis, setApis] = useState([])
 
-  async function fetchApiList() {
-    const response = await fetch(
-      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}`,
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
-      )
-    }
-  }
-
   async function loadApis() {
     try {
-      const response = await fetchApiList()
+      const response = await APIRepository.getAll()
       const apis = response.results.map((api) => modelFromAPIResponse(api))
       setApis(apis)
     } catch (e) {

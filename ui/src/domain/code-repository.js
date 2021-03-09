@@ -4,11 +4,11 @@
 import Cookies from 'js-cookie'
 
 export default class CodeRepository {
-  static async getAll(page) {
-    const result = await fetch(`/api/code?page=${encodeURIComponent(page)}`)
+  static async getAll(queryParams) {
+    const result = await fetch(`/api/code?${queryParams}`)
 
     if (!result.ok) {
-      throw new Error('Kan de lijst met projecten niet ophalen')
+      throw new Error('Er ging iets fout tijdens het ophalen van de code')
     }
 
     return result.json()

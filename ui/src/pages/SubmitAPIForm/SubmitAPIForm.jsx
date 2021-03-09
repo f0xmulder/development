@@ -3,8 +3,7 @@
 //
 import React, { Component } from 'react'
 import { Formik } from 'formik'
-import Cookies from 'js-cookie'
-
+import APIRepository from '../../domain/api-repository'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
@@ -143,7 +142,6 @@ class SubmitAPIFormPage extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.submitToApi = this.submitToApi.bind(this)
   }
 
   async componentDidMount() {
@@ -166,7 +164,7 @@ class SubmitAPIFormPage extends Component {
     const submitData = convertFormDataToRequestBody(parsedFormData)
 
     try {
-      const responseData = await this.submitToApi(submitData)
+      const responseData = await APIRepository.create(submitData)
       actions.setSubmitting(false)
       this.setState({
         submitted: true,
@@ -181,22 +179,6 @@ class SubmitAPIFormPage extends Component {
           'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.',
       })
       console.error(error)
-    }
-  }
-
-  async submitToApi(data) {
-    const response = await fetch('/api/submit-api', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-    })
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error('Er ging iets fout tijdens het toevoegen van de API.')
     }
   }
 
@@ -215,22 +197,11 @@ class SubmitAPIFormPage extends Component {
     this.setState({ storedFormValues: null })
   }
 
-  async fetchApiList() {
-    const response = await fetch(
-      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
-      )
-    }
-  }
-
   async callAPIAndModelResponse() {
     try {
-      const response = await this.fetchApiList()
+      const response = await APIRepository.getAll(
+        `rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
+      )
       const result = {
         apis: response.results.map((api) => modelFromAPIResponse(api)),
       }
