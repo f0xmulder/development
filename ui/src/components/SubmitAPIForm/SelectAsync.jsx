@@ -9,6 +9,8 @@ import {
   StyledLink,
   StyledMessage,
   StyledReactSelectAsync,
+  StyledResultContainer,
+  StyledField,
 } from './SelectAsync.styles'
 
 const SelectAsync = ({ field, form: { setFieldValue }, ...props }) => {
@@ -16,7 +18,14 @@ const SelectAsync = ({ field, form: { setFieldValue }, ...props }) => {
 
   const mapResult = (data) => {
     return data.map((organisatie) => ({
-      label: organisatie.naam,
+      label: (
+        <StyledResultContainer>
+          {organisatie.naam}
+          {organisatie.hoofdOIN?.naam && (
+            <small>({organisatie.hoofdOIN?.naam})</small>
+          )}
+        </StyledResultContainer>
+      ),
       value: organisatie.oin,
     }))
   }
@@ -49,6 +58,19 @@ const SelectAsync = ({ field, form: { setFieldValue }, ...props }) => {
 
   const LoadingIndicator = () => {
     return <Spinner />
+  }
+
+  if (hasError) {
+    return (
+      <StyledField
+        type="text"
+        size="l"
+        value={field.value}
+        onChange={(event) => {
+          setFieldValue(field.name, event.target.value)
+        }}
+      />
+    )
   }
 
   return (

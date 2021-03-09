@@ -4,6 +4,7 @@
 import styled, { css } from 'styled-components'
 import { AsyncPaginate as ReactSelectAsync } from 'react-select-async-paginate'
 import { Link } from 'react-router-dom'
+import Field from '../design-system-candidates/Field'
 
 export const StyledReactSelectAsync = styled(ReactSelectAsync)`
   margin-top: ${(p) => p.theme.tokens.spacing01};
@@ -120,4 +121,16 @@ export const StyledMessage = styled.span`
 
 export const StyledLink = styled(Link)`
   color: #f02b41;
+`
+
+export const StyledResultContainer = styled.div`
+  display: flex;
+
+  small {
+    margin-left: auto;
+  }
+`
+
+export const StyledField = styled(Field)`
+  max-width: 45rem;
 `
