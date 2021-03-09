@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import (
     Subquery, OuterRef, Case, When, BooleanField, Value, CharField, Prefetch)
 from django.db.models.functions import Concat
+from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html
 
 MAX_URL_LENGTH = 2000
@@ -12,6 +13,16 @@ MAX_ENUM_LENGTH = 31
 TEST_VERSION_LENGTH = 200
 RULE_TYPE_LENGTH = 250
 ERROR_CHARFIELD_LENGTH = 500
+
+
+class Organization(models.Model):
+    name = models.CharField(_("name"), max_length=MAX_TEXT_LENGTH)
+    oin = models.CharField(
+        _("oin"), max_length=20, unique=True, help_text=_("Organization Identification Number"))
+    active = models.BooleanField(_("active"), default=True)
+
+    class Meta:
+        verbose_name = _("organization")
 
 
 class APIQuerySet(models.QuerySet):
@@ -56,6 +67,9 @@ class API(models.Model):
     api_id = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
     description = models.TextField()
     organization_name = models.CharField(max_length=MAX_TEXT_LENGTH)
+    organization = models.ForeignKey(
+        Organization, verbose_name=_("organization"), on_delete=models.PROTECT, null=True,
+        blank=True)
     service_name = models.CharField(max_length=MAX_TEXT_LENGTH)
     api_type = models.CharField(
         max_length=MAX_ENUM_LENGTH,
