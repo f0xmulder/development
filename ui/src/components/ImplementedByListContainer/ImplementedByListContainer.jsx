@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import { string } from 'prop-types'
 import ImplementedByList from '../ImplementedByList/ImplementedByList'
-import { modelFromAPIResponse } from '../../models/api'
+import APIRepository from '../../domain/api-repository'
 
 class ImplementedByListContainer extends Component {
   constructor(props) {
@@ -33,21 +33,9 @@ class ImplementedByListContainer extends Component {
     this.loadDetailsForAPI(id)
   }
 
-  async fetchImplementedByInfo(id) {
-    const response = await fetch(`/api/apis/${id}/implemented-by`)
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout bij het ophalen van de referentie implementaties voor API met ID '${id}'`,
-      )
-    }
-  }
-
   async loadDetailsForAPI(id) {
     try {
-      const response = await this.fetchImplementedByInfo(id)
-      const apis = response.map((api) => modelFromAPIResponse(api))
+      const apis = await APIRepository.fetchImplementedByInfo(id)
       this.setState({ apis: apis, loaded: true })
     } catch (error) {
       this.setState({ error: true, loaded: true })

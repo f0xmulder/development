@@ -4,8 +4,8 @@
 import Cookies from 'js-cookie'
 
 export default class EventRepository {
-  static async getAll(page) {
-    const result = await fetch(`/api/events?page=${encodeURIComponent(page)}`)
+  static async getAll(queryParams) {
+    const result = await fetch(`/api/events?${queryParams}`)
 
     if (!result.ok) {
       throw new Error('Kan de lijst met evenementen niet ophalen')

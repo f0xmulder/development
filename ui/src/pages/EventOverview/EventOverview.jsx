@@ -8,6 +8,7 @@ import { Button } from '@commonground/design-system'
 import Spinner from '@commonground/design-system/dist/components/Spinner'
 import Pagination from '../../components/Pagination/Pagination'
 import EventList from '../../components/EventList/EventList'
+import EventRepository from '../../domain/event-repository'
 import { modelFromAPIResponse } from '../../models/event'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
@@ -43,7 +44,9 @@ class EventOverview extends Component {
 
   async loadEventList() {
     try {
-      const response = await this.fetchEventList()
+      const response = await EventRepository.getAll(
+        generateQueryParams(this.getQueryParams()),
+      )
       const result = Object.assign({}, response, {
         events: response.results.map((event) => modelFromAPIResponse(event)),
       })
@@ -51,17 +54,6 @@ class EventOverview extends Component {
     } catch (error) {
       this.setState({ error: true, loaded: true })
       console.error(error)
-    }
-  }
-
-  async fetchEventList() {
-    const response = await fetch(
-      `/api/events?${generateQueryParams(this.getQueryParams())}`,
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Er ging iets fout tijdens het ophalen van de events`)
     }
   }
 

@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import { string } from 'prop-types'
 import APISummary from '../APISummary/APISummary'
-import { modelFromAPIResponse } from '../../models/api'
+import APIRepository from '../../domain/api-repository'
 
 class LinkToAPIContainer extends Component {
   constructor(props) {
@@ -33,21 +33,9 @@ class LinkToAPIContainer extends Component {
     this.loadDetailsForApi(id)
   }
 
-  async fetchAPIDetails(id) {
-    const response = await fetch(`/api/apis/${id}`)
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout bij het ophalen voor de API met ID '${id}'`,
-      )
-    }
-  }
-
   async loadDetailsForApi(id) {
     try {
-      const response = await this.fetchAPIDetails(id)
-      const details = modelFromAPIResponse(response)
+      const details = await APIRepository.getById(id)
       this.setState({ details, loaded: true })
     } catch (error) {
       this.setState({ error: true, loaded: true })
