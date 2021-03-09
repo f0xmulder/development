@@ -1,19 +1,9 @@
-# apiVersion: storage.k8s.io/v1
-# kind: StorageClass
-# metadata:
-#   annotations:
-#     storageclass.kubernetes.io/is-default-class: "false"
-#     name: do-block-storage-persist
-#     provisioner: dobs.csi.digitalocean.com
-#   name: do-block-storage-persist
-# provisioner: dobs.csi.digitalocean.com
-# reclaimPolicy: Retain
-# volumeBindingMode: Immediate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: synapse-pv-claim
+  namespace: matrix-acc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -21,5 +11,4 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: do-block-storage-persist
 

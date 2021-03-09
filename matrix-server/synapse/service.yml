@@ -3,14 +3,15 @@ kind: Service
 metadata:
   labels:
     app: synapse
-  name: synapse-service
+  name: synapse-srv
+  namespace: matrix-acc
 spec:
-  clusterIP: None
   ports:
-  - name: http
-    port: 8008
-    protocol: TCP
-    targetPort: 8008
+    - name: http
+      protocol: TCP
+      port: 8008
+    - name: https
+      protocol: TCP
+      port: 8448
   selector:
     app: synapse
-  type: ClusterIP

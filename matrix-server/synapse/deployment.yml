@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: synapse
+  namespace: matrix-acc
 spec:
   selector:
     matchLabels:
@@ -25,16 +26,26 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
-        - name: config-volume
-          mountPath: /data/homeserver.yaml
-          subPath: homeserver.yaml
+        # - name: config-volume
+        #   mountPath: /data/homeserver.yaml
+        #   subPath: homeserver.yaml
         ports:
           - containerPort: 8008
-        resources: {}
+        resources:
+          # These are just some arbitrary values, will have to be tuned or removed per-deployment
+          requests:
+            memory: 250Mi
+            cpu: 250m
+          limits:
+            memory: 1Gi
+            cpu: "1"
       volumes:
       - name: data
         persistentVolumeClaim:
           claimName: synapse-pv-claim
-      - name: config-volume
-        configMap:
-          name: homeserver-config
+      # - name: config-volume
+      #   configMap:
+      #     name: homeserver-config
+
+
+# kubectl -n matrix-acc expose deployment synapse --type=LoadBalancer --name=synapse
