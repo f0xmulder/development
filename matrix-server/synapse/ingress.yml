@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: synapse-nginx
+  name: synapse
   namespace: matrix-acc
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -18,4 +18,11 @@ spec:
             backend:
               serviceName: synapse-srv
               servicePort: http
-
+          - path: /.well-known/matrix/
+            backend:
+              serviceName: delegation-service
+              servicePort: 80
+          - path: /slack/oauth
+            backend:
+              serviceName: mx-puppet-slack-srv
+              servicePort: http

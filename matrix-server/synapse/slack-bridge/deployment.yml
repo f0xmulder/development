@@ -1,36 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: synapse
+  name: mx-puppet-slack
   namespace: matrix-acc
 spec:
   selector:
     matchLabels:
-      app: synapse
+      app: mx-puppet-slack
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: synapse
+        app: mx-puppet-slack
     spec:
       containers:
-      - image: matrixdotorg/synapse:v1.29.0
-        name: synapse
-        # args: ["generate"]
-        # env:
-        # - name: SYNAPSE_SERVER_NAME
-        #   value: "matrix.nlx.reviews"
-        # - name: SYNAPSE_REPORT_STATS
-        #   value: "no"
+      - image: sorunome/mx-puppet-slack
+      # - image: nginxdemos/hello
+        name: mx-puppet-slack
+        env:
+        - name: CONFIG_PATH
+          value: "/data/config.yaml"
+        - name: REGISTRATION_PATH
+          value: "/data/slack-registration.yaml"
         volumeMounts:
-        - name: data
-          mountPath: /data
+        - name: mx-puppet-slack-config
+          mountPath: /data/config.yaml
+          subPath: config.yaml
         - name: mx-puppet-slack-config
           mountPath: /data/slack-registration.yaml
           subPath: slack-registration.yaml
         ports:
-          - containerPort: 8008
+          - containerPort: 8432
         resources:
           # These are just some arbitrary values, will have to be tuned or removed per-deployment
           requests:
@@ -40,9 +41,6 @@ spec:
             memory: 1Gi
             cpu: "1"
       volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: synapse-pv-claim
       - name: mx-puppet-slack-config
         configMap:
           name: mx-puppet-slack-config
