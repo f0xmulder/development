@@ -1,15 +1,15 @@
-const { analyzeAccessibility } = require('../accessibility')
-const { getBaseUrl, isDebugging } = require('../environment')
+// const { analyzeAccessibility } = require('../accessibility')
+// const { getBaseUrl, isDebugging } = require('../environment')
 
-describe('Code Overview', () => {
-    beforeAll(async () => {
-        const baseUrl = getBaseUrl(isDebugging());
-        await page.setBypassCSP(true);
-        await page.goto(`${baseUrl}/code`, { waitUntil: 'load' });
-    })
+// describe('Code Overview', () => {
+//     beforeAll(async () => {
+//         const baseUrl = getBaseUrl(isDebugging());
+//         await page.setBypassCSP(true);
+//         await page.goto(`${baseUrl}/code`, { waitUntil: 'load' });
+//     })
 
-    it('should not have accessibility issues', async () => {
-        const accessibilityReport = await analyzeAccessibility(page, `code-overview.accessibility.png`)
-        expect(accessibilityReport).toHaveNoAccessibilityIssues();
-    })
-})
+//     it('should not have accessibility issues', async () => {
+//         const accessibilityReport = await analyzeAccessibility(page, `code-overview.accessibility.png`)
+//         expect(accessibilityReport).toHaveNoAccessibilityIssues();
+//     })
+// })

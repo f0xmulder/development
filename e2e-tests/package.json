@@ -5,11 +5,13 @@
   "description": "Integration tests for DON.",
   "main": "index.test.js",
   "scripts": {
-    "test": "jest",
-    "debug": "URL=http://localhost:3000 npm test"
+    "test": "cypress run --headless",
+    "debug": "URL=http://localhost:3000 npm test",
+    "cy:run": "cypress run"
   },
   "devDependencies": {
     "axe-core": "4.1.2",
+    "cypress": "^6.6.0",
     "jest": "24.9.0",
     "jest-puppeteer": "4.4.0",
     "puppeteer": "8.0.0"
