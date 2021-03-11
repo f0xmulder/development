@@ -66,7 +66,6 @@ class API(models.Model):
 
     api_id = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
     description = models.TextField()
-    organization_name = models.CharField(max_length=MAX_TEXT_LENGTH)
     organization = models.ForeignKey(
         Organization, verbose_name=_("organization"), on_delete=models.PROTECT, null=True,
         blank=True)
@@ -245,7 +244,7 @@ class CodeAPI(models.Model):
     api = models.ForeignKey(
         API,
         to_field='api_id',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

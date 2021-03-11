@@ -2,9 +2,6 @@
 
 from django.db import migrations
 
-delete_map = {
-    'Rijksmuseum',
-}
 
 name_map = {
     'Logius': 'Logius',
@@ -57,8 +54,7 @@ def create_organizations(apps, schema_editor):
     Organization = apps.get_model('core', 'organization')  # noqa
     API = apps.get_model('core', 'api')  # noqa
     for api in API.objects.all():
-        if api.organization_name in delete_map:
-            api.related_code.all().delete()
+        if api.organization_name == 'Rijksmuseum':
             api.delete()
             continue
         org_name = name_map[api.organization_name]
@@ -71,7 +67,7 @@ def create_organizations(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0017_add_organization'),
+        ('core', '0018_alter_code_api'),
     ]
 
     operations = [
