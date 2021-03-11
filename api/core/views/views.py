@@ -48,20 +48,21 @@ class APIViewSet(RetrieveModelMixin,
 
     """
     queryset = API.objects.with_last_session().prefetch_related(
-        "badges", "environments", "referenced_apis")
+        "badges", "environments", "referenced_apis").select_related("organization")
     serializer_class = APISerializer
     pagination_class = StandardResultsSetPagination
     lookup_field = 'api_id'
 
-    search_vector = SearchVector(
+    text_search_fields = [
         'service_name',
         'description',
-        'organization_name',
+        'organization__name',
         'api_type',
-        config='dutch'
-    )
-    supported_facets = ['organization_name', 'api_type']
-    supported_facets = ['api_type']
+    ]
+    supported_facets = {
+        'api_type': None,
+        'organization__oin': 'organization__name',
+    }
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
@@ -72,15 +73,21 @@ class APIViewSet(RetrieveModelMixin,
         if is_ref_impl_val is not None:
             is_ref_impl_val = bool(['false', 'true'].index(is_ref_impl_val))
             list_filter &= Q(is_reference_implementation=is_ref_impl_val)
-        search_text = request.query_params.get('q', '')
+        search_text = request.query_params.get('q')
         if search_text:
-            queryset = queryset.annotate(searchable=self.search_vector)
-            search_filter = get_search_filter(search_text)
+            search_filter = None
+            for field_name in self.text_search_fields:
+                field_filter = Q(**{f'{field_name}__icontains': search_text})
+                if search_filter is None:
+                    search_filter = field_filter
+                else:
+                    search_filter |= field_filter
             list_filter &= search_filter
         else:
             search_filter = None
 
-        facet_inputs = {f: request.query_params.getlist(f) for f in self.supported_facets}
+        facet_inputs = {
+            f: request.query_params.getlist(f.replace("__", "_")) for f in self.supported_facets}
         facet_filters = get_facet_filters(facet_inputs)
         list_filter &= Q(*facet_filters.values())
 
@@ -95,7 +102,7 @@ class APIViewSet(RetrieveModelMixin,
     @staticmethod
     def get_facets(queryset, facet_filters, search_filter):
         facets = {}
-        for facet in APIViewSet.supported_facets:
+        for facet, display_name in APIViewSet.supported_facets.items():
             other_facet_filters = [
                 v for k, v in facet_filters.items()
                 if k != facet and v is not None]
@@ -104,11 +111,11 @@ class APIViewSet(RetrieveModelMixin,
                 combined_filter &= search_filter
 
             term_counts = queryset \
-                .values(term=F(facet)) \
+                .values(term=F(facet), **({"display": F(display_name)} if display_name else {})) \
                 .annotate(count=Count('id', filter=combined_filter or None)) \
                 .order_by('term')
 
-            facets[facet] = {'terms': list(term_counts)}
+            facets[facet.replace("__", "_")] = {'terms': list(term_counts)}
 
         return facets
 
