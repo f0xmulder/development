@@ -1,6 +1,7 @@
 {
     "description": "AERIUS stelt een API (Application Programming Interface) beschikbaar aan ontwikkelaars, waarmee zij via een computer interface (API) opdrachten kunnen uitvoeren op de AERIUS Calculator, zonder gebruik te maken van een gebruikersomgeving (GUI). Voor de AERIUS Connect API betreft het opdrachten voor het valideren, converteren en rekenen met AERIUS Calculator.",
-    "organization_name": "RIVM",
+    "organization_name": "Rijksinstituut voor Volksgezondheid en Milieu",
+    "organization_oin": "00000004000000062000",
     "service_name": "AERIUS Connect",
     "api_type": "rest_json",
     "api_authentication": "api_key",

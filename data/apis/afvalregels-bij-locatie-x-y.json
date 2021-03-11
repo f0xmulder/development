@@ -1,6 +1,7 @@
 {
   "description": "Query for garbage collection days for the specified address (x/y or lat/lon)",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Afvalregels bij locatie x, y",
   "api_type": "rest_json",
   "api_authentication": "unknown",

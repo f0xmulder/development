@@ -1,6 +1,7 @@
 {
   "description": "Open Search API met informatie en beeldmateriaal van ca. 300.000 beelden uit de Beeldbank van het Stadsarchief Amsterdam",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Beeldbank stadsarchief Amsterdam",
   "api_type": "rest_json",
   "api_authentication": "unknown",

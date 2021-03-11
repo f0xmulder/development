@@ -1,6 +1,7 @@
 {
   "description": "Ondersteunende notificaties voor de Berichtendienst. De zwaailicht service is een REST API die op basis van de BAG+ en de WKPB pand-informatie verzamelt.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Zwaailicht",
   "api_type": "rest_json",
   "api_authentication": "unknown",

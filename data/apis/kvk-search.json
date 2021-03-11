@@ -1,6 +1,7 @@
 {
     "description": "Zoek naar een bedrijf, vind relevante data in het Handelsregister",
-    "organization_name": "Kamers van Koophandel",
+    "organization_name": "Kamer van Koophandel Nederland",
+    "organization_oin": "00000001006033404000",
     "service_name": "KvK Search",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -9,12 +10,14 @@
         "koophandel",
         "bedrijveninformatie"
     ],
-    "environments": [{
-        "name": "production",
-        "api_url": "https://api.kvk.nl:443",
-        "specification_url": "",
-        "documentation_url": "https://developers.kvk.nl/documentation/search-v2"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://api.kvk.nl:443",
+            "specification_url": "",
+            "documentation_url": "https://developers.kvk.nl/documentation/search-v2"
+        }
+    ],
     "contact": {
         "email": "",
         "phone": "",

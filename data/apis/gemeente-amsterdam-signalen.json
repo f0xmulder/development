@@ -1,6 +1,7 @@
 {
   "description": "Deze API is onderdeel van de Signalen Informatievoorziening Amsterdam (SIA) applicatie. Burgers en andere geïnteresseerde partijen kunnen SIA gebruiken om de gemeente Amsterdam te informeren over problemen in de publieke ruimte (bijvoorbeeld geluidsoverlast, kapotte lantaarnpalen, etc.) Deze signalen worden opgepakt door de verantwoordelijke gemeentelijke diensten.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Signalen",
   "api_type": "rest_json",
   "api_authentication": "none",

@@ -1,6 +1,7 @@
 {
   "description": "Met deze REST API overheden begrippen en definities muteren in de stelselcatalogus.",
-  "organization_name": "DSO",
+  "organization_name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+  "organization_oin": "00000004130854102000",
   "service_name": "Catalogus muteren",
   "api_type": "rest_json",
   "api_authentication": "unknown",
