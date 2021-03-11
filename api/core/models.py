@@ -1,4 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 from django.db.models import (
     Subquery, OuterRef, Case, When, BooleanField, Value, CharField, Prefetch)
@@ -127,6 +128,10 @@ class API(models.Model):
 
     def is_rest(self):
         return self.api_type in [self.APIType.REST_JSON, self.APIType.REST_XML]
+
+    class Meta:
+        verbose_name = _("API")
+        verbose_name_plural = _("APIs")
 
 
 class Code(models.Model):
