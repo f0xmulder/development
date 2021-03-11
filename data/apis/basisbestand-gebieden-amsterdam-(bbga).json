@@ -1,6 +1,7 @@
 {
   "description": "Specifieke functionaliteit voor de BBGA API.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Basisbestand Gebieden Amsterdam (BBGA)",
   "api_type": "rest_json",
   "api_authentication": "unknown",

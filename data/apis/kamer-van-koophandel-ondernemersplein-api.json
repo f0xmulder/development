@@ -1,6 +1,7 @@
 {
   "description": "Op Ondernemersplein geeft de overheid ondernemers antwoord op hun vragen. Hier vinden zij verzamelpagina’s en verdiepende artikelen. Maar ook wet- en regelgeving, subsidies en evenementen. Deze content wordt ook uitgeleverd via een zogenaamde API. Met deze technische koppeling kan de informatie ook automatisch op andere websites worden getoond.",
-  "organization_name": "Kamer van Koophandel",
+  "organization_name": "Kamer van Koophandel Nederland",
+  "organization_oin": "00000001006033404000",
   "service_name": "Ondernemersplein API",
   "api_type": "rest_json",
   "api_authentication": "unknown",

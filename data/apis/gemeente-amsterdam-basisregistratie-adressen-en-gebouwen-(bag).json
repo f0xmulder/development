@@ -1,6 +1,7 @@
 {
   "description": "De Basisregistraties adressen en gebouwen (BAG) bevatten gegevens over panden, verblijfsobjecten, standplaatsen en ligplaatsen en de bijbehorende adressen en de benoeming van woonplaatsen en openbare ruimten.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
   "api_type": "rest_json",
   "api_authentication": "unknown",

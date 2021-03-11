@@ -1,6 +1,7 @@
 {
   "description": "Met de Digitale Bereikbaarheidsservice (DBS) kunnen Marktpartijen die postafhandelingsdiensten verzorgen voor overheidsorganisaties de digitale bereikbaarheid van ondernemingen vaststellen. Het is een nieuwe dienst om grote aantallen digitale berichten te verzenden naar ondernemers.",
-  "organization_name": "RVO Rijksdienst voor Ondernemend Nederland",
+  "organization_name": "Rijksdienst voor Ondernemend Nederland",
+  "organization_oin": "00000004000000006000",
   "service_name": "Digitale BereikbaarheidsService (DBS)",
   "api_type": "rest_json",
   "api_authentication": "unknown",
@@ -10,12 +11,14 @@
     "BerichtenBox",
     "RVO"
   ],
-  "environments": [{
-    "name": "production",
-    "api_url": "https://developer.berichtenvoorbedrijven.nl",
-    "specification_url": "https://developer.berichtenvoorbedrijven.nl/api-docs/carbon.super/DBS/0.1",
-    "documentation_url": "https://developer.berichtenvoorbedrijven.nl/apis/info?name=DBS&version=0.1"
-  }],
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://developer.berichtenvoorbedrijven.nl",
+      "specification_url": "https://developer.berichtenvoorbedrijven.nl/api-docs/carbon.super/DBS/0.1",
+      "documentation_url": "https://developer.berichtenvoorbedrijven.nl/apis/info?name=DBS&version=0.1"
+    }
+  ],
   "contact": {
     "email": "contact@e-overheidvoorbedrijven.nl",
     "phone": "088-0424230",

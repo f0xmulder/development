@@ -1,18 +1,21 @@
 {
     "description": "Statische en real-time dynamische parkeerdata van publiek toegankelijke on street (straatparkeren) en off street (garages en terreinen) parkeerfaciliteiten (van publieke (gemeentelijke) en private exploitanten",
-    "organization_name": "Ministerie van Infrastructuur en Waterstaat",
+    "organization_name": "Ministerie van IenW-Rijkswaterstaat",
+    "organization_oin": "00000001821699180000",
     "service_name": "parkeerdatacatalogus",
     "api_type": "rest_json",
     "api_authentication": "unknown",
     "tags": [
         "parkeerdata"
     ],
-    "environments": [{
-        "name": "production",
-        "api_url": "http://www.parkeerdatacatalogus.nl",
-        "specification_url": "",
-        "documentation_url": "https://openparking.nl"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "http://www.parkeerdatacatalogus.nl",
+            "specification_url": "",
+            "documentation_url": "https://openparking.nl"
+        }
+    ],
     "contact": {
         "email": "ron.peerenboom@rapptrans.nl",
         "phone": "0621235207",

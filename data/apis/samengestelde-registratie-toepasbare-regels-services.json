@@ -1,6 +1,7 @@
 {
   "description": "Een REST API voor specifieke samengestelde services in de Registratie Toepasbare Regels.",
-  "organization_name": "DSO",
+  "organization_name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+  "organization_oin": "00000004130854102000",
   "service_name": "Samengestelde registratie toepasbare regels services",
   "api_type": "rest_json",
   "api_authentication": "unknown",

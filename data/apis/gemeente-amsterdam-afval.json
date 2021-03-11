@@ -1,24 +1,30 @@
 {
     "description": "Afvalcontainers en putten in Amsterdam",
     "organization_name": "Gemeente Amsterdam",
+    "organization_oin": "00000001002564440000",
     "service_name": "Afvalcontainers en putten",
     "api_type": "rest_json",
     "api_authentication": "unknown",
-    "tags": ["afval", "containers", "putten"],
-    "environments": [{
-        "name": "production",
-        "api_url": "https://api.data.amsterdam.nl/afval/",
-        "specification_url": "https://api.data.amsterdam.nl/afval/redoc/?format=openapi",
-        "documentation_url": "https://api.data.amsterdam.nl/afval/"
-    }],
-
+    "tags": [
+        "afval",
+        "containers",
+        "putten"
+    ],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://api.data.amsterdam.nl/afval/",
+            "specification_url": "https://api.data.amsterdam.nl/afval/redoc/?format=openapi",
+            "documentation_url": "https://api.data.amsterdam.nl/afval/"
+        }
+    ],
     "contact": {
         "email": "datapunt@amsterdam.nl",
         "url": "https://github.com/Amsterdam/afvalcontainers/issues"
     },
     "is_reference_implementation": false,
     "terms_of_use": {
-      "government_only": false,
-      "pay_per_use": false
-  }
+        "government_only": false,
+        "pay_per_use": false
+    }
 }

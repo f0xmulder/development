@@ -1,6 +1,7 @@
 {
   "description": "Dit is een 'convenience' API. We hebben energie gerelateerde data van netbeheerders, kadaster en de BAG tot een dataset samengevoegd waarmee energie gerelateerde kaarten gemaakt kunnen worden.\n\nAlle relevante open energie data in een keer bij de hand.\n\nDeze dataset is  de basis voor tvw.commondatafactory.nl.\n\nPer pand zijn er ~25 attributen over hoogte, oppervlakte, volume, gasverbruik over meerdere jaren, elektra verbruik over meerdere jaren, bouwjaar, postcode.\n\nWe zijn zorgvuldig geweest maar er zullen zeker nog 'rare' dingen in de data zitten. Ook omdat meetgegevens fouten bevatten of omdat panden samen worden genomen voor de anonimiteit (in het geval van de meetgegevens).",
-  "organization_name": "VNG / commondatafactory",
+  "organization_name": "VNG Realisatie",
+  "organization_oin": "00000001821002193000",
   "service_name": "Energie data Nederland per pand",
   "api_type": "wfs",
   "api_authentication": "none",
