@@ -1,6 +1,7 @@
 {
   "description": "Met deze REST API kunnen bestaande ruimtelijke plannen worden opgevraagd uit Ruimtelijkeplannen.nl.",
-  "organization_name": "DSO",
+  "organization_name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+  "organization_oin": "00000004130854102000",
   "service_name": "Ruimtelijke plannen opvragen",
   "api_type": "rest_json",
   "api_authentication": "unknown",

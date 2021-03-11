@@ -4,7 +4,7 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand
 
-from core.models import API, Environment, Relation
+from core.models import API, Environment, Relation, Organization
 
 COLOR_RED = '\033[91m'
 COLOR_END = '\033[0m'
@@ -57,11 +57,15 @@ def parse_api(file_name, api_id, json_data):
     mechanism.
 
     """
+    org = Organization.objects.get_or_create(
+        oin=json_data.pop("organization_oin"),
+        defaults={"name": json_data.pop("organization_name")})[0]
+
     # required fields for API
     api_vals = {k: json_data.pop(k) for k in [
-        "description", "organization_name", "service_name", "api_type",
-        "api_authentication",
+        "description", "service_name", "api_type", "api_authentication",
     ]}
+    api_vals["organization"] = org
 
     # optional field for API
     ref_imp_str = "is_reference_implementation"

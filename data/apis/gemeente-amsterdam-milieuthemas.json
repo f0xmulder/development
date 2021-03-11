@@ -1,6 +1,7 @@
 {
   "description": "Informatie over milieu gerelateerde zaken. Momenteel via deze api enkel explosieven in de stad. Inslagen (met mogelijke blindgangers), gevrijwaarde, verdachte en ondezochte gebieden.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Milieuthemas",
   "api_type": "rest_json",
   "api_authentication": "unknown",

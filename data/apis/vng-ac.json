@@ -1,17 +1,25 @@
 {
     "description": "De referentieimplementatie van het autorisatiecomponent.",
     "organization_name": "VNG Realisatie",
+    "organization_oin": "00000001821002193000",
     "service_name": "Autorisatiecomponent (AC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
-    "tags": ["zgw", "ac", "zaakgericht werken", "autorisatiecomponent"],
+    "tags": [
+        "zgw",
+        "ac",
+        "zaakgericht werken",
+        "autorisatiecomponent"
+    ],
     "is_reference_implementation": true,
-    "environments": [{
-        "name": "production",
-        "api_url": "https://autorisaties-api.vng.cloud/api/v1/",
-        "specification_url": "https://autorisaties-api.vng.cloud/api/v1/schema/openapi.json",
-        "documentation_url": "https://github.com/VNG-Realisatie/gemma-autorisatiecomponent"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://autorisaties-api.vng.cloud/api/v1/",
+            "specification_url": "https://autorisaties-api.vng.cloud/api/v1/schema/openapi.json",
+            "documentation_url": "https://github.com/VNG-Realisatie/gemma-autorisatiecomponent"
+        }
+    ],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
     },

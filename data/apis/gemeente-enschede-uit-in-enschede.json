@@ -1,6 +1,7 @@
 {
   "description": "De uit agenda en het locatie aanbod op www.uitinenschede.nl en www.stadtenschede.de zijn middels een API beschikbaar om door derden gebruikt te worden.",
   "organization_name": "Gemeente Enschede",
+  "organization_oin": "00000001001589623000",
   "service_name": "Uit in Enschede",
   "api_type": "rest_json",
   "api_authentication": "unknown",

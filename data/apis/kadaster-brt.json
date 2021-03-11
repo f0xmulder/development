@@ -1,16 +1,23 @@
 {
     "description": "Het Kadaster is houder van de Basisregistratie Topografie (BRT). De BRT bestaat uit digitale topografische bestanden op verschillende schaalniveaus. Deze verzameling topografische bestanden is via dit portaal beschikbaar als open data. Hier vindt u TOP10NL als Linked Data en via een API, en de kennisbank van de gebruikte begrippen inclusief verwijzing naar de relevante wetsartikelen. Deze site is op 27 juni 2016 door het Kadaster gelanceerd als bètaversie. Op dit moment is de kaartview functionaliteit beperkt en zijn alleen de gebouwen aanklikbaar. Verdere functionaliteit van de viewer is in ontwikkeling. Het Kadaster wil ervaring op doen om Linked Data als standaard dienstverlening aan te bieden.",
-    "organization_name": "Kadaster",
+    "organization_name": "Dienst voor het kadaster en de openbare registers",
+    "organization_oin": "00000001802327497000",
     "service_name": "Basisregistratie Topografie (BRT)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
-    "tags": ["basisregistratie", "kadaster", "brt"],
-    "environments": [{
-        "name": "production",
-        "api_url": "https://brt.basisregistraties.overheid.nl/api/v2",
-        "specification_url": "https://brt.basisregistraties.overheid.nl/api/v2",
-        "documentation_url": "https://brt.basisregistraties.overheid.nl"
-    }],
+    "tags": [
+        "basisregistratie",
+        "kadaster",
+        "brt"
+    ],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://brt.basisregistraties.overheid.nl/api/v2",
+            "specification_url": "https://brt.basisregistraties.overheid.nl/api/v2",
+            "documentation_url": "https://brt.basisregistraties.overheid.nl"
+        }
+    ],
     "forum": {
         "vendor": "discourse",
         "url": "https://geoforum.nl/c/datasets/brt"

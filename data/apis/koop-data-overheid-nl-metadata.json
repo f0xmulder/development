@@ -1,6 +1,7 @@
 {
     "description": "Voor data.overheid.nl is een API beschikbaar die de metadata van alle aanwezige datasets beschikbaar stelt. Alle informatie op data.overheid.nl is her te gebruiken onder de CC-0 licentie.",
-    "organization_name": "KOOP",
+    "organization_name": "Uitvoeringsorganisatie Bedrijfsvoering Rijk (UBR)",
+    "organization_oin": "00000004000000059000",
     "service_name": "data.overheid.nl",
     "api_type": "unknown",
     "api_authentication": "none",

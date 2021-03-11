@@ -1,15 +1,18 @@
 {
     "description": "Ondernemersplein biedt ondernemers volledige en up-to-date informatie van de overheid. Aangevuld met wet- en regelgeving, subsidies en evenementen. Gemaakt door een gezamenlijke overheidsredactie. Deze content wordt uitgeserveerd via een open API.",
-    "organization_name": "Ondernemersplein (KVK)",
+    "organization_name": "Kamer van Koophandel Nederland",
+    "organization_oin": "00000001006033404000",
     "service_name": "Ondernemersplein API",
     "api_type": "rest_json",
     "api_authentication": "none",
-    "environments": [{
-        "name": "production",
-        "api_url": "https://opendata.ondernemersplein.nl/api/v1",
-        "specification_url": "https://opendata.ondernemersplein.nl/swagger/v1/swagger.json",
-        "documentation_url": "https://opendata.ondernemersplein.nl/docs/"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://opendata.ondernemersplein.nl/api/v1",
+            "specification_url": "https://opendata.ondernemersplein.nl/swagger/v1/swagger.json",
+            "documentation_url": "https://opendata.ondernemersplein.nl/docs/"
+        }
+    ],
     "contact": {
         "email": "redactie@ondernemersplein.nl",
         "url": "https://ondernemersplein.kvk.nl/ondernemersplein-api/"

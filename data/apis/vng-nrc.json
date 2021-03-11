@@ -1,17 +1,25 @@
 {
     "description": "De referentieimplementatie van het notificatiecomponent.",
     "organization_name": "VNG Realisatie",
+    "organization_oin": "00000001821002193000",
     "service_name": "Notificatierouteringscomponent (NRC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
-    "tags": ["zgw", "nrc", "zaakgericht werken", "notificatiecomponent"],
+    "tags": [
+        "zgw",
+        "nrc",
+        "zaakgericht werken",
+        "notificatiecomponent"
+    ],
     "is_reference_implementation": true,
-    "environments": [{
-        "name": "production",
-        "api_url": "https://notificaties-api.vng.cloud/api/v1/",
-        "specification_url": "https://notificaties-api.vng.cloud/api/v1/schema/openapi.json",
-        "documentation_url": "https://notificaties-api.vng.cloud/"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://notificaties-api.vng.cloud/api/v1/",
+            "specification_url": "https://notificaties-api.vng.cloud/api/v1/schema/openapi.json",
+            "documentation_url": "https://notificaties-api.vng.cloud/"
+        }
+    ],
     "contact": {
         "email": "standaarden.ondersteuning@vng.nl"
     },
