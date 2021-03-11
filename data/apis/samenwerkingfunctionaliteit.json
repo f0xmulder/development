@@ -1,6 +1,7 @@
 {
   "description": "Een REST API die de samenwerkfunctionaliteit (SWF) van het Digitaal stelsel Omgevingswet realiseert.",
-  "organization_name": "DSO",
+  "organization_name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+  "organization_oin": "00000004130854102000",
   "service_name": "Samenwerkingfunctionaliteit",
   "api_type": "rest_json",
   "api_authentication": "unknown",

@@ -1,6 +1,7 @@
 {
   "description": "Een REST API voor het beheren van de behandeldienstconfiguraties. Hierin kan een bevoegd gezag een activiteit waarvoor zij verantwoordelijk is koppelen aan een behandeldienst.",
-  "organization_name": "DSO",
+  "organization_name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+  "organization_oin": "00000004130854102000",
   "service_name": "Behandeldienst configuratie beheren",
   "api_type": "rest_json",
   "api_authentication": "unknown",

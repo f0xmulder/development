@@ -1,6 +1,7 @@
 {
   "description": "Schoolwijzer biedt haar data aan in de vorm van een OpenData API.",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Schoolwijzer API",
   "api_type": "rest_json",
   "api_authentication": "unknown",

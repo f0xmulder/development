@@ -1,6 +1,7 @@
 {
     "description": "Met de API van het CPA register kunnen alle CPA gerelateerde beheerwerkzaamheden geautomatiseerd worden uitgevoerd.",
     "organization_name": "Logius",
+    "organization_oin": "00000001822477348000",
     "service_name": "CPA-register",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -9,12 +10,14 @@
         "Digikoppeling",
         "JustiD"
     ],
-    "environments": [{
-        "name": "production",
-        "api_url": "https://cparegister.nl",
-        "specification_url": "https://cparegister.nl/api/v1",
-        "documentation_url": "https://cparegister.nl/developer/docs/"
-    }],
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://cparegister.nl",
+            "specification_url": "https://cparegister.nl/api/v1",
+            "documentation_url": "https://cparegister.nl/developer/docs/"
+        }
+    ],
     "contact": {
         "email": "servicecentrum@logius.nl",
         "phone": "0900 555 45 55",

@@ -1,6 +1,7 @@
 {
   "description": "De monumenten in de stad worden hier als een lijst getoond. monumenten, situeringen, complexen. datamodel conform stelselpedia https://www.amsterdam.nl/stelselpedia/monumenten-index/catalogus-monumenten/",
   "organization_name": "Gemeente Amsterdam",
+  "organization_oin": "00000001002564440000",
   "service_name": "Monumenten",
   "api_type": "rest_json",
   "api_authentication": "unknown",
