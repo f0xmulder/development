@@ -61,6 +61,7 @@ class APIViewSet(RetrieveModelMixin,
         config='dutch'
     )
     supported_facets = ['organization_name', 'api_type']
+    supported_facets = ['api_type']
 
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
