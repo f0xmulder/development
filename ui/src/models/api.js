@@ -68,6 +68,7 @@ export const modelFromAPIResponse = (api) => {
     id: api.id,
     serviceName: api.service_name,
     organizationName: api.organization_name,
+    organizationOin: api.organization_oin,
     description: api.description,
     apiType,
     apiAuthentication: APIAuthentication.valueOf(api.api_authentication),
