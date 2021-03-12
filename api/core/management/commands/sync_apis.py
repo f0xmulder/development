@@ -6,9 +6,6 @@ from django.core.management.base import BaseCommand
 
 from core.models import API, Environment, Relation, Organization
 
-COLOR_RED = '\033[91m'
-COLOR_END = '\033[0m'
-
 
 class Command(BaseCommand):
     def add_arguments(self, parser):

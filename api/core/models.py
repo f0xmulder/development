@@ -68,8 +68,7 @@ class API(models.Model):
     api_id = models.CharField(max_length=MAX_TEXT_LENGTH, unique=True)
     description = models.TextField()
     organization = models.ForeignKey(
-        Organization, verbose_name=_("organization"), on_delete=models.PROTECT, null=True,
-        blank=True)
+        Organization, verbose_name=_("organization"), on_delete=models.PROTECT)
     service_name = models.CharField(max_length=MAX_TEXT_LENGTH)
     api_type = models.CharField(
         max_length=MAX_ENUM_LENGTH,
