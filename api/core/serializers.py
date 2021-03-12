@@ -172,8 +172,8 @@ class CodeSerializer(BasicCodeSerializer):
 
 class APISerializer(NonNullModelSerializer):
     id = serializers.CharField(source='api_id')
-    organization_name = serializers.SerializerMethodField()
-    organization_oin = serializers.SerializerMethodField()
+    organization_name = serializers.CharField(source='organization.name')
+    organization_oin = serializers.CharField(source='organization.oin')
     environments = EnvironmentSerializer(many=True)
     badges = BadgeSerializer(many=True, read_only=True)
     forum = ForumSerializer(source='*', required=False)
@@ -207,12 +207,6 @@ class APISerializer(NonNullModelSerializer):
             'scores',
             'design_rule_scores',
         ]
-
-    def get_organization_name(self, obj):
-        return obj.organization.name
-
-    def get_organization_oin(self, obj):
-        return obj.organization.oin
 
     def validate_environments(self, environments):
         if len(environments) == 0:

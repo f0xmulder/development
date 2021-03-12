@@ -67,51 +67,44 @@ class APIViewSet(RetrieveModelMixin,
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
 
-        list_filter = Q()
+        search_filter = Q()
 
         is_ref_impl_val = request.query_params.get('isReferenceImplementation')
         if is_ref_impl_val is not None:
             is_ref_impl_val = bool(['false', 'true'].index(is_ref_impl_val))
-            list_filter &= Q(is_reference_implementation=is_ref_impl_val)
+            search_filter &= Q(is_reference_implementation=is_ref_impl_val)
         search_text = request.query_params.get('q')
         if search_text:
-            search_filter = None
             for field_name in self.text_search_fields:
-                field_filter = Q(**{f'{field_name}__icontains': search_text})
-                if search_filter is None:
-                    search_filter = field_filter
-                else:
-                    search_filter |= field_filter
-            list_filter &= search_filter
-        else:
-            search_filter = None
+                search_filter |= Q(**{f'{field_name}__icontains': search_text})
 
+        queryset = queryset.filter(search_filter)
+
+        list_filter = Q()
         facet_inputs = {
             f: request.query_params.getlist(f.replace("__", "_")) for f in self.supported_facets}
         facet_filters = get_facet_filters(facet_inputs)
         list_filter &= Q(*facet_filters.values())
 
-        results = queryset
-        if list_filter:
-            results = results.filter(list_filter)
-        results = results.order_by('api_id')
-        facets = self.get_facets(queryset, facet_filters, search_filter)
+        results = queryset.filter(list_filter).order_by('api_id')
+        facets = self.get_facets(queryset, facet_filters)
 
         return self.get_response(results, facets)
 
     @staticmethod
-    def get_facets(queryset, facet_filters, search_filter):
+    def get_facets(queryset, facet_filters):
         facets = {}
         for facet, display_name in APIViewSet.supported_facets.items():
             other_facet_filters = [
                 v for k, v in facet_filters.items()
                 if k != facet and v is not None]
             combined_filter = Q(*other_facet_filters)
-            if search_filter:
-                combined_filter &= search_filter
 
+            field_vals = {"term": F(facet)}
+            if display_name:
+                field_vals["display_name"] = F(display_name)
             term_counts = queryset \
-                .values(term=F(facet), **({"display": F(display_name)} if display_name else {})) \
+                .values(**field_vals) \
                 .annotate(count=Count('id', filter=combined_filter or None)) \
                 .order_by('term')
 
