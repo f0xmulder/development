@@ -314,8 +314,7 @@ Deploy production:
   only:
   - master@commonground/don/developer.overheid.nl
 
-sast:
-  stage: security
+
 
 include:
 - template: Security/SAST.gitlab-ci.yml
@@ -323,6 +322,16 @@ include:
 - template: Dependency-Scanning.gitlab-ci.yml
 - template: SAST.gitlab-ci.yml
 - template: Secret-Detection.gitlab-ci.yml
+
+sast:
+  stage: security
+  artifacts:
+    paths:
+      - gl-sast-report.json
+    expire_in: 7 days
+  variables:
+    SAST_DEFAULT_ANALYZERS: "gosec,secrets"
+    GO111MODULE: "on"
 
 # registry.gitlab.com/commonground/don/developer.overheid.nl/ui
 # registry.gitlab.com/commonground/don/developer.overheid.nl/docs
