@@ -3,6 +3,7 @@
 //
 import { shallow } from 'enzyme/build'
 import React from 'react'
+import { APIType } from '../../models/enums'
 import APIList from './APIList'
 
 describe('APIList', () => {
@@ -15,6 +16,8 @@ describe('APIList', () => {
         id: 'test-api.json',
         organizationName: 'Organization Name',
         serviceName: 'Service Name',
+        apiType: APIType.REST_JSON,
+        totalScore: { points: 10, maxPoints: 10 },
       },
     ]
 

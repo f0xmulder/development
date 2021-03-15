@@ -142,7 +142,7 @@ describe('SubmitAPI', () => {
         })
       })
 
-      describe.only('submitToApi is unsuccessful', () => {
+      describe('submitToApi is unsuccessful', () => {
         it('should call the setStatus action', async () => {
           // Suppress error in test console
           global.console.error = jest.fn()

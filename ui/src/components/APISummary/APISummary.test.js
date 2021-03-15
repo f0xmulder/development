@@ -23,6 +23,7 @@ describe('APISummary', () => {
           hasContactDetails: false,
           providesSla: false,
         }}
+        totalScore={{ points: 10, maxPoints: 10 }}
       />,
     )
   })

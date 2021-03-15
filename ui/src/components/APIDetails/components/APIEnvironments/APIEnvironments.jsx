@@ -25,7 +25,7 @@ const APIEnvironments = ({ environments, apiId }) => (
       const hasSpecification = env.specificationUrl && env.name
 
       return (
-        <Environment key={env.name.value}>
+        <Environment key={env.name}>
           <H3>{env.name.label}</H3>
           <EnvData>
             <EnvUri data-test="apiUrl">{env.apiUrl}</EnvUri>

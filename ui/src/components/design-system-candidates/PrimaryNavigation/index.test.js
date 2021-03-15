@@ -96,6 +96,7 @@ describe('PrimaryNavigation', () => {
     expect(element).toBeNull()
 
     resizeWindow(360, 1000)
+    await waitForDebounce()
 
     const element2 = queryByTestId('mobile-nav')
     expect(element2).toBeTruthy()
@@ -107,6 +108,7 @@ describe('PrimaryNavigation', () => {
     const { findByTestId } = createInstance()
 
     resizeWindow(360, 900)
+    await waitForDebounce()
 
     const element = findByTestId('mobile-nav')
     expect(element).toBeTruthy()

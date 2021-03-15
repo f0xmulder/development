@@ -3,7 +3,7 @@
 //
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { MemoryRouter as Router } from 'react-router-dom'
 
@@ -99,7 +99,7 @@ describe('the Primary Mobile Navigation', () => {
 
     fireEvent.click(queryByTestId('mobile-nav-more'))
 
-    await wait(() => {
+    await waitFor(() => {
       expect(subnav).toHaveClass('slide-in-enter-done')
     })
 

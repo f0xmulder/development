@@ -23,7 +23,7 @@ class ImplementedByListContainer extends Component {
     this.loadDetailsForAPI(id)
   }
 
-  componentWillUpdate(nextProps) {
+  componentDidUpdate(nextProps) {
     const { id } = nextProps
     const { id: prevId } = this.props.id
 
