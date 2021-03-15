@@ -11,13 +11,13 @@ describe('formatting API terms to options', () => {
   it('should format terms to options', () => {
     const apiTypeFilter = filters.find((filter) => filter.key === 'api_type')
     const organizationFilter = filters.find(
-      (filter) => filter.key === 'organization_name',
+      (filter) => filter.key === 'organization_oin',
     )
     /* eslint-disable camelcase */
     const testCases = [
       {
         facets: {
-          organization_name: {
+          organization_oin: {
             terms: [],
           },
         },
@@ -26,13 +26,24 @@ describe('formatting API terms to options', () => {
       },
       {
         facets: {
-          organization_name: {
-            terms: [{ term: 'MijnBV', count: 5 }],
+          organization_oin: {
+            terms: [
+              {
+                term: '00000001001589623000',
+                display_name: 'MijnBV',
+                count: 5,
+              },
+            ],
           },
         },
         filter: organizationFilter,
         expected: [
-          { value: 'MijnBV', label: 'MijnBV', count: 5, disabled: false },
+          {
+            value: '00000001001589623000',
+            label: 'MijnBV',
+            count: 5,
+            disabled: false,
+          },
         ],
       },
       {
@@ -65,14 +76,14 @@ describe('check if facets contains terms for a filter', () => {
     const testCases = [
       {
         // eslint-disable-next-line camelcase
-        facets: { organization_name: { terms: [] } },
-        filter: 'organization_name',
+        facets: { organization_oin: { terms: [] } },
+        filter: 'organization_oin',
         expected: false,
       },
       {
         // eslint-disable-next-line camelcase
-        facets: { organization_name: { terms: [{ term: 'foo', count: 1 }] } },
-        filter: 'organization_name',
+        facets: { organization_oin: { terms: [{ term: 'foo', count: 1 }] } },
+        filter: 'organization_oin',
         expected: true,
       },
     ]

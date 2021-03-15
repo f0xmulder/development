@@ -22,6 +22,7 @@ describe('ImplementedByList', () => {
           hasContactDetails: false,
           providesSla: false,
         },
+        totalScore: { points: 10, maxPoints: 10 },
       },
     ]
     wrapper = shallow(<ImplementedByList apis={apis} />)

@@ -64,6 +64,7 @@ class LinkToAPIContainer extends Component {
             organizationName={details.organizationName}
             id={details.id}
             totalScore={details.totalScore}
+            apiType={details.apiType}
           />
         )}
       </div>

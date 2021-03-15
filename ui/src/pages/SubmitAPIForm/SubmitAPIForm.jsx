@@ -202,11 +202,15 @@ class SubmitAPIFormPage extends Component {
     this.setState({ storedFormValues: null })
   }
 
+  async fetchApiList() {
+    return APIRepository.getAll(
+      `rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
+    )
+  }
+
   async callAPIAndModelResponse() {
     try {
-      const response = await APIRepository.getAll(
-        `rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
-      )
+      const response = await this.fetchApiList()
       const result = {
         apis: response.results.map((api) => modelFromAPIResponse(api)),
       }

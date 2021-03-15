@@ -94,7 +94,7 @@ describe('Pagination', () => {
     })
   })
 
-  describe.only('Results per page', () => {
+  describe('Results per page', () => {
     const onResultsPerPageChange = jest.fn()
 
     const { setup } = new SetupTest(
