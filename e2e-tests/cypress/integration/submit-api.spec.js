@@ -1,3 +1,5 @@
+const { terminalLog } = require("../support")
+
 describe('Submit API', () => {
   context('desktop resolution', () => {
     beforeEach(() => {
@@ -12,7 +14,7 @@ describe('Submit API', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y()
+      cy.checkA11y(null, null, terminalLog)
     })
   })
 
@@ -30,7 +32,7 @@ describe('Submit API', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y()
+      cy.checkA11y(null, null, terminalLog)
     })
   })
 })

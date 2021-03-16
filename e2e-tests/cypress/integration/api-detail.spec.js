@@ -1,3 +1,5 @@
+const { terminalLog } = require("../support");
+
 describe('API Detail', () => {
 
   context('desktop resolution', () => {
@@ -14,7 +16,7 @@ describe('API Detail', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y()
+      cy.checkA11y(null, null, terminalLog)
     })
   })
 
@@ -34,7 +36,7 @@ describe('API Detail', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y()
+      cy.checkA11y(null, null, terminalLog)
     })
   })
 })
