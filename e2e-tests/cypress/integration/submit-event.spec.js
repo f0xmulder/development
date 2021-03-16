@@ -27,10 +27,6 @@ describe('Submit Event', () => {
       cy.get('h1').contains('Event toevoegen')
       cy.screenshot()
     })
-    it('Has no detectable a11y violations on load', () => {
-      cy.injectAxe()
-      // Test the page at initial load
-      cy.checkA11y()
-    })
+
   })
 })
