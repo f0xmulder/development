@@ -274,6 +274,7 @@ E2E tests:
   - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
   - echo "$(pwd)"
+  - find *
   - |
     docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
     -f e2e-tests/Dockerfile . && \
@@ -283,6 +284,7 @@ E2E tests:
     -v "$(pwd)"/e2e-tests/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
     $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
     /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test"
+  - find *
   only:
   - branches@commonground/don/developer.overheid.nl
   variables:
@@ -292,8 +294,8 @@ E2E tests:
   artifacts:
     when: always
     paths:
-      - /go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos/**/*.mp4
-      - /go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots/**/*.png
+      - e2e-tests/cypress/videos/**/*.mp4
+      - e2e-tests/cypress/screenshots/**/*.png
     expire_in: 1 day
 
 Deploy production:
