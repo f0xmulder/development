@@ -27,5 +27,10 @@ describe('Event Overview', () => {
       cy.get('h1').contains('Aankomende events')
       cy.screenshot()
     })
+    it('Has no detectable a11y violations on load', () => {
+      cy.injectAxe()
+      // Test the page at initial load
+      cy.checkA11y()
+    })
   })
 })

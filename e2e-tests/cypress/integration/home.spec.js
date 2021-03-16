@@ -27,5 +27,10 @@ describe('Home', () => {
       cy.get('h1').contains('Eén centrale plek voor de developer die voor of met de overheid ontwikkelt')
       cy.screenshot()
     })
+    it('Has no detectable a11y violations on load', () => {
+      cy.injectAxe()
+      // Test the page at initial load
+      cy.checkA11y()
+    })
   })
 })

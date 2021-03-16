@@ -27,6 +27,10 @@ describe('Submit API', () => {
       cy.get('h1').contains('API toevoegen')
       cy.screenshot()
     })
-
+    it('Has no detectable a11y violations on load', () => {
+      cy.injectAxe()
+      // Test the page at initial load
+      cy.checkA11y()
+    })
   })
 })
