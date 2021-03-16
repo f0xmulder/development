@@ -289,8 +289,8 @@ E2E tests:
   artifacts:
     when: always
     paths:
-      - cypress/videos/**/*.mp4
-      - cypress/screenshots/**/*.png
+      - /go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos/**/*.mp4
+      - /go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots/**/*.png
     expire_in: 1 day
 
 Deploy production:
