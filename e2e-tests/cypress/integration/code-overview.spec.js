@@ -14,7 +14,12 @@ describe('Code Overview', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y(null, null, terminalLog)
+      cy.checkA11y(null, {
+        runOnly: {
+          type: 'tag',
+          values: ['wcag2a']
+        }
+      }, terminalLog)
     })
   })
 
