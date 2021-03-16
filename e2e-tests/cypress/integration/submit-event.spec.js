@@ -1,3 +1,5 @@
+import { terminalLog } from "../support"
+
 describe('Submit Event', () => {
   context('desktop resolution', () => {
     beforeEach(() => {
@@ -12,7 +14,7 @@ describe('Submit Event', () => {
     it('Has no detectable a11y violations on load', () => {
       cy.injectAxe()
       // Test the page at initial load
-      cy.checkA11y()
+      cy.checkA11y(null, null, terminalLog)
     })
   })
 
