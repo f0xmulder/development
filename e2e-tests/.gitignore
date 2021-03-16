@@ -1,5 +1,7 @@
 node_modules
 screenshots/*.png
 cypress/screenshots/*
+!cypress/screenshots/.gitkeep
 cypress/videos/*
+!cypress/videos/.gitkeep
 cypress/.DS_Store
