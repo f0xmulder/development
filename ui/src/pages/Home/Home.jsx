@@ -34,7 +34,7 @@ const Home = () => {
 
       <H2>Direct naar</H2>
       <Links>
-        <StyledCard>
+        <StyledCard data-testid="card-apis">
           <StyledCard.Header>
             <img
               src={svgApi}
@@ -54,7 +54,7 @@ const Home = () => {
           </StyledCard.Body>
         </StyledCard>
 
-        <StyledCard>
+        <StyledCard data-testid="card-forum">
           <StyledCard.Header>
             <img
               src={svgForum}
