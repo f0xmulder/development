@@ -1,0 +1,1 @@
+export const sizes = [[1920, 1080], 'macbook-11', 'iphone-6', 'ipad-mini']

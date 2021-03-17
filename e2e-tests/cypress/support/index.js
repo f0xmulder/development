@@ -17,5 +17,6 @@
 import './commands'
 import 'cypress-axe'
 import terminalLog from './terminal-log'
+import { sizes } from './sizes';
 
-export { terminalLog }
+export { terminalLog, sizes }
