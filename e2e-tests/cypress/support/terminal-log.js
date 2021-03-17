@@ -15,4 +15,5 @@ export default function terminalLog(violations) {
   )
 
   cy.task('table', violationData)
+  cy.task('dir', violations)
 }
