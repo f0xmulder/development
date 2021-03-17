@@ -24,6 +24,11 @@ module.exports = (on, config) => {
 
       return null
     },
+    dir(message) {
+      console.dir(message, { depth: null })
+
+      return null
+    },
     table(message) {
       console.table(message)
 
