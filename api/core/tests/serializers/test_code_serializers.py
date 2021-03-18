@@ -43,11 +43,11 @@ class CodeSerializerTest(TransactionTestCase):
                          'related_apis': [
                                 OrderedDict([
                                     ('service_name', ''),
-                                    ('organization_name', ''),
+                                    ('organization_name', 'Test organization'),
                                     ('api_id', 'api1')]),
                                 OrderedDict([
                                     ('service_name', ''),
-                                    ('organization_name', ''),
+                                    ('organization_name', 'Test organization'),
                                     ('api_id', 'api2')])
                          ]}
 

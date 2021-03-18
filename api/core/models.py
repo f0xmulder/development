@@ -16,11 +16,22 @@ RULE_TYPE_LENGTH = 250
 ERROR_CHARFIELD_LENGTH = 500
 
 
+class OrganizationQuerySet(models.QuerySet):
+
+    def get_by_natural_key(self, oin):
+        return self.get(oin=oin)
+
+
 class Organization(models.Model):
     name = models.CharField(_("name"), max_length=MAX_TEXT_LENGTH)
     oin = models.CharField(
         _("oin"), max_length=20, unique=True, help_text=_("Organization Identification Number"))
     active = models.BooleanField(_("active"), default=True)
+
+    objects = OrganizationQuerySet.as_manager()
+
+    def natural_key(self):
+        return (self.oin,)
 
     class Meta:
         verbose_name = _("organization")

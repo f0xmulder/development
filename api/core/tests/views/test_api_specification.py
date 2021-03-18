@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from core.models import API, Environment
+from core.models import API, Environment, Organization
 from core.tests.mocking import mock_response
 from core.tests.utils import prevent_logging
 
@@ -12,8 +12,10 @@ API_PATH = '/api/apis/'
 
 class APISpecificationViewTest(TestCase):
     def setUp(self):
+        org = Organization.objects.create(name='Test Organization', oin='00001234567890123456')
         self.api1 = API.objects.create(
             api_id='api1',
+            organization=org,
             description='API with production and demo spec',
         )
         Environment.objects.create(
@@ -29,6 +31,7 @@ class APISpecificationViewTest(TestCase):
 
         self.api2 = API.objects.create(
             api_id='api2',
+            organization=org,
             description='API with empty production spec url',
         )
         Environment.objects.create(

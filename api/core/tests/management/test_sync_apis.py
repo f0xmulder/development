@@ -4,6 +4,7 @@ from json import JSONDecodeError, load as json_load
 from pathlib import Path
 
 from django.core.management import call_command
+from django.db.models import F
 from django.test import TransactionTestCase
 
 from core.management.commands.sync_apis import sync_apis, parse_api
@@ -45,7 +46,8 @@ class SyncAPIsTest(TransactionTestCase):
                 'terms_support_response_time': 2,
             },
         ]
-        actual_apis = list(API.objects.values(*(k for k in expected_apis[0])))
+        actual_apis = list(API.objects.annotate(
+            organization_name=F('organization__name')).values(*(k for k in expected_apis[0])))
 
         self.assertEqual(actual_apis, expected_apis)
 
