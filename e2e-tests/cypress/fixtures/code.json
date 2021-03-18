@@ -1,0 +1,226 @@
+{
+  "page": 1,
+  "rowsPerPage": 10,
+  "totalResults": 12,
+  "results": [
+    {
+      "id": 1,
+      "owner_name": "statistiekcbs",
+      "name": "CBS-Open-Data-v4",
+      "url": "https://github.com/statistiekcbs/CBS-Open-Data-v4",
+      "last_change": "2020-10-11T20:06:19+02:00",
+      "stars": 13,
+      "source": "GitHub repository",
+      "programming_languages": ["R", "Python"],
+      "related_apis": [
+        {
+          "service_name": "CBS OData",
+          "organization_name": "Centraal Bureau voor de Statistiek (CBS)",
+          "api_id": "cbs-odata"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "owner_name": "statistiekcbs",
+      "name": "CBS-Open-Data-v3",
+      "url": "https://github.com/statistiekcbs/CBS-Open-Data-v3",
+      "last_change": "2020-08-15T19:08:49+02:00",
+      "stars": 12,
+      "source": "GitHub repository",
+      "programming_languages": ["C#", "HTML", "Python", "R"],
+      "related_apis": [
+        {
+          "service_name": "CBS OData",
+          "organization_name": "Centraal Bureau voor de Statistiek (CBS)",
+          "api_id": "cbs-odata"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "owner_name": "PDOK",
+      "name": "data.labs.pdok.nl",
+      "url": "https://github.com/PDOK/data.labs.pdok.nl",
+      "last_change": "2019-12-13T09:56:21+01:00",
+      "stars": 11,
+      "source": "GitHub repository",
+      "programming_languages": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Python",
+        "Shell",
+        "Ruby"
+      ],
+      "related_apis": [
+        {
+          "service_name": "Basisregistratie Kadaster (BRK)",
+          "organization_name": "Kadaster",
+          "api_id": "kadaster-brk"
+        },
+        {
+          "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
+          "organization_name": "Kadaster",
+          "api_id": "kadaster-bag"
+        },
+        {
+          "service_name": "Basisregistratie Topografie (BRT)",
+          "organization_name": "Kadaster",
+          "api_id": "kadaster-brt"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "owner_name": "MinBZK en VNG Realisatie",
+      "name": "developer.overheid.nl",
+      "url": "https://gitlab.com/commonground/don/developer.overheid.nl",
+      "last_change": "2020-11-03T13:12:17+01:00",
+      "stars": 9,
+      "source": "GitLab repository",
+      "programming_languages": [
+        "JavaScript",
+        "Python",
+        "Go",
+        "Dockerfile",
+        "HTML"
+      ],
+      "related_apis": []
+    },
+    {
+      "id": 11,
+      "owner_name": "AERIUS",
+      "name": "AERIUS",
+      "url": "https://gitlab.com/AERIUS/AERIUS",
+      "last_change": "2020-10-21T12:24:51.454000+02:00",
+      "stars": 5,
+      "source": "GitLab repository",
+      "programming_languages": [
+        "Java",
+        "PLpgSQL",
+        "Gherkin",
+        "TSQL",
+        "JavaScript"
+      ],
+      "related_apis": [
+        {
+          "service_name": "AERIUS Connect",
+          "organization_name": "RIVM",
+          "api_id": "rivm-aerius-connect"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "owner_name": "Signalen",
+      "name": "backend",
+      "url": "https://github.com/Signalen/backend",
+      "last_change": "2020-11-03T09:22:40+01:00",
+      "stars": 2,
+      "source": "GitHub repository",
+      "programming_languages": ["Python", "HTML", "Shell", "Dockerfile"],
+      "related_apis": [
+        {
+          "service_name": "Basisregistratie Topografie (BRT)",
+          "organization_name": "Kadaster",
+          "api_id": "kadaster-brt"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "owner_name": "GemeenteUtrecht",
+      "name": "BInG",
+      "url": "https://github.com/GemeenteUtrecht/BInG",
+      "last_change": "2020-03-13T11:28:20+01:00",
+      "stars": 0,
+      "source": "GitHub repository",
+      "programming_languages": [
+        "CSS",
+        "Python",
+        "HTML",
+        "JavaScript",
+        "Shell",
+        "Dockerfile",
+        "TSQL"
+      ],
+      "related_apis": [
+        {
+          "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
+          "organization_name": "Kadaster",
+          "api_id": "kadaster-bag"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "owner_name": "pmoreira1",
+      "name": "amsterdam-project",
+      "url": "https://github.com/pmoreira1/amsterdam-project",
+      "last_change": "2020-04-21T17:26:17+02:00",
+      "stars": 0,
+      "source": "GitHub repository",
+      "programming_languages": ["Jupyter Notebook", "Python"],
+      "related_apis": [
+        {
+          "service_name": "Afvalcontainers en putten",
+          "organization_name": "Gemeente Amsterdam",
+          "api_id": "gemeente-amsterdam-afval"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "owner_name": "dmitrychebayewski",
+      "name": "airrotterdam-api",
+      "url": "https://github.com/dmitrychebayewski/airrotterdam-api",
+      "last_change": "2020-10-26T21:17:48+01:00",
+      "stars": 0,
+      "source": "GitHub repository",
+      "programming_languages": ["Kotlin"],
+      "related_apis": [
+        {
+          "service_name": "Luchtmeetnet",
+          "organization_name": "Luchtmeetnet",
+          "api_id": "luchtmeetnet-luchtmeetnet"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "owner_name": "r5atom",
+      "name": "Saturday-Datascience",
+      "url": "https://github.com/r5atom/Saturday-Datascience",
+      "last_change": "2020-02-07T21:15:50+01:00",
+      "stars": 0,
+      "source": "GitHub repository",
+      "programming_languages": ["Jupyter Notebook"],
+      "related_apis": [
+        {
+          "service_name": "Gekentekende voertuigen",
+          "organization_name": "RDW",
+          "api_id": "rdw-brv"
+        }
+      ]
+    }
+  ],
+  "programmingLanguages": [
+    { "id": 3, "name": "C#" },
+    { "id": 5, "name": "CSS" },
+    { "id": 8, "name": "Dockerfile" },
+    { "id": 16, "name": "Gherkin" },
+    { "id": 13, "name": "Go" },
+    { "id": 4, "name": "HTML" },
+    { "id": 14, "name": "Java" },
+    { "id": 6, "name": "JavaScript" },
+    { "id": 10, "name": "Jupyter Notebook" },
+    { "id": 11, "name": "Kotlin" },
+    { "id": 15, "name": "PLpgSQL" },
+    { "id": 2, "name": "Python" },
+    { "id": 1, "name": "R" },
+    { "id": 12, "name": "Ruby" },
+    { "id": 7, "name": "Shell" },
+    { "id": 9, "name": "TSQL" }
+  ]
+}
