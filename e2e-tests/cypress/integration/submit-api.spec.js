@@ -40,8 +40,9 @@ describe('Submit API', () => {
     cy.get('#termsOfUsePayPerUse').click()
     cy.get('#termsOfUseUptimeGuarantee').type("{backspace}{backspace}99.99")
     cy.get('#termsOfUseSupportResponseTime').type("1")
+    cy.get('button').parent().screenshot()
     cy.get('button').contains('API toevoegen').click()
-    cy.contains('De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.')
+    cy.contains('De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.').screenshot()
   })
 
   it('should have add by MR', () => {

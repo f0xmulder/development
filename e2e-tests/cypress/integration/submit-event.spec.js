@@ -10,6 +10,19 @@ describe('Submit Event', () => {
     cy.screenshot()
   })
 
+  it('should have a form', () => {
+    cy.intercept('POST', '/api/events', { fixture: 'submit-event.json' })
+
+    cy.get('input[name="title"]').type("Event title")
+    cy.get('input[name="startDate"]').type(`${new Date().getFullYear()}-12-31`)
+    cy.get('input[name="startTime"]').type("10:00")
+    cy.get('input[name="location"]').type("Amsterdam")
+    cy.get('input[name="registrationUrl"]').type("https://registrationUrl.url")
+    cy.get('button').parent().screenshot()
+    cy.get('button').contains('Event toevoegen').click()
+    cy.contains('Het event is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.').screenshot()
+  })
+
   context('a11y', () => {
     sizes.forEach(size => {
       it(`${size.toString().replace(",", "x")}: has no detectable a11y violations on load`, () => {
