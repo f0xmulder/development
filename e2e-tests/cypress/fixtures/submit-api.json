@@ -1,0 +1,62 @@
+{
+  "id": 81190939,
+  "iid": 96,
+  "project_id": 18975726,
+  "title": "Add a new API: dsfdssdfdfsdfd test",
+  "description": "We would like to add the following API:\n\n```json\n{\n    \"description\": \"sdfdsfds\",\n    \"organization_name\": \"dsfdssdfdfsdfd\",\n    \"service_name\": \"test\",\n    \"api_type\": \"unknown\",\n    \"api_authentication\": \"unknown\",\n    \"environments\": [\n        {\n            \"name\": \"production\",\n            \"api_url\": \"https://gitlab.com\",\n            \"specification_url\": \"\",\n            \"documentation_url\": \"\"\n        }\n    ],\n    \"contact\": {\n        \"email\": \"\",\n        \"phone\": \"\",\n        \"url\": \"\"\n    },\n    \"terms_of_use\": {\n        \"government_only\": false,\n        \"pay_per_use\": false,\n        \"uptime_guarantee\": 99.5,\n        \"support_response_time\": null\n    }\n}\n```\n\nThanks a lot!\n\nThe web form",
+  "state": "opened",
+  "created_at": "2021-03-18T14:07:34.624Z",
+  "updated_at": "2021-03-18T14:07:34.624Z",
+  "closed_at": null,
+  "closed_by": null,
+  "labels": ["New API"],
+  "milestone": null,
+  "assignees": [],
+  "author": {
+    "id": 3683739,
+    "name": "Don Vito Corleone",
+    "username": "don-vito",
+    "state": "active",
+    "avatar_url": "https://secure.gravatar.com/avatar/a2f2705df5bb84c8bb08a2b358a7ddca?s=80&d=identicon",
+    "web_url": "https://gitlab.com/don-vito"
+  },
+  "assignee": null,
+  "user_notes_count": 0,
+  "merge_requests_count": 0,
+  "upvotes": 0,
+  "downvotes": 0,
+  "due_date": null,
+  "confidential": false,
+  "discussion_locked": null,
+  "web_url": "https://gitlab.com/commonground/don/don-issues-test/-/issues/96",
+  "time_stats": {
+    "time_estimate": 0,
+    "total_time_spent": 0,
+    "human_time_estimate": null,
+    "human_total_time_spent": null
+  },
+  "task_completion_status": {
+    "count": 0,
+    "completed_count": 0
+  },
+  "weight": null,
+  "blocking_issues_count": 0,
+  "has_tasks": false,
+  "_links": {
+    "self": "https://gitlab.com/api/v4/projects/18975726/issues/96",
+    "notes": "https://gitlab.com/api/v4/projects/18975726/issues/96/notes",
+    "award_emoji": "https://gitlab.com/api/v4/projects/18975726/issues/96/award_emoji",
+    "project": "https://gitlab.com/api/v4/projects/18975726"
+  },
+  "references": {
+    "short": "#96",
+    "relative": "#96",
+    "full": "commonground/don/don-issues-test#96"
+  },
+  "subscribed": true,
+  "moved_to_id": null,
+  "service_desk_reply_to": null,
+  "epic_iid": null,
+  "epic": null,
+  "health_status": null
+}
