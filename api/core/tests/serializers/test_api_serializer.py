@@ -9,7 +9,8 @@ from django.test import TestCase
 from rest_framework.exceptions import ErrorDetail
 
 from core.models import (
-    API, Badge, Environment, DesignRuleSession, APIDesignRuleTestSuite, DesignRuleResult
+    API, Badge, Environment, DesignRuleSession, APIDesignRuleTestSuite, DesignRuleResult,
+    Organization,
 )
 from core.serializers import APISerializer
 
@@ -62,7 +63,8 @@ class APISerializerTest(TestCase):
         api = API.objects.create(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization=Organization.objects.create(
+                organization_name='Test Organization', organization_oin='00001234567890123456'),
             service_name='First Service',
             api_type='rest_json',
             api_authentication='api_key',
@@ -83,6 +85,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'api_type': 'rest_json',
             'api_authentication': 'api_key',
@@ -352,6 +355,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'api_type': 'rest_json',
             'api_authentication': 'api_key',
@@ -387,6 +391,7 @@ class APISerializerTest(TestCase):
             api_id='api1',
             description='First API',
             organization_name='Test Organization',
+            organization_oin='00001234567890123456',
             service_name='First Service',
             api_type='rest_json',
             api_authentication='api_key',
@@ -408,13 +413,14 @@ class APISerializerTest(TestCase):
             terms_support_response_time=2,
         )
 
-        self.assertDictEqual(serializer.validated_data, expected)
+        self.assertDictEqual(serializer.data, expected)
 
     def test_deserialize_minimal_input(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -440,13 +446,14 @@ class APISerializerTest(TestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.validated_data, expected)
+        self.assertDictEqual(serializer.data, expected)
 
     def test_deserialize_empty_subobjects(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -474,13 +481,14 @@ class APISerializerTest(TestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.validated_data, expected)
+        self.assertDictEqual(serializer.data, expected)
 
     def test_deserialize_blank_subobjects(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -524,7 +532,7 @@ class APISerializerTest(TestCase):
             terms_support_response_time=None,
         )
 
-        self.assertDictEqual(serializer.validated_data, expected)
+        self.assertDictEqual(serializer.data, expected)
 
     def test_deserialize_missing_fields(self):
         input_data = {}
@@ -534,6 +542,7 @@ class APISerializerTest(TestCase):
             'id': [REQUIRED_ERROR],
             'description': [REQUIRED_ERROR],
             'organization_name': [REQUIRED_ERROR],
+            'organization_oin': [REQUIRED_ERROR],
             'service_name': [REQUIRED_ERROR],
             'environments': [REQUIRED_ERROR],
         })
@@ -544,6 +553,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -574,13 +584,14 @@ class APISerializerTest(TestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.validated_data, expected)
+        self.assertDictEqual(serializer.data, expected)
 
     def test_deserialize_forum_invalid_vendor(self):
         input_data = {
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -604,6 +615,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -627,6 +639,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -650,6 +663,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -669,6 +683,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [{}],
         }
@@ -686,6 +701,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [],
         }
@@ -700,6 +716,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
@@ -723,6 +740,7 @@ class APISerializerTest(TestCase):
             'id': 'api1',
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': '00001234567890123456',
             'service_name': 'First Service',
             'environments': [
                 {
