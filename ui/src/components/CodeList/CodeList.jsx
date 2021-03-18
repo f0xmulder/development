@@ -10,7 +10,7 @@ import { StyledList, StyledListItem } from './CodeList.styles'
 const CodeList = ({ code }) => (
   <StyledList>
     {code.map((code) => (
-      <StyledListItem key={code.id}>
+      <StyledListItem key={code.id} data-testid="link">
         <CodeSummary {...code} />
       </StyledListItem>
     ))}
