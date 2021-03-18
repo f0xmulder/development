@@ -1,4 +1,4 @@
-import { terminalLog } from "../support"
+import { sizes, terminalLog } from "../support"
 
 describe('Submit Event', () => {
   beforeEach(() => {
