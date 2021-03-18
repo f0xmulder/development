@@ -56,11 +56,11 @@ describe('Event Overview', () => {
     cy.url().should('include', `pagina=2`)
   })
 
-  it.skip('should have results per page', () => {
+  it('should have results per page', () => {
     const resultsPerPage = cy.get("#resultsPerPage").as('select')
     resultsPerPage.parent().screenshot()
-    cy.get('@select').select('25').should('have.value', '25')
-    cy.url().should('include', `aantalPerPagina=25`)
+    cy.get('@select').select('10').should('have.value', '10')
+    cy.url().should('include', `aantalPerPagina=10`)
   })
 
   context('a11y', () => {
