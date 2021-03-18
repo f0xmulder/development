@@ -66,7 +66,7 @@ const Pagination = ({
   }
 
   return totalPageCount > 0 ? (
-    <StyledPagination>
+    <StyledPagination data-testid="pagination">
       <StyledArrowButton
         disabled={currentPage === 1}
         onClick={() =>
