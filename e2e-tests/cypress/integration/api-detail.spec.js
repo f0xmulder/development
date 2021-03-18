@@ -1,4 +1,4 @@
-const { terminalLog } = require("../support");
+const { terminalLog, sizes } = require("../support");
 
 describe('API Detail', () => {
 
