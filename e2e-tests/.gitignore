@@ -5,3 +5,5 @@ cypress/screenshots/*
 cypress/videos/*
 !cypress/videos/.gitkeep
 cypress/.DS_Store
+.nyc_output/*
+coverage/*
