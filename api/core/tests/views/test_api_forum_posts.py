@@ -1,16 +1,16 @@
 import json
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 
-from core.models import API
+from core.models import API, Organization
 from core.tests.mocking import mock_response
 from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis/'
 
 
-class APIForumPostsViewTest(TestCase):
+class APIForumPostsViewTest(TransactionTestCase):
 
     def setUp(self):
         self.api1 = API.objects.create(
@@ -18,16 +18,22 @@ class APIForumPostsViewTest(TestCase):
             description='API with forum',
             forum_vendor='discourse',
             forum_url='https://geoforum.nl/c/datasets/bag',
+            organization=Organization.objects.create(
+                name='Test Organization', oin="00000000000000000001"),
         )
         self.api2 = API.objects.create(
             api_id='api2',
             description='API without forum',
+            organization=Organization.objects.create(
+                name='Test Organization 2', oin="00000000000000000002"),
         )
         self.api3 = API.objects.create(
             api_id='api3',
             description='API with empty forum url',
             forum_vendor='discourse',
             forum_url='',
+            organization=Organization.objects.create(
+                name='Test Organization 3', oin="00000000000000000003"),
         )
 
         # Display whole JSON diffs

@@ -75,8 +75,13 @@ class APIViewSet(RetrieveModelMixin,
             search_filter &= Q(is_reference_implementation=is_ref_impl_val)
         search_text = request.query_params.get('q')
         if search_text:
-            for field_name in self.text_search_fields:
-                search_filter |= Q(**{f'{field_name}__icontains': search_text})
+            for search_item in search_text.split(' '):
+                if not search_item:
+                    continue
+                item_filter = Q()
+                for field_name in self.text_search_fields:
+                    item_filter |= Q(**{f'{field_name}__icontains': search_item})
+                search_filter &= item_filter
 
         facet_inputs = {
             f: request.query_params.getlist(f.replace("__", "_")) for f in self.supported_facets}
