@@ -61,15 +61,6 @@ export const Links = styled.div`
   `}
 `
 
-export const Events = styled.div`
-  display: flex;
-  flex-direction: column;
-  a:last-child {
-    margin-left: auto;
-    margin-right: ${(p) => p.theme.tokens.spacing04};
-  }
-`
-
 export const StyledErrorMessage = styled.p`
   margin-top: ${(p) => p.theme.tokens.spacing05};
 `
