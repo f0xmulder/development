@@ -22,7 +22,6 @@ describe('Home', () => {
       it(`should have a ${link.name} link`, () => {
         const el = cy.get('nav').contains(link.name)
         el.screenshot()
-        el.toMatchImageSnapshot();
         el.click()
         cy.url().should('include', link.url)
       })
@@ -42,7 +41,6 @@ describe('Home', () => {
       it(`should have a ${link.name} link`, () => {
         const el = cy.get('nav').contains(link.name)
         el.screenshot()
-        el.toMatchImageSnapshot();
         el.click()
         cy.url().should('include', link.url)
       })
@@ -59,7 +57,6 @@ describe('Home', () => {
       it(`should have a "${card.name}" card`, () => {
         const el = cy.get(`[data-testid="${card.testId}"]`)
         el.screenshot()
-        el.toMatchImageSnapshot();
         cy.contains(card.name).click()
         cy.url().should('include', card.url)
       })

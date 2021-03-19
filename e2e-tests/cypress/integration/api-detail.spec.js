@@ -8,7 +8,7 @@ describe('API Detail', () => {
   })
 
   it('navigating to the first API Detail page', () => {
-    cy.get('[data-test="api-specification-url"]').contains("Specificatie").toMatchImageSnapshot();
+    cy.get('[data-test="api-specification-url"]').contains("Specificatie")
   })
 
   context('a11y', () => {
