@@ -9,9 +9,6 @@ describe('Home', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('Eén centrale plek voor de developer die voor of met de overheid ontwikkelt')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
   })
 
   context('Header', () => {
@@ -25,6 +22,7 @@ describe('Home', () => {
       it(`should have a ${link.name} link`, () => {
         const el = cy.get('nav').contains(link.name)
         el.screenshot()
+        el.toMatchImageSnapshot();
         el.click()
         cy.url().should('include', link.url)
       })
@@ -44,6 +42,7 @@ describe('Home', () => {
       it(`should have a ${link.name} link`, () => {
         const el = cy.get('nav').contains(link.name)
         el.screenshot()
+        el.toMatchImageSnapshot();
         el.click()
         cy.url().should('include', link.url)
       })
@@ -60,6 +59,7 @@ describe('Home', () => {
       it(`should have a "${card.name}" card`, () => {
         const el = cy.get(`[data-testid="${card.testId}"]`)
         el.screenshot()
+        el.toMatchImageSnapshot();
         cy.contains(card.name).click()
         cy.url().should('include', card.url)
       })
@@ -68,7 +68,6 @@ describe('Home', () => {
 
   it('should have a create issue button', () => {
     const el = cy.contains('Melding maken op GitLab')
-    el.screenshot()
     // Remove target to open in current window
     el.invoke('removeAttr', 'target').click()
     cy.url().should('include', 'https://gitlab.com/commonground/don/developer.overheid.nl/-/issues')
@@ -84,7 +83,7 @@ describe('Home', () => {
         }
         cy.visit('/')
         cy.screenshot()
-        
+
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

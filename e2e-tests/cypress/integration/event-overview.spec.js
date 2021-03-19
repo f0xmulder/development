@@ -32,14 +32,10 @@ describe('Event Overview', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('Aankomende events')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
   })
 
   it('should have an add event button', () => {
     const button = cy.contains('Event toevoegen')
-    button.screenshot()
     button.click()
     cy.url().should('include', '/events/add')
   })
@@ -47,20 +43,19 @@ describe('Event Overview', () => {
   it('should have a list of events', () => {
     cy.contains('Event 1').parent().parent().as('event')
     cy.get('@event').screenshot()
+    cy.get('@event').toMatchImageSnapshot();
     cy.contains('Naar event pagina').first().invoke('removeAttr', 'target').click()
     cy.url().should('include', `https://www.meetup.com/events/1`)
   })
 
   it('should have pagination', () => {
     const pagination = cy.get('[data-testid="pagination"]')
-    pagination.screenshot()
     pagination.get('button').eq(2).click()
     cy.url().should('include', `pagina=2`)
   })
 
   it('should have results per page', () => {
     const resultsPerPage = cy.get("#resultsPerPage").as('select')
-    resultsPerPage.parent().screenshot()
     cy.get('@select').select('10').should('have.value', '10')
     cy.url().should('include', `aantalPerPagina=10`)
   })

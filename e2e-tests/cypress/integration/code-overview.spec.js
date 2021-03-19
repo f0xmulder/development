@@ -10,21 +10,16 @@ describe('Code Overview', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('Code')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
   })
 
   it('should have an add project button', () => {
     const button = cy.contains('Project toevoegen')
-    button.screenshot()
     button.click()
     cy.url().should('include', '/code/add')
   })
 
   it('should have a search project field', () => {
     const input = cy.get('input')
-    input.screenshot()
     input.type("xxx")
 
     cy.url().should('include', '/code?q=xxx')
@@ -39,14 +34,13 @@ describe('Code Overview', () => {
       .first()
       .click() // click on first option
     cy.get('@select').screenshot()
-
     cy.url().should('include', 'code?programming_languages=3')
   })
 
   it('should have a list of projects', () => {
     cy.get('[data-testid="link"]').first().as("link")
     cy.get("@link").screenshot()
-
+    cy.get("@link").toMatchImageSnapshot();
     cy.get('[data-testid="link"] > div > div > a').first().as('firstLink').then(function (elem) {
       cy.get('@firstLink').invoke('removeAttr', 'target').click()
       cy.url().should('include', elem.text())
@@ -55,14 +49,12 @@ describe('Code Overview', () => {
 
   it('should have pagination', () => {
     const pagination = cy.get('[data-testid="pagination"]')
-    pagination.screenshot()
     pagination.get('button').eq(2).click()
     cy.url().should('include', `pagina=2`)
   })
 
   it('should have results per page', () => {
     const resultsPerPage = cy.get("#resultsPerPage").as('select')
-    resultsPerPage.parent().screenshot()
     cy.get('@select').select('10').should('have.value', '10')
     cy.url().should('include', `aantalPerPagina=10`)
   })
