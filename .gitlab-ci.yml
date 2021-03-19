@@ -270,7 +270,9 @@ E2E tests:
   stage: e2e-tests
   allow_failure: true
   parallel: 9
+  image: docker
   before_script:
+  - apk add --update nodejs npm
   - export CYPRESS_BASE_URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
     "https://$DOMAIN")
   - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
