@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import Search from './index'
 
 describe('Search', () => {
@@ -19,7 +19,7 @@ describe('Search', () => {
         />,
       )
 
-      await wait(async () => {
+      await waitFor(async () => {
         const inputField = await findByPlaceholderText('Zoek')
 
         fireEvent.change(inputField, { target: { value: 'abc' } })

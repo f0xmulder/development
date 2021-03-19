@@ -95,7 +95,7 @@ class APIViewSet(RetrieveModelMixin,
         return self.get_response(results, facets)
 
     @staticmethod
-    def get_facets(queryset, facet_filters, search_filter):
+    def get_facets(queryset, facet_filters):
         facets = {}
         for facet, display_name in APIViewSet.supported_facets.items():
             other_facet_filters = [

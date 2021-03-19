@@ -11,6 +11,7 @@ import { modelFromCodeResponse } from '../../models/code'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
 import { DONSmall } from '../../components/CustomDON'
+import CodeRepository from '../../domain/code-repository'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -47,7 +48,9 @@ class CodeOverview extends Component {
 
   async loadCodeList() {
     try {
-      const response = await this.fetchCodeList()
+      const response = await CodeRepository.getAll(
+        generateQueryParams(this.getQueryParams()),
+      )
       const result = Object.assign({}, response, {
         code: response.results.map((code) => modelFromCodeResponse(code)),
       })
@@ -91,18 +94,6 @@ class CodeOverview extends Component {
       )
     }
     history.push(`/code?${urlParams}`)
-  }
-
-  async fetchCodeList() {
-    const response = await fetch(
-      `/api/code?${generateQueryParams(this.getQueryParams())}`,
-    )
-
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Er ging iets fout tijdens het ophalen van de code`)
-    }
   }
 
   handlePageChange = (page) => {

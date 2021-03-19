@@ -16,19 +16,19 @@ const singleEnvironment = {
 const multipleEnvironments = [
   {
     name: 'production',
-    apiUrl: 'API URL',
+    apiUrl: 'PRODUCTION API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
   },
   {
     name: 'acceptance',
-    apiUrl: 'API URL',
+    apiUrl: 'ACCEPTANCE API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
   },
   {
     name: 'demo',
-    apiUrl: 'API URL',
+    apiUrl: 'DEMO API URL',
     specificationUrl: 'Specification URL',
     documentationUrl: 'Documentation URL',
   },

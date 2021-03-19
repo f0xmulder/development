@@ -14,7 +14,7 @@ import {
   submitDataMock,
 } from './formData.mock'
 
-import SubmitAPI, {
+import SubmitAPIForm, {
   createRelation,
   convertFormDataToRequestBody,
 } from './SubmitAPIForm'
@@ -50,8 +50,8 @@ describe('SubmitAPI', () => {
     let submitToApiSpy
 
     beforeEach(() => {
-      submitToApiSpy = jest.spyOn(SubmitAPI.prototype, 'submitToApi')
-      wrapper = shallow(<SubmitAPI />)
+      submitToApiSpy = jest.spyOn(SubmitAPIForm.prototype, 'submitToApi')
+      wrapper = shallow(<SubmitAPIForm />)
       wrapper.setState({ apis: [], apisLoaded: true })
     })
 
@@ -62,9 +62,9 @@ describe('SubmitAPI', () => {
 
     describe('on selecting reference implementation', () => {
       it('should fetch the available apis', () => {
-        jest.spyOn(SubmitAPI.prototype, 'fetchApiList')
+        jest.spyOn(SubmitAPIForm.prototype, 'fetchApiList')
 
-        const wrapper = shallow(<SubmitAPI />)
+        const wrapper = shallow(<SubmitAPIForm />)
         wrapper.instance().formikValueChange({
           ...rawFormDataMock,
           isBasedOnReferenceImplementation: 'true',
@@ -77,9 +77,9 @@ describe('SubmitAPI', () => {
           page: 1,
           results: [backendApiMock],
         })
-        SubmitAPI.prototype.fetchApiList = jest.fn(() => apiPromise)
+        SubmitAPIForm.prototype.fetchApiList = jest.fn(() => apiPromise)
 
-        const wrapper = shallow(<SubmitAPI />)
+        const wrapper = shallow(<SubmitAPIForm />)
         wrapper.instance().formikValueChange({
           ...rawFormDataMock,
           isBasedOnReferenceImplementation: 'true',
@@ -128,9 +128,9 @@ describe('SubmitAPI', () => {
       describe('submitToApi is succesful', () => {
         it('should set submitted to true', async () => {
           const apiPromise = Promise.resolve({ id: 42 })
-          SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
+          SubmitAPIForm.prototype.submitToApi = jest.fn(() => apiPromise)
 
-          const wrapper = shallow(<SubmitAPI />)
+          const wrapper = shallow(<SubmitAPIForm />)
           wrapper.instance().handleSubmit(rawFormDataMock, {
             setSubmitting: jest.fn(),
             setStatus: jest.fn(),
@@ -150,9 +150,9 @@ describe('SubmitAPI', () => {
           const apiPromise = Promise.reject(
             new Error('arbitrary reject reason coming from tests'),
           )
-          SubmitAPI.prototype.submitToApi = jest.fn(() => apiPromise)
+          SubmitAPIForm.prototype.submitToApi = jest.fn(() => apiPromise)
 
-          const wrapper = shallow(<SubmitAPI />)
+          const wrapper = shallow(<SubmitAPIForm />)
 
           const actions = {
             setSubmitting: jest.fn(),
@@ -172,7 +172,7 @@ describe('SubmitAPI', () => {
 
     beforeEach(() => {
       global.sessionStorage.removeItem('storedFormValues')
-      formWrapper = shallow(<SubmitAPI />)
+      formWrapper = shallow(<SubmitAPIForm />)
       formWrapper.setState({ storedFormValues: testValue })
     })
 

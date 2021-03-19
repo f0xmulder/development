@@ -1,7 +1,6 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import {
@@ -80,12 +79,20 @@ class SetupTest {
     ignoreLoadingState = true,
     route,
     additionalProps,
+    muteError,
   }) => {
     // Filter expected errors to keep the console clean
-    const error = console.error
+
+    if (muteError) {
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
+    }
 
     if (throwBackendError) {
-      console.error = jest.fn
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
 
       this.server.use(
         rest.get(this.apiUrl, (_, res, ctx) => {
@@ -120,9 +127,6 @@ class SetupTest {
         waitForElementToBeRemoved(() => screen.getByTestId('loading')),
       ).resolves.not.toThrow()
     }
-
-    // Restore error reporting
-    console.error = error
   }
 }
 

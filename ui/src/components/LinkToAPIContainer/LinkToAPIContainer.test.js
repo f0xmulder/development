@@ -43,7 +43,6 @@ describe('LinkToAPIContainer', () => {
 
   describe('displaying the API', () => {
     let wrapper
-
     beforeEach(() => {
       wrapper = shallow(<LinkToAPIContainer id="42" />)
       wrapper.setState({
@@ -58,6 +57,11 @@ describe('LinkToAPIContainer', () => {
   })
 
   describe('when an error occurred while fetching the API', () => {
+    beforeAll(() => {
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
+    })
     it('should set the error state', async () => {
       const thePromise = Promise.reject(
         new Error('arbitrary reject reason coming from tests'),
@@ -72,6 +76,11 @@ describe('LinkToAPIContainer', () => {
   })
 
   describe('when the component is in the error state', () => {
+    beforeAll(() => {
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
+    })
     it('an error message should be visible', () => {
       const wrapper = shallow(<LinkToAPIContainer id="42" />)
       wrapper.setState({ error: true, loaded: true })

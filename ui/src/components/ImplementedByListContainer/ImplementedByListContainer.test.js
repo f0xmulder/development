@@ -71,6 +71,11 @@ describe('ImplementedByListContainer', () => {
   })
 
   describe("when an error occurred while fetching the API's", () => {
+    beforeAll(() => {
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
+    })
     it('should set the error state', async () => {
       const thePromise = Promise.reject(
         new Error('arbitrary reject reason coming from tests'),
@@ -87,6 +92,11 @@ describe('ImplementedByListContainer', () => {
   })
 
   describe('when the component is in the error state', () => {
+    beforeAll(() => {
+      jest
+        .spyOn(global.console, 'error')
+        .mockImplementationOnce(() => jest.fn())
+    })
     it('an error message should be visible', () => {
       const wrapper = shallow(<ImplementedByListContainer id="42" />)
       wrapper.setState({ error: true, loaded: true })

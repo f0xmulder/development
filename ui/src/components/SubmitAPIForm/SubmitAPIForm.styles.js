@@ -2,6 +2,7 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
+import { Field } from 'formik'
 
 export const StyledFormGroupColumnContainer = styled.div`
   display: flex;
@@ -58,4 +59,11 @@ export const SelectFieldLoading = styled.div`
   max-width: 45rem;
   outline: none;
   padding: ${(p) => p.theme.tokens.spacing04};
+`
+export const StyledField = styled(Field)`
+  display: flex;
+  padding: 0;
+  width: 100% !important;
+  max-width: 45rem;
+  border: none;
 `

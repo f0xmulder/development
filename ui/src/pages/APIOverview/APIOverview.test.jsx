@@ -19,19 +19,21 @@ const apiResponse = {
       ...backendApiMock,
       id: 'id2',
       service_name: 'service_name2',
-      organization_name: 'organization_name2',
+      organization_oin: '00000001001589623000',
       api_type: 'rest_xml',
     },
   ],
   facets: {
-    organization_name: {
+    organization_oin: {
       terms: [
         {
           term: 'organization name',
+          display_name: 'organization name',
           count: 1,
         },
         {
           term: 'organization_name2',
+          display_name: 'organization_name2',
           count: 1,
         },
       ],

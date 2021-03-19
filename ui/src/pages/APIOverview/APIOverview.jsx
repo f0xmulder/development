@@ -12,6 +12,7 @@ import { modelFromAPIResponse } from '../../models/api'
 import { generateQueryParams } from '../../utils/uriHelpers'
 import { ResultsHeader } from '../../components/Overview/Overview'
 import { DONSmall } from '../../components/CustomDON'
+import APIRepository from '../../domain/api-repository'
 import {
   StyledOverviewPage,
   StyledOverviewHeader,
@@ -46,7 +47,9 @@ class APIOverview extends Component {
 
   async loadAPIList() {
     try {
-      const response = await this.fetchApiList()
+      const response = await APIRepository.getAll(
+        generateQueryParams(this.getQueryParams()),
+      )
       const result = Object.assign({}, response, {
         apis: response.results.map((api) => modelFromAPIResponse(api)),
       })
@@ -79,24 +82,13 @@ class APIOverview extends Component {
     this.handleSearchHandler(input)
   }
 
-  async fetchApiList() {
-    const response = await fetch(
-      `/api/apis?${generateQueryParams(this.getQueryParams())}`,
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-    }
-  }
-
   handleFilterChange = (newFilters) => {
     const currentFilters = this.getQueryParams()
 
     // Reset facets when starting a new text search
     if (newFilters.q !== currentFilters.q) {
       /* eslint-disable camelcase */
-      newFilters.organization_name = []
+      newFilters.organization_oin = []
       newFilters.api_type = []
       /* eslint-enable camelcase */
     }
@@ -104,7 +96,7 @@ class APIOverview extends Component {
     const translatedFilters = {
       /* eslint-disable camelcase */
       q: newFilters.q,
-      organisatie: newFilters.organization_name || [],
+      organisatie: newFilters.organization_oin || [],
       type: newFilters.api_type || [],
       /* eslint-enable camelcase */
     }
@@ -136,7 +128,7 @@ class APIOverview extends Component {
     /* eslint-disable camelcase */
     return {
       q: values.get('q') || '',
-      organization_name: values.getAll('organisatie'),
+      organization_oin: values.getAll('organisatie'),
       api_type: values.getAll('type'),
       page: values.get('pagina') || '1',
       rowsPerPage: values.get('aantalPerPagina') || '10',

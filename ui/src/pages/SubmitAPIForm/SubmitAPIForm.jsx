@@ -3,8 +3,7 @@
 //
 import React, { Component } from 'react'
 import { Formik } from 'formik'
-import Cookies from 'js-cookie'
-
+import APIRepository from '../../domain/api-repository'
 import { RELATION_TYPE_REFERENCE_IMPLEMENTATION } from '../../constants'
 import SubmitAPIForm from '../../components/SubmitAPIForm/SubmitAPIForm'
 import OnFormikValueChange from '../../components/Form/OnFormikValueChange'
@@ -15,6 +14,7 @@ import { schema } from './validationSchema'
 const initialValues = {
   description: '',
   organizationName: '',
+  organizationOin: '',
   serviceName: '',
   apiType: 'unknown',
   apiAuthentication: '',
@@ -65,6 +65,7 @@ export const convertFormDataToRequestBody = (formData) => {
   /* eslint-disable camelcase */
   requestBody.description = formData.description
   requestBody.organization_name = formData.organizationName
+  requestBody.organization_oin = formData.organizationOin
   requestBody.service_name = formData.serviceName
   requestBody.api_type = formData.apiType
   requestBody.api_authentication = formData.apiAuthentication
@@ -157,6 +158,10 @@ class SubmitAPIFormPage extends Component {
     window && window.removeEventListener('beforeunload', this.handleReset)
   }
 
+  async submitToApi(data) {
+    return APIRepository.create(data)
+  }
+
   async handleSubmit(values, actions) {
     // The form has already passed validation,
     // this call serves only to apply Yup type coercion and transforms.
@@ -182,22 +187,6 @@ class SubmitAPIFormPage extends Component {
     }
   }
 
-  async submitToApi(data) {
-    const response = await fetch('/api/submit-api', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-    })
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error('Er ging iets fout tijdens het toevoegen van de API.')
-    }
-  }
-
   formikValueChange = (values) => {
     const { isBasedOnReferenceImplementation } = values
 
@@ -214,16 +203,9 @@ class SubmitAPIFormPage extends Component {
   }
 
   async fetchApiList() {
-    const response = await fetch(
-      `/api/apis?rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
+    return APIRepository.getAll(
+      `rowsPerPage=${Number.MAX_SAFE_INTEGER}&isReferenceImplementation=true`,
     )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout tijdens het ophalen van de beschikbare API's`,
-      )
-    }
   }
 
   async callAPIAndModelResponse() {

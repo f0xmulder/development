@@ -27,7 +27,7 @@ describe('Code repository', () => {
     afterEach(() => global.fetch.mockRestore())
 
     it('should return a list of code', async () => {
-      const result = await CodeRepository.getAll('1')
+      const result = await CodeRepository.getAll('page=1')
       expect(result).toEqual(codeListMock)
       expect(global.fetch).toHaveBeenCalledWith('/api/code?page=1')
     })

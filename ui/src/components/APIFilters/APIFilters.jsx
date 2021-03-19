@@ -19,19 +19,23 @@ export const filters = [
     getLabel: (term) => APIType.valueOf(term).label,
   },
   {
-    key: 'organization_name',
+    key: 'organization_oin',
     label: 'Organisatie',
     getLabel: (term) => term,
   },
 ]
 
-export const formatOptions = (facets, filter) =>
-  facets[filter.key].terms.map((termData) => ({
+export const formatOptions = (facets, filter) => {
+  return facets[filter.key].terms.map((termData) => ({
     value: termData.term,
-    label: filter.getLabel(termData.term),
+    label:
+      filter.key === 'organization_oin'
+        ? filter.getLabel(termData.display_name)
+        : filter.getLabel(termData.term),
     count: termData.count,
     disabled: termData.count === 0,
   }))
+}
 
 export const facetsContainTermsForFilterByKey = (facets, filterKey) =>
   facets[filterKey] &&
