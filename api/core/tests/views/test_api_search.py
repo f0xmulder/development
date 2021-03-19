@@ -80,10 +80,10 @@ class APISearchTest(TransactionTestCase):
             {'term': t, 'count': expected_api_type_facets[t]} for t in expected_api_type_facets]
         api_terms.sort(key=operator.itemgetter("term"))
         org_terms = [{
-                'term': self.orgs_vals[t],
-                'display_name': t,
-                'count': excepted_organization_facets[t],
-            } for t in excepted_organization_facets]
+            'term': self.orgs_vals[t],
+            'display_name': t,
+            'count': excepted_organization_facets[t],
+        } for t in excepted_organization_facets]
         org_terms.sort(key=operator.itemgetter("term"))
         expected_facets = {
             'api_type': {
