@@ -12,6 +12,7 @@
     "cy:show:debug": "cypress open"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.2",
     "axe-core": "4.1.3",
     "cypress": "^6.8.0",
     "cypress-axe": "0.12.2"

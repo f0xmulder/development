@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@commonground/eslint-config-cra-standard-prettier": "2.1.1",
+    "@cypress/instrument-cra": "1.4.0",
     "@sheerun/mutationobserver-shim": "0.3.3",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
@@ -51,7 +52,7 @@
     "react-scripts": "3.4.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "react-scripts test",
