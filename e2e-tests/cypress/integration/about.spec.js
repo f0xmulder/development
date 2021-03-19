@@ -19,10 +19,11 @@ describe('About', () => {
           cy.viewport(size)
         }
         cy.visit('/about')
-
+        cy.document()
+          .toMatchImageSnapshot();
+          
         cy.injectAxe()
         // Test the page at initial load
-        cy.screenshot()
         cy.checkA11y(null, {
           runOnly: {
             type: 'tag',

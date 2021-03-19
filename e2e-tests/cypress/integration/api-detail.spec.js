@@ -21,11 +21,12 @@ describe('API Detail', () => {
           cy.viewport(size)
         }
         cy.visit('/apis')
-        cy.get('[data-test="link"]').first().click();
+        cy.document()
+          .toMatchImageSnapshot();
 
+        cy.get('[data-test="link"]').first().click();
         cy.injectAxe()
         // Test the page at initial load
-        cy.screenshot()
         cy.checkA11y(null, {
           runOnly: {
             type: 'tag',
