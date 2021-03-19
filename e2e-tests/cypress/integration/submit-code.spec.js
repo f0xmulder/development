@@ -7,9 +7,6 @@ describe('Submit Code', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('Project toevoegen')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
   })
 
   it('should have a form', () => {
@@ -24,6 +21,7 @@ describe('Submit Code', () => {
       .first()
       .click() // click on first option
     cy.get('@url').parent().screenshot()
+    cy.get('@url').parent().toMatchImageSnapshot();
     cy.get('button').contains('Project toevoegen').click()
     cy.contains("De code is toegevoegd. https://gitlab.com/commonground/don/don-issues-test/-/issues/96").screenshot()
   })

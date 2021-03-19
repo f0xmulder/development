@@ -7,9 +7,7 @@ describe('Submit API', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('API toevoegen')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
+    cy.document().toMatchImageSnapshot();
   })
 
   it('should have add by form', () => {
@@ -17,6 +15,7 @@ describe('Submit API', () => {
 
     cy.contains('Toevoegen via formulier').as('form')
     cy.get('@form').screenshot()
+    cy.get('@form').toMatchImageSnapshot();
     cy.get('#serviceName').type("API naam")
     cy.get('#description').type("API description")
     cy.get('#organizationName').type("Organization name")
@@ -43,6 +42,7 @@ describe('Submit API', () => {
     cy.get('#termsOfUseUptimeGuarantee').type("{backspace}{backspace}99.99")
     cy.get('#termsOfUseSupportResponseTime').type("1")
     cy.get('button').parent().screenshot()
+    cy.get('button').parent().toMatchImageSnapshot();
     cy.get('button').contains('API toevoegen').click()
     cy.contains('De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.').screenshot()
   })
@@ -50,6 +50,7 @@ describe('Submit API', () => {
   it('should have add by MR', () => {
     cy.contains('Via Merge Request').as('MR')
     cy.get('@MR').screenshot()
+    cy.get('@MR').toMatchImageSnapshot();
     cy.get('@MR').click()
     cy.contains('data/{organization}-{api}')
     cy.contains('data/apis/{organization}-{api}.json')
@@ -106,7 +107,7 @@ describe('Submit API', () => {
         }
         cy.visit('/apis/add')
         cy.screenshot()
-        
+
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

@@ -7,9 +7,6 @@ describe('Submit Event', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('Event toevoegen')
-    cy.screenshot()
-    cy.document()
-      .toMatchImageSnapshot();
   })
 
   it('should have a form', () => {
@@ -21,6 +18,7 @@ describe('Submit Event', () => {
     cy.get('input[name="location"]').type("Amsterdam")
     cy.get('input[name="registrationUrl"]').type("https://registrationUrl.url")
     cy.get('button').parent().screenshot()
+    cy.get('button').parent().toMatchImageSnapshot();
     cy.get('button').contains('Event toevoegen').click()
     cy.contains('Het event is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.').screenshot()
   })
