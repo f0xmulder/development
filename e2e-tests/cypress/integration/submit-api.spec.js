@@ -7,7 +7,6 @@ describe('Submit API', () => {
 
   it('should show the page title', () => {
     cy.get('h1').contains('API toevoegen')
-    cy.document().toMatchImageSnapshot();
   })
 
   it('should have add by form', () => {
@@ -15,7 +14,6 @@ describe('Submit API', () => {
 
     cy.contains('Toevoegen via formulier').as('form')
     cy.get('@form').screenshot()
-    cy.get('@form').toMatchImageSnapshot();
     cy.get('#serviceName').type("API naam")
     cy.get('#description').type("API description")
     cy.get('#organizationName').type("Organization name")
