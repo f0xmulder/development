@@ -8,9 +8,10 @@
       "type": "image/x-icon"
     },
     {
-      "src": "DON_favicon_Gitlab.png",
+      "src": "maskable_icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "DON_favicon_64x64.png",
