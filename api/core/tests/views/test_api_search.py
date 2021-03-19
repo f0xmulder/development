@@ -69,9 +69,11 @@ class APISearchTest(TransactionTestCase):
         except json.JSONDecodeError:
             self.fail(f'response.content is not valid JSON: {response.content}')
 
-        expected_results = APISerializer(expected_apis, many=True).data
+        expected_results = list(APISerializer(expected_apis, many=True).data)
+        expected_results.sort(key=operator.itemgetter("id"))
         # Convert results from OrderedDict to dict
         expected_results = [dict(r) for r in expected_results]
+        response_data['results'].sort(key=operator.itemgetter("id"))
         self.assertEqual(response_data['results'], expected_results)
 
         api_terms = [

@@ -2,7 +2,7 @@ import json
 
 from django.test import TestCase
 
-from core.models import API, Relation
+from core.models import API, Relation, Organization
 from core.serializers import APISerializer
 
 
@@ -14,7 +14,8 @@ class APIImplementedByViewTest(TestCase):
         self.api1 = API.objects.create(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization=Organization.objects.create(
+                name='Test Organization', oin="00000000000000000001"),
             service_name='First Service',
             api_type='rest_json',
             api_authentication='none',
@@ -24,14 +25,20 @@ class APIImplementedByViewTest(TestCase):
         self.api2 = API.objects.create(
             api_id='implementer_1',
             is_reference_implementation=False,
+            organization=Organization.objects.create(
+                name='Test Organization 2', oin="00000000000000000002"),
         )
         self.api3 = API.objects.create(
             api_id='implementer_2',
             is_reference_implementation=False,
+            organization=Organization.objects.create(
+                name='Test Organization 3', oin="00000000000000000003"),
         )
         self.api4 = API.objects.create(
             api_id='fake_implementer',
             is_reference_implementation=False,
+            organization=Organization.objects.create(
+                name='Test Organization 4', oin="00000000000000000004"),
         )
         Relation.objects.create(
             name=Relation.TYPE_REFERENCE_IMPLEMENTATION,
