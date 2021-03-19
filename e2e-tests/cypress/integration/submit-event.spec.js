@@ -32,10 +32,11 @@ describe('Submit Event', () => {
           cy.viewport(size)
         }
         cy.visit('/events/add')
-
+        cy.document()
+          .toMatchImageSnapshot();
+          
         cy.injectAxe()
         // Test the page at initial load
-        cy.screenshot()
         cy.checkA11y(null, {
           runOnly: {
             type: 'tag',
