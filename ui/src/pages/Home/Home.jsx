@@ -1,36 +1,23 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
-import useSWR from 'swr'
 
-import { Button } from '@commonground/design-system'
+import { Button, Spinner } from '@commonground/design-system'
 import { H1, H2 } from '../../components/Headings/Headings'
 import svgApi from '../../components/SVG/Spot-API.svg'
 import svgForum from '../../components/SVG/Spot-Forum.svg'
-import EventList from '../../components/EventList/EventList'
-import { modelFromAPIResponse } from '../../models/event'
 import {
   Links,
   StyledHomePage,
   StyledHeading,
   StyledCard,
   StyledInternalIcon,
-  Events,
 } from './Home.styles'
+const UpcomingEvents = lazy(() => import('./UpcomingEvents'))
 
 const Home = () => {
-  const { data } = useSWR('/api/events?page=1&rowsPerPage=3', (url) =>
-    fetch(url)
-      .then((r) => r.json())
-      .then((json) =>
-        Object.assign({}, json, {
-          events: json.results.map((event) => modelFromAPIResponse(event)),
-        }),
-      ),
-  )
-
   return (
     <StyledHomePage>
       <StyledHeading>
@@ -91,18 +78,9 @@ const Home = () => {
           </StyledCard.Body>
         </StyledCard>
       </Links>
-
-      {!!data?.events?.length && (
-        <>
-          <H2>Aankomende events</H2>
-          <Events>
-            <EventList events={data.events} />
-            <Button variant="link" as={Link} to="/events">
-              Bekijk alle events <StyledInternalIcon />
-            </Button>
-          </Events>
-        </>
-      )}
+      <Suspense fallback={<Spinner />}>
+        <UpcomingEvents />
+      </Suspense>
     </StyledHomePage>
   )
 }
