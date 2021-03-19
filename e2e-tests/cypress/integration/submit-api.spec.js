@@ -8,6 +8,8 @@ describe('Submit API', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('API toevoegen')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have add by form', () => {
@@ -103,9 +105,8 @@ describe('Submit API', () => {
           cy.viewport(size)
         }
         cy.visit('/apis/add')
-        cy.document()
-          .toMatchImageSnapshot();
-
+        cy.screenshot()
+        
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

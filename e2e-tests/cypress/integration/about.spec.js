@@ -8,6 +8,8 @@ describe('About', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Over Developer Overheid')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   context('a11y', () => {
@@ -19,9 +21,8 @@ describe('About', () => {
           cy.viewport(size)
         }
         cy.visit('/about')
-        cy.document()
-          .toMatchImageSnapshot();
-          
+        cy.screenshot()
+        
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

@@ -11,6 +11,8 @@ describe('Code Overview', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Code')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have an add project button', () => {
@@ -74,8 +76,7 @@ describe('Code Overview', () => {
           cy.viewport(size)
         }
         cy.visit('/code')
-        cy.document()
-          .toMatchImageSnapshot();
+        cy.screenshot()
 
         cy.injectAxe()
         // Test the page at initial load
