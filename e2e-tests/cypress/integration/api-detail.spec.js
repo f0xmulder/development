@@ -10,6 +10,8 @@ describe('API Detail', () => {
   it('navigating to the first API Detail page', () => {
     cy.get('[data-test="api-specification-url"]').contains("Specificatie")
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   context('a11y', () => {
@@ -21,8 +23,7 @@ describe('API Detail', () => {
           cy.viewport(size)
         }
         cy.visit('/apis')
-        cy.document()
-          .toMatchImageSnapshot();
+        cy.screenshot()
 
         cy.get('[data-test="link"]').first().click();
         cy.injectAxe()

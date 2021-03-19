@@ -8,6 +8,8 @@ describe('Submit Code', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Project toevoegen')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have a form', () => {
@@ -35,8 +37,7 @@ describe('Submit Code', () => {
           cy.viewport(size)
         }
         cy.visit('/code/add')
-        cy.document()
-          .toMatchImageSnapshot();
+        cy.screenshot()
 
         cy.injectAxe()
         // Test the page at initial load

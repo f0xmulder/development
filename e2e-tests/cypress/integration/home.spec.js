@@ -10,6 +10,8 @@ describe('Home', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Eén centrale plek voor de developer die voor of met de overheid ontwikkelt')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   context('Header', () => {
@@ -81,8 +83,8 @@ describe('Home', () => {
           cy.viewport(size)
         }
         cy.visit('/')
-        cy.document()
-          .toMatchImageSnapshot();
+        cy.screenshot()
+        
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

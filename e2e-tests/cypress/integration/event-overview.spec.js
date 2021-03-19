@@ -33,6 +33,8 @@ describe('Event Overview', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Aankomende events')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have an add event button', () => {
@@ -72,8 +74,7 @@ describe('Event Overview', () => {
           cy.viewport(size)
         }
         cy.visit('/events')
-        cy.document()
-          .toMatchImageSnapshot();
+        cy.screenshot()
 
         cy.injectAxe()
         // Test the page at initial load

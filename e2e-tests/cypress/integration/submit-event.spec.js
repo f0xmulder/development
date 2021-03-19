@@ -8,6 +8,8 @@ describe('Submit Event', () => {
   it('should show the page title', () => {
     cy.get('h1').contains('Event toevoegen')
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have a form', () => {
@@ -32,9 +34,8 @@ describe('Submit Event', () => {
           cy.viewport(size)
         }
         cy.visit('/events/add')
-        cy.document()
-          .toMatchImageSnapshot();
-          
+        cy.screenshot()
+
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {

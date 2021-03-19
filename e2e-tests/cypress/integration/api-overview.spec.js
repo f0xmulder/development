@@ -9,6 +9,8 @@ describe('API Overview', () => {
   it('should show the page title', () => {
     cy.get('h1').contains("API's binnen de Nederlandse overheid")
     cy.screenshot()
+    cy.document()
+      .toMatchImageSnapshot();
   })
 
   it('should have an add API button', () => {
@@ -81,9 +83,8 @@ describe('API Overview', () => {
           cy.viewport(size)
         }
         cy.visit('/apis')
-        cy.document()
-          .toMatchImageSnapshot();
-
+        cy.screenshot()
+        
         cy.injectAxe()
         // Test the page at initial load
         cy.checkA11y(null, {
