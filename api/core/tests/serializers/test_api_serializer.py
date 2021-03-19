@@ -416,8 +416,7 @@ class APISerializerTest(TransactionTestCase):
         expected = OrderedDict(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
-            organization_oin='00001234567890123456',
+            organization={"name": 'Test Organization', 'oin': '00001234567890123456'},
             service_name='First Service',
             api_type='rest_json',
             api_authentication='api_key',
@@ -439,7 +438,7 @@ class APISerializerTest(TransactionTestCase):
             terms_support_response_time=2,
         )
 
-        self.assertDictEqual(serializer.data, expected)
+        self.assertDictEqual(serializer.validated_data, expected)
 
     def test_deserialize_minimal_input(self):
         input_data = {
@@ -462,7 +461,7 @@ class APISerializerTest(TransactionTestCase):
         expected = OrderedDict(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization={'name': 'Test Organization', 'oin': '00001234567890123456'},
             service_name='First Service',
             environments=[
                 OrderedDict({
@@ -472,7 +471,7 @@ class APISerializerTest(TransactionTestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.data, expected)
+        self.assertDictEqual(serializer.validated_data, expected)
 
     def test_deserialize_empty_subobjects(self):
         input_data = {
@@ -497,7 +496,7 @@ class APISerializerTest(TransactionTestCase):
         expected = OrderedDict(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization={'name': 'Test Organization', 'oin': '00001234567890123456'},
             service_name='First Service',
             environments=[
                 OrderedDict({
@@ -507,7 +506,7 @@ class APISerializerTest(TransactionTestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.data, expected)
+        self.assertDictEqual(serializer.validated_data, expected)
 
     def test_deserialize_blank_subobjects(self):
         input_data = {
@@ -541,8 +540,7 @@ class APISerializerTest(TransactionTestCase):
         expected = OrderedDict(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
-            organization_oin='00001234567890123456',
+            organization={'name': 'Test Organization', 'oin': '00001234567890123456'},
             service_name='First Service',
             environments=[
                 OrderedDict({
@@ -559,7 +557,7 @@ class APISerializerTest(TransactionTestCase):
             terms_support_response_time=None,
         )
 
-        self.assertDictEqual(serializer.data, expected)
+        self.assertDictEqual(serializer.validated_data, expected)
 
     def test_deserialize_missing_fields(self):
         input_data = {}
@@ -601,7 +599,7 @@ class APISerializerTest(TransactionTestCase):
         expected = OrderedDict(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization={'name': 'Test Organization', 'oin': '00001234567890123456'},
             service_name='First Service',
             environments=[
                 OrderedDict({
@@ -611,7 +609,7 @@ class APISerializerTest(TransactionTestCase):
             ],
         )
 
-        self.assertDictEqual(serializer.data, expected)
+        self.assertDictEqual(serializer.validated_data, expected)
 
     def test_deserialize_forum_invalid_vendor(self):
         input_data = {
