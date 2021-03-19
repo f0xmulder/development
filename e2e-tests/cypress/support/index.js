@@ -19,5 +19,6 @@ import 'cypress-axe'
 import terminalLog from './terminal-log'
 import { sizes } from './sizes';
 import 'cypress-plugin-snapshots/commands';
+import '@cypress/code-coverage/support'
 
 export { terminalLog, sizes }
