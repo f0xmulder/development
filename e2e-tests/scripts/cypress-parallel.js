@@ -3,7 +3,7 @@ const path = require('path');
 
 const NODE_INDEX = Number(process.env.CI_NODE_INDEX || 1);
 const NODE_TOTAL = Number(process.env.CI_NODE_TOTAL || 1);
-const TEST_FOLDER = './e2e-tests/cypress/integration';
+const TEST_FOLDER = './cypress/integration';
 
 // This log will be printed out to the console
 // so that cypress will know which files will be run.
