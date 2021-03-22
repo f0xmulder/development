@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import { RedocStandalone } from 'redoc'
+import SwaggerParser from '@apidevtools/swagger-parser'
 
 import APIDetailsRepository from '../../domain/api-details-repository'
 import APIDetailsHeader from '../../components/APIDetailsHeader/APIDetailsHeader'
@@ -14,11 +15,16 @@ class APISpecification extends Component {
     details: {},
     error: false,
     loaded: false,
+    redocError: false,
   }
 
   componentDidMount() {
     const { id } = this.props.match.params
     this.loadDetailsForApi(id)
+    const specificationUrl = this.getSpecificationUrl()
+    this.parseApi(specificationUrl).then((isValid) => {
+      this.setState((prevState) => ({ ...prevState, redocError: !isValid }))
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -27,6 +33,11 @@ class APISpecification extends Component {
 
     if (prevId === id) return
     this.loadDetailsForApi(id)
+
+    const specificationUrl = this.getSpecificationUrl()
+    this.parseApi(specificationUrl).then((isValid) => {
+      this.setState((prevState) => ({ ...prevState, redocError: isValid }))
+    })
   }
 
   getSpecificationUrl() {
@@ -67,8 +78,17 @@ class APISpecification extends Component {
     }
   }
 
+  async parseApi(myAPI) {
+    try {
+      await SwaggerParser.validate(myAPI)
+      return true
+    } catch (err) {
+      return false
+    }
+  }
+
   render() {
-    const { details, error, loaded } = this.state
+    const { details, error, loaded, redocError } = this.state
     const specificationUrl = this.getSpecificationUrl()
     const externalSpecUrl = this.getExternalSpecificationUrl()
 
@@ -87,8 +107,13 @@ class APISpecification extends Component {
                 organizationName={details.organizationName}
                 externalSpecificationUrl={externalSpecUrl}
               />
-              {specificationUrl && (
+              {specificationUrl && !redocError ? (
                 <RedocStandalone specUrl={specificationUrl} />
+              ) : (
+                <p data-test="error-message">
+                  Er ging iets fout tijdens het verwerken van de API
+                  specificatie.
+                </p>
               )}
             </>
           ))}

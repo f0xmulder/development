@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apidevtools/swagger-parser": "10.0.2",
     "@commonground/design-system": "18.3.1",
     "@fontsource/source-sans-pro": "4.2.2",
     "change-case": "4.1.2",
