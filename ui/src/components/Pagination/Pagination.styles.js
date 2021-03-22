@@ -9,6 +9,17 @@ import arrowDownSolidIcon from '../Icons/arrow-down-solid-icon.svg'
 export const StyledPagination = styled.div`
   margin-top: ${(p) => p.theme.tokens.spacing10};
   display: flex;
+  ${mq.xs`
+    flex-direction: column;
+    padding: 0 1rem;
+    margin-top: 2rem;
+  `}
+`
+
+export const StyledPages = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: ${(p) => p.theme.tokens.spacing08};
 `
 
 export const StyledPageButton = styled.button`
@@ -30,7 +41,6 @@ export const StyledPageButton = styled.button`
   ${mq.xs`
     width: 48px;
     height: 48px;
-    display: none;
   `}
 `
 
@@ -64,15 +74,10 @@ export const StyledDottedButton = styled.div`
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   background-color: transparent;
   user-select: none;
-
-  ${mq.xs`
-    display: none;
-  `}
 `
 
 export const StyledPageCount = styled.span`
   margin-left: ${(p) => p.theme.tokens.spacing03};
-
   ${mq.smUp`
     display: none;
   `}
@@ -85,6 +90,10 @@ export const SelectFieldContainer = styled.div`
   width: 214px;
   position: relative;
   bottom: ${(p) => p.theme.tokens.spacing07};
+  margin-top: ${(p) => p.theme.tokens.spacing08};
+  ${mq.xs`
+    min-width: 100%;
+  `}
 `
 
 export const SelectField = styled.select`
