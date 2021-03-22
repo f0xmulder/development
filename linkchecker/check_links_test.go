@@ -80,18 +80,23 @@ func setTestGitlabUrl(t *testing.T, url string) {
 
 func loadHttpTestData(db *sqlx.DB, t *testing.T, server testServer) {
 	_, err := db.Exec(`
+	    INSERT INTO core_organization (name, oin, active) VALUES (
+	        'DON developers', '00000000001000000002', true);
+
 		INSERT INTO  core_api (api_id, api_authentication, api_type,
 		                       contact_email, contact_phone, contact_url,
 		                       description,
 		                       forum_url, forum_vendor,
 		                       is_reference_implementation,
-		                       organization_name, service_name)
+		                       organization_id, service_name)
 		VALUES ('test-api', 'none', 'rest_json',
 		        '', '', '',
 		        'Test api',
 		        '', '',
 		        false,
-		        'DON developers', 'Linkchecker test api')
+		        (SELECT id FROM core_organization
+		         WHERE oin='00000000001000000002'),
+		        'Linkchecker test api')
 	`)
 	failErrSql(t, err)
 
