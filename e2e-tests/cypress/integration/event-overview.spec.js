@@ -1,20 +1,22 @@
 const { terminalLog, sizes } = require("../support")
 
+const baseUrl = Cypress.config().baseUrl;
+
+const results = []
+for (let i = 1; i <= 50; i++) {
+
+  const startDate = new Date(Date.now() + i * 24 * 60 * (60 + i) * 1000)
+  results.push({
+    id: i,
+    title: `Event ${i}`,
+    start_date: startDate,
+    location: `Amsterdam (${i})`,
+    registration_url: `${baseUrl}/tests/events/${i}`,
+  })
+}
+
 describe('Event Overview', () => {
   beforeEach(() => {
-    const results = []
-    for (let i = 1; i <= 50; i++) {
-
-      const startDate = new Date(Date.now() + i * 24 * 60 * (60 + i) * 1000)
-      results.push({
-        id: i,
-        title: `Event ${i}`,
-        start_date: startDate,
-        location: `Amsterdam (${i})`,
-        registration_url: `https://www.meetup.com/events/${i}`,
-      })
-    }
-
     const apiResponse = {
       page: 1,
       rowsPerPage: 10,
@@ -44,8 +46,7 @@ describe('Event Overview', () => {
     cy.contains('Event 1').parent().parent().as('event')
     cy.get('@event').screenshot()
     cy.get('@event').toMatchImageSnapshot();
-    cy.contains('Naar event pagina').first().invoke('removeAttr', 'target').click()
-    cy.url().should('include', `https://www.meetup.com/events/1`)
+    cy.contains('Naar event pagina')
   })
 
   it('should have pagination', () => {
