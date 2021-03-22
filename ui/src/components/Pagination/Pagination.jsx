@@ -8,9 +8,9 @@ import {
   StyledPageButton,
   StyledArrowButton,
   StyledDottedButton,
-  StyledPageCount,
   SelectField,
   SelectFieldContainer,
+  StyledPages,
 } from './Pagination.styles'
 
 const ELLIPSIS = '...'
@@ -66,55 +66,57 @@ const Pagination = ({
   }
 
   return totalPageCount > 0 ? (
-    <StyledPagination data-testid="pagination">
-      <StyledArrowButton
-        disabled={currentPage === 1}
-        onClick={() =>
-          onPreviousPageButtonClickedHandler(
-            currentPage,
-            handlePageChangedHandler,
-            /* eslint-disable-next-line */
-          )}
-        aria-label="Vorige pagina"
-      >
-        «
-      </StyledArrowButton>
-      {pages.map((page, index) =>
-        page === ELLIPSIS ? (
-          <StyledDottedButton key={index}>{ELLIPSIS}</StyledDottedButton>
-        ) : (
-          <StyledPageButton
-            onClick={() => handlePageChangedHandler(page)}
-            current={page === currentPage}
-            disabled={page === currentPage}
-            key={index}
-            aria-label={`Pagina ${page}`}
+    <>
+      <StyledPagination data-testid="pagination">
+        <StyledPages>
+          <StyledArrowButton
+            disabled={currentPage === 1}
+            onClick={() =>
+              onPreviousPageButtonClickedHandler(
+                currentPage,
+                handlePageChangedHandler,
+                /* eslint-disable-next-line */
+            )}
+            aria-label="Vorige pagina"
           >
-            {page}
-          </StyledPageButton>
-        ),
-      )}
-      <StyledArrowButton
-        disabled={currentPage === totalPageCount}
-        onClick={() =>
-          onNextPageButtonClickedHandler(
-            currentPage,
-            handlePageChangedHandler,
-            /* eslint-disable-next-line */
+            «
+          </StyledArrowButton>
+          {pages.map((page, index) =>
+            page === ELLIPSIS ? (
+              <StyledDottedButton key={index}>{ELLIPSIS}</StyledDottedButton>
+            ) : (
+              <StyledPageButton
+                onClick={() => handlePageChangedHandler(page)}
+                current={page === currentPage}
+                disabled={page === currentPage}
+                key={index}
+                aria-label={`Pagina ${page}`}
+              >
+                {page}
+              </StyledPageButton>
+            ),
           )}
-        aria-label="Volgende pagina"
-      >
-        »
-      </StyledArrowButton>
-      <StyledPageCount>
-        Pagina {currentPage} van {totalPageCount}
-      </StyledPageCount>
-      <Pagination.ResultsPerPage
-        onResultsPerPageChange={onResultsPerPageChange}
-        totalRows={totalRows}
-        rowsPerPage={rowsPerPage}
-      />
-    </StyledPagination>
+          <StyledArrowButton
+            disabled={currentPage === totalPageCount}
+            onClick={() =>
+              onNextPageButtonClickedHandler(
+                currentPage,
+                handlePageChangedHandler,
+                /* eslint-disable-next-line */
+          )}
+            aria-label="Volgende pagina"
+          >
+            »
+          </StyledArrowButton>
+        </StyledPages>
+
+        <Pagination.ResultsPerPage
+          onResultsPerPageChange={onResultsPerPageChange}
+          totalRows={totalRows}
+          rowsPerPage={rowsPerPage}
+        />
+      </StyledPagination>
+    </>
   ) : null
 }
 
