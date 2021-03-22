@@ -56,7 +56,7 @@ const StyledCloseButton = styled.button`
 `
 
 export const CloseButton = (props) => (
-  <StyledCloseButton type="button" {...props}>
+  <StyledCloseButton type="button" {...props} aria-label="Navigatie sluiten">
     <span>navigatie sluiten</span>
   </StyledCloseButton>
 )
