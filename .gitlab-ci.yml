@@ -280,7 +280,7 @@ E2E tests:
   - |
     cd e2e-tests && \
     docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA . && \
-    docker run --rm --cap-add=SYS_ADMIN \
+    docker run --rm --cap-add=SYS_ADMIN --ipc=host \
     -e CYPRESS_BASE_URL=${CYPRESS_BASE_URL} \
     -v "$(pwd)"/cypress/videos:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos \
     -v "$(pwd)"/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
