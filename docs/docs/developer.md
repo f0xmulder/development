@@ -175,7 +175,7 @@ The linkchecker uses a mock database for its tests. If you make changes to the d
 You may need to adjust the command to your local development setup. If you use the docker dev database you can run the `pg_dump` in the container with
 
     docker exec developeroverheidnl_database_1 pg_dump -U don don \
-    --no-owner --schema-only --schema=public --table=core_\* \
+    --no-owner --schema-only -T django* -T auth* \
     | sed '/-- Dumped by /d' > linkchecker/testdata/testschema.sql
 
 then you can be sure you have a `pg_dump` version matching the database. After dumping the database schema, commit the updated `linkchecker/testdata/testschema.sql`.
