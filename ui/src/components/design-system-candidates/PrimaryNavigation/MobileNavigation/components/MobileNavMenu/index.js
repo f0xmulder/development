@@ -19,6 +19,7 @@ const MobileNavMenu = ({ items, hasMoreItems, onClick, isMoreActive }) => (
         onClick={onClick}
         className={isMoreActive && 'active'}
         data-testid="mobile-nav-more"
+        aria-label="Meer"
       />
     ) : null}
   </MobileNavWrapper>
