@@ -5,7 +5,7 @@
   "description": "Integration tests for DON.",
   "main": "index.test.js",
   "scripts": {
-    "test": "cypress run",
+    "test": "cypress run --browser chrome",
     "test:debug": "CYPRESS_BASE_URL=http://localhost:3000 npm test",
     "test:open": "CYPRESS_BASE_URL=http://localhost:3000 npm run cy:show:debug",
     "cy:run:debug": "cypress run --headed",

@@ -296,6 +296,8 @@ E2E tests:
   artifacts:
     when: always
     paths:
+      - e2e-tests/.nyc_output/**/*
+      - e2e-tests/coverage/**/*
       - e2e-tests/cypress/videos/**/*.mp4
       - e2e-tests/cypress/screenshots/**/*.png
       - e2e-tests/cypress/integration/__image_snapshots__/*.png
