@@ -127,6 +127,49 @@ class DesignRuleSessionSerializer(serializers.ModelSerializer):
         ]
 
 
+class ProgrammingLanguagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProgrammingLanguage
+        fields = ['name']
+
+    def to_representation(self, instance):
+        return instance.name
+
+
+class RelatedApisSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = API
+        fields = ['service_name', 'organization_name', 'api_id']
+
+
+class BasicCodeSerializer(serializers.ModelSerializer):
+    programming_languages = ProgrammingLanguagesSerializer(many=True)
+
+    class Meta:
+        model = Code
+        fields = [
+            'id',
+            'owner_name',
+            'name',
+            'url',
+            'last_change',
+            'stars',
+            'source',
+            'programming_languages',
+        ]
+
+
+class CodeSerializer(BasicCodeSerializer):
+    related_apis = RelatedApisSerializer(many=True)
+
+    class Meta(BasicCodeSerializer.Meta):
+        fields = BasicCodeSerializer.Meta.fields + [
+            'related_apis'
+        ]
+
+
 class APISerializer(NonNullModelSerializer):
     id = serializers.CharField(source='api_id')
     environments = EnvironmentSerializer(many=True)
@@ -139,6 +182,7 @@ class APISerializer(NonNullModelSerializer):
         source='last_design_rule_session',
         read_only=True
     )
+    related_code = BasicCodeSerializer(many=True, read_only=True)
 
     class Meta:
         model = API
@@ -155,6 +199,7 @@ class APISerializer(NonNullModelSerializer):
             'contact',
             'is_reference_implementation',
             'referenced_apis',
+            'related_code',
             'terms_of_use',
             'scores',
             'design_rule_scores',
@@ -211,40 +256,6 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ['id', 'title', 'start_date', 'location', 'registration_url']
-
-
-class ProgrammingLanguagesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProgrammingLanguage
-        fields = ['name']
-
-    def to_representation(self, instance):
-        return instance.name
-
-
-class RelatedApisSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = API
-        fields = ['service_name', 'organization_name', 'api_id']
-
-
-class CodeSerializer(serializers.ModelSerializer):
-    programming_languages = ProgrammingLanguagesSerializer(many=True)
-    related_apis = RelatedApisSerializer(many=True)
-
-    class Meta:
-        model = Code
-        fields = [
-            'id',
-            'owner_name',
-            'name',
-            'url',
-            'last_change',
-            'stars',
-            'source',
-            'programming_languages',
-            'related_apis'
-        ]
 
 
 class RelatedApisSubmitSerializer(serializers.ModelSerializer):
