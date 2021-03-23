@@ -11,6 +11,7 @@ export const StyledPagination = styled.div`
   display: flex;
   ${mq.xs`
     flex-direction: column;
+    align-items: center;
     padding: 0 1rem;
     margin-top: 2rem;
   `}
@@ -63,22 +64,22 @@ export const StyledArrowButton = styled(StyledPageButton)`
 `
 
 export const StyledDottedButton = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-right: ${(p) => p.theme.tokens.spacing01};
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border: none;
-  text-align: center;
-  font-size: ${(p) => p.theme.tokens.fontSizeSmall};
   background-color: transparent;
+  border: none;
+  display: inline-flex;
+  font-size: ${(p) => p.theme.tokens.fontSizeSmall};
+  height: 40px;
+  justify-content: center;
+  margin-right: ${(p) => p.theme.tokens.spacing01};
+  text-align: center;
   user-select: none;
+  width: 40px;
 `
 
 export const StyledPageCount = styled.span`
   margin-left: ${(p) => p.theme.tokens.spacing03};
-  ${mq.smUp`
+  ${mq.mdDown`
     display: none;
   `}
 `
@@ -87,12 +88,12 @@ export const SelectFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: auto;
-  width: 214px;
   position: relative;
   bottom: ${(p) => p.theme.tokens.spacing07};
   margin-top: ${(p) => p.theme.tokens.spacing08};
   ${mq.xs`
-    min-width: 100%;
+    margin-left: unset;
+    max-width: 214px;
   `}
 `
 
@@ -106,7 +107,4 @@ export const SelectField = styled.select`
   margin-top: ${(p) => p.theme.tokens.spacing03};
   padding: 0 ${(p) => p.theme.tokens.spacing04};
   background-origin: content-box;
-  ${mq.xs`
-    max-width: 100%;
-  `}
 `
