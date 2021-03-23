@@ -302,7 +302,7 @@ class CodeViewSet(GenericViewSet, ListModelMixin, CreateModelMixin):
 
     def create(self, request, *args, **kwargs):
         request.data['related_apis'] = [
-            {'api_id': x['value']} for x in request.data['related_apis']
+            {'api_id': x} for x in request.data['related_apis']
         ]
         serializer = CodeSubmitSerializer(data=request.data)
         if not serializer.is_valid():
