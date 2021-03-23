@@ -92,6 +92,7 @@ class APISerializerTest(TransactionTestCase):
             'is_reference_implementation': False,
             'badges': [],
             'referenced_apis': [],
+            'related_code': [],
             'environments': [],
             'contact': OrderedDict({
                 'email': 'contact@api1.com',
@@ -134,6 +135,7 @@ class APISerializerTest(TransactionTestCase):
             'is_reference_implementation': False,
             'badges': [],
             'referenced_apis': [],
+            'related_code': [],
             'environments': [],
             'contact': OrderedDict({
                 'email': '',
