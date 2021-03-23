@@ -6,9 +6,10 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router'
 
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
-import { H2 } from '../Headings/Headings'
+import { H1 } from '../Headings/Headings'
 import fetchForumPosts from './forumFunctions/fetchForumPosts'
 import ForumPostsView from './ForumPostsView'
+import { ForumPostsContainer } from './ForumPosts.styles'
 
 const ForumPosts = ({ forum }) => {
   const { vendor, url } = forum
@@ -31,8 +32,8 @@ const ForumPosts = ({ forum }) => {
   }, [vendor, url, params.id, params])
 
   return (
-    <>
-      <H2>Forum</H2>
+    <ForumPostsContainer>
+      <H1>Forum</H1>
       {error && (
         <ErrorMessage level="warning">
           Fout bij het ophalen van forumcontent
@@ -41,7 +42,7 @@ const ForumPosts = ({ forum }) => {
       {!error && posts && posts.length > 0 && (
         <ForumPostsView url={url} posts={posts} />
       )}
-    </>
+    </ForumPostsContainer>
   )
 }
 

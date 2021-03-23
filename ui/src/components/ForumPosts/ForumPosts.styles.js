@@ -7,6 +7,8 @@ import { ReactComponent as ChevronRight } from '../Icons/chevron-right.svg'
 import { ReactComponent as MessageIcon } from '../Icons/message-icon.svg'
 import ExternalIcon from '../Icons/External'
 
+export const ForumPostsContainer = styled.div``
+
 export const PostList = styled.ul`
   padding: 0;
   list-style: none;
@@ -48,6 +50,19 @@ export const PostTitle = styled.div`
 export const PostInfo = styled.small`
   display: flex;
   align-items: center;
+`
+
+export const PostImage = styled.div`
+  align-items: center;
+  background: #e0e0e0;
+  border-radius: 50%;
+  color: #616161;
+  display: flex;
+  min-height: ${(p) => p.theme.tokens.spacing07};
+  justify-content: center;
+  margin-right: ${(p) => p.theme.tokens.spacing05};
+  text-align: center;
+  min-width: ${(p) => p.theme.tokens.spacing07};
 `
 
 export const StyledMessageIcon = styled(MessageIcon)`
