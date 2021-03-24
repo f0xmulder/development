@@ -11,4 +11,5 @@ export default styled.span`
   font-weight: ${(p) => p.theme.tokens.fontWeightRegular};
   color: ${(p) => p.theme.colorText};
   background-color: ${(p) => p.theme.colorBackgroundButtonSecondary};
+  user-select: none;
 `
