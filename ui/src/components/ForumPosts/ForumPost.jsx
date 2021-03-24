@@ -38,7 +38,7 @@ const ForumPost = ({
       rel="noopener noreferrer"
     >
       <PostImage title={lastPosterUsername}>
-        {lastPosterUsername.substring(0, 1).toUpperCase()}
+        {lastPosterUsername?.substring(0, 1).toUpperCase()}
       </PostImage>
 
       <PostBody>
