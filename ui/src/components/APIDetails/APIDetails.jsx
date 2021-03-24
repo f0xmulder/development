@@ -16,13 +16,18 @@ import LinkToAPIContainer from '../LinkToAPIContainer/LinkToAPIContainer'
 import Card from '../Card/Card'
 import ForumPosts from '../ForumPosts/ForumPosts'
 import { designRuleScores } from '../../models/propTypes'
+import CodeExamples from '../CodeExamples/CodeExamples'
 import APIDesignRulesPane from './components/APIDesignRulesPane/APIDesignRulesPane'
 import APIEnvironments from './components/APIEnvironments/APIEnvironments'
 import APITerms from './components/APITerms/APITerms'
 import GradeBox from './components/GradeBox/GradeBox'
 import APIScoresPane from './components/APIScoresPane/APIScoresPane'
 
-import { Description, StyledContainer } from './APIDetails.styles'
+import {
+  Description,
+  IntegrationContainer,
+  StyledContainer,
+} from './APIDetails.styles'
 
 export const referenceImplementationsFromRelations = (relations = {}) =>
   Object.keys(relations).filter((apiId) =>
@@ -40,6 +45,7 @@ const APIDetails = ({
   forum,
   isReferenceImplementation,
   relations,
+  relatedCode,
   termsOfUse,
   scores,
   designRuleScores,
@@ -47,6 +53,9 @@ const APIDetails = ({
 }) => {
   const match = useRouteMatch('/apis')
   const showDesignRuleScores = !!designRuleScores
+
+  const hasForum = !!forum?.url
+  const hasCode = !!relatedCode?.length
 
   return (
     <StyledContainer>
@@ -88,13 +97,23 @@ const APIDetails = ({
         </Card>
       ) : null}
 
-      {forum && forum.url && (
-        <Card>
-          <Card.Body>
-            <ForumPosts forum={forum} />
-          </Card.Body>
-        </Card>
-      )}
+      <IntegrationContainer twoColumn={hasForum && hasCode}>
+        {hasForum && (
+          <Card>
+            <Card.Body>
+              <ForumPosts forum={forum} />
+            </Card.Body>
+          </Card>
+        )}
+
+        {hasCode && (
+          <Card>
+            <Card.Body>
+              <CodeExamples relatedCode={relatedCode} />
+            </Card.Body>
+          </Card>
+        )}
+      </IntegrationContainer>
 
       {isReferenceImplementation ? (
         <Card data-test="is-reference">
@@ -149,6 +168,7 @@ APIDetails.propTypes = {
   apiAuthentication: PropTypes.instanceOf(APIAuthentication).isRequired,
   environments: PropTypes.arrayOf(PropTypes.object),
   forum: PropTypes.object,
+  relatedCode: PropTypes.arrayOf(PropTypes.object),
   isReferenceImplementation: PropTypes.bool,
   relations: PropTypes.object,
   termsOfUse: PropTypes.shape({

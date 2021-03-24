@@ -45,3 +45,17 @@ export const StyledDrawer = styled(Drawer)`
 export const StyledContainer = styled(Container)`
   margin-bottom: ${(p) => p.theme.tokens.spacing05};
 `
+
+export const IntegrationContainer = styled.div`
+  margin-top: ${(p) => p.theme.tokens.spacing07};
+  column-gap: ${(p) => p.theme.tokens.spacing07};
+  padding-right: ${(p) => p.theme.tokens.spacing07};
+  display: grid;
+  grid-template-columns: ${({ twoColumn }) => (twoColumn ? '50% 50%' : '100%')};
+
+  ${mq.mdDown`
+    grid-template-columns: 100%;
+    padding-right: unset;
+    row-gap: ${(p) => p.theme.tokens.spacing07};
+  `}
+`
