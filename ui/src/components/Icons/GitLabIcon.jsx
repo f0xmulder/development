@@ -2,15 +2,18 @@
 // Licensed under the EUPL
 //
 import React from 'react'
+import { string } from 'prop-types'
 
-const GitLabIcon = ({ color }) => {
+const GitLabIcon = ({ color, title, ...rest }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       width="100%"
       height="100%"
+      {...rest}
     >
+      <title>{title}</title>
       <path fill="none" d="M0 0h24v24H0z" />
       <path
         fill={color}
@@ -18,6 +21,11 @@ const GitLabIcon = ({ color }) => {
       />
     </svg>
   )
+}
+
+GitLabIcon.propTypes = {
+  color: string,
+  title: string,
 }
 
 export { GitLabIcon }
