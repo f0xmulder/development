@@ -15,7 +15,7 @@ describe('Submit Code', () => {
       cy.intercept('POST', '/api/code', { fixture: 'submit-api.json' })
     }
 
-    cy.get('input[name="url"]').as('url').type("https://gitlab.com/url")
+    cy.get('input[name="url"]').as('url').type("https://gitlab.com/commonground/don/developer.overheid.nl")
     cy.get('.ReactSelect__control').as('select');
 
     cy.get('@select').click() // click to open dropdown
@@ -26,7 +26,7 @@ describe('Submit Code', () => {
     cy.get('@url').parent().screenshot()
     cy.get('@url').parent().toMatchImageSnapshot();
     cy.get('button').contains('Project toevoegen').click()
-    cy.contains("De code is toegevoegd. https://gitlab.com/commonground/don/don-issues-test/-/issues/96").screenshot()
+    cy.contains("De code is toegevoegd.").screenshot()
   })
 
   context('a11y', () => {
