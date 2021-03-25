@@ -1,8 +1,6 @@
-const { terminalLog, sizes } = require("../support")
+const { terminalLog, sizes, baseUrl } = require("../support")
 
 describe('Home', () => {
-  const baseUrl = Cypress.config().baseUrl;
-
   beforeEach(() => {
     cy.visit('/')
   })

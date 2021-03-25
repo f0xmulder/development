@@ -1,6 +1,4 @@
-const { terminalLog, sizes } = require("../support")
-
-const baseUrl = Cypress.config().baseUrl;
+const { terminalLog, sizes, baseUrl } = require("../support")
 
 const results = []
 for (let i = 1; i <= 50; i++) {
