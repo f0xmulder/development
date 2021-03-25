@@ -1,4 +1,4 @@
-const { terminalLog, sizes } = require("../support")
+const { terminalLog, sizes, baseUrl } = require("../support")
 
 describe('Submit Code', () => {
   beforeEach(() => {
@@ -10,7 +10,10 @@ describe('Submit Code', () => {
   })
 
   it('should have a form', () => {
-    cy.intercept('POST', '/api/code', { fixture: 'submit-api.json' })
+    // Fake response on local dev
+    if (baseUrl.includes('localhost')) {
+      cy.intercept('POST', '/api/code', { fixture: 'submit-api.json' })
+    }
 
     cy.get('input[name="url"]').as('url').type("https://gitlab.com/url")
     cy.get('.ReactSelect__control').as('select');
