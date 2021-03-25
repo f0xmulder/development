@@ -21,7 +21,7 @@ describe('Submit Code', () => {
     cy.get('@url').parent().screenshot()
     cy.get('@url').parent().toMatchImageSnapshot();
     cy.get('button').contains('Project toevoegen').click()
-    cy.contains("De code is toegevoegd.").screenshot()
+    cy.contains("de URL is eerder toegevoegd").screenshot()
   })
 
   context('a11y', () => {
