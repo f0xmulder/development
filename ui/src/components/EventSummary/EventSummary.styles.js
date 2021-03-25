@@ -10,9 +10,9 @@ export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  height: 135px;
 
   ${mq.mdUp`
+    height: 135px;
     flex-direction: row;
   `}
 `
@@ -36,16 +36,20 @@ StyledCard.DateTime = styled.div`
     align-items: center;
     justify-content: center;
     color: ${(p) => p.theme.colorText};
-    margin: ${(p) => p.theme.tokens.spacing06} ${(p) =>
-      p.theme.tokens.spacing07};
+    margin: ${(p) => `${p.theme.tokens.spacing06} ${p.theme.tokens.spacing07}`};
+  `}
+  ${mq.smDown`
+    margin-bottom: ${(p) => p.theme.tokens.spacing05};
   `}
 `
 
-StyledCard.DateTime.DayOfWeek = styled.small`
+StyledCard.DateTime.DayOfWeek = styled.span`
   ${mq.mdUp`
     font-size: ${(p) => p.theme.tokens.fontSizeSmall};
-    color: ${(p) => p.theme.tokens.colorPaletteGray700};
     margin-bottom: ${(p) => p.theme.tokens.spacing04};
+  `}
+  ${mq.smDown`
+    text-transform: capitalize;
   `}
 `
 
@@ -93,6 +97,9 @@ StyledCard.Details.Item = styled.small`
 
 StyledCard.EventBackground = styled(EventBackground)`
   min-width: 141px;
+  ${mq.mdDown`
+    display: none;
+  `}
 `
 
 export const StyledLink = styled.a`
