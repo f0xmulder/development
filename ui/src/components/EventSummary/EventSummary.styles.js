@@ -4,11 +4,13 @@
 import styled from 'styled-components'
 import Card from '../Card/Card'
 import mq from '../../theme/mediaQueries'
+import EventBackground from './EventBackground'
 
 export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  height: 135px;
 
   ${mq.mdUp`
     flex-direction: row;
@@ -35,7 +37,7 @@ StyledCard.DateTime = styled.div`
     justify-content: center;
     color: ${(p) => p.theme.colorText};
     margin: ${(p) => p.theme.tokens.spacing06} ${(p) =>
-    p.theme.tokens.spacing07};
+      p.theme.tokens.spacing07};
   `}
 `
 
@@ -87,6 +89,10 @@ StyledCard.Details.Item = styled.small`
   svg {
     margin-right: ${(p) => p.theme.tokens.spacing02};
   }
+`
+
+StyledCard.EventBackground = styled(EventBackground)`
+  min-width: 141px;
 `
 
 export const StyledLink = styled.a`
