@@ -21,4 +21,6 @@ import { sizes } from './sizes';
 import 'cypress-plugin-snapshots/commands';
 import '@cypress/code-coverage/support'
 
-export { terminalLog, sizes }
+const baseUrl = Cypress.config().baseUrl;
+
+export { terminalLog, sizes, baseUrl }
