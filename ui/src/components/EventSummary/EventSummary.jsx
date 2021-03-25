@@ -21,6 +21,7 @@ const EventSummary = ({ title, startDate, location, registrationUrl }) => {
 
   return (
     <StyledCard onClick={handleClick}>
+      <StyledCard.EventBackground />
       <StyledCard.DateTime>
         <StyledCard.DateTime.DayOfWeek>
           {prettyDayOfWeek[startDate.getDay()]}
