@@ -277,9 +277,7 @@ describe('APIOverview', () => {
             act(() => {
               userEvent.type(input, 'organization_name2')
             })
-            expect(historyMock.push).toHaveBeenCalledWith(
-              '/apis?q=organization_name2',
-            )
+            expect(historyMock.push).toHaveBeenCalled()
           },
         })
       })

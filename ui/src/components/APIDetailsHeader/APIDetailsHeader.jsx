@@ -68,7 +68,6 @@ APIDetailsHeader.propTypes = {
   organizationName: PropTypes.string.isRequired,
   apiType: PropTypes.instanceOf(APIType),
   history: PropTypes.object,
-  backLink: PropTypes.string,
   externalSpecificationUrl: PropTypes.string,
 }
 

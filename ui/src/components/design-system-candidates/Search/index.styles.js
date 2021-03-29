@@ -3,6 +3,7 @@
 //
 import React from 'react'
 import styled from 'styled-components'
+import { Spinner } from '@commonground/design-system'
 
 export const StyledSearch = styled.div`
   position: relative;
@@ -50,4 +51,10 @@ export const StyledInput = styled.input`
   &:placeholder {
     color: ${(p) => p.theme.tokens.colorPaletteGray600};
   }
+`
+
+export const StyledSpinner = styled(Spinner)`
+  position: absolute;
+  top: 0.75rem;
+  right: 0;
 `

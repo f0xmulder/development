@@ -2,12 +2,23 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { object, func, oneOfType, node, element } from 'prop-types'
+import { object, func, oneOfType, node, element, bool } from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 import theme from '../../../theme'
-import { StyledSearch, StyledInput, StyledSearchIcon } from './index.styles'
+import {
+  StyledSearch,
+  StyledInput,
+  StyledSearchIcon,
+  StyledSpinner,
+} from './index.styles'
 
-const Search = ({ inputProps, onQueryChanged, children, ...props }) => (
+const Search = ({
+  inputProps,
+  onQueryChanged,
+  searching,
+  children,
+  ...props
+}) => (
   <ThemeProvider theme={theme}>
     <StyledSearch {...props}>
       <StyledInput
@@ -16,6 +27,7 @@ const Search = ({ inputProps, onQueryChanged, children, ...props }) => (
       />
       <StyledSearchIcon />
       {children}
+      {searching && <StyledSpinner />}
     </StyledSearch>
   </ThemeProvider>
 )
@@ -24,6 +36,7 @@ Search.propTypes = {
   onQueryChanged: func,
   inputProps: object,
   children: oneOfType([node, element]),
+  searching: bool,
 }
 
 Search.defaultProps = {
@@ -31,6 +44,7 @@ Search.defaultProps = {
   inputProps: {
     placeholder: 'Zoeken…',
   },
+  searching: false,
 }
 
 export default Search

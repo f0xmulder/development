@@ -1,7 +1,7 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { object } from 'prop-types'
 
 import { Button } from '@commonground/design-system'
@@ -25,27 +25,76 @@ import {
   StyledAddIcon,
 } from './APIOverview.styles'
 
-class APIOverview extends Component {
-  state = {
-    result: {},
-    error: false,
-    loaded: false,
-  }
+function useDebounce(value, delay) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = useState(value)
 
-  componentDidMount() {
-    this.loadAPIList()
-  }
+  useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value)
+      }, delay)
 
-  componentDidUpdate(prevProps) {
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      return () => {
+        clearTimeout(handler)
+      }
+    },
+    [value, delay], // Only re-call effect if value or delay changes
+  )
+
+  return debouncedValue
+}
+
+const APIOverview = (props) => {
+  const { history, location } = props
+
+  const [result, setResult] = useState({})
+  const [error, setError] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+
+  const controller = new AbortController()
+  const signal = controller.signal
+
+  const debounced = useDebounce(props.location?.search, 300)
+  const isFacet =
+    props.location?.search.includes('type') ||
+    props.location?.search.includes('organisatie')
+
+  const isSeaching = debounced !== props.location?.search
+
+  useEffect(() => {
+    loadAPIList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFacet])
+
+  useEffect(() => {
     if (
-      prevProps.location &&
-      prevProps.location.search !== this.props.location.search
+      debounced &&
+      !debounced.includes('type') &&
+      !debounced.includes('organisatie')
     ) {
-      this.loadAPIList()
+      loadAPIList()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounced])
+
+  const fetchApiList = async () => {
+    const response = await fetch(
+      `/api/apis?${generateQueryParams(getQueryParams())}`,
+      { signal },
+    )
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
     }
   }
 
-  async loadAPIList() {
+  const loadAPIList = async () => {
     try {
       const response = await APIRepository.getAll(
         generateQueryParams(this.getQueryParams()),
@@ -53,37 +102,37 @@ class APIOverview extends Component {
       const result = Object.assign({}, response, {
         apis: response.results.map((api) => modelFromAPIResponse(api)),
       })
-      this.setState({ result, loaded: true })
+      setResult(result)
+      setLoaded(true)
     } catch (error) {
-      this.setState({ error: true, loaded: true })
+      setError(true)
+      setLoaded(true)
       console.error(error)
     }
   }
 
-  handleSearchHandler(query) {
-    const { history } = this.props
-
+  const handleSearchHandler = (query) => {
     const urlParams = new URLSearchParams()
     urlParams.set('q', query)
     history.push(`/apis?${urlParams}`)
   }
 
-  formSubmitHandler(event) {
+  const formSubmitHandler = (event) => {
     event.preventDefault()
 
     const input = event.target.query
-    this.handleSearchHandler(input.value)
+    handleSearchHandler(input.value)
   }
 
-  formChangeHandler(event) {
+  const formChangeHandler = (event) => {
     event.preventDefault()
 
     const input = event.target.value
-    this.handleSearchHandler(input)
+    handleSearchHandler(input)
   }
 
-  handleFilterChange = (newFilters) => {
-    const currentFilters = this.getQueryParams()
+  const handleFilterChange = (newFilters) => {
+    const currentFilters = getQueryParams()
 
     // Reset facets when starting a new text search
     if (newFilters.q !== currentFilters.q) {
@@ -101,28 +150,23 @@ class APIOverview extends Component {
       /* eslint-enable camelcase */
     }
 
-    const { history } = this.props
     history.push(`?${generateQueryParams(translatedFilters)}`)
   }
 
-  handlePageChange = (page) => {
-    const { history, location } = this.props
+  const handlePageChange = (page) => {
     const values = new URLSearchParams(location ? location.search : {})
     values.set('pagina', page.toString())
     history.push(`?${values}`)
   }
 
-  handleResultsPerPageChange = (resultsPerPage) => {
-    const { history, location } = this.props
-
+  const handleResultsPerPageChange = (resultsPerPage) => {
     const values = new URLSearchParams(location ? location.search : {})
     values.set('aantalPerPagina', resultsPerPage.toString())
     values.set('pagina', '1')
     history.push(`?${values}`)
   }
 
-  getQueryParams = () => {
-    const { location } = this.props
+  const getQueryParams = () => {
     const values = new URLSearchParams(location ? location.search : {})
 
     /* eslint-disable camelcase */
@@ -136,83 +180,82 @@ class APIOverview extends Component {
     /* eslint-enable camelcase */
   }
 
-  render() {
-    const { result, error, loaded } = this.state
-    const queryParams = this.getQueryParams()
-    const { page } = queryParams
+  const queryParams = getQueryParams()
+  const { page } = queryParams
 
-    const totalResults = loaded && !error && result ? result.totalResults : null
-    return (
-      <StyledOverviewPage>
-        <StyledOverviewHeader>
-          <div>
-            <h1>API&#39;s binnen de Nederlandse overheid</h1>
-            <StyledSubtitle>
-              Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
-              Nederland aanbieden.
-            </StyledSubtitle>
-            <form
-              onSubmit={(event) => this.formSubmitHandler(event)}
-              onChange={(event) => this.formChangeHandler(event)}
-            >
-              <label htmlFor="search-api" aria-label="Zoekterm">
-                <StyledSearch
-                  inputProps={{
-                    placeholder: 'Zoek API',
-                    name: 'query',
-                    id: 'search-api',
-                    defaultValue: '',
-                  }}
-                />
-              </label>
-            </form>
-          </div>
-          <Button as={StyledAddLinkDesktop} to="apis/add" variant="secondary">
-            <StyledAddIcon />
-            API toevoegen
-          </Button>
-        </StyledOverviewHeader>
+  const totalResults = loaded && !error && result ? result.totalResults : null
 
-        <StyledOverviewBody>
-          {!loaded || error ? null : (
-            <StyledAPIFilters
-              initialValues={queryParams}
-              facets={result.facets}
-              onSubmit={this.handleFilterChange}
-            />
+  return (
+    <StyledOverviewPage>
+      <StyledOverviewHeader>
+        <div>
+          <h1>API&#39;s binnen de Nederlandse overheid</h1>
+          <StyledSubtitle>
+            Een wegwijzer naar de API’s die (semi-)overheidsorganisaties in
+            Nederland aanbieden.
+          </StyledSubtitle>
+          <form
+            onSubmit={(event) => formSubmitHandler(event)}
+            onChange={(event) => formChangeHandler(event)}
+          >
+            <label htmlFor="search-api" aria-label="Zoekterm">
+              <StyledSearch
+                inputProps={{
+                  placeholder: 'Zoek API',
+                  name: 'query',
+                  id: 'search-api',
+                  value: queryParams.q,
+                }}
+                searching={isSeaching}
+              />
+            </label>
+          </form>
+        </div>
+        <Button as={StyledAddLinkDesktop} to="apis/add" variant="secondary">
+          <StyledAddIcon />
+          API toevoegen
+        </Button>
+      </StyledOverviewHeader>
+
+      <StyledOverviewBody>
+        {!loaded || error ? null : (
+          <StyledAPIFilters
+            initialValues={queryParams}
+            facets={result.facets}
+            onSubmit={handleFilterChange}
+          />
+        )}
+        <StyledResultsContainer>
+          <ResultsHeader
+            totalResults={totalResults}
+            objectName="API"
+            objectNamePlural="API&#39;s"
+            addLinkTarget="apis/add"
+          />
+          {!loaded ? (
+            <Spinner data-testid="loading" />
+          ) : error ? (
+            <DONSmall>
+              Er ging iets fout tijdens het ophalen van de API&#39;s.
+            </DONSmall>
+          ) : !result || !result.apis || result.apis.length === 0 ? (
+            <DONSmall>Er zijn (nog) geen API&#39;s beschikbaar.</DONSmall>
+          ) : (
+            <>
+              <APIList apis={result.apis} />
+              <Pagination
+                currentPage={parseInt(page, 10)}
+                totalRows={result.totalResults}
+                rowsPerPage={result.rowsPerPage}
+                onPageChangedHandler={handlePageChange}
+                onResultsPerPageChange={handleResultsPerPageChange}
+              />
+            </>
           )}
-          <StyledResultsContainer>
-            <ResultsHeader
-              totalResults={totalResults}
-              objectName="API"
-              objectNamePlural="API&#39;s"
-              addLinkTarget="apis/add"
-            />
-            {!loaded ? (
-              <Spinner data-testid="loading" />
-            ) : error ? (
-              <DONSmall>
-                Er ging iets fout tijdens het ophalen van de API&#39;s.
-              </DONSmall>
-            ) : !result || !result.apis || result.apis.length === 0 ? (
-              <DONSmall>Er zijn (nog) geen API&#39;s beschikbaar.</DONSmall>
-            ) : (
-              <>
-                <APIList apis={result.apis} />
-                <Pagination
-                  currentPage={parseInt(page, 10)}
-                  totalRows={result.totalResults}
-                  rowsPerPage={result.rowsPerPage}
-                  onPageChangedHandler={this.handlePageChange}
-                  onResultsPerPageChange={this.handleResultsPerPageChange}
-                />
-              </>
-            )}
-          </StyledResultsContainer>
-        </StyledOverviewBody>
-      </StyledOverviewPage>
-    )
-  }
+        </StyledResultsContainer>
+      </StyledOverviewBody>
+    </StyledOverviewPage>
+  )
 }
 
 APIOverview.propTypes = {
