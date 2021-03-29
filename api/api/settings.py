@@ -87,6 +87,9 @@ DATABASES = {
         'CONN_MAX_AGE': None,
         'OPTIONS': {
             'application_name': "don_api",
+            'keepalives': "1",
+            'keepalives_idle': "120",
+            'keepalives_interval': "20",
         }
     }
 }

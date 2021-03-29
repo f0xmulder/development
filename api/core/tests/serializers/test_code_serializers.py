@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from django.test import TransactionTestCase
 
-from core.models import API, ProgrammingLanguage, Code
+from core.models import API, ProgrammingLanguage, Code, Organization
 from core.serializers import CodeSerializer, CodeSubmitSerializer
 
 
@@ -16,8 +16,9 @@ class CodeSerializerTest(TransactionTestCase):
     def test_serialize_code(self):
         pl1 = ProgrammingLanguage.objects.create(name='Python')
         pl2 = ProgrammingLanguage.objects.create(name='Go')
-        api1 = API.objects.create(api_id='api1')
-        api2 = API.objects.create(api_id='api2')
+        org = Organization.objects.create(name="Test organization", oin="00001234567890123456")
+        api1 = API.objects.create(api_id='api1', organization=org)
+        api2 = API.objects.create(api_id='api2', organization=org)
         code1 = Code.objects.create(
             source=Code.Source.GITHUB_GIST,
             owner_name='me',
@@ -42,11 +43,11 @@ class CodeSerializerTest(TransactionTestCase):
                          'related_apis': [
                                 OrderedDict([
                                     ('service_name', ''),
-                                    ('organization_name', ''),
+                                    ('organization_name', 'Test organization'),
                                     ('api_id', 'api1')]),
                                 OrderedDict([
                                     ('service_name', ''),
-                                    ('organization_name', ''),
+                                    ('organization_name', 'Test organization'),
                                     ('api_id', 'api2')])
                          ]}
 

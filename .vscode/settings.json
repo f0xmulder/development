@@ -7,11 +7,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "conventionalCommits.scopes": ["deps"],
-  "workbench.colorCustomizations": {
-    "titleBar.activeForeground": "#fff",
-    "titleBar.inactiveForeground": "#ffffffCC",
-    "titleBar.activeBackground": "#008cff",
-    "titleBar.inactiveBackground": "#008cffcc"
-  }
+  "conventionalCommits.scopes": ["deps"]
 }

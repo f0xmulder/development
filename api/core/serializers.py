@@ -226,6 +226,8 @@ class ProgrammingLanguagesSerializer(serializers.ModelSerializer):
 
 
 class RelatedApisSerializer(serializers.ModelSerializer):
+    organization_name = serializers.CharField(source='organization.name')
+
     class Meta:
         model = API
         fields = ['service_name', 'organization_name', 'api_id']

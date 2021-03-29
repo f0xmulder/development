@@ -15,6 +15,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -35,12 +49,12 @@ CREATE TABLE public.core_api (
     forum_url character varying(2000) NOT NULL,
     forum_vendor character varying(31) NOT NULL,
     is_reference_implementation boolean NOT NULL,
-    organization_name character varying(255) NOT NULL,
     service_name character varying(255) NOT NULL,
     terms_government_only boolean,
     terms_pay_per_use boolean,
     terms_support_response_time integer,
     terms_uptime_guarantee numeric(8,6),
+    organization_id integer NOT NULL,
     CONSTRAINT core_api_terms_support_response_time_e2919236_check CHECK ((terms_support_response_time >= 0))
 );
 
@@ -424,6 +438,38 @@ ALTER SEQUENCE public.core_event_id_seq OWNED BY public.core_event.id;
 
 
 --
+-- Name: core_organization; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_organization (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    oin character varying(20) NOT NULL,
+    active boolean NOT NULL
+);
+
+
+--
+-- Name: core_organization_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.core_organization_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: core_organization_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.core_organization_id_seq OWNED BY public.core_organization.id;
+
+
+--
 -- Name: core_programminglanguage; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -665,6 +711,13 @@ ALTER TABLE ONLY public.core_event ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
+-- Name: core_organization id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_organization ALTER COLUMN id SET DEFAULT nextval('public.core_organization_id_seq'::regclass);
+
+
+--
 -- Name: core_programminglanguage id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -836,6 +889,22 @@ ALTER TABLE ONLY public.core_event
 
 
 --
+-- Name: core_organization core_organization_oin_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_organization
+    ADD CONSTRAINT core_organization_oin_key UNIQUE (oin);
+
+
+--
+-- Name: core_organization core_organization_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_organization
+    ADD CONSTRAINT core_organization_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: core_programminglanguage core_programminglanguage_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -896,6 +965,20 @@ ALTER TABLE ONLY public.core_urlprobe
 --
 
 CREATE INDEX core_api_api_id_2f4913ac_like ON public.core_api USING btree (api_id varchar_pattern_ops);
+
+
+--
+-- Name: core_api_organization_id_b2b20e22; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_api_organization_id_b2b20e22 ON public.core_api USING btree (organization_id);
+
+
+--
+-- Name: core_api_search_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_api_search_idx ON public.core_api USING gin (upper(description) public.gin_trgm_ops, upper((service_name)::text) public.gin_trgm_ops);
 
 
 --
@@ -1018,6 +1101,20 @@ CREATE INDEX core_event_start_date_29821cf6 ON public.core_event USING btree (st
 
 
 --
+-- Name: core_org_search_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_org_search_idx ON public.core_organization USING gin (upper((name)::text) public.gin_trgm_ops);
+
+
+--
+-- Name: core_organization_oin_0184a326_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX core_organization_oin_0184a326_like ON public.core_organization USING btree (oin varchar_pattern_ops);
+
+
+--
 -- Name: core_programminglanguage_name_6bd382a4_like; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1078,6 +1175,14 @@ CREATE INDEX core_urlapilink_url_id_732f9a3b ON public.core_urlapilink USING btr
 --
 
 CREATE INDEX core_urlprobe_url_id_b650da51 ON public.core_urlprobe USING btree (url_id);
+
+
+--
+-- Name: core_api core_api_organization_id_b2b20e22_fk_core_organization_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_api
+    ADD CONSTRAINT core_api_organization_id_b2b20e22_fk_core_organization_id FOREIGN KEY (organization_id) REFERENCES public.core_organization(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

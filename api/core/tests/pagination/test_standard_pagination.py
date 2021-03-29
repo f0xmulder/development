@@ -1,12 +1,12 @@
 from collections import OrderedDict
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.test import APIRequestFactory
 from rest_framework.views import APIView
 
-from core.models import API
+from core.models import API, Organization
 from core.pagination import StandardResultsSetPagination
 from core.serializers import APISerializer
 
@@ -14,13 +14,15 @@ API_PATH = '/api/apis'
 ROWS_PER_PAGE_DEFAULT = 10
 
 
-class StandardResultsSetPaginationTest(TestCase):
+class StandardResultsSetPaginationTest(TransactionTestCase):
     def setUp(self):
+        the_bureau = Organization.objects.create(name='Het bureau', oin="00000000000000000001")
+        the_state = Organization.objects.create(name="De staat", oin="00000000000000000002")
         self.api1 = API.objects.create(
             api_id='kad1',
             service_name='Eerste Kadaster',
             description='Originele Kadaster API',
-            organization_name='Het bureau',
+            organization=the_bureau,
             api_type='rest_json',
             api_authentication='none',
             is_reference_implementation=False,
@@ -30,7 +32,7 @@ class StandardResultsSetPaginationTest(TestCase):
             api_id='kad2',
             service_name='Tweede Kadaster',
             description='Nieuwe Kadaster API',
-            organization_name='De staat',
+            organization=the_state,
             api_type='graphql',
             api_authentication='unknown',
             is_reference_implementation=True,
@@ -40,7 +42,7 @@ class StandardResultsSetPaginationTest(TestCase):
             api_id='vuil',
             service_name='De eerste echte vuilnisbakken API',
             description='Alle bakken die aan de openbare weg staan',
-            organization_name='De staat',
+            organization=the_state,
             api_type='rest_json',
             api_authentication='none',
             is_reference_implementation=False,

@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import { string } from 'prop-types'
 import ImplementedByList from '../ImplementedByList/ImplementedByList'
+import APIRepository from '../../domain/api-repository'
 import { modelFromAPIResponse } from '../../models/api'
 
 class ImplementedByListContainer extends Component {
@@ -22,7 +23,7 @@ class ImplementedByListContainer extends Component {
     this.loadDetailsForAPI(id)
   }
 
-  componentWillUpdate(nextProps) {
+  componentDidUpdate(nextProps) {
     const { id } = nextProps
     const { id: prevId } = this.props.id
 
@@ -34,14 +35,7 @@ class ImplementedByListContainer extends Component {
   }
 
   async fetchImplementedByInfo(id) {
-    const response = await fetch(`/api/apis/${id}/implemented-by`)
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(
-        `Er ging iets fout bij het ophalen van de referentie implementaties voor API met ID '${id}'`,
-      )
-    }
+    return APIRepository.fetchImplementedByInfo(id)
   }
 
   async loadDetailsForAPI(id) {

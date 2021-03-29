@@ -1,0 +1,2436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1616675145631" clover="3.2.0">
+  <project timestamp="1616675145631" name="All files">
+    <metrics statements="1716" coveredstatements="840" conditionals="563" coveredconditionals="78" methods="746" coveredmethods="210" elements="3025" coveredelements="1128" complexity="0" loc="1716" ncloc="1716" packages="73" files="165" classes="165"/>
+    <package name="src">
+      <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+      <file name="App.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/App.jsx">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="34" count="46" type="stmt"/>
+      </file>
+      <file name="App.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/App.styles.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+      </file>
+      <file name="constants.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/constants.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="42" type="stmt"/>
+        <line num="6" count="42" type="stmt"/>
+      </file>
+      <file name="index.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/index.jsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="13" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails">
+      <metrics statements="30" coveredstatements="11" conditionals="21" coveredconditionals="0" methods="15" coveredmethods="0"/>
+      <file name="APIDetails.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/APIDetails.jsx">
+        <metrics statements="12" coveredstatements="3" conditionals="19" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="32" count="42" type="cond" truecount="0" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="162" count="42" type="stmt"/>
+      </file>
+      <file name="APIDetails.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/APIDetails.styles.js">
+        <metrics statements="18" coveredstatements="8" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="42" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.APIDesignRulesPane">
+      <metrics statements="39" coveredstatements="17" conditionals="8" coveredconditionals="0" methods="19" coveredmethods="0"/>
+      <file name="APIDesignRulesPane.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIDesignRulesPane/APIDesignRulesPane.jsx">
+        <metrics statements="12" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="120" count="42" type="stmt"/>
+      </file>
+      <file name="APIDesignRulesPane.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIDesignRulesPane/APIDesignRulesPane.styles.js">
+        <metrics statements="27" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="42" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="42" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="42" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.APIEnvironments">
+      <metrics statements="17" coveredstatements="9" conditionals="10" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="APIEnvironments.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIEnvironments/APIEnvironments.jsx">
+        <metrics statements="6" coveredstatements="3" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="67" count="42" type="stmt"/>
+        <line num="71" count="42" type="stmt"/>
+      </file>
+      <file name="APIEnvironments.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIEnvironments/APIEnvironments.styles.js">
+        <metrics statements="11" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.APIScoresPane">
+      <metrics statements="9" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="APIScoresPane.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIScoresPane/APIScoresPane.jsx">
+        <metrics statements="7" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="34" count="42" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="68" count="42" type="stmt"/>
+      </file>
+      <file name="APIScoresPane.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APIScoresPane/APIScoresPane.styles.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.APITerms">
+      <metrics statements="14" coveredstatements="8" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="APITerms.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APITerms/APITerms.jsx">
+        <metrics statements="10" coveredstatements="4" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="53" count="42" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+      </file>
+      <file name="APITerms.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/APITerms/APITerms.styles.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="19" count="42" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.GradeBanner">
+      <metrics statements="13" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="GradeBanner.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/GradeBanner/GradeBanner.jsx">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+      </file>
+      <file name="GradeBanner.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/GradeBanner/GradeBanner.styles.js">
+        <metrics statements="8" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetails.components.GradeBox">
+      <metrics statements="12" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="GradeBox.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/GradeBox/GradeBox.jsx">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="33" count="42" type="stmt"/>
+      </file>
+      <file name="GradeBox.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetails/components/GradeBox/GradeBox.styles.js">
+        <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="22" count="42" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIDetailsHeader">
+      <metrics statements="25" coveredstatements="10" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <file name="APIDetailsHeader.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetailsHeader/APIDetailsHeader.jsx">
+        <metrics statements="11" coveredstatements="3" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="73" count="42" type="stmt"/>
+      </file>
+      <file name="APIDetailsHeader.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIDetailsHeader/APIDetailsHeader.styles.js">
+        <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="54" count="42" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIFilter">
+      <metrics statements="12" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <file name="APIFilter.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIFilter/APIFilter.jsx">
+        <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+      </file>
+      <file name="APIFilter.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIFilter/APIFilter.styles.js">
+        <metrics statements="7" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIFilters">
+      <metrics statements="22" coveredstatements="7" conditionals="13" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="APIFilters.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIFilters/APIFilters.jsx">
+        <metrics statements="16" coveredstatements="5" conditionals="9" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="87" count="42" type="stmt"/>
+      </file>
+      <file name="APIFilters.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIFilters/APIFilters.styles.js">
+        <metrics statements="6" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APIList">
+      <metrics statements="11" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="APIList.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIList/APIList.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+      </file>
+      <file name="APIList.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APIList/APIList.styles.js">
+        <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.APISummary">
+      <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="APISummary.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APISummary/APISummary.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+      </file>
+      <file name="APISummary.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/APISummary/APISummary.styles.js">
+        <metrics statements="11" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+        <line num="51" count="42" type="stmt"/>
+        <line num="59" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Card">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="Card.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Card/Card.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="42" type="stmt"/>
+      </file>
+      <file name="Card.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Card/Card.styles.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="11" count="2854" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CheckboxGroupField">
+      <metrics statements="17" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <file name="CheckboxGroupField.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CheckboxGroupField/CheckboxGroupField.jsx">
+        <metrics statements="8" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="42" count="42" type="stmt"/>
+        <line num="56" count="42" type="stmt"/>
+      </file>
+      <file name="CheckboxGroupField.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CheckboxGroupField/CheckboxGroupField.styles.js">
+        <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CodeBlock">
+      <metrics statements="41" coveredstatements="5" conditionals="6" coveredconditionals="0" methods="18" coveredmethods="0"/>
+      <file name="CodeBlock.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeBlock/CodeBlock.jsx">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+      </file>
+      <file name="CodeBlock.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeBlock/CodeBlock.styles.js">
+        <metrics statements="15" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+      </file>
+      <file name="copy.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeBlock/copy.js">
+        <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+      </file>
+      <file name="showFeedback.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeBlock/showFeedback.js">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CodeExamples">
+      <metrics statements="41" coveredstatements="19" conditionals="8" coveredconditionals="0" methods="21" coveredmethods="0"/>
+      <file name="CodeExamples.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeExamples/CodeExamples.jsx">
+        <metrics statements="16" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="67" count="42" type="stmt"/>
+        <line num="76" count="42" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="42" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="84" count="42" type="stmt"/>
+        <line num="95" count="42" type="stmt"/>
+        <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="127" count="42" type="stmt"/>
+      </file>
+      <file name="CodeExamples.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeExamples/CodeExamples.styles.js">
+        <metrics statements="25" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="42" type="stmt"/>
+        <line num="66" count="42" type="stmt"/>
+        <line num="72" count="42" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="96" count="42" type="stmt"/>
+        <line num="116" count="42" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="123" count="42" type="stmt"/>
+        <line num="126" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CodeList">
+      <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="CodeList.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeList/CodeList.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+      </file>
+      <file name="CodeList.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeList/CodeList.styles.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CodeSummary">
+      <metrics statements="32" coveredstatements="17" conditionals="8" coveredconditionals="0" methods="15" coveredmethods="0"/>
+      <file name="CodeSummary.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeSummary/CodeSummary.jsx">
+        <metrics statements="5" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="91" count="42" type="stmt"/>
+      </file>
+      <file name="CodeSummary.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CodeSummary/CodeSummary.styles.js">
+        <metrics statements="27" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="55" count="42" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="64" count="42" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="68" count="42" type="stmt"/>
+        <line num="73" count="42" type="stmt"/>
+        <line num="82" count="42" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="87" count="42" type="stmt"/>
+        <line num="94" count="42" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="98" count="42" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="105" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.CustomDON">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/CustomDON/index.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="57" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.EnvironmentFormInputs">
+      <metrics statements="8" coveredstatements="4" conditionals="17" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="EnvironmentFormInputs.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EnvironmentFormInputs/EnvironmentFormInputs.jsx">
+        <metrics statements="8" coveredstatements="4" conditionals="17" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="136" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.ErrorMessage">
+      <metrics statements="8" coveredstatements="4" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="ErrorMessage.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ErrorMessage/ErrorMessage.jsx">
+        <metrics statements="8" coveredstatements="4" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.EventList">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="EventList.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EventList/EventList.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="57" type="stmt"/>
+        <line num="13" count="2850" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+      </file>
+      <file name="EventList.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EventList/EventList.styles.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="13" count="2850" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.EventSummary">
+      <metrics statements="39" coveredstatements="38" conditionals="2" coveredconditionals="1" methods="24" coveredmethods="23"/>
+      <file name="EventBackground.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EventSummary/EventBackground.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="2850" type="stmt"/>
+      </file>
+      <file name="EventSummary.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EventSummary/EventSummary.jsx">
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="18" count="2850" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="2850" type="stmt"/>
+        <line num="70" count="42" type="stmt"/>
+      </file>
+      <file name="EventSummary.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/EventSummary/EventSummary.styles.js">
+        <metrics statements="32" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="21" coveredmethods="21"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="2850" type="stmt"/>
+        <line num="22" count="2850" type="stmt"/>
+        <line num="23" count="2850" type="stmt"/>
+        <line num="24" count="2850" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="29" count="2850" type="stmt"/>
+        <line num="30" count="2850" type="stmt"/>
+        <line num="38" count="2850" type="stmt"/>
+        <line num="39" count="2850" type="stmt"/>
+        <line num="42" count="2850" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+        <line num="48" count="2850" type="stmt"/>
+        <line num="49" count="2850" type="stmt"/>
+        <line num="56" count="42" type="stmt"/>
+        <line num="59" count="2850" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+        <line num="65" count="42" type="stmt"/>
+        <line num="66" count="2850" type="stmt"/>
+        <line num="69" count="2850" type="stmt"/>
+        <line num="74" count="42" type="stmt"/>
+        <line num="78" count="2850" type="stmt"/>
+        <line num="81" count="42" type="stmt"/>
+        <line num="84" count="2850" type="stmt"/>
+        <line num="85" count="2850" type="stmt"/>
+        <line num="88" count="42" type="stmt"/>
+        <line num="94" count="5700" type="stmt"/>
+        <line num="98" count="42" type="stmt"/>
+        <line num="105" count="42" type="stmt"/>
+        <line num="107" count="2850" type="stmt"/>
+        <line num="108" count="2850" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Expandable">
+      <metrics statements="10" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="Expandable.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Expandable/Expandable.jsx">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+      <file name="Expandable.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Expandable/Expandable.styles.js">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Feedback">
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="11"/>
+      <file name="Feedback.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Feedback/Feedback.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+      </file>
+      <file name="Feedback.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Feedback/Feedback.styles.js">
+        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Footer">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+      <file name="Footer.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Footer/Footer.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+      </file>
+      <file name="Footer.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Footer/Footer.styles.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="22" count="42" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="62" count="42" type="stmt"/>
+        <line num="65" count="42" type="stmt"/>
+        <line num="75" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Form">
+      <metrics statements="44" coveredstatements="11" conditionals="5" coveredconditionals="0" methods="30" coveredmethods="1"/>
+      <file name="Form.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Form/Form.jsx">
+        <metrics statements="35" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="26" coveredmethods="0"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="53" count="42" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="69" count="42" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="100" count="42" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="111" count="42" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+      </file>
+      <file name="OnFormikValueChange.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Form/OnFormikValueChange.jsx">
+        <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+      <file name="yup-transforms.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Form/yup-transforms.js">
+        <metrics statements="4" coveredstatements="1" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="9" count="84" type="cond" truecount="0" falsecount="1"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.ForumPosts">
+      <metrics statements="57" coveredstatements="21" conditionals="10" coveredconditionals="0" methods="25" coveredmethods="0"/>
+      <file name="ForumPost.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ForumPosts/ForumPost.jsx">
+        <metrics statements="7" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="59" count="42" type="stmt"/>
+      </file>
+      <file name="ForumPosts.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ForumPosts/ForumPosts.jsx">
+        <metrics statements="15" coveredstatements="2" conditionals="10" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="49" count="42" type="stmt"/>
+      </file>
+      <file name="ForumPosts.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ForumPosts/ForumPosts.styles.js">
+        <metrics statements="31" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="18" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="55" count="42" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="68" count="42" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="76" count="42" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="42" type="stmt"/>
+        <line num="87" count="42" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="92" count="42" type="stmt"/>
+        <line num="97" count="42" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+      </file>
+      <file name="ForumPostsView.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ForumPosts/ForumPostsView.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.ForumPosts.forumFunctions">
+      <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="fetchForumPosts.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ForumPosts/forumFunctions/fetchForumPosts.js">
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.GlobalStyles">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="GlobalStyles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/GlobalStyles/GlobalStyles.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Grade">
+      <metrics statements="63" coveredstatements="20" conditionals="20" coveredconditionals="0" methods="28" coveredmethods="0"/>
+      <file name="Grade.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Grade/Grade.jsx">
+        <metrics statements="48" coveredstatements="18" conditionals="16" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="48" count="42" type="stmt"/>
+        <line num="55" count="42" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="42" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="89" count="42" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="114" count="42" type="stmt"/>
+        <line num="123" count="42" type="stmt"/>
+        <line num="130" count="42" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="139" count="42" type="stmt"/>
+        <line num="144" count="42" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="150" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="158" count="42" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="171" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="182" count="0" type="stmt"/>
+        <line num="214" count="42" type="stmt"/>
+        <line num="230" count="42" type="stmt"/>
+      </file>
+      <file name="Grade.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Grade/Grade.styles.js">
+        <metrics statements="15" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="src.components.Header">
+      <metrics statements="46" coveredstatements="40" conditionals="0" coveredconditionals="0" methods="29" coveredmethods="23"/>
+      <file name="Header.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/Header.jsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="62" count="42" type="stmt"/>
+      </file>
+      <file name="Header.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/Header.styles.js">
+        <metrics statements="43" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="28" coveredmethods="22"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="34" count="42" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+        <line num="42" count="42" type="stmt"/>
+        <line num="52" count="42" type="stmt"/>
+        <line num="60" count="42" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="74" count="42" type="stmt"/>
+        <line num="79" count="126" type="stmt"/>
+        <line num="84" count="126" type="stmt"/>
+        <line num="89" count="42" type="stmt"/>
+        <line num="96" count="42" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="106" count="42" type="stmt"/>
+        <line num="112" count="42" type="stmt"/>
+        <line num="114" count="42" type="stmt"/>
+        <line num="115" count="42" type="stmt"/>
+        <line num="116" count="42" type="stmt"/>
+        <line num="117" count="42" type="stmt"/>
+        <line num="120" count="42" type="stmt"/>
+        <line num="124" count="42" type="stmt"/>
+        <line num="125" count="42" type="stmt"/>
+        <line num="126" count="42" type="stmt"/>
+        <line num="129" count="42" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="151" count="42" type="stmt"/>
+        <line num="154" count="42" type="stmt"/>
+        <line num="157" count="42" type="stmt"/>
+        <line num="161" count="42" type="stmt"/>
+        <line num="163" count="42" type="stmt"/>
+        <line num="164" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Header.assets">
+      <metrics statements="10" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3"/>
+      <file name="IconCode.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/assets/IconCode.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+      <file name="IconEvents.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/assets/IconEvents.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="54" type="stmt"/>
+      </file>
+      <file name="IconHome.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/assets/IconHome.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="54" type="stmt"/>
+      </file>
+      <file name="IconInfo.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/assets/IconInfo.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
+      <file name="IconPresent.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Header/assets/IconPresent.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="54" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Headings">
+      <metrics statements="16" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <file name="Headings.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Headings/Headings.js">
+        <metrics statements="16" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Icons">
+      <metrics statements="34" coveredstatements="27" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="4"/>
+      <file name="AddIcon.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/AddIcon.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="198" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+      </file>
+      <file name="ArrowLeft.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/ArrowLeft.jsx">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="22" count="42" type="stmt"/>
+      </file>
+      <file name="ArrowRight.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/ArrowRight.jsx">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+      </file>
+      <file name="Checkmark.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Checkmark.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+      <file name="Cross.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Cross.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+      <file name="External.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/External.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="2892" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+      <file name="GitHubIcon.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/GitHubIcon.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+      </file>
+      <file name="GitLabIcon.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/GitLabIcon.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+      </file>
+      <file name="Pin.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Pin.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="2850" type="stmt"/>
+      </file>
+      <file name="StarIcon.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/StarIcon.jsx">
+        <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="19" count="42" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+      </file>
+      <file name="Time.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Time.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="2850" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Icons.Circles">
+      <metrics statements="12" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="CheckmarkCircle.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Circles/CheckmarkCircle.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+      </file>
+      <file name="CrossCircle.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Circles/CrossCircle.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Icons/Circles/index.styles.js">
+        <metrics statements="8" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.ImplementedByList">
+      <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="ImplementedByList.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ImplementedByList/ImplementedByList.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="22" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.ImplementedByListContainer">
+      <metrics statements="22" coveredstatements="1" conditionals="14" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="ImplementedByListContainer.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/ImplementedByListContainer/ImplementedByListContainer.jsx">
+        <metrics statements="22" coveredstatements="1" conditionals="14" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="80" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.LinkToAPIContainer">
+      <metrics statements="22" coveredstatements="1" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="LinkToAPIContainer.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/LinkToAPIContainer/LinkToAPIContainer.jsx">
+        <metrics statements="22" coveredstatements="1" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="80" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Overview">
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
+      <file name="Overview.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Overview/Overview.jsx">
+        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="22" count="99" type="stmt"/>
+        <line num="35" count="42" type="stmt"/>
+      </file>
+      <file name="Overview.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Overview/Overview.styles.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="14" count="99" type="stmt"/>
+        <line num="15" count="99" type="stmt"/>
+        <line num="22" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="31" count="99" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.PageContentCard">
+      <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+      <file name="PageContentCard.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/PageContentCard/PageContentCard.js">
+        <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Pagination">
+      <metrics statements="70" coveredstatements="63" conditionals="21" coveredconditionals="19" methods="37" coveredmethods="32"/>
+      <file name="Pagination.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Pagination/Pagination.jsx">
+        <metrics statements="43" coveredstatements="37" conditionals="15" coveredconditionals="13" methods="18" coveredmethods="14"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="19" count="285" type="stmt"/>
+        <line num="20" count="57" type="stmt"/>
+        <line num="21" count="57" type="stmt"/>
+        <line num="22" count="285" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="179" type="stmt"/>
+        <line num="29" count="106" type="stmt"/>
+        <line num="32" count="57" type="stmt"/>
+        <line num="33" count="285" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="42" type="stmt"/>
+        <line num="60" count="57" type="stmt"/>
+        <line num="61" count="57" type="stmt"/>
+        <line num="63" count="57" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="68" count="57" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="85" count="236" type="cond" truecount="2" falsecount="0"/>
+        <line num="89" count="4" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="123" count="42" type="stmt"/>
+        <line num="124" count="57" type="stmt"/>
+        <line num="126" count="57" type="stmt"/>
+        <line num="128" count="57" type="stmt"/>
+        <line num="129" count="57" type="stmt"/>
+        <line num="130" count="342" type="cond" truecount="2" falsecount="0"/>
+        <line num="132" count="171" type="stmt"/>
+        <line num="137" count="342" type="stmt"/>
+        <line num="139" count="57" type="cond" truecount="1" falsecount="1"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="144" count="57" type="stmt"/>
+        <line num="147" count="57" type="stmt"/>
+        <line num="152" count="4" type="stmt"/>
+        <line num="162" count="42" type="stmt"/>
+        <line num="170" count="42" type="stmt"/>
+      </file>
+      <file name="Pagination.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/Pagination/Pagination.styles.js">
+        <metrics statements="27" coveredstatements="26" conditionals="6" coveredconditionals="6" methods="19" coveredmethods="18"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="57" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="23" count="57" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="29" count="293" type="stmt"/>
+        <line num="31" count="293" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="293" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="293" type="stmt"/>
+        <line num="35" count="293" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="42" type="stmt"/>
+        <line num="50" count="114" type="stmt"/>
+        <line num="51" count="114" type="stmt"/>
+        <line num="58" count="114" type="stmt"/>
+        <line num="62" count="114" type="stmt"/>
+        <line num="66" count="42" type="stmt"/>
+        <line num="71" count="57" type="stmt"/>
+        <line num="74" count="57" type="stmt"/>
+        <line num="80" count="42" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="87" count="42" type="stmt"/>
+        <line num="92" count="57" type="stmt"/>
+        <line num="93" count="57" type="stmt"/>
+        <line num="100" count="42" type="stmt"/>
+        <line num="106" count="57" type="stmt"/>
+        <line num="107" count="57" type="stmt"/>
+        <line num="108" count="57" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.PillBadge">
+      <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="PillBadge.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/PillBadge/PillBadge.js">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.SubmitAPIForm">
+      <metrics statements="32" coveredstatements="15" conditionals="67" coveredconditionals="0" methods="16" coveredmethods="0"/>
+      <file name="PercentageInput.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitAPIForm/PercentageInput.jsx">
+        <metrics statements="9" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="39" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+      </file>
+      <file name="SubmitAPIForm.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitAPIForm/SubmitAPIForm.jsx">
+        <metrics statements="10" coveredstatements="3" conditionals="67" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="33" count="42" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="260" count="0" type="stmt"/>
+        <line num="262" count="0" type="stmt"/>
+        <line num="395" count="42" type="stmt"/>
+        <line num="411" count="42" type="stmt"/>
+      </file>
+      <file name="SubmitAPIForm.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitAPIForm/SubmitAPIForm.styles.js">
+        <metrics statements="13" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="42" count="42" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.SubmitCodeForm">
+      <metrics statements="52" coveredstatements="11" conditionals="19" coveredconditionals="0" methods="17" coveredmethods="2"/>
+      <file name="SubmitCodeForm.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitCodeForm/SubmitCodeForm.jsx">
+        <metrics statements="35" coveredstatements="3" conditionals="11" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="183" count="42" type="stmt"/>
+      </file>
+      <file name="SubmitCodeForm.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitCodeForm/SubmitCodeForm.styles.js">
+        <metrics statements="8" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+      </file>
+      <file name="validationSchema.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitCodeForm/validationSchema.js">
+        <metrics statements="9" coveredstatements="5" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="19" count="42" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.SubmitEventForm">
+      <metrics statements="20" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
+      <file name="SubmitEventForm.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitEventForm/SubmitEventForm.jsx">
+        <metrics statements="18" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+      </file>
+      <file name="SubmitEventForm.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitEventForm/SubmitEventForm.styles.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+      </file>
+      <file name="validationSchema.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/SubmitEventForm/validationSchema.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.Field">
+      <metrics statements="25" coveredstatements="5" conditionals="7" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="const.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/Field/const.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="42" type="stmt"/>
+      </file>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/Field/index.js">
+        <metrics statements="24" coveredstatements="4" conditionals="7" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.Grid">
+      <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/Grid/index.js">
+        <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="11" count="276" type="stmt"/>
+        <line num="12" count="276" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation">
+      <metrics statements="18" coveredstatements="16" conditionals="12" coveredconditionals="12" methods="5" coveredmethods="4"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/index.js">
+        <metrics statements="18" coveredstatements="16" conditionals="12" coveredconditionals="12" methods="5" coveredmethods="4"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="41" count="54" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="30" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="42" type="stmt"/>
+        <line num="52" count="84" type="stmt"/>
+        <line num="55" count="42" type="stmt"/>
+        <line num="58" count="170" type="stmt"/>
+        <line num="59" count="170" type="cond" truecount="2" falsecount="0"/>
+        <line num="76" count="42" type="stmt"/>
+      </file>
+      <file name="primaryNavigationTypes.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/primaryNavigationTypes.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.DesktopNavigation">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/DesktopNavigation/index.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="108" type="stmt"/>
+        <line num="16" count="540" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/DesktopNavigation/index.styles.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="108" type="stmt"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="108" type="stmt"/>
+        <line num="24" count="42" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="39" count="540" type="stmt"/>
+        <line num="40" count="540" type="stmt"/>
+        <line num="41" count="540" type="stmt"/>
+        <line num="46" count="540" type="stmt"/>
+        <line num="48" count="540" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.MobileNavigation">
+      <metrics statements="13" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/index.js">
+        <metrics statements="13" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="18" count="54" type="stmt"/>
+        <line num="19" count="54" type="stmt"/>
+        <line num="21" count="54" type="stmt"/>
+        <line num="22" count="54" type="stmt"/>
+        <line num="24" count="54" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="54" type="stmt"/>
+        <line num="26" count="54" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="108" type="stmt"/>
+        <line num="33" count="54" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.MobileNavigation.components">
+      <metrics statements="19" coveredstatements="18" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="7"/>
+      <file name="Backdrop.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/Backdrop.js">
+        <metrics statements="12" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="17" count="54" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="54" type="stmt"/>
+        <line num="30" count="54" type="stmt"/>
+        <line num="31" count="46" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="46" type="stmt"/>
+        <line num="33" count="45" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="40" count="54" type="stmt"/>
+        <line num="48" count="42" type="stmt"/>
+      </file>
+      <file name="IconChevron.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/IconChevron.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="108" type="stmt"/>
+      </file>
+      <file name="IconMore.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/IconMore.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="54" type="stmt"/>
+      </file>
+      <file name="MobileMoreButton.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileMoreButton.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="54" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.MobileNavigation.components.MobileNavItem">
+      <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="1" methods="10" coveredmethods="10"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileNavItem/index.js">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="216" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileNavItem/index.styles.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="15" count="216" type="stmt"/>
+        <line num="18" count="216" type="stmt"/>
+        <line num="20" count="216" type="stmt"/>
+        <line num="21" count="216" type="stmt"/>
+        <line num="26" count="216" type="stmt"/>
+        <line num="31" count="216" type="stmt"/>
+        <line num="32" count="216" type="stmt"/>
+        <line num="35" count="216" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="43" count="216" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.MobileNavigation.components.MobileNavMenu">
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="5"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileNavMenu/index.js">
+        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="13" count="54" type="stmt"/>
+        <line num="15" count="162" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileNavMenu/index.styles.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="18" count="54" type="stmt"/>
+        <line num="19" count="54" type="stmt"/>
+        <line num="20" count="54" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.PrimaryNavigation.MobileNavigation.components.MobileSubNav">
+      <metrics statements="22" coveredstatements="22" conditionals="2" coveredconditionals="1" methods="12" coveredmethods="10"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileSubNav/index.js">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="3"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="19" count="54" type="stmt"/>
+        <line num="20" count="54" type="stmt"/>
+        <line num="22" count="54" type="stmt"/>
+        <line num="23" count="53" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="54" type="stmt"/>
+        <line num="34" count="108" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/PrimaryNavigation/MobileNavigation/components/MobileSubNav/index.styles.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="16" count="54" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="44" count="54" type="stmt"/>
+        <line num="58" count="42" type="stmt"/>
+        <line num="59" count="54" type="stmt"/>
+        <line num="64" count="42" type="stmt"/>
+        <line num="70" count="42" type="stmt"/>
+        <line num="71" count="108" type="stmt"/>
+        <line num="74" count="42" type="stmt"/>
+        <line num="79" count="108" type="stmt"/>
+        <line num="83" count="108" type="stmt"/>
+        <line num="93" count="108" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.design-system-candidates.Search">
+      <metrics statements="28" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="0"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/Search/index.js">
+        <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+      </file>
+      <file name="index.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/components/design-system-candidates/Search/index.styles.js">
+        <metrics statements="23" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="19" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.domain">
+      <metrics statements="24" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="api-details-repository.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/domain/api-details-repository.js">
+        <metrics statements="5" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+      <file name="code-repository.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/domain/code-repository.js">
+        <metrics statements="9" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+      </file>
+      <file name="event-repository.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/domain/event-repository.js">
+        <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.models">
+      <metrics statements="53" coveredstatements="30" conditionals="26" coveredconditionals="2" methods="18" coveredmethods="2"/>
+      <file name="api.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/models/api.js">
+        <metrics statements="17" coveredstatements="5" conditionals="18" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="51" count="42" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+      </file>
+      <file name="code.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/models/code.js">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="5" count="42" type="stmt"/>
+      </file>
+      <file name="enums.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/models/enums.js">
+        <metrics statements="33" coveredstatements="22" conditionals="6" coveredconditionals="2" methods="7" coveredmethods="1"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="714" type="stmt"/>
+        <line num="24" count="714" type="stmt"/>
+        <line num="27" count="714" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="126" type="stmt"/>
+        <line num="31" count="714" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="44" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+        <line num="48" count="42" type="stmt"/>
+        <line num="49" count="42" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="51" count="42" type="stmt"/>
+        <line num="52" count="42" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="60" count="42" type="stmt"/>
+        <line num="61" count="42" type="stmt"/>
+        <line num="62" count="42" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+        <line num="64" count="42" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="72" count="42" type="stmt"/>
+        <line num="73" count="42" type="stmt"/>
+        <line num="74" count="42" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+      </file>
+      <file name="event.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/models/event.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="2450" type="stmt"/>
+      </file>
+      <file name="propTypes.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/models/propTypes.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.APIDetail">
+      <metrics statements="17" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="APIDetail.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/APIDetail/APIDetail.jsx">
+        <metrics statements="17" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="61" count="42" type="stmt"/>
+        <line num="66" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.APIOverview">
+      <metrics statements="76" coveredstatements="10" conditionals="42" coveredconditionals="0" methods="26" coveredmethods="0"/>
+      <file name="APIOverview.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/APIOverview/APIOverview.jsx">
+        <metrics statements="56" coveredstatements="1" conditionals="42" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="152" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="226" count="42" type="stmt"/>
+      </file>
+      <file name="APIOverview.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/APIOverview/APIOverview.styles.js">
+        <metrics statements="20" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+        <line num="13" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="42" type="stmt"/>
+        <line num="27" count="42" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="49" count="42" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="42" type="stmt"/>
+        <line num="63" count="42" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="69" count="42" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.About">
+      <metrics statements="10" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="About.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/About/About.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="About.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/About/About.styles.js">
+        <metrics statements="8" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.CodeOverview">
+      <metrics statements="77" coveredstatements="12" conditionals="38" coveredconditionals="0" methods="27" coveredmethods="0"/>
+      <file name="CodeOverview.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/CodeOverview/CodeOverview.jsx">
+        <metrics statements="57" coveredstatements="1" conditionals="38" coveredconditionals="0" methods="18" coveredmethods="0"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="101" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="110" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="143" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="229" count="42" type="stmt"/>
+      </file>
+      <file name="CodeOverview.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/CodeOverview/CodeOverview.styles.js">
+        <metrics statements="20" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="42" type="stmt"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+        <line num="55" count="42" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="42" type="stmt"/>
+        <line num="69" count="42" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="78" count="42" type="stmt"/>
+        <line num="90" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.EventOverview">
+      <metrics statements="49" coveredstatements="46" conditionals="30" coveredconditionals="24" methods="16" coveredmethods="16"/>
+      <file name="EventOverview.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/EventOverview/EventOverview.jsx">
+        <metrics statements="36" coveredstatements="33" conditionals="30" coveredconditionals="24" methods="9" coveredmethods="9"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="32" count="42" type="stmt"/>
+        <line num="36" count="57" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="45" count="50" type="stmt"/>
+        <line num="46" count="50" type="stmt"/>
+        <line num="47" count="49" type="stmt"/>
+        <line num="48" count="2450" type="stmt"/>
+        <line num="50" count="49" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="58" count="50" type="stmt"/>
+        <line num="61" count="50" type="cond" truecount="1" falsecount="1"/>
+        <line num="62" count="50" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="42" type="stmt"/>
+        <line num="69" count="4" type="stmt"/>
+        <line num="70" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="75" count="42" type="stmt"/>
+        <line num="76" count="4" type="stmt"/>
+        <line num="78" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="4" type="stmt"/>
+        <line num="80" count="4" type="stmt"/>
+        <line num="81" count="4" type="stmt"/>
+        <line num="84" count="42" type="stmt"/>
+        <line num="85" count="149" type="stmt"/>
+        <line num="86" count="149" type="cond" truecount="1" falsecount="1"/>
+        <line num="89" count="149" type="stmt"/>
+        <line num="97" count="99" type="stmt"/>
+        <line num="98" count="99" type="stmt"/>
+        <line num="99" count="99" type="stmt"/>
+        <line num="101" count="99" type="cond" truecount="5" falsecount="0"/>
+        <line num="103" count="99" type="stmt"/>
+        <line num="151" count="42" type="stmt"/>
+      </file>
+      <file name="EventOverview.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/EventOverview/EventOverview.styles.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="12" count="99" type="stmt"/>
+        <line num="14" count="99" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="99" type="stmt"/>
+        <line num="25" count="99" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="37" count="99" type="stmt"/>
+        <line num="38" count="99" type="stmt"/>
+        <line num="41" count="42" type="stmt"/>
+        <line num="43" count="99" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.Home">
+      <metrics statements="22" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="Home.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/Home/Home.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+      </file>
+      <file name="Home.styles.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/Home/Home.styles.js">
+        <metrics statements="19" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="42" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="44" count="42" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="48" count="42" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="64" count="42" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.SubmitAPI">
+      <metrics statements="16" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="0"/>
+      <file name="SubmitAPI.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPI/SubmitAPI.jsx">
+        <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="14" count="42" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="44" count="42" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+      </file>
+      <file name="SubmitAPI.styles.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPI/SubmitAPI.styles.jsx">
+        <metrics statements="11" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="42" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.SubmitAPIForm">
+      <metrics statements="79" coveredstatements="13" conditionals="26" coveredconditionals="0" methods="16" coveredmethods="0"/>
+      <file name="SubmitAPIForm.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPIForm/SubmitAPIForm.jsx">
+        <metrics statements="67" coveredstatements="3" conditionals="24" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="51" count="42" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="42" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="95" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="104" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="111" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="143" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="148" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="157" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="194" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="202" count="0" type="stmt"/>
+        <line num="204" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="208" count="0" type="stmt"/>
+        <line num="211" count="0" type="stmt"/>
+        <line num="212" count="0" type="stmt"/>
+        <line num="213" count="0" type="stmt"/>
+        <line num="217" count="0" type="stmt"/>
+        <line num="220" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
+        <line num="230" count="0" type="stmt"/>
+        <line num="231" count="0" type="stmt"/>
+        <line num="232" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+        <line num="235" count="0" type="stmt"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="238" count="0" type="stmt"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="250" count="0" type="stmt"/>
+        <line num="264" count="0" type="stmt"/>
+      </file>
+      <file name="validationSchema.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPIForm/validationSchema.js">
+        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="16" count="42" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="95" count="42" type="stmt"/>
+      </file>
+      <file name="yup-translations.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPIForm/yup-translations.js">
+        <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="42" type="stmt"/>
+        <line num="29" count="42" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="45" count="42" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+        <line num="52" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.SubmitAPIMergeRequest">
+      <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="SubmitAPIMergeRequest.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitAPIMergeRequest/SubmitAPIMergeRequest.jsx">
+        <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="42" type="stmt"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="53" count="42" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.SubmitCode">
+      <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="SubmitCode.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitCode/SubmitCode.jsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+      </file>
+      <file name="SubmitCode.styles.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitCode/SubmitCode.styles.jsx">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.SubmitEvent">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="SubmitEvent.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitEvent/SubmitEvent.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+      </file>
+      <file name="SubmitEvent.styles.jsx" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/pages/SubmitEvent/SubmitEvent.styles.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="42" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="13" count="42" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.theme">
+      <metrics statements="38" coveredstatements="37" conditionals="6" coveredconditionals="3" methods="8" coveredmethods="8"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/theme/index.js">
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="42" type="stmt"/>
+        <line num="11" count="42" type="stmt"/>
+        <line num="18" count="42" type="stmt"/>
+        <line num="20" count="42" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="36" count="42" type="stmt"/>
+        <line num="37" count="42" type="stmt"/>
+        <line num="38" count="42" type="stmt"/>
+        <line num="39" count="42" type="stmt"/>
+        <line num="40" count="42" type="stmt"/>
+        <line num="42" count="42" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+        <line num="46" count="42" type="stmt"/>
+        <line num="47" count="42" type="stmt"/>
+        <line num="50" count="42" type="stmt"/>
+        <line num="53" count="42" type="stmt"/>
+        <line num="55" count="126" type="stmt"/>
+      </file>
+      <file name="mediaQueries.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/theme/mediaQueries.js">
+        <metrics statements="21" coveredstatements="20" conditionals="6" coveredconditionals="3" methods="7" coveredmethods="7"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="9" count="42" type="stmt"/>
+        <line num="20" count="1428" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
+        <line num="29" count="1134" type="stmt"/>
+        <line num="32" count="1134" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="1134" type="stmt"/>
+        <line num="43" count="42" type="stmt"/>
+        <line num="44" count="882" type="stmt"/>
+        <line num="47" count="882" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="882" type="stmt"/>
+        <line num="61" count="3444" type="stmt"/>
+        <line num="67" count="42" type="stmt"/>
+        <line num="69" count="42" type="stmt"/>
+        <line num="70" count="168" type="stmt"/>
+        <line num="73" count="168" type="stmt"/>
+        <line num="74" count="168" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="80" count="1134" type="stmt"/>
+        <line num="81" count="882" type="stmt"/>
+        <line num="82" count="1428" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="41" coveredstatements="14" conditionals="20" coveredconditionals="4" methods="12" coveredmethods="3"/>
+      <file name="objectKeysToCamelCase.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/objectKeysToCamelCase.js">
+        <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+      <file name="objectKeysToSnakeCase.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/objectKeysToSnakeCase.js">
+        <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+      <file name="prettyDateTimes.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/prettyDateTimes.js">
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="5" count="42" type="stmt"/>
+        <line num="15" count="42" type="stmt"/>
+        <line num="30" count="42" type="stmt"/>
+        <line num="31" count="5700" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="2052" type="stmt"/>
+        <line num="35" count="3648" type="stmt"/>
+      </file>
+      <file name="timeAgo.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/timeAgo.js">
+        <metrics statements="7" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="8" count="42" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="23" count="42" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+      </file>
+      <file name="uriHelpers.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/uriHelpers.js">
+        <metrics statements="8" coveredstatements="6" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
+        <line num="5" count="50" type="stmt"/>
+        <line num="7" count="50" type="stmt"/>
+        <line num="8" count="100" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="100" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="100" type="stmt"/>
+        <line num="18" count="50" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils.hooks">
+      <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="index.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/hooks/index.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="useToggleState.js" path="/Users/ramsydevos@saxum.nl/sources/opdrachten/vng/developer.overheid.nl/ui/src/utils/hooks/useToggleState.js">
+        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="7" count="54" type="stmt"/>
+        <line num="8" count="54" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="54" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

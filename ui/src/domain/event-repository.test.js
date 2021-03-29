@@ -30,7 +30,7 @@ describe('Event repository', () => {
     afterEach(() => global.fetch.mockRestore())
 
     it('should return a list of events', async () => {
-      const result = await EventRepository.getAll('1')
+      const result = await EventRepository.getAll('page=1')
       expect(result).toEqual(eventListMock)
       expect(global.fetch).toHaveBeenCalledWith('/api/events?page=1')
     })

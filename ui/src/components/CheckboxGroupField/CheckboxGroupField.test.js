@@ -1,6 +1,7 @@
 // Copyright © VNG Realisatie 2020
 // Licensed under the EUPL
 //
+import { act } from '@testing-library/react'
 import { mount } from 'enzyme/build'
 import { Formik, useFormikContext } from 'formik'
 import React from 'react'
@@ -14,7 +15,7 @@ const options = [
   { value: '43', label: '43', count: 3 },
 ]
 
-const createForm = (onChange = null, onSubmit = null) => {
+const createForm = (onChange = () => { }, onSubmit = () => { }) => {
   return mount(
     <ThemeProvider theme={theme}>
       <Formik initialValues={{ theNumber: ['42'] }} onSubmit={onSubmit}>
@@ -50,6 +51,8 @@ describe('CheckboxGroupField', () => {
   })
 
   it('checks values included in initialValue', () => {
+    jest.spyOn(global.console, 'error').mockImplementationOnce(() => jest.fn())
+
     const wrapper = createForm()
     const secondInput = wrapper.find(`input[value="42"]`)
 
@@ -57,12 +60,16 @@ describe('CheckboxGroupField', () => {
   })
 
   it('triggers onChange when a checkbox is changed', () => {
+    jest.spyOn(global.console, 'error').mockImplementationOnce(() => jest.fn())
+
     return new Promise((resolve) => {
       const onChange = jest.fn()
       const wrapper = createForm(onChange)
 
       const firstInput = wrapper.find(`input[value="41"]`)
-      firstInput.simulate('change', { target: { checked: true } })
+      act(() => {
+        firstInput.simulate('change', { target: { checked: true } })
+      })
 
       setTimeout(() => {
         expect(onChange).toHaveBeenCalled()
@@ -90,7 +97,7 @@ describe('CheckboxGroupField', () => {
               <CheckboxGroupField
                 name="theNumber"
                 options={options}
-                onChange={null}
+                onChange={() => { }}
                 value={values.theNumber}
               />
               <TransferValues />

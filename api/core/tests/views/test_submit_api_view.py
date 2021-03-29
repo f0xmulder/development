@@ -16,6 +16,7 @@ class SubmitAPIViewTest(TestCase):
         self.valid_api_data = {
             'description': 'First API',
             'organization_name': 'Test Organization',
+            'organization_oin': "00001234567890123456",
             'service_name': 'First Service',
             'environments': [{
                 'name': 'production',

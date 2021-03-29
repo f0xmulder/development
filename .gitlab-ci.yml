@@ -86,7 +86,7 @@ Verify test schema:
   script:
   - python manage.py migrate
   - 'PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME" --no-owner
-    --schema-only --schema=public --table=core_\* | sed ''/-- Dumped by /d'' > current_testschema.sql
+    --schema-only -T django* -T auth* | sed ''/-- Dumped by /d'' > current_testschema.sql
 
 '
   - ls -l current_testschema.sql
@@ -265,10 +265,12 @@ Remove Review App:
   - branches@commonground/don/developer.overheid.nl
   except:
   - master
+
 E2E tests:
   stage: e2e-tests
+  allow_failure: true
   before_script:
-  - export URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
+  - export CYPRESS_BASE_URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
     "https://$DOMAIN")
   - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
@@ -276,15 +278,24 @@ E2E tests:
     docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
     -f e2e-tests/Dockerfile . && \
     docker run --rm --cap-add=SYS_ADMIN \
-    -e URL=${URL} \
+    -e CYPRESS_BASE_URL=${CYPRESS_BASE_URL} \
+    -v "$(pwd)"/e2e-tests/cypress/videos:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos \
+    -v "$(pwd)"/e2e-tests/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
     $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-    /bin/sh -c "./wait-for-http.sh $URL && npm test"
+    /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test"
   only:
   - branches@commonground/don/developer.overheid.nl
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
   - docker:19.03.1-dind
+  artifacts:
+    when: always
+    paths:
+      - e2e-tests/cypress/videos/**/*.mp4
+      - e2e-tests/cypress/screenshots/**/*.png
+    expire_in: 1 day
+
 Deploy production:
   stage: deploy
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
@@ -309,7 +320,7 @@ Deploy production:
     name: prod
     url: https://$DOMAIN
   tags:
-  - cg-privileged
+  - cg
   - docker
   only:
   - master@commonground/don/developer.overheid.nl
