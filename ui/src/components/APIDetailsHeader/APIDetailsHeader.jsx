@@ -12,7 +12,6 @@ import {
   StyledArrowIcon,
   StyledExternalIcon,
   BackButton,
-  BackLink,
   SpecLink,
   HeaderContainer,
 } from './APIDetailsHeader.styles'
@@ -38,19 +37,12 @@ export const APIDetailsHeader = ({
   organizationName,
   apiType,
   history,
-  backLink,
   externalSpecificationUrl,
 }) => (
   <>
-    {backLink ? (
-      <BackLink to={backLink}>
-        <StyledArrowIcon /> Terug naar {previousName}
-      </BackLink>
-    ) : (
-      <BackButton onClick={() => history.goBack()}>
-        <StyledArrowIcon /> Terug naar {previousName}
-      </BackButton>
-    )}
+    <BackButton onClick={() => history.goBack()}>
+      <StyledArrowIcon /> Terug naar {previousName}
+    </BackButton>
 
     {externalSpecificationUrl ? (
       <HeaderContainer>
