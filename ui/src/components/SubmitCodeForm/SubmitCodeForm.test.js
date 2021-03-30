@@ -3,15 +3,7 @@
 //
 import React from 'react'
 import { shallow } from 'enzyme'
-import {
-  renderWithProviders,
-  act,
-  screen,
-  waitFor,
-  fireEvent,
-  SetupTest,
-} from '../../test-helpers'
-import CodeRepository from '../../domain/code-repository'
+import { act, screen, fireEvent, SetupTest } from '../../test-helpers'
 import { backendApiMock } from '../../models/api.mock'
 import SubmitCodeForm from './SubmitCodeForm'
 
@@ -57,23 +49,6 @@ const apiResponse = {
       ],
     },
   },
-}
-
-const renderForm = async (assertion) => {
-  let result
-  act(() => {
-    result = renderWithProviders(<SubmitCodeForm />)
-  })
-  const projectUrlInput = screen.getByRole('textbox', { name: /Project URL/ })
-  const usedApisInput = screen.getByRole('textbox', {
-    name: "Gebruikte API's",
-  })
-  const submitButton = screen.getByRole('button', { name: /Project toevoegen/ })
-
-  await assertion({ result, projectUrlInput, usedApisInput, submitButton })
-
-  // Completely complete rendering
-  await act(() => Promise.resolve())
 }
 
 describe('SubmitCodeForm', () => {
