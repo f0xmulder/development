@@ -78,27 +78,25 @@ class APIViewSet(RetrieveModelMixin,
             for field_name in self.text_search_fields:
                 search_filter |= Q(**{f'{field_name}__icontains': search_text})
 
-        queryset = queryset.filter(search_filter)
-
-        list_filter = Q()
         facet_inputs = {
             f: request.query_params.getlist(f.replace("__", "_")) for f in self.supported_facets}
         facet_filters = get_facet_filters(facet_inputs)
-        list_filter &= Q(*facet_filters.values())
 
-        results = queryset.filter(list_filter).order_by('api_id')
-        facets = self.get_facets(queryset, facet_filters)
+        facets = self.get_facets(queryset, facet_filters, search_filter)
+
+        search_filter &= Q(*facet_filters.values())
+        results = queryset.filter(search_filter).order_by('api_id')
 
         return self.get_response(results, facets)
 
     @staticmethod
-    def get_facets(queryset, facet_filters):
+    def get_facets(queryset, facet_filters, search_filter):
         facets = {}
         for facet, display_name in APIViewSet.supported_facets.items():
             other_facet_filters = [
                 v for k, v in facet_filters.items()
                 if k != facet and v is not None]
-            combined_filter = Q(*other_facet_filters)
+            combined_filter = Q(search_filter, *other_facet_filters)
 
             field_vals = {"term": F(facet)}
             if display_name:

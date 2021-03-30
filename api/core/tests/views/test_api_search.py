@@ -1,26 +1,32 @@
 import json
 from collections import OrderedDict
+import operator
 from unittest.mock import patch, MagicMock
 
-from django.test import TestCase
+from django.test import TransactionTestCase
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
-from core.models import API
+from core.models import API, Organization
 from core.serializers import APISerializer
 from core.tests.utils import prevent_logging
 
 API_PATH = '/api/apis'
 
 
-class APISearchTest(TestCase):
+class APISearchTest(TransactionTestCase):
 
     def setUp(self):
+        self.orgs_vals = {
+            "Het bureau": "00000000000000000001",
+            "De staat": "00000000000000000002",
+        }
+        self.orgs = [Organization.objects.create(name=k, oin=v) for k, v in self.orgs_vals.items()]
         self.api1 = API.objects.create(
             api_id='kad1',
             service_name='Eerste Kadaster',
             description='Originele Kadaster API',
-            organization_name='Het bureau',
+            organization=self.orgs[0],
             api_type='rest_json',
             api_authentication='none',
             is_reference_implementation=False,
@@ -30,7 +36,7 @@ class APISearchTest(TestCase):
             api_id='kad2',
             service_name='Tweede Kadaster',
             description='Nieuwe Kadaster API',
-            organization_name='De staat',
+            organization=self.orgs[1],
             api_type='graphql',
             api_authentication='unknown',
             is_reference_implementation=True,
@@ -40,7 +46,7 @@ class APISearchTest(TestCase):
             api_id='vuil',
             service_name='De eerste echte vuilnisbakken API',
             description='Alle bakken die aan de openbare weg staan',
-            organization_name='De staat',
+            organization=self.orgs[1],
             api_type='rest_json',
             api_authentication='none',
             is_reference_implementation=False,
@@ -68,16 +74,25 @@ class APISearchTest(TestCase):
         expected_results = [dict(r) for r in expected_results]
         self.assertEqual(response_data['results'], expected_results)
 
+        api_terms = [
+            {'term': t, 'count': expected_api_type_facets[t]} for t in expected_api_type_facets]
+        api_terms.sort(key=operator.itemgetter("term"))
+        org_terms = [{
+                'term': self.orgs_vals[t],
+                'display_name': t,
+                'count': excepted_organization_facets[t],
+            } for t in excepted_organization_facets]
+        org_terms.sort(key=operator.itemgetter("term"))
         expected_facets = {
             'api_type': {
-                'terms': [{'term': t, 'count': expected_api_type_facets[t]}
-                          for t in expected_api_type_facets]
+                'terms': api_terms,
             },
-            'organization_name': {
-                'terms': [{'term': t, 'count': excepted_organization_facets[t]}
-                          for t in excepted_organization_facets]
+            'organization_oin': {
+                'terms': org_terms,
             },
         }
+        response_data['facets']['api_type']['terms'].sort(key=operator.itemgetter("term"))
+        response_data['facets']['organization_oin']['terms'].sort(key=operator.itemgetter("term"))
         self.assertEqual(response_data['facets'], expected_facets)
 
         return response_data
@@ -295,7 +310,7 @@ class APISearchTest(TestCase):
 
     def test_organization(self):
         self.run_search_test(
-            'organization_name=Het+bureau',
+            'organization_oin=00000000000000000001',
             [self.api1],
             {
                 'graphql': 0,
@@ -308,7 +323,7 @@ class APISearchTest(TestCase):
 
     def test_organization_multiple(self):
         self.run_search_test(
-            'organization_name=Het+bureau&organization_name=De+staat',
+            'organization_oin=00000000000000000001&organization_oin=00000000000000000002',
             [self.api1, self.api2, self.api3],
             {
                 'graphql': 1,
@@ -322,7 +337,7 @@ class APISearchTest(TestCase):
 
     def test_organization_no_results(self):
         self.run_search_test(
-            'organization_name=VNG+Realisatie',
+            'organization_oin=00000000000000099999',
             [],
             {
                 'graphql': 0,
@@ -336,7 +351,7 @@ class APISearchTest(TestCase):
 
     def test_organization_no_partial_match(self):
         self.run_search_test(
-            'organization_name=bureau',
+            'organization_oin=0000',
             [],
             {
                 'graphql': 0,
@@ -392,7 +407,7 @@ class APISearchTest(TestCase):
 
     def test_combo_facet_search(self):
         self.run_search_test(
-            'q=Eerste&organization_name=De+staat',
+            'q=Eerste&organization_oin=00000000000000000002',
             [self.api3],
             {
                 'graphql': 0,
@@ -406,7 +421,7 @@ class APISearchTest(TestCase):
 
     def test_combo_different_facets(self):
         self.run_search_test(
-            'organization_name=De+staat&api_type=rest_json',
+            'organization_oin=00000000000000000002&api_type=rest_json',
             [self.api3],
             {
                 'graphql': 1,
@@ -420,7 +435,7 @@ class APISearchTest(TestCase):
 
     def test_combo_no_results(self):
         self.run_search_test(
-            'q=Tweede&organization_name=Het+bureau',
+            'q=Tweede&organization_oin=00000000000000000001',
             [],
             {
                 'graphql': 0,

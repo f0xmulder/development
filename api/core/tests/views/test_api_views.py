@@ -2,7 +2,7 @@ import json
 
 from django.test import TestCase
 
-from core.models import API
+from core.models import API, Organization
 from core.serializers import APISerializer
 from core.tests.utils import prevent_logging
 
@@ -11,10 +11,11 @@ API_PATH = '/api/apis'
 
 class APIViewTest(TestCase):
     def setUp(self):
+        org = Organization.objects.create(name='Test Organization', oin='00001234567890123456')
         self.api1 = API.objects.create(
             api_id='api1',
             description='First API',
-            organization_name='Test Organization',
+            organization=org,
             service_name='First Service',
             api_type='rest_json',
             api_authentication='none',
@@ -24,7 +25,7 @@ class APIViewTest(TestCase):
         self.api2 = API.objects.create(
             api_id='api2',
             description='Second API',
-            organization_name='Other Organization',
+            organization=org,
             service_name='Better Service',
             api_type='graphql',
             api_authentication='unknown',
