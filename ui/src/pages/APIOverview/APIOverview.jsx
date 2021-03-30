@@ -182,7 +182,6 @@ const APIOverview = (props) => {
 
   const queryParams = getQueryParams()
   const { page } = queryParams
-
   const totalResults = loaded && !error && result ? result.totalResults : null
 
   return (
