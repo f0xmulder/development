@@ -56,9 +56,6 @@ const APIOverview = (props) => {
   const [error, setError] = useState(false)
   const [loaded, setLoaded] = useState(false)
 
-  const controller = new AbortController()
-  const signal = controller.signal
-
   const debounced = useDebounce(props.location?.search, 300)
   const isFacet =
     props.location?.search.includes('type') ||
@@ -81,18 +78,6 @@ const APIOverview = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced])
-
-  const fetchApiList = async () => {
-    const response = await fetch(
-      `/api/apis?${generateQueryParams(getQueryParams())}`,
-      { signal },
-    )
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw new Error(`Er ging iets fout tijdens het ophalen van de API's`)
-    }
-  }
 
   const loadAPIList = async () => {
     try {
