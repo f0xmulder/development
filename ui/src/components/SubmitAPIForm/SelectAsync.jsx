@@ -9,7 +9,6 @@ import {
   StyledLink,
   StyledMessage,
   StyledReactSelectAsync,
-  StyledResultContainer,
   StyledField,
 } from './SelectAsync.styles'
 
@@ -17,15 +16,18 @@ const SelectAsync = ({ field, form: { setFieldValue }, ...props }) => {
   const [hasError, setError] = useState(false)
 
   const mapResult = (data) => {
-    return data.map((organisatie) => ({
-      label: (
+    /**
+     * (
         <StyledResultContainer>
           {organisatie.naam}
-          {organisatie.hoofdOIN?.naam && (
-            <small>({organisatie.hoofdOIN?.naam})</small>
-          )}
+          {organisatie.hoofdOIN?.naam && `- ${organisatie.hoofdOIN?.naam}`}
         </StyledResultContainer>
       ),
+     */
+    return data.map((organisatie) => ({
+      label: organisatie.hoofdOIN?.naam
+        ? `${organisatie.naam} (${organisatie.hoofdOIN?.naam})`
+        : organisatie.naam,
       value: organisatie.oin,
     }))
   }

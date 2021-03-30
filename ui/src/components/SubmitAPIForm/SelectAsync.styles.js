@@ -123,14 +123,6 @@ export const StyledLink = styled(Link)`
   color: #f02b41;
 `
 
-export const StyledResultContainer = styled.div`
-  display: flex;
-
-  small {
-    margin-left: auto;
-  }
-`
-
 export const StyledField = styled(Field)`
   max-width: 45rem;
 `
