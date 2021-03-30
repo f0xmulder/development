@@ -342,7 +342,7 @@ include:
 - template: SAST.gitlab-ci.yml
 - template: Secret-Detection.gitlab-ci.yml
 
-container_scanning_deprecated:
+container_scanning:
   stage: security
   variables:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/ui:$CI_COMMIT_SHORT_SHA"
@@ -350,7 +350,7 @@ container_scanning_deprecated:
     DOCKER_PASSWORD: $CI_JOB_TOKEN
 
 container_scanning_docs:
-  extends: container_scanning_deprecated
+  extends: container_scanning
   stage: security
   variables:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/docs:$CI_COMMIT_SHORT_SHA"
@@ -358,7 +358,7 @@ container_scanning_docs:
     DOCKER_PASSWORD: $CI_JOB_TOKEN
 
 container_scanning_api:
-  extends: container_scanning_deprecated
+  extends: container_scanning
   stage: security
   variables:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA"
@@ -366,7 +366,7 @@ container_scanning_api:
     DOCKER_PASSWORD: $CI_JOB_TOKEN
 
 container_scanning_linkchecker:
-  extends: container_scanning_deprecated
+  extends: container_scanning
   stage: security
   variables:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA"
