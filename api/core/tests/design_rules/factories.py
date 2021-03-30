@@ -1,10 +1,18 @@
 import factory
 
 
+class OrganizationFactory(factory.django.DjangoModelFactory):
+    name = factory.Faker("word")
+    oin = factory.Faker("word")
+
+    class Meta:
+        model = "core.Organization"
+
+
 class APIFactory(factory.django.DjangoModelFactory):
     api_id = factory.Sequence(lambda n: n)
     description = factory.Faker("paragraph")
-    organization_name = factory.Faker("word")
+    organization = factory.SubFactory(OrganizationFactory)
     service_name = factory.Faker("word")
     api_type = "rest_json"
     api_authentication = "none"

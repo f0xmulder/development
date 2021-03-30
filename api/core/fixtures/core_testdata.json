@@ -1,11 +1,147 @@
 [
 {
+  "model": "core.organization",
+  "fields": {
+    "name": "Logius",
+    "oin": "00000001822477348000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Gemeente Amsterdam",
+    "oin": "00000001002564440000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "VNG Realisatie",
+    "oin": "00000001821002193000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Centraal Bureau voor de Statistiek",
+    "oin": "00000001812483297000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Ministerie van IenW-Rijkswaterstaat",
+    "oin": "00000001821699180000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Dienst voor het kadaster en de openbare registers",
+    "oin": "00000001802327497000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Uitvoeringsorganisatie Bedrijfsvoering Rijk (UBR)",
+    "oin": "00000004000000059000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Rijksinstituut voor Volksgezondheid en Milieu",
+    "oin": "00000004000000062000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Kamer van Koophandel Nederland",
+    "oin": "00000001006033404000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties",
+    "oin": "00000001003214345000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "RDW",
+    "oin": "00000001804770694000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Digitaal Stelsel Omgevingswet (DSO-LV)",
+    "oin": "00000004130854102000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Provincie Zuid-Holland",
+    "oin": "00000001002306608000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Gemeenschappelijke Regeling Drechtsteden",
+    "oin": "00000001817301409000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Rijksdienst voor Ondernemend Nederland",
+    "oin": "00000004000000006000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Ministerie van Algemene Zaken",
+    "oin": "00000001003227376000",
+    "active": true
+  }
+},
+{
+  "model": "core.organization",
+  "fields": {
+    "name": "Gemeente Enschede",
+    "oin": "00000001001589623000",
+    "active": true
+  }
+},
+{
   "model": "core.api",
   "pk": 6990,
   "fields": {
     "api_id": "gemeente-amsterdam-zwaailicht",
     "description": "Ondersteunende notificaties voor de Berichtendienst. De zwaailicht service is een REST API die op basis van de BAG+ en de WKPB pand-informatie verzamelt.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Zwaailicht",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -27,7 +163,7 @@
   "fields": {
     "api_id": "logius-cpa-register",
     "description": "Met de API van het CPA register kunnen alle CPA gerelateerde beheerwerkzaamheden geautomatiseerd worden uitgevoerd.",
-    "organization_name": "Logius",
+    "organization": ["00000001822477348000"],
     "service_name": "CPA-register",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -49,7 +185,7 @@
   "fields": {
     "api_id": "koop-data-overheid-nl-metadata",
     "description": "Voor data.overheid.nl is een API beschikbaar die de metadata van alle aanwezige datasets beschikbaar stelt. Alle informatie op data.overheid.nl is her te gebruiken onder de CC-0 licentie.",
-    "organization_name": "KOOP",
+    "organization": ["00000004000000059000"],
     "service_name": "data.overheid.nl",
     "api_type": "unknown",
     "api_authentication": "none",
@@ -71,7 +207,7 @@
   "fields": {
     "api_id": "vng-ac",
     "description": "De referentieimplementatie van het autorisatiecomponent.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Autorisatiecomponent (AC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -93,7 +229,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-nap-peilmerken",
     "description": "Het Normaal Amsterdams Peil (meestal afgekort tot NAP) is de referentiehoogte waaraan hoogtemetingen in Nederland worden gerelateerd. Het NAP-net bestaat uit ongeveer 50.000 zichtbare peilmerken en 250 ondergrondse peilmerken in Nederland, waarvan ongeveer 1000 in Amsterdam.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "NAP Peilmerken",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -115,7 +251,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-meetbouten",
     "description": "In Amsterdam is een systeem gerealiseerd voor het monitoren van deformatie (zakkingen). De oudere, vooroorlogse panden in Amsterdam zijn gebouwd op houten palen. De kwaliteit van deze fundering op houten palen verschilt sterk. Een slechte fundering kan zakkingen tot gevolg hebben, waardoor de kwaliteit van deze panden afneemt en mogelijkerwijs zelfs uiteindelijk tot sloop kan leiden. Om dergelijke zakkingen te kunnen volgen zijn op grote schaal meetbouten geplaatst in de binnenstad, de 19e eeuwse gordel en de gordel 20-40, grofweg alle gebieden binnen de ringweg. Met de meetgegevens wordt vooral het inzicht vergroot in grootte en snelheid van de zakking. Eigenaren van de panden kunnen met deze inzichten rekening houden bij mogelijke investeringen. De Registratie meetbouten is een initiatief van de afdeling Wonen (opdrachtgever), de bestuurscommissies en de afdeling Basisinformatie.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Registratie Meetbouten",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -137,7 +273,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-gebieden",
     "description": "In de Registratie gebieden worden de Amsterdamse stadsdelen, wijk (voorheen) buurtcombinaties, buurten en bouwblokken vastgelegd. Verder bevat de registratie gegevens van de grootstedelijke gebieden binnen de gemeente, de UNESCO werelderfgoedgrens en de gebieden van gebiedsgericht werken.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Basisregistratie Amsterdamse Gebieden",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -159,7 +295,7 @@
   "fields": {
     "api_id": "luchtmeetnet-luchtmeetnet",
     "description": "This API grants direct access to detailed information of the stations and the measurements of  air quality on several measuring stations in the Netherlands and the calculated air quality maps",
-    "organization_name": "Luchtmeetnet",
+    "organization": ["00000004000000062000"],
     "service_name": "Luchtmeetnet",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -181,7 +317,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-bag",
     "description": "De Basisregistratie Adressen en Gebouwen (BAG) bevat gegevens over panden, verblijfsobjecten, standplaatsen en ligplaatsen en de bijbehorende adressen en de benoeming van woonplaatsen en openbare ruimten.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -203,7 +339,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-brk",
     "description": "De Basisregistratie kadaster (BRK) bevat informatie over percelen, eigendom, hypotheken, beperkte rechten (zoals recht van erfpacht, opstal en vruchtgebruik) en leidingnetwerken. Daarnaast staan er kadastrale kaarten in met perceel, perceelnummer, oppervlakte, kadastrale grens en de grenzen van het rijk, de provincies en gemeenten.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Basisregistratie Kadaster (BRK)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -225,7 +361,7 @@
   "fields": {
     "api_id": "vng-ztc",
     "description": "De referentieimplementatie van de zaaktypecatalogus.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Zaaktypecatalogus (ZTC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -247,7 +383,7 @@
   "fields": {
     "api_id": "logius-cor",
     "description": "Met de COR API kunnen de OIN’s van geregistreerde organisaties worden opgevraagd en de organisatienamen bij bestaande OIN’s worden opgezocht.",
-    "organization_name": "Logius",
+    "organization": ["00000001822477348000"],
     "service_name": "Centrale OIN Raadpleegvoorziening (COR)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -269,7 +405,7 @@
   "fields": {
     "api_id": "cbs-odata",
     "description": "Met behulp van de CBS OData API kan je Articles, Pages, Figures, Events en Flash data van de CBS website ophalen.",
-    "organization_name": "Centraal Bureau voor de Statistiek (CBS)",
+    "organization": ["00000001812483297000"],
     "service_name": "CBS OData",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -291,7 +427,7 @@
   "fields": {
     "api_id": "vng-drc",
     "description": "De referentieimplementatie van het documentregistratiecomponent.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Documentregistratiecomponent (DRC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -313,7 +449,7 @@
   "fields": {
     "api_id": "minienw-parkeerdatacatalogus",
     "description": "Statische en real-time dynamische parkeerdata van publiek toegankelijke on street (straatparkeren) en off street (garages en terreinen) parkeerfaciliteiten (van publieke (gemeentelijke) en private exploitanten",
-    "organization_name": "Ministerie van Infrastructuur en Waterstaat",
+    "organization": ["00000001821699180000"],
     "service_name": "parkeerdatacatalogus",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -335,7 +471,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-bbga",
     "description": "Specifieke functionaliteit voor de BBGA API.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Basisbestand Gebieden Amsterdam (BBGA)",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -357,7 +493,7 @@
   "fields": {
     "api_id": "kadaster-brt",
     "description": "Het Kadaster is houder van de Basisregistratie Topografie (BRT). De BRT bestaat uit digitale topografische bestanden op verschillende schaalniveaus. Deze verzameling topografische bestanden is via dit portaal beschikbaar als open data. Hier vindt u TOP10NL als Linked Data en via een API, en de kennisbank van de gebruikte begrippen inclusief verwijzing naar de relevante wetsartikelen. Deze site is op 27 juni 2016 door het Kadaster gelanceerd als bètaversie. Op dit moment is de kaartview functionaliteit beperkt en zijn alleen de gebouwen aanklikbaar. Verdere functionaliteit van de viewer is in ontwikkeling. Het Kadaster wil ervaring op doen om Linked Data als standaard dienstverlening aan te bieden.",
-    "organization_name": "Kadaster",
+    "organization": ["00000001802327497000"],
     "service_name": "Basisregistratie Topografie (BRT)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -379,7 +515,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-tellus",
     "description": "-",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Tellus",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -401,7 +537,7 @@
   "fields": {
     "api_id": "vng-cdf-energie-maps",
     "description": "Dit is een 'convenience' API. We hebben energie gerelateerde data van netbeheerders, kadaster en de BAG tot een dataset samengevoegd waarmee energie gerelateerde kaarten gemaakt kunnen worden.\n\nAlle relevante open energie data in een keer bij de hand.\n\nDeze dataset is  de basis voor tvw.commondatafactory.nl.\n\nPer pand zijn er ~25 attributen over hoogte, oppervlakte, volume, gasverbruik over meerdere jaren, elektra verbruik over meerdere jaren, bouwjaar, postcode.\n\nWe zijn zorgvuldig geweest maar er zullen zeker nog 'rare' dingen in de data zitten. Ook omdat meetgegevens fouten bevatten of omdat panden samen worden genomen voor de anonimiteit (in het geval van de meetgegevens).",
-    "organization_name": "VNG / commondatafactory",
+    "organization": ["00000001821002193000"],
     "service_name": "Energie data Nederland per pand",
     "api_type": "wfs",
     "api_authentication": "none",
@@ -423,7 +559,7 @@
   "fields": {
     "api_id": "kadaster-brk",
     "description": "Het Kadaster is houder van de Basisregistratie Kadaster (BRK). Onderdeel van de BRK is de Digitale kadastrale kaart. Deze is beschikbaar als open data en nu via dit portaal ook als Linked Open Data (vooralsnog zonder de topografie).",
-    "organization_name": "Kadaster",
+    "organization": ["00000001802327497000"],
     "service_name": "Basisregistratie Kadaster (BRK)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -445,7 +581,7 @@
   "fields": {
     "api_id": "vng-bevraging-ingeschreven-persoon",
     "description": "API voor het opvragen van persoonsgegevens van een ingeschreven persoon, Voor de getoonde API URL is een APIkey vereist.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Bevraging Ingeschreven Persoon",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -467,7 +603,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-geosearch",
     "description": "Een API om objecten uit verschillende andere datasets van de Gemeente Amsterdam mee op te zoeken op basis van een coördinaat en een straal",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Geosearch",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -485,33 +621,11 @@
 },
 {
   "model": "core.api",
-  "pk": 7012,
-  "fields": {
-    "api_id": "eindhoven-avg-contracten",
-    "description": "Het ontsluiten van zaken / contractgegevens via het MijnApp concept.",
-    "organization_name": "Eindhoven",
-    "service_name": "Contracten API",
-    "api_type": "rest_json",
-    "api_authentication": "unknown",
-    "is_reference_implementation": false,
-    "contact_email": "helpdesk@solviteers.nl",
-    "contact_phone": "",
-    "contact_url": "",
-    "terms_government_only": null,
-    "terms_pay_per_use": null,
-    "terms_uptime_guarantee": null,
-    "terms_support_response_time": null,
-    "forum_vendor": "",
-    "forum_url": ""
-  }
-},
-{
-  "model": "core.api",
   "pk": 7013,
   "fields": {
     "api_id": "kadaster-bag",
     "description": "De Basisregistratie Adressen en Gebouwen (BAG) is onderdeel van het overheidsstelsel van basisregistraties. Gemeenten zijn bronhouders van de BAG. Zij zijn verantwoordelijk voor het opnemen van de gegevens in de BAG en voor de kwaliteit ervan. Alle gemeenten stellen gegevens over adressen en gebouwen centraal beschikbaar via de Landelijke Voorziening BAG (LV BAG). Het Kadaster beheert de LV BAG en stelt de gegevens beschikbaar aan de diverse afnemers. Organisaties met een publieke taak, zoals ministeries, waterschappen, politiekorpsen en veiligheidsregio's zijn verplicht de authentieke gegevens uit de registraties te gebruiken.",
-    "organization_name": "Kadaster",
+    "organization": ["00000001802327497000"],
     "service_name": "Basisregistratie Adressen en Gebouwen (BAG)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -533,7 +647,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-dcatd",
     "description": "-",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Datasetcatalogus",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -555,7 +669,7 @@
   "fields": {
     "api_id": "rdw-brv",
     "description": "Alle niet-gevoelige gegevens van het wagenpark.",
-    "organization_name": "RDW",
+    "organization": ["00000001804770694000"],
     "service_name": "Gekentekende voertuigen",
     "api_type": "unknown",
     "api_authentication": "unknown",
@@ -577,7 +691,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-parkeervakken",
     "description": "De parkeervakken in de stad worden hier als een lijst getoond.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Parkeervakken",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -599,7 +713,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-signalen",
     "description": "Deze API is onderdeel van de Signalen Informatievoorziening Amsterdam (SIA) applicatie. Burgers en andere geïnteresseerde partijen kunnen SIA gebruiken om de gemeente Amsterdam te informeren over problemen in de publieke ruimte (bijvoorbeeld geluidsoverlast, kapotte lantaarnpalen, etc.) Deze signalen worden opgepakt door de verantwoordelijke gemeentelijke diensten.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Signalen",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -621,7 +735,7 @@
   "fields": {
     "api_id": "vng-open-raadsinformatie",
     "description": "Raadsinformatie van gemeenten. Onder andere notulen, moties, agenda’s en raadsbesluiten. Beschikbaar voor hergebruik via deze API.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Open Raadsinformatie",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -643,7 +757,7 @@
   "fields": {
     "api_id": "minbzk-bronhouderportaal",
     "description": "Met deze API is het mogelijk om volledig geautomatiseerd brondocumenten aan te leveren aan het Bronhouderportaal BRO. De API is RESTful opgezet. In vogelvlucht werkt de API door eerst een Upload aan te maken waar vervolgens, door middel van het sturen van een POST request met als body de XML van het brondocument, meerdere Brondocumenten aan kunnen worden toegevoegd. Van de Upload kan een Levering gemaakt worden. Vervolgens kan de status van de levering periodiek worden opgevraagd, waarbij uiteindelijk een BRO-ID teruggeven wordt. Ter ondersteuning van de kwaliteitscontrole van een levering is het mogelijk om een levering en/of de brondocumenten van een levering te verrijken met extra gegevens. Daarnaast kunnen brondocumenten gevalideerd worden, zonder dat hiervoor een levering wordt aangemaakt. Deze functionaliteit is tevens geschikt om te testen of de koppeling met de API correct functioneert.",
-    "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
+    "organization": ["00000001003214345000"],
     "service_name": "Bronhouderportaal BRO API (1.0.0)",
     "api_type": "rest_xml",
     "api_authentication": "unknown",
@@ -665,7 +779,7 @@
   "fields": {
     "api_id": "rivm-aerius-connect",
     "description": "AERIUS stelt een API (Application Programming Interface) beschikbaar aan ontwikkelaars, waarmee zij via een computer interface (API) opdrachten kunnen uitvoeren op de AERIUS Calculator, zonder gebruik te maken van een gebruikersomgeving (GUI). Voor de AERIUS Connect API betreft het opdrachten voor het valideren, converteren en rekenen met AERIUS Calculator.",
-    "organization_name": "RIVM",
+    "organization": ["00000004000000062000"],
     "service_name": "AERIUS Connect",
     "api_type": "rest_json",
     "api_authentication": "api_key",
@@ -687,7 +801,7 @@
   "fields": {
     "api_id": "kvk-ondernemersplein",
     "description": "Ondernemersplein biedt ondernemers volledige en up-to-date informatie van de overheid. Aangevuld met wet- en regelgeving, subsidies en evenementen. Gemaakt door een gezamenlijke overheidsredactie. Deze content wordt uitgeserveerd via een open API.",
-    "organization_name": "Ondernemersplein (KVK)",
+    "organization": ["00000001006033404000"],
     "service_name": "Ondernemersplein API",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -705,33 +819,11 @@
 },
 {
   "model": "core.api",
-  "pk": 7022,
-  "fields": {
-    "api_id": "rijksmuseum-rijksmuseum",
-    "description": "De live website-API (die een live link naar het websiteplatform heeft) maakt de mogelijkheden van de bekroonde website van het Rijksmuseum direct toegankelijk voor ontwikkelaars. Het doorzoeken van de collectie via de API biedt een breed scala aan interessante mogelijkheden, zoals de functie 'explore the collection', de collecties van de Rijksstudio-gebruikers en de 'tiled images die worden gebruikt om in te zoomen op close-ups van kunstwerken. Andere soorten gegevens zijn ook beschikbaar, zoals informatie uit de evenementenkalender van het Rijksmuseum. De op JSON gebaseerde service is zo eenvoudig te gebruiken dat u in een mum van tijd een toepassing kunt maken met de rijke en vrij toegankelijke inhoud van het Rijksmuseum.",
-    "organization_name": "Rijksmuseum",
-    "service_name": "Rijksmuseum API",
-    "api_type": "unknown",
-    "api_authentication": "unknown",
-    "is_reference_implementation": false,
-    "contact_email": "website@rijksmuseum.nl",
-    "contact_phone": "",
-    "contact_url": "https://www.rijksmuseum.nl/en/research/contact-form",
-    "terms_government_only": false,
-    "terms_pay_per_use": false,
-    "terms_uptime_guarantee": "0.000000",
-    "terms_support_response_time": null,
-    "forum_vendor": "",
-    "forum_url": ""
-  }
-},
-{
-  "model": "core.api",
   "pk": 7023,
   "fields": {
     "api_id": "gemeente-amsterdam-panoramabeelden",
     "description": "De panoramas van de stad worden in een lijst getoond, panorama's, thumbnails, recente panorama's",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Panoramabeelden",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -753,7 +845,7 @@
   "fields": {
     "api_id": "vng-zrc",
     "description": "De referentieimplementatie van het zaakregistratiecomponent.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Zaakregistratiecomponent (ZRC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -775,7 +867,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-bag-search",
     "description": "Zoekservice voor BAG, BRK en Amsterdamse Gebieden",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "BAG Search",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -797,7 +889,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-monumenten",
     "description": "De monumenten in de stad worden hier als een lijst getoond. monumenten, situeringen, complexen. Datamodel conform stelselpedia https://www.amsterdam.nl/stelselpedia/monumenten-index/catalogus-monumenten/",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Monumenten",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -819,7 +911,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-typeahead",
     "description": "Typeahead API voor de datapunt Amsterdam datasets",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Typeahead",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -841,7 +933,7 @@
   "fields": {
     "api_id": "vng-nrc",
     "description": "De referentieimplementatie van het notificatiecomponent.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Notificatierouteringscomponent (NRC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -863,7 +955,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-afval",
     "description": "Afvalcontainers en putten in Amsterdam",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Afvalcontainers en putten",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -885,7 +977,7 @@
   "fields": {
     "api_id": "minbzk-omgevingsdocumenten-opvragen",
     "description": "Met deze API worden alle omgevingsdocumenten ontsloten die door overheden beschikbaar zijn gesteld aan de Landelijke Voorziening Bekendmaken en Beschikbaar stellen (LVBB). Het betreft alle gegevens waar het omgevingsdocument uit is opgebouwd. De gegevens worden objectgericht ontsloten op basis van de API strategie van het digitaal stelsel Omgevingswet.",
-    "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
+    "organization": ["00000001003214345000"],
     "service_name": "Omgevingsdocumenten Opvragen",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -907,7 +999,7 @@
   "fields": {
     "api_id": "kvk-search",
     "description": "Zoek naar een bedrijf, vind relevante data in het Handelsregister",
-    "organization_name": "Kamers van Koophandel",
+    "organization": ["00000001006033404000"],
     "service_name": "KvK Search",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -929,7 +1021,7 @@
   "fields": {
     "api_id": "provincie-zuid-holland-subsidieregister",
     "description": "Subsidieregister van de provincie Zuid-Holland",
-    "organization_name": "Provincie Zuid-Holland",
+    "organization": ["00000001002306608000"],
     "service_name": "Subsidieregister",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -951,7 +1043,7 @@
   "fields": {
     "api_id": "rvo-dbs",
     "description": "Met de Digitale Bereikbaarheidsservice (DBS) kunnen Marktpartijen die postafhandelingsdiensten verzorgen voor overheidsorganisaties de digitale bereikbaarheid van ondernemingen vaststellen. Het is een nieuwe dienst om grote aantallen digitale berichten te verzenden naar ondernemers.",
-    "organization_name": "RVO Rijksdienst voor Ondernemend Nederland",
+    "organization": ["00000004000000059000"],
     "service_name": "Digitale BereikbaarheidsService (DBS)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -973,7 +1065,7 @@
   "fields": {
     "api_id": "gemeentelijke-regelingen-drechtsteden-kernregistratie-medewerkers",
     "description": "API voor het opvragen van medewerkergegevens.",
-    "organization_name": "Gemeenschappelijke Regeling Drechtsteden",
+    "organization": ["00000001817301409000"],
     "service_name": "Kernregistratie Medewerkers",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -995,7 +1087,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-afvalophaalgebieden",
     "description": "Vind de afval ophaaldagen voor de opgegeven locatie (x/y of lat/lon) in Amsterdam.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Afvalregels bij locatie x, y",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -1017,7 +1109,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-rioolnetwerk",
     "description": "-",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Rioolnetwerk",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -1039,7 +1131,7 @@
   "fields": {
     "api_id": "kadaster-terugmeldingen",
     "description": "De Terugmelding API bevat recente terugmeldingen op informatie uit de Basisregistratie Adressen en Gebouwen (BAG), Basisregistratie Grootschalige Topografie (BGT) en Basisregistratie Topografie (BRT) waarover twijfel bestaat. De API toont de locaties, inhoud en status van de meldingen. De informatie in de services wordt continu bijgewerkt. Ook is het mogelijk om via de API een terugmelding te doen. De API is beveiligd met een API-key.",
-    "organization_name": "Kadaster",
+    "organization": ["00000001802327497000"],
     "service_name": "Terugmelding",
     "api_type": "rest_json",
     "api_authentication": "api_key",
@@ -1061,7 +1153,7 @@
   "fields": {
     "api_id": "vng-brc",
     "description": "De referentieimplementatie van het besluitregistratiecomponent.",
-    "organization_name": "VNG Realisatie",
+    "organization": ["00000001821002193000"],
     "service_name": "Besluitregistratiecomponent (BRC)",
     "api_type": "rest_json",
     "api_authentication": "unknown",
@@ -1083,7 +1175,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-typeahead-bag-brk",
     "description": "Typeahead API over de bag, brk, en gebieden datasets",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Typeahead Bag/Brk",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -1105,7 +1197,7 @@
   "fields": {
     "api_id": "gemeente-amsterdam-milieuthemas",
     "description": "Informatie over milieu gerelateerde zaken. Momenteel via deze api enkel explosieven in de stad. Inslagen (met mogelijke blindgangers), gevrijwaarde, verdachte en ondezochte gebieden.",
-    "organization_name": "Gemeente Amsterdam",
+    "organization": ["00000001002564440000"],
     "service_name": "Milieuthema's",
     "api_type": "rest_json",
     "api_authentication": "none",
@@ -1242,22 +1334,6 @@
     "programming_languages": [
       2,
       10
-    ]
-  }
-},
-{
-  "model": "core.code",
-  "pk": 8,
-  "fields": {
-    "source": "GitHub repository",
-    "owner_name": "DanielJ06",
-    "name": "rijksmuseum-mobile-app",
-    "url": "https://github.com/DanielJ06/rijksmuseum-mobile-app",
-    "description": "A react-native app (expo), based on Rijksmuseum api - Art and technology in the palm of your hands! ",
-    "last_change": "2020-10-25T20:55:18Z",
-    "stars": 0,
-    "programming_languages": [
-      6
     ]
   }
 },
@@ -1708,17 +1784,6 @@
 },
 {
   "model": "core.environment",
-  "pk": 7095,
-  "fields": {
-    "name": "production",
-    "api_url": "https://testen.solviteers.nl/MijnApp/api",
-    "specification_url": "https://raw.githubusercontent.com/solviteers/mijnapp-api/master/contracten-api.yaml",
-    "documentation_url": "https://solviteers.github.io/mijnapp-api-contracts-docs-redoc/",
-    "api": "eindhoven-avg-contracten"
-  }
-},
-{
-  "model": "core.environment",
   "pk": 7096,
   "fields": {
     "name": "production",
@@ -1814,17 +1879,6 @@
     "specification_url": "https://opendata.ondernemersplein.nl/swagger/v1/swagger.json",
     "documentation_url": "https://opendata.ondernemersplein.nl/docs/",
     "api": "kvk-ondernemersplein"
-  }
-},
-{
-  "model": "core.environment",
-  "pk": 7105,
-  "fields": {
-    "name": "production",
-    "api_url": "https://www.rijksmuseum.nl/en/api",
-    "specification_url": "",
-    "documentation_url": "https://rijksmuseum.github.io",
-    "api": "rijksmuseum-rijksmuseum"
   }
 },
 {
@@ -2122,14 +2176,6 @@
   }
 },
 {
-  "model": "core.codeapi",
-  "pk": 26,
-  "fields": {
-    "code": 8,
-    "api": "rijksmuseum-rijksmuseum"
-  }
-},
-{
   "model": "core.event",
   "pk": 1,
   "fields": {
@@ -2215,13 +2261,6 @@
     "location": "sangli",
     "registration_url": "http://hcxc7573kfzgncqwk3ufqm285zbpze.burpcollaborator.net",
     "is_published": false
-  }
-},
-{
-  "model": "core.url",
-  "pk": 1,
-  "fields": {
-    "url": "https://rijksmuseum.github.io"
   }
 },
 {
@@ -2348,13 +2387,6 @@
   "pk": 19,
   "fields": {
     "url": "https://ref.tst.vng.cloud/brc/api/v1/"
-  }
-},
-{
-  "model": "core.url",
-  "pk": 20,
-  "fields": {
-    "url": "https://github.com/Rijksmuseum/api-issues/issues"
   }
 },
 {
@@ -2751,13 +2783,6 @@
 },
 {
   "model": "core.url",
-  "pk": 77,
-  "fields": {
-    "url": "https://www.rijksmuseum.nl/en/api"
-  }
-},
-{
-  "model": "core.url",
   "pk": 78,
   "fields": {
     "url": "https://portaal.digikoppeling.nl/registers/api/"
@@ -2915,13 +2940,6 @@
   "pk": 100,
   "fields": {
     "url": "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/master/specificatie/openapi.yaml"
-  }
-},
-{
-  "model": "core.url",
-  "pk": 101,
-  "fields": {
-    "url": "https://www.rijksmuseum.nl/en/research/contact-form"
   }
 },
 {
@@ -3530,15 +3548,6 @@
 },
 {
   "model": "core.urlapilink",
-  "pk": 5004,
-  "fields": {
-    "url": 1,
-    "api": 7022,
-    "field": "production_doc"
-  }
-},
-{
-  "model": "core.urlapilink",
   "pk": 5005,
   "fields": {
     "url": 174,
@@ -3679,15 +3688,6 @@
     "url": 52,
     "api": 6991,
     "field": "production_api"
-  }
-},
-{
-  "model": "core.urlapilink",
-  "pk": 5021,
-  "fields": {
-    "url": 101,
-    "api": 7022,
-    "field": "contact"
   }
 },
 {
@@ -4223,15 +4223,6 @@
 },
 {
   "model": "core.urlapilink",
-  "pk": 5081,
-  "fields": {
-    "url": 77,
-    "api": 7022,
-    "field": "production_api"
-  }
-},
-{
-  "model": "core.urlapilink",
   "pk": 5082,
   "fields": {
     "url": 168,
@@ -4264,15 +4255,6 @@
     "url": 65,
     "api": 7030,
     "field": "production_api"
-  }
-},
-{
-  "model": "core.urlapilink",
-  "pk": 5086,
-  "fields": {
-    "url": 55,
-    "api": 7012,
-    "field": "production_doc"
   }
 },
 {
@@ -4488,15 +4470,6 @@
   "fields": {
     "url": 56,
     "api": 7034,
-    "field": "production_api"
-  }
-},
-{
-  "model": "core.urlapilink",
-  "pk": 5111,
-  "fields": {
-    "url": 80,
-    "api": 7012,
     "field": "production_api"
   }
 },
@@ -4804,15 +4777,6 @@
     "url": 33,
     "api": 7033,
     "field": "production_doc"
-  }
-},
-{
-  "model": "core.urlapilink",
-  "pk": 5146,
-  "fields": {
-    "url": 58,
-    "api": 7012,
-    "field": "production_spec"
   }
 },
 {
@@ -5284,15 +5248,6 @@
 },
 {
   "model": "core.apidesignruletestsuite",
-  "pk": 13,
-  "fields": {
-    "api": "eindhoven-avg-contracten",
-    "uuid": "09c1a43a-6d55-45a5-b6e4-dcc6601939c3",
-    "api_endpoint": "https://testen.solviteers.nl/MijnApp/api"
-  }
-},
-{
-  "model": "core.apidesignruletestsuite",
   "pk": 14,
   "fields": {
     "api": "kadaster-bag",
@@ -5719,16 +5674,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 13,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-27T18:23:23.174Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 14,
   "fields": {
     "test_suite": 14,
@@ -6013,16 +5958,6 @@
   "fields": {
     "test_suite": 12,
     "started_at": "2021-01-27T18:24:11.326Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 43,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-27T18:24:11.881Z",
     "percentage_score": "0.00",
     "test_version": "09 Juli 2020"
   }
@@ -6319,16 +6254,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 73,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-27T18:25:31.130Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 74,
   "fields": {
     "test_suite": 14,
@@ -6613,16 +6538,6 @@
   "fields": {
     "test_suite": 12,
     "started_at": "2021-01-27T18:30:42.186Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 103,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-27T18:30:42.813Z",
     "percentage_score": "0.00",
     "test_version": "09 Juli 2020"
   }
@@ -6919,16 +6834,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 133,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-28T04:20:26.501Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 134,
   "fields": {
     "test_suite": 14,
@@ -7219,16 +7124,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 163,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-28T12:26:43.890Z",
-    "percentage_score": "0.00",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 164,
   "fields": {
     "test_suite": 14,
@@ -7513,16 +7408,6 @@
   "fields": {
     "test_suite": 12,
     "started_at": "2021-01-28T16:23:23.930Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 193,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-28T16:23:25.507Z",
     "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
@@ -8079,16 +7964,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 249,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-28T16:31:22.719Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 250,
   "fields": {
     "test_suite": 26,
@@ -8364,16 +8239,6 @@
     "test_suite": 44,
     "started_at": "2021-01-29T04:20:54.628Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 278,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-29T04:20:55.185Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -8839,16 +8704,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 325,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-30T04:20:57.376Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 326,
   "fields": {
     "test_suite": 14,
@@ -9304,16 +9159,6 @@
     "test_suite": 44,
     "started_at": "2021-01-31T04:21:06.325Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 372,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-01-31T04:21:06.882Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -9779,16 +9624,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 419,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-01T04:20:54.100Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 420,
   "fields": {
     "test_suite": 14,
@@ -10244,16 +10079,6 @@
     "test_suite": 44,
     "started_at": "2021-02-02T04:20:54.861Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 466,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-02T04:20:55.485Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -10719,16 +10544,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 513,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-03T04:20:58.266Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 514,
   "fields": {
     "test_suite": 14,
@@ -11184,16 +10999,6 @@
     "test_suite": 44,
     "started_at": "2021-02-04T04:21:06.181Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 560,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-04T04:21:06.749Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -11659,16 +11464,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 607,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-05T04:20:58.101Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 608,
   "fields": {
     "test_suite": 14,
@@ -12124,16 +11919,6 @@
     "test_suite": 44,
     "started_at": "2021-02-06T04:21:07.791Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 654,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-06T04:21:08.410Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -12599,16 +12384,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 701,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-07T04:21:08.128Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 702,
   "fields": {
     "test_suite": 14,
@@ -13064,16 +12839,6 @@
     "test_suite": 44,
     "started_at": "2021-02-08T04:21:10.617Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 748,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-08T04:21:11.184Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -13539,16 +13304,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 795,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-09T04:21:23.129Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 796,
   "fields": {
     "test_suite": 14,
@@ -14009,16 +13764,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 842,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-10T04:21:49.401Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 843,
   "fields": {
     "test_suite": 14,
@@ -14474,16 +14219,6 @@
     "test_suite": 44,
     "started_at": "2021-02-10T09:26:32.572Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 889,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-10T09:26:33.083Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -15049,16 +14784,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 946,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-10T10:03:37.967Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 947,
   "fields": {
     "test_suite": 14,
@@ -15514,16 +15239,6 @@
     "test_suite": 44,
     "started_at": "2021-02-11T04:21:46.272Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 993,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-11T04:21:46.769Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -15989,16 +15704,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1040,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-11T10:17:37.454Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1041,
   "fields": {
     "test_suite": 14,
@@ -16264,16 +15969,6 @@
     "test_suite": 44,
     "started_at": "2021-02-11T10:18:40.465Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1068,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-11T10:18:41.027Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -16734,16 +16429,6 @@
     "test_suite": 44,
     "started_at": "2021-02-11T15:53:30.300Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1115,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-11T15:53:30.808Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -17279,16 +16964,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1169,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-12T04:21:42.562Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1170,
   "fields": {
     "test_suite": 47,
@@ -17744,16 +17419,6 @@
     "test_suite": 44,
     "started_at": "2021-02-12T09:03:00.277Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1216,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-12T09:03:00.853Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -18309,16 +17974,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1272,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-13T04:21:59.735Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1273,
   "fields": {
     "test_suite": 14,
@@ -18774,16 +18429,6 @@
     "test_suite": 44,
     "started_at": "2021-02-14T04:22:21.014Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1319,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-14T04:22:21.501Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -19249,16 +18894,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1366,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-15T04:21:24.847Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1367,
   "fields": {
     "test_suite": 14,
@@ -19719,16 +19354,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1413,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-15T08:26:06.729Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1414,
   "fields": {
     "test_suite": 14,
@@ -20024,16 +19649,6 @@
     "test_suite": 44,
     "started_at": "2021-02-15T09:34:18.511Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1444,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-15T09:34:19.095Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -20499,16 +20114,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1491,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-15T11:54:27.140Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1492,
   "fields": {
     "test_suite": 14,
@@ -20964,16 +20569,6 @@
     "test_suite": 44,
     "started_at": "2021-02-16T04:22:28.931Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1538,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-16T04:22:29.401Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
@@ -21439,16 +21034,6 @@
 },
 {
   "model": "core.designrulesession",
-  "pk": 1585,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-16T12:05:55.519Z",
-    "percentage_score": "57.14",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
   "pk": 1586,
   "fields": {
     "test_suite": 14,
@@ -21904,16 +21489,6 @@
     "test_suite": 44,
     "started_at": "2021-02-16T13:20:42.790Z",
     "percentage_score": "14.29",
-    "test_version": "09 Juli 2020"
-  }
-},
-{
-  "model": "core.designrulesession",
-  "pk": 1632,
-  "fields": {
-    "test_suite": 13,
-    "started_at": "2021-02-16T13:20:43.342Z",
-    "percentage_score": "57.14",
     "test_version": "09 Juli 2020"
   }
 },
