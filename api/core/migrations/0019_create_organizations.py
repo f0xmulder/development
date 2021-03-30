@@ -27,6 +27,7 @@ name_map = {
     'RVO Rijksdienst voor Ondernemend Nederland': 'Rijksdienst voor Ondernemend Nederland',
     'Ministerie van Algemene Zaken': 'Ministerie van Algemene Zaken',
     'Gemeente Enschede': 'Gemeente Enschede',
+    'Eindhoven': 'Gemeente Eindhoven',
 }
 
 oin_map = {
@@ -47,6 +48,7 @@ oin_map = {
     'Rijksdienst voor Ondernemend Nederland': '00000004000000006000',
     'Ministerie van Algemene Zaken': '00000001003227376000',
     'Gemeente Enschede': '00000001001589623000',
+    'Gemeente Eindhoven': '00000001001902763000',
 }
 
 
