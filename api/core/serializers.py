@@ -138,6 +138,7 @@ class ProgrammingLanguagesSerializer(serializers.ModelSerializer):
 
 
 class RelatedApisSerializer(serializers.ModelSerializer):
+    organization_name = serializers.CharField(source='organization.name')
 
     class Meta:
         model = API
