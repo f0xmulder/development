@@ -61,7 +61,9 @@ const APIOverview = (props) => {
     props.location?.search.includes('type') ||
     props.location?.search.includes('organisatie')
 
-  const isSeaching = debounced !== props.location?.search
+  const isSeaching =
+    debounced !== props.location?.search &&
+    props.location?.search.includes('q=')
 
   useEffect(() => {
     loadAPIList()
@@ -82,7 +84,7 @@ const APIOverview = (props) => {
   const loadAPIList = async () => {
     try {
       const response = await APIRepository.getAll(
-        generateQueryParams(this.getQueryParams()),
+        generateQueryParams(getQueryParams()),
       )
       const result = Object.assign({}, response, {
         apis: response.results.map((api) => modelFromAPIResponse(api)),

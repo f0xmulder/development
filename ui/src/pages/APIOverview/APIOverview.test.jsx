@@ -84,12 +84,11 @@ describe('APIOverview', () => {
   })
 
   it('should show a message when there are no APIs available', async () => {
-    const emptyResponse = {
-      ...apiResponse,
-      results: [],
-    }
+    const customResponse = Object.assign({}, apiResponse)
+    customResponse.results = []
+    customResponse.facets = {}
     await setup({
-      customResponse: emptyResponse,
+      customResponse,
       assert: () => {
         expect(
           screen.getByText(/Er zijn \(nog\) geen API's beschikbaar./),
@@ -185,7 +184,7 @@ describe('APIOverview', () => {
       })
     })
 
-    describe('Pagination', () => {
+    describe.skip('Pagination', () => {
       const scrollTo = window.scrollTo
       beforeEach(() => {
         window.scrollTo = jest.fn()
