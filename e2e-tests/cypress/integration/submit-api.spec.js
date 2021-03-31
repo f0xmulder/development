@@ -16,7 +16,8 @@ describe('Submit API', () => {
     cy.get('@form').screenshot()
     cy.get('#serviceName').type("API naam")
     cy.get('#description').type("API description")
-    cy.get('#organizationName').type("Organization name")
+    cy.get('#organizationName').click()
+    cy.get('#react-select-2-option-0').click();
     cy.get('#apiType').select('REST/JSON').should('have.value', 'rest_json')
     cy.get('#apiAuthentication-none').click()
     cy.get('#productionApiUrl').type("https://productionApiUrl.don.url")
