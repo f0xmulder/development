@@ -56,6 +56,7 @@ describe('Submit API', () => {
   "service_name": "Voorbeeld van een API naam",
   "description": "Voorbeeld van een omschrijving",
   "organization_name": "Voorbeeld van een organisatie naam",
+  "organization_oin": "00000001234567891234",
   "api_type": "rest_json",
   "api_authentication": "api_key",
   "environments": [
