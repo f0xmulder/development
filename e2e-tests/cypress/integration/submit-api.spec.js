@@ -42,7 +42,7 @@ describe('Submit API', () => {
     cy.get('button').parent().screenshot()
     cy.get('button').parent().toMatchImageSnapshot();
     cy.get('button').contains('API toevoegen').click()
-    cy.get('@form').screenshot('submit-api-filled-form')
+    cy.screenshot('submit-api-filled-form')
     cy.contains('De API is toegevoegd. Wij zullen deze zo snel mogelijk nakijken.').screenshot()
   })
 
