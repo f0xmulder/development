@@ -162,13 +162,13 @@ const SubmitAPIForm = ({
         <StyledFormGroupColumnContainer>
           <StyledFormGroupColumn>
             <StyledFormGroup>
-              <Label htmlFor="contact.email">E-mailadres</Label>
+              <Label htmlFor="contactEmail">E-mailadres</Label>
               <HelperMessage>
                 Dit wordt als contactinformatie bij de API getoond
               </HelperMessage>
               <Field
                 type="email"
-                id="contact.email"
+                id="contactEmail"
                 name="contact.email"
                 maxWidth="large"
               />
@@ -181,13 +181,13 @@ const SubmitAPIForm = ({
             </StyledFormGroup>
 
             <StyledFormGroup>
-              <Label htmlFor="contact.phone">Telefoonnummer</Label>
+              <Label htmlFor="contactPhone">Telefoonnummer</Label>
               <HelperMessage>
                 Dit wordt als contactinformatie bij de API getoond
               </HelperMessage>
               <Field
                 type="text"
-                id="contact.phone"
+                id="contactPhone"
                 name="contact.phone"
                 maxWidth="large"
               />
@@ -200,13 +200,13 @@ const SubmitAPIForm = ({
             </StyledFormGroup>
 
             <StyledFormGroup>
-              <Label htmlFor="contact.url">URL</Label>
+              <Label htmlFor="contactUrl">URL</Label>
               <HelperMessage>
                 Link naar een website met contactinformatie.
               </HelperMessage>
               <Field
                 type="text"
-                id="contact.url"
+                id="contactUrl"
                 name="contact.url"
                 maxWidth="large"
               />
@@ -299,12 +299,12 @@ const SubmitAPIForm = ({
           <StyledFormGroupColumn>
             <StyledFormGroup>
               <StyledFormSetting>
-                <Label htmlFor="termsOfUse.governmentOnly">
+                <Label htmlFor="termsOfUseGovernmentOnly">
                   Deze API is alleen beschikbaar voor overheden
                 </Label>
                 <CheckboxField
                   type="checkbox"
-                  id="termsOfUse.governmentOnly"
+                  id="termsOfUseGovernmentOnly"
                   name="termsOfUse.governmentOnly"
                   checked={
                     values.termsOfUse &&
@@ -324,13 +324,13 @@ const SubmitAPIForm = ({
 
             <StyledFormGroup>
               <StyledFormSetting>
-                <Label htmlFor="termsOfUse.payPerUse">
+                <Label htmlFor="termsOfUsePayPerUse">
                   De kosten voor het gebruik van de API worden verrekend met de
                   gebruiker
                 </Label>
                 <CheckboxField
                   type="checkbox"
-                  id="termsOfUse.payPerUse"
+                  id="termsOfUsePayPerUse"
                   name="termsOfUse.payPerUse"
                   checked={
                     values.termsOfUse && values.termsOfUse.payPerUse === true
@@ -346,7 +346,7 @@ const SubmitAPIForm = ({
             </StyledFormGroup>
 
             <StyledFormGroup>
-              <Label htmlFor="termsOfUse.uptimeGuarantee">
+              <Label htmlFor="termsOfUseUptimeGuarantee">
                 Beschikbaarheidsgarantie van de API
               </Label>
               <Field
@@ -355,7 +355,7 @@ const SubmitAPIForm = ({
                 max="100"
                 min="0"
                 step="0.01"
-                id="termsOfUse.uptimeGuarantee"
+                id="termsOfUseUptimeGuarantee"
                 name="termsOfUse.uptimeGuarantee"
                 maxWidth="small"
               />
@@ -368,7 +368,7 @@ const SubmitAPIForm = ({
             </StyledFormGroup>
 
             <StyledFormGroup>
-              <Label htmlFor="termsOfUse.supportResponseTime">
+              <Label htmlFor="termsOfUseSupportResponseTime">
                 Binnen hoeveel werkdagen reageert de helpdesk doorgaans?
                 (optioneel)
               </Label>
@@ -376,7 +376,7 @@ const SubmitAPIForm = ({
                 type="number"
                 min="1"
                 step="1"
-                id="termsOfUse.supportResponseTime"
+                id="termsOfUseSupportResponseTime"
                 name="termsOfUse.supportResponseTime"
                 maxWidth="extraSmall"
               />
