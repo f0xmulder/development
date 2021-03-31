@@ -28,18 +28,14 @@ describe('API Overview', () => {
   })
 
   it('should have filters for organisation', () => {
-    cy.get('[data-test="content"]').within(() => {
-      const checkbox = cy.get('[type="checkbox"]').first().parent().click()
-      cy.get('[type="checkbox"]').first().parent().then(function (elem) {
-        const regexOrg = /^.*(?=(\(\d*\)))/
-        const regExNum = /^.*?\([^\d]*(\d+)[^\d]*\).*$/
-        const filter = regexOrg.exec(elem.text())[0].split(" ")[0]
-        const number = regExNum.exec(elem.text())[1]
+    const checkbox = cy.get('[type="checkbox"]').eq(4).parent().click()
+    cy.get('[type="checkbox"]').eq(4).parent().then(function (elem) {
+      const regExNum = /^.*?\([^\d]*(\d+)[^\d]*\).*$/
+      const number = regExNum.exec(elem.text())[1]
 
-        cy.root().closest('main').contains(`${number} API`)
+      cy.contains(`${number} API`)
 
-        cy.url().should('include', `apis?organisatie=${filter}`)
-      })
+      cy.url().should('include', `organisatie=`)
     })
   })
 
@@ -47,22 +43,24 @@ describe('API Overview', () => {
     cy.get('[data-test="link"]').first().as("link")
     cy.get("@link").screenshot()
     cy.get("@link").toMatchImageSnapshot();
-    cy.get('[data-test="link"] > div').first().then(function(elem){
+    cy.get('[data-test="link"] > div').first().then(function (elem) {
       cy.get("@link").click()
       cy.url().should('include', elem.text().toLowerCase())
     })
   })
 
-  it('should have pagination', () => {
-    const pagination = cy.get('[data-testid="pagination"]')
-    pagination.get('button').eq(4).click()
-    cy.url().should('include', `pagina=2`)
-  })
+  describe('Pagination', () => {
+    it('should have pagination', () => {
+      const pagination = cy.get('[data-testid="pagination"]')
+      pagination.get('button').contains("2").click()
+      cy.url().should('include', `pagina=2`)
+    })
 
-  it('should have results per page', () => {
-    const resultsPerPage = cy.get("#resultsPerPage").as('select')
-    cy.get('@select').select('25').should('have.value', '25')
-    cy.url().should('include', `aantalPerPagina=25`)
+    it('should have results per page', () => {
+      const resultsPerPage = cy.get("#resultsPerPage").as('select')
+      cy.get('@select').select('25').should('have.value', '25')
+      cy.url().should('include', `aantalPerPagina=25`)
+    })
   })
 
   context('a11y', () => {
