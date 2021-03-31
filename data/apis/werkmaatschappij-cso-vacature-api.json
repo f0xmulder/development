@@ -11,7 +11,12 @@
   "environments": [
     {
       "name": "production",
-      "api_url": "https://[sandbox.]api.cso20.net/v1/JobAPI/getApiKey.json",
+      "api_url": "https://api.cso20.net/v1/JobAPI/getApiKey.json",
+      "documentation_url": "http://docs.api.cso20.net"
+    },
+    {
+      "name": "demo",
+      "api_url": "https://sandbox.api.cso20.net/v1/JobAPI/getApiKey.json",
       "documentation_url": "http://docs.api.cso20.net"
     }
   ],
