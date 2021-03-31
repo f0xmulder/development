@@ -62,6 +62,13 @@ metadata: {{ include "don.common.metadata" . | nindent 2 }}
     ingress.kubernetes.io/referrer-policy: "same-origin"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'; connect-src https:; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; worker-src 'self' blob:; child-src 'self' blob:;"
     ingress.kubernetes.io/hsts-max-age: "315360000"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "server: hide";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: SAMEORIGIN";
+      more_set_headers "X-Xss-Protection: 1";
+      more_set_headers "Referrer-Policy: no-referrer";
+      more_set_headers "Permissions-Policy: geolocation=(), microphone=()";
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
