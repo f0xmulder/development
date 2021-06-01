@@ -2,5 +2,6 @@
 prospector
 coverage
 pip-tools
-factory-boy
+factory-boy>=3.2.0
 requests-mock
+faker>=8.1.3
