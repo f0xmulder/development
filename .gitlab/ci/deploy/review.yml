@@ -33,8 +33,9 @@ Deploy Review App:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
-    - if: '$CI_COMMIT_REF_NAME != "master"'
-    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      when: never
+    - when: always
   artifacts:
     paths:
     - ci_environment_url.txt
@@ -53,7 +54,7 @@ Remove Review App:
       when: never
     # Review jobs are only accepted for environments prefixed with review/*
     # see: https://gitlab.com/groups/commonground/nlx/-/clusters
-    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+    - if: '$CI_COMMIT_BRANCH != "master" && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
       when: manual
       allow_failure: true
       # The combination `when: manual` and `allow_failure: true` allow this step to be manual without blocking
