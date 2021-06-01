@@ -31,6 +31,9 @@ Deploy Review App:
   - cg
   - docker
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: '$CI_COMMIT_REF_NAME != "master"'
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
   artifacts:
     paths:
@@ -46,6 +49,8 @@ Remove Review App:
   - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
   - kubectl delete namespace $REVIEW_NAMESPACE
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     # Review jobs are only accepted for environments prefixed with review/*
     # see: https://gitlab.com/groups/commonground/nlx/-/clusters
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
@@ -60,4 +65,3 @@ Remove Review App:
   tags:
   - cg
   - docker
-

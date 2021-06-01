@@ -20,6 +20,8 @@ E2E tests:
       $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
       /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test -- --spec $(node scripts/cypress-parallel.js)"
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags

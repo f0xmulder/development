@@ -1,7 +1,7 @@
 sast:
   stage: security
   needs: []
-  
+
 include:
 - template: Security/SAST.gitlab-ci.yml
 - template: Container-Scanning.gitlab-ci.yml
@@ -16,12 +16,14 @@ container_scanning:
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
         $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
+  needs: ['Test and release UI']
 
 container_scanning_docs:
   extends: container_scanning
@@ -31,12 +33,14 @@ container_scanning_docs:
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
         $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
+  needs: ['Release Docs']
 
 container_scanning_api:
   extends: container_scanning
@@ -46,12 +50,14 @@ container_scanning_api:
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
         $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
+  needs: ['Release API']
 
 container_scanning_linkchecker:
   extends: container_scanning
@@ -61,12 +67,14 @@ container_scanning_linkchecker:
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
   rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
     - if: $CI_COMMIT_BRANCH &&
         $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
         $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
+  needs: ['Release Linkchecker']
 
 dependency_scanning:
   stage: security
