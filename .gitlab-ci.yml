@@ -3,6 +3,7 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#priority-of-environment-variables
 image: docker:19.03.1
+
 stages:
 - test
 - release
@@ -10,17 +11,22 @@ stages:
 - deploy
 - e2e-tests
 - security
+
 variables:
   IMAGE_PREFIX: "$CI_REGISTRY_IMAGE"
   DOMAIN: developer.overheid.nl
   REVIEW_BASE_DOMAIN: nlx.reviews
   REVIEW_NAMESPACE: don-$CI_ENVIRONMENT_SLUG
-".validate":
+
+.validate:
   image: golang:1.14.1
   before_script:
   - cd validate
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
 Test validate:
-  extends: ".validate"
+  extends: .validate
   stage: test
   script:
   - go test ./... -coverprofile coverage.out
@@ -31,11 +37,13 @@ Test validate:
     expire_in: 1 month
     paths:
     - validate/coverage.html
+
 Validate API definitions:
-  extends: ".validate"
+  extends: .validate
   stage: test
   script:
   - go run ./cmd/don-validate/main.go
+
 Lint and test API:
   image: python:3.8
   stage: test
@@ -52,22 +60,25 @@ Lint and test API:
     paths:
     - "$CI_PROJECT_DIR/.cache/pip"
   before_script:
-  - cd api/
-  - pip3 install -r requirements-dev.txt
+    - cd api/
+    - pip3 install -r requirements-dev.txt
   script:
-  - python3 -m prospector
-  - python3 -m coverage run --source='.' manage.py test core
-  - python3 -m coverage report && python -m coverage html
+    - python3 -m prospector
+    - python3 -m coverage run --source='.' manage.py test core
+    - python3 -m coverage report && python -m coverage html
   coverage: "/TOTAL.+ ([0-9]{1,3}%)/"
   artifacts:
     expire_in: 1 month
     paths:
     - api/htmlcov
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
 Verify test schema:
   image: python:3.8
   stage: test
   services:
-  - postgres:11.6-alpine
+    - postgres:11.6-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -79,29 +90,32 @@ Verify test schema:
     paths:
     - "$CI_PROJECT_DIR/.cache/pip"
   before_script:
-  - apt-get update
-  - apt-get install -qy postgresql-client-11
-  - cd api/
-  - pip3 install -r requirements-dev.txt
+    - apt-get update
+    - apt-get install -qy postgresql-client-11
+    - cd api/
+    - pip3 install -r requirements-dev.txt
   script:
-  - python manage.py migrate
-  - 'PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME" --no-owner
-    --schema-only -T django* -T auth* | sed ''/-- Dumped by /d'' > current_testschema.sql
+    - python manage.py migrate
+    - 'PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME" --no-owner
+      --schema-only -T django* -T auth* | sed ''/-- Dumped by /d'' > current_testschema.sql
 
-'
-  - ls -l current_testschema.sql
-  - |
-    if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
-    then
-      echo -e "\e[31mError: Non-matching test database schema! See docs/docs/developer.md#Data model changes on how to update it.\e[0m"
-      exit 1
-    fi
+  '
+    - ls -l current_testschema.sql
+    - |
+      if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
+      then
+        echo -e "\e[31mError: Non-matching test database schema! See docs/docs/developer.md#Data model changes on how to update it.\e[0m"
+        exit 1
+      fi
   artifacts:
     expire_in: 1 month
     when: always
     paths:
     - api/current_testschema.sql
-".ui":
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
+.ui:
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - export UI_IMAGE=${IMAGE_PREFIX}/ui
@@ -109,8 +123,11 @@ Verify test schema:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
   - docker:19.03.1-dind
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
 Test and release UI:
-  extends: ".ui"
+  extends: .ui
   stage: release
   script:
   - |
@@ -122,7 +139,7 @@ Test and release UI:
     docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
 
-".api":
+.api:
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - export API_IMAGE=${IMAGE_PREFIX}/api
@@ -130,6 +147,7 @@ Test and release UI:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
   - docker:19.03.1-dind
+
 Release API:
   extends: ".api"
   stage: release
@@ -142,15 +160,19 @@ Release API:
     docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
-".linkchecker":
+
+.linkchecker:
   before_script:
-  - cd linkchecker
+    - cd linkchecker
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
 Test linkchecker:
-  extends: ".linkchecker"
+  extends: .linkchecker
   image: golang:1.14.1
   stage: test
   services:
-  - postgres:11.6-alpine
+    - postgres:11.6-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -159,34 +181,36 @@ Test linkchecker:
     DB_TEST_NAME: postgres
     SECRET_KEY: somethingverysecret
   script:
-  - go test ./... -coverprofile coverage.out
-  - go tool cover -html=coverage.out -o coverage.html
-  - go tool cover -func=coverage.out
+    - go test ./... -coverprofile coverage.out
+    - go tool cover -html=coverage.out -o coverage.html
+    - go tool cover -func=coverage.out
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
   artifacts:
     expire_in: 1 month
     paths:
     - linkchecker/coverage.html
+
 Release Linkchecker:
-  extends: ".linkchecker"
+  extends: .linkchecker
   stage: release
   before_script:
-  - cd linkchecker
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  - export LINKCHECKER_IMAGE=${IMAGE_PREFIX}/linkchecker
+    - cd linkchecker
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export LINKCHECKER_IMAGE=${IMAGE_PREFIX}/linkchecker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-  - docker:19.03.1-dind
+    - docker:19.03.1-dind
   script:
-  - |
-    docker build \
-    --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
-    --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
-    . && \
-    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
-".docs":
+    - |
+      docker build \
+      --tag $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA \
+      --tag $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG \
+      . && \
+      docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
+      docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
+
+.docs:
   before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
@@ -194,8 +218,9 @@ Release Linkchecker:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
   - docker:19.03.1-dind
+
 Release Docs:
-  extends: ".docs"
+  extends: .docs
   stage: release
   script:
   - |
@@ -238,13 +263,12 @@ Deploy Review App:
   tags:
   - cg
   - docker
-  only:
-  - branches@commonground/don/developer.overheid.nl
-  except:
-  - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
   artifacts:
     paths:
     - ci_environment_url.txt
+
 Remove Review App:
   stage: review
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
@@ -253,7 +277,14 @@ Remove Review App:
   script:
   - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
   - kubectl delete namespace $REVIEW_NAMESPACE
-  when: manual
+  rules:
+    # Review jobs are only accepted for environments prefixed with review/*
+    # see: https://gitlab.com/groups/commonground/nlx/-/clusters
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+      when: manual
+      allow_failure: true
+      # The combination `when: manual` and `allow_failure: true` allow this step to be manual without blocking
+      # the pipeline. See https://docs.gitlab.com/ee/ci/yaml/README.html#rulesallow_failure
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
@@ -261,10 +292,6 @@ Remove Review App:
   tags:
   - cg
   - docker
-  only:
-  - branches@commonground/don/developer.overheid.nl
-  except:
-  - master
 
 E2E tests:
   stage: e2e-tests
@@ -272,23 +299,25 @@ E2E tests:
   parallel: 9
   image: docker
   before_script:
-  - apk add --update nodejs npm
-  - export CYPRESS_BASE_URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
-    "https://$DOMAIN")
-  - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
+    - apk add --update nodejs npm
+    - export CYPRESS_BASE_URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
+      "https://$DOMAIN")
+    - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
   script:
-  - |
-    cd e2e-tests && \
-    docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA . && \
-    docker run --rm --cap-add=SYS_ADMIN --ipc=host \
-    -e CYPRESS_BASE_URL=${CYPRESS_BASE_URL} \
-    -v "$(pwd)"/cypress/videos:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos \
-    -v "$(pwd)"/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
-    -v "$(pwd)"/cypress/integration/__image_snapshots__:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/integration/__image_snapshots__ \
-    $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
-    /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test -- --spec $(node scripts/cypress-parallel.js)"
-  only:
-  - branches@commonground/don/developer.overheid.nl
+    - |
+      cd e2e-tests && \
+      docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA . && \
+      docker run --rm --cap-add=SYS_ADMIN --ipc=host \
+      -e CYPRESS_BASE_URL=${CYPRESS_BASE_URL} \
+      -v "$(pwd)"/cypress/videos:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos \
+      -v "$(pwd)"/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
+      -v "$(pwd)"/cypress/integration/__image_snapshots__:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/integration/__image_snapshots__ \
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test -- --spec $(node scripts/cypress-parallel.js)"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
@@ -307,30 +336,30 @@ Deploy production:
   stage: deploy
   image: registry.gitlab.com/commonground/core/review-app-deployer:latest
   script:
-  - |
-    helm upgrade --install don-prod ./helm/don \
-    --namespace don-prod \
-    --set "secretKey=$SECRET_KEY" \
-    --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
-    --set "gitlabUrl=$GITLAB_URL" \
-    --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
-    --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
-    --set "apiTestToken=$API_TEST_TOKEN" \
-    --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
-    --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
-    --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
-    --set "dbTerminationPolicy=DoNotTerminate" \
-    --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
-    --set "linkcheckerEnabledDefault=true" \
-    --set "domain=$DOMAIN"
+    - |
+      helm upgrade --install don-prod ./helm/don \
+      --namespace don-prod \
+      --set "secretKey=$SECRET_KEY" \
+      --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+      --set "gitlabUrl=$GITLAB_URL" \
+      --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+      --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
+      --set "apiTestToken=$API_TEST_TOKEN" \
+      --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+      --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+      --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+      --set "dbTerminationPolicy=DoNotTerminate" \
+      --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
+      --set "linkcheckerEnabledDefault=true" \
+      --set "domain=$DOMAIN"
   environment:
     name: prod
     url: https://$DOMAIN
   tags:
   - cg
   - docker
-  only:
-  - master@commonground/don/developer.overheid.nl
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^master/i
 
 sast:
   stage: security
@@ -348,6 +377,12 @@ container_scanning:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/ui:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
 
 container_scanning_docs:
   extends: container_scanning
@@ -356,6 +391,12 @@ container_scanning_docs:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/docs:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
 
 container_scanning_api:
   extends: container_scanning
@@ -364,6 +405,12 @@ container_scanning_api:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
 
 container_scanning_linkchecker:
   extends: container_scanning
@@ -372,6 +419,12 @@ container_scanning_linkchecker:
     DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
 
 dependency_scanning:
   stage: security
