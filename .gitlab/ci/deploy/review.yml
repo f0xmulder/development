@@ -35,6 +35,7 @@ Deploy Review App:
   artifacts:
     paths:
     - ci_environment_url.txt
+  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
 
 Remove Review App:
   stage: review

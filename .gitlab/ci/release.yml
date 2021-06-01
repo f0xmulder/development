@@ -2,14 +2,15 @@ Release API:
   extends: ".api"
   stage: release
   script:
-  - |
-    docker build \
-    --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
-    --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
-    -f api/Dockerfile . && \
-    docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
+    - |
+      docker build \
+      --tag $API_IMAGE:$CI_COMMIT_SHORT_SHA \
+      --tag $API_IMAGE:$CI_COMMIT_REF_SLUG \
+      -f api/Dockerfile . && \
+      docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
+      docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
+  needs: ['Lint and test API', 'Verify test schema']
 
 Test and release UI:
   extends: .ui
@@ -23,6 +24,7 @@ Test and release UI:
     docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
+  needs: []
 
 Release Linkchecker:
   extends: .linkchecker
@@ -34,7 +36,7 @@ Release Linkchecker:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.1-dind
+    - docker:20.10-dind
   script:
     - |
       docker build \
@@ -43,15 +45,17 @@ Release Linkchecker:
       . && \
       docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
       docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
+  needs: ['Test linkchecker']
 
 Release Docs:
   extends: .docs
   stage: release
   script:
-  - |
-    docker build \
-    --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
-    --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
-    -f docs/Dockerfile . && \
-    docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
-    docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
+    - |
+      docker build \
+      --tag $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA \
+      --tag $DOCS_IMAGE:$CI_COMMIT_REF_SLUG \
+      -f docs/Dockerfile . && \
+      docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
+      docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
+  needs: []

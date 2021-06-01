@@ -26,7 +26,7 @@ E2E tests:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-  - docker:19.03.1-dind
+  - docker:20.10-dind
   artifacts:
     when: always
     paths:
@@ -36,3 +36,4 @@ E2E tests:
       - e2e-tests/cypress/screenshots/**/*.png
       - e2e-tests/cypress/integration/__image_snapshots__/*.png
     expire_in: 1 day
+  needs: ['Deploy Review App']
