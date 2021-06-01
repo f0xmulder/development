@@ -1,0 +1,38 @@
+E2E tests:
+  stage: e2e-tests
+  allow_failure: true
+  parallel: 9
+  image: docker
+  before_script:
+    - apk add --update nodejs npm
+    - export CYPRESS_BASE_URL=$([ -f ci_environment_url.txt ] && cat ci_environment_url.txt || echo
+      "https://$DOMAIN")
+    - export E2E_IMAGE=${IMAGE_PREFIX}/e2e
+  script:
+    - |
+      cd e2e-tests && \
+      docker build --tag $E2E_IMAGE:$CI_COMMIT_SHORT_SHA . && \
+      docker run --rm --cap-add=SYS_ADMIN --ipc=host \
+      -e CYPRESS_BASE_URL=${CYPRESS_BASE_URL} \
+      -v "$(pwd)"/cypress/videos:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/videos \
+      -v "$(pwd)"/cypress/screenshots:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/screenshots \
+      -v "$(pwd)"/cypress/integration/__image_snapshots__:/go/src/commonground/developer.overheid.nl/e2e-tests/cypress/integration/__image_snapshots__ \
+      $E2E_IMAGE:$CI_COMMIT_SHORT_SHA \
+      /bin/sh -c "./wait-for-http.sh $CYPRESS_BASE_URL && npm test -- --spec $(node scripts/cypress-parallel.js)"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+  - docker:19.03.1-dind
+  artifacts:
+    when: always
+    paths:
+      - e2e-tests/.nyc_output/**/*
+      - e2e-tests/coverage/**/*
+      - e2e-tests/cypress/videos/**/*.mp4
+      - e2e-tests/cypress/screenshots/**/*.png
+      - e2e-tests/cypress/integration/__image_snapshots__/*.png
+    expire_in: 1 day

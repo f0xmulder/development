@@ -1,0 +1,62 @@
+Deploy Review App:
+  stage: review
+  image: registry.gitlab.com/commonground/core/review-app-deployer:latest
+  script:
+  - echo -e -n "https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" > ci_environment_url.txt
+  - |
+    kubectl create namespace $REVIEW_NAMESPACE || true
+    helm upgrade --install $REVIEW_NAMESPACE ./helm/don \
+    --namespace $REVIEW_NAMESPACE \
+    --set "secretKey=$SECRET_KEY" \
+    --set-string "gitlabProjectId=$GITLAB_PROJECT_ID" \
+    --set "gitlabUrl=$GITLAB_URL" \
+    --set "gitlabAccessToken=$GITLAB_ACCESS_TOKEN" \
+    --set "apiTestBaseUrl=$API_TEST_BASE_URL" \
+    --set "apiTestToken=$API_TEST_TOKEN" \
+    --set "apiImage=$IMAGE_PREFIX/api:$CI_COMMIT_SHORT_SHA" \
+    --set "uiImage=$IMAGE_PREFIX/ui:$CI_COMMIT_SHORT_SHA" \
+    --set "docsImage=$IMAGE_PREFIX/docs:$CI_COMMIT_SHORT_SHA" \
+    --set "dbTerminationPolicy=WipeOut" \
+    --set "linkcheckerImage=$IMAGE_PREFIX/linkchecker:$CI_COMMIT_SHORT_SHA" \
+    --set "domain=don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN" \
+    --set "loadTestData=true" \
+    --set "linkcheckerEnabledDefault=false" \
+    --set "testAdminPassword=$TEST_ADMIN_PASSWORD" \
+    --set "replicas=1"
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
+    on_stop: Remove Review App
+  tags:
+  - cg
+  - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+  artifacts:
+    paths:
+    - ci_environment_url.txt
+
+Remove Review App:
+  stage: review
+  image: registry.gitlab.com/commonground/core/review-app-deployer:latest
+  variables:
+    GIT_STRATEGY: none
+  script:
+  - helm uninstall $REVIEW_NAMESPACE --namespace $REVIEW_NAMESPACE
+  - kubectl delete namespace $REVIEW_NAMESPACE
+  rules:
+    # Review jobs are only accepted for environments prefixed with review/*
+    # see: https://gitlab.com/groups/commonground/nlx/-/clusters
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+      when: manual
+      allow_failure: true
+      # The combination `when: manual` and `allow_failure: true` allow this step to be manual without blocking
+      # the pipeline. See https://docs.gitlab.com/ee/ci/yaml/README.html#rulesallow_failure
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://don-$CI_ENVIRONMENT_SLUG.$REVIEW_BASE_DOMAIN
+    action: stop
+  tags:
+  - cg
+  - docker
+

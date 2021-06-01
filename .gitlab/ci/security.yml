@@ -1,0 +1,103 @@
+sast:
+  stage: security
+
+include:
+- template: Security/SAST.gitlab-ci.yml
+- template: Container-Scanning.gitlab-ci.yml
+- template: Dependency-Scanning.gitlab-ci.yml
+- template: SAST.gitlab-ci.yml
+- template: Secret-Detection.gitlab-ci.yml
+
+container_scanning:
+  stage: security
+  variables:
+    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/ui:$CI_COMMIT_SHORT_SHA"
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
+
+container_scanning_docs:
+  extends: container_scanning
+  stage: security
+  variables:
+    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/docs:$CI_COMMIT_SHORT_SHA"
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
+
+container_scanning_api:
+  extends: container_scanning
+  stage: security
+  variables:
+    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA"
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
+
+container_scanning_linkchecker:
+  extends: container_scanning
+  stage: security
+  variables:
+    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA"
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
+  rules:
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+    - if: $CI_COMMIT_BRANCH &&
+        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
+        $CS_MAJOR_VERSION =~ /^[0-3]$/
+
+dependency_scanning:
+  stage: security
+
+.secret-analyzer:
+  stage: security
+
+secret_detection:
+  variables:
+    SECRET_DETECTION_EXCLUDED_PATHS: "pki/,testing/"
+
+retire-js-dependency_scanning:
+  variables:
+    SECURE_LOG_LEVEL: debug
+  before_script:
+    # For building mozjpeg in /docs
+    - apk add autoconf automake libtool gcc libc-dev pkgconf nasm make
+    - apk add jq
+    - mkdir -p tmp/docs tmp/e2e-tests tmp/ui
+  script:
+    - /analyzer run --target-dir docs --artifact-dir tmp/docs
+    - /analyzer run --target-dir e2e-tests --artifact-dir tmp/e2e-tests
+    - /analyzer run --target-dir ui --artifact-dir tmp/ui
+  after_script:
+    # Combine the reports
+    - jq -s '.[0].version as $version | [.[] | to_entries] | flatten | reduce .[] as $dot ({}; .[$dot.key] += $dot.value) | .version = $version' tmp/*/gl-dependency-scanning-report.json > gl-dependency-scanning-report.json
+
+gosec-sast:
+  variables:
+    SECURE_LOG_LEVEL: debug
+  script:
+    - /analyzer run --target-dir linkchecker
+
+gemnasium-python-dependency_scanning:
+  variables:
+    SECURE_LOG_LEVEL: debug
+  script:
+    - /analyzer run --target-dir api
+

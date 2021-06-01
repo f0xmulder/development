@@ -1,0 +1,41 @@
+.api:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export API_IMAGE=${IMAGE_PREFIX}/api
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:20.10-dind
+
+.docs:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export DOCS_IMAGE=${IMAGE_PREFIX}/docs
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:20.10-dind
+
+.linkchecker:
+  before_script:
+    - cd linkchecker
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
+.ui:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - export UI_IMAGE=${IMAGE_PREFIX}/ui
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+  -   docker:20.10-dind
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
+
+.validate:
+  image: golang:1.14.1
+  before_script:
+    - cd validate
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
