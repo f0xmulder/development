@@ -180,8 +180,7 @@ class SubmitAPIFormPage extends Component {
     } catch (error) {
       actions.setSubmitting(false)
       actions.setStatus({
-        msg:
-          'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.',
+        msg: 'Er ging iets fout tijdens het toevoegen van de API. Gelieve opnieuw te proberen.',
       })
       console.error(error)
     }

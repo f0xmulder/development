@@ -73,16 +73,14 @@ export const designRuleScoresMock = {
     {
       name: 'API-16: Use OAS 3.0 for documentation',
       description: 'Use Open API Specification (OAS) 3.0 or higher.',
-      url:
-        'https://docs.geostandaarden.nl/api/API-Designrules/#api-16-use-oas-3-0-for-documentation',
+      url: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-16-use-oas-3-0-for-documentation',
       success: true,
       errors: [],
     },
     {
       name: 'API-48: Leave off trailing slashes from API endpoints',
       description: "URIs don't include a trailing slash.",
-      url:
-        'https://docs.geostandaarden.nl/api/API-Designrules/#api-48-leave-off-trailing-slashes-from-api-endpoints',
+      url: 'https://docs.geostandaarden.nl/api/API-Designrules/#api-48-leave-off-trailing-slashes-from-api-endpoints',
       success: false,
       errors: [
         'Path: /provider-latest-badge-1/{uuid}/ ends with a slash',
