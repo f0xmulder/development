@@ -38,4 +38,3 @@ E2E tests:
       - e2e-tests/cypress/screenshots/**/*.png
       - e2e-tests/cypress/integration/__image_snapshots__/*.png
     expire_in: 1 day
-  needs: ['Deploy Review App']

@@ -33,13 +33,14 @@ Deploy Review App:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_REF_NAME == "master"'
       when: never
     - when: always
   artifacts:
     paths:
     - ci_environment_url.txt
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
 
 Remove Review App:
   stage: review
@@ -52,8 +53,8 @@ Remove Review App:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
-    # Review jobs are only accepted for environments prefixed with review/*
-    # see: https://gitlab.com/groups/commonground/nlx/-/clusters
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_BRANCH != "master" && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
       when: manual
       allow_failure: true

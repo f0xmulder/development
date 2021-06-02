@@ -1,6 +1,9 @@
 sast:
   stage: security
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+
 
 include:
 - template: Security/SAST.gitlab-ci.yml
@@ -20,10 +23,7 @@ container_scanning:
       when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
-    - if: $CI_COMMIT_BRANCH &&
-        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
-        $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Test and release UI']
+
 
 container_scanning_docs:
   extends: container_scanning
@@ -37,10 +37,6 @@ container_scanning_docs:
       when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
-    - if: $CI_COMMIT_BRANCH &&
-        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
-        $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release Docs']
 
 container_scanning_api:
   extends: container_scanning
@@ -54,10 +50,7 @@ container_scanning_api:
       when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
-    - if: $CI_COMMIT_BRANCH &&
-        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
-        $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release API']
+
 
 container_scanning_linkchecker:
   extends: container_scanning
@@ -71,23 +64,35 @@ container_scanning_linkchecker:
       when: never
     - if: $CONTAINER_SCANNING_DISABLED
       when: never
-    - if: $CI_COMMIT_BRANCH &&
-        $GITLAB_FEATURES =~ /\bcontainer_scanning\b/ &&
-        $CS_MAJOR_VERSION =~ /^[0-3]$/
-  needs: ['Release Linkchecker']
+
 
 dependency_scanning:
   stage: security
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+
 
 .secret-analyzer:
   stage: security
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+
 
 secret_detection:
   variables:
     SECRET_DETECTION_EXCLUDED_PATHS: "pki/,testing/"
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+
 
 retire-js-dependency_scanning:
   variables:
@@ -104,18 +109,31 @@ retire-js-dependency_scanning:
   after_script:
     # Combine the reports
     - jq -s '.[0].version as $version | [.[] | to_entries] | flatten | reduce .[] as $dot ({}; .[$dot.key] += $dot.value) | .version = $version' tmp/*/gl-dependency-scanning-report.json > gl-dependency-scanning-report.json
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
 
 gosec-sast:
   variables:
     SECURE_LOG_LEVEL: debug
   script:
     - /analyzer run --target-dir linkchecker
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
 
 gemnasium-python-dependency_scanning:
   variables:
     SECURE_LOG_LEVEL: debug
   script:
     - /analyzer run --target-dir api
-  needs: []
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+

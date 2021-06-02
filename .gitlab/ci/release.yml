@@ -10,7 +10,6 @@ Release API:
       docker push $API_IMAGE:$CI_COMMIT_SHORT_SHA && \
       docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
-  needs: ['Lint and test API', 'Verify test schema']
 
 Test and release UI:
   extends: .ui
@@ -24,7 +23,6 @@ Test and release UI:
     docker push $UI_IMAGE:$CI_COMMIT_SHORT_SHA && \
     docker push $UI_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/All\\sfiles.*?\\s+(\\d+.\\d+)/"
-  needs: []
 
 Release Linkchecker:
   extends: .linkchecker
@@ -45,7 +43,6 @@ Release Linkchecker:
       . && \
       docker push $LINKCHECKER_IMAGE:$CI_COMMIT_SHORT_SHA && \
       docker push $LINKCHECKER_IMAGE:$CI_COMMIT_REF_SLUG
-  needs: ['Test linkchecker']
 
 Release Docs:
   extends: .docs
@@ -58,4 +55,3 @@ Release Docs:
       -f docs/Dockerfile . && \
       docker push $DOCS_IMAGE:$CI_COMMIT_SHORT_SHA && \
       docker push $DOCS_IMAGE:$CI_COMMIT_REF_SLUG
-  needs: []

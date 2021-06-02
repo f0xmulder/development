@@ -28,6 +28,8 @@ Lint and test API:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
 
 Verify test schema:
@@ -71,6 +73,8 @@ Verify test schema:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
 
 Test linkchecker:
@@ -95,3 +99,9 @@ Test linkchecker:
     expire_in: 1 month
     paths:
     - linkchecker/coverage.html
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags

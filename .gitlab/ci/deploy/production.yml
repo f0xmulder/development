@@ -27,7 +27,6 @@ Deploy production:
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_BRANCH == "master" && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"'
-
-
-  needs: ['Release API', 'Test and release UI', 'Release Linkchecker', 'Release Docs']
