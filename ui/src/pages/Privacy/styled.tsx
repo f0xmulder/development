@@ -2,7 +2,7 @@
 // Licensed under the EUPL
 //
 import styled from 'styled-components'
-
+import { H3 } from '../../components/Headings/Headings'
 import PageContentCard from '../../components/PageContentCard/PageContentCard'
 
 export const StyledPageTitle = styled.h1`
@@ -22,6 +22,7 @@ export const StyledPageDescription = styled.h2`
 
 export const StyledPageContentCard: any = styled(PageContentCard)`
   margin-top: 3rem;
+  padding-top: 0;
 
   abbr {
     text-decoration: none;
@@ -31,4 +32,11 @@ export const StyledPageContentCard: any = styled(PageContentCard)`
 
 export const StyledList = styled.ul`
   list-style-type: '- ';
+`
+export const StyledH3 = styled(H3)`
+  font-weight: normal;
+`
+
+export const StyledP = styled.p`
+  margin-bottom: 3rem;
 `

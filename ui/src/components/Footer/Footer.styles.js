@@ -80,6 +80,7 @@ export const StyledVNGLogo = styled.img`
 `
 
 export const StyledLink = styled(Button)`
+  font-weight: regular;
   color: white;
   text-decoration: underline;
   margin-left: auto;
