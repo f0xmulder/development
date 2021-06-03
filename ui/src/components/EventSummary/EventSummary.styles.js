@@ -4,12 +4,13 @@
 import styled from 'styled-components'
 import Card from '../Card/Card'
 import mq from '../../theme/mediaQueries'
-import EventBackground from './EventBackground'
+import EventBackground from './EventBackground.svg'
 
 export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  position: relative;
 
   ${mq.mdUp`
     height: 135px;
@@ -25,6 +26,7 @@ StyledCard.Title = styled.div`
 `
 
 StyledCard.DateTime = styled.div`
+  position: relative;
   white-space: nowrap;
   color: ${(p) => p.theme.tokens.colorPaletteGray700};
   margin: ${(p) => p.theme.tokens.spacing06};
@@ -95,8 +97,16 @@ StyledCard.Details.Item = styled.small`
   }
 `
 
-StyledCard.EventBackground = styled(EventBackground)`
-  min-width: 141px;
+StyledCard.EventBackground = styled.div`
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  background-image: url(${EventBackground});
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  width: 141px;
+  height: 100%;
   ${mq.mdDown`
     display: none;
   `}
