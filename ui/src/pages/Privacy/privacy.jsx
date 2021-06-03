@@ -2,7 +2,6 @@
 // Licensed under the EUPL
 //
 import React from 'react'
-import { H2 } from '../../components/Headings/Headings'
 import Collapsible from '../../components/Collapsible'
 import { Container } from '../../components/design-system-candidates/Grid'
 import {
@@ -10,8 +9,8 @@ import {
   StyledPageTitle,
   StyledPageDescription,
   StyledList,
+  StyledH2,
   StyledH3,
-  StyledP,
 } from './styled'
 
 const Privacy = () => {
@@ -24,7 +23,7 @@ const Privacy = () => {
       </StyledPageDescription>
       <StyledPageContentCard>
         <StyledPageContentCard.Body>
-          <StyledP>
+          <p>
             Deze privacyverklaring moet worden gelezen in aanvulling op en in
             samenhang met{' '}
             <a href="https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten">
@@ -32,9 +31,9 @@ const Privacy = () => {
               gemeenten
             </a>
             .
-          </StyledP>
+          </p>
 
-          <H2>1. Algemeen</H2>
+          <StyledH2>1. Algemeen</StyledH2>
           <p>
             VNG Realisatie BV verwerkt persoonsgegevens op een zorgvuldige en
             veilige manier in overeenstemming met de geldende wet- en
@@ -46,13 +45,13 @@ const Privacy = () => {
             belangrijke informatie.
           </p>
 
-          <H2>2. De verantwoordelijke</H2>
+          <StyledH2>2. De verantwoordelijke</StyledH2>
           <p>
             VNG Realisatie BV is de verwerkingsverantwoordelijke van de volgende
             verwerkingen:
           </p>
 
-          <H2>3. Verwerken van persoonsgegevens</H2>
+          <StyledH2>3. Verwerken van persoonsgegevens</StyledH2>
           <p>
             Hieronder wordt meer uitleg gegeven over de verwerking, inclusief
             het doel, de grondslag en andere belangrijke informatie.
@@ -109,7 +108,7 @@ const Privacy = () => {
             </p>
           </Collapsible>
 
-          <H2>4. Contact</H2>
+          <StyledH2>4. Contact</StyledH2>
           <p>
             Mocht u nog vragen hebben, die niet in dit document, noch in het
             document met algemene informatie, worden beantwoord, of als u om een
@@ -118,7 +117,7 @@ const Privacy = () => {
             <a href="mailto:realisatie@vng.nl">realisatie@vng.nl</a>.
           </p>
 
-          <H2>5. Uw rechten uitoefenen en klachten</H2>
+          <StyledH2>5. Uw rechten uitoefenen en klachten</StyledH2>
           <p>
             Als burger of belanghebbende kunt u uw rechten bij de VNG Realisatie
             BV uitoefenen. Voor meer informatie over het uitoefenen van uw
@@ -129,7 +128,7 @@ const Privacy = () => {
             toezichthouder, de Autoriteit Persoonsgegevens.
           </p>
 
-          <H2>6. Wijzigingen</H2>
+          <StyledH2>6. Wijzigingen</StyledH2>
           <p>Deze privacyverklaring is opgesteld op: 18 november 2020.</p>
         </StyledPageContentCard.Body>
       </StyledPageContentCard>
