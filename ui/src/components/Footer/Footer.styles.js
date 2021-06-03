@@ -3,6 +3,7 @@
 //
 import styled from 'styled-components'
 
+import { Button } from '@commonground/design-system'
 import mq from '../../theme/mediaQueries'
 import { Container } from '../design-system-candidates/Grid'
 
@@ -27,6 +28,8 @@ export const FooterContainer = styled(Container)`
 `
 
 export const StyledText = styled.p`
+  display: flex;
+  align-items: center;
   opacity: 0.6;
   color: white;
   font-size: ${(p) => p.theme.tokens.fontSizeSmall};
@@ -74,4 +77,13 @@ export const StyledVNGLogo = styled.img`
     margin-left: 0;
     margin-top: ${(p) => p.theme.tokens.spacing05};
   `}
+`
+
+export const StyledLink = styled(Button)`
+  color: white;
+  text-decoration: underline;
+  margin-left: auto;
+  &:hover {
+    color: white;
+  }
 `

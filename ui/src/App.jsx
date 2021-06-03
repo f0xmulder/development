@@ -23,6 +23,7 @@ import GlobalStyles from './components/GlobalStyles/GlobalStyles'
 import '@fontsource/source-sans-pro/latin.css'
 
 import { AppContainer, ContentWrap } from './App.styles'
+import { Privacy } from './pages/Privacy'
 
 const APISpecification = lazy(() =>
   import(
@@ -31,13 +32,13 @@ const APISpecification = lazy(() =>
 )
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <AppContainer className="App">
-      <DSGlobalStyles />
-      <GlobalStyles />
+  <Router>
+    <ThemeProvider theme={theme}>
+      <AppContainer className="App">
+        <DSGlobalStyles />
+        <GlobalStyles />
 
-      <ContentWrap>
-        <Router>
+        <ContentWrap>
           <Header />
           <Suspense fallback={<div />}>
             <main role="main">
@@ -57,15 +58,16 @@ const App = () => (
                 <Route path="/code" exact component={CodeOverview} />
                 <Route path="/code/add" component={SubmitCode} />
                 <Route path="/about" component={About} />
+                <Route path="/privacy" component={Privacy} />
               </Switch>
               <Feedback />
             </main>
           </Suspense>
-        </Router>
-      </ContentWrap>
-      <Footer />
-    </AppContainer>
-  </ThemeProvider>
+        </ContentWrap>
+        <Footer />
+      </AppContainer>
+    </ThemeProvider>
+  </Router>
 )
 
 export default App

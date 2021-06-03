@@ -2,6 +2,7 @@
 // Licensed under the EUPL
 //
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   FooterArea,
@@ -10,13 +11,19 @@ import {
   FooterImageWrapper,
   StyledBZKLogo,
   StyledVNGLogo,
+  StyledLink,
 } from './Footer.styles'
 
 const Footer = () => {
   return (
     <FooterArea>
       <FooterContainer>
-        <StyledText>Een initiatief van</StyledText>
+        <StyledText>
+          Een initiatief van
+          <StyledLink variant="link" as={Link} to="/privacy">
+            Privacyverklaring
+          </StyledLink>
+        </StyledText>
         <FooterImageWrapper>
           <StyledBZKLogo
             src="/logo_bzk.png"

@@ -7,5 +7,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "conventionalCommits.scopes": ["deps"]
+  "conventionalCommits.scopes": ["deps"],
+  "prettier.trailingComma": "none",
+  "typescript.format.semicolons": "remove"
 }
