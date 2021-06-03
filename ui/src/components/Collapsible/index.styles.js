@@ -10,10 +10,7 @@ export const Wrapper = styled.div`
   }
   min-height: 55px;
   border-top: 1px solid #e0e0e0;
-  padding-top: 15px;
-  /* display: flex; */
-  /* flex-direction: ${(p) => (p.isOpen ? 'column' : 'row')}; */
-  /* align-items: center; */
+  padding-top: 10px;
   width: 100%;
   &:last-of-type {
     border-bottom: 1px solid #e0e0e0;
