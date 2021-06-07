@@ -8,7 +8,7 @@ spec:
   teamId: "don"
   volume:
     size: 5Gi
-  numberOfInstances: 2
+  numberOfInstances: 1
   users:
     don:  # database owner
     - superuser
