@@ -1,31 +1,20 @@
-{{ with set . "component" "postgres" }}
-apiVersion: kubedb.com/v1alpha1
-kind: Postgres
-metadata: {{ include "don.common.metadata" . | nindent 2 }}
-spec:
-  version: "11.1"
-  storageType: {{ .Values.storageType }}
-  {{ if eq .Values.storageType "Durable" }}
-  storage:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 5Gi
-  terminationPolicy: {{ .Values.dbTerminationPolicy }}
-  {{ end }}
-  init:
-    scriptSource:
-      configMap:
-        name: {{ .component }}-init-script
----
-apiVersion: v1
-kind: ConfigMap
+{{- if and .Values.loadTestData -}}
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
 metadata:
-  name: {{ .component }}-init-script
+  name: don-cluster
   namespace: {{ .Release.Namespace }}
-  labels: {{- include "don.common.metadata-labels" . | nindent 4 }}
-data:
-  createdb.sql: |+
-    CREATE DATABASE "{{ .Values.postgresDb }}";
+spec:
+  teamId: "don"
+  volume:
+    size: 5Gi
+  numberOfInstances: 2
+  users:
+    don:  # database owner
+    - superuser
+    - createdb
+  databases:
+    don: don  # dbname: owner
+  postgresql:
+    version: "11"
 {{ end }}

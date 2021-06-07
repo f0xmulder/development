@@ -17,10 +17,7 @@ apiTestToken: secret
 postgresUser: don
 postgresPassword: don
 postgresDb: don
-postgresPvcName: postgres-data-volume
 
-storageType: Durable
-dbTerminationPolicy: Pause
 loadTestData: false
 linkcheckerEnabledDefault: true
 linkcheckerSchedule: "10 * * * *"

@@ -19,17 +19,17 @@ spec:
                   name: gitlab-creds
             env:
               - name: DB_HOST
-                value: postgres
+                value: don-cluster
               - name: DB_USER
                 valueFrom:
                   secretKeyRef:
-                    name: postgres-auth
-                    key: POSTGRES_USER
+                    name: postgres.don-cluster.credentials.postgresql.acid.zalan.do
+                    key: username
               - name: DB_PASSWORD
                 valueFrom:
                   secretKeyRef:
-                    name: postgres-auth
-                    key: POSTGRES_PASSWORD
+                    name: postgres.don-cluster.credentials.postgresql.acid.zalan.do
+                    key: password
               - name: DB_NAME
                 value: "{{ .Values.postgresDb }}"
           restartPolicy: OnFailure
