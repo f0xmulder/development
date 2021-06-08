@@ -1,12 +1,9 @@
 const fs = require('fs')
-const { exec } = require("child_process")
 
 const dir = './apis/'
 
-// list all files in the directory
 const files = fs.readdirSync(dir)
 
-const descriptions = []
 const urls = []
 
 files.forEach(file => {
@@ -24,7 +21,5 @@ files.forEach(file => {
     }
 
     urls.push({ apiUrl, file })
-
-
   })
 })
