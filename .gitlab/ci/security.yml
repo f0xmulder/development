@@ -4,66 +4,61 @@ sast:
     - if: $CI_MERGE_REQUEST_ID
       when: never
 
-
 include:
-- template: Security/SAST.gitlab-ci.yml
-- template: Container-Scanning.gitlab-ci.yml
-- template: Dependency-Scanning.gitlab-ci.yml
-- template: Secret-Detection.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: Secret-Detection.gitlab-ci.yml
 
 container_scanning:
   stage: security
   variables:
-    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/ui:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
+  before_script:
+    - export IMAGE="registry.gitlab.com/commonground/don/developer.overheid.nl/api:${CI_COMMIT_SHORT_SHA}"
+    - export DOCKER_IMAGE="$IMAGE"
+  script:
+    - gtcs scan
+
+
+container_scanning_ui:
+  extends: container_scanning
+  stage: security
+  variables:
+    DOCKER_USER: gitlab-ci-token
+    DOCKER_PASSWORD: $CI_JOB_TOKEN
+  before_script:
+    - export IMAGE="registry.gitlab.com/commonground/don/developer.overheid.nl/ui:${CI_COMMIT_SHORT_SHA}"
+    - export DOCKER_IMAGE="$IMAGE"
+  script:
+    - gtcs scan
 
 
 container_scanning_docs:
   extends: container_scanning
   stage: security
   variables:
-    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/docs:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
-
-container_scanning_api:
-  extends: container_scanning
-  stage: security
-  variables:
-    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/api:$CI_COMMIT_SHORT_SHA"
-    DOCKER_USER: gitlab-ci-token
-    DOCKER_PASSWORD: $CI_JOB_TOKEN
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
+  before_script:
+    - export IMAGE="registry.gitlab.com/commonground/don/developer.overheid.nl/docs:${CI_COMMIT_SHORT_SHA}"
+    - export DOCKER_IMAGE="$IMAGE"
+  script:
+    - gtcs scan
 
 
 container_scanning_linkchecker:
   extends: container_scanning
   stage: security
   variables:
-    DOCKER_IMAGE: "registry.gitlab.com/commonground/don/developer.overheid.nl/linkchecker:$CI_COMMIT_SHORT_SHA"
     DOCKER_USER: gitlab-ci-token
     DOCKER_PASSWORD: $CI_JOB_TOKEN
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
-
+  before_script:
+    - export IMAGE="registry.gitlab.com/commonground/don/developer.overheid.nl/linkchecker:${CI_COMMIT_SHORT_SHA}"
+    - export DOCKER_IMAGE="$IMAGE"
+  script:
+    - gtcs scan
 
 dependency_scanning:
   stage: security
