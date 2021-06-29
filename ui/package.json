@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@apidevtools/swagger-parser": "10.0.2",
-    "@commonground/design-system": "18.8.3",
+    "@commonground/design-system": "18.9.2",
     "@fontsource/source-sans-pro": "4.4.5",
     "change-case": "4.1.2",
-    "core-js": "3.15.0",
+    "core-js": "3.15.2",
     "debounce": "1.2.1",
     "formik": "2.2.9",
     "javascript-time-ago": "2.3.7",
@@ -54,8 +54,8 @@
     "eslint-plugin-standard": "4.1.0",
     "jest-fetch-mock": "3.0.3",
     "json-server": "0.16.3",
-    "msw": "0.29.0",
-    "prettier": "2.3.1",
+    "msw": "0.30.0",
+    "prettier": "2.3.2",
     "react-scripts": "3.4.4"
   },
   "scripts": {
