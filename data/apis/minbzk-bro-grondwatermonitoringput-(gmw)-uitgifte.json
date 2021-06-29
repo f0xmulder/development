@@ -1,0 +1,26 @@
+{
+    "description": "Met deze API worden de volgende BasisRegistratie Ondergrond (BRO) publieke gegevens ontsloten:\n\n* Uitgifte van grondwatermonitoringput (GMW) op basis van een BRO-ID\n* Uitgifte van putcode op basis van een BRO-ID\n* Uitgifte van karakteristieken van een grondwatermonitoringput  op basis van kenmerken.\n* Validatie van registratieverzoeken\n\nMerk op: validatie vindt plaats op basis van publiek beschikbare gegevens. Confidenti\u00eble gegevens worden niet gebruikt bij validatie en worden niet uitgegeven.\n\nDe API is in combinatie van JSON en XML \n* de bron / uitgifte documenten zijn in IMBRO XML\n* de criteria zijn waar mogelijk in JSON (kenmerken) of in query parameters uitgevoerd.",
+    "organization_name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK)",
+    "service_name": "BRO Grondwatermonitoringput (GMW) uitgifte",
+    "api_type": "rest_xml",
+    "api_authentication": "none",
+    "environments": [
+        {
+            "name": "production",
+            "api_url": "https://publiek.broservices.nl/gm/gmw-v1.1",
+            "specification_url": "https://publiek.broservices.nl/gm/gmw-v1.1/openapi",
+            "documentation_url": "https://publiek.broservices.nl/gm/gmw-v1.1/swagger-ui"
+        }
+    ],
+    "contact": {
+        "email": "support@broservicedesk.nl",
+        "phone": "088- 8664 999",
+        "url": "https://basisregistratieondergrond.nl/service-contact/formulieren/contactformulier/"
+    },
+    "terms_of_use": {
+        "government_only": false,
+        "pay_per_use": false,
+        "uptime_guarantee": 99.5,
+        "support_response_time": 5
+    }
+}
