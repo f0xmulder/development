@@ -1,0 +1,25 @@
+{
+  "service_name": "BAG API Huidige Bevragingen (Basisregistratie Adressen en Gebouwen)",
+  "description": "De Basisregistratie Adressen en Gebouwen (BAG) is onderdeel van het overheidsstelsel van basisregistraties. Gemeenten zijn bronhouders van de BAG. Zij zijn verantwoordelijk voor het opnemen van de gegevens in de BAG en voor de kwaliteit ervan. Alle gemeenten stellen gegevens over adressen en gebouwen centraal beschikbaar via de Landelijke Voorziening BAG (LV BAG). Het Kadaster beheert de LV BAG en stelt de gegevens beschikbaar aan de diverse afnemers. De BAG API Huidige Bevragingen is een Haal Centraal API die in samenwerking met VNG Realisatie is ontwikkeld vanuit de Common Ground gedachte. De gebruikerswensen van de gemeenten vormen het uitgangspunt van deze API. De BAG API Huidige Bevragingen is vooralsnog uitsluitend beschikbaar voor gemeenten en leveranciers van gemeenten. De API is 24*7 beschikbaar.",
+  "organization_name": "Dienst voor het kadaster en de openbare registers",
+  "organization_oin": "00000001802327497000",
+  "api_type": "rest_json",
+  "api_authentication": "api_key",
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://api.bag.kadaster.nl/esd/huidigebevragingen/v1/",
+      "specification_url": "https://api.bag.kadaster.nl/esd/huidigebevragingen/v1/openapi.yaml",
+      "documentation_url": "https://www.kadaster.nl/zakelijk/producten/adressen-en-gebouwen/bag-api-huidige-bevragingen"
+    }
+  ],
+  "contact": {
+      "email": "bag@kadaster.nl",
+      "phone": "0031881833400",
+      "url": "https://www.kadaster.nl/zakelijk/producten/adressen-en-gebouwen/bag-api-huidige-bevragingen"
+  },
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": true
+  }
+}

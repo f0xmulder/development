@@ -90,6 +90,7 @@ Test linkchecker:
     DB_NAME: postgres
     DB_TEST_NAME: postgres
     SECRET_KEY: somethingverysecret
+    PGSSLMODE: disable
   script:
     - go test ./... -coverprofile coverage.out
     - go tool cover -html=coverage.out -o coverage.html

@@ -20,6 +20,8 @@ spec:
             env:
               - name: DB_HOST
                 value: don-cluster
+              - name: PGSSLMODE
+                value: require
               - name: DB_USER
                 valueFrom:
                   secretKeyRef:

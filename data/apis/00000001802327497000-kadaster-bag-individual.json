@@ -1,0 +1,27 @@
+{
+  "service_name": "BAG API Individuele Bevragingen (Basisregistratie Adressen en Gebouwen)",
+  "description": "De Basisregistratie Adressen en Gebouwen (BAG) is onderdeel van het overheidsstelsel van basisregistraties. Gemeenten zijn bronhouders van de BAG. Zij zijn verantwoordelijk voor het opnemen van de gegevens in de BAG en voor de kwaliteit ervan. Alle gemeenten stellen gegevens over adressen en gebouwen centraal beschikbaar via de Landelijke Voorziening BAG (LV BAG). Het Kadaster beheert de LV BAG en stelt de gegevens beschikbaar aan de diverse afnemers. Met de API BAG Individuele Bevragingen kunt u rechtstreeks de Landelijke Voorziening BAG bevragen en ontvangt u near realtime actuele BAG data. Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object). De API is 24*7 beschikbaar.",
+  "organization_name": "Dienst voor het kadaster en de openbare registers",
+  "organization_oin": "00000001802327497000",
+  "api_type": "rest_json",
+  "api_authentication": "api_key",
+  "environments": [
+    {
+      "name": "production",
+      "api_url": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/",
+      "specification_url": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen.yaml",
+      "documentation_url": "https://www.kadaster.nl/zakelijk/producten/adressen-en-gebouwen/bag-api-individuele-bevragingen"
+    }
+  ],
+  "contact": {
+      "email": "bag@kadaster.nl",
+      "phone": "0031881833400",
+      "url": "https://www.kadaster.nl/zakelijk/producten/adressen-en-gebouwen/bag-api-individuele-bevragingen"
+  },
+  "is_reference_implementation": false,
+  "terms_of_use": {
+    "government_only": false,
+    "pay_per_use": true,
+    "uptime_guarantee": 98.5
+  }
+}

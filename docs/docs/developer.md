@@ -55,8 +55,17 @@ Also note that if you installed using Homebrew, you probably need to execute the
 find all the necessary libs, see https://github.com/psycopg/psycopg2/issues/1200#issuecomment-770198398:
 
 ```bash
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
+$ brew link openssl
+Warning: Refusing to link macOS provided/shadowed software: openssl@1.1
+If you need to have openssl@1.1 first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find openssl@1.1 you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+
+For pkg-config to find openssl@1.1 you may need to set:
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 ```
 
 First, set up a python virtual environment with python 3.8 and activate it.
@@ -199,7 +208,7 @@ python manage.py dumpdata -e core.URLProbe -e core.DesignRuleResult --indent 2 c
 
 ### Python
 
-First, make sure your virtual environment is active. 
+First, make sure your virtual environment is active.
 
 #### New dependency
 
@@ -223,7 +232,7 @@ If you updated your git repository and the new version has changes in the requir
 
 #### Dependency problems
 
-When you update dependencies, it may happen that there is an unsolved bug in a new dependency version or that some required modules do not work together well. In that case you have a few options: 
+When you update dependencies, it may happen that there is an unsolved bug in a new dependency version or that some required modules do not work together well. In that case you have a few options:
 - Abort the upgrade and try again later. Often problems will be resolved by the package maintainers in short time.
 - Add explicit constraints to `requirements*.in` to exclude the problematic versions.
 - Modify the `requirements*.txt` files manually to select working versions. Note that you need to provide hashes for all packages.

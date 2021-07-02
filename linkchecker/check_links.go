@@ -98,7 +98,7 @@ func getDb() *sqlx.DB {
 
 	log.Printf("connecting to database %v@%v:%v %v", DB_USER, DB_HOST, DB_PORT, DB_NAME)
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s "+
-		"password=%s dbname=%s sslmode=disable",
+		"password=%s dbname=%s",
 		DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
 
 	db, err := sqlx.Connect("postgres", connectionString)

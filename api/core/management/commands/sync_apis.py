@@ -31,9 +31,11 @@ def sync_apis(api_dir):
     for file in files:
         json_data = load_json(os.path.join(api_dir, file))
         api_id = file.split('.json')[0]
-
-        api, api_environments, api_relations = parse_api(
-            file, api_id, json_data)
+        try:
+            api, api_environments, api_relations = parse_api(
+                file, api_id, json_data)
+        except Exception as e:
+            raise Exception(f'{file} is invalid!', e)
 
         apis.append(api)
         environments += api_environments
@@ -54,6 +56,7 @@ def parse_api(file_name, api_id, json_data):
     mechanism.
 
     """
+
     org = Organization.objects.get_or_create(
         oin=json_data.pop("organization_oin"),
         defaults={"name": json_data.pop("organization_name")})[0]
