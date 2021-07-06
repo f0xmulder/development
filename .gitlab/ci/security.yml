@@ -115,10 +115,7 @@ gosec-sast:
   script:
     - /analyzer run --target-dir linkchecker
   rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
+    - if: $CI_PIPELINE_SOURCE == "schedule"
 
 gemnasium-python-dependency_scanning:
   variables:
@@ -126,8 +123,4 @@ gemnasium-python-dependency_scanning:
   script:
     - /analyzer run --target-dir api
   rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: never
-    - if: $CONTAINER_SCANNING_DISABLED
-      when: never
-
+    - if: $CI_PIPELINE_SOURCE == "schedule"

@@ -43,7 +43,6 @@ describe('Event Overview', () => {
   it('should have a list of events', () => {
     cy.contains('Event 1').parent().parent().as('event')
     cy.get('@event').screenshot()
-    cy.get('@event').toMatchImageSnapshot();
     cy.contains('Naar event pagina')
   })
 

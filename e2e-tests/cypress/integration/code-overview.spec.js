@@ -40,7 +40,6 @@ describe('Code Overview', () => {
   it('should have a list of projects', () => {
     cy.get('[data-testid="link"]').first().as("link")
     cy.get("@link").screenshot()
-    cy.get("@link").toMatchImageSnapshot()
     cy.get('[data-testid="link"] > div > div > a').first().as('firstLink').then(function (elem) {
       cy.get('@firstLink').invoke('removeAttr', 'target').click()
       cy.url().should('include', elem.text())

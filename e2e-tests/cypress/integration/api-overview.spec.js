@@ -42,7 +42,6 @@ describe('API Overview', () => {
   it(`should have a list of API's`, () => {
     cy.get('[data-test="link"]').first().as("link")
     cy.get("@link").screenshot()
-    cy.get("@link").toMatchImageSnapshot()
     cy.get('[data-test="link"] > div').first().then(function (elem) {
       cy.get("@link").click()
       cy.get('h1').contains(elem.text(), { matchCase: false })
