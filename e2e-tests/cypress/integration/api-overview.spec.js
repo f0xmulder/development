@@ -45,7 +45,7 @@ describe('API Overview', () => {
     cy.get("@link").toMatchImageSnapshot();
     cy.get('[data-test="link"] > div').first().then(function (elem) {
       cy.get("@link").click()
-      cy.url().should('include', elem.text().toLowerCase())
+      cy.contains(elem.text().toLowerCase());
     })
   })
 
