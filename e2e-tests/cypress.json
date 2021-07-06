@@ -1,5 +1,5 @@
 {
-  "videoCompression": 0,
+  "video": false,
   "chromeWebSecurity": false,
   "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
   "env": {
