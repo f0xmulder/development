@@ -6,6 +6,9 @@
     DOCKER_TLS_CERTDIR: "/certs"
   services:
     - docker:20.10-dind
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
 
 .docs:
   before_script:
@@ -15,12 +18,17 @@
     DOCKER_TLS_CERTDIR: "/certs"
   services:
     - docker:20.10-dind
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
 
 .linkchecker:
   before_script:
     - cd linkchecker
   rules:
     - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
 
@@ -35,6 +43,8 @@
   rules:
     - if: $CI_MERGE_REQUEST_ID
       when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
 
 .validate:
@@ -43,5 +53,7 @@
     - cd validate
   rules:
     - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags

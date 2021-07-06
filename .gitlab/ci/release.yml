@@ -11,6 +11,7 @@ Release API:
       docker push $API_IMAGE:$CI_COMMIT_REF_SLUG
   coverage: "/total:\\t+\\(statements\\)\\t+([\\d\\.]+?%)/"
 
+
 Test and release UI:
   extends: .ui
   stage: release

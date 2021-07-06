@@ -15,7 +15,6 @@ container_scanning:
   script:
     - gtcs scan
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 container_scanning_ui:
@@ -82,7 +81,6 @@ retire-js-dependency_scanning:
     # Combine the reports
     - jq -s '.[0].version as $version | [.[] | to_entries] | flatten | reduce .[] as $dot ({}; .[$dot.key] += $dot.value) | .version = $version' tmp/*/gl-dependency-scanning-report.json > gl-dependency-scanning-report.json
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 gemnasium-python-dependency_scanning:
@@ -91,12 +89,10 @@ gemnasium-python-dependency_scanning:
   script:
     - /analyzer run --target-dir api
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 gemnasium-dependency_scanning:
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 sast:
@@ -104,15 +100,12 @@ sast:
 
 bandit-sast:
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 eslint-sast:
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 nodejs-scan-sast:
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 gosec-sast:
@@ -121,10 +114,8 @@ gosec-sast:
   script:
     - /analyzer run --target-dir linkchecker
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
 
 semgrep-sast:
   rules:
-    - when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
