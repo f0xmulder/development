@@ -86,7 +86,7 @@ python manage.py migrate
 Optionally load some development test data into the database, this can be done only once:
 
 ```bash
-manage.py loaddata core_testdata
+python manage.py loaddata core_testdata
 ```
 
 The following step is not necessary if you have loaded the testdata. It syncs the API JSON files to your database.
