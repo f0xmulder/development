@@ -34,7 +34,7 @@ describe('Code Overview', () => {
       .first()
       .click() // click on first option
     cy.get('@select').screenshot()
-    cy.url().should('include', 'code?programming_languages=4')
+    cy.url().should('include', 'code?programming_languages')
   })
 
   it('should have a list of projects', () => {
