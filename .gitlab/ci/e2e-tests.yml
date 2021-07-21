@@ -23,8 +23,8 @@ E2E tests:
     - if: $CI_MERGE_REQUEST_ID
       when: never
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
-    - if: '$CI_COMMIT_BRANCH == "master" && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"'
-    - if: '$CI_COMMIT_BRANCH =~ /^review\/.*$/ && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   services:

@@ -1,3 +1,9 @@
+sast:
+  stage: security
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+
 include:
   - template: Security/Container-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
@@ -14,8 +20,7 @@ container_scanning:
     - export DOCKER_IMAGE="$IMAGE"
   script:
     - gtcs scan
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+
 
 container_scanning_ui:
   extends: container_scanning
@@ -29,6 +34,7 @@ container_scanning_ui:
   script:
     - gtcs scan
 
+
 container_scanning_docs:
   extends: container_scanning
   stage: security
@@ -40,6 +46,7 @@ container_scanning_docs:
     - export DOCKER_IMAGE="$IMAGE"
   script:
     - gtcs scan
+
 
 container_scanning_linkchecker:
   extends: container_scanning
@@ -55,15 +62,31 @@ container_scanning_linkchecker:
 
 dependency_scanning:
   stage: security
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
 
 
 .secret-analyzer:
   stage: security
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+
 
 secret_detection:
+  variables:
+    SECRET_DETECTION_EXCLUDED_PATHS: "pki/,testing/"
   rules:
-    - when: never
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+
 
 retire-js-dependency_scanning:
   variables:
@@ -81,32 +104,10 @@ retire-js-dependency_scanning:
     # Combine the reports
     - jq -s '.[0].version as $version | [.[] | to_entries] | flatten | reduce .[] as $dot ({}; .[$dot.key] += $dot.value) | .version = $version' tmp/*/gl-dependency-scanning-report.json > gl-dependency-scanning-report.json
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
-gemnasium-python-dependency_scanning:
-  variables:
-    SECURE_LOG_LEVEL: debug
-  script:
-    - /analyzer run --target-dir api
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
-gemnasium-dependency_scanning:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
-sast:
-  stage: security
-
-bandit-sast:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-eslint-sast:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-nodejs-scan-sast:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
 
 gosec-sast:
   variables:
@@ -114,8 +115,19 @@ gosec-sast:
   script:
     - /analyzer run --target-dir linkchecker
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
 
-semgrep-sast:
+gemnasium-python-dependency_scanning:
+  variables:
+    SECURE_LOG_LEVEL: debug
+  script:
+    - /analyzer run --target-dir api
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CONTAINER_SCANNING_DISABLED
+      when: never
+

@@ -55,7 +55,9 @@ Verify test schema:
   script:
     - python manage.py migrate
     - 'PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" "$DB_NAME" --no-owner
-      --schema-only -T django* -T auth* | sed ''/-- Dumped by /d'' > current_testschema.sql'
+      --schema-only -T django* -T auth* | sed ''/-- Dumped by /d'' > current_testschema.sql
+
+  '
     - ls -l current_testschema.sql
     - |
       if ! diff -u $TESTDATA/testschema.sql current_testschema.sql
