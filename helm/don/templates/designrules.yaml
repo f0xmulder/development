@@ -11,6 +11,8 @@
     - secretRef:
         name: api
   env:
+    - name: PGSSLMODE
+      value: require
     - name: DB_HOST
       value: don-cluster
     - name: DB_USER
