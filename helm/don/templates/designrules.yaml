@@ -29,6 +29,8 @@
       value: "{{ .Values.postgresDb }}"
     - name: API_TEST_BASE_URL
       value: "{{.Values.apiTestBaseUrl}}"
+    - name: API_TEST_TOKEN
+      value: "{{.Values.apiTestToken}}"
 {{ end }}
 
 {{ with set . "component" "designrules" }}
