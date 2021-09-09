@@ -4,7 +4,8 @@
     ":semanticCommits",
     ":semanticCommitTypeAll(build)",
     ":semanticCommitScopeDisabled",
-    "schedule:nonOfficeHours"
+    "schedule:nonOfficeHours",
+    "group:allNonMajor"
   ],
   "automerge": true,
   "automergeType": "pr",
