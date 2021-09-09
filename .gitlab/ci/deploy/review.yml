@@ -34,6 +34,8 @@ Deploy Review App:
       when: never
     - if: '$CI_COMMIT_REF_NAME == "master"'
       when: never
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^renovate/'
+      when: never
     - when: always
   artifacts:
     paths:
@@ -51,6 +53,8 @@ Remove Review App:
     - if: $CI_MERGE_REQUEST_ID
       when: never
     - if: '$CI_COMMIT_REF_NAME == "master"'
+      when: never
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^renovate/'
       when: never
     - if: '$CI_COMMIT_BRANCH != "master" && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
       when: manual
