@@ -2,7 +2,7 @@ Lint and test API:
   image: python:3.8
   stage: test
   services:
-  - postgres:11.6-alpine
+  - postgres:14.1-alpine
   variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     DB_HOST: postgres
@@ -36,7 +36,7 @@ Verify test schema:
   image: python:3.8-buster
   stage: test
   services:
-    - postgres:11.6-alpine
+    - postgres:14.1-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -82,7 +82,7 @@ Test linkchecker:
   image: golang:1.14.1
   stage: test
   services:
-    - postgres:11.6-alpine
+    - postgres:14.1-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
