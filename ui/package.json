@@ -23,7 +23,7 @@
     "redoc": "2.0.0-rc.54",
     "reflexbox": "4.0.6",
     "styled-components": "5.3.0",
-    "swr": "0.5.6",
+    "swr": "1.1.2",
     "typescript": "4.3.5",
     "yup": "0.32.9"
   },
