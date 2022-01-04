@@ -18,9 +18,9 @@ chardet==4.0.0 \
 django-solo==1.1.5 \
     --hash=sha256:e412f0f844aa101fa77ba5d07768a8a77ea0e0a6e098b87a6eef3bedb2e5ecd4
     # via -r requirements.in
-Django==3.2.5 \
-    --hash=sha256:3da05fea54fdec2315b54a563d5b59f3b4e2b1e69c3a5841dda35019c01855cd \
-    --hash=sha256:c58b5f19c5ae0afe6d75cbdd7df561e6eb929339985dbbda2565e1cabb19a62e
+Django==4.0.1 \
+    --hash=sha256:2485eea3cc4c3bae13080dee866ebf90ba9f98d1afe8fda89bfb0eb2e218ef86 \
+    --hash=sha256:7cd8e8a3ed2bc0dfda05ce1e53a9c81b30eefd7aa350e538a18884475e4d4ce2
 djangorestframework==3.12.4 \
     --hash=sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf \
     --hash=sha256:f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2
