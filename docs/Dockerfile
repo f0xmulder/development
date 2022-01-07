@@ -1,4 +1,4 @@
-FROM node:12.13.1 AS build
+FROM node:12.22.8 AS build
 
 ENV CI=true
 
@@ -10,14 +10,14 @@ COPY docs/docs/ /src/docs/
 
 RUN npm run build
 
-FROM alpine:3.10 AS version
+FROM alpine:3.15 AS version
 # Add file with version tag from git
 ARG GIT_TAG_NAME=undefined
 ARG GIT_COMMIT_HASH=undefined
 RUN ash -c 'echo "{\"tag\": \"$GIT_TAG_NAME\", \"commit\": \"$GIT_COMMIT_HASH\"}" > /version.json'
 
 # Copy static docs to alpine-based nginx container.
-FROM nginx:1.18.0-alpine as webserver
+FROM nginx:1.21.5-alpine as webserver
 EXPOSE 8080
 
 # Add non-privileged user

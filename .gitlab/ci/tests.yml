@@ -1,8 +1,8 @@
 Lint and test API:
-  image: python:3.8
+  image: python:3.10
   stage: test
   services:
-  - postgres:11.6-alpine
+  - postgres:11.14-alpine
   variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     DB_HOST: postgres
@@ -33,10 +33,10 @@ Lint and test API:
     - if: '$CI_COMMIT_BRANCH && $CI_PROJECT_PATH == "commonground/don/developer.overheid.nl"' # do not run for tags
 
 Verify test schema:
-  image: python:3.8-buster
+  image: python:3.10-buster
   stage: test
   services:
-    - postgres:11.6-alpine
+    - postgres:11.14-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
@@ -79,10 +79,10 @@ Verify test schema:
 
 Test linkchecker:
   extends: .linkchecker
-  image: golang:1.14.1
+  image: golang:1.17.6
   stage: test
   services:
-    - postgres:11.6-alpine
+    - postgres:11.14-alpine
   variables:
     DB_HOST: postgres
     DB_USER: postgres
