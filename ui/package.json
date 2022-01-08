@@ -11,7 +11,7 @@
     "debounce": "1.2.1",
     "formik": "2.2.9",
     "javascript-time-ago": "2.3.7",
-    "js-cookie": "2.2.1",
+    "js-cookie": "3.0.1",
     "mobx": "6.3.2",
     "react": "17.0.2",
     "react-app-polyfill": "2.0.0",
