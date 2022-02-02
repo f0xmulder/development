@@ -89,7 +89,7 @@ coverage==5.5 \
 django-solo==1.1.5 \
     --hash=sha256:e412f0f844aa101fa77ba5d07768a8a77ea0e0a6e098b87a6eef3bedb2e5ecd4
     # via -r requirements.txt
-django==3.1.7 \
+django==3.2.12 \
     --hash=sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7 \
     --hash=sha256:baf099db36ad31f970775d0be5587cc58a6256a6771a44eb795b554d45f211b8
     # via
