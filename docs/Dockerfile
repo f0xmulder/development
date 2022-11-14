@@ -17,7 +17,7 @@ ARG GIT_COMMIT_HASH=undefined
 RUN ash -c 'echo "{\"tag\": \"$GIT_TAG_NAME\", \"commit\": \"$GIT_COMMIT_HASH\"}" > /version.json'
 
 # Copy static docs to alpine-based nginx container.
-FROM nginx:1.18.0-alpine as webserver
+FROM nginx:mainline-alpine as webserver
 EXPOSE 8080
 
 # Add non-privileged user
