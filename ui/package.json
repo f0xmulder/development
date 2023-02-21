@@ -7,7 +7,7 @@
     "@commonground/design-system": "18.10.1",
     "@fontsource/source-sans-pro": "4.4.5",
     "change-case": "4.1.2",
-    "core-js": "3.15.2",
+    "core-js": "3.27.2",
     "debounce": "1.2.1",
     "formik": "2.2.9",
     "javascript-time-ago": "2.3.7",
