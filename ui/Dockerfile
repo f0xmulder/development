@@ -25,7 +25,7 @@ RUN npm run lint
 RUN npm run test -- --coverage
 
 # Copy static docs to alpine-based nginx container.
-FROM nginx:alpine as webserver
+FROM nginx:1.25.4-alpine3.18 as webserver
 
 # Copy nginx configuration
 COPY ui/docker/default.conf /etc/nginx/conf.d/default.conf
